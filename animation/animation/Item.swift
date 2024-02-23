@@ -114,7 +114,7 @@ struct DestinationView<Content: View>: View {
     
     var opacity: CGFloat {
         if let index {
-            return model.info[index].isActive ? (model.info[index].hiddenView ? 1: 0) : 0
+            return model.info[index].isActive ? (model.info[index].hideView ? 1: 0) : 0
         }
         return 1
     }
@@ -175,6 +175,7 @@ fileprivate struct HeroLayerViewModifier<Layer: View>: ViewModifier {
                             }
                         }
                     } else {
+                        model.info[index].hideView = false
                         withAnimation(.snappy(duration: 0.35, extraBounce: 0)) {
                             model.info[index].animateView = false
                         }
@@ -196,7 +197,7 @@ fileprivate struct HeroInfo: Identifiable {
     var isActive: Bool = false
     var layerView: AnyView?
     var animateView: Bool = false
-    var hiddenView: Bool = false
+    var hideView: Bool = false
     var sourceAnchor: Anchor<CGRect>?
     var destinationAnchor: Anchor<CGRect>?
     var sCornerRadius: CGFloat = 0
@@ -241,7 +242,7 @@ fileprivate struct HeroLayerView: View {
                     if let sourceAnchor = info.sourceAnchor,
                        let desitinationAnchor = info.destinationAnchor,
                        let layerView = info.layerView,
-                       !info.hiddenView {
+                       !info.hideView {
                         /// Retrieving bounds data from anchor values
                         let sRect = proxy[sourceAnchor]
                         let dRect = proxy[desitinationAnchor]
@@ -260,15 +261,15 @@ fileprivate struct HeroLayerView: View {
                         layerView
                             .frame(width: size.width, height: size.height)
                             .clipShape(.rect(cornerRadius: animateView ? info.dCornerRadius : info.sCornerRadius))
-//                            .offset(offset)
+                            .offset(offset)
                             .transition(.identity)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     }
                 }
-                .customOnChange(value: info.hiddenView) { newValue in
+                .customOnChange(value: info.animateView) { newValue in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
-                        if newValue {
-                            /// resetting all properties to source state
+                        if !newValue {
+                            /// resetting all properties once view goes to source state
                             info.isActive = false
                             info.layerView = nil
                             info.sourceAnchor = nil
@@ -278,7 +279,7 @@ fileprivate struct HeroLayerView: View {
                             
                             info.completion(false)
                         } else {
-                            info.hiddenView = true
+                            info.hideView = true
                             info.completion(true)
                         }
                     }

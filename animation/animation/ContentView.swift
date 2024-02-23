@@ -30,7 +30,7 @@ struct ContentView: View {
                         showView.toggle()
                     }
             }
-            .padding(150)
+            .padding(15)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .interactiveDismissDisabled() // animation effect requires to disable interaction such as go back or dismiss sheet
         })
