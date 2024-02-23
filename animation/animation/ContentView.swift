@@ -21,7 +21,7 @@ struct ContentView: View {
             }
         }
         .padding()
-        .sheet(isPresented: $showView, content: {
+        .fullScreenCover(isPresented: $showView, content: {
             DestinationView(id: "View 1") {
                 Circle()
                     .fill(.red)
