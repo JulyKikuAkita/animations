@@ -2,11 +2,10 @@
 //  ProfileListView.swift
 //  animation
 //
-//  Created by IFang Lee on 2/23/24.
+//  source: https://www.youtube.com/watch?v=1h5NjJbheEU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=44
 //
 
 import SwiftUI
-// 13:16
 struct ProfileListView: View {
     @State private var allProfiles: [Profile] = profiles
     @State private var selectedProfile: Profile?
@@ -23,6 +22,7 @@ struct ProfileListView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 50, height: 50)
                         .clipShape(.circle)
+                        .opacity(selectedProfile?.id == profile.id ? 0 : 1)
                         .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
                             return [profile.id.uuidString: anchor]
                         })
@@ -102,7 +102,7 @@ struct ProfileListView: View {
         /// some visual help
         .overlay(alignment: .bottom) {
             Slider(value: $heroProgress)
-                .padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
+                .padding()
         }
     }
 }
@@ -118,6 +118,8 @@ struct DetailedView: View {
     
     /// Gesture properties
     @GestureState private var isDragging: Bool = false
+    @State private var offset: CGFloat = .zero
+    
     var body: some View {
         if let selectedProfile, showDetail {
             GeometryReader {
@@ -180,6 +182,58 @@ struct DetailedView: View {
                     .animation(.snappy(duration: 0.2, extraBounce: 0), value: showHeroView)
                 }
                 .offset(x: size.width - (size.width * heroProgress))
+                .overlay(alignment: .leading) {
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(width: 10)
+                        .contentShape(.rect)
+                        .gesture(
+                            DragGesture()
+                                .updating($isDragging, body: { _, out, _ in
+                                        out = true
+                                })
+                                .onChanged({ value in
+                                    /// enable hero layer view when gesture start to dismiss the view
+                                    var translation = value.translation.width
+                                    translation = isDragging ? translation : .zero
+                                    translation = translation > 0 ? translation : 0
+                                    offset = translation
+
+                                    /// Convering into progress
+                                    let dragProgress = 1.0 - (translation / size.width)
+                                    /// Limiting progress between (1,0)
+                                    let cappedProgress = min(max(0, dragProgress), 1)
+                                    heroProgress = cappedProgress
+                                    if !showHeroView {
+                                        showHeroView = true
+                                    }
+                                })
+                                .onEnded({ value in
+                                    /// Closing/Resetting based on end target
+                                    let velocity = value.velocity.width
+                                    
+                                    if (offset + velocity) > (size.width * 0.8) {
+                                        /// Close view
+                                        withAnimation(.snappy(duration: 0.35, extraBounce: 0), completionCriteria: .logicallyComplete) {
+                                            heroProgress = .zero
+                                        } completion: {
+                                            offset = .zero
+                                            showDetail = false
+                                            showHeroView = true
+                                            self.selectedProfile = nil
+                                        }
+                                    } else {
+                                        /// Reset
+                                        withAnimation(.snappy(duration: 0.35, extraBounce: 0), completionCriteria: .logicallyComplete) {
+                                            heroProgress = 1.0
+                                            offset = .zero
+                                        } completion: {
+                                            showHeroView = false
+                                        }
+                                    }
+                                })
+                        )
+                }
             }
         }
     }
