@@ -11,9 +11,10 @@ import SwiftUI
 struct animationApp: App {
     var body: some Scene {
         WindowGroup {
-            HeroWrapper {
-                ContentView()
-            }
+            ContentView()
+//            HeroWrapper {
+//                HeroItemView()
+//            }
         }
     }
 }

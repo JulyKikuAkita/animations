@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    var allProfiles: [Profile] = profiles
+    var body: some View {
+        ProfileListView()
+    }
+}
+
+struct HeroItemView: View {
     var body: some View {
         NavigationStack {
             List {
@@ -105,11 +112,6 @@ struct DemoView: View {
         }
     }
 }
-
-#Preview {
-    ContentView()
-}
-
 
 /// Demo Item Model
 
