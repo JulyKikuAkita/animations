@@ -74,10 +74,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.heroWindow = heroWindow
     }
 }
-
-struct CustomHeroAnimationView: View {
-    @Environment(WindowSharedModel.self) private var windowShareModel
-    var body: some View {
-        Text("")
-    }
-}

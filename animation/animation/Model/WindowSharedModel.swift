@@ -13,6 +13,8 @@ class WindowSharedModel {
     var previousSourceRect: CGRect = .zero
     var hideNativeView: Bool = false
     var selectedProfile: Profile?
+    var cornerRadius: CGFloat = 0
+    var showGradient: Bool = false
     
     /// Resetting properties
     func reset() {
@@ -20,5 +22,7 @@ class WindowSharedModel {
         previousSourceRect = .zero
         hideNativeView = false
         selectedProfile = nil
+        cornerRadius = 0
+        showGradient = false
     }
 }

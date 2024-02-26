@@ -4,9 +4,10 @@
 //
 //  source: https://www.youtube.com/watch?v=zHtB8mHPLDU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=32
 //
+// Note: preview is not availble due to use SceneDelegate env var
 
 import SwiftUI
-10:51
+
 struct ProfileList_SheetView: View {
     var body: some View {
         NavigationStack {
@@ -20,23 +21,49 @@ struct ProfileSheetAnimationView: View {
     @State var selectedProfile: Profile?
     @State var showProfileView: Bool = false
     /// this will crash preview but works at simulator
+    @Environment(WindowSharedModel.self) private var windowSharedModel
     @Environment(SceneDelegate.self) private var sceneDelegate
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 15) {
                 ForEach(profiles) { profile in
                     HStack(spacing: 12) {
-                        Image(profile.profilePicture)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 50, height: 50)
-                            .clipShape(.circle)
-                            .contentShape(.circle)
-                            .onTapGesture {
-                                /// Opening profile
-                                selectedProfile = profile
-                                showProfileView.toggle()
-                            }
+                        /// to find view's position
+                        GeometryReader(content: { geometry in
+                            let rect = geometry.frame(in: .global)
+                            
+                            Image(profile.profilePicture)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: rect.width, height: rect.height)
+                                .clipShape(.circle)
+                                .contentShape(.circle)
+                                .opacity(windowSharedModel.selectedProfile?.id == profile.id ? (windowSharedModel.hideNativeView || showProfileView ? 1 : 0) : 1)
+                                .onTapGesture {
+                                    Task {
+                                        /// Opening profile
+                                        selectedProfile = profile
+                                        windowSharedModel.selectedProfile = profile
+                                        windowSharedModel.cornerRadius = rect.width / 2
+                                        windowSharedModel.sourceRect = rect
+                                        /// Storing the source rect for closing animation
+                                        windowSharedModel.previousSourceRect = rect
+                                        try? await Task.sleep(for: .seconds(0))
+                                        windowSharedModel.hideNativeView = true
+                                        showProfileView.toggle()
+                                        
+                                        /// After animation finished, removing hero view
+                                        try? await Task.sleep(for: .seconds(0))
+                                        if windowSharedModel.hideNativeView {
+                                            windowSharedModel.hideNativeView = false
+                                        }
+                                    }
+                                   
+                                }
+                        })
+                        .frame(width: 50, height: 50)
+
+                            
                         
                         VStack(alignment: .leading, spacing: 4, content: {
                             Text(profile.username)
@@ -66,7 +93,12 @@ struct ProfileSheetAnimationView: View {
             .presentationDetents([.medium, .large])
             .presentationCornerRadius(25)
             .interactiveDismissDisabled() // in order to present animation
-            
+            .presentationDragIndicator(.hidden)
+        })
+        /// Adding hero overlay window for performing hero animation
+        .onAppear(perform: {
+            guard sceneDelegate.heroWindow == nil else { return }
+            sceneDelegate.addHeroWindow(windowSharedModel)
         })
     }
 }
@@ -77,10 +109,13 @@ struct DetailedSheetProfileView: View {
     @Binding var showProfileView: Bool
     /// Color Scheme
     @Environment(\.colorScheme) private var scheme
+    @Environment(WindowSharedModel.self) private var windowSharedModel
+
     var body: some View {
         VStack {
             GeometryReader(content: { geometry in
                 let size = geometry.size
+                let rect = geometry.frame(in: .global)
                 
                 if let selectedProfile {
                     Image(selectedProfile.profilePicture)
@@ -100,29 +135,63 @@ struct DetailedSheetProfileView: View {
                             ], startPoint: .top, endPoint: .bottom)
                         }
                         .clipped()
-
+                        .opacity(windowSharedModel.hideNativeView ? 0 : 1)
+                        .preference(key: RectKey.self, value: rect)
+                        .onPreferenceChange(RectKey.self, perform: { value in
+                            if showProfileView {
+                                windowSharedModel.sourceRect = value
+                                /// showing Gradient
+                                windowSharedModel.showGradient = true
+                            }
+                        })
                 }
             })
             .frame(maxHeight: 330)
             .overlay(alignment: .topLeading) {
                 Button(action: {
+                    /// Closing the same way as opening
+                    Task {
+                        windowSharedModel.hideNativeView = true
+                        showProfileView = false
+                        try? await Task.sleep(for: .seconds(0))
+                        /// Using the store source frame to re-positiong to it's original place
+                        windowSharedModel.sourceRect = windowSharedModel.previousSourceRect
+                        windowSharedModel.showGradient = false
+                        /// waiting for animation completion
+                        try? await Task.sleep(for: .seconds(0.5))
+                        if windowSharedModel.hideNativeView {
+                            windowSharedModel.reset()
+                            selectedProfile = nil
+                        }
+                    }
                     /// Closing Profile
                     showProfileView = false
                 }, label: {
                     Image(systemName: "xmark")
-                        .font(.title3)
                         .foregroundStyle(.white)
                         .contentShape(.rect)
                         .padding(10)
                         .background(.black, in: .circle)
                 })
                 .padding([.leading, .top], 20)
+                .scaleEffect(0.9)
+                .opacity(windowSharedModel.hideNativeView ? 0 : 1)
+                .animation(.snappy, value: windowSharedModel.hideNativeView)
             }
             
             Spacer()
         }
     }
 }
+
+/// Preference key to read view bounds
+struct RectKey: PreferenceKey {
+    static var defaultValue: CGRect = .zero
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
+        value = nextValue()
+    }
+}
+
 #Preview {
     ContentView()
 }
