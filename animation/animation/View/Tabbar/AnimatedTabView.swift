@@ -9,7 +9,9 @@ import SwiftUI
 
 struct AnimatedTabView: View {
     /// View properties
-    @State private var activeTab: Tab = .apps
+    @State private var activeTab: Tab = .photos
+    @State private var tabState: Visibility = .visible
+    
     /// All tabs
     @State private var allTabs: [AnimatedTab] = Tab.allCases.compactMap { tab -> AnimatedTab? in
         return .init(tab: tab)
@@ -20,13 +22,34 @@ struct AnimatedTabView: View {
         VStack(spacing: 0) {
             TabView(selection: $activeTab) {
                 NavigationStack {
-                    VStack {
-                        
+                    TabStateScrollView(axis: .vertical, showsIndicator: false, tabState: $tabState) {
+                        VStack(spacing: 15) {
+                            ForEach(profiles) { profile in
+                                GeometryReader(content: { geometry in
+                                    let size = geometry.size
+                                    
+                                    Image(profile.profilePicture)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: size.width, height: size.height)
+                                        .clipShape(.rect(cornerRadius: 12))
+                                })
+                                .frame(height: 380)
+                            }
+                        }
                     }
                     .navigationTitle(Tab.photos.title)
                 }
-                .setupTab(.photos)
                 
+//                .setupTab(.photos, tabState)
+                .toolbar(tabState, for: .tabBar)
+                .animation(.easeInOut(duration: 0.3), value: tabState)
+                .tabItem {
+                    Image(systemName: Tab.photos.rawValue)
+                    Text(Tab.photos.title)
+                }
+                
+
                 NavigationStack {
                     VStack {
                         
@@ -34,6 +57,10 @@ struct AnimatedTabView: View {
                     .navigationTitle(Tab.chat.title)
                 }
                 .setupTab(.chat)
+                .tabItem {
+                    Image(systemName: Tab.chat.rawValue)
+                    Text(Tab.chat.title)
+                }
                 
                 NavigationStack {
                     VStack {
@@ -42,6 +69,10 @@ struct AnimatedTabView: View {
                     .navigationTitle(Tab.apps.title)
                 }
                 .setupTab(.apps)
+                .tabItem {
+                    Image(systemName: Tab.apps.rawValue)
+                    Text(Tab.apps.title)
+                }
                 
                 NavigationStack {
                     VStack {
@@ -50,6 +81,10 @@ struct AnimatedTabView: View {
                     .navigationTitle(Tab.notifications.title)
                 }
                 .setupTab(.notifications)
+                .tabItem {
+                    Image(systemName: Tab.notifications.rawValue)
+                    Text(Tab.notifications.title)
+                }
                 
                 NavigationStack {
                     VStack {
@@ -58,6 +93,10 @@ struct AnimatedTabView: View {
                     .navigationTitle(Tab.profile.title)
                 }
                 .setupTab(.profile)
+                .tabItem {
+                    Image(systemName: Tab.profile.rawValue)
+                    Text(Tab.profile.title)
+                }
                 
             }
             
