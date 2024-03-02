@@ -29,6 +29,7 @@
 		96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */; };
 		96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */; };
 		96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */; };
+		96FF50972B92FE1700B36142 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50962B92FE1700B36142 /* GridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelXCardView.swift; sourceTree = "<group>"; };
 		96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateScrollView.swift; sourceTree = "<group>"; };
+		96FF50962B92FE1700B36142 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				96E70B0D2B8EBF0000F23A51 /* Tabbar */,
 				96C0C2D82B905E3500F56FF5 /* CardView.swift */,
 				96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */,
+				96FF50962B92FE1700B36142 /* GridView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				9603C9FD2B8ABB0500F91C21 /* MAnchorKey.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
+				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardView.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
