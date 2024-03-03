@@ -33,3 +33,23 @@ struct AnimatedTab: Identifiable {
     var tab: Tab
     var isAnimating: Bool?
 }
+
+enum VideoTab: String, CaseIterable {
+    case home = "Home"
+    case shorts = "Shorts"
+    case subscription = "Subscription"
+    case you = "You"
+    
+    var symbol: String {
+        switch self {
+        case.home:
+            return "house.fill"
+        case .shorts:
+            return "video.badge.waveform.fill"
+        case .subscription:
+            return "play.square.stack.fill"
+        case .you:
+            return "person.circle.fill"
+        }
+    }
+}

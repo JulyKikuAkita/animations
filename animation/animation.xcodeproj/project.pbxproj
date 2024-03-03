@@ -30,6 +30,10 @@
 		96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */; };
 		96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */; };
 		96FF50972B92FE1700B36142 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50962B92FE1700B36142 /* GridView.swift */; };
+		96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50982B94427000B36142 /* PlayerAnimationView.swift */; };
+		96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509A2B94465700B36142 /* PlayerItem.swift */; };
+		96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509C2B944D1B00B36142 /* PlayerConfig.swift */; };
+		96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509E2B944E7300B36142 /* MiniPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +61,10 @@
 		96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateScrollView.swift; sourceTree = "<group>"; };
 		96FF50962B92FE1700B36142 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		96FF50982B94427000B36142 /* PlayerAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnimationView.swift; sourceTree = "<group>"; };
+		96FF509A2B94465700B36142 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
+		96FF509C2B944D1B00B36142 /* PlayerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerConfig.swift; sourceTree = "<group>"; };
+		96FF509E2B944E7300B36142 /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +135,8 @@
 				968D2E9D2B8EB56500007734 /* Tab.swift */,
 				96C0C2D62B905DDE00F56FF5 /* Card.swift */,
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
+				96FF509A2B94465700B36142 /* PlayerItem.swift */,
+				96FF509C2B944D1B00B36142 /* PlayerConfig.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,6 +149,8 @@
 				96C0C2D82B905E3500F56FF5 /* CardView.swift */,
 				96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */,
 				96FF50962B92FE1700B36142 /* GridView.swift */,
+				96FF50982B94427000B36142 /* PlayerAnimationView.swift */,
+				96FF509E2B944E7300B36142 /* MiniPlayerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,10 +246,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
 				961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */,
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
+				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
@@ -245,9 +259,11 @@
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
+				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardView.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
+				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */,
