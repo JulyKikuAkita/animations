@@ -12,11 +12,15 @@ struct MiniPlayerView: View {
     @Binding var config: PlayerConfig
     var close: () -> ()
     /// Player configuration
-    let playerHeight: CGFloat = 180
+    let playerHeight: CGFloat = 200
     let miniPlayerHeight: CGFloat = 50
     
     var body: some View {
-        let progress = config.progress
+        /// resize from beginigng to end
+        // let progress = config.progress
+        
+        /// resize after drag to 0.7 position
+        let progress = config.progress > 0.7 ? (config.progress - 0.7) / 0.3 : 0
         
             VStack(spacing: 0) {
                 ZStack(alignment: .top) {
@@ -44,8 +48,11 @@ struct MiniPlayerView: View {
                 .zIndex(1)
                 
                 ScrollView(.vertical) {
-                    
+                    if let playerItem = config.selectedPlayerItem {
+                        PlayerExpandedContentView(playerItem)
+                    }
                 }
+                .opacity(1.0 - (config.progress * 1.6)) // faster fade-out when drag down
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(.background)
@@ -56,12 +63,20 @@ struct MiniPlayerView: View {
             .frame(maxHeight: .infinity, alignment: .bottom)
             .gesture(
                 DragGesture()
-                    .onChanged({ value in
+                    .onChanged { value in
+                        let start = value.startLocation.y
+                        // set scroll range for the expanded player view
+                        guard start < playerHeight || start > (size.height - (tabBarHeight + miniPlayerHeight)) else { return }
+                        
                         let height = config.lastPosition + value.translation.height
                         // stop animation when miniplayer view at miniPlayerHeight
                         config.position = min(height, (size.height - miniPlayerHeight))
                         generateProgress()
-                    }).onEnded({ value in
+                    }.onEnded { value in
+                        let start = value.startLocation.y
+                        // set scroll range for the expanded player view
+                        guard start < playerHeight || start > (size.height - (tabBarHeight + miniPlayerHeight)) else { return }
+                        
                         let velocity = value.velocity.height * 5
                         withAnimation(.smooth(duration: 0.3)) {
                             if (config.position + velocity) > (size.height * 0.65) {
@@ -73,10 +88,19 @@ struct MiniPlayerView: View {
                             }
                             
                         }
+                    }.simultaneously(with: TapGesture().onEnded { _ in
+                        withAnimation(.smooth(duration: 0.3)) {
+                            config.resetPosition()
+                        }
                     })
             )
-            /// Sliding In/Out
-            .transition(.offset(y: size.height))
+            /// miniplayer Sliding In/Out
+            .transition(.offset(y: config.progress == 1 ? tabBarHeight :  size.height))
+            .onChange(of: config.selectedPlayerItem, initial: false) { oldValue, newValue in
+                withAnimation(.smooth(duration: 0.3)) {
+                    config.resetPosition()
+                }
+            }
     }
     
     /// Video Player View
@@ -133,6 +157,22 @@ struct MiniPlayerView: View {
                 })
             }
         }
+    }
+    
+    /// Player ExpandedContent view
+    @ViewBuilder
+    func PlayerExpandedContentView(_ playerItem: PlayerItem) -> some View {
+        VStack(alignment: .leading, spacing: 15, content: {
+            Text(playerItem.title)
+                .font(.title3)
+                .fontWeight(.semibold)
+            
+            Text(playerItem.description)
+                .font(.callout)
+        })
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(15)
+        .padding(.top, 10)
     }
     
     /// calculate progress value [0,1] for miniplayer covering tabbar

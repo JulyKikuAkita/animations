@@ -34,7 +34,12 @@ struct PlayerAnimationView: View {
                 let size = $0.size
                 if config.showMiniPlayer {
                     MiniPlayerView(size: size, config: $config) {
-                        
+                        withAnimation(.easeIn(duration: 0.3), completionCriteria: .logicallyComplete) {
+                            config.showMiniPlayer = false
+                        } completion: {
+                            config.resetPosition()
+                            config.selectedPlayerItem = nil
+                        }
                     }
                 }
             }
