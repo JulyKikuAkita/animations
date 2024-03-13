@@ -13,4 +13,3 @@ struct ContentView: View {
         PlayerAnimationView()
     }
 }
-

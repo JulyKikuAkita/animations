@@ -21,7 +21,12 @@ struct PlayerAnimationView: View {
                 Text(VideoTab.shorts.rawValue)
                     .setupTab(.shorts)
                 
-                Text(VideoTab.subscription.rawValue)
+                RootView {
+                    HStack {
+                        Text(VideoTab.subscription.rawValue)
+                        CustomToastView()
+                    }
+                }
                     .setupTab(.subscription)
                 
                 Text(VideoTab.you.rawValue)
