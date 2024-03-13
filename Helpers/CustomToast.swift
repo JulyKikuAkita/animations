@@ -88,6 +88,7 @@ fileprivate struct ToastGroup: View {
                     ToastView(size: size, item: toast)
                         .scaleEffect(scale(toast))
                         .offset(y: offsetY(toast))
+                        .zIndex(Double(model.toasts.firstIndex(where: { $0.id == toast.id }) ?? 0))
                     /// below animation seems not working
 //                        .animation(.easeInOut) { view in
 //                            view
@@ -121,8 +122,10 @@ fileprivate struct ToastView: View {
     var item: ToastItem
     
     /// View Properties
-    @State private var animateIn: Bool = false
-    @State private var animateOut: Bool = false
+    ///  for state style animation
+//    @State private var animateIn: Bool = false
+//    @State private var animateOut: Bool = false
+    @State private var delayTask: DispatchWorkItem?
     
     var body: some View {
         HStack(spacing: 0) {
@@ -154,37 +157,60 @@ fileprivate struct ToastView: View {
                     
                     if (endY + velocityY) > 100 {
                         /// swipe gesture to remove toast
-                        removeToast()
+                        transitionRemoveToast()
                     }
                     
                 })
         )
-        .offset(y: animateIn ? 0 : 250) // use state change for animation; can use transition too
-        .offset(y: !animateOut ? 0 : 250)
-
-        .task {
-            guard !animateIn else { return }
-            withAnimation(.snappy) {
-                animateIn = true
+//        .offset(y: animateIn ? 0 : 150) // use state change for animation; can use transition too
+//        .offset(y: !animateOut ? 0 : 150) // only need for state style aniamtion
+//        .task {
+//            /// only need for state style aniamtion
+////            guard !animateIn else { return }
+////            withAnimation(.snappy) {
+////                animateIn = true
+////            }
+//            
+//            try? await Task.sleep(for: .seconds(item.timing.rawValue))
+//            
+//            transitionRemoveToast()
+//        }
+        .onAppear {
+            guard delayTask == nil else { return }
+            delayTask = .init(block: {
+                removeToastItem()
+            })
+            
+            if let delayTask {
+                DispatchQueue.main.asyncAfter(deadline: .now() + item.timing.rawValue, execute: delayTask)
             }
-            
-            try? await Task.sleep(for: .seconds(item.timing.rawValue))
-            
-            removeToast()
         }
         /// Limiting size
         .frame(maxWidth: size.width * 0.7)
+        .transition(.offset(y: 150))
     }
     
-    func removeToast() {
-        guard !animateOut else { return }
-        withAnimation(.snappy, completionCriteria: .logicallyComplete) {
-            animateOut = true
-        } completion: {
-            removeToastItem()
+    /// animation has no delay when item is removed
+    func transitionRemoveToast() {
+        if let delayTask {
+            delayTask.cancel()
+        }
+        withAnimation(.snappy) {
+            Toast.shared.toasts.removeAll(where: { $0.id == item.id })
         }
     }
     
+    /// use state change for animation -> animation has delay when item is removed
+//    func removeToast() {
+//        guard !animateOut else { return }
+//        withAnimation(.snappy, completionCriteria: .logicallyComplete) {
+//            animateOut = true
+//        } completion: {
+//            removeToastItem()
+//        }
+//    }
+    
+    /// use state change for animation
     func removeToastItem() {
         Toast.shared.toasts.removeAll(where: { $0.id == item.id })
     }
@@ -197,7 +223,7 @@ struct CustomToastView: View {
         VStack {
             Button("OK!") {
                 Toast.shared.present(
-                    title: "Hi",
+                    title: "Thank you!",
                     symbol: "heart",
                     isUserInteractionEnabled: true
                 )
