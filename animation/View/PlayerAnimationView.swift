@@ -18,8 +18,11 @@ struct PlayerAnimationView: View {
                 HomeTabView()
                     .setupTab(.home)
                 
-                Text(VideoTab.shorts.rawValue)
-                    .setupTab(.shorts)
+                VStack {
+                    Text(VideoTab.shorts.rawValue)
+                    CardCarouselView()
+                }
+                .setupTab(.shorts)
                 
                 RootView {
                     HStack {
@@ -29,8 +32,13 @@ struct PlayerAnimationView: View {
                 }
                     .setupTab(.subscription)
                 
-                Text(VideoTab.you.rawValue)
-                    .setupTab(.you)
+                HStack {
+                    Text(VideoTab.you.rawValue)
+                    CustomAlertDemoView()
+                        .environment(SceneDelegate())
+                }
+                .setupTab(.you)
+                    
             }
             .padding(.bottom, tabBarHeight)
             

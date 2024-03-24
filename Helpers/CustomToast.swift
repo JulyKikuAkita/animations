@@ -81,8 +81,8 @@ fileprivate struct ToastGroup: View {
             let safeArea = $0.safeAreaInsets
             
             ZStack {
-                Text("\(model.toasts.count)")
-                    .offset(y: -100)
+//                Text("\(model.toasts.count)")
+//                    .offset(y: -100)
                 
                 ForEach(model.toasts) { toast in
                     ToastView(size: size, item: toast)
