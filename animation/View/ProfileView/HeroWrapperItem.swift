@@ -206,13 +206,6 @@ fileprivate struct HeroInfo: Identifiable {
     }
 }
 
-//fileprivate struct AnchorKey: PreferenceKey {
-//    static func reduce(value: inout [String : Anchor<CGRect>], 
-//                       nextValue: () -> [String : Anchor<CGRect>]) {
-//        value.merge(nextValue()) { $1 }
-//    }
-//    static var defaultValue: [String: Anchor<CGRect>] = [:]
-//}
 extension View {
     @ViewBuilder
     func customOnChange<Value: Equatable>(value: Value, completion: @escaping (Value) -> ()) -> some View {
