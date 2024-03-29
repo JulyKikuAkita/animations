@@ -11,6 +11,10 @@
 		9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */; };
 		9603C9FD2B8ABB0500F91C21 /* MAnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9FC2B8ABB0500F91C21 /* MAnchorKey.swift */; };
 		9603CA012B8ABDCD00F91C21 /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603CA002B8ABDCD00F91C21 /* AnchorKey.swift */; };
+		960D20602BB6A1F8002F1677 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960D205F2BB6A1F8002F1677 /* Todo.swift */; };
+		960D20612BB6A1F8002F1677 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960D205F2BB6A1F8002F1677 /* Todo.swift */; };
+		960D20642BB6A36A002F1677 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960D20632BB6A36A002F1677 /* TodoView.swift */; };
+		960D20652BB6A36A002F1677 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960D20632BB6A36A002F1677 /* TodoView.swift */; };
 		961F3B8F2B8818240055D79B /* animationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B8E2B8818240055D79B /* animationApp.swift */; };
 		961F3B912B8818240055D79B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B902B8818240055D79B /* ContentView.swift */; };
 		961F3B932B8818250055D79B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 961F3B922B8818250055D79B /* Assets.xcassets */; };
@@ -75,6 +79,8 @@
 		9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroItemView.swift; sourceTree = "<group>"; };
 		9603C9FC2B8ABB0500F91C21 /* MAnchorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAnchorKey.swift; sourceTree = "<group>"; };
 		9603CA002B8ABDCD00F91C21 /* AnchorKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnchorKey.swift; path = ../../../../.Trash/AnchorKey.swift; sourceTree = "<group>"; };
+		960D205F2BB6A1F8002F1677 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		960D20632BB6A36A002F1677 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		961F3B8B2B8818240055D79B /* animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961F3B8E2B8818240055D79B /* animationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animationApp.swift; sourceTree = "<group>"; };
 		961F3B902B8818240055D79B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +146,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		960D20622BB6A35A002F1677 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				960D20632BB6A36A002F1677 /* TodoView.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
 		961F3B822B8818240055D79B = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +207,7 @@
 				96FF509A2B94465700B36142 /* PlayerItem.swift */,
 				96FF509C2B944D1B00B36142 /* PlayerConfig.swift */,
 				96F9A69A2B9E741F00FD6900 /* TaskModel.swift */,
+				960D205F2BB6A1F8002F1677 /* Todo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +215,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				960D20622BB6A35A002F1677 /* Todo */,
 				96E70B102B8EC21200F23A51 /* ProfileView */,
 				96E70B0D2B8EBF0000F23A51 /* Tabbar */,
 				96C0C2D82B905E3500F56FF5 /* CardView.swift */,
@@ -361,6 +377,7 @@
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
+				960D20602BB6A1F8002F1677 /* Todo.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
 				9603C9FD2B8ABB0500F91C21 /* MAnchorKey.swift in Sources */,
@@ -372,6 +389,7 @@
 				96C0C2D92B905E3500F56FF5 /* CardView.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
+				960D20642BB6A36A002F1677 /* TodoView.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
@@ -388,10 +406,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				960D20652BB6A36A002F1677 /* TodoView.swift in Sources */,
 				96F9A69C2B9E741F00FD6900 /* TaskModel.swift in Sources */,
 				96F9A68D2B9E6D7800FD6900 /* TaskWidget.swift in Sources */,
 				96F9A68B2B9E6D7800FD6900 /* TaskWidgetBundle.swift in Sources */,
 				96F9A69F2B9E7CF500FD6900 /* ToggleStateIntent.swift in Sources */,
+				960D20612BB6A1F8002F1677 /* Todo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
