@@ -15,7 +15,6 @@ class Todo {
     
     init(task: String, priority: Priority) {
         self.task = task
-//        self.isCompleted = isCompleted
         self.priority = priority
     }
     

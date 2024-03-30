@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct TodoRowView: View {
     @Bindable var todo: Todo
@@ -19,6 +20,7 @@ struct TodoRowView: View {
                 Button(action: {
                     todo.isCompleted.toggle()
                     todo.lastUpdated = .now
+                    WidgetCenter.shared.reloadAllTimelines()
                 }, label: {
                     Image(systemName: todo.isCompleted ? "checkmark.circle.fill" : "circle")
                         .font(.title2)
@@ -74,11 +76,16 @@ struct TodoRowView: View {
                 /// Deleting empty todo
                 context.delete(todo)
             }
+            WidgetCenter.shared.reloadAllTimelines()
         }
         .onChange(of: phase) { oldValue, newValue in
             if newValue != .active && todo.task.isEmpty {
                 context.delete(todo)
             }
+            WidgetCenter.shared.reloadAllTimelines() // force widget update
+        }
+        .task { /// swift data bug: workaround for widget status sync to app when app in bg
+            todo.isCompleted = todo.isCompleted
         }
     }
 }
