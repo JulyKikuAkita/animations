@@ -27,6 +27,11 @@
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
 		968D2E9E2B8EB56500007734 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab.swift */; };
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
+		969A4A7D2BB7ADCE00DDC3CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B902B8818240055D79B /* ContentView.swift */; };
+		969A4A7F2BB7DB9B00DDC3CF /* CompletedTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4A7E2BB7DB9B00DDC3CF /* CompletedTaskListView.swift */; };
+		969A4A802BB7DB9B00DDC3CF /* CompletedTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4A7E2BB7DB9B00DDC3CF /* CompletedTaskListView.swift */; };
+		969A4A822BB7DE0500DDC3CF /* TodoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4A812BB7DE0500DDC3CF /* TodoRowView.swift */; };
+		969A4A832BB7DE0500DDC3CF /* TodoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4A812BB7DE0500DDC3CF /* TodoRowView.swift */; };
 		96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
 		96C0C2D92B905E3500F56FF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D82B905E3500F56FF5 /* CardView.swift */; };
 		96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
@@ -94,6 +99,8 @@
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
 		968D2E9D2B8EB56500007734 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
+		969A4A7E2BB7DB9B00DDC3CF /* CompletedTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskListView.swift; sourceTree = "<group>"; };
+		969A4A812BB7DE0500DDC3CF /* TodoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowView.swift; sourceTree = "<group>"; };
 		96C0C2D62B905DDE00F56FF5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		96C0C2D82B905E3500F56FF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetReader.swift; sourceTree = "<group>"; };
@@ -150,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				960D20632BB6A36A002F1677 /* TodoView.swift */,
+				969A4A7E2BB7DB9B00DDC3CF /* CompletedTaskListView.swift */,
+				969A4A812BB7DE0500DDC3CF /* TodoRowView.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -382,6 +391,7 @@
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
 				9603C9FD2B8ABB0500F91C21 /* MAnchorKey.swift in Sources */,
 				96F9A69B2B9E741F00FD6900 /* TaskModel.swift in Sources */,
+				969A4A822BB7DE0500DDC3CF /* TodoRowView.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
@@ -393,6 +403,7 @@
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
+				969A4A7F2BB7DB9B00DDC3CF /* CompletedTaskListView.swift in Sources */,
 				968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */,
 				96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */,
 				96F9A69E2B9E7CF500FD6900 /* ToggleStateIntent.swift in Sources */,
@@ -407,9 +418,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				960D20652BB6A36A002F1677 /* TodoView.swift in Sources */,
+				969A4A832BB7DE0500DDC3CF /* TodoRowView.swift in Sources */,
 				96F9A69C2B9E741F00FD6900 /* TaskModel.swift in Sources */,
+				969A4A7D2BB7ADCE00DDC3CF /* ContentView.swift in Sources */,
 				96F9A68D2B9E6D7800FD6900 /* TaskWidget.swift in Sources */,
 				96F9A68B2B9E6D7800FD6900 /* TaskWidgetBundle.swift in Sources */,
+				969A4A802BB7DB9B00DDC3CF /* CompletedTaskListView.swift in Sources */,
 				96F9A69F2B9E7CF500FD6900 /* ToggleStateIntent.swift in Sources */,
 				960D20612BB6A1F8002F1677 /* Todo.swift in Sources */,
 			);

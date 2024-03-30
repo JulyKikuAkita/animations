@@ -13,5 +13,6 @@ struct animationApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Todo.self)
     }
 }
