@@ -34,6 +34,17 @@
 		969A4A912BB7E9FD00DDC3CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 969A4A902BB7E9FD00DDC3CF /* Assets.xcassets */; };
 		969A4A952BB7E9FD00DDC3CF /* TodoListExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 969A4A882BB7E9FC00DDC3CF /* TodoListExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		969A4A992BB7EA0C00DDC3CF /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960D205F2BB6A1F8002F1677 /* Todo.swift */; };
+		969A4AA32BBA7E0300DDC3CF /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F9A6852B9E6D7800FD6900 /* WidgetKit.framework */; };
+		969A4AA42BBA7E0300DDC3CF /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F9A6872B9E6D7800FD6900 /* SwiftUI.framework */; };
+		969A4AA72BBA7E0300DDC3CF /* GraphWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4AA62BBA7E0300DDC3CF /* GraphWidgetBundle.swift */; };
+		969A4AA92BBA7E0300DDC3CF /* GraphWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4AA82BBA7E0300DDC3CF /* GraphWidget.swift */; };
+		969A4AAB2BBA7E0300DDC3CF /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4AAA2BBA7E0300DDC3CF /* AppIntent.swift */; };
+		969A4AAD2BBA7E0400DDC3CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 969A4AAC2BBA7E0400DDC3CF /* Assets.xcassets */; };
+		969A4AB12BBA7E0400DDC3CF /* GraphWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 969A4AA22BBA7E0300DDC3CF /* GraphWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		969A4AB72BBA7FDC00DDC3CF /* Downloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4AB62BBA7FDC00DDC3CF /* Downloads.swift */; };
+		969A4AB92BBA810100DDC3CF /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4AB82BBA810100DDC3CF /* AppModel.swift */; };
+		969A4ABA2BBA820B00DDC3CF /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4AB82BBA810100DDC3CF /* AppModel.swift */; };
+		969A4ABB2BBA820E00DDC3CF /* Downloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969A4AB62BBA7FDC00DDC3CF /* Downloads.swift */; };
 		96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
 		96C0C2D92B905E3500F56FF5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D82B905E3500F56FF5 /* CardView.swift */; };
 		96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
@@ -65,6 +76,13 @@
 			remoteGlobalIDString = 969A4A872BB7E9FC00DDC3CF;
 			remoteInfo = TodoListExtension;
 		};
+		969A4AAF2BBA7E0400DDC3CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 961F3B832B8818240055D79B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 969A4AA12BBA7E0300DDC3CF;
+			remoteInfo = GraphWidgetExtension;
+		};
 		96F9A6912B9E6D7900FD6900 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 961F3B832B8818240055D79B /* Project object */;
@@ -82,6 +100,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				969A4A952BB7E9FD00DDC3CF /* TodoListExtension.appex in Embed Foundation Extensions */,
+				969A4AB12BBA7E0400DDC3CF /* GraphWidgetExtension.appex in Embed Foundation Extensions */,
 				96F9A6932B9E6D7900FD6900 /* TaskWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -118,6 +137,14 @@
 		969A4A922BB7E9FD00DDC3CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		969A4A9C2BB7EE2200DDC3CF /* animation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = animation.entitlements; sourceTree = "<group>"; };
 		969A4A9D2BB7EEFD00DDC3CF /* TodoListExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoListExtension.entitlements; sourceTree = "<group>"; };
+		969A4AA22BBA7E0300DDC3CF /* GraphWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GraphWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		969A4AA62BBA7E0300DDC3CF /* GraphWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphWidgetBundle.swift; sourceTree = "<group>"; };
+		969A4AA82BBA7E0300DDC3CF /* GraphWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphWidget.swift; sourceTree = "<group>"; };
+		969A4AAA2BBA7E0300DDC3CF /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		969A4AAC2BBA7E0400DDC3CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		969A4AAE2BBA7E0400DDC3CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		969A4AB62BBA7FDC00DDC3CF /* Downloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloads.swift; sourceTree = "<group>"; };
+		969A4AB82BBA810100DDC3CF /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		96C0C2D62B905DDE00F56FF5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		96C0C2D82B905E3500F56FF5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetReader.swift; sourceTree = "<group>"; };
@@ -154,6 +181,15 @@
 			files = (
 				969A4A8A2BB7E9FC00DDC3CF /* SwiftUI.framework in Frameworks */,
 				969A4A892BB7E9FC00DDC3CF /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		969A4A9F2BBA7E0300DDC3CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				969A4AA42BBA7E0300DDC3CF /* SwiftUI.framework in Frameworks */,
+				969A4AA32BBA7E0300DDC3CF /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +233,7 @@
 				961F3B8D2B8818240055D79B /* animation */,
 				96F9A6892B9E6D7800FD6900 /* TaskWidget */,
 				969A4A8B2BB7E9FC00DDC3CF /* TodoList */,
+				969A4AA52BBA7E0300DDC3CF /* GraphWidget */,
 				96F9A6842B9E6D7800FD6900 /* Frameworks */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
@@ -208,6 +245,7 @@
 				961F3B8B2B8818240055D79B /* animation.app */,
 				96F9A6832B9E6D7800FD6900 /* TaskWidgetExtension.appex */,
 				969A4A882BB7E9FC00DDC3CF /* TodoListExtension.appex */,
+				969A4AA22BBA7E0300DDC3CF /* GraphWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,6 +315,28 @@
 			path = TodoList;
 			sourceTree = "<group>";
 		};
+		969A4AA52BBA7E0300DDC3CF /* GraphWidget */ = {
+			isa = PBXGroup;
+			children = (
+				969A4AB52BBA7FCE00DDC3CF /* Model */,
+				969A4AA62BBA7E0300DDC3CF /* GraphWidgetBundle.swift */,
+				969A4AA82BBA7E0300DDC3CF /* GraphWidget.swift */,
+				969A4AAA2BBA7E0300DDC3CF /* AppIntent.swift */,
+				969A4AAC2BBA7E0400DDC3CF /* Assets.xcassets */,
+				969A4AAE2BBA7E0400DDC3CF /* Info.plist */,
+			);
+			path = GraphWidget;
+			sourceTree = "<group>";
+		};
+		969A4AB52BBA7FCE00DDC3CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				969A4AB62BBA7FDC00DDC3CF /* Downloads.swift */,
+				969A4AB82BBA810100DDC3CF /* AppModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		96E70B0D2B8EBF0000F23A51 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +396,7 @@
 			dependencies = (
 				96F9A6922B9E6D7900FD6900 /* PBXTargetDependency */,
 				969A4A942BB7E9FD00DDC3CF /* PBXTargetDependency */,
+				969A4AB02BBA7E0400DDC3CF /* PBXTargetDependency */,
 			);
 			name = animation;
 			productName = animation;
@@ -357,6 +418,23 @@
 			name = TodoListExtension;
 			productName = TodoListExtension;
 			productReference = 969A4A882BB7E9FC00DDC3CF /* TodoListExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		969A4AA12BBA7E0300DDC3CF /* GraphWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 969A4AB42BBA7E0400DDC3CF /* Build configuration list for PBXNativeTarget "GraphWidgetExtension" */;
+			buildPhases = (
+				969A4A9E2BBA7E0300DDC3CF /* Sources */,
+				969A4A9F2BBA7E0300DDC3CF /* Frameworks */,
+				969A4AA02BBA7E0300DDC3CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GraphWidgetExtension;
+			productName = GraphWidgetExtension;
+			productReference = 969A4AA22BBA7E0300DDC3CF /* GraphWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		96F9A6822B9E6D7800FD6900 /* TaskWidgetExtension */ = {
@@ -392,6 +470,9 @@
 					969A4A872BB7E9FC00DDC3CF = {
 						CreatedOnToolsVersion = 15.3;
 					};
+					969A4AA12BBA7E0300DDC3CF = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					96F9A6822B9E6D7800FD6900 = {
 						CreatedOnToolsVersion = 15.1;
 					};
@@ -413,6 +494,7 @@
 				961F3B8A2B8818240055D79B /* animation */,
 				96F9A6822B9E6D7800FD6900 /* TaskWidgetExtension */,
 				969A4A872BB7E9FC00DDC3CF /* TodoListExtension */,
+				969A4AA12BBA7E0300DDC3CF /* GraphWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -432,6 +514,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				969A4A912BB7E9FD00DDC3CF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		969A4AA02BBA7E0300DDC3CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				969A4AAD2BBA7E0400DDC3CF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +553,7 @@
 				9603C9FD2B8ABB0500F91C21 /* MAnchorKey.swift in Sources */,
 				96F9A69B2B9E741F00FD6900 /* TaskModel.swift in Sources */,
 				969A4A822BB7DE0500DDC3CF /* TodoRowView.swift in Sources */,
+				969A4AB92BBA810100DDC3CF /* AppModel.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
@@ -471,6 +562,7 @@
 				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				960D20642BB6A36A002F1677 /* TodoView.swift in Sources */,
+				969A4AB72BBA7FDC00DDC3CF /* Downloads.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
@@ -494,6 +586,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		969A4A9E2BBA7E0300DDC3CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				969A4AA92BBA7E0300DDC3CF /* GraphWidget.swift in Sources */,
+				969A4ABB2BBA820E00DDC3CF /* Downloads.swift in Sources */,
+				969A4AA72BBA7E0300DDC3CF /* GraphWidgetBundle.swift in Sources */,
+				969A4AAB2BBA7E0300DDC3CF /* AppIntent.swift in Sources */,
+				969A4ABA2BBA820B00DDC3CF /* AppModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96F9A67F2B9E6D7800FD6900 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -512,6 +616,11 @@
 			isa = PBXTargetDependency;
 			target = 969A4A872BB7E9FC00DDC3CF /* TodoListExtension */;
 			targetProxy = 969A4A932BB7E9FD00DDC3CF /* PBXContainerItemProxy */;
+		};
+		969A4AB02BBA7E0400DDC3CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 969A4AA12BBA7E0300DDC3CF /* GraphWidgetExtension */;
+			targetProxy = 969A4AAF2BBA7E0400DDC3CF /* PBXContainerItemProxy */;
 		};
 		96F9A6922B9E6D7900FD6900 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -760,6 +869,62 @@
 			};
 			name = Release;
 		};
+		969A4AB22BBA7E0400DDC3CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GraphWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GraphWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.animation.GraphWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		969A4AB32BBA7E0400DDC3CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GraphWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GraphWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.animation.GraphWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		96F9A6952B9E6D7900FD6900 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -838,6 +1003,15 @@
 			buildConfigurations = (
 				969A4A972BB7E9FD00DDC3CF /* Debug */,
 				969A4A982BB7E9FD00DDC3CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		969A4AB42BBA7E0400DDC3CF /* Build configuration list for PBXNativeTarget "GraphWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				969A4AB22BBA7E0400DDC3CF /* Debug */,
+				969A4AB32BBA7E0400DDC3CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
