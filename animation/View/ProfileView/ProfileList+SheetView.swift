@@ -4,7 +4,7 @@
 //
 //  source: https://www.youtube.com/watch?v=zHtB8mHPLDU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=32
 //
-// Note: preview is not availble due to use SceneDelegate env var
+// Note: preview is not available due to use SceneDelegate env var
 
 import SwiftUI
 

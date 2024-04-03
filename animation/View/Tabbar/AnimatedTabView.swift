@@ -92,7 +92,7 @@ struct AnimatedTabView: View {
                     }
                     .navigationTitle(Tab.profile.title)
                 }
-                .setupTab(.profile)
+                .setupTab(Tab.profile)
                 .tabItem {
                     Image(systemName: Tab.profile.rawValue)
                     Text(Tab.profile.title)

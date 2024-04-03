@@ -44,7 +44,7 @@ struct TabStateScrollView<Content: View>: View {
     
     /// Handling tab state on swipe
     func handleTabState(_ gesture: UIPanGestureRecognizer) {
-        let offsetY = gesture.translation(in: gesture.view).y
+//        let offsetY = gesture.translation(in: gesture.view).y
         let velocityY = gesture.velocity(in: gesture.view).y
         
         if velocityY < 0 {

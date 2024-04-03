@@ -39,6 +39,7 @@ enum VideoTab: String, CaseIterable {
     case shorts = "Shorts"
     case subscription = "Subscription"
     case you = "You"
+    case profile = "Profile"
     
     var symbol: String {
         switch self {
@@ -50,6 +51,8 @@ enum VideoTab: String, CaseIterable {
             return "play.square.stack.fill"
         case .you:
             return "person.circle.fill"
+        case .profile:
+            return "person.2.crop.square.stack.fill"
         }
     }
 }
