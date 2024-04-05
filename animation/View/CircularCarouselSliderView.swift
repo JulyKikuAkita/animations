@@ -14,7 +14,6 @@ struct CircularCarouselSliderView: View {
     @State private var activeID: String? /// ios 17 api to track scroll view posititon
     var body: some View {
         VStack {
-            Spacer(minLength: 0)
             Picker("", selection: $pickerType) {
                 ForEach(TripPicker.allCases, id:\.rawValue) {
                     Text($0.rawValue)

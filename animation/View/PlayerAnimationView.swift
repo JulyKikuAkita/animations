@@ -33,17 +33,11 @@ struct PlayerAnimationView: View {
                 }
                 .setupTab(.subscription)
                 
-                VStack {
-                    Text(VideoTab.shorts.rawValue)
-                    CardCarouselView()
-                }
-                .setupTab(.you)
+                CardCarouselView()
+                    .setupTab(.you)
                 
-                ZStack {
-                    ProfileListView()
-                    CircularCarouselSliderView()
-                }
-                .setupTab(VideoTab.profile)
+                ProfileListView()
+                    .setupTab(VideoTab.profile)
             }
             .padding(.bottom, tabBarHeight)
             

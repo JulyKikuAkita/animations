@@ -12,11 +12,12 @@ private let customedCardWidth: CGFloat = 100.0
 struct CardCarouselView: View {
     var body: some View {
         NavigationStack {
+            Spacer(minLength: 0)
             CarouselView1(cards: firstSetCards)
-                .navigationTitle("Progress Style")
-            
             CarouselView2(cards: secondSetCards)
                 .navigationTitle("Carousel Style")
+            CircularCarouselSliderView()
+                .padding()
         }
     }
 }
