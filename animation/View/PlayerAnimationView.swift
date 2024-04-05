@@ -22,25 +22,28 @@ struct PlayerAnimationView: View {
                     .setupTab(.shorts)
                 
                 VStack {
+                    BasicProfileAnimationListView()
+                    HStack {
+                        RootView {
+                            CustomToastView()
+                            CustomAlertDemoView()
+                                .environment(SceneDelegate())
+                        }
+                    }
+                }
+                .setupTab(.subscription)
+                
+                VStack {
                     Text(VideoTab.shorts.rawValue)
                     CardCarouselView()
                 }
                 .setupTab(.you)
                 
-                ProfileListView()
-                    .setupTab(VideoTab.profile)
-
-                VStack {
-                    BasicProfileAnimationListView()
-                    HStack {
-                        RootView {
-                            CustomToastView()
-                        }
-                        CustomAlertDemoView()
-                            .environment(SceneDelegate())
-                    }
+                ZStack {
+                    ProfileListView()
+                    CircularCarouselSliderView()
                 }
-                .setupTab(.subscription)
+                .setupTab(VideoTab.profile)
             }
             .padding(.bottom, tabBarHeight)
             

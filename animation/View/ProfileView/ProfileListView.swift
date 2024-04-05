@@ -99,11 +99,11 @@ struct ProfileListView: View {
                 }
             }
         })
-        /// some visual help
-        .overlay(alignment: .bottom) {
-            Slider(value: $heroProgress)
-                .padding()
-        }
+//        /// some visual help
+//        .overlay(alignment: .bottom) {
+//            Slider(value: $heroProgress)
+//                .padding()
+//        }
     }
 }
 
