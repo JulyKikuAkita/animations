@@ -11,7 +11,8 @@ struct PlayerAnimationView: View {
     /// View properties
     @State private var activeTab: VideoTab = .home
     @State private var config: PlayerConfig = .init()
-    
+    @State private var hideNavBar: Bool = true
+
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $activeTab) {
@@ -83,6 +84,16 @@ struct PlayerAnimationView: View {
             .navigationTitle("YouTube")
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarBackground(.background, for: .navigationBar)
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        hideNavBar.toggle()
+                    }, label: {
+                        Image(systemName: hideNavBar ? "eye.slash" : "eye")
+                    })
+                }
+            })
+            .hideNavBarOnSwipe(hideNavBar)
         }
     }
     
