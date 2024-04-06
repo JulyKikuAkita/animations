@@ -1,22 +1,24 @@
 //
-//  CardView.swift
+//  CardCarouselView.swift
 //  animation
 // Converting card view to progress value that ranges from 0 to 130 based on the min X value to achieve animation effect
 // Each view container size is 180 but view size changes
-// Use the progess value to reduce the card width by calculating the previous offset value to keep adjust the current view
+// Use the progress value to reduce the card width by calculating the previous offset value to keep adjust the current view
 
 import SwiftUI
 
-private let customedCardWidth: CGFloat = 100.0
+private let customCardWidth: CGFloat = 100.0
 
 struct CardCarouselView: View {
     var body: some View {
         NavigationStack {
-            CarouselView1(cards: firstSetCards)
-                .navigationTitle("Progress Style")
-            
-            CarouselView2(cards: secondSetCards)
-                .navigationTitle("Carousel Style")
+            List{
+                CarouselView1(cards: firstSetCards)
+                CarouselView2(cards: secondSetCards)
+                CircularCarouselSliderView()
+            }
+            .listStyle(.plain)
+            .navigationTitle("Carousel Style")
         }
     }
 }
@@ -87,8 +89,8 @@ extension CarouselView1 {
             let size = proxy.size
             let minX = proxy.frame(in: .scrollView).minX
             /// 190: 180 - card width; 10 - spacing
-            let reducingWidth = (minX / 190) * customedCardWidth
-            let cappedWidth = min(reducingWidth, customedCardWidth)
+            let reducingWidth = (minX / 190) * customCardWidth
+            let cappedWidth = min(reducingWidth, customCardWidth)
             
             let frameWidth = size.width - (minX > 0 ? cappedWidth : -cappedWidth)
             
@@ -103,7 +105,7 @@ extension CarouselView1 {
         }
         .frame(width: 180, height:  200)
         .offsetX { offset in
-            let reducingWidth = (offset / 190) * customedCardWidth
+            let reducingWidth = (offset / 190) * customCardWidth
             let index = cards.indexOf(card)
             
             if cards.indices.contains(index + 1) {
@@ -121,8 +123,8 @@ extension CarouselView2 {
             let size = proxy.size
             let minX = proxy.frame(in: .scrollView).minX
             /// 190: 180 - card width; 10 - spacing
-            let reducingWidth = (minX / 190) * customedCardWidth
-            let cappedWidth = min(reducingWidth, customedCardWidth)
+            let reducingWidth = (minX / 190) * customCardWidth
+            let cappedWidth = min(reducingWidth, customCardWidth)
             
             let frameWidth = size.width - (minX > 0 ? cappedWidth : -cappedWidth)
             
@@ -137,7 +139,7 @@ extension CarouselView2 {
         }
         .frame(width: 180, height:  200)
         .offsetX { offset in
-            let reducingWidth = (offset / 190) * customedCardWidth
+            let reducingWidth = (offset / 190) * customCardWidth
             let index = cards.indexOf(card)
             
             if cards.indices.contains(index + 1) {

@@ -18,7 +18,7 @@ struct GridView: View {
                 LazyVGrid(columns: columns, spacing: 10, content: {
                     ForEach(colors, id: \.self) { color in
                         GeometryReader {
-                            let size = $0.size
+                            let _ = $0.size
                             
                             RoundedRectangle(cornerRadius: 10)
                             .fill(color.gradient)

@@ -11,34 +11,34 @@ struct PlayerAnimationView: View {
     /// View properties
     @State private var activeTab: VideoTab = .home
     @State private var config: PlayerConfig = .init()
-    
+    @State private var hideNavBar: Bool = true
+
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $activeTab) {
                 HomeTabView()
                     .setupTab(.home)
                 
-                VStack {
-                    Text(VideoTab.shorts.rawValue)
-                    CardCarouselView()
-                }
-                .setupTab(.shorts)
+                FullScreenVideoView()
+                    .setupTab(.shorts)
                 
-                RootView {
+                VStack {
+                    BasicProfileAnimationListView()
                     HStack {
-                        Text(VideoTab.subscription.rawValue)
-                        CustomToastView()
+                        RootView {
+                            CustomToastView()
+                            CustomAlertDemoView()
+                                .environment(SceneDelegate())
+                        }
                     }
                 }
-                    .setupTab(.subscription)
+                .setupTab(.subscription)
                 
-                HStack {
-                    Text(VideoTab.you.rawValue)
-                    CustomAlertDemoView()
-                        .environment(SceneDelegate())
-                }
-                .setupTab(.you)
-                    
+                CardCarouselView()
+                    .setupTab(.you)
+                
+                ProfileListView()
+                    .setupTab(VideoTab.profile)
             }
             .padding(.bottom, tabBarHeight)
             
@@ -84,6 +84,16 @@ struct PlayerAnimationView: View {
             .navigationTitle("YouTube")
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarBackground(.background, for: .navigationBar)
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        hideNavBar.toggle()
+                    }, label: {
+                        Image(systemName: hideNavBar ? "eye.slash" : "eye")
+                    })
+                }
+            })
+            .hideNavBarOnSwipe(hideNavBar)
         }
     }
     

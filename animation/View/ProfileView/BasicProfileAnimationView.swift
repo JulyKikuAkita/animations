@@ -9,7 +9,6 @@
 // source: https://www.youtube.com/watch?v=cyVQJ31AYKs&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=22
 
 import SwiftUI
-//9.22
 struct BasicProfileAnimationListView: View {
     @State private var selectedProfile: Profile?
     @State private var pushView: Bool = false
@@ -29,7 +28,7 @@ struct BasicProfileAnimationListView: View {
                     )
                 }
         }
-        .overlayPreferenceValue(MAnchorKey.self, { value in
+        .overlayPreferenceValue(AnchorKey.self, { value in
             GeometryReader(content: { geometry in
                 if let selectedProfile, 
                     let anchor = value[selectedProfile.id.uuidString],
@@ -59,7 +58,7 @@ struct BasicProfileAnimationView: View {
                     Color.clear
                         .frame(width: 60, height: 60)
                         ///Source view anchor
-                        .anchorPreference(key: MAnchorKey.self, value: .bounds,
+                        .anchorPreference(key: AnchorKey.self, value: .bounds,
                                           transform: { anchor in
                             return [profile.id.uuidString: anchor]
                         })
@@ -86,7 +85,7 @@ struct BasicProfileAnimationView: View {
         /// Need to disable the default list back action to achieve custom geometry effect
         /// Since it's an overlay, we cannot tap on image
         /// Enable tap on image by disable allowsHitTesting
-        .overlayPreferenceValue(MAnchorKey.self, { value in
+        .overlayPreferenceValue(AnchorKey.self, { value in
             GeometryReader(content: { geometry in
                 ForEach(profiles) { profile in
                     /// Fetching each profile image view using the profile id
@@ -159,7 +158,7 @@ struct BasicProfileAnimationDetailedView: View {
                         }
                     }
                     /// Destination view anchor
-                    .anchorPreference(key: MAnchorKey.self, value: .bounds,
+                    .anchorPreference(key: AnchorKey.self, value: .bounds,
                                       transform: { anchor in
                         return [selectedProfile.id.uuidString: anchor]
                     })
