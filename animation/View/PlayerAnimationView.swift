@@ -12,6 +12,7 @@ struct PlayerAnimationView: View {
     @State private var activeTab: VideoTab = .home
     @State private var config: PlayerConfig = .init()
     @State private var hideNavBar: Bool = true
+    @State private var tabState: Visibility = .visible
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -27,9 +28,9 @@ struct PlayerAnimationView: View {
                     HStack {
                         RootView {
                             CustomToastView()
-                            CustomAlertDemoView()
-                                .environment(SceneDelegate())
                         }
+                        CustomAlertDemoView()
+                            .environment(SceneDelegate())
                     }
                 }
                 .setupTab(.subscription)

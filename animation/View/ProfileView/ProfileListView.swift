@@ -13,6 +13,8 @@ struct ProfileListView: View {
     @State private var heroProgress: CGFloat = 0
     @State private var showHeroView: Bool = true
 
+    /// Textfield View Properties
+    @State private var text: String = ""
     var body: some View {
         NavigationStack {
             List(allProfiles) { profile in
@@ -99,11 +101,23 @@ struct ProfileListView: View {
                 }
             }
         })
-//        /// some visual help
-//        .overlay(alignment: .bottom) {
+        /// some visual help
+        .overlay(alignment: .bottom) {
 //            Slider(value: $heroProgress)
 //                .padding()
-//        }
+            VStack{
+                LimitedTextFieldIView(
+                    config: .init(
+                        limit: 40,
+                        tint: .secondary,
+                        autoResizes: true
+                    ),
+                    hint: "Type here",
+                    value: $text)
+           }
+            .autocorrectionDisabled()
+            .frame(maxHeight: 150)
+        }
     }
 }
 
