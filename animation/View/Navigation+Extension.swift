@@ -2,6 +2,7 @@
 //  Navigation+Extension.swift
 //  animation
 
+/// Show/ Hide navigation bar 
 import SwiftUI
 
 /// Custom View modifier
