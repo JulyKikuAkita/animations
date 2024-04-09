@@ -22,6 +22,7 @@
 		961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F51DA2BC3B43B00F0D953 /* LimitedTextFieldIView.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
+		965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E573B2BC5097C00E172B3 /* DropDownView.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -73,6 +74,7 @@
 		961F51DA2BC3B43B00F0D953 /* LimitedTextFieldIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTextFieldIView.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
+		965E573B2BC5097C00E172B3 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -189,17 +191,16 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				965E573A2BC5086000E172B3 /* Carousel */,
 				96D495832BBD25160011D5AA /* Video */,
 				96F9A6EB2B9FACC900FD6900 /* Button */,
 				96E70B102B8EC21200F23A51 /* ProfileView */,
 				96E70B0D2B8EBF0000F23A51 /* Tabbar */,
-				96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */,
-				96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */,
 				96FF50962B92FE1700B36142 /* GridView.swift */,
 				96FF50982B94427000B36142 /* PlayerAnimationView.swift */,
 				96FF509E2B944E7300B36142 /* MiniPlayerView.swift */,
-				96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */,
 				961F51D82BC11B5200F0D953 /* Navigation+Extension.swift */,
+				965E573B2BC5097C00E172B3 /* DropDownView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,6 +221,16 @@
 				96D495922BBD2AAD0011D5AA /* Reel14.mp4 */,
 			);
 			path = Videos;
+			sourceTree = "<group>";
+		};
+		965E573A2BC5086000E172B3 /* Carousel */ = {
+			isa = PBXGroup;
+			children = (
+				96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */,
+				96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */,
+				96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */,
+			);
+			path = Carousel;
 			sourceTree = "<group>";
 		};
 		96D495832BBD25160011D5AA /* Video */ = {
@@ -372,6 +383,7 @@
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */,
 				96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */,
+				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
 				9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */,
 				9603CA012B8ABDCD00F91C21 /* AnchorKey.swift in Sources */,
 				968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */,
