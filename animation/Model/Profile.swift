@@ -21,4 +21,5 @@ Profile(username: "Hachi", profilePicture: "IMG_1915", lastMsg: "Wong", lastActi
 Profile(username: "Akita", profilePicture: "IMG_2104", lastMsg: "Meow", lastActive: "3:25 PM"),
 Profile(username: "Nanachi", profilePicture: "IMG_6162", lastMsg: "...", lastActive: "4:25 PM"),
 Profile(username: "Banana", profilePicture: "IMG_8788", lastMsg: "banana", lastActive: "5:25 PM"),
+Profile(username: "Fox", profilePicture: "fox", lastMsg: "Mr. Fox", lastActive: "8:25 PM"),
 ]

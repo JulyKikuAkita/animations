@@ -16,6 +16,7 @@ struct CardCarouselView: View {
                 CarouselView1(cards: firstSetCards)
                 CarouselView2(cards: secondSetCards)
                 CircularCarouselSliderView()
+                ParallelXCardView()
             }
             .listStyle(.plain)
             .navigationTitle("Carousel Style")
