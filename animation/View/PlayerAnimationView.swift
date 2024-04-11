@@ -82,6 +82,43 @@ struct PlayerAnimationView: View {
                 }
                 .padding(15)
             }
+            .overlay(alignment: .bottomTrailing) {
+                FloatingButton {
+                    FloatingAction(symbol: "dog.fill") {
+                        print("wow")
+                    }
+                    
+                    FloatingAction(symbol: "pawprint.fill") {
+                        print("meow")
+                    }
+                    
+                    FloatingAction(symbol: "fish.fill") {
+                        print("puh")
+                    }
+                    
+                    FloatingAction(symbol: "cat.fill") {
+                        print("puh")
+                    }
+                    
+                    FloatingAction(symbol: "bird.fill") {
+                        print("puh")
+                    }
+                } label: { isExpanded in
+                    Image(systemName: "plus")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .rotationEffect(.init(degrees: isExpanded ? 45 : 0))
+                        .scaleEffect(1.02)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.purple.gradient, in: .circle)
+                        .shadow(color: .orange.opacity(0.5), radius: 6)
+                        ///  scale effect when expanded
+                        .scaleEffect(isExpanded ? 0.9 : 1)
+                    
+                }
+                .padding()
+            }
             .navigationTitle("YouTube")
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarBackground(.background, for: .navigationBar)
