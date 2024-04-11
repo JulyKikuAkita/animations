@@ -27,6 +27,13 @@ struct FloatingButton<Label: View>: View {
                 .contentShape(.rect)
         }
         .buttonStyle(NoAnimationButtonStyle())
+        .gesture(
+            LongPressGesture(minimumDuration: 0.3)
+                .onEnded {_ in
+                    // https://www.youtube.com/watch?v=ogblzP7rXHg&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=93
+                    // 9:00
+                }
+        )
         .background {
             ForEach(actions) { action in
                 ActionView(action)
@@ -38,16 +45,23 @@ struct FloatingButton<Label: View>: View {
     /// Action view
     @ViewBuilder
     func ActionView(_ action: FloatingAction) -> some View {
-        Image(systemName: action.symbol)
-            .font(action.font)
-            .foregroundStyle(action.tint)
-            .frame(width: buttonSize, height: buttonSize)
-            .background(action.background.gradient, in: .circle)
-            .shadow(color: .orange.opacity(0.5), radius: 6)
-            .contentShape(.circle)
-            .rotationEffect(.init(degrees: progress(action) * -90))
-            .offset(x: isExpanded ? -offset / 2 : 0)
-            .rotationEffect(.init(degrees: progress(action) * 90))
+        Button {
+            action.action()
+            isExpanded = false
+        } label: {
+            Image(systemName: action.symbol)
+                .font(action.font)
+                .foregroundStyle(action.tint)
+                .frame(width: buttonSize, height: buttonSize)
+                .background(action.background.gradient, in: .circle)
+                .shadow(color: .orange.opacity(0.5), radius: 6)
+                .contentShape(.circle)
+        }
+        .buttonStyle(PressedButtonStyle())
+        .disabled(!isExpanded)
+        .rotationEffect(.init(degrees: progress(action) * -90))
+        .offset(x: isExpanded ? -offset / 2 : 0)
+        .rotationEffect(.init(degrees: progress(action) * 90))
     }
     
     private var offset: CGFloat {
@@ -74,6 +88,14 @@ struct FloatingButton<Label: View>: View {
 fileprivate struct NoAnimationButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+    }
+}
+
+fileprivate struct PressedButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.9 : 1)
+            .animation(.snappy(duration: 0.3, extraBounce: 0), value: configuration.isPressed)
     }
 }
 
