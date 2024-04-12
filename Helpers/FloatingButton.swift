@@ -18,6 +18,9 @@ struct FloatingButton<Label: View>: View {
     
     /// View Properties
     @State private var isExpanded: Bool = false
+    @State private var dragLocation: CGPoint = .zero
+    @State private var selectedAction: FloatingAction?
+    @GestureState private var isDragging: Bool = false
     var body: some View {
         Button {
             isExpanded.toggle()
@@ -29,16 +32,30 @@ struct FloatingButton<Label: View>: View {
         .buttonStyle(NoAnimationButtonStyle())
         .gesture(
             LongPressGesture(minimumDuration: 0.3)
-                .onEnded {_ in
-                    // https://www.youtube.com/watch?v=ogblzP7rXHg&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=93
-                    // 9:00
-                }
+                .onEnded { _ in
+                    isExpanded = true
+                }.sequenced(before: DragGesture().updating($isDragging, body: { _, out, _ in
+                    out = true
+                }).onChanged { value in
+                    guard isExpanded else { return }
+                    dragLocation = value.location
+                }.onEnded { _ in
+                    Task { /// onEnded didn't work unless wrapped in task{}
+                        if let selectedAction {
+                            isExpanded = false
+                            selectedAction.action()
+                        }
+                        selectedAction = nil
+                        dragLocation = .zero
+                    }
+                })
         )
         .background {
             ForEach(actions) { action in
                 ActionView(action)
             }
         }
+        .coordinateSpace(.named("FLOATING VIEW"))
         .animation(.snappy(duration: 0.4, extraBounce: 0), value: isExpanded)
     }
     
@@ -59,6 +76,32 @@ struct FloatingButton<Label: View>: View {
         }
         .buttonStyle(PressedButtonStyle())
         .disabled(!isExpanded)
+        .animation(.snappy(duration: 0.3, extraBounce: 0)) { content in
+            content
+                .scaleEffect(selectedAction?.id == action.id ? 1.15 : 1)
+        }
+        .background {
+            GeometryReader {
+                let rect = $0.frame(in: .named("FLOATING VIEW"))
+                
+                Color.clear
+                    .onChange(of: dragLocation) { oldValue, newValue in
+                        if isExpanded && isDragging {
+                            /// checking if the drag location is inside any action's rect
+                            if rect.contains(newValue) {
+                                /// user is pressing on this action
+                                selectedAction = action
+                            } else {
+                                /// Checking if it is gone out of the rect
+                                if selectedAction?.id == action.id && !rect.contains(newValue) {
+                                    selectedAction = nil
+                                }
+                            }
+                        }
+                        
+                    }
+            }
+        }
         .rotationEffect(.init(degrees: progress(action) * -90))
         .offset(x: isExpanded ? -offset / 2 : 0)
         .rotationEffect(.init(degrees: progress(action) * 90))

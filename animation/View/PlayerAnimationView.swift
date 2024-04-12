@@ -85,23 +85,23 @@ struct PlayerAnimationView: View {
             .overlay(alignment: .bottomTrailing) {
                 FloatingButton {
                     FloatingAction(symbol: "dog.fill") {
-                        print("wow")
+                        print("dog")
                     }
                     
                     FloatingAction(symbol: "pawprint.fill") {
-                        print("meow")
+                        print("paw")
                     }
                     
                     FloatingAction(symbol: "fish.fill") {
-                        print("puh")
+                        print("fish")
                     }
                     
                     FloatingAction(symbol: "cat.fill") {
-                        print("puh")
+                        print("cat")
                     }
                     
                     FloatingAction(symbol: "bird.fill") {
-                        print("puh")
+                        print("bird")
                     }
                 } label: { isExpanded in
                     Image(systemName: "plus")
@@ -111,7 +111,7 @@ struct PlayerAnimationView: View {
                         .rotationEffect(.init(degrees: isExpanded ? 45 : 0))
                         .scaleEffect(1.02)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.purple.gradient, in: .circle)
+                        .background(.orange.gradient, in: .circle)
                         .shadow(color: .orange.opacity(0.5), radius: 6)
                         ///  scale effect when expanded
                         .scaleEffect(isExpanded ? 0.9 : 1)
