@@ -38,16 +38,16 @@ struct BasicProfileAnimationListView: View {
                 DropDownView(
                     hint: "Select",
                     options: ["Shiba", "Akita", "Bernes", "Doodle", "Malamute"],
-                    anchor: .top,
+                    anchor: .bottom,
                     selection: $selection
                 )
                 
-                DropDownView(
-                    hint: "Select",
-                    options: ["list", "grid", "stack"],
-                    anchor: .bottom,
-                    selection: $selection2
-                )
+//                DropDownView(
+//                    hint: "Select",
+//                    options: ["list", "grid", "stack"],
+//                    anchor: .bottom,
+//                    selection: $selection2
+//                )
                 
                 DropDownView(
                     hint: "Select",
@@ -172,6 +172,7 @@ struct BasicProfileAnimationDetailedView: View {
                                             .foregroundStyle(.black)
                                             .padding(15)
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                                        
                                     }
                                     .opacity(hideView.1 ? 1 : 0)
                                     .animation(.snappy, value: hideView.1)
@@ -183,6 +184,9 @@ struct BasicProfileAnimationDetailedView: View {
                                         hideView.1 = true
                                     }
                                 })
+                            
+                            BookView(profile: selectedProfile)
+
                         } else {
                             Color.clear
                         }

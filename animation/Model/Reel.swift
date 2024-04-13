@@ -22,7 +22,7 @@ var reelsData: [Reel] = [
     .init(videoID: "Reel10", authorName: "Teamwork"),
     .init(videoID: "Reel11", authorName: "GoldenBoy"),
     .init(videoID: "Reel12", authorName: "Owlweee"),
-    .init(videoID: "Reel13", authorName: "jump into the sea"),
+//    .init(videoID: "Reel13", authorName: "jump into the sea"),
     .init(videoID: "Reel14", authorName: "coming"),
 ]
 
