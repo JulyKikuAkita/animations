@@ -29,8 +29,6 @@ struct PlayerAnimationView: View {
                         RootView {
                             CustomToastView()
                         }
-                        CustomAlertDemoView()
-                            .environment(SceneDelegate())
                     }
                 }
                 .setupTab(.subscription)

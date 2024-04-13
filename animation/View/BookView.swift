@@ -7,30 +7,36 @@ import SwiftUI
 struct BookView: View {
     /// View properties
     @State private var progress: CGFloat = 0
+    var profile: Profile
     var body: some View {
         VStack {
             OpenableBookView(config: .init(progress: progress)) { size in
-                FrontView(size)
+                FrontView(size, profile.profilePicture)
             } insideLeft: { size in
                 LeftView()
             } insideRight: { size in
                 RightView()
             }
-            
-            VStack {
-                Slider(value: $progress)
-                
-                Button("Toggle") {
-                    withAnimation(.snappy(duration: 1.0)) {
-                        // progress need to be animatable data otherwise the value jumping from 0 to 1 directly instead of progressing to 1
-                        progress = ( progress == 1.0 ? 0.2 : 1.0)
-                    }
+            .onTapGesture {
+                withAnimation(.snappy(duration: 1.0)) {
+                    progress = ( progress == 1.0 ? 0.2 : 1.0)
                 }
-                .buttonStyle(.borderedProminent)
             }
+            
+//            VStack { /// debug slider
+//                Slider(value: $progress)
+                
+//                Button("Toggle") {
+//                    withAnimation(.snappy(duration: 1.0)) {
+//                        // progress need to be animatable data otherwise the value jumping from 0 to 1 directly instead of progressing to 1
+//                        progress = ( progress == 1.0 ? 0.2 : 1.0)
+//                    }
+//                }
+//                .buttonStyle(.borderedProminent)
+//            }
             .padding()
-            .background(.background, in: .rect(cornerRadius: 10))
-            .padding(.top, 50)
+//            .background(.background, in: .rect(cornerRadius: 10))
+//            .padding(.top, 50)
                 
         }
         .padding(10)
@@ -39,8 +45,8 @@ struct BookView: View {
     }
     
     @ViewBuilder
-    func FrontView(_ size: CGSize) -> some View {
-        Image("IMG_8788")
+    func FrontView(_ size: CGSize, _ coverImage: String) -> some View {
+        Image(coverImage)
             .resizable()
             .aspectRatio(contentMode: .fill)
 //            .offset(y: 10)
@@ -57,7 +63,7 @@ struct BookView: View {
                 .clipShape(.circle)
                 .shadow(color: .black.opacity(0.15), radius: 5, x: 5, y: 5)
             
-            Text("Mr. Fox")
+            Text(profile.username)
                 .fontWidth(.condensed)
                 .fontWeight(.bold)
                 .padding(.top, 8)
@@ -167,5 +173,5 @@ struct OpenableBookView<Front: View, InsideLeft: View, InsideRight: View>: View,
 }
 
 #Preview {
-    BookView()
+    BookView(profile: profiles.first!)
 }
