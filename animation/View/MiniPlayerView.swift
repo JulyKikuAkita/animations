@@ -16,7 +16,7 @@ struct MiniPlayerView: View {
     let miniPlayerHeight: CGFloat = 50
     
     var body: some View {
-        /// resize from beginigng to end
+        /// resize from beginning to end
         // let progress = config.progress
         
         /// resize after drag to 0.7 position
@@ -169,6 +169,12 @@ struct MiniPlayerView: View {
             
             Text(playerItem.description)
                 .font(.callout)
+            
+            HStack {
+                Spacer(minLength: 0)
+                ParticleEffectsView()
+                Spacer(minLength: 0)
+            }
         })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(15)

@@ -29,14 +29,14 @@ struct ProfileListView: View {
                             return [profile.id.uuidString: anchor]
                         })
                     
-                    VStack(alignment: .leading, spacing: 6, content: {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text(profile.username)
                             .fontWeight(.semibold)
                         
                         Text(profile.lastMsg)
                             .font(.caption2)
                             .foregroundStyle(.gray)
-                    })
+                    }
                 }
                 .contentShape(.rect)
                 .onTapGesture {
@@ -133,7 +133,8 @@ struct DetailedView: View {
     /// Gesture properties
     @GestureState private var isDragging: Bool = false
     @State private var offset: CGFloat = .zero
-    
+    @State private var star: Bool = true
+
     var body: some View {
         if let selectedProfile, showDetail {
             GeometryReader {
@@ -173,27 +174,30 @@ struct DetailedView: View {
                 }
                 /// Close button
                 .overlay(alignment: .topLeading) {
-                    Button(action: { 
-                        showHeroView = true
-                        withAnimation(.snappy(duration: 0.35, extraBounce: 0), 
-                                      completionCriteria: .logicallyComplete) {
-                            heroProgress = 0.0
-                        } completion: {
-                            showDetail = false
-                            self.selectedProfile = nil
-                        }
+                    VStack {
+                        Button(action: {
+                            showHeroView = true
+                            withAnimation(.snappy(duration: 0.35, extraBounce: 0),
+                                          completionCriteria: .logicallyComplete) {
+                                heroProgress = 0.0
+                            } completion: {
+                                showDetail = false
+                                self.selectedProfile = nil
+                            }
+                            
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.largeTitle)
+                                .imageScale(.medium)
+                                .contentShape(.rect)
+                                .foregroundStyle(.white, .black)
+                        })
+                        .buttonStyle(.plain)
+                        .padding()
+                        .opacity(showHeroView ? 0 : 1)
+                        .animation(.snappy(duration: 0.2, extraBounce: 0), value: showHeroView)
                         
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.largeTitle)
-                            .imageScale(.medium)
-                            .contentShape(.rect)
-                            .foregroundStyle(.white, .black)
-                    })
-                    .buttonStyle(.plain)
-                    .padding()
-                    .opacity(showHeroView ? 0 : 1)
-                    .animation(.snappy(duration: 0.2, extraBounce: 0), value: showHeroView)
+                    }
                 }
                 .offset(x: size.width - (size.width * heroProgress))
                 .overlay(alignment: .leading) {

@@ -122,11 +122,13 @@ struct PlayerAnimationView: View {
             .toolbarBackground(.background, for: .navigationBar)
             .toolbar(content: {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        hideNavBar.toggle()
-                    }, label: {
-                        Image(systemName: hideNavBar ? "eye.slash" : "eye")
-                    })
+                    HStack{
+                        Button(action: {
+                            hideNavBar.toggle()
+                        }, label: {
+                            Image(systemName: hideNavBar ? "eye.slash" : "eye")
+                        })
+                    }
                 }
             })
             .hideNavBarOnSwipe(hideNavBar)
