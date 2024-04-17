@@ -18,3 +18,12 @@ struct Particle: Identifiable {
         scale = 0
     }
 }
+
+/// Repeatable button Model - keyframe animation
+struct ButtonFrame: Identifiable, Equatable {
+    var id: UUID = .init()
+    var value: Int
+    var offset: CGSize = .zero
+    var opacity: CGFloat = 1
+    var triggerKeyFrame: Bool = false
+}

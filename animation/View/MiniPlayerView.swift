@@ -170,11 +170,8 @@ struct MiniPlayerView: View {
             Text(playerItem.description)
                 .font(.callout)
             
-            HStack {
-                Spacer(minLength: 0)
-                ParticleEffectsView()
-                Spacer(minLength: 0)
-            }
+            ParticleEffectsView()
+                .scaleEffect(0.7, anchor: .bottomTrailing)
         })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(15)
