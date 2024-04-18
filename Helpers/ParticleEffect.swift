@@ -7,10 +7,10 @@ import SwiftUI
 /// Custom view modifier
 extension View {
     @ViewBuilder
-    func particleEffect(systemImage: String, font: Font, status: Bool, activeTint: Color, inActiveTint: Color) -> some View {
+    func particleEffect(systemImage: String, font: Font, status: Bool, activeTint: Color, inActiveTint: Color, drop: Bool) -> some View {
         self
             .modifier(
-                ParticleModifier(systemImage: systemImage, font: font, status: status, activeTint: activeTint, inActiveTint: inActiveTint)
+                ParticleModifier(systemImage: systemImage, font: font, status: status, activeTint: activeTint, inActiveTint: inActiveTint, drop: drop)
             )
     }
 }
@@ -21,6 +21,7 @@ fileprivate struct ParticleModifier: ViewModifier {
     var status: Bool
     var activeTint: Color
     var inActiveTint: Color
+    var drop: Bool = true
     @State private var particles: [Particle] = []
     
     func body(content: Content) -> some View {
@@ -31,7 +32,7 @@ fileprivate struct ParticleModifier: ViewModifier {
                         Image(systemName: systemImage)
                             .foregroundColor(status ? activeTint : inActiveTint)
                             .scaleEffect(particle.scale)
-                            .offset(x: particle.randomX, y: particle.randomY)
+                            .offset(x: particle.randomX, y: drop ? -particle.randomY : particle.randomY)
                             .opacity(particle.opacity)
                             /// only visible when status is active
                             .opacity(status ? 1 : 0)
