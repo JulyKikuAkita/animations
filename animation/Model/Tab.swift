@@ -56,3 +56,27 @@ enum VideoTab: String, CaseIterable {
         }
     }
 }
+
+enum AppleMusicTab: String, CaseIterable {
+    /// rawValue: system image name
+    case listenNow = "play.circle.fill"
+    case browse = "square.grid.2x2.fill"
+    case radis = "dot.radiowaves.left.and.right"
+    case music = "play.square.stack"
+    case search = "magnifyingglass"
+    
+    var title: String {
+        switch self {
+        case .listenNow:
+            "Listen Now"
+        case .browse:
+            "Browse"
+        case .radis:
+            "Radis"
+        case .music:
+            "Music"
+        case .search:
+            "Search"
+        }
+    }
+}
