@@ -17,7 +17,11 @@ struct AppleMusicHomeView: View {
     
     var body: some View {
         TabView {
-            SampleTab(AppleMusicTab.listenNow.title, AppleMusicTab.listenNow.rawValue)
+            ListenView()
+                .tabItem {
+                    Image(systemName: AppleMusicTab.listenNow.rawValue)
+                    Text("Listen Now")
+                }
             SampleTab(AppleMusicTab.browse.title, AppleMusicTab.browse.rawValue)
             SampleTab(AppleMusicTab.radis.title, AppleMusicTab.radis.rawValue)
             SampleTab(AppleMusicTab.music.title, AppleMusicTab.music.rawValue)
@@ -37,22 +41,53 @@ struct AppleMusicHomeView: View {
         }
     }
     
+    /// Custom listen now  view
+    @ViewBuilder
+    func ListenView() -> some View {
+        NavigationStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 20) {
+                    Image("IMG_0202")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    
+                    Image("IMG_0206")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+                .padding()
+                .padding(.bottom, 100)
+            }
+            .navigationTitle("Listen now")
+        }
+    }
+    
+    
+    /// Custom bottom sheet
     @ViewBuilder
     func CustomBottomSheet() -> some View {
+        /// Animating sheet background (to look like it's expanding from the bottom)
         ZStack {
-            Rectangle()
-                .fill(.ultraThickMaterial)
-                .overlay {
-                    MusicInfoView(expandSheet: $expandSheet, animation: animation)
-                }
+            if expandSheet {
+                Rectangle()
+                    .fill(.clear)
+            } else {
+                Rectangle()
+                    .fill(.ultraThickMaterial)
+                    .overlay {
+                        /// Music info
+                        MusicInfoView(expandSheet: $expandSheet, animation: animation)
+                    }
+                    .matchedGeometryEffect(id: "BGVIEW", in: animation)
+            }
         }
         .frame(height: AppleMusicConstant.miniPlayerHeight)
         /// Separator line
         .overlay(alignment: .bottom, content: {
             Rectangle()
-                .fill(.gray.opacity(0.1))
+                .fill(.gray.opacity(0.3))
                 .frame(height: 1)
-//                .offset(y: -10)
+                .offset(y: -5)
         })
         .offset(y: -AppleMusicConstant.defaultTabBarHeight)
     }
@@ -60,14 +95,19 @@ struct AppleMusicHomeView: View {
     
     @ViewBuilder
     func SampleTab(_ title: String, _ icon: String) -> some View {
-        Text(title)
-            .tabItem {
-                Image(systemName: icon)
-                Text(title)
-            }
+        /// iOS bug of tab bar animation, it can be avoided by wrapping the view inside scrollview
+        ScrollView(.vertical, showsIndicators: false, content: {
+            Text(title)
+        })
+        .tabItem {
+            Image(systemName: icon)
+            Text(title)
+        }
         /// changing tab background color
         .toolbarBackground(.visible, for: .tabBar)
         .toolbarBackground(.ultraThickMaterial, for: .tabBar)
+        /// Hiding tab bar when sheet is expanded
+        .toolbar(expandSheet ? .hidden : .visible, for: .tabBar)
     }
 }
 

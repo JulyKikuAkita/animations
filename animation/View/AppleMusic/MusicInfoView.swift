@@ -20,14 +20,14 @@ struct MusicInfoView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: size.width, height: size.height)
-                            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                            .clipShape(RoundedRectangle(cornerRadius: expandSheet ? 15 : 5, style: .continuous))
                     }
                     .matchedGeometryEffect(id: "ARTWORK", in: animation)
                 }
             }
             .frame(width:45, height:45)
             
-            Text("Hanging Around(Flying Fox")
+            Text("Hanging Around(Flying Fox)")
                 .fontWeight(.semibold)
                 .lineLimit(1)
                 .padding(.horizontal, 15)
