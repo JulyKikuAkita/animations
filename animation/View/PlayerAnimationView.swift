@@ -23,21 +23,16 @@ struct PlayerAnimationView: View {
                 FullScreenVideoView()
                     .setupTab(.shorts)
                 
-                VStack {
-                    BasicProfileAnimationListView()
-                    HStack {
-                        RootView {
-                            CustomToastView()
-                        }
-                    }
-                }
-                .setupTab(.subscription)
+                ProfileListView()
+                    .setupTab(.progress)
+                
+                BasicProfileAnimationListView()
+                .setupTab(VideoTab.profile)
                 
                 CardCarouselView()
-                    .setupTab(.you)
+                    .setupTab(.carousel)
                 
-                ProfileListView()
-                    .setupTab(VideoTab.profile)
+                
             }
             .padding(.bottom, tabBarHeight)
             

@@ -25,7 +25,7 @@ struct ParticleEffectsView: View {
     var body: some View {
         VStack(spacing: 15) {
             HStack(spacing: 20) {
-                CustomButton(systemImage: "fireworks", status: firework, activeTint: .orange, inActiveTint: .blue, drop: false, useKeyFrame: true) {
+                CustomButton(systemImage: "fireworks", status: firework, activeTint: .orange, inActiveTint: .orange, drop: false, useKeyFrame: true) {
                     firework.toggle()
                     let frame = ButtonFrame(value: count)
                     buttonFrames2.append(frame)
@@ -34,9 +34,7 @@ struct ParticleEffectsView: View {
                 .buttonRepeatBehavior(.enabled)
                 
                 CustomNumberKeyFrameView(count: $count, imageName: $imageName)
-            }
-            
-            HStack(spacing: 20) {
+                
                 CustomButton(systemImage: "suit.heart.fill", status: heart, activeTint: .pink, inActiveTint: .red) {
                     heart.toggle()
                 }
@@ -45,7 +43,6 @@ struct ParticleEffectsView: View {
                     star.toggle()
                 }
             }
-            
         }
     }
     

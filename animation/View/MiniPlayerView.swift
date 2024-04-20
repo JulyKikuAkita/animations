@@ -169,9 +169,6 @@ struct MiniPlayerView: View {
             
             Text(playerItem.description)
                 .font(.callout)
-            
-            ParticleEffectsView()
-                .scaleEffect(0.7, anchor: .bottomTrailing)
         })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(15)

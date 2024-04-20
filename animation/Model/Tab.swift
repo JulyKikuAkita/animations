@@ -37,8 +37,8 @@ struct AnimatedTab: Identifiable {
 enum VideoTab: String, CaseIterable {
     case home = "Home"
     case shorts = "Shorts"
-    case subscription = "Subscription"
-    case you = "You"
+    case progress = "Progress"
+    case carousel = "Carousel"
     case profile = "Profile"
     
     var symbol: String {
@@ -47,11 +47,11 @@ enum VideoTab: String, CaseIterable {
             return "house.fill"
         case .shorts:
             return "video.badge.waveform.fill"
-        case .subscription:
-            return "play.square.stack.fill"
-        case .you:
-            return "person.circle.fill"
         case .profile:
+            return "play.square.stack.fill"
+        case .carousel:
+            return "person.circle.fill"
+        case .progress:
             return "person.2.crop.square.stack.fill"
         }
     }
