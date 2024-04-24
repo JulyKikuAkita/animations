@@ -3,7 +3,6 @@
 //  animation
 //
 //  source: https://www.youtube.com/watch?v=1h5NjJbheEU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=44
-//
 
 import SwiftUI
 struct ProfileListView: View {

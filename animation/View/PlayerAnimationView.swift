@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PlayerAnimationView: View {
     /// View properties
@@ -14,6 +15,12 @@ struct PlayerAnimationView: View {
     @State private var hideNavBar: Bool = true
     @State private var tabState: Visibility = .visible
 
+    @State private var selectedColor: DummyColors = .black
+    /// Context
+    @Environment(\.modelContext) private var context
+    /// Stored colors, need to register ColorTransformer() class
+    @Query private var storedColors: [ColorModel]
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $activeTab) {
@@ -31,8 +38,6 @@ struct PlayerAnimationView: View {
                 
                 CardCarouselView()
                     .setupTab(.carousel)
-                
-                
             }
             .padding(.bottom, tabBarHeight)
             
@@ -64,6 +69,17 @@ struct PlayerAnimationView: View {
         NavigationStack {
             ScrollView(.vertical) {
                 LazyVStack(spacing: 15) {
+                    HStack {
+                        ForEach(storedColors, id: \.color) { color in
+                            ZStack {
+                                Circle().fill(Color(color.color).gradient)
+                                    .frame(width: 35, height: 35)
+                                Text(String(color.name.first ?? "M"))
+                                    .font(.callout)
+                                    .foregroundColor(selectedColor.color)
+                            }
+                        }
+                    }
                     ForEach(playItems) { item in
                         PlayerItemCardView(item) {
                             config.selectedPlayerItem = item
@@ -77,24 +93,30 @@ struct PlayerAnimationView: View {
             }
             .overlay(alignment: .bottomTrailing) {
                 FloatingButton {
-                    FloatingAction(symbol: "dog.fill") {
-                        print("dog")
+                    FloatingAction(symbol: "dog.fill", background: DummyColors.red.color) {
+                        selectedColor = .red
+                        insertColorModels() // this crash preview
                     }
                     
-                    FloatingAction(symbol: "pawprint.fill") {
-                        print("paw")
+                    FloatingAction(symbol: "pawprint.fill", background: DummyColors.orange.color) {
+                        selectedColor = .orange
+                        insertColorModels() // this crash preview
                     }
                     
-                    FloatingAction(symbol: "fish.fill") {
-                        print("fish")
+                    FloatingAction(symbol: "fish.fill", background: DummyColors.accent.color) {
+                        selectedColor = .accent
+                        insertColorModels() // this crash preview
                     }
                     
-                    FloatingAction(symbol: "cat.fill") {
-                        print("cat")
+                    FloatingAction(symbol: "cat.fill", background: DummyColors.green.color) {
+                        selectedColor = .green
+                        insertColorModels() // this crash preview
                     }
                     
-                    FloatingAction(symbol: "bird.fill") {
-                        print("bird")
+                    FloatingAction(symbol: "bird.fill", background: DummyColors.brown.color) {
+                        selectedColor = .brown
+                        insertColorModels() // this crash preview
+                        
                     }
                 } label: { isExpanded in
                     Image(systemName: "plus")
@@ -104,8 +126,8 @@ struct PlayerAnimationView: View {
                         .rotationEffect(.init(degrees: isExpanded ? 45 : 0))
                         .scaleEffect(1.02)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.orange.gradient, in: .circle)
-                        .shadow(color: .orange.opacity(0.5), radius: 6)
+                        .background(selectedColor.color.gradient, in: .circle)
+                        .shadow(color: .black.opacity(0.5), radius: 6)
                         ///  scale effect when expanded
                         .scaleEffect(isExpanded ? 0.9 : 1)
                     
@@ -122,6 +144,14 @@ struct PlayerAnimationView: View {
                             hideNavBar.toggle()
                         }, label: {
                             Image(systemName: hideNavBar ? "eye.slash" : "eye")
+                                .foregroundColor(selectedColor.color)
+                        })
+                        
+                        Button(action: {
+                            deleteColorModels()
+                        }, label: {
+                            Image(systemName: "trash.fill")
+                                .foregroundColor(selectedColor.color)
                         })
                     }
                 }
@@ -146,10 +176,12 @@ struct PlayerAnimationView: View {
             HStack(spacing: 10) {
                 Image(systemName: "person.circle.fill")
                     .font(.title)
+                    .foregroundColor(selectedColor.color)
                 
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text(item.title)
                         .font(.callout)
+                        .foregroundColor(selectedColor.color)
                     
                     HStack(spacing: 6) {
                         Text(item.author)
@@ -175,7 +207,7 @@ struct PlayerAnimationView: View {
                     Text(tab.rawValue)
                         .font(.caption2)
                 }
-                .foregroundStyle(activeTab == tab ? Color.primary : .gray)
+                .foregroundStyle(activeTab == tab ? selectedColor.color : .gray)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .contentShape(.rect)
                 .onTapGesture {
@@ -191,6 +223,19 @@ struct PlayerAnimationView: View {
         .frame(height: tabBarHeight)
         .background(.background)
     }
+    
+    func insertColorModels() {
+        let colorModel = ColorModel(name: selectedColor.rawValue, color: selectedColor.color)
+        context.insert(colorModel)
+    }
+    
+    func deleteColorModels() {
+        do {
+            try context.delete(model: ColorModel.self)
+        } catch {
+            print("Failed to delete all ColorModel.")
+        }
+    }
 }
 
 extension View {
@@ -201,7 +246,7 @@ extension View {
             .toolbar(.hidden, for: .tabBar)
     }
     
-    /// Safearea value (increase bottom padding for tab bar)
+    /// Safe area value (increase bottom padding for tab bar)
     var safeArea: UIEdgeInsets {
         if let safeArea = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.safeAreaInsets {
             return safeArea

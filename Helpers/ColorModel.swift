@@ -47,12 +47,51 @@ class ColorTransformer: ValueTransformer {
         return true
     }
     
-    // wip: https://www.youtube.com/watch?v=VJbsc1lS4mQ&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=101
-    // 4:13
+    static func register() {
+        ValueTransformer.setValueTransformer(ColorTransformer(), forName: .init("ColorTransformer")) // the name need to be exactly match the class name
+    }
 }
 
 enum DummyColors: String, CaseIterable {
-    case red = "RED"
+    case red = "Red"
     case blue = "Blue"
     case green = "Green"
+    case orange = "Orange"
+    case purple = "Purple"
+    case gray = "Gray"
+    case accent = "AccentColor"
+    case yellow = "Yellow"
+    case brown = "Brown"
+    case white = "White"
+    case black = "Black"
+    case none = "None"
+    
+    var color: Color {
+        switch self {
+        case .red:
+            .red
+        case .blue:
+            .blue
+        case .green:
+            .green
+        case .orange:
+            .orange
+        case .purple:
+            .purple
+        case .gray:
+            .gray
+        case .yellow:
+            .yellow
+        case .brown:
+            .brown
+        case .white:
+            .white
+        case .black:
+            .black
+        case .accent:
+            .accentColor
+        case .none:
+            .clear
+        }
+    }
 }

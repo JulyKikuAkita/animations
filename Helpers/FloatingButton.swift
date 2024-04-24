@@ -71,7 +71,7 @@ struct FloatingButton<Label: View>: View {
                 .foregroundStyle(action.tint)
                 .frame(width: buttonSize, height: buttonSize)
                 .background(action.background.gradient, in: .circle)
-                .shadow(color: .orange.opacity(0.5), radius: 6)
+                .shadow(color: .white.opacity(0.5), radius: 6)
                 .contentShape(.circle)
         }
         .buttonStyle(PressedButtonStyle())
@@ -148,7 +148,7 @@ struct FloatingAction: Identifiable {
     var symbol: String
     var font: Font = .title3
     var tint: Color = .white
-    var background: Color = .orange
+    var background: Color = .black
     var action: () -> ()
 }
 
