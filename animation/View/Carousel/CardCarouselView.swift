@@ -10,6 +10,16 @@ import SwiftUI
 private let customCardWidth: CGFloat = 100.0
 
 struct CardCarouselView: View {
+    
+    /// Drop down View properties
+    @State private var selection: String?
+    @State private var selection2: String?
+    @State private var selection3: String?
+    
+    
+    /// Textfield View Properties
+    @State private var text: String = ""
+    
     var body: some View {
         NavigationStack {
             List{
@@ -17,10 +27,55 @@ struct CardCarouselView: View {
                 CarouselView2(cards: secondSetCards)
                 CircularCarouselSliderView()
                 ParallelXCardView()
+                randomView()
             }
             .listStyle(.plain)
             .navigationTitle("Carousel Style")
         }
+    }
+}
+
+extension CardCarouselView {
+    @ViewBuilder
+    func randomView() -> some View {
+        
+        LimitedTextFieldIView(
+            config: .init(
+                limit: 10,
+                tint: .secondary,
+                autoResizes: true
+            ),
+            hint: "Type here",
+            value: $text
+        )
+        .autocorrectionDisabled()
+        .frame(maxHeight: 150)
+        
+        
+        DropDownView(
+            hint: "Select",
+            options: ["Shiba", "Akita", "Bernes", "Malamute"],
+            anchor: .bottom,
+            selection: $selection
+        )
+        
+        ParticleEffectsView()
+            .scaleEffect(0.7, anchor: .bottom)
+            .padding()
+        
+        DropDownView(
+            hint: "Select",
+            options: ["list", "grid", "stack"],
+            anchor: .bottom,
+            selection: $selection2
+        )
+        
+        DropDownView(
+            hint: "Select",
+            options: ["1", "2", "3"],
+            anchor: .top,
+            selection: $selection3
+        )
     }
 }
 

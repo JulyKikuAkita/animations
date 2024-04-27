@@ -37,8 +37,8 @@ struct AnimatedTab: Identifiable {
 enum VideoTab: String, CaseIterable {
     case home = "Home"
     case shorts = "Shorts"
-    case subscription = "Subscription"
-    case you = "You"
+    case progress = "Progress"
+    case carousel = "Carousel"
     case profile = "Profile"
     
     var symbol: String {
@@ -47,12 +47,36 @@ enum VideoTab: String, CaseIterable {
             return "house.fill"
         case .shorts:
             return "video.badge.waveform.fill"
-        case .subscription:
-            return "play.square.stack.fill"
-        case .you:
-            return "person.circle.fill"
         case .profile:
+            return "play.square.stack.fill"
+        case .carousel:
+            return "person.circle.fill"
+        case .progress:
             return "person.2.crop.square.stack.fill"
+        }
+    }
+}
+
+enum AppleMusicTab: String, CaseIterable {
+    /// rawValue: system image name
+    case listenNow = "play.circle.fill"
+    case browse = "square.grid.2x2.fill"
+    case radis = "dot.radiowaves.left.and.right"
+    case music = "play.square.stack"
+    case search = "magnifyingglass"
+    
+    var title: String {
+        switch self {
+        case .listenNow:
+            "Listen Now"
+        case .browse:
+            "Browse"
+        case .radis:
+            "Radis"
+        case .music:
+            "Music"
+        case .search:
+            "Search"
         }
     }
 }

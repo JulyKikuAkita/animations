@@ -13,14 +13,9 @@ struct BasicProfileAnimationListView: View {
     /// View properties
     @State private var selectedProfile: Profile?
     @State private var pushView: Bool = false
-    /// first bool indicates if animation is finised, and when finished, remove the overlay view
+    /// first bool indicates if animation is finished, and when finished, remove the overlay view
     ///  sec bool to animate contents like buttons and header views in the detailed view
     @State private var hideView: (Bool, Bool) = (false, false)
-    
-    /// Drop down View properties
-    @State private var selection: String?
-    @State private var selection2: String?
-    @State private var selection3: String?
 
     var body: some View {
         NavigationStack {
@@ -34,28 +29,6 @@ struct BasicProfileAnimationListView: View {
                             hideView: $hideView
                         )
                     }
-                
-                DropDownView(
-                    hint: "Select",
-                    options: ["Shiba", "Akita", "Bernes", "Doodle", "Malamute"],
-                    anchor: .bottom,
-                    selection: $selection
-                )
-                
-//                DropDownView(
-//                    hint: "Select",
-//                    options: ["list", "grid", "stack"],
-//                    anchor: .bottom,
-//                    selection: $selection2
-//                )
-                
-                DropDownView(
-                    hint: "Select",
-                    options: ["1", "2", "3"],
-                    anchor: .top,
-                    selection: $selection3
-                )
-
             }
         }
         .overlayPreferenceValue(AnchorKey.self, { value in
