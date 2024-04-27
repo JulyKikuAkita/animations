@@ -80,3 +80,18 @@ enum AppleMusicTab: String, CaseIterable {
         }
     }
 }
+
+/// horizontal scrollable tabs
+struct TabModel: Identifiable {
+    private(set) var id: HorizonTab
+    var size: CGSize = .zero
+    var minX: CGFloat = .zero
+    
+    enum HorizonTab: String, CaseIterable {
+        case research = "Research"
+        case development = "Development"
+        case analytics = "Analytics"
+        case audience = "Audience"
+        case privacy = "Privacy"
+    }
+}
