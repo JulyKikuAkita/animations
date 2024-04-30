@@ -64,6 +64,7 @@ enum DummyColors: String, CaseIterable {
     case brown = "Brown"
     case white = "White"
     case black = "Black"
+    case pink = "Pink"
     case none = "None"
     
     var color: Color {
@@ -92,6 +93,8 @@ enum DummyColors: String, CaseIterable {
             .accentColor
         case .none:
             .clear
+        case .pink:
+            .pink
         }
     }
 }

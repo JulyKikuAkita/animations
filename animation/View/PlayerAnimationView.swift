@@ -15,7 +15,7 @@ struct PlayerAnimationView: View {
     @State private var hideNavBar: Bool = true
     @State private var tabState: Visibility = .visible
 
-    @State private var selectedColor: DummyColors = .black
+    @State private var selectedColor: DummyColors = .blue
     /// Context
     @Environment(\.modelContext) private var context
     /// Stored colors, need to register ColorTransformer() class
