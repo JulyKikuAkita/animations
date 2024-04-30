@@ -6,11 +6,17 @@
 
 import SwiftUI
 struct ProfileListView: View {
+    /// View properties - profiles
     @State private var allProfiles: [Profile] = profiles
     @State private var selectedProfile: Profile?
     @State private var showDetail: Bool = false
     @State private var heroProgress: CGFloat = 0
     @State private var showHeroView: Bool = true
+    
+    /// View properties - dark mode animation
+    @State private var toggleDarkMode: Bool = false
+    @State private var activeDarkMode: Bool = false
+    @State private var buttonRect: CGRect = .zero
 
     var body: some View {
         NavigationStack {
@@ -102,6 +108,25 @@ struct ProfileListView: View {
         .overlay(alignment: .bottom) {
             Slider(value: $heroProgress)
                 .padding()
+        }
+        // https://www.youtube.com/watch?v=4dbnfyXILc4&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=42
+        // 3:49
+        .overlay(alignment: .topTrailing) {
+            Button(action: {
+                toggleDarkMode.toggle()
+            }, label: {
+                Image(systemName: toggleDarkMode ? "sun.max.fill" : "moon.fill")
+                    .font(.title2)
+                    .foregroundColor(.primary)
+                    .symbolEffect(.bounce, value: toggleDarkMode)
+                    .frame(width: 40, height: 40)
+            })
+            .padding(10)
+            .background {
+                GeometryReader(content: { geometry in
+                    let rect = geometry.frame(in: .global)
+                })
+            }
         }
     }
 }
