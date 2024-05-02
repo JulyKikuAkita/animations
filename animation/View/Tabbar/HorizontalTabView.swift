@@ -14,7 +14,7 @@ struct HorizontalTabView: View {
         .init(id: TabModel.HorizonTab.privacy)
     ]
     @State private var activeTab: TabModel.HorizonTab = .research
-    @State private var mainViewScrollState: TabModel.HorizonTab? // scroll to view matched tapbar
+    @State private var mainViewScrollState: TabModel.HorizonTab? // scroll to view matched tab bar
     @State private var tabBarScrollState: TabModel.HorizonTab? // center selected tab
     @State private var progress: CGFloat = .zero
     

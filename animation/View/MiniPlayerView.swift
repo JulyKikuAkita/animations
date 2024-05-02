@@ -30,7 +30,7 @@ struct MiniPlayerView: View {
                         let height = size.height
                         
                         VideoPlayerView()
-                            .frame( // 120 is miniplayer width
+                            .frame( // 120 is mini-player width
                                 width: 120 + (width - (width * progress)),
                                 height: height
                             )
@@ -55,11 +55,11 @@ struct MiniPlayerView: View {
                 .opacity(1.0 - (config.progress * 1.6)) // faster fade-out when drag down
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background(.background)
+            .background()
             .clipped()
             .contentShape(.rect)
             .offset(y: config.progress * -tabBarHeight)
-            .frame(height: size.height - config.position, alignment: .top)
+            .frame(height: size.height + 25 - config.position, alignment: .top) // 20 is the curved tab bar height
             .frame(maxHeight: .infinity, alignment: .bottom)
             .gesture(
                 DragGesture()
@@ -116,7 +116,7 @@ struct MiniPlayerView: View {
             if let playerItem = config.selectedPlayerItem {
                 Image(playerItem.image)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: size.height < 60 ? .fill : .fit)
                     .frame(width: size.width, height: size.height)
             }
         }

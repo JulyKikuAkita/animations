@@ -55,6 +55,10 @@ enum VideoTab: String, CaseIterable {
             return "person.2.crop.square.stack.fill"
         }
     }
+    
+    var index: Int {
+        return VideoTab.allCases.firstIndex(of: self) ?? 0
+    }
 }
 
 enum AppleMusicTab: String, CaseIterable {

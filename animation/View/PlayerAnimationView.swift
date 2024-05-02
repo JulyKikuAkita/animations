@@ -9,11 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct PlayerAnimationView: View {
+    /// For smooth custom drawing path tab bar animation
+    @Namespace private var animation
     /// View properties
     @State private var activeTab: VideoTab = .home
     @State private var config: PlayerConfig = .init()
     @State private var hideNavBar: Bool = true
     @State private var tabState: Visibility = .visible
+    /// View properties - custom path tab bar
+    @State private var tabShapePosition: CGPoint = .zero
 
     @State private var selectedColor: DummyColors = .blue
     /// Context
@@ -41,7 +45,7 @@ struct PlayerAnimationView: View {
             }
             .padding(.bottom, tabBarHeight)
             
-            /// Miniplayer View
+            /// Mini-player View
             GeometryReader {
                 let size = $0.size
                 if config.showMiniPlayer {
@@ -56,7 +60,7 @@ struct PlayerAnimationView: View {
                 }
             }
             
-            CustomTabBar()
+            CustomTabBar(selectedColor.color)
                 // hide/show tab bar show drag mini player view
                 .offset(y: config.showMiniPlayer ? tabBarHeight - (config.progress * tabBarHeight) : 0)
         }
@@ -197,31 +201,34 @@ struct PlayerAnimationView: View {
     
     /// Custom Tab Bar
     @ViewBuilder
-    func CustomTabBar() -> some View {
-        HStack(spacing: 0) {
+    func CustomTabBar(_ tint: Color, _ inactiveTint: Color = .gray) -> some View {
+        /// Moving all the remaining tab items' to the bottom
+        HStack(alignment: .bottom, spacing: 0) {
             ForEach(VideoTab.allCases, id: \.rawValue) { tab in
-                VStack(spacing: 4) {
-                    Image(systemName: tab.symbol)
-                        .font(.title3)
-                    
-                    Text(tab.rawValue)
-                        .font(.caption2)
-                }
-                .foregroundStyle(activeTab == tab ? selectedColor.color : .gray)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .contentShape(.rect)
-                .onTapGesture {
-                    activeTab = tab
-                }
+                VideoTabItem(
+                    tint: tint,
+                    inactiveTint: inactiveTint, 
+                    tab: tab, 
+                    animation: animation,
+                    activeTab: $activeTab, 
+                    position: $tabShapePosition
+                )
             }
         }
-        .frame(height: 49)
-        .overlay(alignment: .top) {
-                Divider()
-        }
-        .frame(maxHeight: .infinity, alignment: .top)
         .frame(height: tabBarHeight)
-        .background(.background)
+        .padding(.horizontal, 15)
+        .padding(.vertical, 10)
+        .background(content: {
+            TabShape(midpoint: tabShapePosition.x)
+                .fill(.white)
+                .ignoresSafeArea()
+                /// adding blur + shadow for shape smoothing
+                .shadow(color: tint.opacity(0.2), radius: 5, x: 0, y: -5)
+                .blur(radius: 2)
+                .padding(.top, 25)
+        })
+        /// adding animation
+        .animation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7), value: activeTab)
     }
     
     func insertColorModels() {
@@ -238,11 +245,63 @@ struct PlayerAnimationView: View {
     }
 }
 
+/// Custom tab bar item
+struct VideoTabItem: View {
+    var tint: Color
+    var inactiveTint: Color
+    var tab: VideoTab
+    var animation: Namespace.ID
+    @Binding var activeTab: VideoTab
+    @Binding var position: CGPoint
+
+    /// Each tab item position on the screen
+    @State private var tabPosition: CGPoint = .zero
+    var body: some View {
+        VStack(spacing: 4) {
+            Image(systemName: tab.symbol)
+                .font(.title3)
+                .foregroundColor(activeTab == tab ? .white : tint)
+                /// increasing size for the active tab
+                .frame(width: activeTab == tab ? 60 : 30, height: activeTab == tab ? 60 : 30)
+                .background {
+                    if activeTab == tab {
+                        Circle()
+                            .fill(tint.gradient)
+                            .matchedGeometryEffect(id: "ACTIVETAB", in: animation)
+                    }
+                }
+            
+            Text(tab.rawValue)
+                .font(.caption2)
+                .foregroundColor(activeTab == tab ? tint : .gray)
+        }
+        .frame(maxWidth: .infinity)
+        .contentShape(.rect)
+        .viewPosition(completion: { rect in
+            tabPosition.x = rect.midX
+            
+            /// updating active tab position
+            if activeTab == tab {
+                position.x = rect.midX
+            }
+            
+        })
+        .onTapGesture {
+            activeTab = tab
+            /// need below animation block due to TabShape.animatableData didn't work
+            withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+                position.x = tabPosition.x
+            }
+        }
+    }
+}
+
 extension View {
     @ViewBuilder
     func setupTab(_ tab: VideoTab) -> some View {
         self
             .tag(tab)
+            /// hiding native tab bar
             .toolbar(.hidden, for: .tabBar)
     }
     
@@ -254,7 +313,7 @@ extension View {
         return .zero
     }
     
-    var tabBarHeight: CGFloat {
+    var tabBarHeight: CGFloat { // 20 is the custom curve path
         return 49 + safeArea.bottom
     }
 }
