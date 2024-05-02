@@ -6,11 +6,21 @@
 
 import SwiftUI
 struct ProfileListView: View {
+    /// View properties - profiles
     @State private var allProfiles: [Profile] = profiles
     @State private var selectedProfile: Profile?
     @State private var showDetail: Bool = false
     @State private var heroProgress: CGFloat = 0
     @State private var showHeroView: Bool = true
+    
+    /// View properties - dark mode animation
+    @AppStorage("toggleDarkMode") private var toggleDarkMode: Bool = false // persisted with app storage
+    @AppStorage("activeDarkMode") private var activeDarkMode: Bool = false // persisted with app storage
+    @State private var buttonRect: CGRect = .zero
+    /// current & previous state snapshot images
+    @State private var currentImage: UIImage?
+    @State private var previousImage: UIImage?
+    @State private var maskAnimation: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -44,7 +54,7 @@ struct ProfileListView: View {
                         heroProgress = 1.0
                     } completion: {
                         Task {
-                            /// adding delay for the heroview overlay
+                            /// adding delay for the hero view overlay
                             try? await Task.sleep(for: .seconds(0.1))
                             showHeroView = false
                         }
@@ -103,6 +113,78 @@ struct ProfileListView: View {
             Slider(value: $heroProgress)
                 .padding()
         }
+        .createImages(
+            toggleDarkMode: toggleDarkMode,
+            currentImage: $currentImage,
+            previousImage: $previousImage,
+            activeDarkMode: $activeDarkMode
+        )
+        .overlay(content: {
+            GeometryReader(content: { geometry in
+                let size = geometry.size
+                if let previousImage, let currentImage {
+                    ZStack {
+                        Image(uiImage: previousImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: size.width, height: size.height)
+                        
+                        Image(uiImage: currentImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: size.width, height: size.height)
+                            .mask(alignment: .topLeading) {
+                                Circle() /// the start point of transition animation
+                                    .frame(width: buttonRect.width * (maskAnimation ? 80 : 1), height: buttonRect.height * (maskAnimation ? 80 : 1), alignment: .bottomLeading)
+                                    .frame(width: buttonRect.width, height: buttonRect.height)
+                                    .offset(x: buttonRect.midX, y: buttonRect.minY)
+                                    .ignoresSafeArea()
+                            }
+
+                    }
+                    .offset(y: 42) // tab bar height - safe area bottom
+                    .task {
+                        guard !maskAnimation else { return }
+                        withAnimation(.easeInOut(duration: 0.9), completionCriteria: .logicallyComplete) {
+                            maskAnimation = true
+                        } completion: {
+                            /// Removing all snapshots
+                            self.currentImage = nil
+                            self.previousImage = nil
+                            maskAnimation = false
+                        }
+                    }
+                }
+            })
+            /// Reverse masking
+            .mask({
+                Rectangle()
+                    .overlay(alignment: .topLeading) {
+                        Circle() /// the start point of transition animation
+                            .frame(width: buttonRect.width, height: buttonRect.height)
+                            .offset(x: buttonRect.midX, y: buttonRect.minY)
+                            .blendMode(.destinationOut)
+                    }
+            })
+            .ignoresSafeArea()
+        })
+        .overlay(alignment: .topTrailing) {
+            Button(action: {
+                toggleDarkMode.toggle()
+            }, label: {
+                Image(systemName: toggleDarkMode ? "sun.max.fill" : "moon.fill")
+                    .font(.title2)
+                    .foregroundColor(.primary)
+                    .symbolEffect(.bounce, value: toggleDarkMode)
+                    .frame(width: 40, height: 40)
+            })
+            .darkModeRect{ rect in
+                buttonRect = rect
+            }
+            .padding(10)
+            .disabled(currentImage != nil || previousImage != nil || maskAnimation)
+        }
+        .preferredColorScheme(activeDarkMode ? .dark : .light)
     }
 }
 

@@ -55,6 +55,10 @@ enum VideoTab: String, CaseIterable {
             return "person.2.crop.square.stack.fill"
         }
     }
+    
+    var index: Int {
+        return VideoTab.allCases.firstIndex(of: self) ?? 0
+    }
 }
 
 enum AppleMusicTab: String, CaseIterable {
@@ -78,5 +82,20 @@ enum AppleMusicTab: String, CaseIterable {
         case .search:
             "Search"
         }
+    }
+}
+
+/// horizontal scrollable tabs
+struct TabModel: Identifiable {
+    private(set) var id: HorizonTab
+    var size: CGSize = .zero
+    var minX: CGFloat = .zero
+    
+    enum HorizonTab: String, CaseIterable {
+        case research = "Research"
+        case development = "Development"
+        case analytics = "Analytics"
+        case audience = "Audience"
+        case privacy = "Privacy"
     }
 }
