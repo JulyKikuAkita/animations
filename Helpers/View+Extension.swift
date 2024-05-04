@@ -57,7 +57,7 @@ extension View {
 }
 
 /// Converting UIView to UIImage
-extension UIView {
+fileprivate extension UIView {
     func image(_ size: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { _ in

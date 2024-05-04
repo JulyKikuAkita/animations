@@ -21,6 +21,7 @@
 		961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BC12B897D7D0055D79B /* ProfileListView.swift */; };
 		961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F51D82BC11B5200F0D953 /* Navigation+Extension.swift */; };
 		961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F51DA2BC3B43B00F0D953 /* LimitedTextFieldIView.swift */; };
+		9621D9612BE5EB6300183CB7 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621D9602BE5EB6300183CB7 /* DatePickerView.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965999192BE0BCD6000133FA /* View+Extension.swift */; };
@@ -86,6 +87,7 @@
 		961F3BC12B897D7D0055D79B /* ProfileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListView.swift; sourceTree = "<group>"; };
 		961F51D82BC11B5200F0D953 /* Navigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Extension.swift"; sourceTree = "<group>"; };
 		961F51DA2BC3B43B00F0D953 /* LimitedTextFieldIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedTextFieldIView.swift; sourceTree = "<group>"; };
+		9621D9602BE5EB6300183CB7 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		965999192BE0BCD6000133FA /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				9603CA002B8ABDCD00F91C21 /* AnchorKey.swift */,
+				9621D9602BE5EB6300183CB7 /* DatePickerView.swift */,
 				96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */,
 				9600DE502BA17D1800205DE9 /* CustomToast.swift */,
 				96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */,
@@ -453,6 +456,7 @@
 				96845DA52BD3347F00B7D8B2 /* AppleMusicHomeView.swift in Sources */,
 				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
 				9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */,
+				9621D9612BE5EB6300183CB7 /* DatePickerView.swift in Sources */,
 				9603CA012B8ABDCD00F91C21 /* AnchorKey.swift in Sources */,
 				968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */,
 			);
