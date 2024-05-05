@@ -22,7 +22,7 @@ struct TagFieldDemoView: View {
 struct TagField: View {
     @Binding var tags: [Tag]
     var body: some View {
-        HStack { // -> replace to TagLayoutView in https://www.youtube.com/watch?v=FzL11vRhzs8j
+        TagLayout { // tagLayout at https://www.youtube.com/watch?v=FzL11vRhzs8j
             ForEach($tags){ $tag in
                 TagView(tag: $tag, allTags: $tags)
                     .onChange(of: tag.value) { newValue, oldValue in
