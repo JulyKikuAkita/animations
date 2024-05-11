@@ -72,6 +72,7 @@
 		9621DC842BEF478A00183CB7 /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC822BEF478500183CB7 /* UICoordinator.swift */; };
 		9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC882BEF4B6F00183CB7 /* DetailView.swift */; };
 		9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */; };
+		9621DC8D2BF0121E00183CB7 /* HeroLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC8C2BF0121E00183CB7 /* HeroLayer.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965999192BE0BCD6000133FA /* View+Extension.swift */; };
@@ -153,6 +154,7 @@
 		9621DC822BEF478500183CB7 /* UICoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICoordinator.swift; sourceTree = "<group>"; };
 		9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePhotoHomeView.swift; sourceTree = "<group>"; };
 		9621DC882BEF4B6F00183CB7 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		9621DC8C2BF0121E00183CB7 /* HeroLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroLayer.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		965999192BE0BCD6000133FA /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 			children = (
 				9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */,
 				9621DC882BEF4B6F00183CB7 /* DetailView.swift */,
+				9621DC8C2BF0121E00183CB7 /* HeroLayer.swift */,
 			);
 			path = ApplePhoto;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				9621DC3F2BEF3D7A00183CB7 /* PlayerItem.swift in Sources */,
 				9621DC402BEF3D7A00183CB7 /* Interpolation.swift in Sources */,
 				9621DC412BEF3D7A00183CB7 /* Reel.swift in Sources */,
+				9621DC8D2BF0121E00183CB7 /* HeroLayer.swift in Sources */,
 				9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */,
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,

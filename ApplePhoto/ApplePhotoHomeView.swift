@@ -15,12 +15,32 @@ struct ApplePhotoHomeView: View {
                 .allowsHitTesting(coordinator.selectedItem == nil)
         }
         .overlay {
+            Rectangle()
+                .fill(.background)
+                .ignoresSafeArea()
+                .opacity(coordinator.animateView ? 1 : 0)
+        }
+        .overlay {
             if coordinator.selectedItem != nil {
                 DetailView()
                     .environment(coordinator)
                 /// disabled until the showDetailView is visible
                     .allowsHitTesting(coordinator.showDetailView)
             }
+        }
+        /// we need to source and destination frame to animate the detailed view transition
+        .overlayPreferenceValue(AnchorKey.self) { value in
+            if let selectedItem = coordinator.selectedItem,
+               let sAnchor = value[selectedItem.id + "SOURCE"],
+               let dAnchor = value[selectedItem.id + "DEST"] {
+                HeroLayer(
+                    item: selectedItem,
+                    sAnchor: sAnchor,
+                    dAnchor: dAnchor
+                )
+                .environment(coordinator)
+            }
+                
         }
     }
 }
@@ -48,12 +68,19 @@ struct HomeView: View {
         GeometryReader {
             let size = $0.size
             
+            Rectangle()
+                .fill(.clear)
+                .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
+                    return [item.id + "SOURCE": anchor]
+                })
+            
             if let previewImage = item.previewImage {
                 Image(uiImage: previewImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: size.width, height: size.height)
                     .clipped()
+                    .opacity(coordinator.selectedItem?.id == item.id ? 0 : 1)
             }
         }
         .frame(height: 130)
