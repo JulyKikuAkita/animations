@@ -66,6 +66,12 @@
 		9621DC7B2BEF41A000183CB7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BBE2B897A310055D79B /* Profile.swift */; };
 		9621DC7D2BEF423500183CB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC7C2BEF423500183CB7 /* AppDelegate.swift */; };
 		9621DC7E2BEF42DB00183CB7 /* UniversalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */; };
+		9621DC802BEF461000183CB7 /* photoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC7F2BEF461000183CB7 /* photoItem.swift */; };
+		9621DC812BEF461400183CB7 /* photoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC7F2BEF461000183CB7 /* photoItem.swift */; };
+		9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC822BEF478500183CB7 /* UICoordinator.swift */; };
+		9621DC842BEF478A00183CB7 /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC822BEF478500183CB7 /* UICoordinator.swift */; };
+		9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC882BEF4B6F00183CB7 /* DetailView.swift */; };
+		9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965999192BE0BCD6000133FA /* View+Extension.swift */; };
@@ -143,6 +149,10 @@
 		9621DC5E2BEF3F1B00183CB7 /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
 		9621DC762BEF406500183CB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9621DC7C2BEF423500183CB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9621DC7F2BEF461000183CB7 /* photoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoItem.swift; sourceTree = "<group>"; };
+		9621DC822BEF478500183CB7 /* UICoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICoordinator.swift; sourceTree = "<group>"; };
+		9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePhotoHomeView.swift; sourceTree = "<group>"; };
+		9621DC882BEF4B6F00183CB7 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		965999192BE0BCD6000133FA /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -245,6 +255,7 @@
 				961F3B8D2B8818240055D79B /* animation */,
 				9621DB142BEDDD6100183CB7 /* Gesture */,
 				96845DA32BD3346500B7D8B2 /* AppleMusic */,
+				9621DC872BEF4B2200183CB7 /* ApplePhoto */,
 				9621DC262BEF3CF800183CB7 /* demoApp */,
 				9621DC4B2BEF3E5E00183CB7 /* Alert */,
 				961F3B8C2B8818240055D79B /* Products */,
@@ -295,6 +306,8 @@
 				9684833C2BCF62C50023FE2B /* Particle.swift */,
 				96B884E92BDD82B000196125 /* Interpolation.swift */,
 				9621D9622BE5F7D100183CB7 /* Tag.swift */,
+				9621DC7F2BEF461000183CB7 /* photoItem.swift */,
+				9621DC822BEF478500183CB7 /* UICoordinator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -374,6 +387,15 @@
 			children = (
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9621DC872BEF4B2200183CB7 /* ApplePhoto */ = {
+			isa = PBXGroup;
+			children = (
+				9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */,
+				9621DC882BEF4B6F00183CB7 /* DetailView.swift */,
+			);
+			path = ApplePhoto;
 			sourceTree = "<group>";
 		};
 		963DB14C2BBBD39F00AAF347 /* Videos */ = {
@@ -626,6 +648,7 @@
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
+				9621DC812BEF461400183CB7 /* photoItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
 				96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
@@ -639,6 +662,7 @@
 				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
+				9621DC842BEF478A00183CB7 /* UICoordinator.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
@@ -670,7 +694,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
+				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
 				9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */,
+				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
@@ -684,10 +710,12 @@
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
+				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
 				9621DC392BEF3D7300183CB7 /* Tab.swift in Sources */,
 				9621DC5F2BEF3F1B00183CB7 /* DemoView.swift in Sources */,
 				9621DC3A2BEF3D7600183CB7 /* Card.swift in Sources */,
 				9621DC342BEF3D5600183CB7 /* AppleMusicHomeView.swift in Sources */,
+				9621DC802BEF461000183CB7 /* photoItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
