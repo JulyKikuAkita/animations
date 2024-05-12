@@ -26,6 +26,7 @@ struct DetailView: View {
                 }
                 /// Making it as a paging view
                 .scrollTargetBehavior(.paging)
+                .scrollIndicators(.hidden)
                 .scrollPosition(id: .init(get: {
                     return coordinator.detailScrollPosition
                 }, set: {
@@ -43,9 +44,45 @@ struct DetailView: View {
                             })
                     }
                 }
+                .offset(coordinator.offset)
+                
+                Rectangle()
+                    .foregroundStyle(.clear)
+                    .frame(width: 10)
+                    .contentShape(.rect)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                let translation = value.translation
+                                coordinator.offset = translation
+                                /// Progress for fading out the detail view, use height in this example, feel free to use width
+                                let heightProgress = max(min(translation.height / 200, 1), 0)
+                                coordinator.dragProgress = heightProgress
+                            }.onEnded { value in
+                                let translation = value.translation
+                                let velocity = value.velocity
+//                                let width = translation.width + (velocity.width / 5)
+                                let height = translation.height + (velocity.height / 5)
+                                
+                                if height > (size.height * 0.5) {
+                                    /// Close view
+                                    coordinator.toggleView(show: false)
+                                } else {
+                                    /// Reset to origin
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        coordinator.offset = .zero
+                                        coordinator.dragProgress = 0
+                                    }
+                                }
+                            }
+                    )
             }
+            .opacity(coordinator.showDetailView ? 1 : 0)
+            
+            BottomIndicatorView()
+                .offset(y: coordinator.showDetailView ? (120 * coordinator.dragProgress) : 120)
+                .animation(.easeInOut(duration: 0.15), value: coordinator.showDetailView)
         }
-        .opacity(coordinator.showDetailView ? 1 : 0)
         .onAppear {
             // ensure the detailed view loads and initiates the layer animation
             // due to occasionally the destination view might not be loaded and dest anchor will be nil
@@ -85,7 +122,7 @@ struct DetailView: View {
         .padding([.top, .horizontal], 15)
         .padding(.bottom, 10)
         .background(.ultraThinMaterial)
-        .offset(y: coordinator.showDetailView ? 0 : -120)
+        .offset(y: coordinator.showDetailView ? (-120 * coordinator.dragProgress) : -120)
         .animation(.easeInOut(duration: 0.15), value: coordinator.showDetailView)
     }
     
@@ -98,6 +135,56 @@ struct DetailView: View {
                 .frame(width: size.width, height: size.height)
                 .clipped()
                 .contentShape(.rect)
+        }
+    }
+    
+    /// Bottom indicator view
+    @ViewBuilder
+    func BottomIndicatorView() -> some View {
+        GeometryReader {
+            let size = $0.size
+            
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 5) {
+                    ForEach(coordinator.items) { item in
+                        if let image = item.previewImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 50, height: 50)
+                                .clipShape(.rect(cornerRadius: 10))
+                                .scaleEffect(0.97)
+                        }
+                    }
+                }
+                .padding(.vertical, 10)
+                .scrollTargetLayout()
+            }
+            /// 50 - Item size inside scrollview
+            .safeAreaPadding(.horizontal, (size.width - 50) / 2)
+            .overlay {
+                /// Active indicator icon
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.primary, lineWidth: 2)
+                    .frame(width: 50, height: 50)
+                    .allowsHitTesting(false)
+            }
+            .scrollTargetBehavior(.viewAligned)
+            .scrollPosition(id: .init(get: {
+                return coordinator.detailIndicatorPosition
+            }, set: {
+                coordinator.detailIndicatorPosition = $0
+            }))
+            .scrollIndicators(.hidden)
+            .onChange(of: coordinator.detailIndicatorPosition) { oldValue, newValue in
+                coordinator.didDetailIndicatorChanged()
+            }
+        }
+        .frame(height: 70)
+        .background {
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea()
         }
     }
 }

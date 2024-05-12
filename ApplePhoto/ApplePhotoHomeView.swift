@@ -18,7 +18,7 @@ struct ApplePhotoHomeView: View {
             Rectangle()
                 .fill(.background)
                 .ignoresSafeArea()
-                .opacity(coordinator.animateView ? 1 : 0)
+                .opacity(coordinator.animateView ? 1 - coordinator.dragProgress : 0)
         }
         .overlay {
             if coordinator.selectedItem != nil {
@@ -48,18 +48,51 @@ struct ApplePhotoHomeView: View {
 struct HomeView: View {
     @Environment(UICoordinator.self) private var coordinator
     var body: some View {
-        ScrollView(.vertical) {
-            LazyVGrid(columns: Array(repeating: GridItem(spacing: 3), count: 3), spacing: 3) {
-                ForEach(coordinator.items) { item in
-                    GridImageView(item)
-                        .onTapGesture {
-                            coordinator.selectedItem = item
+        @Bindable var bindableCoordinator = coordinator
+        ScrollViewReader { reader in /// scrollPosition modifier causes scrollview to stutter w/ lazeGrid; use scrollViewReader as alternative
+            ScrollView(.vertical) {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    Text("Recents")
+                        .font(.largeTitle.bold())
+                        .padding(.top, 20)
+                        .padding(.horizontal, 15)
+                    
+                    LazyVGrid(columns: Array(repeating: GridItem(spacing: 3), count: 3), spacing: 3) {
+                        ForEach($bindableCoordinator.items) { $item in
+                            GridImageView(item)
+                                .id(item.id)
+                                .didFrameChange { frame, bounds in
+                                    let minY = frame.minY // > height item is scrolled away in a downward direction
+                                    let maxY = frame.maxY // <0 item is scrolled away in upward direction
+                                    let height = bounds.height
+                                    
+                                    if maxY < 9 || minY > height {
+                                        item.appeared = false
+                                    } else {
+                                        item.appeared = true
+                                        
+                                    }
+                                }
+                                .onDisappear { // address LazyVGrid
+                                    item.appeared = false
+                                }
+                                .onTapGesture {
+                                    coordinator.selectedItem = item
+                                }
                         }
+                    }
+                    .padding(.vertical, 15)
                 }
             }
-            .padding(.vertical, 15)
+            .onChange(of: coordinator.selectedItem) { oldValue, newValue in
+                if let item = coordinator.items.first(where: { $0.id == newValue?.id }), 
+                    !item.appeared {
+                    /// Scroll to this item, as this is not visible on the screen
+                    reader.scrollTo(item.id, anchor: .bottom)
+                }
+            }
         }
-        .navigationTitle("Recents")
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     /// Image view for grid
