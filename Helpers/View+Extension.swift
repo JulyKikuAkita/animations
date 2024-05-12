@@ -56,6 +56,39 @@ extension View {
     }
 }
 
+/// For  Apple photo app
+extension View {
+    @ViewBuilder
+    func didFrameChange(result: @escaping (CGRect, CGRect) -> ()) -> some View {
+        self
+        .overlay {
+            GeometryReader {
+                let frame = $0.frame(in: .scrollView(axis: .vertical))
+                let bounds = $0.bounds(of: .scrollView(axis: .vertical)) ?? .zero
+                
+                Color.clear
+                    .preference(key: FrameKey.self, value: .init(frame: frame, bounds: bounds))
+                    .onPreferenceChange(FrameKey.self, perform: { value in
+                        result(value.frame, value.bounds)
+                    })
+            }
+        }
+    }
+}
+
+struct ViewFrame: Equatable {
+    var frame: CGRect = .zero
+    var bounds: CGRect = .zero
+}
+
+struct FrameKey: PreferenceKey {
+    static var defaultValue: ViewFrame = .init()
+    static func reduce(value: inout ViewFrame, nextValue: () -> ViewFrame) {
+        value = nextValue()
+    }
+}
+/// For Apple photo app
+
 /// Converting UIView to UIImage
 extension UIView {
     func image(_ size: CGSize) -> UIImage {
