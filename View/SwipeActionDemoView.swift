@@ -20,10 +20,10 @@ struct SwipeActionHomeView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 10) {
                 ForEach(colors, id: \.self) { color in
-                    SwipeAction(cornerRadius: 15, direction: .trailing) {
+                    SwipeAction(cornerRadius: 15, direction: color == .black ? .leading : .trailing) {
                         CardView(color)
                     } actions: {
-                        Action(tint: .green, icon: "star.fill") {
+                        Action(tint: .green, icon: "star.fill", isEnabled: color == .black) {
                             print("Bookmark")
                         }
                         
@@ -60,7 +60,7 @@ struct SwipeActionHomeView: View {
         .foregroundStyle(.white.opacity(0.4))
         .padding(.horizontal, 15)
         .padding(.vertical, 10)
-        .background(color.gradient, in: .rect(cornerRadius: 15))
+        .background(color.gradient)
     }
 }
 
@@ -83,10 +83,12 @@ struct SwipeAction<Content: View>: View {
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 0) {
                     content
+                        .rotationEffect(.init(degrees: direction == .leading ? -180 : 0))
                         /// to take full available space
                         .containerRelativeFrame(.horizontal)
+                        .background(scheme == .dark ? .black : .white)
                         .background {
-                            if let firstAction = actions.first {
+                            if let firstAction = filterActions.first {
                                 Rectangle()
                                     .fill(firstAction.tint)
                                     .opacity(scrollOffset == .zero ? 0 : 1)
@@ -123,13 +125,14 @@ struct SwipeAction<Content: View>: View {
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned) /// (where the magic is) ViewAligned scroll target behavior requires scrollTargetLayout() to be added inside the scrollView
             .background {
-                if let lastAction = actions.last {
+                if let lastAction = filterActions.last {
                     Rectangle()
                         .fill(lastAction.tint)
                         .opacity(scrollOffset == .zero ? 0 : 1)
                 }
             }
             .clipShape(.rect(cornerRadius: cornerRadius))
+            .rotationEffect(.init(degrees: direction == .leading ? 180 : 0))
         }
         .allowsHitTesting(isEnabled)
         .transition(CustomTransition())
@@ -141,10 +144,10 @@ struct SwipeAction<Content: View>: View {
         /// default each button will have 100 width
         Rectangle()
             .fill(.clear)
-            .frame(width: CGFloat(actions.count) * 100)
+            .frame(width: CGFloat(filterActions.count) * 100)
             .overlay(alignment: direction.alignment) {
                 HStack(spacing: 0) {
-                    ForEach(actions) { button in
+                    ForEach(filterActions) { button in
                         Button(action: {
                             Task {
                                 isEnabled = false
@@ -164,6 +167,7 @@ struct SwipeAction<Content: View>: View {
                         })
                         .buttonStyle(.plain)
                         .background(button.tint)
+                        .rotationEffect(.init(degrees: direction == .leading ? -180 : 0))
                     }
                 }
             }
@@ -172,7 +176,11 @@ struct SwipeAction<Content: View>: View {
     func scrollOffset(_ proxy: GeometryProxy) -> CGFloat {
         let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
         
-        return direction == .trailing ? (minX > 0 ? -minX : 0) : (minX < 0 ? -minX : 0)
+        return (minX > 0 ? -minX : 0)
+    }
+    
+    var filterActions: [Action] {
+        return actions.filter({ $0.isEnabled })
     }
 }
 
