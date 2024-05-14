@@ -20,9 +20,22 @@ struct SwipeActionHomeView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 10) {
                 ForEach(colors, id: \.self) { color in
-                    CardView(color)
+                    SwipeAction(cornerRadius: 15, direction: .trailing) {
+                        CardView(color)
+                    } actions: {
+                        Action(tint: .green, icon: "star.fill") {
+                            print("Bookmark")
+                        }
+                        
+                        Action(tint: .red, icon: "trash.fill") {
+                            withAnimation(.easeInOut) {
+                                colors.removeAll(where: { $0 == color })
+                            }
+                        }
+                    }
                 }
             }
+            .padding([.leading, .trailing], 10)
         }
         .scrollIndicators(.hidden)
     }
@@ -47,14 +60,24 @@ struct SwipeActionHomeView: View {
         .foregroundStyle(.white.opacity(0.4))
         .padding(.horizontal, 15)
         .padding(.vertical, 10)
-        .background(color.gradient)
-
+        .background(color.gradient, in: .rect(cornerRadius: 15))
     }
 }
 
 /// Custom swipe action view
 struct SwipeAction<Content: View>: View {
+    var cornerRadius:CGFloat = 0
+    var direction: SwipeDirection = .trailing
     @ViewBuilder var content: Content
+    @ActionBuilder var actions: [Action]
+    /// View properties
+    @Environment(\.colorScheme) private var scheme
+    /// View unique ID
+    let viewID = UUID()
+    /// Animation properties
+    @State private var isEnabled: Bool = true /// disable interaction when animation is still in progress
+    @State private var scrollOffset: CGFloat = .zero /// hide action item view when during animation
+    
     var body: some View {
         ScrollViewReader { scrollProxy in /// reset scroll view to original position  when swipe action is pressed
             ScrollView(.horizontal) {
@@ -62,17 +85,131 @@ struct SwipeAction<Content: View>: View {
                     content
                         /// to take full available space
                         .containerRelativeFrame(.horizontal)
+                        .background {
+                            if let firstAction = actions.first {
+                                Rectangle()
+                                    .fill(firstAction.tint)
+                                    .opacity(scrollOffset == .zero ? 0 : 1)
+                            }
+                        }
+                        .id(viewID)
+                        .transition(.identity)
+                        .overlay {
+                            GeometryReader {
+                                let minX = $0.frame(in: .scrollView(axis: .horizontal)).minX
+                                
+                                Color.clear
+                                    .preference(key: OffsetCGFloatKey.self, value: minX)
+                                    .onPreferenceChange(OffsetCGFloatKey.self) {
+                                        scrollOffset = $0
+                                    }
+                            }
+                        }
+                    
+                    ActionButtons {
+                        withAnimation(.snappy) {
+                            scrollProxy.scrollTo(viewID, anchor: direction == .trailing ? .topLeading : .topTrailing)
+                        }
+                    }
+                    .opacity(scrollOffset == .zero ? 0 : 1)
                 }
                 .scrollTargetLayout()
+                /// limit the swipe direction with visual effect api
+                .visualEffect { content, geometryProxy in
+                    content
+                        .offset(x: scrollOffset(geometryProxy))
+                }
             }
             .scrollIndicators(.hidden)
-            .scrollTargetBehavior(.viewAligned) /// ViewAligned scroll target behavior requires scrollTargetLayout() to be added inside the scrollView
+            .scrollTargetBehavior(.viewAligned) /// (where the magic is) ViewAligned scroll target behavior requires scrollTargetLayout() to be added inside the scrollView
+            .background {
+                if let lastAction = actions.last {
+                    Rectangle()
+                        .fill(lastAction.tint)
+                        .opacity(scrollOffset == .zero ? 0 : 1)
+                }
+            }
+            .clipShape(.rect(cornerRadius: cornerRadius))
         }
+        .allowsHitTesting(isEnabled)
+        .transition(CustomTransition())
+    }
+    
+    /// Action buttons
+    @ViewBuilder
+    func ActionButtons(resetPosition: @escaping () -> ()) -> some View {
+        /// default each button will have 100 width
+        Rectangle()
+            .fill(.clear)
+            .frame(width: CGFloat(actions.count) * 100)
+            .overlay(alignment: direction.alignment) {
+                HStack(spacing: 0) {
+                    ForEach(actions) { button in
+                        Button(action: {
+                            Task {
+                                isEnabled = false
+                                resetPosition()
+                                try? await Task.sleep(for: .seconds(0.25)) // scroll action approx. takes 0.25 secs to complete (optionally if want immediate run button action
+                                button.action()
+                                try? await Task.sleep(for: .seconds(0.1))
+                                isEnabled = true
+                            }
+                        }, label: {
+                            Image(systemName: button.icon)
+                                .font(button.iconFont)
+                                .foregroundStyle(button.iconTint)
+                                .frame(width: 100)
+                                .frame(maxHeight: .infinity)
+                                .contentShape(.rect)
+                        })
+                        .buttonStyle(.plain)
+                        .background(button.tint)
+                    }
+                }
+            }
+    }
+    
+    func scrollOffset(_ proxy: GeometryProxy) -> CGFloat {
+        let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
+        
+        return direction == .trailing ? (minX > 0 ? -minX : 0) : (minX < 0 ? -minX : 0)
     }
 }
 
-// TODO: https://www.youtube.com/watch?v=K8VnH2eEnK4&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=53
-// 3:00
+@resultBuilder
+struct ActionBuilder {
+    static func buildBlock(_ components: Action...) -> [Action] {
+        return components
+    }
+}
+
+/// Custom Transition as identity transition still not flaky on fading out the view when delete it
+struct CustomTransition: Transition {
+    func body(content: Content, phase: TransitionPhase) -> some View {
+        content
+            .mask {
+                GeometryReader {
+                    let size = $0.size
+                    
+                    Rectangle()
+                        .offset(y: phase == .identity ? 0 : -size.height)
+                }
+                .containerRelativeFrame(.horizontal)
+            }
+    }
+}
+enum SwipeDirection {
+    case leading, trailing
+    
+    var alignment: Alignment {
+        switch self {
+        case .leading:
+                .leading
+        case .trailing:
+                .trailing
+        }
+    }
+}
 #Preview {
     SwipeActionDemoView()
 }
