@@ -77,6 +77,27 @@
 		9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC902BF1EDB100183CB7 /* ActionModel.swift */; };
 		9621DC922BF1EDB100183CB7 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC902BF1EDB100183CB7 /* ActionModel.swift */; };
 		9621DC932BF1EDB100183CB7 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC902BF1EDB100183CB7 /* ActionModel.swift */; };
+		9621DD8A2BF47FC800183CB7 /* MyMintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DD892BF47FC800183CB7 /* MyMintApp.swift */; };
+		9621DD8C2BF47FC800183CB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DD8B2BF47FC800183CB7 /* ContentView.swift */; };
+		9621DD8E2BF47FC900183CB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9621DD8D2BF47FC900183CB7 /* Assets.xcassets */; };
+		9621DD912BF47FC900183CB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9621DD902BF47FC900183CB7 /* Preview Assets.xcassets */; };
+		9621DD952BF47FDA00183CB7 /* PlayerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509C2B944D1B00B36142 /* PlayerConfig.swift */; };
+		9621DD962BF47FDA00183CB7 /* photoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC7F2BEF461000183CB7 /* photoItem.swift */; };
+		9621DD972BF47FDA00183CB7 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
+		9621DD982BF47FDA00183CB7 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
+		9621DD992BF47FDA00183CB7 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
+		9621DD9A2BF47FDA00183CB7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621D9622BE5F7D100183CB7 /* Tag.swift */; };
+		9621DD9B2BF47FDA00183CB7 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC902BF1EDB100183CB7 /* ActionModel.swift */; };
+		9621DD9C2BF47FDA00183CB7 /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC822BEF478500183CB7 /* UICoordinator.swift */; };
+		9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BBE2B897A310055D79B /* Profile.swift */; };
+		9621DD9E2BF47FDA00183CB7 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
+		9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884E92BDD82B000196125 /* Interpolation.swift */; };
+		9621DDA02BF47FDA00183CB7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab.swift */; };
+		9621DDA12BF47FDA00183CB7 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509A2B94465700B36142 /* PlayerItem.swift */; };
+		9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
+		9621DDA62BF4800500183CB7 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDA52BF4800400183CB7 /* IntroScreen.swift */; };
+		9621DDA92BF4813100183CB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDA82BF4813100183CB7 /* Constants.swift */; };
+		9621DDAB2BF4849F00183CB7 /* MintTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDAA2BF4849F00183CB7 /* MintTabs.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965999192BE0BCD6000133FA /* View+Extension.swift */; };
@@ -161,6 +182,14 @@
 		9621DC8C2BF0121E00183CB7 /* HeroLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroLayer.swift; sourceTree = "<group>"; };
 		9621DC8E2BF1E9AD00183CB7 /* SwipeActionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionDemoView.swift; sourceTree = "<group>"; };
 		9621DC902BF1EDB100183CB7 /* ActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionModel.swift; sourceTree = "<group>"; };
+		9621DD872BF47FC800183CB7 /* MyMint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMint.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9621DD892BF47FC800183CB7 /* MyMintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMintApp.swift; sourceTree = "<group>"; };
+		9621DD8B2BF47FC800183CB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9621DD8D2BF47FC900183CB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9621DD902BF47FC900183CB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9621DDA52BF4800400183CB7 /* IntroScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreen.swift; sourceTree = "<group>"; };
+		9621DDA82BF4813100183CB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9621DDAA2BF4849F00183CB7 /* MintTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTabs.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		965999192BE0BCD6000133FA /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -232,6 +261,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9621DD842BF47FC800183CB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -266,6 +302,7 @@
 				9621DC872BEF4B2200183CB7 /* ApplePhoto */,
 				9621DC262BEF3CF800183CB7 /* demoApp */,
 				9621DC4B2BEF3E5E00183CB7 /* Alert */,
+				9621DD882BF47FC800183CB7 /* MyMint */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -276,6 +313,7 @@
 				961F3B8B2B8818240055D79B /* animation.app */,
 				9621DC252BEF3CF700183CB7 /* demoApp.app */,
 				9621DC4A2BEF3E5E00183CB7 /* Alert.app */,
+				9621DD872BF47FC800183CB7 /* MyMint.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,6 +445,52 @@
 				9621DC8C2BF0121E00183CB7 /* HeroLayer.swift */,
 			);
 			path = ApplePhoto;
+			sourceTree = "<group>";
+		};
+		9621DD882BF47FC800183CB7 /* MyMint */ = {
+			isa = PBXGroup;
+			children = (
+				9621DDA72BF4811F00183CB7 /* Helper */,
+				9621DDA42BF47FF300183CB7 /* View */,
+				9621DDA32BF47FED00183CB7 /* Model */,
+				9621DD892BF47FC800183CB7 /* MyMintApp.swift */,
+				9621DD8B2BF47FC800183CB7 /* ContentView.swift */,
+				9621DD8D2BF47FC900183CB7 /* Assets.xcassets */,
+				9621DD8F2BF47FC900183CB7 /* Preview Content */,
+			);
+			path = MyMint;
+			sourceTree = "<group>";
+		};
+		9621DD8F2BF47FC900183CB7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				9621DD902BF47FC900183CB7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9621DDA32BF47FED00183CB7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9621DDAA2BF4849F00183CB7 /* MintTabs.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9621DDA42BF47FF300183CB7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9621DDA52BF4800400183CB7 /* IntroScreen.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9621DDA72BF4811F00183CB7 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				9621DDA82BF4813100183CB7 /* Constants.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		963DB14C2BBBD39F00AAF347 /* Videos */ = {
@@ -548,6 +632,23 @@
 			productReference = 9621DC4A2BEF3E5E00183CB7 /* Alert.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9621DD862BF47FC800183CB7 /* MyMint */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9621DD942BF47FC900183CB7 /* Build configuration list for PBXNativeTarget "MyMint" */;
+			buildPhases = (
+				9621DD832BF47FC800183CB7 /* Sources */,
+				9621DD842BF47FC800183CB7 /* Frameworks */,
+				9621DD852BF47FC800183CB7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyMint;
+			productName = MyMint;
+			productReference = 9621DD872BF47FC800183CB7 /* MyMint.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -565,6 +666,9 @@
 						CreatedOnToolsVersion = 15.3;
 					};
 					9621DC492BEF3E5E00183CB7 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					9621DD862BF47FC800183CB7 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 				};
@@ -585,6 +689,7 @@
 				961F3B8A2B8818240055D79B /* animation */,
 				9621DC242BEF3CF700183CB7 /* demoApp */,
 				9621DC492BEF3E5E00183CB7 /* Alert */,
+				9621DD862BF47FC800183CB7 /* MyMint */,
 			);
 		};
 /* End PBXProject section */
@@ -635,6 +740,15 @@
 			files = (
 				9621DC582BEF3E7A00183CB7 /* Assets.xcassets in Resources */,
 				9621DC542BEF3E5F00183CB7 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9621DD852BF47FC800183CB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9621DD912BF47FC900183CB7 /* Preview Assets.xcassets in Resources */,
+				9621DD8E2BF47FC900183CB7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +859,32 @@
 				9621DC932BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				9621DC7E2BEF42DB00183CB7 /* UniversalAlert.swift in Sources */,
 				9621DC4D2BEF3E5E00183CB7 /* AlertApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9621DD832BF47FC800183CB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9621DD8C2BF47FC800183CB7 /* ContentView.swift in Sources */,
+				9621DD8A2BF47FC800183CB7 /* MyMintApp.swift in Sources */,
+				9621DD952BF47FDA00183CB7 /* PlayerConfig.swift in Sources */,
+				9621DDA62BF4800500183CB7 /* IntroScreen.swift in Sources */,
+				9621DD962BF47FDA00183CB7 /* photoItem.swift in Sources */,
+				9621DD972BF47FDA00183CB7 /* WindowSharedModel.swift in Sources */,
+				9621DD982BF47FDA00183CB7 /* Reel.swift in Sources */,
+				9621DD992BF47FDA00183CB7 /* Particle.swift in Sources */,
+				9621DD9A2BF47FDA00183CB7 /* Tag.swift in Sources */,
+				9621DD9B2BF47FDA00183CB7 /* ActionModel.swift in Sources */,
+				9621DD9C2BF47FDA00183CB7 /* UICoordinator.swift in Sources */,
+				9621DDAB2BF4849F00183CB7 /* MintTabs.swift in Sources */,
+				9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */,
+				9621DD9E2BF47FDA00183CB7 /* OffsetReader.swift in Sources */,
+				9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */,
+				9621DDA02BF47FDA00183CB7 /* Tab.swift in Sources */,
+				9621DDA12BF47FDA00183CB7 /* PlayerItem.swift in Sources */,
+				9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */,
+				9621DDA92BF4813100183CB7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,6 +1184,66 @@
 			};
 			name = Release;
 		};
+		9621DD922BF47FC900183CB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MyMint/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.MyMint;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9621DD932BF47FC900183CB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MyMint/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.MyMint;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1079,6 +1279,15 @@
 			buildConfigurations = (
 				9621DC562BEF3E5F00183CB7 /* Debug */,
 				9621DC572BEF3E5F00183CB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9621DD942BF47FC900183CB7 /* Build configuration list for PBXNativeTarget "MyMint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9621DD922BF47FC900183CB7 /* Debug */,
+				9621DD932BF47FC900183CB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
