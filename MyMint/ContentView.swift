@@ -14,19 +14,19 @@ struct ContentView: View {
     @State private var activeTab: MintTab = .recents
     var body: some View {
         TabView(selection: $activeTab) {
-            Text("Recents")
+            Recents()
                 .tag(MintTab.recents)
                 .tabItem { MintTab.recents.tabContent }
             
-            Text("Search")
+            Search()
                 .tag(MintTab.search)
                 .tabItem { MintTab.search.tabContent }
             
-            Text("Chart")
+            Graphs()
                 .tag(MintTab.charts)
                 .tabItem { MintTab.charts.tabContent }
             
-            Text("Settings")
+            Settings()
                 .tag(MintTab.settings)
                 .tabItem { MintTab.settings.tabContent }
         }
