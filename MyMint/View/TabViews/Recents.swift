@@ -11,7 +11,10 @@ struct Recents: View {
     /// View Properties
     @State private var startDate: Date = .now.startOfMonth
     @State private var endDate: Date = .now.endOfMonth
+    @State private var selectedCategory: MintCategory = .expense
     
+    /// Animation properties
+    @Namespace private var animation
     var body: some View {
         GeometryReader {
             /// for animation purpose
@@ -23,14 +26,30 @@ struct Recents: View {
                         Section {
                             /// Date filter button
                             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                                Text("\(format(date: startDate, format: "dd-MMM yy")) to \(format(date: endDate, format: "dd-MMM yy"))"
+                                )
+                                .font(.caption2)
+                                .foregroundStyle(.gray)
                             })
+                            .hSpacing(.leading)
+                            
+                            /// Card view
+                            MintCardView(income: 1111, expense: 2222)
+                            
+                            /// Segmented control
+                            CustomSegmentedControl()
+                                .padding(.bottom, 10)
+                            
+                            ForEach(mockTransactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
+                                MintTransactionCardView(transaction: transaction)
+                            }
                         } header: {
                             HeaderView(size)
                         }
                     }
                     .padding(15)
                 }
+                .background(.gray.opacity(0.15))
             }
         }
     }
@@ -83,6 +102,34 @@ struct Recents: View {
             .padding(.horizontal, -15)
             .padding(.top, -(safeArea.top + 15))
         }
+    }
+    
+    /// Segment Control
+    @ViewBuilder
+    func CustomSegmentedControl() -> some View {
+        HStack(spacing: 0) {
+            ForEach(MintCategory.allCases, id:\.rawValue) { category in
+                Text(category.rawValue)
+                    .hSpacing()
+                    .padding(.vertical, 10)
+                    .background {
+                        if category == selectedCategory {
+                            Capsule()
+                                .fill(.background)
+                                .matchedGeometryEffect(id: "ACTIVETAB", in: animation)
+                        }
+                    }
+                    .contentShape(.capsule)
+                    .onTapGesture {
+                        withAnimation(.snappy) {
+                            selectedCategory = category
+                        }
+                    }
+                
+            }
+        }
+        .background(.gray.opacity(0.15), in: .capsule)
+        .padding(.top, 5)
     }
     
     /// scale view along with screen Height: pulldown welcome view enlarge the text

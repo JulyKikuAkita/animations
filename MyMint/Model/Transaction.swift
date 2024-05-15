@@ -30,3 +30,11 @@ struct Transaction: Identifiable {
         return tints.first(where: { $0.color == tintColor })?.value ?? appTint
     }
 }
+
+/// mock data
+var mockTransactions: [Transaction] = [
+    .init(title: "Magic Mike", remarks: "McDonald's", amount: 39.99, dateAdded: .now, category: .expense, rule: .need, tintColor: tints.randomElement()!),
+    .init(title: "Magic Keyboard", remarks: "Apple", amount: 129.99, dateAdded: .now, category: .expense, rule: .need, tintColor: tints.randomElement()!),
+    .init(title: "Magic Wand", remarks: "Disnet", amount: 99.99, dateAdded: .now, category: .expense, rule: .want, tintColor: tints.randomElement()!),
+    .init(title: "Garage sell", remarks: "FB market place", amount: 799.99, dateAdded: .now, category: .income, rule: .save, tintColor: tints.randomElement()!),
+]

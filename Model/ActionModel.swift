@@ -10,6 +10,6 @@ struct Action: Identifiable {
     var icon: String
     var iconFont: Font = .title
     var iconTint: Color = .white
-    var isEnabled: Bool = false
+    var isEnabled: Bool = true
     var action: () -> ()
 }
