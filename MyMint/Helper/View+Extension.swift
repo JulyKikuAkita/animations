@@ -24,6 +24,11 @@ extension View {
         return .zero
     }
     
+    var currencySymbol: String {
+        let locale = Locale.current
+        return locale.currencySymbol ?? ""
+    }
+    
     func format(date: Date, format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format

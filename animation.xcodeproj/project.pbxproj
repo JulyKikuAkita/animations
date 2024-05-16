@@ -119,6 +119,7 @@
 		96725BB12BF57E62003DBD45 /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603CA002B8ABDCD00F91C21 /* AnchorKey.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
+		96725BB62BF5B762003DBD45 /* MintExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB52BF5B762003DBD45 /* MintExpenseView.swift */; };
 		9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833A2BCF61D40023FE2B /* ParticleEffect.swift */; };
 		9684833D2BCF62C50023FE2B /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
@@ -223,6 +224,7 @@
 		965E573B2BC5097C00E172B3 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
+		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
 		96845DA42BD3347F00B7D8B2 /* AppleMusicHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicHomeView.swift; sourceTree = "<group>"; };
 		96845DA62BD337D200B7D8B2 /* MusicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfoView.swift; sourceTree = "<group>"; };
 		96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedBottomSheet.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				9621DE272BF5678C00183CB7 /* MintCardView.swift */,
 				96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */,
 				96725BB32BF59904003DBD45 /* MintDateFilterView.swift */,
+				96725BB52BF5B762003DBD45 /* MintExpenseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -929,6 +932,7 @@
 				9621DDB42BF489AD00183CB7 /* Recents.swift in Sources */,
 				96725BB12BF57E62003DBD45 /* AnchorKey.swift in Sources */,
 				9621DD9C2BF47FDA00183CB7 /* UICoordinator.swift in Sources */,
+				96725BB62BF5B762003DBD45 /* MintExpenseView.swift in Sources */,
 				9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */,
 				9621DDAD2BF486C800183CB7 /* MintCategory.swift in Sources */,
 				9621DDAB2BF4849F00183CB7 /* MintTabs.swift in Sources */,

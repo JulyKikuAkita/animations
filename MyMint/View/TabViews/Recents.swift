@@ -3,8 +3,10 @@
 //  MyMint
 
 import SwiftUI
+import SwiftData
 
 struct Recents: View {
+    @Query(sort: [SortDescriptor(\Transaction.dateAdded, order: .reverse)], animation: .snappy) private var transactions: [Transaction]
     /// User properties
     @AppStorage("userName") private var userName: String = ""
     
@@ -43,9 +45,19 @@ struct Recents: View {
                             CustomSegmentedControl()
                                 .padding(.bottom, 10)
                             
-                            ForEach(mockTransactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
-                                MintTransactionCardView(transaction: transaction)
+                            ForEach(transactions) { transaction in
+                                NavigationLink {
+                                    MintExpenseView(editTransaction: transaction)
+                                } label: {
+                                    MintTransactionCardView(transaction: transaction)
+                                }
+                                .buttonStyle(.plain)
                             }
+                            
+                            /// when using mock data
+//                            ForEach(mockTransactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
+//                                MintTransactionCardView(transaction: transaction)
+//                            }
                         } header: {
                             HeaderView(size)
                         }
@@ -95,7 +107,7 @@ struct Recents: View {
             Spacer(minLength: 0)
             
             NavigationLink {
-                
+                MintExpenseView()
             } label: {
                 Image(systemName: "plus")
                     .font(.title3)
