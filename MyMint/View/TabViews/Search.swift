@@ -8,12 +8,18 @@ struct Search: View {
     /// View Properties
     @State private var searchText: String = ""
     @State private var filterText: String = ""
+    @State private var selectedCategory: MintCategory? = nil
+    @State private var selectedRule: MintRule? = nil
+
     let searchPublisher = PassthroughSubject<String, Never>() // use combine debounce method
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 LazyVStack(spacing: 12) {
-                    
+                    MintFilterTransactionsView(category: selectedCategory, rule: selectedRule, searchText: searchText) { transaction in
+                        // TODO: 2:52
+                        
+                    }
                 }
             }
             .overlay(content: {

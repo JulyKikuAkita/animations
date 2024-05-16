@@ -120,6 +120,7 @@
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
 		96725BB62BF5B762003DBD45 /* MintExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB52BF5B762003DBD45 /* MintExpenseView.swift */; };
+		96725BB82BF5D6C2003DBD45 /* MintFilterTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB72BF5D6C2003DBD45 /* MintFilterTransactionsView.swift */; };
 		9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833A2BCF61D40023FE2B /* ParticleEffect.swift */; };
 		9684833D2BCF62C50023FE2B /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
@@ -225,6 +226,7 @@
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
+		96725BB72BF5D6C2003DBD45 /* MintFilterTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintFilterTransactionsView.swift; sourceTree = "<group>"; };
 		96845DA42BD3347F00B7D8B2 /* AppleMusicHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicHomeView.swift; sourceTree = "<group>"; };
 		96845DA62BD337D200B7D8B2 /* MusicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfoView.swift; sourceTree = "<group>"; };
 		96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedBottomSheet.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */,
 				96725BB32BF59904003DBD45 /* MintDateFilterView.swift */,
 				96725BB52BF5B762003DBD45 /* MintExpenseView.swift */,
+				96725BB72BF5D6C2003DBD45 /* MintFilterTransactionsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 			files = (
 				9621DD8C2BF47FC800183CB7 /* ContentView.swift in Sources */,
 				9621DD8A2BF47FC800183CB7 /* MyMintApp.swift in Sources */,
+				96725BB82BF5D6C2003DBD45 /* MintFilterTransactionsView.swift in Sources */,
 				9621DDBA2BF489D100183CB7 /* Settings.swift in Sources */,
 				9621DD952BF47FDA00183CB7 /* PlayerConfig.swift in Sources */,
 				9621DDA62BF4800500183CB7 /* IntroScreen.swift in Sources */,
