@@ -16,11 +16,18 @@ struct Search: View {
         NavigationStack {
             ScrollView(.vertical) {
                 LazyVStack(spacing: 12) {
-                    MintFilterTransactionsView(category: selectedCategory, rule: selectedRule, searchText: searchText) { transaction in
-                        // TODO: 2:52
-                        
+                    MintFilterTransactionsView(category: selectedCategory, rule: selectedRule, searchText: searchText) { transactions in
+                        ForEach(transactions) { transaction in
+                            NavigationLink {
+                                MintExpenseView(editTransaction: transaction)
+                            } label: {
+                                MintTransactionCardView(transaction: transaction)
+                            }
+                            .buttonStyle(.plain)
+                        }
                     }
                 }
+                .padding(15)
             }
             .overlay(content: {
                 ContentUnavailableView("Search Transactions", image: "magnifyingglass")
@@ -38,10 +45,51 @@ struct Search: View {
             .searchable(text: $searchText)
             .navigationTitle("Search")
             .background(.gray.opacity(0.15))
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    ToolBarContent()
+                }
+            }
+        }
+    }
+    
+    // TODO: 5:26
+// https://www.youtube.com/watch?v=MQTcDTiP9M4&list=PLimqJDzPI-H88PbxlOtNPkD0n0n-q-__z&index=6
+    @ViewBuilder
+    func ToolBarContent() -> some View {
+        Menu {
+            Button {
+                selectedCategory = nil
+            } label : {
+                HStack {
+                    Text("Both")
+                    
+                    if selectedCategory == nil {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
+            
+            ForEach(MintCategory.allCases, id:\.rawValue) { category in
+                Button {
+                    selectedCategory = category
+                } label : {
+                    HStack {
+                        Text(category.rawValue)
+                        
+                        if selectedCategory == category {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            }
+            
+        } label: {
+            Image(systemName: "slider.vertical.3")
         }
     }
 }
 
 #Preview {
-    Search()
+    ContentView()
 }
