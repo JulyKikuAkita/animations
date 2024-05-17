@@ -21,7 +21,7 @@ struct Search: View {
                             NavigationLink {
                                 MintExpenseView(editTransaction: transaction)
                             } label: {
-                                MintTransactionCardView(transaction: transaction)
+                                MintTransactionCardView(showCategory: true, showRule: true, transaction: transaction)
                             }
                             .buttonStyle(.plain)
                         }
@@ -53,8 +53,6 @@ struct Search: View {
         }
     }
     
-    // TODO: 5:26
-// https://www.youtube.com/watch?v=MQTcDTiP9M4&list=PLimqJDzPI-H88PbxlOtNPkD0n0n-q-__z&index=6
     @ViewBuilder
     func ToolBarContent() -> some View {
         Menu {

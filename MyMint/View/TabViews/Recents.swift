@@ -38,26 +38,25 @@ struct Recents: View {
                             })
                             .hSpacing(.leading)
                             
-                            /// Card view
-                            MintCardView(income: 1111, expense: 2222)
-                            
-                            /// Segmented control
-                            CustomSegmentedControl()
-                                .padding(.bottom, 10)
-                            
-                            ForEach(transactions) { transaction in
-                                NavigationLink {
-                                    MintExpenseView(editTransaction: transaction)
-                                } label: {
-                                    MintTransactionCardView(transaction: transaction)
+                            MintFilterTransactionsView(startDate: startDate, endDate: endDate) { transaction in
+                                /// Card view
+                                MintCardView(income: total(transactions, category: .income),
+                                             expense: total(transactions, category: .expense))
+                                
+                                /// Segmented control
+                                CustomSegmentedControl()
+                                    .padding(.bottom, 10)
+                                
+                                /// when using mock data
+                                /// ForEach(mockTransactions.filter({ $0.category == selectedCategory.rawValue }))
+                                ForEach(transactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
+                                    NavigationLink(value: transaction) {
+                                        MintTransactionCardView(showRule: true, transaction: transaction)
+                                    }
+                                    .buttonStyle(.plain)
                                 }
-                                .buttonStyle(.plain)
                             }
-                            
-                            /// when using mock data
-//                            ForEach(mockTransactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
-//                                MintTransactionCardView(transaction: transaction)
-//                            }
+                           
                         } header: {
                             HeaderView(size)
                         }
@@ -67,6 +66,9 @@ struct Recents: View {
                 .background(.gray.opacity(0.15))
                 .blur(radius: showFilterView ? 8 : 0)
                 .disabled(showFilterView)
+                .navigationDestination(for: Transaction.self) { transaction in
+                    MintExpenseView(editTransaction: transaction)
+                }
             }
             .overlay {
                 if showFilterView {
@@ -81,7 +83,6 @@ struct Recents: View {
                 }
             }
             .animation(.snappy, value: showFilterView)
-
         }
     }
     
@@ -176,6 +177,12 @@ struct Recents: View {
     func headerBGOpacity(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView).minY + safeArea.top
         return minY > 0 ? 0 : (-minY / 15)
+    }
+    
+    func total(_ transactions: [Transaction], category: MintCategory) -> Double {
+        return transactions.filter({ $0.category == category.rawValue }).reduce(Double.zero) { partialResult, transaction in
+            return partialResult + transaction.amount
+        }
     }
 }
 

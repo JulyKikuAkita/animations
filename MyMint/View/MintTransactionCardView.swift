@@ -6,7 +6,8 @@ import SwiftUI
 
 struct MintTransactionCardView: View {
     @Environment(\.modelContext) private var context
-
+    var showCategory: Bool = false
+    var showRule: Bool = false
     var transaction: Transaction
     var body: some View {
         SwipeAction(cornerRadius: 10, direction: .trailing) {
@@ -29,6 +30,23 @@ struct MintTransactionCardView: View {
                     Text(format(date: transaction.dateAdded, format: "dd MMM yyyy"))
                         .font(.caption2)
                         .foregroundStyle(.gray)
+                    
+                    if showCategory {
+                        Text(transaction.category)
+                            .font(.caption2)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .foregroundColor(.white)
+                            .background(transaction.category == MintCategory.income.rawValue ? Color.green.gradient : Color.red.gradient, in: .capsule)
+                    }
+                    
+                    if showRule {
+                        Text(transaction.rule)
+                            .font(.caption2)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .background(wantLabelTint, in: .capsule)
+                    }
                 })
                 .lineLimit(1)
                 .hSpacing(.leading)
