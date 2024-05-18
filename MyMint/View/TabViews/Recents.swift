@@ -178,12 +178,6 @@ struct Recents: View {
         let minY = proxy.frame(in: .scrollView).minY + safeArea.top
         return minY > 0 ? 0 : (-minY / 15)
     }
-    
-    func total(_ transactions: [Transaction], category: MintCategory) -> Double {
-        return transactions.filter({ $0.category == category.rawValue }).reduce(Double.zero) { partialResult, transaction in
-            return partialResult + transaction.amount
-        }
-    }
 }
 
 #Preview {

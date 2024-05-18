@@ -7,9 +7,13 @@ import SwiftUI
 struct ChartGroup: Identifiable {
     let id: UUID = .init()
     var date:Date
-    var categories: [MintCategory]
+    var categories: [ChartCategory]
     var totalIncome: Double
     var totalExpense: Double
+    var rule: [ChartRule]
+    var totalNeed: Double
+    var totalWant: Double
+    var totalSave: Double
 }
 
 struct ChartCategory: Identifiable {
@@ -21,8 +25,14 @@ struct ChartCategory: Identifiable {
 struct ChartRulesGroup: Identifiable {
     let id: UUID = .init()
     var date:Date
-    var rule: [MintRule]
+    var rule: [ChartRule]
     var totalNeed: Double
     var totalWant: Double
     var totalSave: Double
+}
+
+struct ChartRule: Identifiable {
+    let id: UUID = .init()
+    var totalValue: Double
+    var rule: MintRule
 }

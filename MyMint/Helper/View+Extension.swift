@@ -42,4 +42,16 @@ extension View {
         
         return formatter.string(from: .init(value: value)) ?? ""
     }
+    
+    func total(_ transactions: [Transaction], category: MintCategory) -> Double {
+        return transactions.filter({ $0.category == category.rawValue }).reduce(Double.zero) { partialResult, transaction in
+            return partialResult + transaction.amount
+        }
+    }
+    
+    func total(_ transactions: [Transaction], rule: MintRule) -> Double {
+        return transactions.filter({ $0.rule == rule.rawValue }).reduce(Double.zero) { partialResult, transaction in
+            return partialResult + transaction.amount
+        }
+    }
 }
