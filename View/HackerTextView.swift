@@ -3,8 +3,50 @@
 //  animation
 
 import SwiftUI
-// https://www.youtube.com/watch?v=T5aUgq8GKnA&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=106
-// Todo :2:10
+
+struct HackerTextDemoView: View {
+    let dummyDescription: String = "The answer to life, the universe, and everything."
+
+    @State private var trigger: Bool = false
+    @State private var text = "The Hitchhiker's Guide to the Galaxy"
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HackerTextView(
+                text: text,
+                trigger: trigger,
+                transition: .identity, // .identity // .interpolate // .numericText()
+                speed: 0.01
+            )
+            .font(.largeTitle.bold())
+            .lineLimit(4)
+            
+            Button(action: {
+                if text == "🐕" {
+                    text = "The Hitchhiker's Guide to the Galaxy"
+                } else if text == "The Hitchhiker's Guide to the Galaxy" {
+                    text = dummyDescription
+                } else if text == dummyDescription {
+                    text = "42"
+                } else {
+                    text = "🐕" // multiple emoji crashes preview
+                }
+                trigger.toggle()
+            }, label: {
+                Text("Trigger")
+                    .fontWeight(.semibold)
+                    .padding(.horizontal, 15)
+                    .padding(.vertical, 2)
+            })
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .frame(maxWidth: .infinity)
+            .padding(.top, 30)
+        }
+        .padding(15)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
 struct HackerTextView: View {
     /// Config
     var text: String
@@ -15,21 +57,100 @@ struct HackerTextView: View {
     
     /// View Properties
     @State private var animatedText = ""
+    @State private var randomCharacters: [Character] = {
+        let string = "abcdefghijklmnopqrstuvwxyz1234567890-=!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        return Array(string)
+    }()
+    @State private var animationID: String = UUID().uuidString
+    
     var body: some View {
         Text(animatedText)
             .fontDesign(.monospaced) // ensure same horizontal space for all characters
             .truncationMode(.tail)
             .contentTransition(transition)
+            .animation(.easeInOut(duration: 0.1), value: animatedText )
             .onAppear {
                 guard animatedText.isEmpty else { return }
+                setRandomCharacters()
+                animateText()
             }
+            .customOnChange(value: trigger) { newValue in
+                animateText()
+            }
+            .customOnChange(value: text) { newValue in
+                animatedText = text
+                animationID = UUID().uuidString
+                setRandomCharacters()
+                animateText()
+            }
+        
+    }
+    
+    private func animateText() {
+        let currentID = animationID
+        for index in text.indices {
+            let delay = CGFloat.random(in: 0...duration)
+            var timerDuration: CGFloat = 0
+            
+            let timer = Timer.scheduledTimer(withTimeInterval: speed, repeats: true) { timer in
+                if currentID != animationID {
+                    timer.invalidate()
+                } else {
+                    timerDuration += speed
+                    if timerDuration >= delay {
+                        if text.indices.contains(index) {
+                            let actualCharacter = text[index]
+                            replaceCharacter(at: index, character: actualCharacter)
+                        }
+                        
+                        timer.invalidate()
+                    } else {
+                        guard let randomCharacter = randomCharacters.randomElement() else { return }
+                        replaceCharacter(at: index, character: randomCharacter)
+                    }
+                }
+            }
+            timer.fire()
+        }
     }
     
     private func setRandomCharacters() {
+        animatedText = text
+        for index in animatedText.indices {
+            guard let randomCharacter = randomCharacters.randomElement() else { return }
+            replaceCharacter(at: index, character: randomCharacter)
+        }
+    }
+    
+    /// Change character at the given index
+    func replaceCharacter(at index: String.Index, character: Character) {
+        guard animatedText.indices.contains(index) else { return }
+        let indexCharacter = String(animatedText[index])
         
+        if indexCharacter.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+            animatedText.replaceSubrange(index...index, with: String(character))
+        }
+    }
+}
+
+fileprivate extension View {
+    @ViewBuilder
+    func customOnChange<T: Equatable>(value: T, result: @escaping (T) -> ()) -> some View {
+        if #available(iOS 17, *) {
+            self
+                .onChange(of: value) { oldValue, newValue in
+                    result(newValue)
+                }
+        } else {
+            self
+                .onChange(of: value, perform: { value in
+                    result(value)
+                })
+        }
     }
 }
 
 #Preview {
-    HackerTextView(text: "HackerTextView", trigger: true)
+//    HackerTextView(text: "HackerTextView", trigger: true)
+    HackerTextDemoView()
 }

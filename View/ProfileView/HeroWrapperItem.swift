@@ -206,7 +206,7 @@ fileprivate struct HeroInfo: Identifiable {
     }
 }
 
-extension View {
+fileprivate extension View {
     @ViewBuilder
     func customOnChange<Value: Equatable>(value: Value, completion: @escaping (Value) -> ()) -> some View {
         if #available(iOS 17, *) {
