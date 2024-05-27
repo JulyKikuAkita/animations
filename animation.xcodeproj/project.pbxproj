@@ -130,6 +130,7 @@
 		968D2E9E2B8EB56500007734 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab.swift */; };
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
 		96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18F92C01BEB40015155A /* HackerTextView.swift */; };
+		96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */; };
 		96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */; };
 		96B884EA2BDD82B000196125 /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884E92BDD82B000196125 /* Interpolation.swift */; };
 		96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
@@ -241,6 +242,7 @@
 		968D2E9D2B8EB56500007734 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
 		96AE18F92C01BEB40015155A /* HackerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerTextView.swift; sourceTree = "<group>"; };
+		96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollablePageTabsColorView.swift; sourceTree = "<group>"; };
 		96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTabView.swift; sourceTree = "<group>"; };
 		96B884E92BDD82B000196125 /* Interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolation.swift; sourceTree = "<group>"; };
 		96C0C2D62B905DDE00F56FF5 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 			children = (
 				968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */,
 				96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */,
+				96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
+				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */,

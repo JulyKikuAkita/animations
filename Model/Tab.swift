@@ -25,6 +25,22 @@ enum Tab: String, CaseIterable {
             return "Profile"
         }
     }
+    
+    /// for  SwiftUI TabView Offset Reader - Scrollable Tabs
+    var color: Color {
+        switch self {
+        case .apps:
+                .purple
+        case .photos:
+                .pink
+        case .chat:
+                .orange
+        case .notifications:
+                .green
+        case .profile:
+                .cyan
+        }
+    }
 }
 
 /// Animated SF tab model
