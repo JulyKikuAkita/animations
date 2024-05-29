@@ -124,6 +124,7 @@
 		96725BB82BF5D6C2003DBD45 /* MintFilterTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB72BF5D6C2003DBD45 /* MintFilterTransactionsView.swift */; };
 		9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833A2BCF61D40023FE2B /* ParticleEffect.swift */; };
 		9684833D2BCF62C50023FE2B /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
+		968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -236,6 +237,7 @@
 		96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedBottomSheet.swift; sourceTree = "<group>"; };
 		9684833A2BCF61D40023FE2B /* ParticleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffect.swift; sourceTree = "<group>"; };
 		9684833C2BCF62C50023FE2B /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
+		968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockTextEffectView.swift; sourceTree = "<group>"; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				968A17D22C0704F20072A0BA /* TextEffectView */,
 				96E7CEE22BE32C4900F24910 /* Shape */,
 				965E573A2BC5086000E172B3 /* Carousel */,
 				96D495832BBD25160011D5AA /* Video */,
@@ -412,11 +415,8 @@
 				965E573B2BC5097C00E172B3 /* DropDownView.swift */,
 				965E039F2BCB2C4A00E8A400 /* BookView.swift */,
 				965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */,
-				9621D9642BE5F85B00183CB7 /* TagFieldView.swift */,
-				9621D9692BE84B8300183CB7 /* SelectTagView.swift */,
 				9621D9862BE9F3C600183CB7 /* ImagePicker.swift */,
 				9621DC8E2BF1E9AD00183CB7 /* SwipeActionDemoView.swift */,
-				96AE18F92C01BEB40015155A /* HackerTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -590,6 +590,17 @@
 				96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */,
 			);
 			path = AppleMusic;
+			sourceTree = "<group>";
+		};
+		968A17D22C0704F20072A0BA /* TextEffectView */ = {
+			isa = PBXGroup;
+			children = (
+				96AE18F92C01BEB40015155A /* HackerTextView.swift */,
+				9621D9642BE5F85B00183CB7 /* TagFieldView.swift */,
+				9621D9692BE84B8300183CB7 /* SelectTagView.swift */,
+				968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */,
+			);
+			path = TextEffectView;
 			sourceTree = "<group>";
 		};
 		96D495832BBD25160011D5AA /* Video */ = {
@@ -846,6 +857,7 @@
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
+				968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
 				9684833D2BCF62C50023FE2B /* Particle.swift in Sources */,
