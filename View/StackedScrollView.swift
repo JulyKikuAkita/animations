@@ -24,11 +24,13 @@ struct StackedScrollView: View {
     var body: some View {
         VStack {
             StackedCards(
-                items: profiles,
+                items: stackCards,
                 stackedDisplayCount: 1,
+                opacityDisplayCount: 0,
                 itemHeight: 70) { item in
                     StackCardView(item)
             }
+            .padding(.bottom, 20)
             
             BottomActionBar()
         }
@@ -37,27 +39,33 @@ struct StackedScrollView: View {
     
     @ViewBuilder
     func StackCardView(_ item: Profile) -> some View {
-        HStack(spacing: 12) {
-            Image(item.profilePicture)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
+        if item.username.isEmpty {
+            Rectangle()
+                .fill(.clear)
             
-            VStack(alignment: .leading, spacing: 4, content: {
-                Text(item.username)
-                    .font(.callout)
-                    .fontWeight(.bold)
+        } else {
+            HStack(spacing: 12) {
+                Image(item.profilePicture)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 40, height: 40)
                 
-                Text(item.lastMsg)
-                    .font(.caption)
-                    .lineLimit(1)
-            })
-            .frame(maxWidth: .infinity, alignment: .leading)
+                VStack(alignment: .leading, spacing: 4, content: {
+                    Text(item.username)
+                        .font(.callout)
+                        .fontWeight(.bold)
+                    
+                    Text(item.lastMsg)
+                        .font(.caption)
+                        .lineLimit(1)
+                })
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(10)
+            .frame(maxHeight: .infinity)
+            .background(.ultraThinMaterial)
+            .clipShape(.rect(cornerRadius: 20))
         }
-        .padding(10)
-        .frame(maxHeight: .infinity)
-        .background(.ultraThinMaterial)
-        .clipShape(.rect(cornerRadius: 20))
     }
     
     @ViewBuilder
