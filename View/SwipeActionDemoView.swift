@@ -101,8 +101,8 @@ struct SwipeAction<Content: View>: View {
                                 let minX = $0.frame(in: .scrollView(axis: .horizontal)).minX
                                 
                                 Color.clear
-                                    .preference(key: OffsetCGFloatKey.self, value: minX)
-                                    .onPreferenceChange(OffsetCGFloatKey.self) {
+                                    .preference(key: CGFloatKey.self, value: minX)
+                                    .onPreferenceChange(CGFloatKey.self) {
                                         scrollOffset = $0
                                     }
                             }

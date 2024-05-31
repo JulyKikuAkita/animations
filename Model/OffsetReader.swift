@@ -1,9 +1,6 @@
 //
 //  OffsetReader.swift
 //  animation
-//
-//  Created by IFang Lee on 2/28/24.
-//
 
 import SwiftUI
 
