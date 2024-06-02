@@ -34,9 +34,11 @@ struct GridImageView: View {
             .background(ScrollViewExtractor {
                 coordinator.scrollView = $0
             })
-            .overlay {
-                
-            }
+        }
+        .opacity(coordinator.hideRootView ? 0 : 1)
+        .overlay {
+            GridImageDetailView()
+                .environment(coordinator)
         }
     }
     
@@ -46,20 +48,24 @@ struct GridImageView: View {
         GeometryReader {
             let frame = $0.frame(in: .global)
             
-            if let image = post.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: frame.width, height: frame.height)
-                    .clipShape(.rect(cornerRadius: 10))
-                    .contentShape(.rect(cornerRadius: 10))
-                    .onTapGesture {
-                        /// Storing View's Rect
-                        coordinator.rect = frame
-                        /// Generating scrollView's visible area snapshot
-                        coordinator.createVisibleAreaSnapshot()
+            ImageView(post: post)
+                .clipShape(.rect(cornerRadius: 10))
+                .contentShape(.rect(cornerRadius: 10))
+                .onTapGesture {
+                    coordinator.selectedItem = post
+                    /// Storing View's Rect
+                    coordinator.rect = frame
+                    /// Generating scrollView's visible area snapshot
+                    coordinator.createVisibleAreaSnapshot()
+                    coordinator.hideRootView = true
+
+                    /// Animating View
+                    withAnimation(.easeInOut(duration: 0.3), completionCriteria: .removed) {
+                        coordinator.animateView = true
+                    } completion: {
+                        
                     }
-            }
+                }
         }
         .frame(height: 180)
     }

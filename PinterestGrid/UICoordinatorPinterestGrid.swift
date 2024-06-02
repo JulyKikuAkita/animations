@@ -13,6 +13,7 @@ class UICoordinatorPinterestGrid {
     /// Shared view properties between home and detail view
     var scrollView: UIScrollView = .init(frame: .zero)
     var rect: CGRect = .zero
+    var selectedItem : PhotoItem?
     
     /// Animation Layer properties
     var animationLayer: UIImage?
