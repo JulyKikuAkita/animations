@@ -36,9 +36,13 @@ struct GridImageView: View {
             })
         }
         .opacity(coordinator.hideRootView ? 0 : 1)
+        .scrollDisabled(coordinator.hideRootView)
+        /// disable user interaction for the source view when in animation, vice versa
+        .allowsHitTesting(!coordinator.hideRootView)
         .overlay {
             GridImageDetailView()
                 .environment(coordinator)
+                .allowsHitTesting(coordinator.hideLayer)
         }
     }
     
@@ -52,22 +56,10 @@ struct GridImageView: View {
                 .clipShape(.rect(cornerRadius: 10))
                 .contentShape(.rect(cornerRadius: 10))
                 .onTapGesture {
-                    coordinator.selectedItem = post
-                    /// Storing View's Rect
-                    coordinator.rect = frame
-                    /// Generating scrollView's visible area snapshot
-                    coordinator.createVisibleAreaSnapshot()
-                    coordinator.hideRootView = true
-
-                    /// Animating View
-                    withAnimation(.easeInOut(duration: 0.3), completionCriteria: .removed) {
-                        coordinator.animateView = true
-                    } completion: {
-                        
-                    }
+                    coordinator.toggleView(show: true, frame: frame, post: post)
                 }
         }
-        .frame(height: 180)
+        .frame(height: 240) /// update frame height won't impact animation
     }
 }
 

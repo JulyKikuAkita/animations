@@ -23,6 +23,9 @@ class UICoordinatorPinterestGrid {
     /// Root View properties
     var hideRootView: Bool = false
     
+    /// Detail Grid View Properties
+    var headerOffset: CGFloat = .zero
+    
     /// Capture snapshot for scrollView's visible region, not the complete scroll region.
     func createVisibleAreaSnapshot() {
         let renderer = UIGraphicsImageRenderer(size: scrollView.bounds.size)
@@ -31,6 +34,43 @@ class UICoordinatorPinterestGrid {
             scrollView.layer.render(in: ctx.cgContext)
         }
         animationLayer = image
+    }
+    
+    func toggleView(show: Bool, frame: CGRect, post: PhotoItem) {
+        if show {
+            selectedItem = post
+            /// Storing View's rect
+            rect = frame
+            /// Generating scrollView's visible area snapshot
+            createVisibleAreaSnapshot()
+            hideRootView = true
+            /// Animating view
+            withAnimation(.easeInOut(duration: 0.3), completionCriteria: .removed) {
+                animateView = true
+            } completion: {
+                self.hideLayer = true
+            }
+        } else {
+            /// Closing View
+            hideLayer = false
+            withAnimation(.easeInOut(duration: 0.3), completionCriteria: .removed) {
+                animateView = false
+            } completion: {
+                DispatchQueue.main.async {
+                    self.resetAnimationProperties()
+                }
+            }
+        }
+    }
+    
+    /// Cannot have rect = .zero due to we wrap in dispatch queue
+    /// thus negative rect values will appear in the detail view b.c the detail height was calculated using it
+    private func resetAnimationProperties() {
+        headerOffset = 0
+//        rect = .zero  //removed, see comments
+        selectedItem = nil
+        animationLayer = nil
+        hideRootView = false
     }
 }
 
@@ -50,7 +90,5 @@ struct ScrollViewExtractor: UIViewRepresentable {
         return view
     }
     
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-       
-    }
+    func updateUIView(_ uiView: UIViewType, context: Context) {}
 }

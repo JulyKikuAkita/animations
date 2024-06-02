@@ -98,3 +98,30 @@ extension UIView {
         }
     }
 }
+
+/// For Pinterest Grid Animation
+extension View {
+    var safeArea: UIEdgeInsets {
+        if let safeArea = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.safeAreaInsets {
+            return safeArea
+        }
+        return .zero
+    }
+    
+    @ViewBuilder
+    func offsetY(result: @escaping(CGFloat) -> ()) -> some View {
+        self
+            .overlay {
+                GeometryReader(content: { geometry in
+                    let minY = geometry.frame(in: .scrollView(axis: .vertical)).minY
+                    Color.clear
+                        .preference(key: CGFloatKey.self, value: minY) /// Preference Key is defined in AnchorKey file
+                        .onPreferenceChange(CGFloatKey.self, perform: { value in
+                            result(value)
+                        })
+                        
+                })
+            }
+    }
+}
+/// For Pinterest Grid Animation

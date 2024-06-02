@@ -113,6 +113,7 @@
 		96352D252C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D242C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift */; };
 		96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D262C0BDB12001AD2FD /* GridImageDetailView.swift */; };
 		96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D282C0C4A01001AD2FD /* ImageView.swift */; };
+		96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D2A2C0D07BB001AD2FD /* GridImageDetailContentView.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
@@ -230,6 +231,7 @@
 		96352D242C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICoordinatorPinterestGrid.swift; sourceTree = "<group>"; };
 		96352D262C0BDB12001AD2FD /* GridImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageDetailView.swift; sourceTree = "<group>"; };
 		96352D282C0C4A01001AD2FD /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		96352D2A2C0D07BB001AD2FD /* GridImageDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageDetailContentView.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				96352D242C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift */,
 				96352D262C0BDB12001AD2FD /* GridImageDetailView.swift */,
 				96352D282C0C4A01001AD2FD /* ImageView.swift */,
+				96352D2A2C0D07BB001AD2FD /* GridImageDetailContentView.swift */,
 			);
 			path = PinterestGrid;
 			sourceTree = "<group>";
@@ -943,6 +946,7 @@
 				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
+				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
 				9621DC392BEF3D7300183CB7 /* Tab.swift in Sources */,
 				9621DC922BF1EDB100183CB7 /* ActionModel.swift in Sources */,
