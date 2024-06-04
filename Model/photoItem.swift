@@ -34,5 +34,4 @@ var sampleItems: [PhotoItem] = [
     .init(title: "Nanachi", image: UIImage(named: "IMG_6162")),
     .init(title: "Banana", image: UIImage(named: "IMG_8788")),
     .init(title: "Fox", image: UIImage(named: "fox")),
-
 ]

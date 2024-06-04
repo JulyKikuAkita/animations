@@ -67,7 +67,6 @@
 		9621DC802BEF461000183CB7 /* photoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC7F2BEF461000183CB7 /* photoItem.swift */; };
 		9621DC812BEF461400183CB7 /* photoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC7F2BEF461000183CB7 /* photoItem.swift */; };
 		9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC822BEF478500183CB7 /* UICoordinator.swift */; };
-		9621DC842BEF478A00183CB7 /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC822BEF478500183CB7 /* UICoordinator.swift */; };
 		9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC882BEF4B6F00183CB7 /* DetailView.swift */; };
 		9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */; };
 		9621DC8D2BF0121E00183CB7 /* HeroLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC8C2BF0121E00183CB7 /* HeroLayer.swift */; };
@@ -86,7 +85,6 @@
 		9621DD992BF47FDA00183CB7 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		9621DD9A2BF47FDA00183CB7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621D9622BE5F7D100183CB7 /* Tag.swift */; };
 		9621DD9B2BF47FDA00183CB7 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC902BF1EDB100183CB7 /* ActionModel.swift */; };
-		9621DD9C2BF47FDA00183CB7 /* UICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC822BEF478500183CB7 /* UICoordinator.swift */; };
 		9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BBE2B897A310055D79B /* Profile.swift */; };
 		9621DD9E2BF47FDA00183CB7 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
 		9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884E92BDD82B000196125 /* Interpolation.swift */; };
@@ -111,6 +109,11 @@
 		96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE42C09A8D5001AD2FD /* SwipeActionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC8E2BF1E9AD00183CB7 /* SwipeActionDemoView.swift */; };
 		96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE52C09AC6E001AD2FD /* StackedCards.swift */; };
+		96352D232C0BD4C2001AD2FD /* GridImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D222C0BD4C2001AD2FD /* GridImageView.swift */; };
+		96352D252C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D242C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift */; };
+		96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D262C0BDB12001AD2FD /* GridImageDetailView.swift */; };
+		96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D282C0C4A01001AD2FD /* ImageView.swift */; };
+		96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D2A2C0D07BB001AD2FD /* GridImageDetailContentView.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
@@ -224,6 +227,11 @@
 		9621DE272BF5678C00183CB7 /* MintCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintCardView.swift; sourceTree = "<group>"; };
 		96352CE02C09A416001AD2FD /* AnchorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorKey.swift; sourceTree = "<group>"; };
 		96352CE52C09AC6E001AD2FD /* StackedCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCards.swift; sourceTree = "<group>"; };
+		96352D222C0BD4C2001AD2FD /* GridImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageView.swift; sourceTree = "<group>"; };
+		96352D242C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICoordinatorPinterestGrid.swift; sourceTree = "<group>"; };
+		96352D262C0BDB12001AD2FD /* GridImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageDetailView.swift; sourceTree = "<group>"; };
+		96352D282C0C4A01001AD2FD /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		96352D2A2C0D07BB001AD2FD /* GridImageDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageDetailContentView.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
@@ -335,6 +343,7 @@
 		961F3B822B8818240055D79B = {
 			isa = PBXGroup;
 			children = (
+				96352D212C0BD499001AD2FD /* PinterestGrid */,
 				963DB14C2BBBD39F00AAF347 /* Videos */,
 				961F3BC02B897D1C0055D79B /* View */,
 				961F3BBD2B8979E70055D79B /* Model */,
@@ -558,6 +567,18 @@
 				9621DDB92BF489D100183CB7 /* Settings.swift */,
 			);
 			path = TabViews;
+			sourceTree = "<group>";
+		};
+		96352D212C0BD499001AD2FD /* PinterestGrid */ = {
+			isa = PBXGroup;
+			children = (
+				96352D222C0BD4C2001AD2FD /* GridImageView.swift */,
+				96352D242C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift */,
+				96352D262C0BDB12001AD2FD /* GridImageDetailView.swift */,
+				96352D282C0C4A01001AD2FD /* ImageView.swift */,
+				96352D2A2C0D07BB001AD2FD /* GridImageDetailContentView.swift */,
+			);
+			path = PinterestGrid;
 			sourceTree = "<group>";
 		};
 		963DB14C2BBBD39F00AAF347 /* Videos */ = {
@@ -870,7 +891,6 @@
 				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
-				9621DC842BEF478A00183CB7 /* UICoordinator.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
@@ -907,12 +927,15 @@
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
 				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
 				9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */,
+				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
 				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
+				96352D232C0BD4C2001AD2FD /* GridImageView.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
 				9621DC3D2BEF3D7A00183CB7 /* Tag.swift in Sources */,
 				9621DC3E2BEF3D7A00183CB7 /* OffsetReader.swift in Sources */,
+				96352D252C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift in Sources */,
 				9621DC3F2BEF3D7A00183CB7 /* PlayerItem.swift in Sources */,
 				9621DC402BEF3D7A00183CB7 /* Interpolation.swift in Sources */,
 				9621DC412BEF3D7A00183CB7 /* Reel.swift in Sources */,
@@ -920,8 +943,10 @@
 				96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */,
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
+				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
+				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
 				9621DC392BEF3D7300183CB7 /* Tab.swift in Sources */,
 				9621DC922BF1EDB100183CB7 /* ActionModel.swift in Sources */,
@@ -966,7 +991,6 @@
 				9621DD9A2BF47FDA00183CB7 /* Tag.swift in Sources */,
 				9621DD9B2BF47FDA00183CB7 /* ActionModel.swift in Sources */,
 				9621DDB42BF489AD00183CB7 /* Recents.swift in Sources */,
-				9621DD9C2BF47FDA00183CB7 /* UICoordinator.swift in Sources */,
 				96725BB62BF5B762003DBD45 /* MintExpenseView.swift in Sources */,
 				9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */,
 				9621DDAD2BF486C800183CB7 /* MintCategory.swift in Sources */,
