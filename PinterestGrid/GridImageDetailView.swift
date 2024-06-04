@@ -69,7 +69,7 @@ struct GridImageDetailView: View {
                     .overlay(alignment: .top, content: {
                         HeaderActions(post)
                             .offset(y: coordinator.headerOffset)
-                            .padding(.top, safeArea.top)
+                            .padding(.top, safeAreaPinterest.top)
                     })
                     .offset(x: animateView ? 0 : rect.minX, y: animateView ? 0 : rect.minY)
                     .offset(y: animateView ? -coordinator.headerOffset : 0)
