@@ -4,16 +4,6 @@
 
 import SwiftUI
 
-struct VerticalCircularCarouselDemoView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-        }
-        .padding()
-    }
-}
 struct VerticalCircularCarouselView: View {
     var body: some View {
         GeometryReader {
@@ -26,12 +16,14 @@ struct VerticalCircularCarouselView: View {
                             .frame(width: 220, height: 150)
                             .visualEffect { content, geometryProxy in
                                 content
-                                    .offset(x: -150)
+                                    .offset(x: 150)
                                     .rotationEffect(
                                         .init(degrees: cardRotation(geometryProxy)),
-                                        anchor: .center)
+                                        anchor: .leading)
+                                    .offset(x: -100, // push view to trailing side
+                                            y: -geometryProxy.frame(in: .scrollView(axis: .vertical)).minY)
                             }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 .scrollTargetLayout() // turn scroll view to snap carousel
@@ -40,10 +32,39 @@ struct VerticalCircularCarouselView: View {
             .safeAreaPadding(.vertical, (size.height * 0.5) - 75) //make carousel start at the center point
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned(limitBehavior: .always)) // turn scroll view to snap carousel
-            .overlay { // testing
-                Divider()
-                    .background(.black)
+//            .overlay { // testing
+//                Divider()
+//                    .background(.black)
+//            }
+            .background {
+                Circle()
+                    .fill(.ultraThinMaterial)
+                    .frame(width: size.height, height: size.height)
+                    .offset(x: -size.height / 2)
             }
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Image(systemName: "arrow.left")
+                        .font(.title3.bold())
+                        .foregroundStyle(Color.primary)
+                })
+                
+                VStack(alignment: .trailing) {
+                    Text("Total")
+                        .font(.title3.bold())
+                        .padding(.top, 10)
+                    
+                    Text("$999.99")
+                        .font(.largeTitle)
+                    
+                    Text("Choose a card")
+                        .font(.caption2)
+                        .foregroundStyle(.gray)
+                }
+                .offset(x: size.width / 2)
+            }
+            .padding(15)
         }
         .toolbar(.hidden, for: .navigationBar)
     }
@@ -91,9 +112,15 @@ struct VerticalCircularCarouselView: View {
     
     /// Card rotation
     func cardRotation(_ proxy: GeometryProxy) -> CGFloat {
-        return 30
-        // TODO: https://www.youtube.com/watch?v=AmArOSpxuMQ&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=110
-        // 4:14
+        let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
+        let height = proxy.size.height
+        
+        let progress = minY / height
+        let showCardRange: Double = 3.0 // change how many card to show in above and below
+        let angleForEachCard: CGFloat = 50 // your choice of number
+        let cappedProgress = progress < 0 ? min(max(progress, -showCardRange), 0) : max(min(progress, showCardRange), 0)  // [-1, 1]
+        
+        return cappedProgress * angleForEachCard
     }
 }
 
