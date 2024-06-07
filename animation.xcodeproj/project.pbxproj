@@ -120,6 +120,7 @@
 		96352D532C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */; };
 		96352D542C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */; };
 		96352D552C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */; };
+		96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
@@ -240,6 +241,7 @@
 		96352D2A2C0D07BB001AD2FD /* GridImageDetailContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageDetailContentView.swift; sourceTree = "<group>"; };
 		96352D4E2C0ED814001AD2FD /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCircularCarouselView.swift; sourceTree = "<group>"; };
+		96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlitchTextEffectView.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 				9621D9642BE5F85B00183CB7 /* TagFieldView.swift */,
 				9621D9692BE84B8300183CB7 /* SelectTagView.swift */,
 				968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */,
+				96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */,
 			);
 			path = TextEffectView;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
+				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
