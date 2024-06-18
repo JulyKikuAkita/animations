@@ -104,6 +104,8 @@
 		9621DDBC2BF48B3000183CB7 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDBB2BF48B3000183CB7 /* View+Extension.swift */; };
 		9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDBD2BF4904C00183CB7 /* Date+Extension.swift */; };
 		9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DE272BF5678C00183CB7 /* MintCardView.swift */; };
+		962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04722C214C03008E1E5D /* PixellateTextView.swift */; };
+		962B04762C215176008E1E5D /* Pixellate.metal in Sources */ = {isa = PBXBuildFile; fileRef = 962B04752C215176008E1E5D /* Pixellate.metal */; };
 		96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
@@ -232,6 +234,8 @@
 		9621DDBB2BF48B3000183CB7 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		9621DDBD2BF4904C00183CB7 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9621DE272BF5678C00183CB7 /* MintCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintCardView.swift; sourceTree = "<group>"; };
+		962B04722C214C03008E1E5D /* PixellateTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixellateTextView.swift; sourceTree = "<group>"; };
+		962B04752C215176008E1E5D /* Pixellate.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Pixellate.metal; sourceTree = "<group>"; };
 		96352CE02C09A416001AD2FD /* AnchorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorKey.swift; sourceTree = "<group>"; };
 		96352CE52C09AC6E001AD2FD /* StackedCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCards.swift; sourceTree = "<group>"; };
 		96352D222C0BD4C2001AD2FD /* GridImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageView.swift; sourceTree = "<group>"; };
@@ -639,6 +643,8 @@
 				9621D9692BE84B8300183CB7 /* SelectTagView.swift */,
 				968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */,
 				96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */,
+				962B04722C214C03008E1E5D /* PixellateTextView.swift */,
+				962B04752C215176008E1E5D /* Pixellate.metal */,
 			);
 			path = TextEffectView;
 			sourceTree = "<group>";
@@ -896,6 +902,7 @@
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
+				962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */,
@@ -919,6 +926,7 @@
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
+				962B04762C215176008E1E5D /* Pixellate.metal in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */,
