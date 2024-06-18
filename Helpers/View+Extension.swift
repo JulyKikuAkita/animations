@@ -101,7 +101,7 @@ extension UIView {
 
 /// For Pinterest Grid Animation
 extension View {
-    var safeArea: UIEdgeInsets {
+    var safeAreaPinterest: UIEdgeInsets {
         if let safeArea = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.safeAreaInsets {
             return safeArea
         }
