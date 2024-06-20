@@ -115,3 +115,11 @@ struct TabModel: Identifiable {
         case privacy = "Privacy"
     }
 }
+
+
+enum SimpleTabs: String, CaseIterable {
+    case all = "All"
+    case game = "Games"
+    case music = "Music"
+    case food = "Food"
+}
