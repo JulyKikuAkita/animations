@@ -104,6 +104,7 @@
 		9621DDBC2BF48B3000183CB7 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDBB2BF48B3000183CB7 /* View+Extension.swift */; };
 		9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDBD2BF4904C00183CB7 /* Date+Extension.swift */; };
 		9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DE272BF5678C00183CB7 /* MintCardView.swift */; };
+		9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */; };
 		962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04722C214C03008E1E5D /* PixellateTextView.swift */; };
 		962B04762C215176008E1E5D /* Pixellate.metal in Sources */ = {isa = PBXBuildFile; fileRef = 962B04752C215176008E1E5D /* Pixellate.metal */; };
 		962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04772C22A162008E1E5D /* MeshGradientView.swift */; };
@@ -236,6 +237,7 @@
 		9621DDBB2BF48B3000183CB7 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		9621DDBD2BF4904C00183CB7 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9621DE272BF5678C00183CB7 /* MintCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintCardView.swift; sourceTree = "<group>"; };
+		9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToHideHeaderView.swift; sourceTree = "<group>"; };
 		962B04722C214C03008E1E5D /* PixellateTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixellateTextView.swift; sourceTree = "<group>"; };
 		962B04752C215176008E1E5D /* Pixellate.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Pixellate.metal; sourceTree = "<group>"; };
 		962B04772C22A162008E1E5D /* MeshGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradientView.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				96D04B302C09A1960062520D /* StackedScrollView.swift */,
 				96352CE52C09AC6E001AD2FD /* StackedCards.swift */,
 				962B04772C22A162008E1E5D /* MeshGradientView.swift */,
+				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -905,6 +908,7 @@
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
 				96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
+				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
