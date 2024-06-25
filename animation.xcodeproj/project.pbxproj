@@ -109,6 +109,7 @@
 		962B04762C215176008E1E5D /* Pixellate.metal in Sources */ = {isa = PBXBuildFile; fileRef = 962B04752C215176008E1E5D /* Pixellate.metal */; };
 		962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04772C22A162008E1E5D /* MeshGradientView.swift */; };
 		962B047A2C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */; };
+		96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */; };
 		96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
@@ -242,6 +243,7 @@
 		962B04752C215176008E1E5D /* Pixellate.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Pixellate.metal; sourceTree = "<group>"; };
 		962B04772C22A162008E1E5D /* MeshGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradientView.swift; sourceTree = "<group>"; };
 		962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableNavigationSearchBarView.swift; sourceTree = "<group>"; };
+		96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSelectionAPIView.swift; sourceTree = "<group>"; };
 		96352CE02C09A416001AD2FD /* AnchorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorKey.swift; sourceTree = "<group>"; };
 		96352CE52C09AC6E001AD2FD /* StackedCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCards.swift; sourceTree = "<group>"; };
 		96352D222C0BD4C2001AD2FD /* GridImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageView.swift; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96301B322C2A5FAB00775407 /* TextFieldView */,
 				968A17D22C0704F20072A0BA /* TextEffectView */,
 				96E7CEE22BE32C4900F24910 /* Shape */,
 				965E573A2BC5086000E172B3 /* Carousel */,
@@ -590,6 +593,14 @@
 				9621DDB92BF489D100183CB7 /* Settings.swift */,
 			);
 			path = TabViews;
+			sourceTree = "<group>";
+		};
+		96301B322C2A5FAB00775407 /* TextFieldView */ = {
+			isa = PBXGroup;
+			children = (
+				96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */,
+			);
+			path = TextFieldView;
 			sourceTree = "<group>";
 		};
 		96352D212C0BD499001AD2FD /* PinterestGrid */ = {
@@ -933,6 +944,7 @@
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
 				96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */,
+				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
