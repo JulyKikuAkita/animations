@@ -1,10 +1,6 @@
 //
 //  ScrollToHideHeaderView.swift
 //  animation
-//
-//  With iOS 18 Scroll API
-// TODO: 3:23
-// https://www.youtube.com/watch?v=C6fO9jsaOBg
 import SwiftUI
 
 @available(iOS 18.0, *)
