@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -312,6 +312,20 @@
 		96FF509E2B944E7300B36142 /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		966E8F982C2E8CC300299713 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TimePickerView.swift,
+			);
+			target = 961F3B8A2B8818240055D79B /* animation */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		966E8F952C2E8CAE00299713 /* PickerView */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (966E8F982C2E8CC300299713 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PickerView; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		961F3B882B8818240055D79B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -437,6 +451,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				966E8F952C2E8CAE00299713 /* PickerView */,
 				96301B322C2A5FAB00775407 /* TextFieldView */,
 				968A17D22C0704F20072A0BA /* TextEffectView */,
 				96E7CEE22BE32C4900F24910 /* Shape */,
