@@ -153,6 +153,11 @@
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
 		96725BB62BF5B762003DBD45 /* MintExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB52BF5B762003DBD45 /* MintExpenseView.swift */; };
 		96725BB82BF5D6C2003DBD45 /* MintFilterTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB72BF5D6C2003DBD45 /* MintFilterTransactionsView.swift */; };
+		96726B172C2FA8AA007A4E34 /* TimerHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B162C2FA8AA007A4E34 /* TimerHomeView.swift */; };
+		96726B192C2FCECB007A4E34 /* TimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B182C2FCECB007A4E34 /* TimeModel.swift */; };
+		96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */; };
+		96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1D2C2FD354007A4E34 /* TimePickerView.swift */; };
+		96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B202C2FD9CA007A4E34 /* Recent.swift */; };
 		9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833A2BCF61D40023FE2B /* ParticleEffect.swift */; };
 		9684833D2BCF62C50023FE2B /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */; };
@@ -300,6 +305,11 @@
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
 		96725BB72BF5D6C2003DBD45 /* MintFilterTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintFilterTransactionsView.swift; sourceTree = "<group>"; };
+		96726B162C2FA8AA007A4E34 /* TimerHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHomeView.swift; sourceTree = "<group>"; };
+		96726B182C2FCECB007A4E34 /* TimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModel.swift; sourceTree = "<group>"; };
+		96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockTextEffectView.swift; sourceTree = "<group>"; };
+		96726B1D2C2FD354007A4E34 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		96726B202C2FD9CA007A4E34 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		96845DA42BD3347F00B7D8B2 /* AppleMusicHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicHomeView.swift; sourceTree = "<group>"; };
 		96845DA62BD337D200B7D8B2 /* MusicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfoView.swift; sourceTree = "<group>"; };
 		96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedBottomSheet.swift; sourceTree = "<group>"; };
@@ -420,6 +430,7 @@
 		961F3B822B8818240055D79B = {
 			isa = PBXGroup;
 			children = (
+				96726B152C2FA88D007A4E34 /* PomodoroFocusTimer */,
 				96352D212C0BD499001AD2FD /* PinterestGrid */,
 				963DB14C2BBBD39F00AAF347 /* Videos */,
 				961F3BC02B897D1C0055D79B /* View */,
@@ -706,6 +717,18 @@
 				96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */,
 			);
 			path = Carousel;
+			sourceTree = "<group>";
+		};
+		96726B152C2FA88D007A4E34 /* PomodoroFocusTimer */ = {
+			isa = PBXGroup;
+			children = (
+				96726B1D2C2FD354007A4E34 /* TimePickerView.swift */,
+				96726B162C2FA8AA007A4E34 /* TimerHomeView.swift */,
+				96726B182C2FCECB007A4E34 /* TimeModel.swift */,
+				96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */,
+				96726B202C2FD9CA007A4E34 /* Recent.swift */,
+			);
+			path = PomodoroFocusTimer;
 			sourceTree = "<group>";
 		};
 		96845DA32BD3346500B7D8B2 /* AppleMusic */ = {
@@ -1061,6 +1084,7 @@
 				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
 				9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */,
 				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
+				96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */,
 				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
@@ -1078,15 +1102,19 @@
 				9621DC8D2BF0121E00183CB7 /* HeroLayer.swift in Sources */,
 				96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */,
+				96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */,
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
 				96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */,
 				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
+				96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
 				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
 				9621DC392BEF3D7300183CB7 /* Tab_iOS17.swift in Sources */,
+				96726B192C2FCECB007A4E34 /* TimeModel.swift in Sources */,
 				96352D542C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
+				96726B172C2FA8AA007A4E34 /* TimerHomeView.swift in Sources */,
 				9621DC922BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				96352D502C0ED814001AD2FD /* CreditCard.swift in Sources */,
 				9621DC5F2BEF3F1B00183CB7 /* DemoView.swift in Sources */,

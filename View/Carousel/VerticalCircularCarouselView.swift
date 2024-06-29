@@ -77,7 +77,7 @@ struct VerticalCircularCarouselView: View {
             
             /// Card details
             VStack(alignment: .leading, spacing: 10) {
-                Image(.bitcoin)
+                Image(.fox)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 40)
