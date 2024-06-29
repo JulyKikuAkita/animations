@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -104,8 +104,12 @@
 		9621DDBC2BF48B3000183CB7 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDBB2BF48B3000183CB7 /* View+Extension.swift */; };
 		9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDBD2BF4904C00183CB7 /* Date+Extension.swift */; };
 		9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DE272BF5678C00183CB7 /* MintCardView.swift */; };
+		9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */; };
 		962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04722C214C03008E1E5D /* PixellateTextView.swift */; };
 		962B04762C215176008E1E5D /* Pixellate.metal in Sources */ = {isa = PBXBuildFile; fileRef = 962B04752C215176008E1E5D /* Pixellate.metal */; };
+		962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04772C22A162008E1E5D /* MeshGradientView.swift */; };
+		962B047A2C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */; };
+		96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */; };
 		96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
@@ -234,8 +238,12 @@
 		9621DDBB2BF48B3000183CB7 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		9621DDBD2BF4904C00183CB7 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9621DE272BF5678C00183CB7 /* MintCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintCardView.swift; sourceTree = "<group>"; };
+		9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToHideHeaderView.swift; sourceTree = "<group>"; };
 		962B04722C214C03008E1E5D /* PixellateTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixellateTextView.swift; sourceTree = "<group>"; };
 		962B04752C215176008E1E5D /* Pixellate.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Pixellate.metal; sourceTree = "<group>"; };
+		962B04772C22A162008E1E5D /* MeshGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradientView.swift; sourceTree = "<group>"; };
+		962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableNavigationSearchBarView.swift; sourceTree = "<group>"; };
+		96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSelectionAPIView.swift; sourceTree = "<group>"; };
 		96352CE02C09A416001AD2FD /* AnchorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorKey.swift; sourceTree = "<group>"; };
 		96352CE52C09AC6E001AD2FD /* StackedCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCards.swift; sourceTree = "<group>"; };
 		96352D222C0BD4C2001AD2FD /* GridImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageView.swift; sourceTree = "<group>"; };
@@ -303,6 +311,20 @@
 		96FF509C2B944D1B00B36142 /* PlayerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerConfig.swift; sourceTree = "<group>"; };
 		96FF509E2B944E7300B36142 /* MiniPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		966E8F982C2E8CC300299713 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TimePickerView.swift,
+			);
+			target = 961F3B8A2B8818240055D79B /* animation */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		966E8F952C2E8CAE00299713 /* PickerView */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (966E8F982C2E8CC300299713 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PickerView; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		961F3B882B8818240055D79B /* Frameworks */ = {
@@ -429,6 +451,8 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				966E8F952C2E8CAE00299713 /* PickerView */,
+				96301B322C2A5FAB00775407 /* TextFieldView */,
 				968A17D22C0704F20072A0BA /* TextEffectView */,
 				96E7CEE22BE32C4900F24910 /* Shape */,
 				965E573A2BC5086000E172B3 /* Carousel */,
@@ -447,6 +471,8 @@
 				9621DC8E2BF1E9AD00183CB7 /* SwipeActionDemoView.swift */,
 				96D04B302C09A1960062520D /* StackedScrollView.swift */,
 				96352CE52C09AC6E001AD2FD /* StackedCards.swift */,
+				962B04772C22A162008E1E5D /* MeshGradientView.swift */,
+				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -584,6 +610,14 @@
 			path = TabViews;
 			sourceTree = "<group>";
 		};
+		96301B322C2A5FAB00775407 /* TextFieldView */ = {
+			isa = PBXGroup;
+			children = (
+				96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */,
+			);
+			path = TextFieldView;
+			sourceTree = "<group>";
+		};
 		96352D212C0BD499001AD2FD /* PinterestGrid */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,6 +698,7 @@
 				968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */,
 				96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */,
 				96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */,
+				962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -885,6 +920,7 @@
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
+				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
@@ -898,6 +934,7 @@
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
 				96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
+				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
@@ -922,6 +959,7 @@
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
 				96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */,
+				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
@@ -938,6 +976,7 @@
 				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
 				9621D9632BE5F7D100183CB7 /* Tag.swift in Sources */,
 				9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */,
+				962B047A2C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift in Sources */,
 				96352D532C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
 				9621D9872BE9F3C600183CB7 /* ImagePicker.swift in Sources */,
 				968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */,
