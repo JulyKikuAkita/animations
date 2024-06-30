@@ -12,7 +12,16 @@ struct TimerHomeView: View {
     @State private var background: Color = .red
     /// View Properties
     @State private var flipClockTime: Time = .init()
+    @State private var pickerTime: Time = .init()
+
     @State private var startTimer: Bool = false
+    
+    @State private var totalTimeInSeconds: Int = 0
+    @State private var timeCountdown: Int = 0
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    /// Context
+    @Environment(\.modelContext) private var context
     @Query(
         sort: [SortDescriptor(\Recent.date, order: .reverse)],
         animation: .snappy
@@ -32,22 +41,52 @@ struct TimerHomeView: View {
             /// Custom Time Picker
             TimePickerView(
                 style: .init(.gray.opacity(0.15)),
-                hours: $flipClockTime.hours,
-                minutes: $flipClockTime.minutes,
-                seconds: $flipClockTime.seconds
+                hours: $pickerTime.hours,
+                minutes: $pickerTime.minutes,
+                seconds: $pickerTime.seconds
             )
             .padding(15)
             .environment(\.colorScheme, .light)
             .background(.white, in: .rect(cornerRadius: 10))
+            .onChange(of: pickerTime) { oldValue, newValue in
+                flipClockTime = newValue
+            }
+            .disableWithOpacity(startTimer)
+           
             
             TimerButton()
             
             RecentsView()
+                .disableWithOpacity(startTimer)
+
         }
         .padding(15)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(background.gradient)
+        .onReceive(timer) { _ in
+            if startTimer {
+                if timeCountdown > 0 {
+                    timeCountdown -= 1
+                    
+                    updateFlipClock()
+                } else {
+                    stopTheTimer()
+                }
+            } else {
+                timer.upstream.connect().cancel() // cancel due to auto-connect enabled
+            }
+            
+        }
     }
+    
+    func updateFlipClock() {
+        let hours = (timeCountdown / 3600) % 24
+        let minutes = (timeCountdown / 60) % 60
+        let seconds = (timeCountdown) % 60
+        
+        flipClockTime = .init(hours: hours, minutes: minutes, seconds: seconds)
+    }
+    
     
     /// Start/Stop Timer button
     @ViewBuilder
@@ -70,23 +109,49 @@ struct TimerHomeView: View {
                 .background(.white, in: .rect(cornerRadius: 10))
                 .contentShape(.rect(cornerRadius: 10))
         }
-        .disableWithOpacity(flipClockTime.isZero)
+        .disableWithOpacity(flipClockTime.isZero && !startTimer)
     }
     
     /// Timer actions
     func startTheTimer() {
-        // TODO:
-        // https://www.youtube.com/watch?v=FG6nYxhpAEk 12:30
+        totalTimeInSeconds = flipClockTime.totalInSeconds
+        timeCountdown = totalTimeInSeconds - 1 // timer has 1 sec interval so -1 to show the effect immediately
+        
+        /// Checking if the time already exist in Swift data model
+        ///  should be done before update timer
+        if !recents.contains(where: { $0.totalInSeconds == totalTimeInSeconds }) {
+            let recent = Recent(
+                hours: flipClockTime.hours,
+                minutes: flipClockTime.minutes,
+                seconds: flipClockTime.seconds
+            )
+            context.insert(recent)
+        }
+        
+        updateFlipClock()
+
+        /// Starting timer
+        timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     }
     
     func stopTheTimer() {
+        /// Resetting to it's initial state
+        startTimer = false
+        totalTimeInSeconds = 0
+        timeCountdown = 0
+        flipClockTime = .init()
+
+        withAnimation(.linear) {
+            pickerTime = .init()
+        }
         
+        timer.upstream.connect().cancel()
     }
     
     /// Most recent timer
     @ViewBuilder
     func RecentsView() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 0) {
             Text("Recents")
                 .font(.callout)
                 .foregroundStyle(.white.opacity(0.8))
@@ -111,12 +176,13 @@ struct TimerHomeView: View {
                         .contextMenu {
                             Button("Delete", role: .destructive) {
                                 /// Deleting this item from the Swift Data
+                                context.delete(value)
                             }
                         }
                         .onTapGesture {
                             withAnimation(.linear) {
                                 ///  init as current timer settings
-                                flipClockTime = .init(
+                                pickerTime = .init(
                                     hours: value.hours,
                                     minutes: value.minutes,
                                     seconds: value.seconds
@@ -125,8 +191,12 @@ struct TimerHomeView: View {
                         }
                     }
                 }
+                .padding(.vertical, 10)
+                .padding(.leading, 10)
             }
             .scrollIndicators(.hidden)
+            .padding(.leading, -10)
+
         }
         .padding(.top, 10)
     }
@@ -179,6 +249,7 @@ struct TimerHomeView: View {
 
 #Preview {
     TimerHomeView()
+        .modelContainer(for: Recent.self)
 }
 
 /// Custom View Extension

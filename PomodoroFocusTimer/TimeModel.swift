@@ -13,4 +13,8 @@ struct Time: Hashable {
     var isZero: Bool {
         return hours == 0 && minutes == 0 && seconds == 0
     }
+    
+    var totalInSeconds: Int {
+        return (hours * 60 * 60) + (minutes * 60) + seconds
+    }
 }
