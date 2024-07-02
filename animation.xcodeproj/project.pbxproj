@@ -150,6 +150,13 @@
 		96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */; };
 		96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
 		96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
+		96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
+		96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
+		96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
+		96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */; };
+		96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
+		96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
+		96ACBEFB2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
 		96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18F92C01BEB40015155A /* HackerTextView.swift */; };
 		96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */; };
 		96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */; };
@@ -281,6 +288,9 @@
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
 		96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbarView.swift; sourceTree = "<group>"; };
 		96ACBF022C350BFA004F3070 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
+		96ACBEF22C33B79E004F3070 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHomeView.swift; sourceTree = "<group>"; };
+		96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
 		96AE18F92C01BEB40015155A /* HackerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerTextView.swift; sourceTree = "<group>"; };
 		96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollablePageTabsColorView.swift; sourceTree = "<group>"; };
 		96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTabView.swift; sourceTree = "<group>"; };
@@ -449,6 +459,8 @@
 				9621DC822BEF478500183CB7 /* UICoordinator.swift */,
 				9621DC902BF1EDB100183CB7 /* ActionModel.swift */,
 				96352D4E2C0ED814001AD2FD /* CreditCard.swift */,
+				96ACBEF22C33B79E004F3070 /* Expense.swift */,
+				96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -478,6 +490,7 @@
 				96352CE52C09AC6E001AD2FD /* StackedCards.swift */,
 				962B04772C22A162008E1E5D /* MeshGradientView.swift */,
 				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
+				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -940,12 +953,14 @@
 				9621DC812BEF461400183CB7 /* photoItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
 				96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */,
+				96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
+				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
 				962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
@@ -962,6 +977,7 @@
 				968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
+				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
 				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
@@ -996,6 +1012,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */,
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
 				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
 				9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */,
@@ -1003,6 +1020,7 @@
 				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
+				96ACBEFB2C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D232C0BD4C2001AD2FD /* GridImageView.swift in Sources */,
 				96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
@@ -1074,6 +1092,7 @@
 				96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */,
 				9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */,
 				96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */,
+				96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */,
 				9621DDAF2BF487BB00183CB7 /* Transaction.swift in Sources */,
 				96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */,
@@ -1087,6 +1106,7 @@
 				9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */,
 				9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */,
 				9621DDA92BF4813100183CB7 /* Constants.swift in Sources */,
+				96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D552C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
