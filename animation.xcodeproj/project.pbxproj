@@ -30,7 +30,7 @@
 		9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */; };
 		9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BBE2B897A310055D79B /* Profile.swift */; };
 		9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
-		9621DC392BEF3D7300183CB7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab.swift */; };
+		9621DC392BEF3D7300183CB7 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		9621DC3A2BEF3D7600183CB7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
 		9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509C2B944D1B00B36142 /* PlayerConfig.swift */; };
@@ -88,7 +88,7 @@
 		9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BBE2B897A310055D79B /* Profile.swift */; };
 		9621DD9E2BF47FDA00183CB7 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
 		9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884E92BDD82B000196125 /* Interpolation.swift */; };
-		9621DDA02BF47FDA00183CB7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab.swift */; };
+		9621DDA02BF47FDA00183CB7 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		9621DDA12BF47FDA00183CB7 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509A2B94465700B36142 /* PlayerItem.swift */; };
 		9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
 		9621DDA62BF4800500183CB7 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDA52BF4800400183CB7 /* IntroScreen.swift */; };
@@ -145,8 +145,11 @@
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
-		968D2E9E2B8EB56500007734 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab.swift */; };
+		968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
+		96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */; };
+		96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
+		96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
 		96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18F92C01BEB40015155A /* HackerTextView.swift */; };
 		96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */; };
 		96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */; };
@@ -274,8 +277,10 @@
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
-		968D2E9D2B8EB56500007734 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab_iOS17.swift; sourceTree = "<group>"; };
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
+		96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbarView.swift; sourceTree = "<group>"; };
+		96ACBF022C350BFA004F3070 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		96AE18F92C01BEB40015155A /* HackerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerTextView.swift; sourceTree = "<group>"; };
 		96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollablePageTabsColorView.swift; sourceTree = "<group>"; };
 		96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTabView.swift; sourceTree = "<group>"; };
@@ -431,7 +436,7 @@
 			children = (
 				961F3BBE2B897A310055D79B /* Profile.swift */,
 				968D2D782B8C34CB00007734 /* WindowSharedModel.swift */,
-				968D2E9D2B8EB56500007734 /* Tab.swift */,
+				968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */,
 				96C0C2D62B905DDE00F56FF5 /* Card.swift */,
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
 				96FF509A2B94465700B36142 /* PlayerItem.swift */,
@@ -489,6 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				9621DB152BEDDD7400183CB7 /* PinchZoom.swift */,
+				96ACBF022C350BFA004F3070 /* CustomGesture.swift */,
 			);
 			path = Gesture;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */,
 				96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */,
 				962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */,
+				96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -948,13 +955,15 @@
 				9684833D2BCF62C50023FE2B /* Particle.swift in Sources */,
 				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
+				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
-				968D2E9E2B8EB56500007734 /* Tab.swift in Sources */,
+				968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
+				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
@@ -995,6 +1004,7 @@
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
 				96352D232C0BD4C2001AD2FD /* GridImageView.swift in Sources */,
+				96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
 				9621DC3D2BEF3D7A00183CB7 /* Tag.swift in Sources */,
 				9621DC3E2BEF3D7A00183CB7 /* OffsetReader.swift in Sources */,
@@ -1011,7 +1021,7 @@
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
 				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
-				9621DC392BEF3D7300183CB7 /* Tab.swift in Sources */,
+				9621DC392BEF3D7300183CB7 /* Tab_iOS17.swift in Sources */,
 				96352D542C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
 				9621DC922BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				96352D502C0ED814001AD2FD /* CreditCard.swift in Sources */,
@@ -1071,7 +1081,7 @@
 				9621DDB12BF4885200183CB7 /* TintColor.swift in Sources */,
 				9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */,
 				96352D512C0ED814001AD2FD /* CreditCard.swift in Sources */,
-				9621DDA02BF47FDA00183CB7 /* Tab.swift in Sources */,
+				9621DDA02BF47FDA00183CB7 /* Tab_iOS17.swift in Sources */,
 				9621DDA12BF47FDA00183CB7 /* PlayerItem.swift in Sources */,
 				9621DDB62BF489B800183CB7 /* Search.swift in Sources */,
 				9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */,
@@ -1136,7 +1146,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1193,7 +1203,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

@@ -7,11 +7,11 @@ import SwiftUI
 struct HorizontalTabView: View {
     /// View properties
     @State private var tabs: [TabModel] = [
-        .init(id: TabModel.HorizonTab.research),
-        .init(id: TabModel.HorizonTab.development),
-        .init(id: TabModel.HorizonTab.analytics),
-        .init(id: TabModel.HorizonTab.audience),
-        .init(id: TabModel.HorizonTab.privacy)
+        .init(id: TabModel.HorizonTab.research, idInt: 0),
+        .init(id: TabModel.HorizonTab.development, idInt: 2),
+        .init(id: TabModel.HorizonTab.analytics, idInt: 3),
+        .init(id: TabModel.HorizonTab.audience, idInt: 4),
+        .init(id: TabModel.HorizonTab.privacy, idInt: 5)
     ]
     @State private var activeTab: TabModel.HorizonTab = .research
     @State private var mainViewScrollState: TabModel.HorizonTab? // scroll to view matched tab bar
