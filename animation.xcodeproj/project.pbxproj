@@ -157,6 +157,9 @@
 		96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
 		96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
 		96ACBEFB2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
+		96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
+		96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
+		96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */; };
 		96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18F92C01BEB40015155A /* HackerTextView.swift */; };
 		96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */; };
 		96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */; };
@@ -291,6 +294,8 @@
 		96ACBEF22C33B79E004F3070 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHomeView.swift; sourceTree = "<group>"; };
 		96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
+		96ACBF072C3675FA004F3070 /* TabView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabView+Extension.swift"; sourceTree = "<group>"; };
+		96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarOverSheetView.swift; sourceTree = "<group>"; };
 		96AE18F92C01BEB40015155A /* HackerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerTextView.swift; sourceTree = "<group>"; };
 		96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollablePageTabsColorView.swift; sourceTree = "<group>"; };
 		96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTabView.swift; sourceTree = "<group>"; };
@@ -387,6 +392,7 @@
 				9684833A2BCF61D40023FE2B /* ParticleEffect.swift */,
 				96EBF5E02BD793B400FDD20D /* ColorModel.swift */,
 				965999192BE0BCD6000133FA /* View+Extension.swift */,
+				96ACBF072C3675FA004F3070 /* TabView+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -719,6 +725,7 @@
 				96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */,
 				962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */,
 				96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */,
+				96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -935,6 +942,7 @@
 			files = (
 				963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */,
 				961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */,
+				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
@@ -952,6 +960,7 @@
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
 				9621DC812BEF461400183CB7 /* photoItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
+				96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */,
 				96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */,
 				96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
@@ -1034,6 +1043,7 @@
 				96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */,
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
+				96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */,
 				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
