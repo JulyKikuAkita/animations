@@ -125,3 +125,12 @@ extension View {
     }
 }
 /// For Pinterest Grid Animation
+
+/// SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
+extension View {
+    @ViewBuilder
+    func hideNaviTabBar() -> some View {
+        self
+            .toolbar(.hidden, for: .tabBar)
+    }
+}
