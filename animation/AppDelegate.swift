@@ -41,7 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     /// SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
-    func addTabBar(_ windowSharedModel: WindowSharedModel) {
+    ///  Adding a new window to display the custom tabbar to control hide/show w/ bottom sheet
+    func addTabBar(_ windowSharedModel: WindowSharedModelTabbar) {
         guard let scene = windowScene else { return }
         let tabBarController = UIHostingController(rootView: 
             CustomTabBar()
@@ -50,7 +51,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         
         tabBarController.view.backgroundColor = .clear
-        let tabWindow = PassthroughWindow(windowScene: scene)
+        /// Window
+        let tabWindow =  UIWindow(windowScene: scene)
         tabWindow.rootViewController = tabBarController
         tabWindow.isHidden = false
         /// Storing tabBar window reference for future use

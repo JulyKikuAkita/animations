@@ -2,7 +2,7 @@
 //  TabbarOverSheetView.swift
 //  animation
 //  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
-
+//  Use AnimationApp2 to test, preview crash with sceneDelegate
 import SwiftUI
 import MapKit
 
@@ -20,8 +20,8 @@ extension MKCoordinateRegion {
     }
 }
 struct TabbarOverSheetView: View {
-    @Environment(WindowSharedModel.self) private var windowSharedModel // need to use bindable within view not @Binding property
-    @Environment(SceneDelegate.self) private var sceneDelegate
+    @Environment(WindowSharedModelTabbar.self) private var windowSharedModel // need to use bindable within view not @Binding property
+//     @Environment(SceneDelegate.self) private var sceneDelegate // crash preview
 
     var body: some View {
         @Bindable var bindableObject = windowSharedModel
@@ -83,11 +83,11 @@ struct TabbarOverSheetView: View {
                     }
                 })
             }
-        }
-        .onAppear {
-            guard sceneDelegate.tabWindow == nil else { return }
-            sceneDelegate.addTabBar(windowSharedModel)
-        }
+        } // crash preview
+//        .onAppear {
+//            guard sceneDelegate.tabWindow == nil else { return }
+//            sceneDelegate.addTabBar(windowSharedModel)
+//        }
     }
     
     @ViewBuilder
@@ -115,7 +115,7 @@ struct TabbarOverSheetView: View {
 }
 
 struct CustomTabBar: View {
-    @Environment(WindowSharedModel.self) private var windowSharedModel
+    @Environment(WindowSharedModelTabbar.self) private var windowSharedModel
     var body: some View {
         VStack(spacing: 0) {
             Divider()
@@ -147,6 +147,7 @@ struct CustomTabBar: View {
 }
 
 #Preview {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     TabbarOverSheetView()
-        .environment(WindowSharedModel())
+        .environment(WindowSharedModelTabbar())
 }

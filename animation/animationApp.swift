@@ -5,23 +5,30 @@
 import SwiftUI
 @main
 struct AnimationApp: App { // with colorTransformer context
-    @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
-
     init() {
         ColorTransformer.register()
     }
-    var windowSharedModel = WindowSharedModel()
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            TabbarOverSheetView()
-//                .modelContainer(for: ColorModel.self)
-                .environment(windowSharedModel)
+            ContentView()
+                .modelContainer(for: ColorModel.self)
         }
     }
 }
 
-///  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
+/// only for  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
+//@main
+struct AnimationApp2: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+
+    var windowSharedModel = WindowSharedModelTabbar()
+    var body: some Scene {
+        WindowGroup {
+            TabbarOverSheetView()
+                .environment(windowSharedModel)
+        }
+    }
+}
 
 /// App Delegate
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -32,3 +39,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return config
     }
 }
+
+/// only for  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15

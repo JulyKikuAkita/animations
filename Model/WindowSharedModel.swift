@@ -16,9 +16,6 @@ class WindowSharedModel {
     var cornerRadius: CGFloat = 0
     var showGradient: Bool = false
     
-    /// SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
-    var activeTab: Tab = .apps
-    
     /// Resetting properties
     func reset() {
         sourceRect = .zero
@@ -28,4 +25,10 @@ class WindowSharedModel {
         cornerRadius = 0
         showGradient = false
     }
+}
+
+/// SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
+@Observable
+class WindowSharedModelTabbar {
+    var activeTab: Tab = .apps
 }
