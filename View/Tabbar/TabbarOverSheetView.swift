@@ -29,26 +29,26 @@ struct TabbarOverSheetView: View {
             NavigationStack {
                 Text("Photos")
             }
-            .tag(Tab.photos)
+            .tag(Tab_iOS17.photos)
             .hideNaviTabBar()
             
             NavigationStack {
                 /// Mock map location
                 Map(initialPosition: .region(.applePark))
             }
-            .tag(Tab.apps)
+            .tag(Tab_iOS17.apps)
             .hideNaviTabBar()
             
             NavigationStack {
                 Text("Chat")
             }
-            .tag(Tab.chat)
+            .tag(Tab_iOS17.chat)
             .hideNaviTabBar()
 
             NavigationStack {
                 Text("Profile")
             }
-            .tag(Tab.profile)
+            .tag(Tab_iOS17.profile)
             .hideNaviTabBar()
         }
         .tabSheet(initialHeight: 110, sheetCornerRadius: 15) {
@@ -121,7 +121,7 @@ struct CustomTabBar: View {
             Divider()
             
             HStack(spacing: 0) {
-                ForEach(Tab.allCases, id: \.rawValue) { tab in
+                ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
                     Button {
                         
                     } label: {

@@ -30,5 +30,5 @@ class WindowSharedModel {
 /// SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
 @Observable
 class WindowSharedModelTabbar {
-    var activeTab: Tab = .apps
+    var activeTab: Tab_iOS17 = .apps
 }

@@ -147,9 +147,6 @@
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
 		968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
-		96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */; };
-		96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
-		96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
 		96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
@@ -157,9 +154,13 @@
 		96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
 		96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
 		96ACBEFB2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
+		96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */; };
+		96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
+		96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
 		96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
 		96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
 		96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */; };
+		96ACBF102C39CBD3004F3070 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18F92C01BEB40015155A /* HackerTextView.swift */; };
 		96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */; };
 		96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */; };
@@ -289,11 +290,11 @@
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
 		968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab_iOS17.swift; sourceTree = "<group>"; };
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
-		96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbarView.swift; sourceTree = "<group>"; };
-		96ACBF022C350BFA004F3070 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		96ACBEF22C33B79E004F3070 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHomeView.swift; sourceTree = "<group>"; };
 		96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
+		96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbarView.swift; sourceTree = "<group>"; };
+		96ACBF022C350BFA004F3070 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
 		96ACBF072C3675FA004F3070 /* TabView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabView+Extension.swift"; sourceTree = "<group>"; };
 		96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarOverSheetView.swift; sourceTree = "<group>"; };
 		96AE18F92C01BEB40015155A /* HackerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerTextView.swift; sourceTree = "<group>"; };
@@ -1067,6 +1068,7 @@
 				9621DC7B2BEF41A000183CB7 /* Profile.swift in Sources */,
 				9621DC4F2BEF3E5F00183CB7 /* ContentView.swift in Sources */,
 				9621DC7A2BEF419200183CB7 /* WindowSharedModel.swift in Sources */,
+				96ACBF102C39CBD3004F3070 /* Tab_iOS17.swift in Sources */,
 				9621DC7D2BEF423500183CB7 /* AppDelegate.swift in Sources */,
 				9621DC932BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				9621DC7E2BEF42DB00183CB7 /* UniversalAlert.swift in Sources */,
