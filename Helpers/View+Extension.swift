@@ -40,12 +40,12 @@ extension View {
                             /// Creating snapshots
                             ///  old one
                             activeDarkMode.wrappedValue = !newValue
-                            previousImage.wrappedValue = await rootView.image(frameSize)
+                            previousImage.wrappedValue = rootView.image(frameSize)
                             /// new one with updated trait state
                             activeDarkMode.wrappedValue = newValue
                             /// wait for transition to complete
                             try await Task.sleep(for: .seconds(0.01))
-                            currentImage.wrappedValue = await rootView.image(frameSize)
+                            currentImage.wrappedValue = rootView.image(frameSize)
                             /// remove dummy view once snapshot has taken
                             try await Task.sleep(for: .seconds(0.01))
                             imageView.removeFromSuperview()
@@ -125,3 +125,12 @@ extension View {
     }
 }
 /// For Pinterest Grid Animation
+
+/// SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
+extension View {
+    @ViewBuilder
+    func hideNaviTabBar() -> some View {
+        self
+            .toolbar(.hidden, for: .tabBar)
+    }
+}
