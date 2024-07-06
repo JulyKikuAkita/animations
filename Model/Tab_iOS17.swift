@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-enum Tab: String, CaseIterable {
+enum Tab_iOS17: String, CaseIterable {
     case photos = "photo.stack"
     case chat = "bubble.left.and.text.bubble.right"
     case apps = "square.3.layers.3d"
@@ -46,7 +46,7 @@ enum Tab: String, CaseIterable {
 /// Animated SF tab model
 struct AnimatedTab: Identifiable {
     var id: UUID = .init()
-    var tab: Tab
+    var tab: Tab_iOS17
     var isAnimating: Bool?
 }
 
@@ -101,11 +101,22 @@ enum AppleMusicTab: String, CaseIterable {
     }
 }
 
+enum SimpleTabs: String, CaseIterable {
+    case all = "All"
+    case game = "Games"
+    case music = "Music"
+    case food = "Food"
+}
+
 /// horizontal scrollable tabs
 struct TabModel: Identifiable {
     private(set) var id: HorizonTab
     var size: CGSize = .zero
     var minX: CGFloat = .zero
+    
+    var idInt: Int = 0
+    var symbolImage: String = ""
+    var rect: CGRect = .zero
     
     enum HorizonTab: String, CaseIterable {
         case research = "Research"
@@ -116,10 +127,10 @@ struct TabModel: Identifiable {
     }
 }
 
-
-enum SimpleTabs: String, CaseIterable {
-    case all = "All"
-    case game = "Games"
-    case music = "Music"
-    case food = "Food"
-}
+let defaultOrderTabs: [TabModel] = [
+    .init(id: .analytics, idInt: 0, symbolImage: "house.fill"),
+    .init(id: .research, idInt: 1, symbolImage: "magnifyingglass"),
+    .init(id: .audience, idInt: 2, symbolImage: "bell.fill"),
+    .init(id: .development, idInt: 3, symbolImage: "person.2.fill"),
+    .init(id: .privacy, idInt: 4, symbolImage: "gearshape.fill")
+]

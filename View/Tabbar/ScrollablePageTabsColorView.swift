@@ -6,7 +6,7 @@ import SwiftUI
 
 struct ScrollablePageTabsColorDemoView: View {
     /// View Properties
-    @State private var activeTab: Tab = .apps
+    @State private var activeTab: Tab_iOS17 = .apps
     var offsetObserver = PageOffsetObserver()
     var body: some View {
         VStack(spacing: 15) {
@@ -15,7 +15,7 @@ struct ScrollablePageTabsColorDemoView: View {
                     if let collectionViewBounds = offsetObserver.collectionView?.bounds {
                         GeometryReader {
                             let width = $0.size.width
-                            let tabCount = CGFloat(Tab.allCases.count)
+                            let tabCount = CGFloat(Tab_iOS17.allCases.count)
                             let capsuleWidth = width / tabCount
                             let progress = offsetObserver.offset / collectionViewBounds.width
                             
@@ -41,8 +41,8 @@ struct ScrollablePageTabsColorDemoView: View {
                 .padding([.horizontal, .top], 15)
 
             TabView(selection: $activeTab) {
-                Tab.apps.color
-                    .tag(Tab.apps)
+                Tab_iOS17.apps.color
+                    .tag(Tab_iOS17.apps)
                     .background {
                         /// ensure adding observer only once
                         if !offsetObserver.isObserving {
@@ -53,14 +53,14 @@ struct ScrollablePageTabsColorDemoView: View {
                         }
                     }
                 
-                Tab.photos.color
-                    .tag(Tab.photos)
+                Tab_iOS17.photos.color
+                    .tag(Tab_iOS17.photos)
                 
-                Tab.profile.color
-                    .tag(Tab.profile)
+                Tab_iOS17.profile.color
+                    .tag(Tab_iOS17.profile)
                 
-                Tab.chat.color
-                    .tag(Tab.chat)
+                Tab_iOS17.chat.color
+                    .tag(Tab_iOS17.chat)
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             .overlay {
@@ -72,7 +72,7 @@ struct ScrollablePageTabsColorDemoView: View {
     @ViewBuilder
     func Tabbar(_ tint: Color, _ weight: Font.Weight = .regular) -> some View {
         HStack(spacing: 0) {
-            ForEach(Tab.allCases, id: \.rawValue) { tab in
+            ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
                 Text(tab.title)
                     .font(.callout)
                     .fontWeight(weight)
