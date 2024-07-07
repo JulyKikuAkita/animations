@@ -134,3 +134,37 @@ extension View {
             .toolbar(.hidden, for: .tabBar)
     }
 }
+
+/// For Dynamic Sheet Height - iOS 17 - ScrollView APIs
+extension View {
+    @ViewBuilder
+    func heightChangePreference(completion: @escaping(CGFloat) -> ()) -> some View {
+        self
+            .overlay {
+                GeometryReader(content: { geometry in
+                    Color.clear
+                        .preference(key: CGFloatKey.self, value: geometry.size.height)
+                        .onPreferenceChange(CGFloatKey.self, perform: { value in
+                            completion(value)
+                        })
+                    
+                })
+            }
+    }
+    
+    @ViewBuilder
+    func minXChangePreference(completion: @escaping(CGFloat) -> ()) -> some View {
+        self
+            .overlay {
+                GeometryReader(content: { geometry in
+                    let minX = geometry.frame(in: .scrollView).minX
+                    Color.clear
+                        .preference(key: CGFloatKey.self, value: minX) /// Preference Key is defined in AnchorKey file
+                        .onPreferenceChange(CGFloatKey.self, perform: { value in
+                            completion(value)
+                        })
+                        
+                })
+            }
+    }
+}
