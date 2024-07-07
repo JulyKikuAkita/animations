@@ -7,7 +7,7 @@ import SwiftUI
 
 struct SynchronizedScrollView: View {
     @State private var pics: [PicItem] = (1...5).compactMap{ index -> PicItem? in
-        return .init(image: "IMG_020\(index)")
+        return .init(image: "IMG_020\(index + 1)")
     }
     var body: some View {
         NavigationStack {
@@ -29,6 +29,7 @@ struct SynchronizedScrollView: View {
                     .font(.largeTitle)
                     .foregroundStyle(.teal)
                     .frame(width: 30, height: 30)
+                    .background(.background)
                 
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text("Nanachi")
@@ -70,14 +71,63 @@ struct SynchronizedScrollView: View {
                 .frame(height: 200)
                 
                 /// Image buttons
+                HStack(spacing: 20) {
+                    ImageButton("suit.heart") {
+                        
+                    }
+                    
+                    ImageButton("message") {
+                        
+                    }
+                    
+                    ImageButton("arrow.2.squarepath") {
+                        
+                    }
+                    ImageButton("paperplane") {
+                        
+                    }
+                }
             }
             .padding(.leading, 45)
+            
+            
+            /// Likes and replies
+            HStack(spacing: 10) {
+                Image(systemName: "person.circle.fill")
+                    .frame(width: 30, height: 30)
+                    .background(.background)
+                
+                Button("10 replies") {
+                    
+                }
+                
+                Button("810 likes") {
+                    
+                }
+                .padding(.leading, -5)
+                
+                Spacer()
+            }
+            .textScale(.secondary)
+            .foregroundStyle(.secondary)
         }
+        /// adding vertical line
+        .background(alignment: .leading) {
+            Rectangle()
+                .fill(.secondary)
+                .frame(width: 1)
+                .padding(.bottom, 30)
+                .offset(x: 15, y: 10)
+        }
+        
+        
     }
     
     @ViewBuilder
-    func ImageButton(_ icon: String, onTap: () -> ()) -> some View {
-        
+    func ImageButton(_ icon: String, onTap: @escaping () -> ()) -> some View {
+        Button("", systemImage: icon, action: onTap)
+            .font(.title3)
+            .foregroundStyle(.primary)
     }
 }
 
