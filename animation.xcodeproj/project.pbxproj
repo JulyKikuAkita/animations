@@ -148,6 +148,7 @@
 		9662EF842C3E4CCD00508B80 /* Reel3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9662EF7D2C3E4CCD00508B80 /* Reel3.mp4 */; };
 		9662EF852C3E4CCD00508B80 /* Reel4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9662EF7E2C3E4CCD00508B80 /* Reel4.mp4 */; };
 		9662EF922C3E4E5000508B80 /* Reel5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9662EF912C3E4E5000508B80 /* Reel5.mp4 */; };
+		9662EF122C3B51E900508B80 /* PicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF112C3B51E900508B80 /* PicItem.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -307,6 +308,7 @@
 		9662EF7E2C3E4CCD00508B80 /* Reel4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel4.mp4; path = ../../../../Documents/Reel/Reel4.mp4; sourceTree = "<group>"; };
 		9662EF7F2C3E4CCD00508B80 /* Reel6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel6.mp4; path = ../../../../Documents/Reel/Reel6.mp4; sourceTree = "<group>"; };
 		9662EF912C3E4E5000508B80 /* Reel5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel5.mp4; path = ../../../../Documents/Reel/Reel5.mp4; sourceTree = "<group>"; };
+		9662EF112C3B51E900508B80 /* PicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicItem.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -754,6 +756,14 @@
 			path = PomodoroFocusTimer;
 			sourceTree = "<group>";
 		};
+		9662EF102C3B51D600508B80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9662EF112C3B51E900508B80 /* PicItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		96845DA32BD3346500B7D8B2 /* AppleMusic */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,11 +811,12 @@
 		96DF8A922C3A68290063A931 /* ThreadApp */ = {
 			isa = PBXGroup;
 			children = (
+				96DF8ABB2C3A687B0063A931 /* SynchronizedScrollView.swift */,
+				9662EF102C3B51D600508B80 /* Model */,
 				96DF8A932C3A68290063A931 /* ThreadAppApp.swift */,
 				96DF8A952C3A68290063A931 /* ContentView.swift */,
 				96DF8A972C3A682A0063A931 /* Assets.xcassets */,
 				96DF8A992C3A682A0063A931 /* Preview Content */,
-				96DF8ABB2C3A687B0063A931 /* SynchronizedScrollView.swift */,
 			);
 			path = ThreadApp;
 			sourceTree = "<group>";
@@ -1276,6 +1287,7 @@
 				96DF8A962C3A68290063A931 /* ContentView.swift in Sources */,
 				96DF8A942C3A68290063A931 /* ThreadAppApp.swift in Sources */,
 				96DF8ABC2C3A687B0063A931 /* SynchronizedScrollView.swift in Sources */,
+				9662EF122C3B51E900508B80 /* PicItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
