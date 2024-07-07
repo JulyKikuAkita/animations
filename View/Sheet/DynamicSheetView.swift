@@ -19,11 +19,15 @@ struct DynamicSheetView: View {
     @State private var sheetHeight: CGFloat = .zero
     @State private var emailAddress: String = ""
     @State private var password: String = ""
+    @State private var hasAccount: Bool = false
 
     /// Storing Sheet's height for swipe calculation
     @State private var sheetFirstPageHeight: CGFloat = .zero
     @State private var sheetSecondPageHeight: CGFloat = .zero
     @State private var sheetScrollProgress: CGFloat = .zero
+
+    /// Other Properties
+    @State private var isKeyboardShowing: Bool = false
 
     var body: some View {
         VStack {
@@ -36,85 +40,99 @@ struct DynamicSheetView: View {
             .tint(.red)
         }
         .padding(30)
-        .sheet(isPresented: $showSheet, 
-               onDismiss: {},
-               content: {
-            /// Sheet View
-            GeometryReader(content: { geometry in
-                let size = geometry.size
-                ScrollViewReader(content: { proxy in
-                    ScrollView(.horizontal) {
-                        HStack(alignment: .top, spacing: 0) {
-                            OnBoardingView(size)
-                                .id("First Page")
-                            
-                            LoginView(size)
-                                .id("Second Page")
-                        }
-                        /// required for paging scrollview
-                        .scrollTargetLayout()
-                    }
-                    .scrollTargetBehavior(.paging)
-                    .scrollIndicators(.hidden)
-                    .overlay(alignment: .topTrailing) {
-                        Button(action: {
-                            if sheetScrollProgress < 1 {
-                                withAnimation(.snappy) {
-                                    proxy.scrollTo("Second Page", anchor: .leading)
-                                }
-                            } else {
-                                /// implementation for continue button
-                                withAnimation(.snappy) {
-                                    showSheet.toggle()
-                                }
+        .sheet(isPresented: $showSheet, onDismiss: {
+            /// Reseting View properites
+            sheetHeight = .zero
+            sheetFirstPageHeight = .zero
+            sheetSecondPageHeight = .zero
+            sheetScrollProgress = .zero
+        }, content: {
+                /// Sheet View
+                GeometryReader(content: { geometry in
+                    let size = geometry.size
+                    ScrollViewReader(content: { proxy in
+                        ScrollView(.horizontal) {
+                            HStack(alignment: .top, spacing: 0) {
+                                OnBoardingView(size)
+                                    .id("First Page")
+                                
+                                LoginView(size)
+                                    .id("Second Page")
                             }
-                        }, label: {
-                            Text("Continue")
-                                .fontWeight(.semibold)
-                                .opacity(1 - sheetScrollProgress)
-                                /// adding extra width for 2nd bottom sheet
-                                .frame(width: 120 + (sheetScrollProgress * 50))
-                                .overlay {
-                                    /// Next page text
-                                    HStack(spacing: 8) {
-                                        Text("Get Started")
-                                        
-                                        Image(systemName: "arrow.right")
+                            /// required for paging scrollview
+                            .scrollTargetLayout()
+                        }
+                        .scrollTargetBehavior(.paging)
+                        .scrollIndicators(.hidden)
+                        /// Disabling scroll view when keyboard is active
+                        .scrollDisabled(isKeyboardShowing)
+                        .overlay(alignment: .topTrailing) {
+                            Button(action: {
+                                if sheetScrollProgress < 1 {
+                                    withAnimation(.snappy) {
+                                        proxy.scrollTo("Second Page", anchor: .leading)
                                     }
-                                    .fontWeight(.semibold)
-                                    .opacity(sheetScrollProgress)
+                                } else {
+                                    /// implementation for continue button
+    //                                withAnimation(.snappy) {
+    //                                    showSheet.toggle()
+    //                                }
                                 }
-                                .padding(.vertical, 12)
-                                .foregroundStyle(.white)
-                                .background(
-                                    .linearGradient(
-                                        colors: [.red, .orange],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing), in: .capsule)
-                        })
-                        .padding(15)
-                        .offset(y: sheetHeight - 100)
-                        /// Moving button near to the next view
-                        .offset(y: sheetScrollProgress * -120) /// Sec view height 220 - first view height 100
-                    }
+                            }, label: {
+                                Text("Continue")
+                                    .fontWeight(.semibold)
+                                    .opacity(1 - sheetScrollProgress)
+                                    /// adding extra width for 2nd bottom sheet
+                                    .frame(width: 120 + (sheetScrollProgress * ( hasAccount ? -10 : 50)))
+                                    .overlay(content: {
+                                        /// Next page text
+                                        HStack(spacing: 8) {
+                                            Text(hasAccount ? "Login" : "Get Started")
+                                            
+                                            Image(systemName: "arrow.right")
+                                        }
+                                        .fontWeight(.semibold)
+                                        .opacity(sheetScrollProgress)
+                                    })
+                                    .padding(.vertical, 12)
+                                    .foregroundStyle(.white)
+                                    .background(
+                                        .linearGradient(
+                                            colors: [.red, .orange],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing), in: .capsule)
+                            })
+                            .padding(15)
+                            .offset(y: sheetHeight - 100)
+                            /// Moving button near to the next view
+                            .offset(y: sheetScrollProgress * -120) /// Sec view height 220 - first view height 100
+                        }
+                    })
+                   
                 })
-               
+                /// Custom Presentation update
+                .presentationCornerRadius(30)
+                .presentationDetents(
+                    sheetHeight == .zero ? [.medium] : [.height(sheetHeight)]
+                )
+                   /// disabling swipe to dismiss
+                .interactiveDismissDisabled()
+                .onReceive( NotificationCenter.default.publisher(for:
+                    UIResponder.keyboardWillShowNotification), perform: { _ in
+                        isKeyboardShowing = true
+                })
+                .onReceive( NotificationCenter.default.publisher(for:
+                    UIResponder.keyboardWillHideNotification), perform: { _ in
+                        isKeyboardShowing = false
+                })
             })
-            /// Custom Presentation update
-            .presentationCornerRadius(30)
-            .presentationDetents(
-                sheetHeight == .zero ? [.medium] : [.height(sheetHeight)]
-            )
-            /// disabling swipe to dismiss
-            .interactiveDismissDisabled()
-        })
     }
     
     /// First View for Sheet
     @ViewBuilder
     func OnBoardingView(_ size: CGSize) -> some View {
         VStack(alignment: .leading, spacing: 12, content: {
-            Text("Know Everything\nabout the weather")
+            Text("Know Everything\nabout the Abyss")
                 .font(.largeTitle.bold())
                 .lineLimit(2)
             
@@ -150,7 +168,8 @@ struct DynamicSheetView: View {
     @ViewBuilder
     func LoginView(_ size: CGSize) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Descend to abyss")
+            Text("Descend to the Abyss")
+                .minimumScaleFactor(0.9)
                 .font(.largeTitle.bold())
             
             CustomTextField(hint: "Email address", text: $emailAddress, icon: "envelope")
@@ -168,13 +187,64 @@ struct DynamicSheetView: View {
         .padding(.horizontal, 10)
         .padding(.top, 15)
         .padding(.bottom, 220)
+        .overlay(alignment: .bottomTrailing, content: {
+            VStack(spacing: 15) {
+                Group {
+                    if hasAccount {
+                        HStack(spacing: 4) {
+                            Text("Already have an account?")
+                                .foregroundStyle(.gray)
+                            
+                            Button("Login") {
+                                withAnimation(.snappy) {
+                                    hasAccount.toggle()
+                                }
+                            }
+                        }
+                        .transition(.push(from: .bottom))
+                    } else {
+                        HStack(spacing: 4) {
+                            Text("Don't have an account?")
+                                .foregroundStyle(.gray)
+                            
+                            Button("Create an account") {
+                                withAnimation(.snappy) {
+                                    hasAccount.toggle()
+                                }
+                            }
+                        }
+                        .transition(.push(from: .bottom))
+                    }
+                }
+                .font(.callout)
+                .textScale(.secondary)
+                .padding(.bottom, hasAccount ? 0 : 15)
+                
+                if !hasAccount {
+                    Text("By signing up, you're agreeing to out **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)**")
+                        .font(.caption)
+                    /// Markup content will be red
+                        .tint(.red)
+                    /// Other text be gray
+                        .foregroundStyle(.gray)
+                        .transition(.offset(y: 100))
+                }
+                // testing
+//                Text("\(sheetScrollProgress)")
+            }
+            .padding(.bottom, 15)
+            .padding(.horizontal, 20)
+            .multilineTextAlignment(.center)
+            .frame(width: size.width)
+        })
         .frame(width: size.width)
-        .overlay {
-            Text("\(sheetScrollProgress)")
-        }
         /// Finding the view's height
         .heightChangePreference { height in
             sheetSecondPageHeight = height
+            /// Just in case  if the Height of the view has changed
+            ///  Currently  withAnimation not animate the sheet height in SwiftUI (xcode 15)
+            let diff = sheetSecondPageHeight - sheetFirstPageHeight
+            sheetHeight = sheetFirstPageHeight + (diff * sheetScrollProgress)
         }
         /// Offset preference
         .minXChangePreference { minX in
