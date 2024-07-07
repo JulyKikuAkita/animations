@@ -1,7 +1,7 @@
 //
 //  SynchronizedScrollView.swift
 //  ThreadApp
-
+// tODO: 3:38 https://www.youtube.com/watch?v=M-iWP2l9-Xg&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=59
 
 import SwiftUI
 
@@ -28,6 +28,8 @@ struct SynchronizedScrollView: View {
                 Image(systemName: "person.circle.fill")
                     .font(.largeTitle)
                     .foregroundStyle(.teal)
+                    .frame(width: 30, height: 30)
+                
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text("Nanachi")
                         .fontWeight(.semibold)
@@ -45,26 +47,37 @@ struct SynchronizedScrollView: View {
                 .offset(y: -10)
             }
             
-            GeometryReader {
-                let size = $0.size
-                
-                ScrollView(.horizontal) {
-                    LazyHStack(spacing: 10) {
-                        ForEach(pics) { pic in
-                            Image(pic.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(maxWidth: size.width)
-                                .clipShape(.rect(cornerRadius: 10))
+            VStack(alignment: .leading, spacing: 10) {
+                GeometryReader {
+                    let size = $0.size
+                    
+                    ScrollView(.horizontal) {
+                        LazyHStack(spacing: 10) {
+                            ForEach(pics) { pic in
+                                Image(pic.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(maxWidth: size.width)
+                                    .clipShape(.rect(cornerRadius: 10))
+                            }
                         }
+                        .scrollTargetLayout()
                     }
-                    .scrollTargetLayout()
+                    .scrollIndicators(.hidden)
+                    .scrollTargetBehavior(.viewAligned)
+                    .scrollClipDisabled()
                 }
-                .scrollIndicators(.hidden)
-                .scrollTargetBehavior(.viewAligned)
+                .frame(height: 200)
+                
+                /// Image buttons
             }
-            .frame(height: 200)
+            .padding(.leading, 45)
         }
+    }
+    
+    @ViewBuilder
+    func ImageButton(_ icon: String, onTap: () -> ()) -> some View {
+        
     }
 }
 
