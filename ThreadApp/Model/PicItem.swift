@@ -12,9 +12,12 @@ struct PicItem: Identifiable {
 }
 /// Constructing pic using asset images
 private var pics: [PicItem] = (1...5).compactMap{ index -> PicItem? in
-    return .init(image: "IMG_020\(index + 1)")
+    return .init(image: "IMG_020\(index)")
 }
 
+private var pics1: [PicItem] = (1...5).reversed().compactMap{ index -> PicItem? in
+    return .init(image: "IMG_020\(index)")
+}
 
 struct Post: Identifiable{
     let id: UUID = .init()
@@ -28,5 +31,5 @@ struct Post: Identifiable{
 /// Sample Posts
 var samplePosts: [Post] = [
     .init(username: "Nanachi", content: "Natural Pics", pics: pics),
-    .init(username: "Nanachi", content: "Natural Pics", pics: pics.reversed())
+    .init(username: "Nanachi", content: "Natural Pics", pics: pics1)
 ]

@@ -1,7 +1,7 @@
 //
 //  SynchronizedScrollView.swift
 //  ThreadApp
-// tODO: 3:38 https://www.youtube.com/watch?v=M-iWP2l9-Xg&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=59
+// tODO: 14:58 https://www.youtube.com/watch?v=M-iWP2l9-Xg&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=59
 
 import SwiftUI
 
@@ -9,6 +9,7 @@ struct SynchronizedScrollView: View {
     /// View Properties
     @State private var posts: [Post] = samplePosts
     @State private var showDetailView: Bool = false
+    @State private var detailViewAnimation: Bool = false
     @State private var selectedPicID: UUID?
     @State private var selectedPost: Post?
     
@@ -18,7 +19,6 @@ struct SynchronizedScrollView: View {
                 VStack(spacing: 15) {
                     ForEach(posts) { post in
                         CardView(post)
-
                     }
                 }
                 .safeAreaPadding(15)
@@ -29,19 +29,47 @@ struct SynchronizedScrollView: View {
             if let selectedPost, showDetailView {
                 DetailView(
                     post: selectedPost,
-                    showDetailView: $showDetailView,
+                    showDetailView: $showDetailView, 
+                    detailViewAnimation: $detailViewAnimation,
                     selectedPicID: $selectedPicID
                 ) { id in
                     /// Updating scroll position
-                    if let index = posts.firstIndex(
-                        where: { $0.id == selectedPost
-                            .id}) {
+                    if let index = posts.firstIndex(where: { $0.id == selectedPost.id}) {
                         posts[index].scrollPosition = id
                     }
                 }
                 .transition(.offset(y: 5)) /// try use identity transition to see the diff
             }
         }
+        .overlayPreferenceValue(OffsetKey.self, { value in
+             GeometryReader { proxy in
+                 if let selectedPicID,
+                    let source = value[selectedPicID.uuidString],
+                    let destination = value["DESTINATION\(selectedPicID.uuidString)"],
+                    let picItem = selectedImage(), showDetailView {
+                         let sRect = proxy[source]
+                         let dRect = proxy[destination]
+                         
+                         Image(picItem.image)
+                         .resizable()
+                         .aspectRatio(contentMode: .fill)
+                         .frame(
+                            width: detailViewAnimation ? dRect.width: sRect.width,
+                            height: detailViewAnimation ? dRect.height : sRect.height
+                         )
+                         .clipShape(.rect(cornerRadius: detailViewAnimation ? 0 : 10))
+                         .offset(x: detailViewAnimation ? dRect.minX : sRect.minX, y: detailViewAnimation ? dRect.minY : sRect.minY)
+                         .allowsHitTesting(false)
+                     }
+                }
+        })
+    }
+    
+    func selectedImage() -> PicItem? {
+        if let pic = selectedPost?.pics.first(where: { $0.id == selectedPicID }) {
+            return pic
+        }
+        return nil
     }
     
     @ViewBuilder
@@ -87,12 +115,19 @@ struct SynchronizedScrollView: View {
                                 }
                                 .frame(maxWidth: size.width)
                                 .frame(height: size.height)
+                                .anchorPreference(
+                                    key: OffsetKey.self,
+                                    value: .bounds,
+                                    transform: { anchor in
+                                        return [pic.id.uuidString: anchor]
+                                })
                                 .onTapGesture {
                                     selectedPost = post
                                     selectedPicID = pic.id
                                     showDetailView = true
                                 }
                                 .contentShape(.rect)
+                                .opacity(selectedPicID == pic.id ? 0 : 1)
                             }
                         }
                         .scrollTargetLayout()
@@ -174,10 +209,16 @@ struct SynchronizedScrollView: View {
 private struct DetailView: View {
     var post: Post
     @Binding var showDetailView: Bool
+    @Binding var detailViewAnimation: Bool
     @Binding var selectedPicID: UUID?
     var updateScrollPosition: (UUID?) -> ()
     /// View Properties
     @State private var detailScrollPosition: UUID?
+    
+    /// Dispatch Tasks
+    @State private var startTask1: DispatchWorkItem?
+    @State private var startTask2: DispatchWorkItem?
+
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
@@ -187,29 +228,90 @@ private struct DetailView: View {
                         .aspectRatio(contentMode: .fit)
                         .containerRelativeFrame(.horizontal)
                         .clipped()
+                        .anchorPreference(
+                            key: OffsetKey.self,
+                            value: .bounds,
+                            transform: { anchor in
+                                return ["DESTINATION\(pic.id.uuidString)": anchor]
+                        })
+                        .opacity(selectedPicID == pic.id ? 0 : 1)
                 }
             }
             .scrollTargetLayout()
         }
         .scrollPosition(id: $detailScrollPosition)
-        .background(.black)
+        .background(.gray.opacity(0.2))
+        .opacity(detailViewAnimation ? 1 : 0)
         .scrollTargetBehavior(.paging)
         .scrollIndicators(.hidden)
         /// close button
         .overlay(alignment: .topLeading) {
             Button("", systemImage: "xmark.circle.fill") {
+                cancellingPreviousTasks()
+
                 updateScrollPosition(detailScrollPosition)
-                showDetailView = false
-                selectedPicID = nil
+                selectedPicID = detailScrollPosition
+
+                /// Giving some time to set scroll position for hero animation
+                initiateTask(ref: &startTask1, task: .init(block: {
+                    withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
+                        detailViewAnimation = false
+                    }
+                    
+                    /// Animated and removing detail View
+                    initiateTask(ref: &startTask2, task: .init(block: {
+                        showDetailView = false
+                        selectedPicID = nil
+                    }), duration: 0.3)
+                }), duration: 0.05)
             }
             .font(.title)
             .foregroundStyle(.white.opacity(0.8), .white.opacity(0.15))
             .padding()
         }
         .onAppear {
+            cancellingPreviousTasks()
+//            print("\(selectedPicID) \(detailScrollPosition)")
+
             /// avoid multiple calls
             guard detailScrollPosition == nil else { return }
             detailScrollPosition = selectedPicID /// make sure carousel start from the select image
+            
+            /// Giving some time to set scroll position for hero animation
+            initiateTask(ref: &startTask1, task: .init(block: {
+                withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
+                    detailViewAnimation = true
+                }
+                
+                /// Animated and removing Layer View
+                initiateTask(ref: &startTask2, task: .init(block: {
+                    selectedPicID = nil
+                }), duration: 0.3)
+            }), duration: 0.05)
+        }
+    }
+    
+    func initiateTask(ref: inout DispatchWorkItem?, task: DispatchWorkItem, duration: CGFloat) {
+        ref = task
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: task)
+    }
+    
+    func cancellingPreviousTasks() {
+//        if let startTask1, let startTask2{
+//            startTask1.cancel()
+//            startTask2.cancel()
+//            self.startTask1 = nil
+//            self.startTask2 = nil
+//        }
+        
+        if let startTask1 {
+            startTask1.cancel()
+            self.startTask1 = nil
+        }
+        
+        if let startTask2 {
+            startTask2.cancel()
+            self.startTask2 = nil
         }
         
     }
