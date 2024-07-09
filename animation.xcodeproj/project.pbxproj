@@ -337,6 +337,7 @@
 		966E8F982C2E8CC300299713 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				ExpandableWheelPickerView.swift,
 				TimePickerView.swift,
 			);
 			target = 961F3B8A2B8818240055D79B /* animation */;
