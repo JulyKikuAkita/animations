@@ -4,9 +4,64 @@
 
 import SwiftUI
 
-struct ExpandableWheelPickerView: View {
+struct ExpandableWheelPickerDemoView: View {
+    let pickerValues: [String] = ["SwiftUI", "UIKIT", "AVKit", "WidgetKit", "CoreImage", "AppIntents", "LiveActivities"]
+    let pickerValues1: [String] = ["Blue", "Green", "Yellow", "Teal", "Brown", "Purple", "Pink"]
+
+    @State private var config: PickerConfig = .init(text: "SwiftUI")
+    @State private var config1: PickerConfig = .init(text: "Blue")
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                Section("Configuration") {
+                    Button {
+                        config.show.toggle()
+                    } label: {
+                        HStack {
+                            Text("Framework")
+                                .foregroundStyle(.gray)
+                            
+                            Spacer(minLength: 0)
+                            
+                            ExpandableWheelPickerView(config: $config)
+                        }
+                    }
+                    
+                    Button {
+                        config1.show.toggle()
+                    } label: {
+                        HStack {
+                            Text("Colors")
+                                .foregroundStyle(.gray)
+                            
+                            Spacer(minLength: 0)
+                            
+                            ExpandableWheelPickerView(config: $config1)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Wheel Picker")
+        }
+        .customWheelPicker($config, items: pickerValues)
+        .customWheelPicker($config1, items: pickerValues1)
+        
+    }
+}
+
+struct ExpandableWheelPickerView: View {
+    @Binding var config: PickerConfig
+    var body: some View {
+        Text(config.text)
+            .foregroundStyle(.blue)
+            .frame(height: 20)
+            .opacity(config.show ? 0 : 1)
+            .onGeometryChange(for: CGRect.self) { proxy in
+                proxy.frame(in: .global)
+            } action: { newValue in
+                config.sourceFrame = newValue
+            }
     }
 }
 
@@ -44,23 +99,91 @@ fileprivate struct CustomWheelPickerView: View {
             .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
             .scrollIndicators(.hidden)
             .opacity(showScrollview ? 1 : 0)
+            .allowsHitTesting(expandItems && showScrollview)
+            
+            let offset: CGSize = .init(
+                width: showContents ? size.width * -0.3 : config.sourceFrame.minX,
+                height: showContents ?  -10 : config.sourceFrame.minY // y: place at center of vi
+            )
+            
+            /// the position is in global space so the view position must from the top leading and ignore safe area
+            Text(config.text)
+                .fontWeight(showContents ? .semibold : .regular)
+                .foregroundStyle(.blue)
+                .frame(height: 20)
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight:  .infinity,
+                    alignment: showContents ? .trailing : .topLeading
+                )
+                .offset(offset)
+                .opacity(showScrollview ? 0 : 1)
+                .ignoresSafeArea(.all, edges: showContents ? [] : .all)
+            
+            CloseButton()
         }
         .task {
             /// Doing actions only for the first time
             guard activeText == nil else { return }
             activeText = config.text
+            withAnimation(.easeInOut(duration: 0.3)) {
+                showContents = true
+            }
+            
+            try? await Task.sleep(for: .seconds(0.3))
             showScrollview = true
+            
+            withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
+                expandItems = true
+            }
         }
         .onChange(of: activeText) { oldValue, newValue in
             if let newValue {
                 config.text = newValue
             }
         }
-        .onTapGesture {
-            withAnimation(.snappy) {
-                expandItems.toggle()
+//        .onTapGesture {
+//            withAnimation(.snappy) {
+//                expandItems.toggle()
+//            }
+//        }
+    }
+    
+    /// Close expanded wheel view
+    @ViewBuilder
+    func CloseButton() -> some View {
+        Button {
+            Task {
+                /// Order is import, revert the animation
+                ///  1. Un-expand all the elements
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    expandItems = false
+                }
+                
+                /// 2. Hiding scroll view and place the active back to it's source  position
+                try? await Task.sleep(for: .seconds(0.2))
+                showScrollview = false
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    showContents = false
+                }
+                
+                /// 3. Closing the overlay view
+                try? await Task.sleep(for: .seconds(0.2))
+                config.show = false
             }
+        } label: {
+            Image(systemName: "xmark")
+                .font(.title2)
+                .foregroundStyle(Color.primary)
+                .frame(width: 45, height: 45)
+                .contentShape(.rect)
         }
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .trailing
+        )
+        .offset(x: expandItems ? -50 : 50, y: -10)
     }
     
     @ViewBuilder
@@ -138,11 +261,15 @@ fileprivate struct CustomWheelPickerView: View {
     }
 }
 
+//#Preview {
+//    @Previewable
+//    @State var config = PickerConfig(text: "SwiftUI")
+//    let texts = ["SwiftUI", "UIKIT", "SwiftTest", "iOS", "macOS", "Xcode", "WWDC"]
+//    CustomWheelPickerView(texts: texts, config: $config)
+//}
+
 #Preview {
-    @Previewable
-    @State var config = PickerConfig(text: "SwiftUI")
-    let texts = ["SwiftUI", "UIKIT", "SwiftTest", "iOS", "macOS", "Xcode", "WWDC"]
-    CustomWheelPickerView(texts: texts, config: $config)
+    ExpandableWheelPickerDemoView()
 }
 
 extension View {
