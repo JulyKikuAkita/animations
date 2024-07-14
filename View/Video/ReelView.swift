@@ -58,6 +58,7 @@ struct ReelView: View {
                 }
                 /// Clearing Player
                 .onDisappear {
+                    player?.pause()
                     player = nil
                 }
         }
@@ -128,22 +129,22 @@ struct ReelView: View {
     }
 }
 
-struct CustomVideoPlayer: UIViewControllerRepresentable {
-    @Binding var player: AVPlayer?
-    func makeUIViewController(context: Context) -> AVPlayerViewController {
-        let controller = AVPlayerViewController()
-        controller.player = player
-        controller.videoGravity = .resizeAspectFill
-        controller.showsPlaybackControls = false
-        
-        return controller
-    }
-    
-    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
-        /// updating player
-        uiViewController.player = player
-    }
-}
+//struct CustomVideoPlayer: UIViewControllerRepresentable {
+//    @Binding var player: AVPlayer?
+//    func makeUIViewController(context: Context) -> AVPlayerViewController {
+//        let controller = AVPlayerViewController()
+//        controller.player = player
+//        controller.videoGravity = .resizeAspectFill
+//        controller.showsPlaybackControls = false
+//        
+//        return controller
+//    }
+//    
+//    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+//        /// updating player
+//        uiViewController.player = player
+//    }
+//}
 
 #Preview {
     ContentView()
