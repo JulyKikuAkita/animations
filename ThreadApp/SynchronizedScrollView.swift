@@ -1,7 +1,6 @@
 //
 //  SynchronizedScrollView.swift
 //  ThreadApp
-// tODO: 14:58 https://www.youtube.com/watch?v=M-iWP2l9-Xg&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=59
 
 import SwiftUI
 
@@ -240,7 +239,7 @@ private struct DetailView: View {
             .scrollTargetLayout()
         }
         .scrollPosition(id: $detailScrollPosition)
-        .background(.gray.opacity(0.2))
+        .background(.black.opacity(0.9))
         .opacity(detailViewAnimation ? 1 : 0)
         .scrollTargetBehavior(.paging)
         .scrollIndicators(.hidden)
