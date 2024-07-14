@@ -198,6 +198,7 @@
 		96D4959B2BBD2AAD0011D5AA /* Reel11.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 96D4958D2BBD2AAD0011D5AA /* Reel11.mp4 */; };
 		96D4959E2BBD2AAD0011D5AA /* Reel12.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 96D495902BBD2AAD0011D5AA /* Reel12.mp4 */; };
 		96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */; };
+		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
 		96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */; };
 		96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */; };
 		96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7CEE32BE32C5C00F24910 /* TabShape.swift */; };
@@ -346,6 +347,7 @@
 		96D4958D2BBD2AAD0011D5AA /* Reel11.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel11.mp4; path = ../../../../Documents/Reel/Reel11.mp4; sourceTree = "<group>"; };
 		96D495902BBD2AAD0011D5AA /* Reel12.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel12.mp4; path = ../../../../Documents/Reel/Reel12.mp4; sourceTree = "<group>"; };
 		96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCarouselSliderView.swift; sourceTree = "<group>"; };
+		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
 		96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateScrollView.swift; sourceTree = "<group>"; };
 		96E7CEE32BE32C5C00F24910 /* TabShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabShape.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96DF8A882C39D7F90063A931 /* Sheet */,
 				966E8F952C2E8CAE00299713 /* PickerView */,
 				96301B322C2A5FAB00775407 /* TextFieldView */,
 				968A17D22C0704F20072A0BA /* TextEffectView */,
@@ -767,6 +770,14 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		96DF8A882C39D7F90063A931 /* Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */,
+			);
+			path = Sheet;
+			sourceTree = "<group>";
+		};
 		96E70B0D2B8EBF0000F23A51 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1014,6 +1025,7 @@
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
+				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
 				9621DC812BEF461400183CB7 /* photoItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
 				96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */,

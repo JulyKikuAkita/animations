@@ -28,7 +28,7 @@ struct CGFloatKey: PreferenceKey {
                        nextValue: () -> CGFloat) {
         value = nextValue()
     }
-    static var defaultValue: CGFloat = 0.0
+    static var defaultValue: CGFloat = .zero
 }
 
 
