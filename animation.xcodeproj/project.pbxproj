@@ -152,6 +152,7 @@
 		9662EF922C3E4E5000508B80 /* Reel5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9662EF912C3E4E5000508B80 /* Reel5.mp4 */; };
 		9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */; };
 		9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */; };
+		9662EFD32C471DB300508B80 /* ThemeSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -315,6 +316,7 @@
 		9662EF912C3E4E5000508B80 /* Reel5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel5.mp4; path = ../../../../Documents/Reel/Reel5.mp4; sourceTree = "<group>"; };
 		9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPagingIndicatorsView.swift; sourceTree = "<group>"; };
 		9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageIndicatorView.swift; sourceTree = "<group>"; };
+		9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchView.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -772,6 +774,7 @@
 			isa = PBXGroup;
 			children = (
 				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
+				9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */,
 			);
 			path = HelpView;
 			sourceTree = "<group>";
@@ -1173,6 +1176,7 @@
 				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
+				9662EFD32C471DB300508B80 /* ThemeSwitchView.swift in Sources */,
 				9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */,
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
