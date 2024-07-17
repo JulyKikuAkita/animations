@@ -153,6 +153,10 @@
 		9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */; };
 		9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */; };
 		9662EFD32C471DB300508B80 /* ThemeSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */; };
+		9662EFDB2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
+		9662EFDC2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
+		9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
+		9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -317,6 +321,8 @@
 		9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPagingIndicatorsView.swift; sourceTree = "<group>"; };
 		9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageIndicatorView.swift; sourceTree = "<group>"; };
 		9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchView.swift; sourceTree = "<group>"; };
+		9662EFDA2C47A8AE00508B80 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerGradientEffectView.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -532,6 +538,7 @@
 				96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */,
 				9662EF282C3E012800508B80 /* Video.swift */,
 				9662EF322C3E067100508B80 /* VideoSharedModel.swift */,
+				9662EFDA2C47A8AE00508B80 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -564,6 +571,7 @@
 				962B04772C22A162008E1E5D /* MeshGradientView.swift */,
 				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
 				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
+				9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1143,6 +1151,7 @@
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
+				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
@@ -1158,6 +1167,7 @@
 				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
+				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
 				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
@@ -1213,6 +1223,7 @@
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
 				96ACBEFB2C33BC62004F3070 /* ExpenseCard.swift in Sources */,
+				9662EFDC2C47A8AE00508B80 /* Message.swift in Sources */,
 				96352D232C0BD4C2001AD2FD /* GridImageView.swift in Sources */,
 				96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
@@ -1294,6 +1305,7 @@
 				96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */,
 				96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */,
 				9621DDAF2BF487BB00183CB7 /* Transaction.swift in Sources */,
+				9662EFDB2C47A8AE00508B80 /* Message.swift in Sources */,
 				96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */,
 				9621DD9E2BF47FDA00183CB7 /* OffsetReader.swift in Sources */,
