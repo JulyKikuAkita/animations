@@ -162,6 +162,8 @@
 		9662EFEF2C4B4FA200508B80 /* PhotosScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */; };
 		9662EFF22C4B579C00508B80 /* OtherContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF12C4B579C00508B80 /* OtherContents.swift */; };
 		9662EFF52C4B597400508B80 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF42C4B597400508B80 /* SharedData.swift */; };
+		9662EFF72C4B97CF00508B80 /* CustomPagingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF62C4B97CF00508B80 /* CustomPagingIndicatorView.swift */; };
+		9662EFFA2C4B9E0500508B80 /* PhotoAppCustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF92C4B9E0500508B80 /* PhotoAppCustomGesture.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -333,6 +335,8 @@
 		9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScrollView.swift; sourceTree = "<group>"; };
 		9662EFF12C4B579C00508B80 /* OtherContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherContents.swift; sourceTree = "<group>"; };
 		9662EFF42C4B597400508B80 /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
+		9662EFF62C4B97CF00508B80 /* CustomPagingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPagingIndicatorView.swift; sourceTree = "<group>"; };
+		9662EFF92C4B9E0500508B80 /* PhotoAppCustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAppCustomGesture.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -802,10 +806,12 @@
 		9662EFF02C4B578400508B80 /* ios18 */ = {
 			isa = PBXGroup;
 			children = (
+				9662EFF82C4B9DE700508B80 /* Helpers */,
 				9662EFF32C4B596400508B80 /* Model */,
 				9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */,
 				9662EFEC2C4B4D8400508B80 /* PhotoAppIOS18View.swift */,
 				9662EFF12C4B579C00508B80 /* OtherContents.swift */,
+				9662EFF62C4B97CF00508B80 /* CustomPagingIndicatorView.swift */,
 			);
 			path = ios18;
 			sourceTree = "<group>";
@@ -816,6 +822,14 @@
 				9662EFF42C4B597400508B80 /* SharedData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9662EFF82C4B9DE700508B80 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9662EFF92C4B9E0500508B80 /* PhotoAppCustomGesture.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		96726B152C2FA88D007A4E34 /* PomodoroFocusTimer */ = {
@@ -1253,6 +1267,7 @@
 				9662EFEF2C4B4FA200508B80 /* PhotosScrollView.swift in Sources */,
 				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
 				96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */,
+				9662EFFA2C4B9E0500508B80 /* PhotoAppCustomGesture.swift in Sources */,
 				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
@@ -1266,6 +1281,7 @@
 				9621DC3E2BEF3D7A00183CB7 /* OffsetReader.swift in Sources */,
 				9662EFF52C4B597400508B80 /* SharedData.swift in Sources */,
 				96352D252C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift in Sources */,
+				9662EFF72C4B97CF00508B80 /* CustomPagingIndicatorView.swift in Sources */,
 				9621DC3F2BEF3D7A00183CB7 /* PlayerItem.swift in Sources */,
 				9621DC402BEF3D7A00183CB7 /* Interpolation.swift in Sources */,
 				9621DC412BEF3D7A00183CB7 /* Reel.swift in Sources */,
@@ -1566,7 +1582,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1595,7 +1611,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

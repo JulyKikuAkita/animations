@@ -12,9 +12,6 @@ struct OtherContents: View {
             DummyView("Memory", .cyan)
             DummyView("Location", .green)
             DummyView("Screenshots", .pink)
-
-            //TODO: https://www.youtube.com/watch?v=6ZrMcQkwTog
-            // 8"09
         }
     }
     
