@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct CustomGesture: UIGestureRecognizerRepresentable {
+struct PhotoAppCustomGesture: UIGestureRecognizerRepresentable {
     var isEnabled: Bool
     var handle: (UIPanGestureRecognizer) -> ()
     

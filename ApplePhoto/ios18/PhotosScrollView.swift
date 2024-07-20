@@ -8,6 +8,8 @@ struct PhotosScrollView: View {
     var size: CGSize
     var safeArea: EdgeInsets
     @Environment(SharedData.self) private var sharedData
+    /// photo scroll position
+    @State private var scrollPosition: ScrollPosition = .init()
     var body: some View {
         let screenHeight = size.height + safeArea.top + safeArea.bottom
         let minimizedHeight = screenHeight * 0.4
@@ -26,21 +28,22 @@ struct PhotosScrollView: View {
                 Group {
                     StretchableView(.blue)
                         .id(2)
-                    
                     StretchableView(.yellow)
                         .id(3)
-                    
                     StretchableView(.brown)
                         .id(4)
                 }
                 .frame(height: screenHeight - minimizedHeight)
             }
+            /// adding space for indicator
+            .padding(.bottom, safeArea.bottom + 20) /// cause glitch if apply to scroll view instead of its content
             .scrollTargetLayout()
         }
+        .scrollClipDisabled()
         .scrollIndicators(.hidden)
         .scrollTargetBehavior(.paging)
-        /// adding space for indicator
-        .safeAreaPadding(.bottom, 15)
+        /// stay at the bottom when can pull up is true, modifier to scrollView content might cause glitch
+        .offset(y: sharedData.canPullUp ? sharedData.photoScrollOffset : 0)
         .scrollPosition(id: .init(get: {
             return sharedData.activePage
         }, set: {
@@ -51,11 +54,28 @@ struct PhotosScrollView: View {
         .frame(height: screenHeight)
         /// increasing the scrollView height based on progress
         .frame(height: screenHeight - (minimizedHeight - (minimizedHeight * sharedData.progress)),
-            alignment: .bottom
-        )
-        .frame(height: screenHeight - minimizedHeight, alignment: .bottom)
+               alignment: .bottom)
         .overlay(alignment: .bottom) {
-            CustomPagingIndicatorView()
+            CustomPagingIndicatorView {
+                Task {
+                    /// check if photo view is scrolled
+                    if sharedData.photoScrollOffset != 0 {
+                        /// if so, reset scroll position
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            scrollPosition.scrollTo(edge: .bottom)
+                        }
+                        
+                        try? await Task.sleep(for: .seconds(0.13))
+                    }
+                    
+                    /// minimizing expand view
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        sharedData.progress = 0
+                        sharedData.isExpanded = false
+                        
+                    }
+                }
+            }
         }
     }
     
@@ -65,13 +85,23 @@ struct PhotosScrollView: View {
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 4), count: 3), spacing: 4) {
                 ForEach(0...300, id:\.self) { _ in
                     Rectangle()
-                        .fill(.red)
+                        .fill(.pink.gradient.opacity(0.5))
                         .frame(height: 120)
                 }
             }
+            .offset(y: sharedData.progress * -(safeArea.bottom + 20))
+            .scrollTargetLayout()
         }
         .defaultScrollAnchor(.bottom) /// make the scroll view start from the bottom
-        .scrollDisabled(sharedData.isExpanded)
+        .scrollDisabled(!sharedData.isExpanded)
+        .scrollPosition($scrollPosition)
+        .scrollClipDisabled()
+        .onScrollGeometryChange(for: CGFloat.self, of: {
+            /// This will be zero when content is placed at the bottom
+            $0.contentOffset.y - $0.contentSize.height + $0.containerSize.height
+        }, action: { oldValue, newValue in
+            sharedData.photoScrollOffset = newValue
+        })
     }
     
     /// Stretchable Paging Views

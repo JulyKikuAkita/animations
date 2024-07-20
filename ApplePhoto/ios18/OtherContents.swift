@@ -8,10 +8,10 @@ struct OtherContents: View {
     var body: some View {
         VStack(spacing: 10) {
             DummyView("Albums", .yellow)
-            DummyView("People", .blue)
+            DummyView("People", .indigo)
             DummyView("Memory", .cyan)
             DummyView("Location", .green)
-            DummyView("Screenshots", .pink)
+            DummyView("Screenshots", .orange)
         }
     }
     

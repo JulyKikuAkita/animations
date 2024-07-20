@@ -27,9 +27,11 @@ struct PhotoAppIOS18View: View {
             VStack(spacing: 10) {
                 /// Photo Grid Scroll View
                 PhotosScrollView(size:size, safeArea: safeArea)
-                
+
                 /// bottom half view
                 OtherContents()
+                    .padding(.top, -30)
+                    .offset(y: sharedData.progress * 30)
             }
             /// have scrollView is bounce from the top direction
             .offset(y: sharedData.canPullDown ? 0 : mainOffset < 0 ? -mainOffset : 0)
@@ -45,32 +47,53 @@ struct PhotoAppIOS18View: View {
         .environment(sharedData)
         .gesture(
             /// only allow gesture when the photos grid scrollView is visible
-            CustomGesture(isEnabled: sharedData.activePage == 1) { gesture in
+            PhotoAppCustomGesture(isEnabled: sharedData.activePage == 1) { gesture in
                 let state = gesture.state
                 let translation = gesture.translation(in: gesture.view).y
                 let isScrolling = state == .began || state == .changed
                 
                 if state == .began {
                     sharedData.canPullDown = translation > 0 && sharedData.mainOffset == 0
+                    sharedData.canPullUp = translation < 0 && sharedData.photoScrollOffset == 0
                 }
                 
                 if isScrolling {
-                    /// onChanged modifier in Drag gesture
-                    if sharedData.canPullDown {
+                    /// similar to onChanged modifier in Drag gesture
+                    if sharedData.canPullDown && !sharedData.isExpanded {
                         let progress = max(min(translation / minimizedHeight, 1), 0)
                         sharedData.progress = progress
+                    }
+                    
+                    if sharedData.canPullUp && sharedData.isExpanded {
+                        let progress = max(min(-translation / minimizedHeight, 1), 0)
+                        sharedData.progress = 1 - progress
                     }
                 } else {
                     /// Like onEnd modifier in drag gesture
                     withAnimation(.smooth(duration: 0.35, extraBounce: 0)) {
-                        if sharedData.canPullDown {
-                            sharedData.isExpanded = true
-                            sharedData.progress = 0
+                        if sharedData.canPullDown && !sharedData.isExpanded {
+                            if translation > 0 { /// add more criteria as needed to trigger expand
+                                sharedData.isExpanded = true
+                                sharedData.progress = 1
+                            }
+                            
+                        }
+                        
+                        if sharedData.canPullUp && sharedData.isExpanded {
+                            if translation < 0 { /// add more criteria as needed to trigger expand
+                                sharedData.isExpanded = false
+                                sharedData.progress = 0
+                            }
+                            
                         }
                     }
                 }
             }
         )
+        .onChange(of: sharedData.canPullDown){ oldValue, newValue in
+            print(newValue)
+        }
+        .background(.gray.opacity(0.05))
     }
 }
 
