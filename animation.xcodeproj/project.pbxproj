@@ -158,6 +158,10 @@
 		9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */; };
 		9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */; };
+		9662EFED2C4B4D8400508B80 /* PhotoAppIOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFEC2C4B4D8400508B80 /* PhotoAppIOS18View.swift */; };
+		9662EFEF2C4B4FA200508B80 /* PhotosScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */; };
+		9662EFF22C4B579C00508B80 /* OtherContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF12C4B579C00508B80 /* OtherContents.swift */; };
+		9662EFF52C4B597400508B80 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF42C4B597400508B80 /* SharedData.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -325,6 +329,10 @@
 		9662EFDA2C47A8AE00508B80 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerGradientEffectView.swift; sourceTree = "<group>"; };
 		9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteLoopingScrollView.swift; sourceTree = "<group>"; };
+		9662EFEC2C4B4D8400508B80 /* PhotoAppIOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAppIOS18View.swift; sourceTree = "<group>"; };
+		9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScrollView.swift; sourceTree = "<group>"; };
+		9662EFF12C4B579C00508B80 /* OtherContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherContents.swift; sourceTree = "<group>"; };
+		9662EFF42C4B597400508B80 /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -636,6 +644,7 @@
 		9621DC872BEF4B2200183CB7 /* ApplePhoto */ = {
 			isa = PBXGroup;
 			children = (
+				9662EFF02C4B578400508B80 /* ios18 */,
 				9621DC852BEF489200183CB7 /* ApplePhotoHomeView.swift */,
 				9621DC882BEF4B6F00183CB7 /* DetailView.swift */,
 				9621DC8C2BF0121E00183CB7 /* HeroLayer.swift */,
@@ -788,6 +797,25 @@
 				9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */,
 			);
 			path = HelpView;
+			sourceTree = "<group>";
+		};
+		9662EFF02C4B578400508B80 /* ios18 */ = {
+			isa = PBXGroup;
+			children = (
+				9662EFF32C4B596400508B80 /* Model */,
+				9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */,
+				9662EFEC2C4B4D8400508B80 /* PhotoAppIOS18View.swift */,
+				9662EFF12C4B579C00508B80 /* OtherContents.swift */,
+			);
+			path = ios18;
+			sourceTree = "<group>";
+		};
+		9662EFF32C4B596400508B80 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9662EFF42C4B597400508B80 /* SharedData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		96726B152C2FA88D007A4E34 /* PomodoroFocusTimer */ = {
@@ -1217,10 +1245,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9662EFF22C4B579C00508B80 /* OtherContents.swift in Sources */,
 				96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */,
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
 				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
 				9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */,
+				9662EFEF2C4B4FA200508B80 /* PhotosScrollView.swift in Sources */,
 				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
 				96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */,
 				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
@@ -1234,6 +1264,7 @@
 				9621DC3D2BEF3D7A00183CB7 /* Tag.swift in Sources */,
 				9662EF2A2C3E012800508B80 /* Video.swift in Sources */,
 				9621DC3E2BEF3D7A00183CB7 /* OffsetReader.swift in Sources */,
+				9662EFF52C4B597400508B80 /* SharedData.swift in Sources */,
 				96352D252C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift in Sources */,
 				9621DC3F2BEF3D7A00183CB7 /* PlayerItem.swift in Sources */,
 				9621DC402BEF3D7A00183CB7 /* Interpolation.swift in Sources */,
@@ -1258,6 +1289,7 @@
 				96352D502C0ED814001AD2FD /* CreditCard.swift in Sources */,
 				9621DC5F2BEF3F1B00183CB7 /* DemoView.swift in Sources */,
 				9621DC3A2BEF3D7600183CB7 /* Card.swift in Sources */,
+				9662EFED2C4B4D8400508B80 /* PhotoAppIOS18View.swift in Sources */,
 				9621DC342BEF3D5600183CB7 /* AppleMusicHomeView.swift in Sources */,
 				9621DC802BEF461000183CB7 /* photoItem.swift in Sources */,
 			);
