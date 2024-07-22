@@ -157,6 +157,7 @@
 		9662EFDC2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */; };
+		9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -323,6 +324,7 @@
 		9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchView.swift; sourceTree = "<group>"; };
 		9662EFDA2C47A8AE00508B80 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerGradientEffectView.swift; sourceTree = "<group>"; };
+		9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteLoopingScrollView.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 			children = (
 				9621D9682BE8409E00183CB7 /* Layout */,
 				96352CE02C09A416001AD2FD /* AnchorKey.swift */,
+				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
 				96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */,
 				9600DE502BA17D1800205DE9 /* CustomToast.swift */,
 				96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */,
@@ -523,7 +526,6 @@
 				968D2D782B8C34CB00007734 /* WindowSharedModel.swift */,
 				968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */,
 				96C0C2D62B905DDE00F56FF5 /* Card.swift */,
-				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
 				96FF509A2B94465700B36142 /* PlayerItem.swift */,
 				96FF509C2B944D1B00B36142 /* PlayerConfig.swift */,
 				963DB14A2BBBD21400AAF347 /* Reel.swift */,
@@ -758,6 +760,7 @@
 				96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */,
 				96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */,
 				9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */,
+				9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */,
 			);
 			path = Carousel;
 			sourceTree = "<group>";
@@ -1189,6 +1192,7 @@
 				9662EFD32C471DB300508B80 /* ThemeSwitchView.swift in Sources */,
 				9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */,
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
+				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
 				962B04762C215176008E1E5D /* Pixellate.metal in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
