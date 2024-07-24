@@ -157,13 +157,14 @@
 		9662EFDC2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */; };
-		9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */; };
 		9662EFED2C4B4D8400508B80 /* PhotoAppIOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFEC2C4B4D8400508B80 /* PhotoAppIOS18View.swift */; };
 		9662EFEF2C4B4FA200508B80 /* PhotosScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */; };
 		9662EFF22C4B579C00508B80 /* OtherContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF12C4B579C00508B80 /* OtherContents.swift */; };
 		9662EFF52C4B597400508B80 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF42C4B597400508B80 /* SharedData.swift */; };
 		9662EFF72C4B97CF00508B80 /* CustomPagingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF62C4B97CF00508B80 /* CustomPagingIndicatorView.swift */; };
 		9662EFFA2C4B9E0500508B80 /* PhotoAppCustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF92C4B9E0500508B80 /* PhotoAppCustomGesture.swift */; };
+		9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */; };
+		9662F0112C50854400508B80 /* ImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0102C50854400508B80 /* ImageCarouselView.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -330,13 +331,14 @@
 		9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitchView.swift; sourceTree = "<group>"; };
 		9662EFDA2C47A8AE00508B80 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerGradientEffectView.swift; sourceTree = "<group>"; };
-		9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteLoopingScrollView.swift; sourceTree = "<group>"; };
 		9662EFEC2C4B4D8400508B80 /* PhotoAppIOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAppIOS18View.swift; sourceTree = "<group>"; };
 		9662EFEE2C4B4FA200508B80 /* PhotosScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosScrollView.swift; sourceTree = "<group>"; };
 		9662EFF12C4B579C00508B80 /* OtherContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherContents.swift; sourceTree = "<group>"; };
 		9662EFF42C4B597400508B80 /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		9662EFF62C4B97CF00508B80 /* CustomPagingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPagingIndicatorView.swift; sourceTree = "<group>"; };
 		9662EFF92C4B9E0500508B80 /* PhotoAppCustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAppCustomGesture.swift; sourceTree = "<group>"; };
+		9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteLoopingScrollView.swift; sourceTree = "<group>"; };
+		9662F0102C50854400508B80 /* ImageCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 				96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */,
 				9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */,
 				9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */,
+				9662F0102C50854400508B80 /* ImageCarouselView.swift */,
 			);
 			path = Carousel;
 			sourceTree = "<group>";
@@ -1241,6 +1244,7 @@
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */,
 				9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */,
+				9662F0112C50854400508B80 /* ImageCarouselView.swift in Sources */,
 				968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */,
 				96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */,
 				9621D9672BE8409A00183CB7 /* TagLayout.swift in Sources */,
