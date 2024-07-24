@@ -10,6 +10,7 @@ import SwiftUI
 /// AppleMusicHomeView()
 /// ApplePhotoHomeView()
 /// PinchZoomDemoView()
+@main
 struct demoApp: App {
     var body: some Scene {
         WindowGroup {
@@ -19,13 +20,12 @@ struct demoApp: App {
 }
 
 /// a demo app for Timer: https://pomofocus.io/
-@main
-struct Pomodoro_TimerApp: App {
-    var body: some Scene {
-        WindowGroup {
-            TimerHomeView()
-            /// Injecting  Model
-                .modelContainer(for: Recent.self)
-        }
-    }
-}
+//struct Pomodoro_TimerApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            TimerHomeView()
+//            /// Injecting  Model
+//                .modelContainer(for: Recent.self)
+//        }
+//    }
+//}

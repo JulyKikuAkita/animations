@@ -1,8 +1,6 @@
 //
 //  ApplePhotoHomeView.swift
 //  demoApp
-//  TODO: https://www.youtube.com/watch?v=ktaGsPwGZpA&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=105
-// creating hero layer 5:08
 import SwiftUI
 
 struct ApplePhotoHomeView: View {
