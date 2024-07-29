@@ -1,7 +1,7 @@
 //
 //  UICoordinator.swift
 //  demoApp
-// Model fro Apple photo app
+// Model for Apple photo app
 
 import SwiftUI
 

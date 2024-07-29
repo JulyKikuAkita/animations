@@ -41,7 +41,7 @@ struct CustomCarousel<Content: View, Data: RandomAccessCollection>: View where D
             let size = $0.size
             
             ScrollView(.horizontal) {
-                HStack(spacing: config.spacing) { /// if use lazyHStack + offset modifier, the view at both side might not be visuble until itemView reaches the screen space
+                HStack(spacing: config.spacing) { /// if use lazyHStack + offset modifier, the view at both side might not be visible until itemView reaches the screen space
                     ForEach(data) { item in
                         ItemView(item)
                     }
