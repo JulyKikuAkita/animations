@@ -170,6 +170,7 @@
 		9662F0212C58348100508B80 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
 		9662F0232C5838CB00508B80 /* MorphingSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */; };
 		9662F0252C583FB600508B80 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0242C583FB600508B80 /* LandingView.swift */; };
+		9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F02C2C58482200508B80 /* MetaballAnimationView.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -347,6 +348,7 @@
 		9662F01E2C58348100508B80 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphingSymbolView.swift; sourceTree = "<group>"; };
 		9662F0242C583FB600508B80 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingView.swift; path = View/LandingView.swift; sourceTree = SOURCE_ROOT; };
+		9662F02C2C58482200508B80 /* MetaballAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaballAnimationView.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -598,6 +600,7 @@
 				9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */,
 				9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */,
 				9662F0242C583FB600508B80 /* LandingView.swift */,
+				9662F02C2C58482200508B80 /* MetaballAnimationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1230,6 +1233,7 @@
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
 				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
+				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
