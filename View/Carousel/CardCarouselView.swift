@@ -206,5 +206,5 @@ extension CarouselView2 {
 }
 
 #Preview {
-    ContentView()
+    CardCarouselView()
 }
