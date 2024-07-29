@@ -165,6 +165,11 @@
 		9662EFFA2C4B9E0500508B80 /* PhotoAppCustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFF92C4B9E0500508B80 /* PhotoAppCustomGesture.swift */; };
 		9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */; };
 		9662F0112C50854400508B80 /* ImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0102C50854400508B80 /* ImageCarouselView.swift */; };
+		9662F01F2C58348100508B80 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
+		9662F0202C58348100508B80 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
+		9662F0212C58348100508B80 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
+		9662F0232C5838CB00508B80 /* MorphingSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */; };
+		9662F0252C583FB600508B80 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0242C583FB600508B80 /* LandingView.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -339,6 +344,9 @@
 		9662EFF92C4B9E0500508B80 /* PhotoAppCustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAppCustomGesture.swift; sourceTree = "<group>"; };
 		9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteLoopingScrollView.swift; sourceTree = "<group>"; };
 		9662F0102C50854400508B80 /* ImageCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
+		9662F01E2C58348100508B80 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphingSymbolView.swift; sourceTree = "<group>"; };
+		9662F0242C583FB600508B80 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingView.swift; path = View/LandingView.swift; sourceTree = SOURCE_ROOT; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -554,6 +562,7 @@
 				9662EF322C3E067100508B80 /* VideoSharedModel.swift */,
 				9662EFDA2C47A8AE00508B80 /* Message.swift */,
 				963DB14A2BBBD21400AAF347 /* Reel.swift */,
+				9662F01E2C58348100508B80 /* Page.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -587,6 +596,8 @@
 				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
 				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
 				9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */,
+				9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */,
+				9662F0242C583FB600508B80 /* LandingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1202,6 +1213,7 @@
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
+				9662F0252C583FB600508B80 /* LandingView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
@@ -1222,6 +1234,7 @@
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */,
+				9662F01F2C58348100508B80 /* Page.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
@@ -1248,6 +1261,7 @@
 				968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */,
 				96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */,
 				9621D9672BE8409A00183CB7 /* TagLayout.swift in Sources */,
+				9662F0232C5838CB00508B80 /* MorphingSymbolView.swift in Sources */,
 				96B884EA2BDD82B000196125 /* Interpolation.swift in Sources */,
 				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
 				9621D9632BE5F7D100183CB7 /* Tag.swift in Sources */,
@@ -1277,6 +1291,7 @@
 				9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */,
 				96ACBEFB2C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				9662EFDC2C47A8AE00508B80 /* Message.swift in Sources */,
+				9662F0202C58348100508B80 /* Page.swift in Sources */,
 				96352D232C0BD4C2001AD2FD /* GridImageView.swift in Sources */,
 				96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
@@ -1374,6 +1389,7 @@
 				9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */,
 				9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */,
 				9621DDA92BF4813100183CB7 /* Constants.swift in Sources */,
+				9662F0212C58348100508B80 /* Page.swift in Sources */,
 				96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D552C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
 			);
