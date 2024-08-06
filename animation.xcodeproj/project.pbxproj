@@ -194,6 +194,7 @@
 		968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
 		968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */; };
+		968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */; };
 		96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
@@ -377,6 +378,7 @@
 		968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab_iOS17.swift; sourceTree = "<group>"; };
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
 		968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBottomSheetsView.swift; sourceTree = "<group>"; };
+		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
 		96ACBEF22C33B79E004F3070 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHomeView.swift; sourceTree = "<group>"; };
 		96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
@@ -826,6 +828,7 @@
 			children = (
 				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
 				9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */,
+				968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */,
 			);
 			path = HelpView;
 			sourceTree = "<group>";
@@ -1214,6 +1217,7 @@
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
+				968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
 				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
