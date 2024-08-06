@@ -1,7 +1,7 @@
 //
 //  MorphingSymbolView.swift
 //  animation
-
+//  iOS 18
 import SwiftUI
 
 struct MorphingSymbolView: View {
