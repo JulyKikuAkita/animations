@@ -30,8 +30,9 @@ struct BlurEffectSearchBarView: View {
                 }
             }
             .padding(15)
-            .offset(y: progress * 75) // address 2.1
+            .offset(y: isFocused ? 0 : progress * 75) // address 2.1
             .padding(.bottom, 75) // address 2.1
+            .animation(.snappy(duration: 0.3, extraBounce: 0), value: isFocused)
             .safeAreaInset(edge: .top, spacing: 0) {
                 ResizableHeader()
             }
@@ -46,6 +47,7 @@ struct BlurEffectSearchBarView: View {
     
     @ViewBuilder
     func ResizableHeader() -> some View {
+        let progress = isFocused ? 1 : progress
         VStack(spacing: 0) {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
@@ -82,25 +84,29 @@ struct BlurEffectSearchBarView: View {
                 Image(systemName: "magnifyingglass")
                 
                 TextField("Search Photo", text: $searchText)
+                    .focused($isFocused)
                 
                 /// Microphone Button
                 Button {
                     
                 } label: {
                     Image(systemName: "microphone.fill")
-                        .foregroundStyle(Color.primary)
+                        .foregroundStyle(Color.red)
                 }
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 15)
             .background {
-                RoundedRectangle(cornerRadius: 30)
+                RoundedRectangle(cornerRadius: isFocused ? 0 : 30)
                     .fill(.background
                         .shadow(.drop(color: .black.opacity(0.08), radius: 5, x: 5, y:5))
                         .shadow(.drop(color: .black.opacity(0.05), radius: 5, x: -5, y:-5))
                     )
+                    .padding(
+                        .top, isFocused ? -100 : 0
+                    ) // roughly to let background fill the top space + safe areas
             }
-            .padding(.horizontal, 15)
+            .padding(.horizontal, isFocused ? 0 : 15)
             .padding(.bottom, 10)
             .padding(.top, 5)
         }
@@ -112,7 +118,7 @@ struct BlurEffectSearchBarView: View {
     
     nonisolated private func offsetY(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
-        return minY > 0 ? 0 : -minY
+        return minY > 0 ? (isFocused ? -minY : 0) : -minY
     }
     
     @ViewBuilder
