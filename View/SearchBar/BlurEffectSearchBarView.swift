@@ -3,6 +3,10 @@
 //  animation
 //
 //  1. make header sticky
+//  2. make header fade away when scrollView scrolled
+//  2.1: view scroll faster at the beginning b.c. header height changes dynamically ->
+// to solve this, push the view in the opposite direction w/ the amount of height reduced, 75 CGFloat
+//  3. implement expandable search bar
 //
 
 import SwiftUI
@@ -15,6 +19,8 @@ struct BlurEffectSearchBarDemoView: View {
 struct BlurEffectSearchBarView: View {
     /// View Properties
     @State private var searchText: String = ""
+    @State private var progress: CGFloat = 0
+    @FocusState private var isFocused: Bool //TODO: 7:11
     
     var body: some View {
         ScrollView(.vertical) {
@@ -24,9 +30,17 @@ struct BlurEffectSearchBarView: View {
                 }
             }
             .padding(15)
+            .offset(y: progress * 75) // address 2.1
+            .padding(.bottom, 75) // address 2.1
             .safeAreaInset(edge: .top, spacing: 0) {
                 ResizableHeader()
             }
+        }
+        .onScrollGeometryChange(for: CGFloat.self) {
+            $0.contentOffset.y + $0.contentInsets.top
+        } action: { oldValue, newValue in
+            /// ResizableHeader height 60 + bottom padding 15
+            progress = max(min(newValue / 75, 1), 0)
         }
     }
     
@@ -56,8 +70,12 @@ struct BlurEffectSearchBarView: View {
                         .clipShape(.circle)
                 }
             }
+            .frame(height: 60 - (60 * progress), alignment: .bottom)
             .padding(.horizontal, 15)
-            .padding(.vertical, 15)
+            .padding(.top, 15)
+            .padding(.bottom, 15 - (15 * progress))
+            .opacity(1 - progress)
+            .offset(y: -10 * progress)
             
             /// Floating Search Bar
             HStack(spacing: 8) {
@@ -84,6 +102,7 @@ struct BlurEffectSearchBarView: View {
             }
             .padding(.horizontal, 15)
             .padding(.bottom, 10)
+            .padding(.top, 5)
         }
         .visualEffect { content, proxy in
             content
