@@ -36,7 +36,9 @@ struct BlurEffectSearchBarView: View {
             .safeAreaInset(edge: .top, spacing: 0) {
                 ResizableHeader()
             }
+            .scrollTargetLayout()
         }
+        .scrollTargetBehavior(CustomScrollTarget())
         .onScrollGeometryChange(for: CGFloat.self) {
             $0.contentOffset.y + $0.contentInsets.top
         } action: { oldValue, newValue in
@@ -110,6 +112,13 @@ struct BlurEffectSearchBarView: View {
             .padding(.bottom, 10)
             .padding(.top, 5)
         }
+        .background {
+            ProgressiveBlurView()
+                .blur(radius: isFocused ? 0 : 10)
+                .padding(.horizontal, -15)
+                .padding(.bottom, -10)
+                .padding(.top, -100)
+        }
         .visualEffect { content, proxy in
             content
                 .offset(y: offsetY(proxy))
@@ -138,6 +147,20 @@ struct BlurEffectSearchBarView: View {
             Text("By: \(item.title)")
                 .font(.callout)
                 .foregroundStyle(.primary.secondary)
+        }
+    }
+}
+
+struct CustomScrollTarget: ScrollTargetBehavior {
+    func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+        let endPoint = target.rect.minY
+        
+        if endPoint < 75 {
+            if endPoint > 40 {
+                target.rect.origin = .init(x: 0, y: 75)
+            } else {
+                target.rect.origin = .zero
+            }
         }
     }
 }
