@@ -235,6 +235,8 @@
 		96DF8A9B2C3A682A0063A931 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96DF8A9A2C3A682A0063A931 /* Preview Assets.xcassets */; };
 		96DF8ABC2C3A687B0063A931 /* SynchronizedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8ABB2C3A687B0063A931 /* SynchronizedScrollView.swift */; };
 		96E09E7A2C6ED10C00A0BE66 /* ProgressiveBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09E792C6ED10C00A0BE66 /* ProgressiveBlurView.swift */; };
+		96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */; };
+		96E09EC72C74105300A0BE66 /* FloatingTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */; };
 		96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */; };
 		96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */; };
 		96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7CEE32BE32C5C00F24910 /* TabShape.swift */; };
@@ -415,6 +417,8 @@
 		96DF8A9A2C3A682A0063A931 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		96DF8ABB2C3A687B0063A931 /* SynchronizedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedScrollView.swift; sourceTree = "<group>"; };
 		96E09E792C6ED10C00A0BE66 /* ProgressiveBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressiveBlurView.swift; sourceTree = "<group>"; };
+		96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBarView.swift; sourceTree = "<group>"; };
+		96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabbar.swift; sourceTree = "<group>"; };
 		96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateScrollView.swift; sourceTree = "<group>"; };
 		96E7CEE32BE32C5C00F24910 /* TabShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabShape.swift; sourceTree = "<group>"; };
@@ -964,6 +968,8 @@
 				96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */,
 				96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */,
 				96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */,
+				96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */,
+				96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -1223,6 +1229,7 @@
 				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
+				96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */,
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
@@ -1264,6 +1271,7 @@
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
 				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
+				96E09EC72C74105300A0BE66 /* FloatingTabbar.swift in Sources */,
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
 				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
