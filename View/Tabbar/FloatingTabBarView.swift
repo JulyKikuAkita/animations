@@ -90,13 +90,20 @@ struct FloatingTabBarView: View {
 
 /// Fix iOS17.3/4 has some glitch of  modifier .toolbar(.hidden, for: .tabBar) to hide tab bar
 fileprivate struct HideTabBar: UIViewRepresentable {
+    init(result: @escaping () -> Void) {
+       UITabBar.appearance().isHidden = true
+       self.result = result
+    }
+    
     var result: () -> ()
+    
     func makeUIView(context: Context) -> some UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
         
         DispatchQueue.main.async {
             if let tabController = view.tabController {
+                UITabBar.appearance().isHidden = false
                 tabController.tabBar.isHidden = true
                 result()
             }
