@@ -1,9 +1,18 @@
 //
 //  DynamicSheetView.swift
 //  animation
-// wip: 14:0 0https://www.youtube.com/watch?v=Y4Vm61vrhTE&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=28
 
 import SwiftUI
+
+//@main
+struct DynamicSheetApp: App {
+    var body: some Scene {
+        WindowGroup {
+            DynamicSheetDemoView()
+        }
+    }
+}
+
 
 struct DynamicSheetDemoView: View {
     var body: some View {
