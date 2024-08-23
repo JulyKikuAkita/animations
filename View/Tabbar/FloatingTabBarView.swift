@@ -4,6 +4,15 @@
 
 import SwiftUI
 
+//@main
+struct FloatingTabBarApp: App {
+    var body: some Scene {
+        WindowGroup {
+            FloatingTabBarDemoView()
+        }
+    }
+}
+
 struct FloatingTabBarDemoView: View {
     /// View Properties
     @State private var activeTab: Tab_iOS17 = .apps

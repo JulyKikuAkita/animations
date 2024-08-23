@@ -130,6 +130,8 @@
 		965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E039F2BCB2C4A00E8A400 /* BookView.swift */; };
 		965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */; };
 		965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E573B2BC5097C00E172B3 /* DropDownView.swift */; };
+		96601FEF2C7807DD002C91FB /* SchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FEE2C7807DD002C91FB /* SchemePicker.swift */; };
+		96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */; };
 		9662EF122C3B51E900508B80 /* PicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF112C3B51E900508B80 /* PicItem.swift */; };
 		9662EF152C3B7E3E00508B80 /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF142C3B7E3E00508B80 /* OffsetKey.swift */; };
 		9662EF292C3E012800508B80 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF282C3E012800508B80 /* Video.swift */; };
@@ -329,6 +331,8 @@
 		965E039F2BCB2C4A00E8A400 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectsView.swift; sourceTree = "<group>"; };
 		965E573B2BC5097C00E172B3 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		96601FEE2C7807DD002C91FB /* SchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemePicker.swift; sourceTree = "<group>"; };
+		96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcherView.swift; sourceTree = "<group>"; };
 		9662EF112C3B51E900508B80 /* PicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicItem.swift; sourceTree = "<group>"; };
 		9662EF142C3B7E3E00508B80 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
 		9662EF282C3E012800508B80 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 				96EBF5E02BD793B400FDD20D /* ColorModel.swift */,
 				965999192BE0BCD6000133FA /* View+Extension.swift */,
 				96ACBF072C3675FA004F3070 /* TabView+Extension.swift */,
+				96601FEE2C7807DD002C91FB /* SchemePicker.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 				9662F02E2C58BBBB00508B80 /* MorphingView.swift */,
 				9662F0242C583FB600508B80 /* LandingView.swift */,
 				9662F02C2C58482200508B80 /* MetaballAnimationView.swift */,
+				96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1226,6 +1232,7 @@
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
 				9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */,
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
+				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
@@ -1265,6 +1272,7 @@
 				968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
+				96601FEF2C7807DD002C91FB /* SchemePicker.swift in Sources */,
 				9684833D2BCF62C50023FE2B /* Particle.swift in Sources */,
 				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,

@@ -1,11 +1,17 @@
 //
 //  AnimatedTabView.swift
 //  animation
-//
-//  Created by IFang Lee on 2/27/24.
-//
 
 import SwiftUI
+
+//@main
+struct TabbarAnimationApp: App {
+    var body: some Scene {
+        WindowGroup {
+            AnimatedTabView()
+        }
+    }
+}
 
 struct AnimatedTabView: View {
     /// View properties
