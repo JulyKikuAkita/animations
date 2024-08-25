@@ -526,7 +526,7 @@
 				9621DB142BEDDD6100183CB7 /* Gesture */,
 				96845DA32BD3346500B7D8B2 /* AppleMusic */,
 				9621DC872BEF4B2200183CB7 /* ApplePhoto */,
-				9621DC262BEF3CF800183CB7 /* demoApp */,
+				9621DC262BEF3CF800183CB7 /* demoApps */,
 				9621DC4B2BEF3E5E00183CB7 /* Alert */,
 				9621DD882BF47FC800183CB7 /* MyMint */,
 				96DF8A922C3A68290063A931 /* ThreadApp */,
@@ -649,7 +649,7 @@
 			path = Gesture;
 			sourceTree = "<group>";
 		};
-		9621DC262BEF3CF800183CB7 /* demoApp */ = {
+		9621DC262BEF3CF800183CB7 /* demoApps */ = {
 			isa = PBXGroup;
 			children = (
 				9621DC272BEF3CF800183CB7 /* demoApp.swift */,
@@ -657,7 +657,7 @@
 				9621DC762BEF406500183CB7 /* Assets.xcassets */,
 				9621DC782BEF40B600183CB7 /* Preview Content */,
 			);
-			path = demoApp;
+			path = demoApps;
 			sourceTree = "<group>";
 		};
 		9621DC4B2BEF3E5E00183CB7 /* Alert */ = {
