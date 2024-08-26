@@ -14,6 +14,13 @@ struct PSTabbarView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 30)
+                        .offset(y: offset(tab))
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.7)) {
+                                activeTab = tab
+                            }
+                        }
                         .frame(maxWidth: .infinity)
                     
                 }
@@ -21,7 +28,7 @@ struct PSTabbarView: View {
             .padding(.top, 12)
             .padding(.bottom, 20)
         }
-        .padding(.bottom, safeArea.bottom == 0 ? 15 : safeArea.bottom)
+        .padding(.bottom, safeArea.bottom == 0 ? 30 : safeArea.bottom)
         .background {
             ZStack {
                 /// Adding border
@@ -42,29 +49,86 @@ struct PSTabbarView: View {
                 let height = rect.height
                 
                 Circle()
-                    .fill(.orange)
+                    .fill(.clear)
                     .frame(width: maxedWidth, height: maxedWidth)
+                    .background(alignment: .top) {
+                        Rectangle()
+                            .fill(
+                                .linearGradient(
+                                    colors: [
+                                        .purple.opacity(0.2),
+                                        .purple.opacity(0.5),
+                                        .purple.opacity(0.5),
+                                    ],
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
+                            /// Masking into a big circle shape
+                            .mask(alignment: .top) {
+                                Circle()
+                                    .frame(
+                                        width: maxedWidth,
+                                        height: maxedWidth,
+                                        alignment: .top)
+                            }
+                    }
+                    /// Border
+                    .overlay {
+                        Circle()
+                            .stroke(.white, lineWidth: 0.2)
+                            .blur(radius: 0.5)
+                    }
                     .frame(width: width)
                     /// custom indicator
-                    .overlay(content: {
+                    .background(content: {
                         Rectangle()
                             .fill(.white)
-                            .frame(width: 34, height: 4)
+                            .frame(width: 45, height: 4)
+                            /// custom glow effect
+                            .glow(.white.opacity(0.5), radius: 50)
+                            .glow(.yellow.opacity(0.7), radius: 30)
                             .offset(y: -1.5)
-                        /// when at center, move to top location
+                            /// when at center, move to top location
                             .offset(y: -maxedWidth / 2)
+                            .rotationEffect(.init(degrees: calculateRotation(maxedWidth: maxedWidth / 2, actualWidth: width, true)))
+                            .rotationEffect(.init(degrees: calculateRotation(maxedWidth: maxedWidth / 2, actualWidth: width)))
                     })
                     .offset(y: height / 2.1)
                 
+            }
+            /// Active Tab text
+            .overlay(alignment: .bottom) {
+                Text(activeTab.rawValue)
+                    .font(.system(size: 14))
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .offset(y: safeArea.bottom == 0 ? -15 : -safeArea.bottom + 12)
             }
         }
         .preferredColorScheme(.light)
     }
     
-    /// https://www.youtube.com/watch?v=4zyuGXTyZ80 at 8:00
+    /// https://www.youtube.com/watch?v=4zyuGXTyZ80 at 8:00-8:10 to get 85.4 degree s of rotation
+    ///  tan - 1(y/x) = tan - 1(975/78) = tan -1(12.5) = 1.4 radians == 84.5 degrees
     /// calculating rotate using Trigonometry
-    func rotation() -> CGFloat {
-        return .zero
+    func calculateRotation(maxedWidth y: CGFloat, actualWidth: CGFloat, _ isInitial: Bool = false) -> CGFloat {
+        let tabWidth = actualWidth / PS_Tab.count
+        let firstTabPositionX: CGFloat = -(actualWidth - tabWidth) / 2 /// tested by return this value to validate indicator
+        let tan = y / firstTabPositionX
+        let radians = atan(tan) /// reverse of tan == atan
+        let degree = radians * 180 / .pi
+        
+        if isInitial {
+            return -(degree + 90)
+        }
+        
+        let x = tabWidth * activeTab.index
+        let tan_ = y / x
+        let radian_ = atan(tan_)
+        let degree_ = radian_ * 180 / .pi
+        
+        return -(degree_ - 90)
     }
     ///  Offset based on Tab position
     ///  Offset gradually increased until mid tab and then decreasing, produce a smooth circle type layout
