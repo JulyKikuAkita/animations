@@ -17,8 +17,12 @@ struct SwiftDataEncryptionDemoView: View {
     /// View Properties
     @State private var showAlertTF: Bool = false
     @State private var keyTF: String = ""
+    /// Exporter Properties
     @State private var exportItem: TransactionTransferable?
     @State private var showFileExporter: Bool = false
+    /// Importer Properties
+    @State private var showFileImporter: Bool = false
+    @State private var importedURL: URL?
     var body: some View {
         NavigationStack {
             List {
@@ -38,7 +42,7 @@ struct SwiftDataEncryptionDemoView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        
+                        showFileImporter.toggle()
                     } label: {
                         Image(systemName: "square.and.arrow.down")
                     }
@@ -66,10 +70,15 @@ struct SwiftDataEncryptionDemoView: View {
             
             Button("Cancel", role: .cancel) {
                 keyTF = ""
+                importedURL = nil
             }
             
-            Button("Export") {
-                exportData()
+            Button(importedURL != nil ? "Import" : "Export") {
+                if importedURL != nil {
+                    importData()
+                } else {
+                    exportData()
+                }
             }
         }
         .fileExporter(
@@ -87,14 +96,59 @@ struct SwiftDataEncryptionDemoView: View {
                 exportItem = nil
             } onCancellation: {
                 exportItem = nil
+        }
+            .fileImporter(
+                isPresented: $showFileImporter,
+                allowedContentTypes: [.data]
+            ) { result in
+                switch result {
+                case .success(let url):
+                    importedURL = url
+                    showAlertTF.toggle()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
+    }
+    func importData() {
+        guard let url = importedURL else { return }
+        Task.detached(priority: .background) {
+            do {
+                guard url.startAccessingSecurityScopedResource() else { return }
+                
+                let container = try ModelContainer(for: TransactionDemo.self)
+                let context = ModelContext(container) // do not use local view env's context to insert transactions into data model b.c. whenever local context got updated, @query will be notified and cause performance downgrade
+                // use a separate container to insert fetched transactions
+                // then save it so that the query will be notified once
+            
+                let encryptedData = try Data(contentsOf: url)
+                let decryptedData = try await AES.GCM.open(
+                    .init(combined: encryptedData), using: .key(keyTF)
+                )
+                let allTransactions = try JSONDecoder().decode(
+                    [TransactionDemo].self,
+                    from: decryptedData
+                )
+                
+                for transaction in allTransactions {
+                    context.insert(transaction)
+                }
+                
+                try context.save()
+                
+                url.stopAccessingSecurityScopedResource()
+            } catch {
+                print(error.localizedDescription)
+                keyTF = "" // UI update
+            }
+        }
     }
     
     func exportData() {
         Task.detached(priority: .background) {
             do {
                 let container = try ModelContainer(for: TransactionDemo.self)
-                let context = ModelContext(container) // do not use local view env's context to fetch data data objects due to performance downgrade
+                let context = ModelContext(container) // do not use local view env's context to fetch data objects due to performance downgrade
                 // use a separate model container to fetch all associated objects
                 
                 let descriptor = FetchDescriptor(sortBy: [
@@ -102,7 +156,7 @@ struct SwiftDataEncryptionDemoView: View {
                 ])
                 
                 let allObjects = try context.fetch(descriptor)
-                let exportItem = TransactionTransferable(
+                let exportItem = await TransactionTransferable(
                     transactions: allObjects,
                     key: keyTF
                 )
@@ -114,6 +168,7 @@ struct SwiftDataEncryptionDemoView: View {
                 }
             } catch {
                 print(error.localizedDescription)
+                keyTF = "" // UI update
             }
         }
     }
