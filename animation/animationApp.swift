@@ -3,7 +3,7 @@
 //  animation
 
 import SwiftUI
-//@main
+@main
 struct AnimationApp: App { // with colorTransformer context
     init() {
         ColorTransformer.register()
@@ -41,3 +41,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 /// only for  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
+
+
+//@main
+struct SchemeChangeApp: App {
+    var body: some Scene {
+        WindowGroup {
+            SchemeHostView {
+                ThemeSwitcherDemoView()
+            }
+        }
+    }
+}

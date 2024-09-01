@@ -4,17 +4,6 @@
 
 import SwiftUI
 
-@main
-struct SchemeChangeApp: App {
-    var body: some Scene {
-        WindowGroup {
-            SchemeHostView {
-                ThemeSwitcherDemoView()
-            }
-        }
-    }
-}
-
 struct ThemeSwitcherDemoView: View {
     @AppStorage("AppScheme") private var appScheme: AppScheme = .device
     @SceneStorage("ShowScenePickerView") private var showPickerView: Bool = false
