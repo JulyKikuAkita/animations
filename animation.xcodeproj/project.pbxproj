@@ -10,6 +10,12 @@
 		9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600DE502BA17D1800205DE9 /* CustomToast.swift */; };
 		9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9F82B8AB73400F91C21 /* BasicProfileAnimationView.swift */; };
 		9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */; };
+		9613D7202C7BE43E007FF2E7 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
+		9613D7212C7BE445007FF2E7 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0242C583FB600508B80 /* LandingView.swift */; };
+		9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */; };
+		9613D7232C7BE463007FF2E7 /* FloatingTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */; };
+		9613D72E2C7BEB67007FF2E7 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */; };
+		9613D72F2C7BEB88007FF2E7 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		961868B82BC7A78700552748 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961868B72BC7A78700552748 /* FloatingButton.swift */; };
 		961F3B8F2B8818240055D79B /* animationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B8E2B8818240055D79B /* animationApp.swift */; };
 		961F3B912B8818240055D79B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B902B8818240055D79B /* ContentView.swift */; };
@@ -256,6 +262,7 @@
 		9600DE502BA17D1800205DE9 /* CustomToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToast.swift; sourceTree = "<group>"; };
 		9603C9F82B8AB73400F91C21 /* BasicProfileAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicProfileAnimationView.swift; sourceTree = "<group>"; };
 		9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroItemView.swift; sourceTree = "<group>"; };
+		9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayStationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961868B72BC7A78700552748 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		961F3B8B2B8818240055D79B /* animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961F3B8E2B8818240055D79B /* animationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animationApp.swift; sourceTree = "<group>"; };
@@ -450,10 +457,18 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		9613D7132C7BE42A007FF2E7 /* PlayStationApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PlayStationApp; sourceTree = "<group>"; };
 		966E8F952C2E8CAE00299713 /* PickerView */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (966E8F982C2E8CC300299713 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PickerView; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9613D70F2C7BE42A007FF2E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		961F3B882B8818240055D79B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -530,6 +545,7 @@
 				9621DC4B2BEF3E5E00183CB7 /* Alert */,
 				9621DD882BF47FC800183CB7 /* MyMint */,
 				96DF8A922C3A68290063A931 /* ThreadApp */,
+				9613D7132C7BE42A007FF2E7 /* PlayStationApp */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -542,6 +558,7 @@
 				9621DC4A2BEF3E5E00183CB7 /* Alert.app */,
 				9621DD872BF47FC800183CB7 /* MyMint.app */,
 				96DF8A912C3A68290063A931 /* ThreadApp.app */,
+				9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1012,6 +1029,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9613D7112C7BE42A007FF2E7 /* PlayStationApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9613D71F2C7BE42B007FF2E7 /* Build configuration list for PBXNativeTarget "PlayStationApp" */;
+			buildPhases = (
+				9613D70E2C7BE42A007FF2E7 /* Sources */,
+				9613D70F2C7BE42A007FF2E7 /* Frameworks */,
+				9613D7102C7BE42A007FF2E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9613D7132C7BE42A007FF2E7 /* PlayStationApp */,
+			);
+			name = PlayStationApp;
+			packageProductDependencies = (
+			);
+			productName = PlayStationApp;
+			productReference = 9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		961F3B8A2B8818240055D79B /* animation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 961F3B992B8818250055D79B /* Build configuration list for PBXNativeTarget "animation" */;
@@ -1107,6 +1146,9 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
+					9613D7112C7BE42A007FF2E7 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					961F3B8A2B8818240055D79B = {
 						CreatedOnToolsVersion = 15.1;
 					};
@@ -1142,11 +1184,19 @@
 				9621DC492BEF3E5E00183CB7 /* Alert */,
 				9621DD862BF47FC800183CB7 /* MyMint */,
 				96DF8A902C3A68290063A931 /* ThreadApp */,
+				9613D7112C7BE42A007FF2E7 /* PlayStationApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9613D7102C7BE42A007FF2E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		961F3B892B8818240055D79B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1219,6 +1269,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9613D70E2C7BE42A007FF2E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9613D7212C7BE445007FF2E7 /* LandingView.swift in Sources */,
+				9613D72F2C7BEB88007FF2E7 /* Tab_iOS17.swift in Sources */,
+				9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */,
+				9613D7232C7BE463007FF2E7 /* FloatingTabbar.swift in Sources */,
+				9613D72E2C7BEB67007FF2E7 /* FloatingTabBarView.swift in Sources */,
+				9613D7202C7BE43E007FF2E7 /* Page.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		961F3B872B8818240055D79B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1466,6 +1529,64 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		9613D71D2C7BE42B007FF2E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PlayStationApp/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PlayStationApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9613D71E2C7BE42B007FF2E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PlayStationApp/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PlayStationApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		961F3B972B8818250055D79B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1882,6 +2003,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9613D71F2C7BE42B007FF2E7 /* Build configuration list for PBXNativeTarget "PlayStationApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9613D71D2C7BE42B007FF2E7 /* Debug */,
+				9613D71E2C7BE42B007FF2E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		961F3B862B8818240055D79B /* Build configuration list for PBXProject "animation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
