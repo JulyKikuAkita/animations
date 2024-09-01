@@ -204,6 +204,7 @@
 		968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */; };
 		968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
+		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
@@ -395,6 +396,7 @@
 		968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBottomSheetsView.swift; sourceTree = "<group>"; };
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
+		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96ACBEF22C33B79E004F3070 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHomeView.swift; sourceTree = "<group>"; };
 		96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 				9621DDB52BF489B800183CB7 /* Search.swift */,
 				9621DDB72BF489C400183CB7 /* Graphs.swift */,
 				9621DDB92BF489D100183CB7 /* Settings.swift */,
+				96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */,
 			);
 			path = TabViews;
 			sourceTree = "<group>";
@@ -1482,6 +1485,7 @@
 				9621DD992BF47FDA00183CB7 /* Particle.swift in Sources */,
 				9621DD9A2BF47FDA00183CB7 /* Tag.swift in Sources */,
 				9621DD9B2BF47FDA00183CB7 /* ActionModel.swift in Sources */,
+				96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */,
 				9621DDB42BF489AD00183CB7 /* Recents.swift in Sources */,
 				96725BB62BF5B762003DBD45 /* MintExpenseView.swift in Sources */,
 				9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */,
