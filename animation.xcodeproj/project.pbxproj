@@ -205,6 +205,12 @@
 		968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
+		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
+		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
+		96AC81002C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
+		96AC81012C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
+		96AC82F22C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC82F12C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift */; };
+		96AC82F42C8BAC2000ABBE78 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */; };
 		96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
 		96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF22C33B79E004F3070 /* Expense.swift */; };
@@ -397,6 +403,10 @@
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
+		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
+		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
+		96AC82F12C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveLayoutView.swift; sourceTree = "<group>"; };
+		96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		96ACBEF22C33B79E004F3070 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHomeView.swift; sourceTree = "<group>"; };
 		96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
@@ -608,6 +618,7 @@
 				963DB14A2BBBD21400AAF347 /* Reel.swift */,
 				9662F01E2C58348100508B80 /* Page.swift */,
 				9662F0302C58BCCF00508B80 /* CustomShape.swift */,
+				96AC80FE2C84FFF900ABBE78 /* Control.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -615,6 +626,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96AC80FB2C84F89300ABBE78 /* ScrollView */,
 				9697B73F2C6D9EF60092D07A /* SearchBar */,
 				9662EFC92C460E8600508B80 /* HelpView */,
 				96DF8A882C39D7F90063A931 /* Sheet */,
@@ -636,10 +648,8 @@
 				965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */,
 				9621D9862BE9F3C600183CB7 /* ImagePicker.swift */,
 				9621DC8E2BF1E9AD00183CB7 /* SwipeActionDemoView.swift */,
-				96D04B302C09A1960062520D /* StackedScrollView.swift */,
 				96352CE52C09AC6E001AD2FD /* StackedCards.swift */,
 				962B04772C22A162008E1E5D /* MeshGradientView.swift */,
-				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
 				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
 				9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */,
 				9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */,
@@ -647,6 +657,8 @@
 				9662F0242C583FB600508B80 /* LandingView.swift */,
 				9662F02C2C58482200508B80 /* MetaballAnimationView.swift */,
 				96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */,
+				96AC82F12C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift */,
+				96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -941,6 +953,16 @@
 				96E09E792C6ED10C00A0BE66 /* ProgressiveBlurView.swift */,
 			);
 			path = SearchBar;
+			sourceTree = "<group>";
+		};
+		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
+				96D04B302C09A1960062520D /* StackedScrollView.swift */,
+				96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */,
+			);
+			path = ScrollView;
 			sourceTree = "<group>";
 		};
 		96D495832BBD25160011D5AA /* Video */ = {
@@ -1300,12 +1322,14 @@
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
+				96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
 				96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */,
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
+				96AC82F42C8BAC2000ABBE78 /* SideBarView.swift in Sources */,
 				961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */,
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
@@ -1366,6 +1390,7 @@
 				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
+				96AC82F22C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift in Sources */,
 				9662EFD32C471DB300508B80 /* ThemeSwitchView.swift in Sources */,
 				9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */,
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
@@ -1390,6 +1415,7 @@
 				96352D532C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
 				9621D9872BE9F3C600183CB7 /* ImagePicker.swift in Sources */,
 				968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */,
+				96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1398,6 +1424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9662EFF22C4B579C00508B80 /* OtherContents.swift in Sources */,
+				96AC81002C84FFF900ABBE78 /* Control.swift in Sources */,
 				96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */,
 				9662F0312C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
@@ -1481,6 +1508,7 @@
 				9621DD972BF47FDA00183CB7 /* WindowSharedModel.swift in Sources */,
 				9621DD982BF47FDA00183CB7 /* Reel.swift in Sources */,
 				9621DDB82BF489C400183CB7 /* Graphs.swift in Sources */,
+				96AC81012C84FFF900ABBE78 /* Control.swift in Sources */,
 				96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */,
 				9621DD992BF47FDA00183CB7 /* Particle.swift in Sources */,
 				9621DD9A2BF47FDA00183CB7 /* Tag.swift in Sources */,
