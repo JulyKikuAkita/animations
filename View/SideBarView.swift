@@ -78,7 +78,6 @@ struct SideBarView: View {
     }
 }
 
-
 /// Side Bar Actions
 enum SideBarActions: String, CaseIterable {
     case communities = "Communities"
