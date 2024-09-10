@@ -11,7 +11,7 @@ struct CircularCarouselSliderView: View {
     /// View properties
     @State private var pickerType: TripPicker = .normal
     @State var cards: [Card] = firstSetCards
-    @State private var activeID: String? /// ios 17 api to track scroll view posititon
+    @State private var activeID: String? /// ios 17 api to track scroll view position
     var body: some View {
         VStack {
             Picker("", selection: $pickerType) {
@@ -80,18 +80,18 @@ struct CircularCarouselSliderView: View {
     }
     
     /// Circular slider view offset
-    func offSet(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func offSet(_ proxy: GeometryProxy) -> CGFloat {
         let progress = progress(proxy)
         /// Simply moving view up/down based on progress
         return progress < 0 ? progress * -30 : progress * 30
     }
     
-    func scale(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func scale(_ proxy: GeometryProxy) -> CGFloat {
         let progress = min(max(progress(proxy), -1), 1)
         return progress < 0 ? 1 + progress : 1 - progress
     }
     
-    func progress(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func progress(_ proxy: GeometryProxy) -> CGFloat {
         /// View Width
         let viewWidth = proxy.size.width
         let minX = (proxy.bounds(of: .scrollView)?.minX ?? 0)

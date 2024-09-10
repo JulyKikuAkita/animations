@@ -111,7 +111,7 @@ struct VerticalCircularCarouselView: View {
     }
     
     /// Card rotation
-    func cardRotation(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func cardRotation(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let height = proxy.size.height
         
