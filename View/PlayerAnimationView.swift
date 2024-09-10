@@ -97,8 +97,8 @@ struct PlayerAnimationView: View {
             }
             .overlay(alignment: .bottomTrailing) {
                 FloatingButton {
-                    FloatingAction(symbol: "dog.fill", background: DummyColors.red.color) {
-                        selectedColor = .red
+                    FloatingAction(symbol: "dog.fill", background: DummyColors.purple.color) {
+                        selectedColor = .purple
                         insertColorModels() // this crash preview
                     }
                     
@@ -107,8 +107,8 @@ struct PlayerAnimationView: View {
                         insertColorModels() // this crash preview
                     }
                     
-                    FloatingAction(symbol: "fish.fill", background: DummyColors.accent.color) {
-                        selectedColor = .accent
+                    FloatingAction(symbol: "fish.fill", background: DummyColors.gray.color) {
+                        selectedColor = .gray
                         insertColorModels() // this crash preview
                     }
                     
