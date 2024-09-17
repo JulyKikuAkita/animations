@@ -51,7 +51,7 @@ struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Dat
     }
     
     /// Offset & scaling values for each item to make it look like a stack
-    func offset(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func offset(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let progress = minY / itemHeight
         let maxOffset = CGFloat(stackedDisplayCount) * offsetForEachItem
@@ -105,7 +105,7 @@ struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Dat
     }
     
     /// position header view on top until stacked card getting close to it then scroll with the cards
-    func headerViewOffset(_ proxy: GeometryProxy, _ topPadding: CGFloat) -> CGFloat {
+    nonisolated func headerViewOffset(_ proxy: GeometryProxy, _ topPadding: CGFloat) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let viewSize = proxy.size.height - itemHeight
         

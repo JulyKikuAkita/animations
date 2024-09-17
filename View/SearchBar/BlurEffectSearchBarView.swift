@@ -125,7 +125,7 @@ struct BlurEffectSearchBarView: View {
         }
     }
     
-    nonisolated private func offsetY(_ proxy: GeometryProxy) -> CGFloat {
+    private func offsetY(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         return minY > 0 ? (isFocused ? -minY : 0) : -minY
     }
