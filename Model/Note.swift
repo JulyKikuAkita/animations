@@ -7,6 +7,7 @@ import SwiftUI
 struct Note: Identifiable {
     var id: String = UUID().uuidString
     var color: Color
+    var allowsHitTesting: Bool = false // when tapped, then allow hit testing
 }
 
 var mockNotes: [Note] = [
