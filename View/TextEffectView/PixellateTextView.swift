@@ -85,7 +85,7 @@ struct RevealRenderer: TextRenderer, Animatable {
 //        let allChars = allLines.flatMap({ $0 }) /// get all chars in the line
     
         for line in allLines {
-            if let apiKeyAttribute = line[APIKeyAttribute.self] {
+            if line[APIKeyAttribute.self] != nil {
                 var localContext = ctx
                 let isBlur = type == .blur
                 
@@ -102,7 +102,7 @@ struct RevealRenderer: TextRenderer, Animatable {
                 localContext.addFilter(isBlur ? blurFilter : pixellateFilter)
                 localContext.draw(line)
             } else {
-                var localContext = ctx
+                let localContext = ctx
                 localContext.draw(line)
             }
         }

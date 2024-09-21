@@ -51,7 +51,7 @@ struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Dat
     }
     
     /// Offset & scaling values for each item to make it look like a stack
-    func offset(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func offset(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let progress = minY / itemHeight
         let maxOffset = CGFloat(stackedDisplayCount) * offsetForEachItem
@@ -60,7 +60,7 @@ struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Dat
         return minY < 0 ? 0 : -minY + offset
     }
     
-    func scale(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func scale(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let progress = minY / itemHeight
         let maxScale = CGFloat(stackedDisplayCount) * scaleForEachItem
@@ -69,7 +69,7 @@ struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Dat
         return 1 - scale
     }
     
-    func opacity(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func opacity(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let progress = minY / itemHeight
         let opacityForItem = 1 / CGFloat(opacityDisplayCount + 1)
@@ -80,11 +80,11 @@ struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Dat
         return progress < CGFloat(opacityDisplayCount + 1) ? 1 - opacity : 0
     }
     
-    var offsetForEachItem: CGFloat {
+    nonisolated var offsetForEachItem: CGFloat {
         8
     }
     
-    var scaleForEachItem: CGFloat {
+    nonisolated var scaleForEachItem: CGFloat {
         0.08
     }
     
@@ -105,7 +105,7 @@ struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Dat
     }
     
     /// position header view on top until stacked card getting close to it then scroll with the cards
-    func headerViewOffset(_ proxy: GeometryProxy, _ topPadding: CGFloat) -> CGFloat {
+    nonisolated func headerViewOffset(_ proxy: GeometryProxy, _ topPadding: CGFloat) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let viewSize = proxy.size.height - itemHeight
         

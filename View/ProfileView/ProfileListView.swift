@@ -24,6 +24,8 @@ struct ProfileListView: View {
 
     var body: some View {
         NavigationStack {
+            CustomTextFieldKeyboardsDemoView()
+
             List(allProfiles) { profile in
                 HStack {
                     Image(profile.profilePicture)

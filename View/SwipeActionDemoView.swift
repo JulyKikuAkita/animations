@@ -173,7 +173,7 @@ struct SwipeAction<Content: View>: View {
             }
     }
     
-    func scrollOffset(_ proxy: GeometryProxy) -> CGFloat {
+    nonisolated func scrollOffset(_ proxy: GeometryProxy) -> CGFloat {
         let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
         
         return (minX > 0 ? -minX : 0)

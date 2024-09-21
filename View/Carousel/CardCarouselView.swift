@@ -37,8 +37,7 @@ struct CardCarouselView: View {
 
 extension CardCarouselView {
     @ViewBuilder
-    func randomView() -> some View {
-        
+    func randomView() -> some View {        
         LimitedTextFieldIView(
             config: .init(
                 limit: 10,
