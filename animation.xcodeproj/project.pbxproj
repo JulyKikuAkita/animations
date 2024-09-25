@@ -17,6 +17,7 @@
 		9613D72E2C7BEB67007FF2E7 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */; };
 		9613D72F2C7BEB88007FF2E7 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
 		961868B82BC7A78700552748 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961868B72BC7A78700552748 /* FloatingButton.swift */; };
+		961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
 		961F3B8F2B8818240055D79B /* animationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B8E2B8818240055D79B /* animationApp.swift */; };
 		961F3B912B8818240055D79B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B902B8818240055D79B /* ContentView.swift */; };
 		961F3B932B8818250055D79B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 961F3B922B8818250055D79B /* Assets.xcassets */; };
@@ -279,6 +280,7 @@
 		9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroItemView.swift; sourceTree = "<group>"; };
 		9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayStationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961868B72BC7A78700552748 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		961F3B8B2B8818240055D79B /* animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961F3B8E2B8818240055D79B /* animationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animationApp.swift; sourceTree = "<group>"; };
 		961F3B902B8818240055D79B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				96601FEE2C7807DD002C91FB /* SchemePicker.swift */,
 				9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */,
 				961F51D82BC11B5200F0D953 /* Navigation+Extension.swift */,
+				961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1345,6 +1348,7 @@
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
+				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
 				9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */,
