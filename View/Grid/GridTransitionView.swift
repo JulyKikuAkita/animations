@@ -28,48 +28,54 @@ struct GridTransitionView: View {
     @State private var deleteNote: Note?
     @State private var animateView: Bool = false
     @FocusState private var isKeyboardActive: Bool
+    @State private var titleNoteSize: CGSize = .zero
+
     /// Swift data
-    @Query(sort: [.init(\Note.dateCreated, order: .reverse)], animation: .snappy)
-    private var notes: [Note] /// no need for state object as swift data model directly update to the object
+//    @Query(sort: [.init(\Note.dateCreated, order: .reverse)], animation: .snappy)
+//    private var notes: [Note] /// no need for state object as swift data model directly update to the object
     @Environment(\.modelContext) private var context
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(spacing: 20) {
-                SearchBar()
-                
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
-                    ForEach(notes) { note in
-                        CardView(note)
-                            .frame(height: 160)
-                            .onTapGesture {
-                                guard selectedNote == nil else { return }
-                                selectedNote = note
-                                note.allowsHitTesting = true
-                                withAnimation(noteAnimation) {
-                                    animateView = true
+        SearchQueryView(searchText: searchText) { notes in
+            ScrollView(.vertical) {
+                VStack(spacing: 20) {
+                    SearchBar()
+                    
+                    LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
+                        ForEach(notes) { note in
+                            CardView(note)
+                                .frame(height: 160)
+                                .onTapGesture {
+                                    guard selectedNote == nil else { return }
+                                    isKeyboardActive = false
+                                    
+                                    selectedNote = note
+                                    note.allowsHitTesting = true
+                                    withAnimation(noteAnimation) {
+                                        animateView = true
+                                    }
                                 }
                             }
+                        }
+                    }
+            }
+            .safeAreaPadding(15)
+            .overlay {
+                GeometryReader { proxy  in
+                    let size = proxy.size
+                    // need forEach to make sure selectNote == nil while transition won't confuse geoMatched animation (seeing prev card transition is still in progress then the next selected card transition start and overlapped)
+                    ForEach(notes) { note in
+                        if note.id == selectedNote?.id && animateView {
+                            DetailView(size: size, titleNoteSize: titleNoteSize, animation: animation, note: note)
+                                .ignoresSafeArea(.container, edges: .top)
+                        }
                     }
                 }
             }
-        }
-        .safeAreaPadding(15)
-        .overlay {
-            GeometryReader { proxy  in
-                let size = proxy.size
-                // need forEach to make sure selectNote == nil while transition won't confusre geoMatched animation (seeing prev card transtion is still in progress then the next selected card transtion start and overlapped)
-                ForEach(notes) { note in
-                    if note.id == selectedNote?.id && animateView {
-                        DetailView(size: size, animation: animation, note: note)
-                            .ignoresSafeArea(.container, edges: .top)
-                    }
-                }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                BottomBar()
             }
+            .focused($isKeyboardActive) // this modifier applies to detailView which has text field too
         }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            BottomBar()
-        }
-        .focused($isKeyboardActive) // this modifier applies to detailView which has text field too
     }
     
     @ViewBuilder
@@ -89,14 +95,24 @@ struct GridTransitionView: View {
     @ViewBuilder
     func CardView(_ note: Note) -> some View {
         ZStack {
+            /// expanded
             if selectedNote?.id == note.id && animateView {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.clear)
             } else {
+                /// minimized
                 RoundedRectangle(cornerRadius: 10)
                     .fill(note.color.gradient)
+                    .overlay {
+                        TitleNoteView(size: titleNoteSize, note: note)
+                    }
                     .matchedGeometryEffect(id: note.id, in: animation)
             }
+        }
+        .onGeometryChange(for: CGSize.self) {
+            $0.size
+        } action: { newValue in
+            titleNoteSize = newValue
         }
     }
     
@@ -247,6 +263,7 @@ struct GridTransitionView: View {
 }
 
 struct TitleNoteView: View {
+    var size: CGSize
     var note: Note
     var body: some View {
         Text(note.title)
@@ -259,11 +276,13 @@ struct TitleNoteView: View {
                 maxHeight: .infinity,
                 alignment: .topLeading
             )
+            .frame(width: size.width, height: size.height)
     }
 }
 
 struct DetailView: View {
     var size: CGSize
+    var titleNoteSize: CGSize
     var animation: Namespace.ID
     @Bindable var note: Note
     /// View properties
@@ -271,6 +290,11 @@ struct DetailView: View {
     var body: some View {
         Rectangle()
             .fill(note.color.gradient)
+            .overlay(alignment: .topLeading) {
+                TitleNoteView(size: titleNoteSize, note: note)
+                    .blur(radius: animateLayers ? 100 : 0)
+                    .opacity(animateLayers ? 0 : 1)
+            }
             .overlay {
                 NotesContent()
             }
