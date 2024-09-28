@@ -180,6 +180,7 @@
 		96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */; };
 		96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1D2C2FD354007A4E34 /* TimePickerView.swift */; };
 		96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B202C2FD9CA007A4E34 /* Recent.swift */; };
+		9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */; };
 		9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833A2BCF61D40023FE2B /* ParticleEffect.swift */; };
 		9684833D2BCF62C50023FE2B /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */; };
@@ -398,6 +399,7 @@
 		96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockTextEffectView.swift; sourceTree = "<group>"; };
 		96726B1D2C2FD354007A4E34 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		96726B202C2FD9CA007A4E34 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
+		9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCarouselView.swift; sourceTree = "<group>"; };
 		96845DA42BD3347F00B7D8B2 /* AppleMusicHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicHomeView.swift; sourceTree = "<group>"; };
 		96845DA62BD337D200B7D8B2 /* MusicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfoView.swift; sourceTree = "<group>"; };
 		96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedBottomSheet.swift; sourceTree = "<group>"; };
@@ -873,6 +875,7 @@
 				9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */,
 				9662F0022C4E294200508B80 /* InfiniteLoopingScrollView.swift */,
 				9662F0102C50854400508B80 /* ImageCarouselView.swift */,
+				9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */,
 			);
 			path = Carousel;
 			sourceTree = "<group>";
@@ -1367,6 +1370,7 @@
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
 				96AC82F42C8BAC2000ABBE78 /* SideBarView.swift in Sources */,
 				9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */,
+				9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */,
 				961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */,
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
