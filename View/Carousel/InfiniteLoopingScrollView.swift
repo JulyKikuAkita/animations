@@ -42,6 +42,7 @@ struct InfiniteLoopingScrollView: View {
     }
 }
 
+/// iOS 17: passing data as  a randomly accessible collection
 struct LoopingScrollView<Content: View, Item: RandomAccessCollection>: View where Item.Element: Identifiable {
     /// Custom Properties
     var width: CGFloat
