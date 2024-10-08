@@ -196,6 +196,7 @@
 		9682B6D22CB1D355003D917F /* ColorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B6CF2CB1D355003D917F /* ColorItem.swift */; };
 		9682B7F22CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B7F12CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift */; };
 		9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B8A42CBDC00D003D917F /* AnimatedTabBariOS18.swift */; };
+		9682B7292CB5DD9E003D917F /* CameraControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B7282CB5DD9E003D917F /* CameraControlView.swift */; };
 		9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833A2BCF61D40023FE2B /* ParticleEffect.swift */; };
 		9684833D2BCF62C50023FE2B /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */; };
@@ -428,6 +429,7 @@
 		9682B6CF2CB1D355003D917F /* ColorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorItem.swift; sourceTree = "<group>"; };
 		9682B7F12CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCarouselWithScrollTransitionsAPI.swift; sourceTree = "<group>"; };
 		9682B8A42CBDC00D003D917F /* AnimatedTabBariOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabBariOS18.swift; sourceTree = "<group>"; };
+		9682B7282CB5DD9E003D917F /* CameraControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControlView.swift; sourceTree = "<group>"; };
 		96845DA42BD3347F00B7D8B2 /* AppleMusicHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicHomeView.swift; sourceTree = "<group>"; };
 		96845DA62BD337D200B7D8B2 /* MusicInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInfoView.swift; sourceTree = "<group>"; };
 		96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedBottomSheet.swift; sourceTree = "<group>"; };
@@ -718,6 +720,7 @@
 				96AC82F12C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift */,
 				96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */,
 				967049282CC4BDDA0056269C /* ToastView.swift */,
+				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1437,6 +1440,7 @@
 				96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */,
 				963B85B42CD436B100C3FB0D /* SnapshotDemoView.swift in Sources */,
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
+				9682B7292CB5DD9E003D917F /* CameraControlView.swift in Sources */,
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
 				96BCDFDD2CC8C05B00A7CBFF /* UniversalOverlayView.swift in Sources */,
