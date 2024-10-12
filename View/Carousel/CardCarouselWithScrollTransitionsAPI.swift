@@ -9,12 +9,67 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
         NavigationStack {
             GeometryReader {
                 let size = $0.size
-                CircularCarousel18View(size: size)
+                ParallaxCarousel18View(size: size)
             }
-            
         }
         .safeAreaPadding(.horizontal, 15)
         .frame(height: 330)
+    }
+    
+    @ViewBuilder
+    func ParallaxCarousel18View(size: CGSize) -> some View {
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 10) {
+                ForEach(firstSetCards) { card in
+
+                    Image(card.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: size.width + 80) // 80 is the offset value
+                        .scrollTransition(.interactive, axis: .horizontal) { content, phase in
+                            content
+                                .offset(x: phase == .identity ? 0 : -phase.value * 80)
+                        }
+                        .frame(width: 220, height: size.height)
+                        .clipShape(.rect(cornerRadius: 25))
+                        .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
+                }
+            }
+            .padding(.horizontal, 30)
+            .scrollTargetLayout()
+            .frame(height: size.height, alignment: .top)
+        }
+        .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
+        .safeAreaPadding(.horizontal, 15)
+        .scrollIndicators(.hidden)
+    }
+    
+    /// Demo blur + scale scroll View
+    @ViewBuilder
+    func ScaleCarousel18View(size: CGSize) -> some View {
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 10) {
+                ForEach(firstSetCards) { card in
+
+                    Image(card.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 220, height: size.height)
+                        .clipShape(.rect(cornerRadius: 25))
+                        .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
+                        .scrollTransition(.interactive, axis: .horizontal) { content, phase in
+                            content
+                                .blur(radius: phase == .identity ? 0 : 2, opaque: false)
+                                .scaleEffect(phase == .identity ? 1: 0.9, anchor: .bottom)
+                        }
+                       
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollClipDisabled()
+        .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
+        .scrollIndicators(.hidden)
     }
     
     /// Demo blur + scale scroll View
