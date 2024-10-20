@@ -1,7 +1,7 @@
 //
 //  CustomToast.swift
 //  animation
-//
+// iOS 17
 
 import SwiftUI
 
@@ -85,7 +85,7 @@ fileprivate struct ToastGroup: View {
 //                    .offset(y: -100)
                 
                 ForEach(model.toasts) { toast in
-                    ToastView(size: size, item: toast)
+                    ToastViewiOS17(size: size, item: toast)
                         .scaleEffect(scale(toast))
                         .offset(y: offsetY(toast))
                         .zIndex(Double(model.toasts.firstIndex(where: { $0.id == toast.id }) ?? 0))
@@ -117,7 +117,7 @@ fileprivate struct ToastGroup: View {
     }
 }
 
-fileprivate struct ToastView: View {
+fileprivate struct ToastViewiOS17: View {
     var size: CGSize
     var item: ToastItem
     
