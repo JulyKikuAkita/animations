@@ -1,7 +1,7 @@
 //
 //  CardCarouselWithScrollTransitionsAPI.swift
 //  animation
-// iOS 18 API
+//  iOS 18 API
 import SwiftUI
 
 struct CardCarouselWithScrollTransitionsAPIView: View {
