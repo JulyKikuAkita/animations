@@ -32,6 +32,7 @@ fileprivate struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier
     }
 }
 
+///https://www.youtube.com/watch?v=B8JGLwg_yxg 7:05
 /// not working for iOS 18 and above
 fileprivate class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
