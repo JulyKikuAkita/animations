@@ -10,6 +10,8 @@ struct ExpandableMusicPlayerView: View {
     /// View Properties
     @State private var expandPlayer: Bool = false
     @State private var offsetY: CGFloat = 0
+    @State private var mainWindow: UIWindow?
+    @State private var windowProgress: CGFloat = 0
     @Namespace private var animation
     var body: some View {
         GeometryReader {
@@ -18,9 +20,11 @@ struct ExpandableMusicPlayerView: View {
             
             ZStack(alignment: .top) {
                 ZStack {
+                    /// miniplayer background
                     Rectangle()
-                        .fill(.secondary)
+                        .fill(.orange.gradient)
 
+                    /// background
                     Rectangle()
                         .fill(
                             .linearGradient(
@@ -53,6 +57,9 @@ struct ExpandableMusicPlayerView: View {
                     guard expandPlayer else { return }
                     let translation = max(value.translation.height, 0)
                     offsetY = translation
+                    windowProgress = max(min(translation / size.height, 1), 0) * 0.1
+                    
+                    resizeWindow(0.1 - windowProgress)
                 } onEnd: { value  in
                     guard expandPlayer else { return }
                     let translation = max(value.translation.height, 0)
@@ -61,13 +68,30 @@ struct ExpandableMusicPlayerView: View {
                     withAnimation(.smooth(duration: 0.3, extraBounce: 0)) {
                         if (translation + velocity) > (size.height * 0.5) {
                             expandPlayer = false
+                            
+                            /// reset resize Window to identity
+                            resetResizeWindow()
+                        } else { /// reset resize Window to 0.1
+                            UIView.animate(withDuration: 0.3) {
+                                resizeWindow(0.1)
+                            }
                         }
                     }
                     offsetY = 0
                 }
-            )
+            ) /// draggable on image area
             .ignoresSafeArea()
+            
          }
+        .onAppear {
+            if let window = (
+                UIApplication.shared.connectedScenes.first as? UIWindowScene
+            )?.keyWindow, mainWindow == nil {
+                mainWindow = window
+            }
+        }
+        
+        
     }
     
     @ViewBuilder
@@ -107,6 +131,11 @@ struct ExpandableMusicPlayerView: View {
         .onTapGesture {
             withAnimation(.smooth(duration: 0.3, extraBounce: 0)) {
                 expandPlayer = true
+            }
+            
+            /// reset resize Window to 0.1
+            UIView.animate(withDuration: 0.3) {
+                resizeWindow(0.1)
             }
         }
     }
@@ -163,6 +192,32 @@ struct ExpandableMusicPlayerView: View {
         }
         .padding(15)
         .padding(.top, safeArea.top)
+    }
+    
+    func resizeWindow(_ progress: CGFloat) {
+        /// first subview of keyWindow is swift app content
+        /// then sheets/full screen covers, inspectors etc
+        /// [min, max] of progress value is [0.1, 0.9]
+        if let mainWindow = mainWindow?.subviews.first {
+            let offsetY = (mainWindow.frame.height * progress) / 2
+            
+            /// personal preference (not work in preview)
+            mainWindow.layer.cornerRadius = (progress / 0.1) * 30
+            mainWindow.layer.masksToBounds = true
+            
+            mainWindow.subviews.first?.transform = .identity
+                .scaledBy(x: 1 - progress, y: 1 - progress)
+                .translatedBy(x: 0, y: offsetY)
+        }
+    }
+    
+    func resetResizeWindow() {
+        if let mainWindow = mainWindow?.subviews.first {
+            UIView.animate(withDuration: 0.3) {
+                mainWindow.layer.cornerRadius = 0
+                mainWindow.transform = .identity
+            }
+        }
     }
 }
 

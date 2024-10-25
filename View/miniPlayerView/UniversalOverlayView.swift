@@ -5,9 +5,22 @@
 import SwiftUI
 import AVKit
 
+// example
+@main
+struct UniversalViewApp: App {
+    var body: some Scene {
+        WindowGroup {
+            RootView {
+                UniversalOverlayDemoView()
+            }
+        }
+    }
+}
+
 struct UniversalOverlayDemoView: View {
     @State private var show: Bool = false
     @State private var showSheet: Bool = false
+    @State private var showMiniPlayer: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -23,6 +36,14 @@ struct UniversalOverlayDemoView: View {
                 
                 Button("Dummy Sheet") {
                     showSheet.toggle()
+                }
+                
+                
+                Button("MiniPlayer Demo") {
+                    showMiniPlayer.toggle()
+                }
+                .universalOverlay(show: $showMiniPlayer) {
+                    ExpandableMusicPlayerView(show: $showMiniPlayer)
                 }
             }
             .navigationTitle("Universal OVerlay")
@@ -226,18 +247,6 @@ struct RootView<Content: View>: View {
                     properties.window = window
                 }
             }
-    }
-}
-
-// example
-@main
-struct UniversalViewApp: App {
-    var body: some Scene {
-        WindowGroup {
-            RootView {
-                UniversalOverlayDemoView()
-            }
-        }
     }
 }
 
