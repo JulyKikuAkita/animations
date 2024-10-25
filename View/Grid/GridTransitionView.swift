@@ -5,7 +5,7 @@
 import SwiftUI
 import SwiftData
 
-@main
+//@main
 struct ColorNotes: App {
     var body: some Scene {
         WindowGroup {

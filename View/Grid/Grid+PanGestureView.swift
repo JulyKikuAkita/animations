@@ -93,7 +93,7 @@ struct GridColorBlockView: View {
                             }
             })
             .gesture(
-                PanGesture { gesture in
+                PanGesture(handle: { gesture in
                     if panGesture == nil {
                         panGesture = gesture
                         gesture.isEnabled = isSelectionEnabled
@@ -105,8 +105,7 @@ struct GridColorBlockView: View {
                     } else {
                         onGestureEnded(gesture)
                     }
-                    
-                }
+                })
             )
     }
     
@@ -258,26 +257,26 @@ struct GridColorBlockView: View {
     }
 }
 
-/// Custom UIKit Gesture
-struct PanGesture: UIGestureRecognizerRepresentable {
-    var handle: (UIPanGestureRecognizer) -> ()
-    
-    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
-        return UIPanGestureRecognizer()
-    }
-    
-    func updateUIGestureRecognizer(
-        _ recognizer: UIPanGestureRecognizer,
-        context: Context
-    ) {}
-    
-    func handleUIGestureRecognizerAction(
-        _ recognizer: UIPanGestureRecognizer,
-        context: Context
-    ) {
-        handle(recognizer)
-    }
-}
+/// Custom UIKit Gesture -> move to Gesture + PanGesture file
+//struct PanGesture: UIGestureRecognizerRepresentable {
+//    var handle: (UIPanGestureRecognizer) -> ()
+//    
+//    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
+//        return UIPanGestureRecognizer()
+//    }
+//    
+//    func updateUIGestureRecognizer(
+//        _ recognizer: UIPanGestureRecognizer,
+//        context: Context
+//    ) {}
+//    
+//    func handleUIGestureRecognizerAction(
+//        _ recognizer: UIPanGestureRecognizer,
+//        context: Context
+//    ) {
+//        handle(recognizer)
+//    }
+//}
 
 
 #Preview {
