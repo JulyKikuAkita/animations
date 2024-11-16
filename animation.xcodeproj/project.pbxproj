@@ -130,6 +130,7 @@
 		963B84742CCC5A1D00C3FB0D /* PanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B84722CCC5A1D00C3FB0D /* PanGesture.swift */; };
 		963B85772CD35BBA00C3FB0D /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B85762CD35BBA00C3FB0D /* Snapshot.swift */; };
 		963B85B42CD436B100C3FB0D /* SnapshotDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B85B32CD436B100C3FB0D /* SnapshotDemoView.swift */; };
+		963B862A2CE9495900C3FB0D /* EffectViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B86292CE9495900C3FB0D /* EffectViewModifier.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
@@ -370,6 +371,7 @@
 		963B84722CCC5A1D00C3FB0D /* PanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGesture.swift; sourceTree = "<group>"; };
 		963B85762CD35BBA00C3FB0D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		963B85B32CD436B100C3FB0D /* SnapshotDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotDemoView.swift; sourceTree = "<group>"; };
+		963B86292CE9495900C3FB0D /* EffectViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectViewModifier.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
 				9662EFD22C471DB300508B80 /* ThemeSwitchView.swift */,
 				968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */,
+				963B86292CE9495900C3FB0D /* EffectViewModifier.swift */,
 			);
 			path = HelpView;
 			sourceTree = "<group>";
@@ -1411,6 +1414,7 @@
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
+				963B862A2CE9495900C3FB0D /* EffectViewModifier.swift in Sources */,
 				9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */,
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
