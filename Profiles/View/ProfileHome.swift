@@ -6,18 +6,35 @@
 import SwiftUI
 
 struct ProfileHome: View {
+    /// Hero configuration
+    @State private var config: HeroConfiguration = .init()
+    @State private var selectedProfile: Profile?
     var body: some View {
         NavigationStack {
             List {
                 ForEach(profiles) { profile in
                     ProfileCardView(profile: profile) { rect in
-                        
+                        config.coordinates.0 = rect
+                        config.coordinates.1 = rect
+                        config.layer = profile.profilePicture
+                        /// setup for navigation destination
+                        selectedProfile = profile
                     }
                 }
             }
             .navigationTitle("Messages")
+            .navigationDestination(item: $selectedProfile) { profile in
+                ProfileDetailView(profile: profile, config: $config)
+            }
         }
     }
+}
+
+struct HeroConfiguration {
+    var layer: String?
+    var coordinates: (CGRect, CGRect) = (.zero, .zero)
+    var isExpandedCompletely: Bool = false
+    var activeId: String = ""
 }
 
 struct ProfileCardView: View {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Profile: Identifiable {
+struct Profile: Identifiable, Hashable {
     var id = UUID()
     var username: String
     var profilePicture: String
