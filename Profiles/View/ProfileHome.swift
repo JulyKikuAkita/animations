@@ -2,7 +2,6 @@
 //  ProfileHome.swift
 //  Profiles
 //  SwiftUI Navigation Stack Hero Animation - iOS 17 & 18
-//  https://www.youtube.com/watch?v=vuMm9r5H8d0 2:04
 import SwiftUI
 
 struct ProfileHome: View {
@@ -13,10 +12,11 @@ struct ProfileHome: View {
         NavigationStack {
             List {
                 ForEach(profiles) { profile in
-                    ProfileCardView(profile: profile) { rect in
+                    ProfileCardView(profile: profile, config: $config) { rect in
                         config.coordinates.0 = rect
                         config.coordinates.1 = rect
                         config.layer = profile.profilePicture
+                        config.activeId = profile.id.uuidString
                         /// setup for navigation destination
                         selectedProfile = profile
                     }
@@ -27,56 +27,23 @@ struct ProfileHome: View {
                 ProfileDetailView(profile: profile, config: $config)
             }
         }
-    }
-}
-
-struct HeroConfiguration {
-    var layer: String?
-    var coordinates: (CGRect, CGRect) = (.zero, .zero)
-    var isExpandedCompletely: Bool = false
-    var activeId: String = ""
-}
-
-struct ProfileCardView: View {
-    var profile: Profile
-    var onClick: (CGRect) -> ()
-    
-    /// View properties
-    @State private var viewRect: CGRect = .zero
-    var body: some View {
-        Button {
-            onClick(viewRect)
-        } label: {
-            HStack(spacing: 12) {
-                Image(profile.profilePicture)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 45, height: 45)
-                    .clipShape(.circle)
-                    .onGeometryChange(for: CGRect.self) { /// new api of Xcode 16 to simplified create hero animation
-                        $0.frame(in: .global)
-                    } action: { newValue in
-                        viewRect = newValue
-                    }
+        .overlay(alignment: .topLeading) { /// overlay should be above navigation stack so won't be push away
+            /// hero animation on the location of source and destination coordinates
+            /// when view is detail view is pushed, animate transition from source to dest location for 0.35s then hide the overlay view
+            /// when view is view is dismissed, reset the overlay position back to source location to finish animation. Then reset all config to 0
+            ZStack {
+                if let image = config.layer {
+                    let destination = config.coordinates.1
                     
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(profile.username)
-                        .font(.callout)
-                        .foregroundStyle(Color.primary)
-                    
-                    Text(profile.lastMsg)
-                        .font(.caption2)
-                        .foregroundStyle(.gray)
+                    Image(image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: destination.width, height: destination.height)
+                        .clipShape(.circle)
+                        .offset(x: destination.minX, y: destination.minY)
                 }
-                
-                Spacer(minLength: 0)
-                
-                Image(systemName: "chevron.right")
-                    .font(.caption2)
-                    .foregroundStyle(.gray)
             }
-            .contentShape(.rect)
+            .ignoresSafeArea()
         }
     }
 }
