@@ -22,6 +22,7 @@ struct ProfileCardView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 45, height: 45)
                     .clipShape(.circle)
+                    .opacity(config.activeId == profile.id.uuidString ? 0 : 1)
                     .onGeometryChange(for: CGRect.self) { /// new api of Xcode 16 to simplified create hero animation
                         $0.frame(in: .global)
                     } action: { newValue in

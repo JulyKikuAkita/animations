@@ -5,6 +5,7 @@
 import SwiftUI
 
 struct ProfileDetailView: View {
+    @Binding var selectedProfile: Profile?
     var profile: Profile
     @Binding var config: HeroConfiguration
     public var body: some View {
@@ -17,19 +18,52 @@ struct ProfileDetailView: View {
             .padding(15)
         }
         .safeAreaInset(edge: .top) {
-            CustomHeaderView()
+            if #unavailable(iOS 18) {
+                CustomHeaderView()
+                    .padding(.vertical, 15)
+                    .background {
+                        Rectangle()
+                            .fill(.ultraThinMaterial)
+                            .ignoresSafeArea()
+                    }
+            } else {
+                CustomHeaderView()
+                    .padding(.top, -25) /// adjust padding but keep navigation bar for interaction
+                    .padding(.bottom, 15)
+                    .background {
+                        Rectangle()
+                            .fill(.ultraThinMaterial)
+                            .ignoresSafeArea()
+                    }
+            }
         }
         .hideNavBarBackground()
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                config.isExpandedCompletely = true
+            }
+        }
     }
     
     @ViewBuilder
     func CustomHeaderView() -> some View {
         VStack(spacing: 6) {
-            Image(profile.profilePicture)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 50, height: 50)
-                .clipShape(.circle)
+            ZStack {
+                if selectedProfile != nil {
+                    Image(profile.profilePicture)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(.circle)
+                        .opacity(config.isExpandedCompletely ? 1 : 0)
+                        .onGeometryChange(for: CGRect.self) {
+                            $0.frame(in: .global)
+                        } action: { newValue in
+                            config.coordinates.1 = newValue
+                        }
+                        .transition(.identity)
+                }
+            }
+            .frame(width: 50, height: 50)
             
             Button {
                 
@@ -46,12 +80,19 @@ struct ProfileDetailView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(.top, -25) /// adjust padding but keep navigation bar for interaction
-        .padding(.bottom, 15)
-        .background {
-            Rectangle()
-                .fill(.ultraThinMaterial)
-                .ignoresSafeArea()
+        .overlay(alignment: .topLeading) {
+            if #unavailable(iOS 18) {
+                Button {
+                    selectedProfile = nil
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .padding(.trailing, 20)
+                        .contentShape(.rect)
+                }
+                .padding(.leading, 15)
+            }
         }
     }
 }
@@ -64,7 +105,18 @@ extension View {
                 .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
         } else {
             self
-                .toolbarBackground(.hidden, for: .navigationBar)
+                .toolbar(.hidden, for: .navigationBar)
+                .navigationBarBackButtonHidden()
+        }
+    }
+    
+    @ViewBuilder
+    func hideNavBarBackgroundProfileHome() -> some View {
+        if #available(iOS 18, *) {
+            self
+        } else {
+            self
+                .toolbar(.hidden, for: .navigationBar)
         }
        
     }
