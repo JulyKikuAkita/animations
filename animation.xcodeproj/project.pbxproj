@@ -141,6 +141,8 @@
 		963B87DA2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */; };
 		963B87DB2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */; };
 		963B87DC2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */; };
+		963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B882E2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift */; };
+		963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B88302CED4BB500C3FB0D /* TextFieldActions.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
@@ -387,6 +389,8 @@
 		963B86912CEABA5F00C3FB0D /* Profiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Profiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		963B87D72CEC0DF000C3FB0D /* mailSearchInboxiOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mailSearchInboxiOS18.swift; sourceTree = "<group>"; };
 		963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTabModel.swift; sourceTree = "<group>"; };
+		963B882E2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldMenuActionsView.swift; sourceTree = "<group>"; };
+		963B88302CED4BB500C3FB0D /* TextFieldActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldActions.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
@@ -612,6 +616,7 @@
 				961F51D82BC11B5200F0D953 /* Navigation+Extension.swift */,
 				961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */,
 				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
+				963B88302CED4BB500C3FB0D /* TextFieldActions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -891,6 +896,7 @@
 			children = (
 				96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */,
 				965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */,
+				963B882E2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift */,
 			);
 			path = TextFieldView;
 			sourceTree = "<group>";
@@ -1511,6 +1517,7 @@
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
+				963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */,
 				968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
@@ -1570,6 +1577,7 @@
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
 				96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */,
+				963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */,
 				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				963B87D82CEC0DF000C3FB0D /* mailSearchInboxiOS18.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
