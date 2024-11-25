@@ -145,6 +145,7 @@
 		963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B88302CED4BB500C3FB0D /* TextFieldActions.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
+		964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
@@ -393,6 +394,7 @@
 		963B88302CED4BB500C3FB0D /* TextFieldActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldActions.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
+		964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisintegrationEffectView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
@@ -749,6 +751,7 @@
 				96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */,
 				967049282CC4BDDA0056269C /* ToastView.swift */,
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
+				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1495,6 +1498,7 @@
 				963B862A2CE9495900C3FB0D /* EffectViewModifier.swift in Sources */,
 				9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */,
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
+				964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
 				96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */,
