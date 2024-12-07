@@ -10,6 +10,7 @@ struct ContentView: View {
             let size = $0.size
             let safeArea = $0.safeAreaInsets
             WalletHomeView(size: size, safeArea: safeArea)
+                .ignoresSafeArea(.container, edges: .top)
         }
     }
 }

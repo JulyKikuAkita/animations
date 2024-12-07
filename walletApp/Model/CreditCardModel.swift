@@ -9,6 +9,11 @@ struct CreditCardModel: Identifiable {
     var number: String
     var expires: String
     var color: Color
+    
+    /// Custom Matched Geometry IDs
+    var jcbGeometryID: String {
+        "JCB_\(id)"
+    }
 }
 
 var cards: [CreditCardModel] = [
