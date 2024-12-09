@@ -270,6 +270,7 @@
 		96E4DD132CFFDE1F0020261F /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
 		96E4DD142CFFDE1F0020261F /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
 		96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */; };
+		96E4DEAD2D06619D0020261F /* GesturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DEAC2D06619D0020261F /* GesturesView.swift */; };
 		96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */; };
 		96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */; };
 		96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7CEE32BE32C5C00F24910 /* TabShape.swift */; };
@@ -508,6 +509,7 @@
 		96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabbar.swift; sourceTree = "<group>"; };
 		96E4DD112CFFDE1F0020261F /* SportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportItem.swift; sourceTree = "<group>"; };
 		96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingIconEffectView.swift; sourceTree = "<group>"; };
+		96E4DEAC2D06619D0020261F /* GesturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesView.swift; sourceTree = "<group>"; };
 		96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateScrollView.swift; sourceTree = "<group>"; };
 		96E7CEE32BE32C5C00F24910 /* TabShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabShape.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
 				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
 				96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */,
+				96E4DEAC2D06619D0020261F /* GesturesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1509,6 +1512,7 @@
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
+				96E4DEAD2D06619D0020261F /* GesturesView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
