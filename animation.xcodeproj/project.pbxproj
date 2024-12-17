@@ -272,6 +272,7 @@
 		96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */; };
 		96E4DEAD2D06619D0020261F /* GesturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DEAC2D06619D0020261F /* GesturesView.swift */; };
 		96E4E35A2D0D72950020261F /* Platform+View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4E3592D0D72950020261F /* Platform+View+Extension.swift */; };
+		96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */; };
 		96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */; };
 		96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */; };
 		96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7CEE32BE32C5C00F24910 /* TabShape.swift */; };
@@ -512,6 +513,7 @@
 		96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingIconEffectView.swift; sourceTree = "<group>"; };
 		96E4DEAC2D06619D0020261F /* GesturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesView.swift; sourceTree = "<group>"; };
 		96E4E3592D0D72950020261F /* Platform+View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Platform+View+Extension.swift"; sourceTree = "<group>"; };
+		96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingStackCardsDemoView.swift; sourceTree = "<group>"; };
 		96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateScrollView.swift; sourceTree = "<group>"; };
 		96E7CEE32BE32C5C00F24910 /* TabShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabShape.swift; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
 				96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */,
 				96E4DEAC2D06619D0020261F /* GesturesView.swift */,
+				96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1603,6 +1606,7 @@
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
+				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
 				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,

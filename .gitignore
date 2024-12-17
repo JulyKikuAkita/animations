@@ -1,6 +1,5 @@
-*.xcuserstate
 .DS_Store
+*.xcuserstate
+xcuserdata/
 **/animation.xcodeproj/xcuserdata
-**/animation.xcodeproj/project.xcworkspace/xcuserdata**
-**/animation.xcodeproj/project.xcworkspace/xcuserdata/**
 resources/**
