@@ -31,8 +31,83 @@ struct DraggableTabBariOS18DemoView: View {
                 }
             }
         }
+                
+        FloatingInteractiveTabBar(activeTab: $activeTab)
         
         DraggableTabBariOS18(activeTab: $activeTab)
+    }
+}
+
+struct FloatingInteractiveTabBar: View {
+    @Binding var activeTab: Tab_iOS17
+    /// View Properties
+    @Namespace private var animation
+    /// storing the locations of the tab buttons to identify the currently dragging tab
+    @State private var tabButtonsLocations: [CGRect] = Array(repeating: .zero, count: Tab_iOS17.allCases.count)
+    /// using this property to animate the changes in the tab bar itself but not the whole tab bar view
+    @State private var activeDraggingTab: Tab_iOS17?
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+                    TabButton(tab)
+            }
+        }
+        .frame(height: 40)
+        .background {
+            Capsule()
+                .fill(.background.shadow(.drop(color: .primary.opacity(0.2), radius: 5)))
+        }
+        .coordinateSpace(.named("TABBAR"))
+        .padding(.horizontal, 15)
+        .padding(.bottom, 10)
+    }
+    
+    @ViewBuilder
+    func TabButton(_ tab: Tab_iOS17) -> some View {
+        let isActive = (activeDraggingTab ?? activeTab) == tab
+        
+        VStack(spacing: 6) {
+            Image(systemName: tab.rawValue)
+                .symbolVariant(.fill)
+                .foregroundStyle(isActive ? .white : .primary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            if isActive {
+                Capsule()
+                    .fill(.blue.gradient)
+                    .matchedGeometryEffect(id: "ACTIVETAB", in: animation)
+            }
+        }
+        .contentShape(.rect) /// check the icon size has been cropped or not
+        .onGeometryChange(for: CGRect.self, of: {
+            $0.frame(in: .named("TABBAR"))
+        }, action: { newValue in
+            tabButtonsLocations[tab.index] = newValue
+        })
+        .onTapGesture {
+            withAnimation(.snappy) {
+                activeTab = tab
+            }
+        }
+        .gesture(
+            DragGesture(coordinateSpace: .named("TABBAR"))
+                .onChanged { value in
+                    let location = value.location
+                    /// map location to the proper tab index
+                    if let index = tabButtonsLocations.firstIndex(where: { $0.contains(location) }) {
+                        withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
+                            activeDraggingTab = Tab_iOS17.allCases[index]
+                        }
+                    }
+                }.onEnded { _ in
+                    if let activeDraggingTab {
+                        activeTab = activeDraggingTab
+                    }
+                    activeDraggingTab = nil
+                },
+            isEnabled: activeTab == tab  /// do not use isActive  -> as it will immediate disabled when tab is moved as it checks drag value
+        )
     }
 }
     
