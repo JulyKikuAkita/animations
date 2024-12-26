@@ -145,6 +145,8 @@
 		963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B88302CED4BB500C3FB0D /* TextFieldActions.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
+		963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
+		963DC1282D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
 		964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */; };
 		9642236D2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
 		9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
@@ -416,6 +418,7 @@
 		963B88302CED4BB500C3FB0D /* TextFieldActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldActions.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
+		963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbariOS18View.swift; sourceTree = "<group>"; };
 		964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisintegrationEffectView.swift; sourceTree = "<group>"; };
 		9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteractiveNavigationGestureView.swift; path = View/InteractiveNavigationGestureView.swift; sourceTree = SOURCE_ROOT; };
 		9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtractor.swift; sourceTree = "<group>"; };
@@ -1190,6 +1193,7 @@
 				96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */,
 				96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */,
 				96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */,
+				963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -1518,6 +1522,7 @@
 				9613D7212C7BE445007FF2E7 /* LandingView.swift in Sources */,
 				9613D72F2C7BEB88007FF2E7 /* Tab_iOS17.swift in Sources */,
 				9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */,
+				963DC1282D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,
 				964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
 				9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */,
 				9613D7232C7BE463007FF2E7 /* FloatingTabbar.swift in Sources */,
@@ -1621,6 +1626,7 @@
 				9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
+				963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */,
 				963B84742CCC5A1D00C3FB0D /* PanGesture.swift in Sources */,
 				9662F01F2C58348100508B80 /* Page.swift in Sources */,

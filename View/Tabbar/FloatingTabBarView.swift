@@ -1,6 +1,7 @@
 //
 //  FloatingTabBarView.swift
 //  animation
+// support both iOS 17 & 18
 
 import SwiftUI
 
