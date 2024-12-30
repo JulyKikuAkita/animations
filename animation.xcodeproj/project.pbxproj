@@ -147,6 +147,7 @@
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
 		963DC1282D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
+		963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */; };
 		964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */; };
 		9642236D2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
 		9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
@@ -419,6 +420,7 @@
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbariOS18View.swift; sourceTree = "<group>"; };
+		963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizedImageToScreenView.swift; sourceTree = "<group>"; };
 		964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisintegrationEffectView.swift; sourceTree = "<group>"; };
 		9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteractiveNavigationGestureView.swift; path = View/InteractiveNavigationGestureView.swift; sourceTree = SOURCE_ROOT; };
 		9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtractor.swift; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 				9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */,
 				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
 				96E4E5FC2D1788830020261F /* AsyncImageViewer.swift */,
+				963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1579,6 +1582,7 @@
 				963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */,
 				968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
+				963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
 				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
 				9621DC812BEF461400183CB7 /* PhotoItem.swift in Sources */,

@@ -1,0 +1,95 @@
+//
+//  ResizedImageToScreenView.swift
+//  animation
+//
+// We need to downsized image to save memory in SwiftUI view
+ 
+import SwiftUI
+
+struct ResizedImageToScreenDemoView: View {
+    var body: some View {
+        NavigationStack {
+            List {
+                HStack {
+                    ForEach(1...3, id:\.self) { index in
+                        let size = CGSize(width: 150, height: 150)
+                        /// provide any large size image and monitor memory change when app sartup
+                        let heicImage = UIImage(named: "IMG_020\(index)")
+                        ResizedImageToScreenView(image: heicImage, size: size) { image in
+                            GeometryReader {
+                                let size = $0.size
+                                
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: size.width, height: size.height)
+                                    .clipShape(.rect(cornerRadius: 10))
+                            }
+                            .frame(height: 150)
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
+        }
+        .navigationTitle("Resize image to input size")
+    }
+}
+
+struct ResizedImageToScreenView<Content: View>: View {
+    var image: UIImage?
+    var size: CGSize
+    @ViewBuilder var content: (Image) -> Content
+    @State private var resizedImageView: Image?
+    
+    var body: some View {
+        ZStack {
+            if let resizedImageView {
+                content(resizedImageView)
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .onAppear {
+            guard resizedImageView == nil else { return }
+            createDownsizedImage(image)
+        }
+        .onChange(of: image) { oldValue, newValue in
+            guard oldValue != newValue else { return }
+        }
+    }
+    
+    private func createDownsizedImage(_ image: UIImage?) {
+        guard let image else { return }
+        let aspectSize = image.size.aspectFit(size)
+        
+        /// Creating image in non-main thread
+        Task.detached(priority: .high) {
+            let renderer = UIGraphicsImageRenderer(size: aspectSize)
+            let resizedImage = renderer.image { ctx in
+                image.draw(in: .init(origin: .zero, size: aspectSize))
+            }
+            
+            /// Update image on main thread
+            await MainActor.run {
+                resizedImageView = .init(uiImage: resizedImage)
+            }
+        }
+    }
+}
+
+/// return a new size based on the given aspect ratio
+extension CGSize {
+    func aspectFit(_ to: CGSize) -> CGSize {
+        let scaleX = to.width / self.width
+        let scaleY = to.height / self.height
+        
+        let aspectRatio = min(scaleX, scaleY)
+        return .init(width: aspectRatio * width, height: aspectRatio * height)
+    }
+ }
+
+#Preview {
+    ResizedImageToScreenDemoView()
+}
