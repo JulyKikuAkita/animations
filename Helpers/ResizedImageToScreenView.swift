@@ -13,9 +13,11 @@ struct ResizedImageToScreenDemoView: View {
                 HStack {
                     ForEach(1...3, id:\.self) { index in
                         let size = CGSize(width: 150, height: 150)
-                        /// provide any large size image and monitor memory change when app sartup
-                        let heicImage = UIImage(named: "IMG_020\(index)")
-                        ResizedImageToScreenView(image: heicImage, size: size) { image in
+                        /// provide any large size image and monitor memory change when app startup
+                        let id = "IMG_020\(index)"
+                        let heicImage = UIImage(named: id)
+                        
+                        ResizedImageToScreenView(id: id, image: heicImage, size: size) { image in
                             GeometryReader {
                                 let size = $0.size
                                 
@@ -37,6 +39,7 @@ struct ResizedImageToScreenDemoView: View {
 }
 
 struct ResizedImageToScreenView<Content: View>: View {
+    var id: String
     var image: UIImage?
     var size: CGSize
     @ViewBuilder var content: (Image) -> Content
@@ -61,19 +64,30 @@ struct ResizedImageToScreenView<Content: View>: View {
     }
     
     private func createDownsizedImage(_ image: UIImage?) {
-        guard let image else { return }
-        let aspectSize = image.size.aspectFit(size)
-        
-        /// Creating image in non-main thread
-        Task.detached(priority: .high) {
-            let renderer = UIGraphicsImageRenderer(size: aspectSize)
-            let resizedImage = renderer.image { ctx in
-                image.draw(in: .init(origin: .zero, size: aspectSize))
-            }
+        if let cacheData = try? CacheManager.shared.get(id: id)?.data, let uiImage = UIImage(data: cacheData) {
+            resizedImageView = .init(uiImage: uiImage)
+        } else {
+            guard let image else { return }
+            let aspectSize = image.size.aspectFit(size)
             
-            /// Update image on main thread
-            await MainActor.run {
-                resizedImageView = .init(uiImage: resizedImage)
+            /// Creating image in non-main thread
+            Task.detached(priority: .high) {
+                let renderer = UIGraphicsImageRenderer(size: aspectSize)
+                let resizedImage = renderer.image { ctx in
+                    image.draw(in: .init(origin: .zero, size: aspectSize))
+                }
+                
+                /// Storing cached image
+                if let jpegData = resizedImage.jpegData(compressionQuality: 1) {
+                    /// Cache manger runs on main actor
+                    await MainActor.run {
+                        try? CacheManager.shared.insert(id: id, data: jpegData, expirationDays: 1)
+                    }
+                }
+                /// Update image on main thread
+                await MainActor.run {
+                    resizedImageView = .init(uiImage: resizedImage)
+                }
             }
         }
     }

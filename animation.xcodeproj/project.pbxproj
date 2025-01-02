@@ -148,6 +148,7 @@
 		963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
 		963DC1282D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
 		963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */; };
+		963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1FC2D270D1E00C97334 /* CacheManager.swift */; };
 		964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */; };
 		9642236D2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
 		9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
@@ -421,6 +422,7 @@
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbariOS18View.swift; sourceTree = "<group>"; };
 		963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizedImageToScreenView.swift; sourceTree = "<group>"; };
+		963DC1FC2D270D1E00C97334 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisintegrationEffectView.swift; sourceTree = "<group>"; };
 		9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteractiveNavigationGestureView.swift; path = View/InteractiveNavigationGestureView.swift; sourceTree = SOURCE_ROOT; };
 		9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtractor.swift; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
 				96E4E5FC2D1788830020261F /* AsyncImageViewer.swift */,
 				963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */,
+				963DC1FC2D270D1E00C97334 /* CacheManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1553,6 +1556,7 @@
 				9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */,
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
 				964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */,
+				963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
 				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
