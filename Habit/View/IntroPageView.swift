@@ -1,13 +1,16 @@
 //
-//  RotatingIconEffectView.swift
-//  animation
+//  IntroPageView.swift
+//  Habit
+
 import SwiftUI
 
-struct RotatingIconEffectDemoView: View {
+struct IntroPageView: View {
     /// View properties
-    @State private var selectedSportItem : SportItem = sportItems.first!
-    @State private var introSportItems : [SportItem] = sportItems
+    @State private var selectedSportItem : IntroPageItem = introItems.first!
+    @State private var introSportItems : [IntroPageItem] = introItems
     @State private var activeIndex: Int = 0
+    @State private var askUserName: Bool = false
+    @AppStorage("username") private var username: String = ""
     var body: some View {
         VStack(spacing: 0) {
             /// Back button
@@ -46,12 +49,15 @@ struct RotatingIconEffectDemoView: View {
                     .font(.title.bold())
                     .contentTransition(.numericText())
                 
-                Text("RotatingIconEffectView Demo")
+                Text(selectedSportItem.description)
                     .font(.caption2)
                     .foregroundStyle(.gray)
                 
                 /// Next/Continue button
                 Button {
+                    if selectedSportItem.id == introSportItems.last?.id {
+                        askUserName.toggle()
+                    }
                     updateItem(isForward: true)
                 } label: {
                     Text(selectedSportItem.id == introSportItems.last?.id ? "Continue" : "Next")
@@ -68,10 +74,27 @@ struct RotatingIconEffectDemoView: View {
             .frame(width: 300)
             .frame(maxHeight: .infinity)
         }
+        .ignoresSafeArea(.keyboard, edges: .all)
+        .overlay {
+            ZStack(alignment: .bottom) {
+                Rectangle()
+                    .fill(.black.opacity(askUserName ? 0.3 : 0))
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        askUserName = false
+                    }
+                
+                if askUserName {
+                    UserNameView()
+                        .transition(.move(edge: .bottom).combined(with: .offset(y: 100)))
+                }
+            }
+            .animation(.snappy, value: askUserName)
+        }
     }
     
     @ViewBuilder
-    func AnimatedIconView(_ item: SportItem) -> some View {
+    func AnimatedIconView(_ item: IntroPageItem) -> some View {
         let isSelected = selectedSportItem.id == item.id
         Image(systemName: item.image)
             .font(.system(size: 80))
@@ -94,6 +117,35 @@ struct RotatingIconEffectDemoView: View {
             .rotationEffect(.init(degrees: item.rotation))
             /// placing the selected icon at the top
             .zIndex(isSelected ? 2 : item.zIndex)
+    }
+    
+    @ViewBuilder
+    func UserNameView() -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Let's Start With Your Name")
+                .font(.caption)
+                .foregroundStyle(.gray)
+            
+            TextField("demo", text: $username)
+                .applyPaddedBackground(10, hPadding: 15, vPadding: 12)
+                .opacityShadow(.black, opacity: 0.1, radius: 5)
+            
+            Button {
+                
+            } label: {
+                Text("Start tracking")
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+                    .hSpacing(.center)
+                    .padding(.vertical, 12)
+                    .background(.green.gradient, in: .rect(cornerRadius: 10))
+            }
+            .disableWithOpacity(username.isEmpty)
+            .padding(.top, 10)
+        }
+        .applyPaddedBackground(12)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 10)
     }
     
     /// shift the active icon to the center when continue or back button is pressed
@@ -157,6 +209,7 @@ struct RotatingIconEffectDemoView: View {
     }
 }
 
+
 #Preview {
-    RotatingIconEffectDemoView()
+    IntroPageView()
 }

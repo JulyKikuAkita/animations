@@ -209,6 +209,7 @@
 		96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */; };
 		96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1D2C2FD354007A4E34 /* TimePickerView.swift */; };
 		96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B202C2FD9CA007A4E34 /* Recent.swift */; };
+		967958702D2DD2EF009E74CA /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
 		9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */; };
 		9682B6CE2CB1D070003D917F /* Grid+PanGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B6CD2CB1D070003D917F /* Grid+PanGestureView.swift */; };
 		9682B6D02CB1D355003D917F /* ColorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B6CF2CB1D355003D917F /* ColorItem.swift */; };
@@ -474,6 +475,7 @@
 		96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockTextEffectView.swift; sourceTree = "<group>"; };
 		96726B1D2C2FD354007A4E34 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		96726B202C2FD9CA007A4E34 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
+		967958442D2DD24B009E74CA /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCarouselView.swift; sourceTree = "<group>"; };
 		9682B6CD2CB1D070003D917F /* Grid+PanGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grid+PanGestureView.swift"; sourceTree = "<group>"; };
 		9682B6CF2CB1D355003D917F /* ColorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorItem.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9613D7132C7BE42A007FF2E7 /* PlayStationApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PlayStationApp; sourceTree = "<group>"; };
 		963B86922CEABA5F00C3FB0D /* Profiles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Profiles; sourceTree = "<group>"; };
+		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -612,6 +615,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		963B868E2CEABA5F00C3FB0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		967958412D2DD24B009E74CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -678,6 +688,7 @@
 				96DF8A922C3A68290063A931 /* ThreadApp */,
 				9613D7132C7BE42A007FF2E7 /* PlayStationApp */,
 				963B86922CEABA5F00C3FB0D /* Profiles */,
+				967958452D2DD24B009E74CA /* Habit */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -692,6 +703,7 @@
 				96DF8A912C3A68290063A931 /* ThreadApp.app */,
 				9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */,
 				963B86912CEABA5F00C3FB0D /* Profiles.app */,
+				967958442D2DD24B009E74CA /* Habit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1362,6 +1374,28 @@
 			productReference = 963B86912CEABA5F00C3FB0D /* Profiles.app */;
 			productType = "com.apple.product-type.application";
 		};
+		967958432D2DD24B009E74CA /* Habit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9679586B2D2DD24C009E74CA /* Build configuration list for PBXNativeTarget "Habit" */;
+			buildPhases = (
+				967958402D2DD24B009E74CA /* Sources */,
+				967958412D2DD24B009E74CA /* Frameworks */,
+				967958422D2DD24B009E74CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				967958452D2DD24B009E74CA /* Habit */,
+			);
+			name = Habit;
+			packageProductDependencies = (
+			);
+			productName = Habit;
+			productReference = 967958442D2DD24B009E74CA /* Habit.app */;
+			productType = "com.apple.product-type.application";
+		};
 		96DF8A902C3A68290063A931 /* ThreadApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96DF8AB82C3A682A0063A931 /* Build configuration list for PBXNativeTarget "ThreadApp" */;
@@ -1407,6 +1441,9 @@
 					963B86902CEABA5F00C3FB0D = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					967958432D2DD24B009E74CA = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					96DF8A902C3A68290063A931 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -1432,6 +1469,7 @@
 				96DF8A902C3A68290063A931 /* ThreadApp */,
 				9613D7112C7BE42A007FF2E7 /* PlayStationApp */,
 				963B86902CEABA5F00C3FB0D /* Profiles */,
+				967958432D2DD24B009E74CA /* Habit */,
 			);
 		};
 /* End PBXProject section */
@@ -1506,6 +1544,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		963B868F2CEABA5F00C3FB0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		967958422D2DD24B009E74CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1846,6 +1891,14 @@
 				963B86F42CEBF76D00C3FB0D /* Message.swift in Sources */,
 				963B869F2CEABAC000C3FB0D /* HeroItemView.swift in Sources */,
 				963B86A92CEABD0600C3FB0D /* AnchorKey.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		967958402D2DD24B009E74CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				967958702D2DD2EF009E74CA /* SportItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2337,6 +2390,64 @@
 			};
 			name = Release;
 		};
+		967958652D2DD24C009E74CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Habit/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.Habit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		967958662D2DD24C009E74CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Habit/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.Habit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		96DF8AB22C3A682A0063A931 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2457,6 +2568,15 @@
 			buildConfigurations = (
 				963B869C2CEABA6000C3FB0D /* Debug */,
 				963B869D2CEABA6000C3FB0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9679586B2D2DD24C009E74CA /* Build configuration list for PBXNativeTarget "Habit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				967958652D2DD24C009E74CA /* Debug */,
+				967958662D2DD24C009E74CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
