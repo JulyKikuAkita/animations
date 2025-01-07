@@ -41,6 +41,11 @@ enum Tab_iOS17: String, CaseIterable {
                 .cyan
         }
     }
+    
+    /// DraggableTabbariOS18DemoView
+    var index: Int {
+        Self.allCases.firstIndex(of: self) ?? 0
+    }
 }
 
 /// Animated SF tab model
