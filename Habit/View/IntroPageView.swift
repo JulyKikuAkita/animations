@@ -11,6 +11,8 @@ struct IntroPageView: View {
     @State private var activeIndex: Int = 0
     @State private var askUserName: Bool = false
     @AppStorage("username") private var username: String = ""
+    @AppStorage("isIntroCompleted") private var isIntroCompleted: Bool = false
+
     var body: some View {
         VStack(spacing: 0) {
             /// Back button
@@ -131,7 +133,7 @@ struct IntroPageView: View {
                 .opacityShadow(.black, opacity: 0.1, radius: 5)
             
             Button {
-                
+                isIntroCompleted.toggle()
             } label: {
                 Text("Start tracking")
                     .fontWeight(.semibold)
@@ -211,5 +213,5 @@ struct IntroPageView: View {
 
 
 #Preview {
-    IntroPageView()
+    ContentView()
 }

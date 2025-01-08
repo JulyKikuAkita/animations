@@ -1,21 +1,24 @@
 //
 //  ContentView.swift
 //  Habit
-//
-//  Created by IFang Lee on 1/7/25.
-//
 
 import SwiftUI
 
 struct ContentView: View {
+    /// View Properties
+    @AppStorage("isIntroCompleted") private var isIntroCompleted: Bool = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            if isIntroCompleted {
+                HabitHome()
+                    .transition(.move(edge: .trailing))
+            } else {
+                IntroPageView()
+                    .transition(.move(edge: .leading))
+            }
         }
-        .padding()
+        .animation(.snappy(duration: 0.25, extraBounce: 0), value: isIntroCompleted)
     }
 }
 
