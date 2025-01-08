@@ -11,8 +11,11 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if isIntroCompleted {
-                HabitHome()
-                    .transition(.move(edge: .trailing))
+                NavigationStack {
+                    HabitHome()
+                }
+                .transition(.move(edge: .trailing))
+
             } else {
                 IntroPageView()
                     .transition(.move(edge: .leading))

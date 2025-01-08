@@ -5,16 +5,19 @@
 import SwiftUI
 
 struct HabitCalendarView: View {
+    var isDemo: Bool = false
     var createdAt: Date
     var frequency: [HabitFrequency]
     var completedDates: [TimeInterval]
     
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 7), spacing: 12) {
-            ForEach(HabitFrequency.allCases, id: \.rawValue) { frequency in
-                Text(frequency.rawValue.prefix(3))
-                    .font(.caption)
-                    .foregroundStyle(.gray)
+            if !isDemo {
+                ForEach(HabitFrequency.allCases, id: \.rawValue) { frequency in
+                    Text(frequency.rawValue.prefix(3))
+                        .font(.caption)
+                        .foregroundStyle(.gray)
+                }
             }
             
             /// day 1 of the month  always start on Sundays, add offset to push it to draw at the  actual date
@@ -44,12 +47,12 @@ struct HabitCalendarView: View {
                         
                         let isFutureHabits = date.startOfDay > Date()
                         
-                        if isHabitCompleted && isHabitDay {
+                        if isHabitCompleted && isHabitDay && !isDemo {
                             Circle()
                                 .fill(.green.tertiary)
-                        } else if isHabitDay && !isFutureHabits {
+                        } else if isHabitDay && !isFutureHabits && !isDemo {
                             Circle()
-                                .fill(.red.tertiary)
+                                .fill((date.isToday ? Color.yellow : Color.red).tertiary)
                         } else {
                             if isHabitDay {
                                 Circle()

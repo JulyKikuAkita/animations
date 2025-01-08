@@ -8,7 +8,7 @@ import SwiftData
 @Model
 class Habit {
     var name: String
-    var frequency: [HabitFrequency]
+    var frequencies: [HabitFrequency]
     var createdAt: Date = Date()
     var completedDates: [TimeInterval] = []
     
@@ -21,7 +21,7 @@ class Habit {
     
     init(name: String, frequency: [HabitFrequency], notificationIDs: [String] = [], notificationTiming: Date? = nil) {
         self.name = name
-        self.frequency = frequency
+        self.frequencies = frequency
         self.notificationIDs = notificationIDs
         self.notificationTiming = notificationTiming
     }
