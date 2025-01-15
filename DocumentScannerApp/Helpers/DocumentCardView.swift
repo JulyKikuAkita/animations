@@ -45,6 +45,16 @@ struct DocumentCardView: View {
                 .frame(height: 150)
                 .clipShape(.rect(cornerRadius: 15))
                 .matchedTransitionSource(id: document.uniqueViewID, in: animationID)
+                
+                if document.isLocked {
+                    ZStack {
+                        Rectangle()
+                            .fill(.ultraThinMaterial)
+                        
+                        Image(systemName: "lock.fill")
+                            .font(.title3)
+                    }
+                }
             }
             
             Text(document.name)
