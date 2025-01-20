@@ -6,7 +6,7 @@ import SwiftUI
 import AVKit
 
 // example
-@main
+//@main
 struct UniversalViewApp: App {
     var body: some Scene {
         WindowGroup {
