@@ -81,5 +81,7 @@ struct APNSDemoView: View {
 }
 
 #Preview {
+    @UIApplicationDelegateAdaptor(AppData.self) var appData
     APNSDemoView()
+        .environment(appData)
 }
