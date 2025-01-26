@@ -154,6 +154,7 @@
 		9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
 		964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
 		964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
+		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
@@ -430,6 +431,13 @@
 		964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisintegrationEffectView.swift; sourceTree = "<group>"; };
 		9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteractiveNavigationGestureView.swift; path = View/InteractiveNavigationGestureView.swift; sourceTree = SOURCE_ROOT; };
 		9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtractor.swift; sourceTree = "<group>"; };
+		96513E9F2D3DC6590004C7C8 /* Message1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message1.apns; sourceTree = "<group>"; };
+		96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSDemoView.swift; sourceTree = "<group>"; };
+		96513EA22D3DCA9E0004C7C8 /* deeplinkMSG1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG1.apns; sourceTree = "<group>"; };
+		96513EA32D3DCADB0004C7C8 /* Message2.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message2.apns; sourceTree = "<group>"; };
+		96513EA42D3DCAF30004C7C8 /* Message3.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message3.apns; sourceTree = "<group>"; };
+		96513EA52D3DCB190004C7C8 /* deeplinkMSG2.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG2.apns; sourceTree = "<group>"; };
+		96513EA62D3DCB200004C7C8 /* deeplinkMSG3.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG3.apns; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
@@ -690,6 +698,7 @@
 		961F3B822B8818240055D79B = {
 			isa = PBXGroup;
 			children = (
+				96513E9E2D3DC6500004C7C8 /* APNS */,
 				96726B152C2FA88D007A4E34 /* PomodoroFocusTimer */,
 				96352D212C0BD499001AD2FD /* PinterestGrid */,
 				963DB14C2BBBD39F00AAF347 /* Videos */,
@@ -1039,6 +1048,20 @@
 				ABFC3FD72C9F6C7A00E2E60E /* Reel13.mp4 */,
 			);
 			path = Videos;
+			sourceTree = "<group>";
+		};
+		96513E9E2D3DC6500004C7C8 /* APNS */ = {
+			isa = PBXGroup;
+			children = (
+				96513E9F2D3DC6590004C7C8 /* Message1.apns */,
+				96513EA32D3DCADB0004C7C8 /* Message2.apns */,
+				96513EA42D3DCAF30004C7C8 /* Message3.apns */,
+				96513EA22D3DCA9E0004C7C8 /* deeplinkMSG1.apns */,
+				96513EA52D3DCB190004C7C8 /* deeplinkMSG2.apns */,
+				96513EA62D3DCB200004C7C8 /* deeplinkMSG3.apns */,
+				96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */,
+			);
+			path = APNS;
 			sourceTree = "<group>";
 		};
 		965E573A2BC5086000E172B3 /* Carousel */ = {
@@ -1784,6 +1807,7 @@
 				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
+				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
 				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
