@@ -230,6 +230,7 @@
 		968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */; };
 		968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */; };
 		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
+		96976CEE2D50349100643821 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976CED2D50349100643821 /* View+Alert.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
@@ -507,6 +508,7 @@
 		968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBottomSheetsView.swift; sourceTree = "<group>"; };
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
 		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
+		96976CED2D50349100643821 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 		9627062A2D46049100DC0161 /* Orientation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orientation; sourceTree = "<group>"; };
 		963B86922CEABA5F00C3FB0D /* Profiles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Profiles; sourceTree = "<group>"; };
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
+		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -877,6 +880,8 @@
 		9621DC4B2BEF3E5E00183CB7 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
+				96976CEC2D50347D00643821 /* Helper */,
+				96976CEB2D50347100643821 /* View */,
 				9621DC4C2BEF3E5E00183CB7 /* AlertApp.swift */,
 				9621DC4E2BEF3E5E00183CB7 /* ContentView.swift */,
 				9621DC2B2BEF3CF900183CB7 /* Assets.xcassets */,
@@ -1176,6 +1181,14 @@
 			path = TextEffectView;
 			sourceTree = "<group>";
 		};
+		96976CEC2D50347D00643821 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				96976CED2D50349100643821 /* View+Alert.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		9697B73F2C6D9EF60092D07A /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1377,6 +1390,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				96976CEB2D50347100643821 /* View */,
 			);
 			name = Alert;
 			productName = Alert;
@@ -1934,6 +1950,7 @@
 				9621DC7A2BEF419200183CB7 /* WindowSharedModel.swift in Sources */,
 				96ACBF102C39CBD3004F3070 /* Tab_iOS17.swift in Sources */,
 				9621DC7D2BEF423500183CB7 /* AppDelegate.swift in Sources */,
+				96976CEE2D50349100643821 /* View+Alert.swift in Sources */,
 				9621DC932BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				9621DC7E2BEF42DB00183CB7 /* UniversalAlert.swift in Sources */,
 				9621DC4D2BEF3E5E00183CB7 /* AlertApp.swift in Sources */,
