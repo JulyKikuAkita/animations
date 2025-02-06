@@ -35,11 +35,6 @@ struct PanGesture: UIGestureRecognizerRepresentable {
             handle?(recognizer)
         }
     }
-    
-    struct PanGestureValue {
-        var translation: CGSize
-        var velocity: CGSize
-    }
 }
 
 extension CGPoint {
