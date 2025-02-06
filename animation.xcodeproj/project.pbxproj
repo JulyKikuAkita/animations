@@ -229,6 +229,7 @@
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
 		968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */; };
 		968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */; };
+		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
@@ -505,6 +506,7 @@
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
 		968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBottomSheetsView.swift; sourceTree = "<group>"; };
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
+		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
@@ -987,6 +989,7 @@
 				96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */,
 				965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */,
 				963B882E2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift */,
+				96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */,
 			);
 			path = TextFieldView;
 			sourceTree = "<group>";
@@ -1759,6 +1762,7 @@
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
+				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
 				965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
 				9662F0252C583FB600508B80 /* LandingView.swift in Sources */,
