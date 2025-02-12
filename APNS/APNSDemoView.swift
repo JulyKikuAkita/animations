@@ -8,7 +8,7 @@
 //
 import SwiftUI
 
-@main
+//@main
 struct APNSDemoAPNSDemoView: App {
     @UIApplicationDelegateAdaptor(AppData.self) private var appData
     var body: some Scene {

@@ -307,6 +307,9 @@
 		96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */; };
 		96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */; };
 		96F9D16F2D5C41E000CD134B /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */; };
+		96F9D1712D5C61C200CD134B /* InfiniteScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1702D5C61C200CD134B /* InfiniteScrollHelper.swift */; };
+		96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */; };
+		96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */; };
 		96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9FB862BB3F17B00C35779 /* SegmentControl.swift */; };
 		96FF50972B92FE1700B36142 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50962B92FE1700B36142 /* GridView.swift */; };
 		96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50982B94427000B36142 /* PlayerAnimationView.swift */; };
@@ -578,6 +581,9 @@
 		96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteHorizontalScrollViewDemo.swift; sourceTree = "<group>"; };
 		96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
+		96F9D1702D5C61C200CD134B /* InfiniteScrollHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollHelper.swift; sourceTree = "<group>"; };
+		96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextRenderer.swift; sourceTree = "<group>"; };
+		96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealRenderer.swift; sourceTree = "<group>"; };
 		96F9FB862BB3F17B00C35779 /* SegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControl.swift; sourceTree = "<group>"; };
 		96FF50962B92FE1700B36142 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		96FF50982B94427000B36142 /* PlayerAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnimationView.swift; sourceTree = "<group>"; };
@@ -687,6 +693,7 @@
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				96F9D1722D5C6A9600CD134B /* TextRender */,
 				9621D9682BE8409E00183CB7 /* Layout */,
 				96352CE02C09A416001AD2FD /* AnchorKey.swift */,
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
@@ -712,6 +719,7 @@
 				963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */,
 				963DC1FC2D270D1E00C97334 /* CacheManager.swift */,
 				963B9CF62D5491EF00453320 /* CustomSwipeActions.swift */,
+				96F9D1702D5C61C200CD134B /* InfiniteScrollHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1330,6 +1338,15 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		96F9D1722D5C6A9600CD134B /* TextRender */ = {
+			isa = PBXGroup;
+			children = (
+				96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */,
+				96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */,
+			);
+			path = TextRender;
+			sourceTree = "<group>";
+		};
 		AB40B84A2C9F607800BC7747 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
@@ -1801,6 +1818,7 @@
 				963B9CFD2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
+				96F9D1712D5C61C200CD134B /* InfiniteScrollHelper.swift in Sources */,
 				96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
@@ -1836,6 +1854,7 @@
 				963B862F2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift in Sources */,
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
 				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
+				96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
 				9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
@@ -1851,6 +1870,7 @@
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
+				96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */,
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
 				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
