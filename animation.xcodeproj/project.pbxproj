@@ -143,6 +143,13 @@
 		963B87DC2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */; };
 		963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B882E2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift */; };
 		963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B88302CED4BB500C3FB0D /* TextFieldActions.swift */; };
+		963B9C7F2D54912D00453320 /* CustomSwipeActionScrollViewiOS18DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B9C7E2D54912D00453320 /* CustomSwipeActionScrollViewiOS18DemoView.swift */; };
+		963B9CF72D5491EF00453320 /* CustomSwipeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B9CF62D5491EF00453320 /* CustomSwipeActions.swift */; };
+		963B9CF92D5492B200453320 /* SwipeActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B9CF82D5492B200453320 /* SwipeActionModel.swift */; };
+		963B9CFA2D5492B200453320 /* SwipeActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B9CF82D5492B200453320 /* SwipeActionModel.swift */; };
+		963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B9CF82D5492B200453320 /* SwipeActionModel.swift */; };
+		963B9CFD2D549D3500453320 /* HorizontalPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B9CFC2D549D3500453320 /* HorizontalPanGesture.swift */; };
+		963B9CFE2D549D3500453320 /* HorizontalPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B9CFC2D549D3500453320 /* HorizontalPanGesture.swift */; };
 		963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */; };
 		963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
@@ -298,6 +305,11 @@
 		96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7CEE32BE32C5C00F24910 /* TabShape.swift */; };
 		96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */; };
+		96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */; };
+		96F9D16F2D5C41E000CD134B /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */; };
+		96F9D1712D5C61C200CD134B /* InfiniteScrollHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1702D5C61C200CD134B /* InfiniteScrollHelper.swift */; };
+		96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */; };
+		96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */; };
 		96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9FB862BB3F17B00C35779 /* SegmentControl.swift */; };
 		96FF50972B92FE1700B36142 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50962B92FE1700B36142 /* GridView.swift */; };
 		96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50982B94427000B36142 /* PlayerAnimationView.swift */; };
@@ -425,6 +437,10 @@
 		963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxTabModel.swift; sourceTree = "<group>"; };
 		963B882E2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldMenuActionsView.swift; sourceTree = "<group>"; };
 		963B88302CED4BB500C3FB0D /* TextFieldActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldActions.swift; sourceTree = "<group>"; };
+		963B9C7E2D54912D00453320 /* CustomSwipeActionScrollViewiOS18DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwipeActionScrollViewiOS18DemoView.swift; sourceTree = "<group>"; };
+		963B9CF62D5491EF00453320 /* CustomSwipeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwipeActions.swift; sourceTree = "<group>"; };
+		963B9CF82D5492B200453320 /* SwipeActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionModel.swift; sourceTree = "<group>"; };
+		963B9CFC2D549D3500453320 /* HorizontalPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPanGesture.swift; sourceTree = "<group>"; };
 		963DB14A2BBBD21400AAF347 /* Reel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reel.swift; sourceTree = "<group>"; };
 		963DB1572BBBD91600AAF347 /* FullScreenVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoView.swift; sourceTree = "<group>"; };
 		963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbariOS18View.swift; sourceTree = "<group>"; };
@@ -563,6 +579,11 @@
 		96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAlert.swift; sourceTree = "<group>"; };
 		96EBF5E02BD793B400FDD20D /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
 		96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteHorizontalScrollViewDemo.swift; sourceTree = "<group>"; };
+		96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
+		96F9D1702D5C61C200CD134B /* InfiniteScrollHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollHelper.swift; sourceTree = "<group>"; };
+		96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextRenderer.swift; sourceTree = "<group>"; };
+		96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealRenderer.swift; sourceTree = "<group>"; };
 		96F9FB862BB3F17B00C35779 /* SegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControl.swift; sourceTree = "<group>"; };
 		96FF50962B92FE1700B36142 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		96FF50982B94427000B36142 /* PlayerAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnimationView.swift; sourceTree = "<group>"; };
@@ -672,6 +693,7 @@
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				96F9D1722D5C6A9600CD134B /* TextRender */,
 				9621D9682BE8409E00183CB7 /* Layout */,
 				96352CE02C09A416001AD2FD /* AnchorKey.swift */,
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
@@ -696,6 +718,8 @@
 				96E4E5FC2D1788830020261F /* AsyncImageViewer.swift */,
 				963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */,
 				963DC1FC2D270D1E00C97334 /* CacheManager.swift */,
+				963B9CF62D5491EF00453320 /* CustomSwipeActions.swift */,
+				96F9D1702D5C61C200CD134B /* InfiniteScrollHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -794,6 +818,7 @@
 				963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */,
 				96E4DD112CFFDE1F0020261F /* SportItem.swift */,
 				96E4E5F82D175FAB0020261F /* ImageLinkModel.swift */,
+				963B9CF82D5492B200453320 /* SwipeActionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -862,6 +887,7 @@
 				9621DB152BEDDD7400183CB7 /* PinchZoom.swift */,
 				96ACBF022C350BFA004F3070 /* CustomGesture.swift */,
 				963B84722CCC5A1D00C3FB0D /* PanGesture.swift */,
+				963B9CFC2D549D3500453320 /* HorizontalPanGesture.swift */,
 			);
 			path = Gesture;
 			sourceTree = "<group>";
@@ -1206,6 +1232,9 @@
 				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
 				96D04B302C09A1960062520D /* StackedScrollView.swift */,
 				96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */,
+				963B9C7E2D54912D00453320 /* CustomSwipeActionScrollViewiOS18DemoView.swift */,
+				96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */,
+				96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -1307,6 +1336,15 @@
 				96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */,
 			);
 			path = Button;
+			sourceTree = "<group>";
+		};
+		96F9D1722D5C6A9600CD134B /* TextRender */ = {
+			isa = PBXGroup;
+			children = (
+				96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */,
+				96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */,
+			);
+			path = TextRender;
 			sourceTree = "<group>";
 		};
 		AB40B84A2C9F607800BC7747 /* Grid */ = {
@@ -1719,12 +1757,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				963B9C7F2D54912D00453320 /* CustomSwipeActionScrollViewiOS18DemoView.swift in Sources */,
+				96F9D16F2D5C41E000CD134B /* InfiniteScrollView.swift in Sources */,
 				9682B6D12CB1D355003D917F /* ColorItem.swift in Sources */,
 				963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */,
 				961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */,
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
+				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* GesturesView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
@@ -1774,8 +1815,11 @@
 				96E09E7A2C6ED10C00A0BE66 /* ProgressiveBlurView.swift in Sources */,
 				96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
+				963B9CFD2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
+				96F9D1712D5C61C200CD134B /* InfiniteScrollHelper.swift in Sources */,
+				96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
@@ -1810,6 +1854,7 @@
 				963B862F2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift in Sources */,
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
 				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
+				96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
 				9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
@@ -1825,6 +1870,7 @@
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
+				96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */,
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
 				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
@@ -1837,6 +1883,7 @@
 				963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */,
 				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				963B87D82CEC0DF000C3FB0D /* mailSearchInboxiOS18.swift in Sources */,
+				963B9CF72D5491EF00453320 /* CustomSwipeActions.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
 				96AC82F22C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift in Sources */,
@@ -1883,6 +1930,7 @@
 				96AC81002C84FFF900ABBE78 /* Control.swift in Sources */,
 				96E4E5FB2D175FAB0020261F /* ImageLinkModel.swift in Sources */,
 				96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */,
+				963B9CFA2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				9662F0312C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
 				963B87DB2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
@@ -1918,6 +1966,7 @@
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
 				96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */,
 				9682B6D22CB1D355003D917F /* ColorItem.swift in Sources */,
+				963B9CFE2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
 				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
 				96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
@@ -1965,6 +2014,7 @@
 				9621DD8A2BF47FC800183CB7 /* MyMintApp.swift in Sources */,
 				96725BB82BF5D6C2003DBD45 /* MintFilterTransactionsView.swift in Sources */,
 				9621DDBA2BF489D100183CB7 /* Settings.swift in Sources */,
+				963B9CF92D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96352CE42C09A8D5001AD2FD /* SwipeActionDemoView.swift in Sources */,
 				9621DD952BF47FDA00183CB7 /* PlayerConfig.swift in Sources */,
 				9621DDA62BF4800500183CB7 /* IntroScreen.swift in Sources */,
