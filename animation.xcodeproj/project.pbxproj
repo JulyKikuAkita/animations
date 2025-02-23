@@ -218,6 +218,8 @@
 		96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1D2C2FD354007A4E34 /* TimePickerView.swift */; };
 		96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B202C2FD9CA007A4E34 /* Recent.swift */; };
 		967958702D2DD2EF009E74CA /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
+		9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680C91E2D6AFAD2005FC80D /* RippleView.swift */; };
+		9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680C9212D6AFF68005FC80D /* RippleTransitionDemoView.swift */; };
 		9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */; };
 		9682B6CE2CB1D070003D917F /* Grid+PanGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B6CD2CB1D070003D917F /* Grid+PanGestureView.swift */; };
 		9682B6D02CB1D355003D917F /* ColorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B6CF2CB1D355003D917F /* ColorItem.swift */; };
@@ -505,6 +507,8 @@
 		96726B1D2C2FD354007A4E34 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		96726B202C2FD9CA007A4E34 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		967958442D2DD24B009E74CA /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9680C91E2D6AFAD2005FC80D /* RippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleView.swift; sourceTree = "<group>"; };
+		9680C9212D6AFF68005FC80D /* RippleTransitionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleTransitionDemoView.swift; sourceTree = "<group>"; };
 		9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCarouselView.swift; sourceTree = "<group>"; };
 		9682B6CD2CB1D070003D917F /* Grid+PanGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grid+PanGestureView.swift"; sourceTree = "<group>"; };
 		9682B6CF2CB1D355003D917F /* ColorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorItem.swift; sourceTree = "<group>"; };
@@ -695,6 +699,7 @@
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9680C91D2D6AFAB7005FC80D /* Transition */,
 				96F9D1722D5C6A9600CD134B /* TextRender */,
 				9621D9682BE8409E00183CB7 /* Layout */,
 				96352CE02C09A416001AD2FD /* AnchorKey.swift */,
@@ -828,6 +833,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
 				963B862B2CE94F9400C3FB0D /* Slider */,
 				963B85B22CD4369F00C3FB0D /* Snapshot */,
 				963B846F2CCC4F2700C3FB0D /* miniPlayerView */,
@@ -1183,6 +1189,22 @@
 				96726B202C2FD9CA007A4E34 /* Recent.swift */,
 			);
 			path = PomodoroFocusTimer;
+			sourceTree = "<group>";
+		};
+		9680C91D2D6AFAB7005FC80D /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				9680C91E2D6AFAD2005FC80D /* RippleView.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
+		9680C9202D6AFF48005FC80D /* TransitionDemoView */ = {
+			isa = PBXGroup;
+			children = (
+				9680C9212D6AFF68005FC80D /* RippleTransitionDemoView.swift */,
+			);
+			path = TransitionDemoView;
 			sourceTree = "<group>";
 		};
 		96845DA32BD3346500B7D8B2 /* AppleMusic */ = {
@@ -1826,6 +1848,7 @@
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
+				9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */,
 				965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
 				9662F0252C583FB600508B80 /* LandingView.swift in Sources */,
@@ -1902,6 +1925,7 @@
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				961BD7692CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift in Sources */,
 				965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */,
+				9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */,
 				9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */,
 				AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */,
 				9662F0112C50854400508B80 /* ImageCarouselView.swift in Sources */,
