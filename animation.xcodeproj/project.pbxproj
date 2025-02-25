@@ -270,6 +270,10 @@
 		969222112D7AD29C00326523 /* View+Extension+Tray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969222102D7AD29C00326523 /* View+Extension+Tray.swift */; };
 		9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */; };
 		9693DB342D9B4F9100A29727 /* DrawerButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9693DB332D9B4F9100A29727 /* DrawerButtonView.swift */; };
+		969219DC2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
+		969219DD2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
+		969219DE2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
+		969219E12D6DA2CC00326523 /* ContactScrollDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */; };
 		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		96976CEE2D50349100643821 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976CED2D50349100643821 /* View+Alert.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
@@ -618,6 +622,8 @@
 		969222102D7AD29C00326523 /* View+Extension+Tray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension+Tray.swift"; sourceTree = "<group>"; };
 		9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaggeredAnimationView.swift; sourceTree = "<group>"; };
 		9693DB332D9B4F9100A29727 /* DrawerButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerButtonView.swift; sourceTree = "<group>"; };
+		969219DB2D6D9EE300326523 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScrollDemoView.swift; sourceTree = "<group>"; };
 		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
 		96976CED2D50349100643821 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
@@ -1105,6 +1111,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0EA1752DEBBAB000C62391 /* Dummies.swift */,
+				969219DB2D6D9EE300326523 /* Contact.swift */,
 				9621DC902BF1EDB100183CB7 /* ActionModel.swift */,
 				968D2D782B8C34CB00007734 /* WindowSharedModel.swift */,
 				96C0C2D62B905DDE00F56FF5 /* Card.swift */,
@@ -1596,6 +1603,7 @@
 				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
 				960663282DD950430084B468 /* ResizableHeaderScrollView.swift */,
 				9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */,
+				969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -2309,6 +2317,7 @@
 				963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */,
 				96FCA7D22DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift in Sources */,
 				961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */,
+				969219E12D6DA2CC00326523 /* ContactScrollDemoView.swift in Sources */,
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
@@ -2390,6 +2399,7 @@
 				9662F0252C583FB600508B80 /* LandingView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
+				969219DD2D6D9EEA00326523 /* Contact.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
 				96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */,
 				AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */,
@@ -2536,6 +2546,7 @@
 				96921D172D74423100326523 /* UIImage+Color.swift in Sources */,
 				9621DC3D2BEF3D7A00183CB7 /* Tag.swift in Sources */,
 				9662EF2A2C3E012800508B80 /* Video.swift in Sources */,
+				969219DE2D6D9EEA00326523 /* Contact.swift in Sources */,
 				9621DC3E2BEF3D7A00183CB7 /* OffsetReader.swift in Sources */,
 				9662EFF52C4B597400508B80 /* SharedData.swift in Sources */,
 				96352D252C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift in Sources */,
@@ -2633,6 +2644,7 @@
 				9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */,
 				96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */,
 				96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */,
+				969219DC2D6D9EEA00326523 /* Contact.swift in Sources */,
 				9621DDAF2BF487BB00183CB7 /* Transaction.swift in Sources */,
 				9662EFDB2C47A8AE00508B80 /* Message.swift in Sources */,
 				96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */,
