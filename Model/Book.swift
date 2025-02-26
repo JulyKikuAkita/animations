@@ -18,7 +18,7 @@ let dummyBooks: [Book] = [
         title: "The Hitchhiker's Guide to the Galaxy",
         author: "Douglas Adams",
         rating: "4.8 (32) * Science Fiction",
-        thumbnail: "Book 1",
+        thumbnail: "fox",
         ISBN: "0-330-25864-8",
         color: .indigo
     ),
@@ -26,7 +26,7 @@ let dummyBooks: [Book] = [
         title: "Life, the Universe and Everything",
         author: "Douglas Adams",
         rating: "4.5 (2) * Science fiction comedy",
-        thumbnail: "Book 2",
+        thumbnail: "IMG_0204",
         ISBN: "0-345-39182-9",
         color: .pink
     )
