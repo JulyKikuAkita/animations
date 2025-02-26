@@ -19,8 +19,12 @@ import SwiftUI
 
 struct BookCardView: View {
     var book: Book
+    var parentHorizontalPadding: CGFloat = 15
     var size: CGSize
+    var isScrolled: (Bool) -> ()
     /// Scroll animation properties
+    /// Adding these insets to the content size of the scroll view
+    /// will give you the total scrollable space of the scroll view.
     @State private var scrollProperties: ScrollGeometry =
         .init(
             contentOffset: .zero,
@@ -29,6 +33,7 @@ struct BookCardView: View {
             containerSize: .zero
         )
     @State private var scrollPosition: ScrollPosition = .init()
+    @State private var isPageScrolled: Bool = false
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 15) {
@@ -39,14 +44,14 @@ struct BookCardView: View {
                 
                 OtherTextContents()
                     .padding(.horizontal, 15)
-                    .frame(maxWidth: size.width - 30) /// due to apply negative padding
+                    .frame(maxWidth: size.width - (parentHorizontalPadding * 2)) /// due to apply negative padding
                     .padding(.bottom, 50)
             }
             /// scrolling + zoom effect: apply a negative scale to the horizontal padding
             /// combine with .scrollClipDisabled()
             /// 15 is the current view horizontal padding
             /// Note: negative padding increase view size, so need to get maxWidth of geometry Width - 15 * 2 to the text view
-            .padding(.horizontal, -15 * scrollProperties.topInsetProgress)
+            .padding(.horizontal, -parentHorizontalPadding * scrollProperties.topInsetProgress)
         }
         .scrollPosition($scrollPosition)
         .scrollClipDisabled()
@@ -54,9 +59,13 @@ struct BookCardView: View {
             $0
         }, action: { oldValue, newValue in
             scrollProperties = newValue
+            isPageScrolled = newValue.offsetY > 0
         })
         .scrollIndicators(.hidden)
         .scrollTargetBehavior(BookScrollEnd(topInset: scrollProperties.contentInsets.top))
+        .onChange(of: isPageScrolled) { oldValue, newValue in
+                isScrolled(newValue)
+        }
         .background {
             UnevenRoundedRectangle(
                 topLeadingRadius: 15,
@@ -67,7 +76,7 @@ struct BookCardView: View {
             .fill(.background)
             .ignoresSafeArea(.all, edges: .bottom)
             .offset(y: scrollProperties.offsetY > 0 ? 0 : -scrollProperties.offsetY)
-            .padding(.horizontal, -15 * scrollProperties.topInsetProgress)
+            .padding(.horizontal, -parentHorizontalPadding * scrollProperties.topInsetProgress)
         }
     }
     
@@ -140,7 +149,7 @@ struct BookCardView: View {
         }
         .foregroundStyle(.white)
         .padding(15)
-        .frame(maxWidth: size.width - 30) /// due to apply negative padding
+        .frame(maxWidth: size.width - parentHorizontalPadding * 2) /// due to apply negative padding
         .frame(maxWidth: .infinity)
         .background {
             Rectangle()
@@ -161,7 +170,7 @@ struct BookCardView: View {
             Text("From the Publisher")
                 .serifText(.title3, weight: .semibold)
             
-            Text(paragraph1)
+            Text([paragraph1, paragraph2].randomElement() ?? paragraph2)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
                 .lineLimit(5)
@@ -225,7 +234,16 @@ struct BookCardView: View {
         .buttonStyle(.plain)
         .font(.title)
         .foregroundStyle(.white, .white.tertiary)
-        .padding(.horizontal, -10 * scrollProperties.topInsetProgress) /// fix header position during scroll
+        .background {
+            GeometryReader { geometry in
+                TransparentBlurView()
+                    .frame(height: scrollProperties.contentInsets.top + 50)
+                    .blur(radius: 10, opaque: false)
+                    .frame(height: geometry.size.height, alignment: .bottom)
+            }
+            .opacity(scrollProperties.topInsetProgress)
+        }
+        .padding(.horizontal, -parentHorizontalPadding * scrollProperties.topInsetProgress) /// fix header position during scroll
         .offset(y: scrollProperties.offsetY < 20 ? 0 : scrollProperties.offsetY - 20)
         .zIndex(1000)
     }
@@ -233,8 +251,10 @@ struct BookCardView: View {
 
 #Preview {
     GeometryReader { geometry in
-        BookCardView(book: dummyBooks[0], size: geometry.size)
-            .padding(.horizontal, 15)
+        BookCardView(book: dummyBooks[0], parentHorizontalPadding: 15, size: geometry.size) { _ in
+            
+        }
+        .padding(.horizontal, 15)
     }
     .background(.gray.opacity(0.15))
 }
