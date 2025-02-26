@@ -242,6 +242,9 @@
 		969219DD2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
 		969219DE2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
 		969219E12D6DA2CC00326523 /* ContactScrollDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */; };
+		96921AEA2D6EE40C00326523 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
+		96921AEB2D6EE40C00326523 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
+		96921AEC2D6EE40C00326523 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
 		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		96976CEE2D50349100643821 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976CED2D50349100643821 /* View+Alert.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
@@ -534,6 +537,7 @@
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
 		969219DB2D6D9EE300326523 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScrollDemoView.swift; sourceTree = "<group>"; };
+		96921AE92D6EE40C00326523 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
 		96976CED2D50349100643821 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
@@ -833,6 +837,7 @@
 				96E4DD112CFFDE1F0020261F /* SportItem.swift */,
 				96E4E5F82D175FAB0020261F /* ImageLinkModel.swift */,
 				963B9CF82D5492B200453320 /* SwipeActionModel.swift */,
+				96921AE92D6EE40C00326523 /* Book.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1919,6 +1924,7 @@
 				963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */,
 				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				963B87D82CEC0DF000C3FB0D /* mailSearchInboxiOS18.swift in Sources */,
+				96921AEC2D6EE40C00326523 /* Book.swift in Sources */,
 				963B9CF72D5491EF00453320 /* CustomSwipeActions.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
@@ -2011,6 +2017,7 @@
 				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
 				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
+				96921AEB2D6EE40C00326523 /* Book.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
 				9621DC392BEF3D7300183CB7 /* Tab_iOS17.swift in Sources */,
 				96726B192C2FCECB007A4E34 /* TimeModel.swift in Sources */,
@@ -2099,6 +2106,7 @@
 				9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */,
 				9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */,
 				9621DDA92BF4813100183CB7 /* Constants.swift in Sources */,
+				96921AEA2D6EE40C00326523 /* Book.swift in Sources */,
 				9662F0212C58348100508B80 /* Page.swift in Sources */,
 				96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D552C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
