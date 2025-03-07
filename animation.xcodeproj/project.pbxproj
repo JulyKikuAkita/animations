@@ -242,6 +242,12 @@
 		96921D142D7439C700326523 /* AppIntentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921D122D7439C700326523 /* AppIntentView.swift */; };
 		96921D162D74401300326523 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96921D152D74401300326523 /* Preview Assets.xcassets */; };
 		96921D172D74423100326523 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
+		9692220A2D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */; };
+		9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692220B2D7ACF5800326523 /* KeyPadModel.swift */; };
+		9692220D2D7ACF5800326523 /* KeyPadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692220B2D7ACF5800326523 /* KeyPadModel.swift */; };
+		9692220E2D7ACF5800326523 /* KeyPadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692220B2D7ACF5800326523 /* KeyPadModel.swift */; };
+		9692220F2D7ACF5800326523 /* KeyPadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692220B2D7ACF5800326523 /* KeyPadModel.swift */; };
+		969222112D7AD29C00326523 /* View+Extension+Tray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969222102D7AD29C00326523 /* View+Extension+Tray.swift */; };
 		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		96976CEE2D50349100643821 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976CED2D50349100643821 /* View+Alert.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
@@ -534,6 +540,9 @@
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
 		96921D122D7439C700326523 /* AppIntentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntentView.swift; sourceTree = "<group>"; };
 		96921D152D74401300326523 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFloatingSheetsiOS18View.swift; sourceTree = "<group>"; };
+		9692220B2D7ACF5800326523 /* KeyPadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadModel.swift; sourceTree = "<group>"; };
+		969222102D7AD29C00326523 /* View+Extension+Tray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension+Tray.swift"; sourceTree = "<group>"; };
 		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
 		96976CED2D50349100643821 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
@@ -733,6 +742,7 @@
 				963DC1FC2D270D1E00C97334 /* CacheManager.swift */,
 				963B9CF62D5491EF00453320 /* CustomSwipeActions.swift */,
 				96F9D1702D5C61C200CD134B /* InfiniteScrollHelper.swift */,
+				969222102D7AD29C00326523 /* View+Extension+Tray.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -824,6 +834,7 @@
 				9662EFDA2C47A8AE00508B80 /* Message.swift */,
 				963DB14A2BBBD21400AAF347 /* Reel.swift */,
 				9662F01E2C58348100508B80 /* Page.swift */,
+				9692220B2D7ACF5800326523 /* KeyPadModel.swift */,
 				9662F0302C58BCCF00508B80 /* CustomShape.swift */,
 				96AC80FE2C84FFF900ABBE78 /* Control.swift */,
 				AB40B8462C9F5F9A00BC7747 /* Note.swift */,
@@ -1297,6 +1308,7 @@
 			children = (
 				96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */,
 				968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */,
+				969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -1789,6 +1801,7 @@
 				963DC1282D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,
 				964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
 				9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */,
+				9692220F2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9613D7232C7BE463007FF2E7 /* FloatingTabbar.swift in Sources */,
 				9613D72E2C7BEB67007FF2E7 /* FloatingTabBarView.swift in Sources */,
 				9613D7202C7BE43E007FF2E7 /* Page.swift in Sources */,
@@ -1847,12 +1860,14 @@
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
 				963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */,
 				968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */,
+				969222112D7AD29C00326523 /* View+Extension+Tray.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
 				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
 				9621DC812BEF461400183CB7 /* PhotoItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
+				9692220A2D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift in Sources */,
 				96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */,
 				96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */,
 				96E09E7A2C6ED10C00A0BE66 /* ProgressiveBlurView.swift in Sources */,
@@ -1935,6 +1950,7 @@
 				9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */,
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
 				965D1DD62C9D4E3A004161B1 /* DynamicTagWidthView.swift in Sources */,
+				9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
@@ -1986,6 +2002,7 @@
 				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
 				AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */,
 				96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */,
+				9692220D2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9662EFFA2C4B9E0500508B80 /* PhotoAppCustomGesture.swift in Sources */,
 				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
 				9621DC352BEF3D5900183CB7 /* MusicInfoView.swift in Sources */,
@@ -2080,6 +2097,7 @@
 				AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */,
 				9621DDB42BF489AD00183CB7 /* Recents.swift in Sources */,
 				96725BB62BF5B762003DBD45 /* MintExpenseView.swift in Sources */,
+				9692220E2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */,
 				9621DDAD2BF486C800183CB7 /* MintCategory.swift in Sources */,
 				9621DDAB2BF4849F00183CB7 /* MintTabs.swift in Sources */,
