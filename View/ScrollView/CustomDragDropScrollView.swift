@@ -17,7 +17,7 @@ struct CustomDragDropScrollDemoView: View {
                         .fill(.blue.opacity(0.25))
                 }
                 .ignoresSafeArea()
-            
+
             CustomDragDropScrollView(safeArea: safeArea)
         }
     }
@@ -53,7 +53,7 @@ struct CustomDragDropScrollView: View {
                             if selectedControl?.id == control.id {
                                 selectedControlFrame = newValue
                             }
-                            
+
                             control.frame = newValue
                         }
                         .gesture(customCombinedGesture(control))
@@ -116,7 +116,7 @@ struct CustomDragDropScrollView: View {
         .allowsTightening(selectedControl == nil) /// avoid multiple gesture inteaction
         .sensoryFeedback(.impact, trigger: hapticsTrigger)
     }
-    
+
     func customCombinedGesture(_ control: Control) -> some Gesture {
         LongPressGesture(minimumDuration: 0.25)
             .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .global))
@@ -129,14 +129,14 @@ struct CustomDragDropScrollView: View {
                             selectedControlFrame = control.frame
                             lastActiveScrollOffset = currentScrollOffset
                             hapticsTrigger.toggle()
-                            
+
                             withAnimation(.smooth(duration: 0.25, extraBounce: 0)) {
                                 selectedControlScale = 1.05
                             }
                         }
                         print("Long press Completed", value?.translation.height ?? 0)
                     }
-                    
+
                     if let value {
                         offset = value.translation
                         let location = value.location
@@ -146,7 +146,7 @@ struct CustomDragDropScrollView: View {
                 }
             }.onEnded { _ in
                 scrollTimer?.invalidate()
-                
+
                 withAnimation(.snappy(duration: 0.25, extraBounce: 0),
                     completionCriteria: .logicallyComplete
                 ) {
@@ -161,13 +161,13 @@ struct CustomDragDropScrollView: View {
                 }
             }
     }
-    
+
     // use a timer to auto-scroll the content
     // when the dragging view falls on the top or bottom region
     func checkAndScroll(_ location: CGPoint) {
         let topStatus = topRegion.contains(location)
         let bottomStatus = bottomRegion.contains(location)
-        
+
         if topStatus || bottomStatus {
             /// Initializing only once
             guard scrollTimer == nil else { return }
@@ -177,9 +177,9 @@ struct CustomDragDropScrollView: View {
                     } else {
                         lastActiveScrollOffset = min(lastActiveScrollOffset + 10, maximumScrollSize)
                     }
-                    
+
                     scrollPosition.scrollTo(y: lastActiveScrollOffset)
-                    
+
                     /// Swapping item if it falls on any item
                     checkAndSwapItems(location)
                 })
@@ -187,11 +187,11 @@ struct CustomDragDropScrollView: View {
             /// Removing Timer
             scrollTimer?.invalidate()
             scrollTimer = nil
-            
+
             checkAndSwapItems(location)
         }
     }
-    
+
     private func checkAndSwapItems(_ location: CGPoint) {
         if let currentIndex = controls.firstIndex(where: { $0.id == selectedControl?.id }),
            let fallingIndex = controls.firstIndex(where: { $0.frame.contains(location)}) {
@@ -208,9 +208,9 @@ private struct ControlView: View {
         HStack(spacing: 15) {
             Image(systemName: control.symbol)
                 .font(.title3)
-            
+
             Text(control.title)
-            
+
             Spacer(minLength: 0)
         }
         .padding(.horizontal, 15)

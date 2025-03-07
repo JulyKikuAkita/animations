@@ -5,7 +5,7 @@ import SwiftUI
 import SwiftData
 import AppIntents
 
-@main
+//@main
 struct demoIntentApp: App {
     var body: some Scene {
         WindowGroup {
@@ -22,13 +22,13 @@ class Memory {
     var date: Date
     @Attribute(.externalStorage)
     var imageData: Data
-    
+
     init(caption: String, date: Date = .now, imageData: Data) {
         self.caption = caption
         self.date = date
         self.imageData = imageData
     }
-    
+
     var uiImage: UIImage? {
         UIImage(data: imageData)!
     }
@@ -74,7 +74,7 @@ struct AppIntentDemoView: View {
 
 struct addMemoryIntent: AppIntent {
     static var title: LocalizedStringResource = "Add New Memory"
-    
+
     /// Getting image from User
     @Parameter(
         title: .init(stringLiteral: "Choose an Image"),
@@ -84,19 +84,19 @@ struct addMemoryIntent: AppIntent {
         /// e.g., if we get an image from the photos app, the photo can be passed to the intent (connection)
         inputConnectionBehavior: .connectToPreviousIntentResult
     ) var imageFile: IntentFile
-    
+
     @Parameter(title: "Caption") var caption: String
-    
+
     func perform() async throws -> some IntentResult & ProvidesDialog {
         let container = try ModelContainer(for: Memory.self)
         let context = ModelContext(container)
-        
+
         let imageData = try await imageFile.data(contentType: .image)
         let memory = Memory(caption: caption, imageData: imageData)
-        
+
         context.insert(memory)
         try context.save()
-        
+
         return .result(dialog: "Memory added successfully!")
     }
 }

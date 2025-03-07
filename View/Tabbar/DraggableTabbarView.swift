@@ -6,7 +6,7 @@ import SwiftUI
 
 struct NormalTabbarView: View {
     var properties: TabProperties = .init()
-    
+
     var body: some View {
         @Bindable var bindings = properties
         VStack(spacing: 0) {
@@ -16,31 +16,31 @@ struct NormalTabbarView: View {
                         .hideTabBar()
                         .environment(properties)
                 }
-                
+
                 Tab.init(value: 1) {
                     Text("view2")
                         .hideTabBar()
                 }
-                
+
                 Tab.init(value: 2) {
                     Text("view3")
                         .hideTabBar()
                 }
-                
+
                 Tab.init(value: 3) {
                     Text("view4")
                         .hideTabBar()
                 }
-                
+
                 Tab.init(value: 4) {
                     Text("view5")
                         .hideTabBar()
                 }
             }
-            
+
             DraggableTabBarView()
                 .environment(properties)
-            
+
         }
     }
 }
@@ -60,7 +60,7 @@ struct ViewOne: View {
 
 struct DraggableTabBarView: View {
     @Environment(TabProperties.self) private var properties
-    
+
     var body: some View {
         @Bindable var binding = properties
         HStack(spacing: 0) {
@@ -93,18 +93,18 @@ struct DraggableTabBarView: View {
                     /// swap items
                     (properties.tabs[droppingIndex], properties.tabs[activeIndex]) = (properties.tabs[activeIndex], properties.tabs[droppingIndex])
                 }
-                
+
                 saveTabBarOrder()
             }
         }
         .sensoryFeedback(.success, trigger: properties.haptics) /// iOS 17+
     }
-    
+
     private func saveTabBarOrder() {
         let order: [Int] = properties.tabs.reduce([]) { partialResult, model in
             return partialResult + [model.idInt]
         }
-        
+
         UserDefaults.standard.setValue(order, forKey: "DraggableTabBarOrder")
     }
 }
@@ -114,7 +114,7 @@ struct DraggableTabBarView: View {
 struct TabBarButton: View {
     @Binding var tab: TabModel
     @Environment(TabProperties.self) private var properties
-    
+
     /// View properties
     @State private var tabRect: CGRect = .zero
     var body: some View {
@@ -191,7 +191,7 @@ class TabProperties {
             return defaultOrderTabs.sorted { first, second in
                 let firstIndex = order.firstIndex(of: first.idInt) ?? 0
                 let secondIndex = order.firstIndex(of: second.idInt) ?? 0
-                
+
                 return firstIndex < secondIndex
             }
         }
@@ -210,7 +210,7 @@ private extension View {
         self
             .toolbarVisibility(.hidden, for: .tabBar)
     }
-    
+
     @ViewBuilder
     func loopingWiggle(_ isEnabled: Bool = false) -> some View {
         self

@@ -26,7 +26,7 @@ struct SwipeActionHomeView: View {
                         Action(tint: .green, icon: "star.fill", isEnabled: color == .black) {
                             print("Bookmark")
                         }
-                        
+
                         Action(tint: .red, icon: "trash.fill") {
                             withAnimation(.easeInOut) {
                                 colors.removeAll(where: { $0 == color })
@@ -39,22 +39,22 @@ struct SwipeActionHomeView: View {
         }
         .scrollIndicators(.hidden)
     }
-    
+
     /// Sample card view
     @ViewBuilder
     func CardView(_ color: Color) -> some View {
         HStack(spacing: 12) {
             Circle()
                 .frame(width: 50, height: 50)
-            
+
             VStack(alignment: .leading, spacing: 6, content: {
                 RoundedRectangle(cornerRadius: 5)
                     .frame(width: 80, height: 5)
-                
+
                 RoundedRectangle(cornerRadius: 5)
                     .frame(width: 60, height: 5)
             })
-            
+
             Spacer(minLength: 0)
         }
         .foregroundStyle(.white.opacity(0.4))
@@ -77,7 +77,7 @@ struct SwipeAction<Content: View>: View {
     /// Animation properties
     @State private var isEnabled: Bool = true /// disable interaction when animation is still in progress
     @State private var scrollOffset: CGFloat = .zero /// hide action item view when during animation
-    
+
     var body: some View {
         ScrollViewReader { scrollProxy in /// reset scroll view to original position  when swipe action is pressed
             ScrollView(.horizontal) {
@@ -99,7 +99,7 @@ struct SwipeAction<Content: View>: View {
                         .overlay {
                             GeometryReader {
                                 let minX = $0.frame(in: .scrollView(axis: .horizontal)).minX
-                                
+
                                 Color.clear
                                     .preference(key: CGFloatKey.self, value: minX)
                                     .onPreferenceChange(CGFloatKey.self) {
@@ -107,7 +107,7 @@ struct SwipeAction<Content: View>: View {
                                     }
                             }
                         }
-                    
+
                     ActionButtons {
                         withAnimation(.snappy) {
                             scrollProxy.scrollTo(viewID, anchor: direction == .trailing ? .topLeading : .topTrailing)
@@ -137,7 +137,7 @@ struct SwipeAction<Content: View>: View {
         .allowsHitTesting(isEnabled)
         .transition(CustomTransition())
     }
-    
+
     /// Action buttons
     @ViewBuilder
     func ActionButtons(resetPosition: @escaping () -> ()) -> some View {
@@ -172,13 +172,13 @@ struct SwipeAction<Content: View>: View {
                 }
             }
     }
-    
+
     nonisolated func scrollOffset(_ proxy: GeometryProxy) -> CGFloat {
         let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
-        
+
         return (minX > 0 ? -minX : 0)
     }
-    
+
     var filterActions: [Action] {
         return actions.filter({ $0.isEnabled })
     }
@@ -198,7 +198,7 @@ struct CustomTransition: Transition {
             .mask {
                 GeometryReader {
                     let size = $0.size
-                    
+
                     Rectangle()
                         .offset(y: phase == .identity ? 0 : -size.height)
                 }
@@ -208,7 +208,7 @@ struct CustomTransition: Transition {
 }
 enum SwipeDirection {
     case leading, trailing
-    
+
     var alignment: Alignment {
         switch self {
         case .leading:

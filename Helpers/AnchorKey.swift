@@ -39,4 +39,3 @@ struct SizeKey: PreferenceKey {
     }
     static var defaultValue: CGSize = .zero
 }
-

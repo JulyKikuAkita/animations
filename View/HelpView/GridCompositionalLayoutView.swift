@@ -31,7 +31,7 @@ struct GridCompositionalLayoutDemoView: View {
             .navigationTitle("Compositional Grid")
         }
     }
-    
+
     @ViewBuilder
     func PickerView() -> some View {
         Picker("", selection: $count) {
@@ -51,7 +51,7 @@ struct GridCompositionalLayoutView<Content: View>: View {
     var body: some View {
         Group(subviews: content) { collection in
             let chunked = collection.chunked(count)
-            
+
             ForEach(chunked) { chunk in
                 switch chunk.layoutID {
                     case 0: OneGridLayout(chunk.collection)
@@ -62,18 +62,18 @@ struct GridCompositionalLayoutView<Content: View>: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func OneGridLayout(_ collection: [SubviewsCollection.Element]) -> some View {
         GeometryReader {
             let width = $0.size.width - spacing
-            
+
             HStack(spacing: spacing) {
                 if let first = collection.first {
                     first
                         .matchedGeometryEffect(id: first.id, in: gridAnimation)
                 }
-                
+
                 VStack(spacing: spacing) {
                     ForEach(collection.dropFirst()) {
                         $0
@@ -85,7 +85,7 @@ struct GridCompositionalLayoutView<Content: View>: View {
         }
         .frame(height: 200)
     }
-    
+
     @ViewBuilder
     func TwoGridLayout(_ collection: [SubviewsCollection.Element]) -> some View {
         HStack(spacing: spacing) {
@@ -97,12 +97,12 @@ struct GridCompositionalLayoutView<Content: View>: View {
         }
         .frame(height: 100)
     }
-    
+
     @ViewBuilder
     func ThreeGridLayout(_ collection: [SubviewsCollection.Element]) -> some View {
         GeometryReader {
             let width = $0.size.width - spacing
-            
+
             HStack(spacing: spacing) {
                 if let first = collection.first {
                     first
@@ -120,7 +120,7 @@ struct GridCompositionalLayoutView<Content: View>: View {
         }
         .frame(height: 200)
     }
-    
+
     @ViewBuilder
     func FourGridLayout(_ collection: [SubviewsCollection.Element]) -> some View {
         HStack(spacing: spacing) {
@@ -142,7 +142,7 @@ fileprivate extension SubviewsCollection {
             return .init(layoutID: layoutID, collection: collection)
         }
     }
-    
+
     struct ChunkedCollection: Identifiable {
         var id: UUID = .init()
         var layoutID: Int

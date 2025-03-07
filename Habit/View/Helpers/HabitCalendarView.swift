@@ -9,7 +9,7 @@ struct HabitCalendarView: View {
     var createdAt: Date
     var frequency: [HabitFrequency]
     var completedDates: [TimeInterval]
-    
+
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 7), spacing: 12) {
             if !isDemo {
@@ -19,7 +19,7 @@ struct HabitCalendarView: View {
                         .foregroundStyle(.gray)
                 }
             }
-            
+
             /// day 1 of the month  always start on Sundays, add offset to push it to draw at the  actual date
             ForEach(0..<Date.startOffsetOfThisMonth, id: \.self) { _ in
                 Circle()
@@ -27,10 +27,10 @@ struct HabitCalendarView: View {
                     .frame(height: 30)
                     .hSpacing(.center)
             }
-            
+
             ForEach(Date.datesInThisMonth, id: \.self) { date in
                 let day = date.format("dd")
-                
+
                 Text(day)
                     .font(.caption)
                     .frame(height: 30)
@@ -39,14 +39,14 @@ struct HabitCalendarView: View {
                         let isHabitCompleted = completedDates.contains {
                             $0 == date.timeIntervalSince1970
                         }
-                        
+
                         /// Habit day should be marked after the created date
                         let isHabitDay = frequency.contains {
                             $0.rawValue == date.weekDay
                         } && date.startOfDay >= createdAt.startOfDay
-                        
+
                         let isFutureHabits = date.startOfDay > Date()
-                        
+
                         if isHabitCompleted && isHabitDay && !isDemo {
                             Circle()
                                 .fill(.green.tertiary)

@@ -23,7 +23,7 @@ struct ToastDemoView: View {
         }
         .interactiveToasts($toasts)
     }
-    
+
     func showToast() {
         withAnimation(.bouncy) {
             let toast = ToastContentView { id in
@@ -32,17 +32,17 @@ struct ToastDemoView: View {
             toasts.append(toast)
         }
     }
-    
+
     @ViewBuilder
     func ToastView(_ id: String) -> some View {
         HStack(spacing: 12) {
             Image(systemName: "square.and.arrow.up.fill")
-            
+
             Text("Hello World!")
                 .font(.callout)
-            
+
             Spacer(minLength: 0)
-            
+
             Button {
                 $toasts.delete(id)
             } label: {
@@ -79,7 +79,7 @@ fileprivate struct ToastViewiOS18: View {
                         isExpanded = false
                     }
             }
-            
+
             /// AnyLayout will seamlessly update it's layout and items with animations
             let layout = isExpanded ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(ZStackLayout())
             layout {
@@ -97,7 +97,7 @@ fileprivate struct ToastViewiOS18: View {
                                     let xOffset = value.translation.width + (
                                         value.velocity
                                             .width / 2)
-                                    
+
                                     if -xOffset > 200 {
                                         /// Remove toast
                                         $toasts.delete(toast.id)
@@ -136,12 +136,12 @@ fileprivate struct ToastViewiOS18: View {
             }
         }
     }
-    
+
     nonisolated func offsetY(_ index: Int) -> CGFloat {
         let offset = min(CGFloat(index) * 15, 30) /// 30 CGFloat is 2 toasts height
         return -offset
     }
-    
+
     nonisolated func scale(_ index: Int) -> CGFloat {
         let scale = min(CGFloat(index) * 0.1, 1)
         return 1 - scale
@@ -157,11 +157,11 @@ struct ToastContentView: Identifiable {
     /// id: help to remove toast from view
     private(set) var id: String = UUID().uuidString
     var content: AnyView
-    
+
     /// View Properties
     var offsetX: CGFloat = 0
     var isDeleting: Bool = false //set zindex to avoid push back to stacj
-    
+
     init(@ViewBuilder content: @escaping (String) -> some View) {
         self.content = .init(content(id))
     }

@@ -25,21 +25,21 @@ extension View {
 ///  - UIKit view(subviews.first)  <-- if no UIKit view, this will be null
 fileprivate struct ViewExtractHelper: UIViewRepresentable {
     var result: (UIView) -> ()
-    
+
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
         view.isUserInteractionEnabled = false
-        
+
         DispatchQueue.main.async {
             if let uiKitView = view.superview?.superview?.subviews.last?.subviews.first {
                 result(uiKitView)
             }
         }
-        
+
         return view
     }
-    
+
     func updateUIView(_ uiView: UIView, context: Context) {
     }
 }
@@ -57,9 +57,9 @@ struct demoViewExtractorControllerView: View {
                 print(navController)
             }
         }
-        
+
         TabView {
-            
+
         }
         .ViewExtractor { view in
             if let tabController = view.next as? UITabBarController {
@@ -77,13 +77,13 @@ struct demoViewExtractorView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            
+
             /// native SwiftUI view
             Text("Native SwiftUI View which has no UIKit view")
                 .ViewExtractor { view in
                         print(view)
                 }
-            
+
             /// UIKit View wrapped with SwiftUI Wrapper: textfield, slider, list etc
             TextField("UIKit View wrapped", text: .constant(""))
                 .ViewExtractor { view in
@@ -91,7 +91,7 @@ struct demoViewExtractorView: View {
                         print(textField)
                     }
                 }
-            
+
             Slider(value: .constant(0.2))
                 .ViewExtractor { view in
                     if let slider = view as? UISlider {
@@ -100,7 +100,7 @@ struct demoViewExtractorView: View {
                         print(slider)
                     }
                 }
-            
+
             HStack {
                 List {
                     Text("List in SwiftUI is UICollectionView")
@@ -110,7 +110,7 @@ struct demoViewExtractorView: View {
                         print(list)
                     }
                 }
-                
+
                 ScrollView {
                     Text("ScrollView in SwiftUI is UIScrollView")
                 }

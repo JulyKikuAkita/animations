@@ -15,17 +15,17 @@ struct HeroLayer: View {
             let sRect = proxy[sAnchor]
             let dRect = proxy[dAnchor]
             let animateView = coordinator.animateView
-            
+
             let viewSize: CGSize = .init(
                 width: animateView ? dRect.width : sRect.width,
                 height: animateView ? dRect.height : sRect.height
             )
-            
+
             let viewPosition: CGSize = .init(
                 width: animateView ? dRect.minX : sRect.minX,
                 height: animateView ? dRect.minY : sRect.minY
             )
-            
+
             if let image = item.image, !coordinator.showDetailView {
                 Image(uiImage: image)
                     .resizable()

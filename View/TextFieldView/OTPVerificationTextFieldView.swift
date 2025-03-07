@@ -19,9 +19,9 @@ struct OTPVerificationTextFieldDemoView: View {
                     return .invalid
                 }
             }
-            
+
             Spacer(minLength: 0)
-            
+
             VerificationTextField(type: .six, style: .roundedBorder, value: $codeSix) { result in
                 if result.count < 6 {
                     return .typing
@@ -31,7 +31,7 @@ struct OTPVerificationTextFieldDemoView: View {
                     return .invalid
                 }
             }
-            
+
             Spacer(minLength: 0)
         }
     }
@@ -40,7 +40,7 @@ struct OTPVerificationTextFieldDemoView: View {
 enum OTPLength: Int, CaseIterable {
     case four = 4
     case six = 6
-    
+
     var strigValue: String {
         "\(rawValue) Digit"
     }
@@ -119,7 +119,7 @@ struct VerificationTextField: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func CharacterView(_ index: Int) -> some View {
         Group {
@@ -137,7 +137,7 @@ struct VerificationTextField: View {
         .overlay {
             /// Showing Characters
             let stringValue = string(index)
-            
+
             if stringValue != "" {
                 Text(stringValue)
                     .font(.title2)
@@ -146,18 +146,18 @@ struct VerificationTextField: View {
             }
         }
     }
-    
+
     func string(_ index: Int) -> String {
         if value.count > index {
             let startIndex = value.startIndex
             let stringIndex = value.index(startIndex, offsetBy: index)
-            
+
             return String(value[stringIndex])
         }
-        
+
         return ""
     }
-    
+
     func borderColor(_ index: Int) -> Color {
         switch state {
             /// Highlight active field when keyboard is active

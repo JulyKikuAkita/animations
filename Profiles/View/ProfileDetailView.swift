@@ -44,7 +44,7 @@ struct ProfileDetailView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func CustomHeaderView() -> some View {
         VStack(spacing: 6) {
@@ -64,13 +64,13 @@ struct ProfileDetailView: View {
                 }
             }
             .frame(width: 50, height: 50)
-            
+
             Button {
-                
+
             } label: {
                 HStack(spacing: 2) {
                     Text(profile.username)
-                    
+
                     Image(systemName: "chevron.right")
                         .font(.caption2)
                 }
@@ -109,7 +109,7 @@ extension View {
                 .navigationBarBackButtonHidden()
         }
     }
-    
+
     @ViewBuilder
     func hideNavBarBackgroundProfileHome() -> some View {
         if #available(iOS 18, *) {
@@ -118,7 +118,7 @@ extension View {
             self
                 .toolbar(.hidden, for: .navigationBar)
         }
-       
+
     }
 }
 

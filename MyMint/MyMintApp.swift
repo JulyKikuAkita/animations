@@ -13,6 +13,6 @@ struct MyMintApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Transaction.self]) /// missing this line  will crash app 
+        .modelContainer(for: [Transaction.self]) /// missing this line  will crash app
     }
 }

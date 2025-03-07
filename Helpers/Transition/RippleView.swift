@@ -23,7 +23,7 @@ extension AnyTransition {
             )
         )
     }
-    
+
     static func reverseRipple(location: CGPoint) -> AnyTransition {
         .modifier (
             active: Ripple(location: location, isIdentity: false),
@@ -42,7 +42,7 @@ fileprivate struct IdentityTransition: ViewModifier {
 fileprivate struct Ripple: ViewModifier {
     var location: CGPoint
     var isIdentity: Bool
-    
+
     func body(content: Content) -> some View {
         content
             .mask(alignment: .topLeading) {
@@ -50,29 +50,29 @@ fileprivate struct Ripple: ViewModifier {
                     .ignoresSafeArea()
             }
     }
-    
+
     private func MaskRippleView() -> some View {
         GeometryReader {
             let size = $0.size
             let progress: CGFloat = isIdentity ? 1 : 0
             let circleSize: CGFloat = 50
             let circleRadius: CGFloat = circleSize / 2
-            
+
             let fillCircleScale: CGFloat = max(size.width / circleRadius, size.height / circleRadius) + 4
             let defaultScale: CGFloat = isIdentity ? 1 : 0
-            
+
             ZStack(alignment: .center) {
                 Circle()
                     .frame(width: circleSize, height: circleSize)
-                
+
                 Circle()
                     .frame(width: circleSize + 10, height: circleSize + 10)
                     .blur(radius: 3)
-                
+
                 Circle()
                     .frame(width: circleSize + 20, height: circleSize + 20)
                     .blur(radius: 7)
-                
+
                 Circle()
                     .opacity(0.5)
                     .frame(width: circleSize + 20, height: circleSize + 20)
@@ -82,7 +82,7 @@ fileprivate struct Ripple: ViewModifier {
             .compositingGroup()
             .scaleEffect(defaultScale + (fillCircleScale * progress), anchor: .center)
             .offset(x: location.x - circleRadius, y: location.y - circleRadius)
-            
+
         }
     }
 }
@@ -95,25 +95,25 @@ struct RippleView: View {
             .mask(alignment: .topLeading) {
                 GeometryReader {
                     let size = $0.size
-                    
+
                     // update per need
                     let circleSize: CGFloat = 100
                     let circleRadius: CGFloat = circleSize / 2
-                    
+
                     let fillCircleScale: CGFloat = max(size.width / circleRadius, size.height / circleRadius) + 4
-                    
+
                     ZStack(alignment: .center) {
                         Circle()
                             .frame(width: circleSize, height: circleSize)
-                        
+
                         Circle()
                             .frame(width: circleSize + 10, height: circleSize + 10)
                             .blur(radius: 3)
-                        
+
                         Circle()
                             .frame(width: circleSize + 20, height: circleSize + 20)
                             .blur(radius: 7)
-                        
+
                         Circle()
                             .opacity(0.5)
                             .frame(width: circleSize + 20, height: circleSize + 20)

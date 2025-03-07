@@ -38,7 +38,7 @@ struct ApplePhotoHomeView: View {
                 )
                 .environment(coordinator)
             }
-                
+
         }
     }
 }
@@ -54,7 +54,7 @@ struct HomeView: View {
                         .font(.largeTitle.bold())
                         .padding(.top, 20)
                         .padding(.horizontal, 15)
-                    
+
                     LazyVGrid(columns: Array(repeating: GridItem(spacing: 3), count: 3), spacing: 3) {
                         ForEach($bindableCoordinator.items) { $item in
                             GridImageView(item)
@@ -63,12 +63,12 @@ struct HomeView: View {
                                     let minY = frame.minY // > height item is scrolled away in a downward direction
                                     let maxY = frame.maxY // <0 item is scrolled away in upward direction
                                     let height = bounds.height
-                                    
+
                                     if maxY < 9 || minY > height {
                                         item.appeared = false
                                     } else {
                                         item.appeared = true
-                                        
+
                                     }
                                 }
                                 .onDisappear { // address LazyVGrid
@@ -83,7 +83,7 @@ struct HomeView: View {
                 }
             }
             .onChange(of: coordinator.selectedItem) { oldValue, newValue in
-                if let item = coordinator.items.first(where: { $0.id == newValue?.id }), 
+                if let item = coordinator.items.first(where: { $0.id == newValue?.id }),
                     !item.appeared {
                     /// Scroll to this item, as this is not visible on the screen
                     reader.scrollTo(item.id, anchor: .bottom)
@@ -92,19 +92,19 @@ struct HomeView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
     }
-    
+
     /// Image view for grid
     @ViewBuilder
     func GridImageView(_ item: PhotoItem) -> some View {
         GeometryReader {
             let size = $0.size
-            
+
             Rectangle()
                 .fill(.clear)
                 .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
                     return [item.id + "SOURCE": anchor]
                 })
-            
+
             if let previewImage = item.previewImage {
                 Image(uiImage: previewImage)
                     .resizable()

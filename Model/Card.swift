@@ -34,4 +34,3 @@ var secondSetCards = [
     Card(image: "IMG_0214", title: "Gifu", subTitle:"Japan"),
     Card(image: "IMG_0215", title: "Santorini", subTitle:"Greece"),
 ]
-

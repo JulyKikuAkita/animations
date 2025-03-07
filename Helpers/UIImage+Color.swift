@@ -20,7 +20,7 @@ extension UIImage {
         let width = 1
         let height = 1
         let bitmapData = calloc(width * height * 4, MemoryLayout<UInt8>.size)
-        
+
         defer {
             free(bitmapData)
         }

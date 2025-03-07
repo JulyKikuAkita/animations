@@ -10,7 +10,7 @@ struct CustomPagingIndicatorView: View {
     @Namespace private var animation
     var body: some View {
         let progress = sharedData.progress
-        
+
         HStack(spacing: 8) {
             ForEach(1...4, id:\.self) { index in /// demo has fix 4 pages
                     Circle()
@@ -35,7 +35,7 @@ struct CustomPagingIndicatorView: View {
         }
         .offset(y: -30 - (30 * progress))
     }
-    
+
     @ViewBuilder
     func CustomButtonBar() -> some View {
         HStack(spacing: 10) {
@@ -63,7 +63,7 @@ struct CustomPagingIndicatorView: View {
                 }
             }
             .background(.ultraThinMaterial, in: .capsule)
-            
+
             Button(action: onClose) {
                 Image(systemName: "xmark")
                     .frame(width: 35, height: 35)

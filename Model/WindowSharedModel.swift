@@ -15,7 +15,7 @@ class WindowSharedModel {
     var selectedProfile: Profile?
     var cornerRadius: CGFloat = 0
     var showGradient: Bool = false
-    
+
     /// Resetting properties
     func reset() {
         sourceRect = .zero

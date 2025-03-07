@@ -17,15 +17,15 @@ struct ContentView: View {
             Recents()
                 .tag(MintTab.recents)
                 .tabItem { MintTab.recents.tabContent }
-            
+
             Search()
                 .tag(MintTab.search)
                 .tabItem { MintTab.search.tabContent }
-            
+
             Graphs()
                 .tag(MintTab.charts)
                 .tabItem { MintTab.charts.tabContent }
-            
+
             Settings()
                 .tag(MintTab.settings)
                 .tabItem { MintTab.settings.tabContent }

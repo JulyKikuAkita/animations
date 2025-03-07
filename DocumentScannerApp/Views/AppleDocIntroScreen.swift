@@ -13,7 +13,7 @@ struct AppleDocIntroScreen: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 65)
                 .padding(.bottom, 35)
-            
+
             /// Points
             VStack(alignment: .leading, spacing: 25) {
                 PointView(
@@ -33,12 +33,12 @@ struct AppleDocIntroScreen: View {
                 )
             }
             .padding(.horizontal, 25)
-            
+
             Spacer(minLength: 0)
-            
+
             /// Continue button
             Button {
-                
+
             } label: {
                 Text("Start using Document Scanner")
                     .fontWeight(.bold)
@@ -50,19 +50,19 @@ struct AppleDocIntroScreen: View {
         }
         .padding(15)
     }
-    
+
     @ViewBuilder
     private func PointView(title: String, image: String, description: String) -> some View {
         HStack(spacing: 15) {
             Image(systemName: image)
                 .font(.largeTitle)
                 .foregroundStyle(.purple)
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.title3)
                     .fontWeight(.semibold)
-                
+
                 Text(description)
                     .foregroundStyle(.gray)
             }

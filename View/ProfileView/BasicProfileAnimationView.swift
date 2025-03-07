@@ -33,7 +33,7 @@ struct BasicProfileAnimationListView: View {
         }
         .overlayPreferenceValue(AnchorKey.self, { value in
             GeometryReader(content: { geometry in
-                if let selectedProfile, 
+                if let selectedProfile,
                     let anchor = value[selectedProfile.id.uuidString],
                    !hideView.0 {
                     let rect = geometry[anchor]
@@ -65,19 +65,19 @@ struct BasicProfileAnimationView: View {
                                           transform: { anchor in
                             return [profile.id.uuidString: anchor]
                         })
-                    
+
                     VStack(alignment: .leading, spacing: 6, content: {
                         Text(profile.username)
                             .fontWeight(.semibold)
                             .foregroundStyle(.black)
-                        
+
                         Text(profile.lastMsg)
                             .font(.callout)
                             .textScale(.secondary)
                             .foregroundStyle(.gray)
                     })
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
+
                     Text(profile.lastActive)
                         .font(.caption)
                         .foregroundStyle(.gray)
@@ -145,7 +145,7 @@ struct BasicProfileAnimationDetailedView: View {
                                             .foregroundStyle(.black)
                                             .padding(15)
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                                        
+
                                     }
                                     .opacity(hideView.1 ? 1 : 0)
                                     .animation(.snappy, value: hideView.1)
@@ -157,7 +157,7 @@ struct BasicProfileAnimationDetailedView: View {
                                         hideView.1 = true
                                     }
                                 })
-                            
+
                             BookView(profile: selectedProfile)
 
                         } else {
@@ -172,7 +172,7 @@ struct BasicProfileAnimationDetailedView: View {
                 })
                 .frame(height: 400)
                 .ignoresSafeArea()
-                
+
                 Spacer(minLength: 0)
             }
             .toolbar(hideView.0 ? .hidden : .visible, for: .navigationBar)
@@ -185,7 +185,7 @@ struct BasicProfileAnimationDetailedView: View {
                 }
             })
         }
-       
+
     }
 }
 struct ImageView: View {

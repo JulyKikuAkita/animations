@@ -8,13 +8,13 @@ struct DetailView: View {
     @Environment(UICoordinator.self) private var coordinator
 
     var body: some View {
-        
+
         VStack(spacing: 0) {
             NavigationBar()
-            
+
             GeometryReader {
                 let size = $0.size
-                
+
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 0) {
                         ForEach(coordinator.items) { item in
@@ -45,7 +45,7 @@ struct DetailView: View {
                     }
                 }
                 .offset(coordinator.offset)
-                
+
                 Rectangle()
                     .foregroundStyle(.clear)
                     .frame(width: 10)
@@ -63,7 +63,7 @@ struct DetailView: View {
                                 let velocity = value.velocity
 //                                let width = translation.width + (velocity.width / 5)
                                 let height = translation.height + (velocity.height / 5)
-                                
+
                                 if height > (size.height * 0.5) {
                                     /// Close view
                                     coordinator.toggleView(show: false)
@@ -78,7 +78,7 @@ struct DetailView: View {
                     )
             }
             .opacity(coordinator.showDetailView ? 1 : 0)
-            
+
             BottomIndicatorView()
                 .offset(y: coordinator.showDetailView ? (120 * coordinator.dragProgress) : 120)
                 .animation(.easeInOut(duration: 0.15), value: coordinator.showDetailView)
@@ -90,7 +90,7 @@ struct DetailView: View {
             coordinator.toggleView(show: true)
         }
     }
-    
+
     /// Custom navigation bar
     /// note: scrollview and detail view should have the same space size otherwise the navigation bar bounce in
     @ViewBuilder
@@ -102,15 +102,15 @@ struct DetailView: View {
                 HStack(spacing: 2) {
                     Image(systemName: "chevron.left")
                         .font(.title3)
-                    
+
                     Text("Back")
                 }
             })
-            
+
             Spacer(minLength: 0)
-            
+
             Button(action: {
-                
+
             }, label: {
                 HStack(spacing: 2) {
                     Image(systemName: "ellipsis")
@@ -125,7 +125,7 @@ struct DetailView: View {
         .offset(y: coordinator.showDetailView ? (-120 * coordinator.dragProgress) : -120)
         .animation(.easeInOut(duration: 0.15), value: coordinator.showDetailView)
     }
-    
+
     @ViewBuilder
     func ImageView(_ item: PhotoItem, size: CGSize) -> some View {
         if let image = item.image {
@@ -137,13 +137,13 @@ struct DetailView: View {
                 .contentShape(.rect)
         }
     }
-    
+
     /// Bottom indicator view
     @ViewBuilder
     func BottomIndicatorView() -> some View {
         GeometryReader {
             let size = $0.size
-            
+
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 5) {
                     ForEach(coordinator.items) { item in

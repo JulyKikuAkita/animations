@@ -41,7 +41,7 @@ struct ThemeSwitchView: View {
         self.scheme = scheme
         let isDark = scheme == .dark
         self._circleOffset = .init(
-            initialValue: CGSize(width: isDark ? 30 : 150, 
+            initialValue: CGSize(width: isDark ? 30 : 150,
                                  height: isDark ? -25: -150)
         )
     }
@@ -59,16 +59,16 @@ struct ThemeSwitchView: View {
                                 .blendMode(.destinationOut)
                         }
                 }
-            
+
             Text("Choose a Style")
                 .font(.title2.bold())
                 .padding(.top, 25)
 //                .foregroundStyle(userTheme.color(scheme))
-            
+
             Text("Pop or subtle. Day or night.\nCustomize your interface.")
                 .multilineTextAlignment(.center)
 //                .foregroundStyle(userTheme.color(scheme))
-            
+
             /// Segment picker
             HStack(spacing: 0) {
                 ForEach(Theme.allCases, id:\.rawValue) { theme in
@@ -119,7 +119,7 @@ enum Theme: String, CaseIterable {
     case systemDefault = "Default"
     case light = "Light"
     case dark = "Dark"
-    
+
     func color(_ scheme: ColorScheme) -> Color {
         switch self {
         case .systemDefault:
@@ -130,7 +130,7 @@ enum Theme: String, CaseIterable {
             return .purple
         }
     }
-    
+
     func backgroundColor(_ scheme: ColorScheme) -> Color {
         switch self {
         case .systemDefault:
@@ -141,7 +141,7 @@ enum Theme: String, CaseIterable {
             return .brown
         }
     }
-    
+
     var colorScheme: ColorScheme? {
         switch self {
         case .systemDefault:

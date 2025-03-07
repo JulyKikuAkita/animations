@@ -25,7 +25,7 @@ struct DisintegrationEffectDemoView: View {
                                     isRemoved = true
                                 }
                             }
-                    
+
                         Button("Remove View") {
                             snapEffect = true
                         }
@@ -64,7 +64,7 @@ fileprivate struct DisintegrationEffectModifier: ViewModifier {
     @State private var particles: [SnapParticle] = []
     @State private var animateEffect: Bool = false
     @State private var triggerSnapshot: Bool = false
-    
+
     func body(content: Content) -> some View {
         content
             .opacity(particles.isEmpty ? 1 : 0)
@@ -83,30 +83,30 @@ fileprivate struct DisintegrationEffectModifier: ViewModifier {
                 }
             }
     }
-    
+
     private func createParticles(_ snapshot: UIImage) async {
         var particles: [SnapParticle] = []
         let size = snapshot.size
         let width = size.width
         let height = size.height
         let maxGridCount: Int = 1100 /// up to 1600 is not recommended
-        
+
         var gridSize: Int = 1
         var rows = Int(height) / gridSize
         var columns = Int(width) / gridSize
-        
-        
+
+
         while (rows * columns) >= maxGridCount {
             gridSize += 1
             rows = Int(height) / gridSize
             columns = Int(width) / gridSize
         }
-        
+
         for row in 0...rows {
             for column in 0...columns {
                 let positionX = column * gridSize
                 let positionY = row * gridSize
-                
+
                 let cropRect = CGRect(x: positionX, y: positionY, width: gridSize, height: gridSize)
                 let croppedImage = cropImage(snapshot, rect: cropRect)
                 particles.append(.init(
@@ -116,7 +116,7 @@ fileprivate struct DisintegrationEffectModifier: ViewModifier {
                 )
             }
         }
-        
+
         await MainActor.run { [particles] in
             self.particles = particles
             withAnimation(.easeInOut(duration: 1.5), completionCriteria: .logicallyComplete) {
@@ -126,7 +126,7 @@ fileprivate struct DisintegrationEffectModifier: ViewModifier {
             }
         }
     }
-    
+
     /// crop snapshot image to match particle size and origin
     /// use the lowest quality image as it's going to dis integrate and fade out
     private func cropImage(_ snapshot: UIImage, rect: CGRect) -> UIImage {
@@ -136,9 +136,9 @@ fileprivate struct DisintegrationEffectModifier: ViewModifier {
         return renderer.image { ctx in
             ctx.cgContext.interpolationQuality = .low
             snapshot.draw(at: .init(x: -rect.origin.x, y: -rect.origin.y))
-            
+
         }
-        
+
     }
 }
 

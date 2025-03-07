@@ -24,27 +24,27 @@ struct PlayerAnimationView: View {
     @Environment(\.modelContext) private var context
     /// Stored colors, need to register ColorTransformer() class
     @Query private var storedColors: [ColorModel]
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $activeTab) {
                 HomeTabView()
                     .setupTab(.home)
-                
+
                 FullScreenVideoView()
                     .setupTab(.shorts)
-                
+
                 ProfileListView()
                     .setupTab(.progress)
-                
+
                 BasicProfileAnimationListView()
                 .setupTab(VideoTab.profile)
-                
+
                 CardCarouselView()
                     .setupTab(.carousel)
             }
             .padding(.bottom, tabBarHeight)
-            
+
             /// Mini-player View
             GeometryReader {
                 let size = $0.size
@@ -59,14 +59,14 @@ struct PlayerAnimationView: View {
                     }
                 }
             }
-            
+
             CustomTabBar(selectedColor.color)
                 // hide/show tab bar show drag mini player view
                 .offset(y: config.showMiniPlayer ? tabBarHeight - (config.progress * tabBarHeight) : 0)
         }
         .ignoresSafeArea(.all, edges: .bottom)
     }
-    
+
     /// Home Tab View
     @ViewBuilder
     func HomeTabView() -> some View {
@@ -101,26 +101,26 @@ struct PlayerAnimationView: View {
                         selectedColor = .purple
                         insertColorModels() // this crash preview
                     }
-                    
+
                     FloatingAction(symbol: "pawprint.fill", background: DummyColors.orange.color) {
                         selectedColor = .orange
                         insertColorModels() // this crash preview
                     }
-                    
+
                     FloatingAction(symbol: "fish.fill", background: DummyColors.gray.color) {
                         selectedColor = .gray
                         insertColorModels() // this crash preview
                     }
-                    
+
                     FloatingAction(symbol: "cat.fill", background: DummyColors.green.color) {
                         selectedColor = .green
                         insertColorModels() // this crash preview
                     }
-                    
+
                     FloatingAction(symbol: "bird.fill", background: DummyColors.brown.color) {
                         selectedColor = .brown
                         insertColorModels() // this crash preview
-                        
+
                     }
                 } label: { isExpanded in
                     Image(systemName: "plus")
@@ -134,7 +134,7 @@ struct PlayerAnimationView: View {
                         .shadow(color: .black.opacity(0.5), radius: 6)
                         ///  scale effect when expanded
                         .scaleEffect(isExpanded ? 0.9 : 1)
-                    
+
                 }
                 .padding()
             }
@@ -150,7 +150,7 @@ struct PlayerAnimationView: View {
                             Image(systemName: hideNavBar ? "eye.slash" : "eye")
                                 .foregroundColor(selectedColor.color)
                         })
-                        
+
                         Button(action: {
                             deleteColorModels()
                         }, label: {
@@ -163,7 +163,7 @@ struct PlayerAnimationView: View {
             .hideNavBarOnSwipe(hideNavBar)
         }
     }
-    
+
     /// Player Item Card View
     @ViewBuilder
     func PlayerItemCardView(_ item: PlayerItem, onTap: @escaping () -> ()) -> some View {
@@ -175,21 +175,21 @@ struct PlayerAnimationView: View {
                 .clipShape(.rect(cornerRadius: 10))
                 .contentShape(.rect)
                 .onTapGesture(perform: onTap)
-            
-            
+
+
             HStack(spacing: 10) {
                 Image(systemName: "person.circle.fill")
                     .font(.title)
                     .foregroundColor(selectedColor.color)
-                
+
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text(item.title)
                         .font(.callout)
                         .foregroundColor(selectedColor.color)
-                    
+
                     HStack(spacing: 6) {
                         Text(item.author)
-                        
+
                         Text(". 2 Days ago")
                     }
                     .font(.callout)
@@ -198,7 +198,7 @@ struct PlayerAnimationView: View {
             }
         })
     }
-    
+
     /// Custom Tab Bar
     @ViewBuilder
     func CustomTabBar(_ tint: Color, _ inactiveTint: Color = .gray) -> some View {
@@ -207,10 +207,10 @@ struct PlayerAnimationView: View {
             ForEach(VideoTab.allCases, id: \.rawValue) { tab in
                 VideoTabItem(
                     tint: tint,
-                    inactiveTint: inactiveTint, 
-                    tab: tab, 
+                    inactiveTint: inactiveTint,
+                    tab: tab,
                     animation: animation,
-                    activeTab: $activeTab, 
+                    activeTab: $activeTab,
                     position: $tabShapePosition
                 )
             }
@@ -230,12 +230,12 @@ struct PlayerAnimationView: View {
         /// adding animation
         .animation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7), value: activeTab)
     }
-    
+
     func insertColorModels() {
         let colorModel = ColorModel(name: selectedColor.rawValue, color: selectedColor.color)
         context.insert(colorModel)
     }
-    
+
     func deleteColorModels() {
         do {
             try context.delete(model: ColorModel.self)
@@ -270,7 +270,7 @@ struct VideoTabItem: View {
                             .matchedGeometryEffect(id: "ACTIVETAB", in: animation)
                     }
                 }
-            
+
             Text(tab.rawValue)
                 .font(.caption2)
                 .foregroundColor(activeTab == tab ? tint : .gray)
@@ -279,12 +279,12 @@ struct VideoTabItem: View {
         .contentShape(.rect)
         .viewPosition(completion: { rect in
             tabPosition.x = rect.midX
-            
+
             /// updating active tab position
             if activeTab == tab {
                 position.x = rect.midX
             }
-            
+
         })
         .onTapGesture {
             activeTab = tab
@@ -304,7 +304,7 @@ extension View {
             /// hiding native tab bar
             .toolbar(.hidden, for: .tabBar)
     }
-    
+
     /// Safe area value (increase bottom padding for tab bar)
     var safeArea: UIEdgeInsets {
         if let safeArea = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.safeAreaInsets {
@@ -312,7 +312,7 @@ extension View {
         }
         return .zero
     }
-    
+
     var tabBarHeight: CGFloat { // 20 is the custom curve path
         return 49 + safeArea.bottom
     }

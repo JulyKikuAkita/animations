@@ -13,13 +13,13 @@ struct RippleTransitionDemoView: View {
     @State private var rippleLocation: CGPoint = .zero
     @State private var showOverlayView: Bool = false
     @State private var overlayRippleLocation: CGPoint = .zero
-    
+
     var body: some View {
         NavigationStack {
             VStack {
                 GeometryReader {
                     let size = $0.size
-                    
+
                     ForEach(0..<imageNames.count, id: \.self) { index in
                         if count == index {
                             ImageView(index, size: size)
@@ -40,13 +40,13 @@ struct RippleTransitionDemoView: View {
             .overlay(alignment: .bottomTrailing) {
                 GeometryReader {
                     let frame = $0.frame(in: .global)
-                    
+
                     Button {
                         overlayRippleLocation = .init(x: frame.midX, y: frame.midY)
                         withAnimation(.linear(duration: 1)) {
                             showOverlayView = true
                         }
-                        
+
                     } label: {
                         Image(systemName: "square.and.arrow.up.fill")
                             .font(.title2)
@@ -72,14 +72,14 @@ struct RippleTransitionDemoView: View {
                                 showOverlayView = false
                             }
                         }
-                    
+
                     Text("Tap anywhere to dismiss!")
                 }
                 .transition(.reverseRipple(location: overlayRippleLocation))
             }
         }
     }
-    
+
     private func ImageView(_ index: Int, size: CGSize) -> some View {
         Image(imageNames[index])
             .resizable()

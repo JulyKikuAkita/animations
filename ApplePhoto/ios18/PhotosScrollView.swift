@@ -13,7 +13,7 @@ struct PhotosScrollView: View {
     var body: some View {
         let screenHeight = size.height + safeArea.top + safeArea.bottom
         let minimizedHeight = screenHeight * 0.4
-        
+
         ScrollView(.horizontal) {
             /// default alignment is center
             LazyHStack(alignment: .bottom, spacing: 0) {
@@ -22,7 +22,7 @@ struct PhotosScrollView: View {
                 /// try to use ContainerRelativeFrame as well.
                     .frame(width: size.width)
                     .id(1)
-                
+
                 /// the remaining view, aka the stretchable view only needs to be the remaining height - the minimizedHeight
                 /// instead of the full screen height
                 Group {
@@ -64,21 +64,21 @@ struct PhotosScrollView: View {
                         withAnimation(.easeInOut(duration: 0.15)) {
                             scrollPosition.scrollTo(edge: .bottom)
                         }
-                        
+
                         try? await Task.sleep(for: .seconds(0.13))
                     }
-                    
+
                     /// minimizing expand view
                     withAnimation(.easeInOut(duration: 0.25)) {
                         sharedData.progress = 0
                         sharedData.isExpanded = false
-                        
+
                     }
                 }
             }
         }
     }
-    
+
     @ViewBuilder
     func GridPhotosScrollView() -> some View {
         ScrollView(.vertical) {
@@ -103,14 +103,14 @@ struct PhotosScrollView: View {
             sharedData.photoScrollOffset = newValue
         })
     }
-    
+
     /// Stretchable Paging Views
     @ViewBuilder
     func StretchableView(_ color: Color) -> some View {
         GeometryReader {
             let minY = $0.frame(in: .scrollView(axis: .vertical)).minY
             let size = $0.size
-            
+
             Rectangle()
                 .fill(color)
                 .frame(width: size.width, height: size.height + (minY > 0 ? minY : 0)) /// make the view stretchable

@@ -50,7 +50,7 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
     @State private var storedScrollOffset: CGFloat?
     var sharedData = SwipeActionSharedData.shared
     @State private var currentID: String = UUID().uuidString
-    
+
     func body(content: Content) -> some View {
         content
             .overlay {
@@ -93,18 +93,18 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
                 }
             }
     }
-    
+
     @ViewBuilder
     func ActionsView() -> some View {
         ZStack {
             ForEach(actions.indices, id: \.self) { index in
                 let action = actions[index]
-                
+
                 GeometryReader { proxy in
                     let size = proxy.size
                     let spacing = config.spacing * CGFloat(index)
                     let offset = CGFloat(index) * size.width
-                    
+
                     Button(action: { action.action(&resetPositionTrigger) }) {
                         Image(systemName: action.symbolImage)
                             .font(action.font)
@@ -123,22 +123,22 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
         }
         .offset(x: config.leadingPadding)
     }
-    
+
     private func gestureDidBegan() {
         storedScrollOffset = lastStoreOffsetX
         sharedData.actionSwipeAction = currentID
     }
-    
+
     private func gestureDidChange(translation: CGSize) {
         offsetX = min(max(translation.width + lastStoreOffsetX, -maxOffsetWidth), 0)
         progress = -offsetX / maxOffsetWidth
-        
+
         bounceOffset = min(translation.width - (offsetX - lastStoreOffsetX), 0) / 10
     }
-    
+
     private func gestureDidEnded(translation: CGSize, velocity: CGSize) {
         let endTarget = velocity.width + offsetX
-        
+
         withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
             if -endTarget > (maxOffsetWidth * 0.6) {
                 offsetX = -maxOffsetWidth
@@ -148,11 +148,11 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
                 /// Reset to initial position
                 reset()
             }
-            
+
         }
         lastStoreOffsetX = offsetX
     }
-    
+
     private func reset() {
         withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
             offsetX = 0
@@ -162,14 +162,14 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
         }
         storedScrollOffset = nil
     }
-    
+
     var maxOffsetWidth: CGFloat {
         let totalActionSize: CGFloat = actions.reduce(.zero) { partialResult, action in
             partialResult + action.size.width
         }
-        
+
         let spacing = config.spacing * CGFloat(actions.count - 1)
-        
+
         return totalActionSize + spacing + config.leadingPadding + config.trailingPadding
     }
 }

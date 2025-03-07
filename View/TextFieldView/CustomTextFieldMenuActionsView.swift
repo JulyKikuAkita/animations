@@ -18,17 +18,17 @@ struct CustomTextFieldMenuActionsDemoView: View {
                                    let selectedText = textField.text(in: selectedRange) {
                                     let upperCasedText = selectedText.uppercased()
                                     textField.replace(selectedRange, withText: upperCasedText)
-                                    
+
                                     textField.selectedTextRange = selectedRange
                                 }
                             }
-                            
+
                             TextFieldAction(title: "Replaced") { range, textField in
                                 if let selectedRange = textField.selectedTextRange {
                                     let replacementText = "Nanachi"
-                                    
+
                                     textField.replace(selectedRange, withText: replacementText)
-                                    
+
                                     if let start = textField.position(from: selectedRange.start, offset: 0),
                                        let end = textField.position(from: selectedRange.start, offset: replacementText.count) {
                                         textField.selectedTextRange = textField.textRange(from: start, to: end)
@@ -37,11 +37,11 @@ struct CustomTextFieldMenuActionsDemoView: View {
                             }
                         }
                 }
-                
+
                 Section {
                     Text(message)
                 }
-                
+
             }
             .navigationTitle("Custom TextField Menu")
         }

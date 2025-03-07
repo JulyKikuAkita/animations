@@ -19,7 +19,7 @@ struct HackerTextDemoView: View {
             )
             .font(.largeTitle.bold())
             .lineLimit(4)
-            
+
             Button(action: {
                 if text == "🐕" {
                     text = "The Hitchhiker's Guide to the Galaxy"
@@ -54,7 +54,7 @@ struct HackerTextView: View {
     var transition: ContentTransition = .interpolate
     var duration: CGFloat = 1.0
     var speed: CGFloat = 0.1
-    
+
     /// View Properties
     @State private var animatedText = ""
     @State private var randomCharacters: [Character] = {
@@ -62,7 +62,7 @@ struct HackerTextView: View {
         return Array(string)
     }()
     @State private var animationID: String = UUID().uuidString
-    
+
     var body: some View {
         Text(animatedText)
             .fontDesign(.monospaced) // ensure same horizontal space for all characters
@@ -83,15 +83,15 @@ struct HackerTextView: View {
                 setRandomCharacters()
                 animateText()
             }
-        
+
     }
-    
+
     private func animateText() {
         let currentID = animationID
         for index in text.indices {
             let delay = CGFloat.random(in: 0...duration)
             var timerDuration: CGFloat = 0
-            
+
             let timer = Timer.scheduledTimer(withTimeInterval: speed, repeats: true) { timer in
                 if currentID != animationID {
                     timer.invalidate()
@@ -102,7 +102,7 @@ struct HackerTextView: View {
                             let actualCharacter = text[index]
                             replaceCharacter(at: index, character: actualCharacter)
                         }
-                        
+
                         timer.invalidate()
                     } else {
                         guard let randomCharacter = randomCharacters.randomElement() else { return }
@@ -113,7 +113,7 @@ struct HackerTextView: View {
             timer.fire()
         }
     }
-    
+
     private func setRandomCharacters() {
         animatedText = text
         for index in animatedText.indices {
@@ -121,12 +121,12 @@ struct HackerTextView: View {
             replaceCharacter(at: index, character: randomCharacter)
         }
     }
-    
+
     /// Change character at the given index
     func replaceCharacter(at index: String.Index, character: Character) {
         guard animatedText.indices.contains(index) else { return }
         let indexCharacter = String(animatedText[index])
-        
+
         if indexCharacter.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
             animatedText.replaceSubrange(index...index, with: String(character))
         }

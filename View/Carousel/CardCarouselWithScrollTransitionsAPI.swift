@@ -15,7 +15,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
         .safeAreaPadding(.horizontal, 15)
         .frame(height: 330)
     }
-    
+
     @ViewBuilder
     func ParallaxCarousel18View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
@@ -43,7 +43,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
         .safeAreaPadding(.horizontal, 15)
         .scrollIndicators(.hidden)
     }
-    
+
     /// Demo blur + scale scroll View
     @ViewBuilder
     func ScaleCarousel18View(size: CGSize) -> some View {
@@ -62,7 +62,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
                                 .blur(radius: phase == .identity ? 0 : 2, opaque: false)
                                 .scaleEffect(phase == .identity ? 1: 0.9, anchor: .bottom)
                         }
-                       
+
                 }
             }
             .scrollTargetLayout()
@@ -71,7 +71,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
         .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
         .scrollIndicators(.hidden)
     }
-    
+
     /// Demo blur + scale scroll View
     @ViewBuilder
     func CircularCarousel18View(size: CGSize) -> some View {
@@ -92,7 +92,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
                                 .offset(y: phase == .identity ? 0 : 35)
                                 .rotationEffect(.init(degrees: phase == .identity ? 0 : phase.value * 15), anchor: .bottom)
                         }
-                       
+
                 }
             }
             .scrollTargetLayout()
@@ -103,7 +103,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
         .scrollIndicators(.hidden)
     }
 }
-        
+
 #Preview {
     CardCarouselWithScrollTransitionsAPIView()
     StackCardCarouselView()
@@ -119,10 +119,10 @@ struct StackCardCarouselView: View {
                     LazyHStack(spacing: 10) {
                         ForEach(firstSetCards) { card in
                             let index = Double(firstSetCards.firstIndex(where: { $0.id == card.id }) ?? 0)
-                            
+
                             GeometryReader {
                                 let minX = $0.frame(in: .scrollView(axis: .horizontal)).minX
-                                
+
                                 Image(card.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)

@@ -16,7 +16,7 @@ class Note {
         self.title = title
         self.content = content
     }
-    
+
     var id: String = UUID().uuidString
     var dateCreated: Date = Date()
     var colorString: String
@@ -24,7 +24,7 @@ class Note {
     var content: String
     /// View Properties
     var allowsHitTesting: Bool = false
-    
+
     /// Convert image asset to color
     var color: Color {
         if let image = UIImage(named: colorString) {

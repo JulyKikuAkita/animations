@@ -10,7 +10,7 @@ struct PlayerConfig: Equatable {
     var progress: CGFloat = 0
     var selectedPlayerItem: PlayerItem?
     var showMiniPlayer: Bool = false
-    
+
     /// Resetting properties
     mutating func resetPosition() {
         position = .zero

@@ -13,7 +13,7 @@ struct SwiftDataEncryptionDemoView: View {
     )
     private var transactions: [TransactionDemo]
     @Environment(\.modelContext) private var context
-    
+
     /// View Properties
     @State private var showAlertTF: Bool = false
     @State private var keyTF: String = ""
@@ -39,7 +39,7 @@ struct SwiftDataEncryptionDemoView: View {
                         Image(systemName: "square.and.arrow.up")
                     }
                 }
-                
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showFileImporter.toggle()
@@ -47,7 +47,7 @@ struct SwiftDataEncryptionDemoView: View {
                         Image(systemName: "square.and.arrow.down")
                     }
                 }
-                
+
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         /// Dummy data
@@ -67,12 +67,12 @@ struct SwiftDataEncryptionDemoView: View {
         .alert("Enter Key", isPresented: $showAlertTF) {
             TextField("Key", text: $keyTF)
                 .autocorrectionDisabled()
-            
+
             Button("Cancel", role: .cancel) {
                 keyTF = ""
                 importedURL = nil
             }
-            
+
             Button(importedURL != nil ? "Import" : "Export") {
                 if importedURL != nil {
                     importData()
@@ -92,7 +92,7 @@ struct SwiftDataEncryptionDemoView: View {
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                
+
                 exportItem = nil
             } onCancellation: {
                 exportItem = nil
@@ -115,12 +115,12 @@ struct SwiftDataEncryptionDemoView: View {
         Task.detached(priority: .background) {
             do {
                 guard url.startAccessingSecurityScopedResource() else { return }
-                
+
                 let container = try ModelContainer(for: TransactionDemo.self)
                 let context = ModelContext(container) // do not use local view env's context to insert transactions into data model b.c. whenever local context got updated, @query will be notified and cause performance downgrade
                 // use a separate container to insert fetched transactions
                 // then save it so that the query will be notified once
-            
+
                 let encryptedData = try Data(contentsOf: url)
                 let decryptedData = try await AES.GCM.open(
                     .init(combined: encryptedData), using: .key(keyTF)
@@ -129,13 +129,13 @@ struct SwiftDataEncryptionDemoView: View {
                     [TransactionDemo].self,
                     from: decryptedData
                 )
-                
+
                 for transaction in allTransactions {
                     context.insert(transaction)
                 }
-                
+
                 try context.save()
-                
+
                 url.stopAccessingSecurityScopedResource()
             } catch {
                 print(error.localizedDescription)
@@ -143,18 +143,18 @@ struct SwiftDataEncryptionDemoView: View {
             }
         }
     }
-    
+
     func exportData() {
         Task.detached(priority: .background) {
             do {
                 let container = try ModelContainer(for: TransactionDemo.self)
                 let context = ModelContext(container) // do not use local view env's context to fetch data objects due to performance downgrade
                 // use a separate model container to fetch all associated objects
-                
+
                 let descriptor = FetchDescriptor(sortBy: [
                     .init(\TransactionDemo.transactionDate, order: .reverse)
                 ])
-                
+
                 let allObjects = try context.fetch(descriptor)
                 let exportItem = await TransactionTransferable(
                     transactions: allObjects,
@@ -181,7 +181,7 @@ class TransactionDemo: Codable {
     var transactionDate: Date
     var transactionAmount: Double
     var transactionCategory: TransactionCategory
-    
+
     init(
         transactionName: String,
         transactionDate: Date,
@@ -193,14 +193,14 @@ class TransactionDemo: Codable {
         self.transactionAmount = transactionAmount
         self.transactionCategory = transactionCategory
     }
-    
+
     enum CodingKeys: CodingKey {
         case transactionName
         case transactionDate
         case transactionAmount
         case transactionCategory
     }
-    
+
     required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         transactionName = try container
@@ -212,7 +212,7 @@ class TransactionDemo: Codable {
         transactionCategory = try container
             .decode(TransactionCategory.self, forKey: .transactionCategory)
     }
-    
+
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(transactionName, forKey: .transactionName)
@@ -225,7 +225,7 @@ class TransactionDemo: Codable {
 struct TransactionTransferable: Transferable {
     var transactions: [TransactionDemo]
     var key: String
-    
+
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(exportedContentType: .data) {
             let data = try JSONEncoder().encode($0.transactions) // Do not pass the complete item, only the transactions' property; otherwise the encryption key will be exported with the file
@@ -236,7 +236,7 @@ struct TransactionTransferable: Transferable {
             return encryptedData
         }
     }
-    
+
     enum EncryptionError: Error {
         case encryptionFailed
     }
@@ -246,7 +246,7 @@ extension SymmetricKey {
     static func key(_ value: String) -> SymmetricKey {
         let keyData = value.data(using: .utf8)!
         let sha256 = SHA256.hash(data: keyData)
-        
+
         return .init(data: sha256)
     }
 }

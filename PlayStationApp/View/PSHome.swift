@@ -10,7 +10,7 @@ struct PSHome: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            
+
             /// Custom tab bar
             PSTabbarView(activeTab: $activeTab)
         }

@@ -17,13 +17,13 @@ struct DocumentCardView: View {
             if let firstPage = document.pages?.sorted(by: { $0.pageIndex < $1.pageIndex }).first {
                 GeometryReader {
                     let size = $0.size
-                    
+
                     if let downsizedImage {
                         Image(uiImage: downsizedImage)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: size.width, height: size.height)
-                        
+
                     } else {
                         Rectangle()
                             .foregroundStyle(.clear)
@@ -35,7 +35,7 @@ struct DocumentCardView: View {
                                 let resizedImage = renderer.image { context in
                                     image.draw(in: .init(origin: .zero, size: aspectSize))
                                 }
-                                
+
                                 await MainActor.run {
                                     downsizedImage = resizedImage
                                 }
@@ -45,23 +45,23 @@ struct DocumentCardView: View {
                 .frame(height: 150)
                 .clipShape(.rect(cornerRadius: 15))
                 .matchedTransitionSource(id: document.uniqueViewID, in: animationID)
-                
+
                 if document.isLocked {
                     ZStack {
                         Rectangle()
                             .fill(.ultraThinMaterial)
-                        
+
                         Image(systemName: "lock.fill")
                             .font(.title3)
                     }
                 }
             }
-            
+
             Text(document.name)
                 .font(.callout)
                 .lineLimit(1)
                 .padding(.top, 10)
-            
+
             Text(document.createdAt.formatted(date: .numeric, time: .omitted))
                 .font(.caption2)
                 .foregroundStyle(.gray)

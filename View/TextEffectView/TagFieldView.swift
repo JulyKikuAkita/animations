@@ -112,11 +112,11 @@ fileprivate struct BackSpaceListenerTextField: UIViewRepresentable {
     var hint: String = "Tag"
     @Binding var text: String
     var onBackPressed: () -> ()
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(text: $text)
     }
-    
+
     func makeUIView(context: Context) -> CustomTextField {
         let textField = CustomTextField()
         textField.delegate = context.coordinator
@@ -128,27 +128,27 @@ fileprivate struct BackSpaceListenerTextField: UIViewRepresentable {
         textField.addTarget(context.coordinator, action: #selector(Coordinator.textChange(textField:)), for: .editingChanged)
         return textField
     }
-    
+
     func updateUIView(_ uiView: CustomTextField, context: Context) {
     }
-    
+
     func sizeThatFits(_ proposal: ProposedViewSize, uiView: CustomTextField, context: Context) -> CGSize? {
         /// maintain the textfield size rather than taking rest of available space
         return uiView.intrinsicContentSize
     }
-    
+
     class Coordinator: NSObject, UITextFieldDelegate {
         @Binding var text: String
         init(text: Binding<String>) {
             self._text = text
         }
-        
+
         /// Text change
         @objc
         func textChange(textField: UITextField) {
             text = textField.text ?? ""
         }
-        
+
         /// closing on pressing return button
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
@@ -158,21 +158,21 @@ fileprivate struct BackSpaceListenerTextField: UIViewRepresentable {
 
 fileprivate class CustomTextField: UITextField {
     open var onBackPressed: (() -> ())?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func deleteBackward() {
         /// this will be called when keyboard back button is pressed
         onBackPressed?()
         super.deleteBackward()
     }
-    
+
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return false
     }

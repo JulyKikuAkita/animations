@@ -25,7 +25,7 @@ struct MorphingView: View {
             /// Achieve  Image morph by mask the Canvas shape with image
             GeometryReader { proxy in
                 let size = proxy.size
-                
+
                 Image("fox")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -45,7 +45,7 @@ struct MorphingView: View {
                             context.addFilter(
                                     .blur(radius: blurRadius >= 20 ? 20 - (blurRadius - 20) : blurRadius)
                             )
-                            
+
                             context.drawLayer { ctx in
                                 if let resolvedImage = context.resolveSymbol(id: 1) {
                                     ctx.draw(resolvedImage, at: CGPoint(x: size.width / 2, y: size.height / 2),
@@ -64,13 +64,13 @@ struct MorphingView: View {
                                     if animateMorph {
                                         if blurRadius <= 40 {
                                             blurRadius += 0.5 /// your desire value for animation speed,
-                                            
+
                                             if blurRadius.rounded() == 20 {
                                                 /// Update to the next image
                                                 currentImage = pickerImage
                                             }
                                         }
-                                        
+
                                         if blurRadius.rounded() == 40 {
                                             /// end animation and reset blur radius to zero
                                             animateMorph = false
@@ -79,10 +79,10 @@ struct MorphingView: View {
                                     }
                                 }
                     }
-                
+
             }
             .frame(height: 350)
-            
+
             Picker("", selection: $pickerImage) {
                 ForEach(CustomShape.allCases, id: \.rawValue) { shape in
                     Image(systemName: shape.rawValue)
@@ -101,7 +101,7 @@ struct MorphingView: View {
                 animateMorph = true
             }
 
-            
+
             Toggle("Turn off Image Morph", isOn: $turnOffImageMorph)
                 .fontWeight(.semibold)
                 .padding(.horizontal, 15)
@@ -122,7 +122,7 @@ struct ResolvedImage: View {
                     response: 0.7,
                     dampingFraction: 0.8,
                     blendDuration: 0.8
-                ), 
+                ),
                 value: currentImage
             )
             .frame(width: 300, height: 300)

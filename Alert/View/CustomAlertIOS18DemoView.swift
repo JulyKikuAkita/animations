@@ -31,7 +31,7 @@ struct CustomAlertIOS18DemoView: View {
 //                        Text("Alert Demo View")
 //                            .fontWeight(.semibold)
 //                            .underline()
-//                        
+//
 //                        Button("Dismiss") {
 //                            showAlert.toggle()
 //                        }
@@ -55,7 +55,7 @@ struct CustomAlertIOS18DemoView: View {
 //                content: "Enter a file Name",
 //                image: .init(content: "folder.fill.badge.plus", tint: .blue, foreground: .white),
 //                button1: .init(content: "Save Folder", tint: .blue, foreground: .white, action: { folder in
-//                    
+//
 //                }),
 //                button2: .init(content: "Cancel", tint: .red, foreground: .white),
 //                addsTextField: true,
@@ -74,7 +74,7 @@ struct CustomDialog: View {
     var addsTextField: Bool = false
     var textFieldHint: String = ""
     @State private var text: String = ""
-    
+
     var body: some View {
         VStack(spacing: 15) {
             Image(systemName: image.content)
@@ -86,10 +86,10 @@ struct CustomDialog: View {
                     Circle()
                         .stroke(.background, lineWidth: 8)
                 }
-            
+
             Text(title)
                 .font(.title3.bold())
-            
+
             if let content {
                 Text(content)
                     .font(.system(size: 14))
@@ -98,7 +98,7 @@ struct CustomDialog: View {
                     .foregroundStyle(.gray)
                     .padding(.vertical, 4)
             }
-            
+
             if addsTextField {
                 TextField(textFieldHint, text: $text)
                     .padding(.horizontal, 15)
@@ -109,9 +109,9 @@ struct CustomDialog: View {
                     }
                     .padding(.bottom, 5)
             }
-            
+
             ButtonView(button1)
-            
+
             if let button2 {
                 ButtonView(button2)
                     .padding(.top, -5)
@@ -127,7 +127,7 @@ struct CustomDialog: View {
         .compositingGroup()
 
     }
-    
+
     @ViewBuilder
     private func ButtonView(_ config: Config) -> some View {
         Button {
@@ -141,7 +141,7 @@ struct CustomDialog: View {
                 .background(config.tint.gradient, in: .rect(cornerRadius: 10))
         }
     }
-    
+
     struct Config {
         var content: String
         var tint: Color
@@ -153,4 +153,3 @@ struct CustomDialog: View {
 #Preview {
     CustomAlertIOS18DemoView()
 }
-

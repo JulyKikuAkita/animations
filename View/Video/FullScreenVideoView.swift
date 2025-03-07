@@ -9,7 +9,7 @@ struct FullScreenVideoView: View {
         GeometryReader {
             let size = $0.size
             let safeArea = $0.safeAreaInsets
-            
+
             VideoView(size: size, safeArea: safeArea)
                 .ignoresSafeArea(.container, edges: .all)
         }
@@ -22,7 +22,7 @@ struct VideoView: View {
     /// View Properties
     @State private var reels: [Reel] = reelsData
     @State private var likedCounter: [Like] = []
-    
+
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 0) {
@@ -68,7 +68,7 @@ struct VideoView: View {
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .trailing) {
                     Button("", systemImage: "camera") {
-                        
+
                     }
                     .font(.title2)
                 }
@@ -78,7 +78,7 @@ struct VideoView: View {
         })
         .environment(\.colorScheme, .dark)
     }
-        
+
 }
 
 #Preview {

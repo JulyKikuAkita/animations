@@ -9,7 +9,7 @@ struct PhotoAppIOS18DemoView: View {
         GeometryReader {
             let size = $0.size
             let safeArea = $0.safeAreaInsets
-            
+
             PhotoAppIOS18View(size:size, safeArea: safeArea)
                 .ignoresSafeArea(.all, edges: .top)
         }
@@ -51,19 +51,19 @@ struct PhotoAppIOS18View: View {
                 let state = gesture.state
                 let translation = gesture.translation(in: gesture.view).y
                 let isScrolling = state == .began || state == .changed
-                
+
                 if state == .began {
                     sharedData.canPullDown = translation > 0 && sharedData.mainOffset == 0
                     sharedData.canPullUp = translation < 0 && sharedData.photoScrollOffset == 0
                 }
-                
+
                 if isScrolling {
                     /// similar to onChanged modifier in Drag gesture
                     if sharedData.canPullDown && !sharedData.isExpanded {
                         let progress = max(min(translation / minimizedHeight, 1), 0)
                         sharedData.progress = progress
                     }
-                    
+
                     if sharedData.canPullUp && sharedData.isExpanded {
                         let progress = max(min(-translation / minimizedHeight, 1), 0)
                         sharedData.progress = 1 - progress
@@ -76,15 +76,15 @@ struct PhotoAppIOS18View: View {
                                 sharedData.isExpanded = true
                                 sharedData.progress = 1
                             }
-                            
+
                         }
-                        
+
                         if sharedData.canPullUp && sharedData.isExpanded {
                             if translation < 0 { /// add more criteria as needed to trigger expand
                                 sharedData.isExpanded = false
                                 sharedData.progress = 0
                             }
-                            
+
                         }
                     }
                 }

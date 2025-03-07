@@ -43,7 +43,7 @@ struct TimePickerView: View {
                 .frame(height: 35)
         }
     }
-    
+
     @ViewBuilder
     private func CustomView(_ title: String, _ range: ClosedRange<Int>, _ selection: Binding<Int>) -> some View {
         PickerViewWithoutIndicator(selection: selection) {
@@ -71,7 +71,7 @@ struct PickerViewWithoutIndicator<Content: View, Selection: Hashable>: View {
     @Binding var selection: Selection
     @ViewBuilder var content: Content
     @State private var isHidden: Bool = false
-    
+
     var body: some View {
         Picker("", selection: $selection) {
             if !isHidden {
@@ -101,7 +101,7 @@ fileprivate struct RemovePickerIndicator: UIViewRepresentable {
         }
         return view
     }
-    
+
     func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
@@ -110,7 +110,7 @@ fileprivate extension UIView {
         if let view = superview as? UIPickerView {
             return view
         }
-        
+
         return superview?.pickerView
     }
 }

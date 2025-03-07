@@ -23,7 +23,7 @@ struct PinchZoomDemoView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }
-                
+
                 Text("test")
                     .tabItem {
                         Image(systemName: "person.circle")
@@ -32,7 +32,7 @@ struct PinchZoomDemoView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func CardView(_ profile: Profile) -> some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -46,21 +46,21 @@ struct PinchZoomDemoView: View {
                     .pinchZoom()
             }
             .frame(height: 240)
-            
+
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(profile.lastMsg)
                         .font(.callout)
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
-                    
+
                     Text("By " + profile.username)
                         .font(.caption)
                         .foregroundStyle(.gray)
                 }
-                
+
                 Spacer(minLength: 0)
-                
+
                 if let link = URL(string: "https://www.youtube.com/watch?v=Z1_49kXP5U0&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=91") {
                     Link("Visit", destination: link)
                         .font(.caption)
@@ -96,7 +96,7 @@ fileprivate struct ZoomContainer<Content: View>: View {
         GeometryReader { _ in
             content
                 .environment(containerData)
-            
+
             ZStack(alignment: .topLeading) {
                 if let view = containerData.zoomingView {
                     Group {
@@ -105,7 +105,7 @@ fileprivate struct ZoomContainer<Content: View>: View {
                                 .fill(.black.opacity(0.25))
                                 .opacity(containerData.zoom - 1)
                         }
-                        
+
                         view
                             .scaleEffect(containerData.zoom, anchor: containerData.zoomAnchor)
                             .offset(containerData.dragOffset)
@@ -138,7 +138,7 @@ fileprivate class ZoomContainerData {
 private struct PinchZoomHelper<Content: View>: View {
     var dimsBackground: Bool
     @ViewBuilder var content: Content
-    
+
     /// View properties
     @Environment(ZoomContainerData.self) private var containerData
     @State private var config: Config = .init()
@@ -149,7 +149,7 @@ private struct PinchZoomHelper<Content: View>: View {
             .overlay {
                 GeometryReader {
                     let rect = $0.frame(in: .global)
-                    
+
                     Color.clear
                         .onChange(of: config.isGestureActive) { oldValue, newValue in
                             if newValue {
@@ -175,7 +175,7 @@ private struct PinchZoomHelper<Content: View>: View {
                                     containerData.isResetting = false
                                 }
                             }
-                            
+
                         }
                         .onChange(of: config) { oldValue, newValue in
                             if config.isGestureActive && !containerData.isResetting {
@@ -192,15 +192,15 @@ private struct PinchZoomHelper<Content: View>: View {
 /// UIKit gestures overlay
 fileprivate struct GestureOverlay: UIViewRepresentable {
     @Binding var config: Config
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(config: $config)
     }
-    
+
     func makeUIView(context: Context) -> some UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        
+
         // Pan Gesture
         let panGesture = UIPanGestureRecognizer()
         panGesture.name = "PINCHPANGESTURE"
@@ -208,7 +208,7 @@ fileprivate struct GestureOverlay: UIViewRepresentable {
         panGesture.addTarget(context.coordinator, action: #selector(Coordinator.panGesture(gesture:)))
         panGesture.delegate = context.coordinator
         view.addGestureRecognizer(panGesture)
-        
+
         // Pinch Gesture
         let pinchGesture = UIPinchGestureRecognizer()
         pinchGesture.name = "PINCHZOOMGESTURE"
@@ -218,15 +218,15 @@ fileprivate struct GestureOverlay: UIViewRepresentable {
 
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {}
-    
+
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
         @Binding var config: Config
         init(config: Binding<Config>) {
             self._config = config
         }
-        
+
         @objc
         func panGesture(gesture: UIPanGestureRecognizer) {
             if gesture.state == .began || gesture.state == .changed {
@@ -237,7 +237,7 @@ fileprivate struct GestureOverlay: UIViewRepresentable {
                 config.isGestureActive = false
             }
         }
-        
+
         @objc
         func pinchGesture(gesture: UIPinchGestureRecognizer) {
             if gesture.state == .began {
@@ -254,7 +254,7 @@ fileprivate struct GestureOverlay: UIViewRepresentable {
                 config.isGestureActive = false
             }
         }
-        
+
         /// make both pan and pinch gesture work simultaneously
         func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
             if gestureRecognizer.name == "PINCHPANGESTURE" && otherGestureRecognizer.name == "PINCHZOOMGESTURE" {

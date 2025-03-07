@@ -24,7 +24,7 @@ struct SegmentControl<Indicator: View>: View {
         GeometryReader {
             let size = $0.size
             let containerWidthForEachTab = size.width / CGFloat(tabs.count)
-            
+
             HStack(spacing: 0) {
                 ForEach(tabs, id: \.rawValue) { tab in
                     Group {
@@ -40,8 +40,8 @@ struct SegmentControl<Indicator: View>: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .contentShape(.rect)
                     .onTapGesture {
-                        
-                        if let index = tabs.firstIndex(of: tab), 
+
+                        if let index = tabs.firstIndex(of: tab),
                             let activeIndex = tabs.firstIndex(of: activeTab) {
                             activeTab = tab
 
@@ -61,7 +61,7 @@ struct SegmentControl<Indicator: View>: View {
                         if tabs.first == tab {
                             GeometryReader {
                                 let size = $0.size
-                                
+
                                 indicatorView(size)
                                     .frame(width: size.width + (excessTabWidth < 0 ? -excessTabWidth : excessTabWidth),
                                            height: size.height)
@@ -70,7 +70,7 @@ struct SegmentControl<Indicator: View>: View {
                             }
                         }
                     }
-                    
+
                 }
             }
             .preference(key: SizeKey.self, value: size)
@@ -113,12 +113,12 @@ struct SegmentControlView: View {
                 }
                 .padding(.horizontal, type2 ? 15 : 0)
 
-                
+
                 Toggle("Animation 2", isOn: $type2)
                     .padding(10)
                     .background(.regularMaterial, in: .rect(cornerRadius: 10))
                     .padding(15)
-                
+
                 Spacer(minLength: 0)
             }
             .padding(.vertical, type2 ? 15 : 0)

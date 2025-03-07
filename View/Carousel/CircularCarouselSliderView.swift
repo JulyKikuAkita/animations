@@ -22,13 +22,13 @@ struct CircularCarouselSliderView: View {
             }
             .pickerStyle(.segmented)
 //            .padding()
-            
+
 //            Spacer(minLength: 0)
-            
+
             GeometryReader {
                 let size = $0.size
                 let padding = (size.width - 70) / 2
-                
+
                 /// Circular Slider
                 ScrollView(.horizontal) {
                     HStack(spacing: 35) {
@@ -49,7 +49,7 @@ struct CircularCarouselSliderView: View {
                                     view
 //                                    .offset(y: phase.isIdentity && activeID == card.image ? 15 : 0)
                                       .scaleEffect(phase.isIdentity && activeID == card.image && pickerType == .scaled ? 1.5 : 1, anchor: .bottom) // use activeID to enlarge the center image
-                                    
+
                                 }
                         }
                     }
@@ -78,19 +78,19 @@ struct CircularCarouselSliderView: View {
         }
         .ignoresSafeArea(.container, edges: .bottom)
     }
-    
+
     /// Circular slider view offset
     nonisolated func offSet(_ proxy: GeometryProxy) -> CGFloat {
         let progress = progress(proxy)
         /// Simply moving view up/down based on progress
         return progress < 0 ? progress * -30 : progress * 30
     }
-    
+
     nonisolated func scale(_ proxy: GeometryProxy) -> CGFloat {
         let progress = min(max(progress(proxy), -1), 1)
         return progress < 0 ? 1 + progress : 1 - progress
     }
-    
+
     nonisolated func progress(_ proxy: GeometryProxy) -> CGFloat {
         /// View Width
         let viewWidth = proxy.size.width

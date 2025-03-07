@@ -9,7 +9,7 @@ struct GridImageDetailContentView: View {
         LazyVStack(spacing: 15) {
             DummySection(title: "Social Media")
             DummySection(title: "Sales", isLong: true)
-            
+
             ImageView("IMG_2104")
             DummySection(title: "Business")
             DummySection(title: "Promotion", isLong: true)
@@ -24,20 +24,20 @@ struct GridImageDetailContentView: View {
         }
         .padding(15)
     }
-    
+
     @ViewBuilder
     func DummySection(title: String, isLong: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 8, content: {
             Text(title)
                 .font(.title.bold())
-            
+
             Text(dummyDescription)
                 .multilineTextAlignment(.leading)
                 .kerning(1.2)
         })
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+
     @ViewBuilder
     func ImageView(_ image: String) -> some View {
         GeometryReader {

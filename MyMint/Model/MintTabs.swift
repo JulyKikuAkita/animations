@@ -10,7 +10,7 @@ enum MintTab: String {
     case search = "Search"
     case charts = "Charts"
     case settings = "Settings"
-    
+
     @ViewBuilder
     var tabContent: some View {
         switch self {

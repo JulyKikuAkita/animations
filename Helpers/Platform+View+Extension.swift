@@ -45,7 +45,7 @@ extension View {
             #else
             self
             #endif
-            
+
         case .macOS:
             #if os(macOS)
             content(self)

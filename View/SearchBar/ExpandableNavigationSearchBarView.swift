@@ -38,7 +38,7 @@ struct ExpandableNavigationSearchBarView: View {
         .background(.gray.opacity(0.15))
         .contentMargins(.top, 190, for: .scrollIndicators) // hide scroll indicator on header
     }
-    
+
     /// Expandable Navigation Bar
     @ViewBuilder
     func ExpandableNavigationBar(_ title: String = "Messages") -> some View {
@@ -58,15 +58,15 @@ struct ExpandableNavigationSearchBarView: View {
                     .scaleEffect(scaleProgress, anchor: .topLeading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 10)
-                
+
                 /// Search Bar
                 HStack(spacing: 12) {
                     Image(systemName: "magnifyingglass")
                         .font(.title3)
-                    
+
                     TextField("Search Conversations", text: $searchText)
                         .focused($isSearching)
-                    
+
                     if isSearching {
                         Button(action: {
                             isSearching = false
@@ -81,7 +81,7 @@ struct ExpandableNavigationSearchBarView: View {
                             )
                         )
                     }
-                        
+
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 15 - (progress * 15))
@@ -94,7 +94,7 @@ struct ExpandableNavigationSearchBarView: View {
                         .padding(.bottom, -progress * 65)
                         .padding(.horizontal, -progress * 15)
                 }
-                
+
                 /// Custom Segmented Picker
                 ScrollView(.horizontal) {
                     HStack(spacing: 12) {
@@ -128,7 +128,7 @@ struct ExpandableNavigationSearchBarView: View {
                     }
                 }
                 .frame(height: 50)
-                
+
             }
             .padding(.top, 25)
             .safeAreaPadding(.horizontal, 15)
@@ -139,7 +139,7 @@ struct ExpandableNavigationSearchBarView: View {
         .padding(.bottom, 10)
         .padding(.bottom, isSearching ? -65 : 0)
     }
-    
+
     /// Dummy messages View
     @ViewBuilder
     func DummyMessagesView() -> some View {
@@ -147,14 +147,14 @@ struct ExpandableNavigationSearchBarView: View {
             HStack(spacing: 12) {
                 Circle()
                     .frame(width: 55, height: 55)
-                
+
                 VStack(alignment: .leading, spacing: 6, content: {
                     Rectangle()
                         .frame(width: 140, height: 8)
-                    
+
                     Rectangle()
                         .frame(height: 8)
-                    
+
                     Rectangle()
                         .frame(width: 80, height: 8)
                 })
@@ -178,7 +178,7 @@ struct CustomScrollTargetBehavior: ScrollTargetBehavior {
         }
     }
 
-    
+
 }
 
 #Preview {

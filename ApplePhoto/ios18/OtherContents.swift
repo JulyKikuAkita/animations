@@ -14,26 +14,26 @@ struct OtherContents: View {
             DummyView("Screenshots", .orange)
         }
     }
-    
+
     @ViewBuilder
     func DummyView(_ title: String, _ color: Color) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Button {
-                
+
             } label: {
                 HStack(spacing: 6) {
                     Text(title)
                         .font(.title3.bold())
                         .foregroundStyle(Color.primary)
-                    
+
                     Image(systemName: "chevron.right")
                         .font(.callout)
                         .fontWeight(.semibold)
                         .foregroundStyle(.gray)
                 }
-                
+
             }
-            
+
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 10) {
                     ForEach(1...10, id:\.self) { _ in

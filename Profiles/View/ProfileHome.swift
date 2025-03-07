@@ -35,7 +35,7 @@ struct ProfileHome: View {
             ZStack {
                 if let image = config.layer {
                     let destination = config.coordinates.1
-                    
+
                     Image(image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -54,7 +54,7 @@ struct ProfileHome: View {
             .onChange(of: selectedProfile == nil) { oldValue, newValue in /// view set to nil when dismiss is only in iOS 18
                 if newValue {
                     config.isExpandedCompletely = false
-                    
+
                     ///  1. avoid using spring-based (non-immediate removal type) animations for dismiss
                     ///  2. do not exceed 0.35s as the max time for navigation stack push/pop operation is 0.35s
                     withAnimation(.easeInOut(duration: 0.35), completionCriteria: .logicallyComplete) {

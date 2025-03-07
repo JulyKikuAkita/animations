@@ -9,11 +9,11 @@ import SwiftUI
 struct CustomTextFieldWithKeyboard<TextField: View, Keyboard: View>: UIViewControllerRepresentable {
     @ViewBuilder var textField: TextField
     @ViewBuilder var keyboard: Keyboard
-    
+
     func makeUIViewController(context: Context) -> UIHostingController<TextField> {
         let controller = UIHostingController(rootView: textField)
         controller.view.backgroundColor = .clear
-        
+
         DispatchQueue.main.async {
             if let textField = controller.view.allSubviews.first(where: { $0 is UITextField
                 }) as? UITextField, textField.inputView == nil { /// ensure only add input view to the textfield once
@@ -32,7 +32,7 @@ struct CustomTextFieldWithKeyboard<TextField: View, Keyboard: View>: UIViewContr
 
     func updateUIViewController(_ uiViewController: UIHostingController<TextField>, context: Context) {
     }
-    
+
     /// ensure view wrapper takes up only the necessary space, rather than the entire available space
     func sizeThatFits(_ proposal: ProposedViewSize, uiViewController: UIHostingController<TextField>, context: Context) -> CGSize? {
         return uiViewController.view.intrinsicContentSize

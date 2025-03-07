@@ -19,7 +19,7 @@ struct MintExpenseView: View {
 
     /// Random Tint
     @State private var tint: TintColor = tints.randomElement()!
-   
+
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 15) {
@@ -27,7 +27,7 @@ struct MintExpenseView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .hSpacing(.leading)
-                
+
                 /// tmp trans view
                 MintTransactionCardView(transaction: .init(
                     title: title.isEmpty ? "Title" : title,
@@ -38,22 +38,22 @@ struct MintExpenseView: View {
                     rule: rule,
                     tintColor: tint
                 ))
-                
+
                 CustomSection("Title", "Magic Mike", value: $title)
                 CustomSection("Remarks", "Magic Mike 2", value: $remarks)
-                
+
                 /// Amount & Category Check box
                 VStack(alignment: .leading, spacing: 10, content: {
                     Text("Amount & Category")
                         .font(.caption)
                         .foregroundStyle(.gray)
                         .hSpacing(.leading)
-                    
+
                     HStack(spacing: 15) {
                         HStack(spacing: 4) {
                             Text(currencySymbol)
                                 .font(.callout.bold())
-                            
+
                             TextField("0.0", value: $amount, formatter: numberFormatter)
                                 .keyboardType(.decimalPad)
                         }
@@ -61,28 +61,28 @@ struct MintExpenseView: View {
                         .padding(.vertical, 12)
                         .background(.background, in: .rect(cornerRadius: 10))
                         .frame(maxWidth: 130)
-                        
+
                         /// Custom Check Box
                         CustomCategoryCheckBox()
                     }
-                    
+
                     CustomRuleCheckBox()
                 })
-                
+
                 /// Date picker
                 VStack(alignment: .leading, spacing: 10, content: {
                     Text("Date")
                         .font(.caption)
                         .foregroundStyle(.gray)
                         .hSpacing(.leading)
-                    
+
                     DatePicker("", selection: $dateAdded, displayedComponents: [.date])
                         .font(.footnote)
                         .datePickerStyle(.graphical)
                         .padding(.horizontal, 15)
                         .padding(.vertical, 12)
                         .background(.background, in: .rect(cornerRadius: 10))
-                    
+
                 })
             }
             .padding(15)
@@ -104,18 +104,18 @@ struct MintExpenseView: View {
                 if let category = editTransaction.rawCategory {
                     self.category = category
                 }
-               
+
                 if let rule = editTransaction.rawRule {
                     self.rule = rule
                 }
-                
+
                 if let tint = editTransaction.tint {
                     self.tint = tint
                 }
             }
         })
     }
-    
+
     /// Saving transaction
     func save() {
         /// Saving transaction to SwiftData
@@ -141,7 +141,7 @@ struct MintExpenseView: View {
         /// Dismiss view
         dismiss()
     }
-    
+
     @ViewBuilder
     func CustomSection(_ title: String, _ hint: String, value: Binding<String>) -> some View {
         VStack(alignment: .leading,spacing: 10, content: {
@@ -149,14 +149,14 @@ struct MintExpenseView: View {
                 .font(.caption)
                 .foregroundStyle(.gray)
                 .hSpacing(.leading)
-            
+
             TextField(hint, text: value)
                 .padding(.horizontal, 15)
                 .padding(.vertical, 12)
                 .background(.background, in: .rect(cornerRadius: 10))
         })
     }
-    
+
     @ViewBuilder
     func CustomCategoryCheckBox() -> some View {
         HStack(spacing: 10) {
@@ -166,14 +166,14 @@ struct MintExpenseView: View {
                         Image(systemName: "circle")
                             .font(.title3)
                             .foregroundStyle(appTint)
-                        
+
                         if self.category == current {
                             Image(systemName: "circle.fill")
                                 .font(.caption)
                                 .foregroundStyle(appTint)
                         }
                     }
-                    
+
                     Text(current.rawValue)
                         .font(.caption)
                 }
@@ -188,7 +188,7 @@ struct MintExpenseView: View {
         .hSpacing(.leading)
         .background(.background, in: .rect(cornerRadius: 10))
     }
-    
+
     @ViewBuilder
     func CustomRuleCheckBox() -> some View {
         HStack(spacing: 5) {
@@ -198,14 +198,14 @@ struct MintExpenseView: View {
                         Image(systemName: "circle")
                             .font(.title3)
                             .foregroundStyle(appTint)
-                        
+
                         if self.rule == current {
                             Image(systemName: "circle.fill")
                                 .font(.caption)
                                 .foregroundStyle(appTint)
                         }
                     }
-                    
+
                     Text(current.rawValue)
                         .font(.caption)
                 }
@@ -220,7 +220,7 @@ struct MintExpenseView: View {
         .hSpacing(.leading)
         .background(.background, in: .rect(cornerRadius: 10))
     }
-    
+
     /// Number Formatter
     var numberFormatter: NumberFormatter {
         let formatter = NumberFormatter()

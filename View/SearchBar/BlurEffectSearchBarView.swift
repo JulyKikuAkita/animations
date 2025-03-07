@@ -21,7 +21,7 @@ struct BlurEffectSearchBarView: View {
     @State private var searchText: String = ""
     @State private var progress: CGFloat = 0
     @FocusState private var isFocused: Bool //TODO: 7:11
-    
+
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 15) {
@@ -46,7 +46,7 @@ struct BlurEffectSearchBarView: View {
             progress = max(min(newValue / 75, 1), 0)
         }
     }
-    
+
     @ViewBuilder
     func ResizableHeader() -> some View {
         let progress = isFocused ? 1 : progress
@@ -56,16 +56,16 @@ struct BlurEffectSearchBarView: View {
                     Text("Welcome Back")
                         .font(.callout)
                         .foregroundStyle(.gray)
-                    
+
                     Text("Nanachi")
                         .font(.title.bold())
                 }
-                
+
                 Spacer(minLength: 0)
-                
+
                 /// Profile Button
                 Button {
-                    
+
                 } label: {
                     Image("fox")
                         .resizable()
@@ -80,17 +80,17 @@ struct BlurEffectSearchBarView: View {
             .padding(.bottom, 15 - (15 * progress))
             .opacity(1 - progress)
             .offset(y: -10 * progress)
-            
+
             /// Floating Search Bar
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
-                
+
                 TextField("Search Photo", text: $searchText)
                     .focused($isFocused)
-                
+
                 /// Microphone Button
                 Button {
-                    
+
                 } label: {
                     Image(systemName: "microphone.fill")
                         .foregroundStyle(Color.red)
@@ -124,18 +124,18 @@ struct BlurEffectSearchBarView: View {
                 .offset(y: offsetY(proxy))
         }
     }
-    
+
     private func offsetY(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         return minY > 0 ? (isFocused ? -minY : 0) : -minY
     }
-    
+
     @ViewBuilder
     func CardView(_ item: Card) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             GeometryReader {
                 let size = $0.size
-                
+
                 Image(item.image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -143,7 +143,7 @@ struct BlurEffectSearchBarView: View {
                     .clipShape(.rect(cornerRadius: 20))
             }
             .frame(height: 220)
-            
+
             Text("By: \(item.title)")
                 .font(.callout)
                 .foregroundStyle(.primary.secondary)
@@ -154,7 +154,7 @@ struct BlurEffectSearchBarView: View {
 struct CustomScrollTarget: ScrollTargetBehavior {
     func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
         let endPoint = target.rect.minY
-        
+
         if endPoint < 75 {
             if endPoint > 40 {
                 target.rect.origin = .init(x: 0, y: 75)

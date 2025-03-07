@@ -17,16 +17,16 @@ struct HorizontalTabView: View {
     @State private var mainViewScrollState: TabModel.HorizonTab? // scroll to view matched tab bar
     @State private var tabBarScrollState: TabModel.HorizonTab? // center selected tab
     @State private var progress: CGFloat = .zero
-    
+
     var body: some View {
         VStack(spacing: 0) {
             HeaderView()
             CustomTabBar()
-            
+
             /// main view
             GeometryReader {
                 let size = $0.size
-                
+
                 ScrollView(.horizontal) { // require each tab view to be full screen width
                     LazyHStack(spacing: 0) {
                         /// individual tab view
@@ -56,7 +56,7 @@ struct HorizontalTabView: View {
             }
         }
     }
-    
+
     /// Header view
     @ViewBuilder
     func HeaderView() -> some View {
@@ -65,22 +65,22 @@ struct HorizontalTabView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 100)
-            
+
             Spacer(minLength: 0)
-            
+
             /// Buttons
             Button("", systemImage: "plus.circle") {
-                
+
             }
             .font(.title2)
             .tint(.primary)
-            
+
             Button("", systemImage: "bell") {
-                
+
             }
             .font(.title2)
             .tint(.primary)
-            
+
             Button(action: {}, label: {
                 Image(.fox)
                     .resizable()
@@ -91,7 +91,7 @@ struct HorizontalTabView: View {
         }
         .padding(15)
     }
-    
+
     /// Dynamic scrollable tab bar
     @ViewBuilder
     func CustomTabBar() -> some View {
@@ -131,7 +131,7 @@ struct HorizontalTabView: View {
                 Rectangle()
                     .fill(.gray.opacity(0.3))
                     .frame(height: 1)
-                
+
                 // dynamically set indicator width
                 let inputRange = tabs.indices.compactMap{ return CGFloat($0) }
                 let outputRange = tabs.compactMap{ return $0.size.width }
@@ -139,7 +139,7 @@ struct HorizontalTabView: View {
 
                 let indicatorWidth = progress.interpolate(inputRange: inputRange, outputRange: outputRange)
                 let indicatorPosition = progress.interpolate(inputRange: inputRange, outputRange: outputPositionRange)
-                
+
                 Rectangle()
                     .fill(.primary)
                     .frame(width: indicatorWidth, height: 1.5)
@@ -160,7 +160,7 @@ extension View {
             .overlay {
                 GeometryReader {
                     let rect = $0.frame(in: .scrollView(axis: .horizontal))
-                    
+
                     Color.clear
                         .preference(key: OffsetKey.self, value: rect)
                         .onPreferenceChange(OffsetKey.self, perform: completion)
@@ -171,5 +171,3 @@ extension View {
 #Preview {
     HorizontalTabView()
 }
-
-

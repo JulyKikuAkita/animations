@@ -17,7 +17,7 @@ struct TabStateScrollView<Content: View>: View {
         self._tabState = tabState
         self.content = content()
     }
-    
+
     var body: some View {
         /// this feature supports iOS 16 and 17
         if #available(iOS 17, *) { // old scroll view deprecated in iOS 17
@@ -41,12 +41,12 @@ struct TabStateScrollView<Content: View>: View {
             }
         }
     }
-    
+
     /// Handling tab state on swipe
     func handleTabState(_ gesture: UIPanGestureRecognizer) {
 //        let offsetY = gesture.translation(in: gesture.view).y
         let velocityY = gesture.velocity(in: gesture.view).y
-        
+
         if velocityY < 0 {
             /// Swiping up
             if -(velocityY / 5) > 60 && tabState == .visible {
@@ -66,15 +66,15 @@ fileprivate struct CustomGesture: UIViewRepresentable {
     var onChange: (UIPanGestureRecognizer) -> ()
     /// gesture ID
     private let gestureID = UUID().uuidString
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(onChange: onChange)
     }
-    
+
     func makeUIView(context: Context) -> some UIView {
         return UIView()
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
         DispatchQueue.main.async {
             // uiview.(background{}).sourceView
@@ -95,13 +95,13 @@ fileprivate struct CustomGesture: UIViewRepresentable {
         init(onChange: @escaping (UIPanGestureRecognizer) -> Void) {
             self.onChange = onChange
         }
-        
+
         @objc
         func gestureChange(gesture: UIPanGestureRecognizer) {
             /// Simply calling the onChange callback
             onChange(gesture)
         }
-        
+
         /// enable this for gesture to work simultaneously with other gestures (such as scrollview)
         func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
             return true

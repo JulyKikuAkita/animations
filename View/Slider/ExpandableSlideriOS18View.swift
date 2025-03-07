@@ -31,7 +31,7 @@ struct CustomExpandableSlider<Overlay: View>: View {
     var range: ClosedRange<CGFloat>
     var config: Config
     var overlay: Overlay
-    
+
     init(
         value: Binding<CGFloat>,
         in range: ClosedRange<CGFloat>,
@@ -43,7 +43,7 @@ struct CustomExpandableSlider<Overlay: View>: View {
         self.overlay = overlay()
         self.lastStoredValue = value.wrappedValue
     }
-    
+
     ///View Properties
     @State private var lastStoredValue: CGFloat
     @GestureState private var isActive: Bool = false
@@ -52,22 +52,22 @@ struct CustomExpandableSlider<Overlay: View>: View {
         GeometryReader {
             let size = $0.size
             let width = (value / range.upperBound) * size.width
-            
+
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(config.inActiveTint)
-                
+
                 Rectangle()
                     .fill(config.activeTint)
                     .mask(alignment: .leading) {
                         Rectangle()
                             .frame(width: width)
                     }
-                
+
                 ZStack(alignment: .leading) {
                     overlay
                         .foregroundStyle(config.overlayInActiveTint)
-                    
+
                     overlay
                         .foregroundStyle(config.overlayActiveTint)
                         .mask(alignment: .leading) {
@@ -103,7 +103,7 @@ struct CustomExpandableSlider<Overlay: View>: View {
         }
         .animation(.snappy, value: isActive)
     }
-    
+
     struct Config {
         var activeTint: Color = Color.primary
         var inActiveTint: Color = .black.opacity(0.06)

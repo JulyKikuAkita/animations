@@ -8,7 +8,7 @@ struct GesturesDemoView: View {
     /// Need to remove view and reload to select interactions dynamically
     @State private var effect = InteractionsEffect.verticalSwipe
     @State private var showView: Bool = true
-    
+
     var pickerValues: [String] = [InteractionsEffect.horizontalSwipe.rawValue,
                                   InteractionsEffect.verticalSwipe.rawValue,
                                   InteractionsEffect.tap.rawValue,
@@ -38,7 +38,7 @@ struct GesturesDemoView: View {
                 }
             }
             .frame(width: 100, height: 400)
-            
+
             List {
                 Button {
                     config.show.toggle()
@@ -46,9 +46,9 @@ struct GesturesDemoView: View {
                     HStack {
                         Text("Gestures")
                             .foregroundStyle(.gray)
-                        
+
                         Spacer(minLength: 0)
-                        
+
                         ExpandableWheelPickerView(config: $config)
                     }
                 }
@@ -76,7 +76,7 @@ struct GesturesDemoView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func HorizontalSwipeView(size: CGSize, animate: Bool) -> some View {
         HStack(spacing: 10) {
@@ -84,7 +84,7 @@ struct GesturesDemoView: View {
                 .fill(.fill)
                 .frame(width: 80, height: 150)
                 .frame(width: size.width, height: size.height)
-            
+
             RoundedRectangle(cornerRadius: 10)
                 .fill(.fill)
                 .frame(width: 80, height: 150)
@@ -92,7 +92,7 @@ struct GesturesDemoView: View {
         }
         .offset(x: animate ? -(size.width + 10) : 0)
     }
-    
+
     @ViewBuilder
     func VerticalSwipeView(size: CGSize, animate: Bool) -> some View {
         VStack(spacing: 10) {
@@ -100,7 +100,7 @@ struct GesturesDemoView: View {
                 .fill(.fill)
                 .frame(width: 80, height: 150)
                 .frame(width: size.width, height: size.height)
-            
+
             RoundedRectangle(cornerRadius: 10)
                 .fill(.fill)
                 .frame(width: 80, height: 150)
@@ -108,7 +108,7 @@ struct GesturesDemoView: View {
         }
         .offset(y: animate ? -(size.height + 10) : 0)
     }
-    
+
     @ViewBuilder
     func PressView(animate: Bool, scale: CGFloat = 0.9) -> some View {
         HStack(spacing: 10) {
@@ -157,7 +157,7 @@ struct Interactions<Content: View>: View {
                 let isSwipe = effect == .verticalSwipe || effect == .horizontalSwipe
                 let isPinch = effect == .pinch
                 let circleSize: CGFloat = effect == .horizontalSwipe ? 18: 20
-                
+
                 Circle()
                     .fill(.fill)
                     .frame(width: circleSize, height: circleSize)
@@ -191,7 +191,7 @@ struct Interactions<Content: View>: View {
                 isStarted = false
             }
     }
-    
+
     private func animationEffect() async {
         guard isStarted else { return } /// set exit point when view is removed during recursive call
         let isSwipe = effect == .verticalSwipe || effect == .horizontalSwipe
@@ -199,7 +199,7 @@ struct Interactions<Content: View>: View {
         withAnimation(.easeIn(duration: 0.5)) {
             showTouch = true
         }
-        
+
         if effect == .tap {
             withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
                 animate = true
@@ -213,7 +213,7 @@ struct Interactions<Content: View>: View {
             try? await Task.sleep(for: .seconds(effect == .longPress ? 1.3 : 1))
 
         }
-        
+
         /// Resetting animation
         withAnimation(.easeIn(duration: 0.3), completionCriteria: .logicallyComplete) {
             if isSwipe || isPinch {
@@ -225,7 +225,7 @@ struct Interactions<Content: View>: View {
             if isSwipe {
                 animate = false
             }
-            
+
             /// no reverse effect for pinch interaction
             if isPinch {
                 withAnimation(.linear(duration: 0.2)) {
@@ -233,7 +233,7 @@ struct Interactions<Content: View>: View {
                 }
             }
         }
-        
+
         /// Looping
         try? await Task.sleep(for: .seconds(effect == .tap ? 0.3 : isPinch ? 1 : 0.6))
         await animationEffect()
@@ -249,7 +249,7 @@ enum InteractionsEffect: String {
     case verticalSwipe
     case horizontalSwipe
     case pinch
-    
+
     static func mapEffect(text: String) -> InteractionsEffect? {
         return InteractionsEffect(rawValue: text)
     }

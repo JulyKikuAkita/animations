@@ -21,12 +21,12 @@ struct HabitCreationView: View {
                 TextField("Workout for 15 minutes", text: $habitName)
                     .font(.title)
                     .padding(.bottom, 10)
-                
+
                 Text("Habit Frequency")
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .padding(.top, 5)
-                
+
                 HabitCalendarView(
                     isDemo: isNewHabit,
                     createdAt: habit?.createdAt ?? .now,
@@ -34,20 +34,20 @@ struct HabitCreationView: View {
                     completedDates: habit?.completedDates ?? []
                 )
                 .applyPaddedBackground(15)
-                
+
                 if isNewHabit {
                     FrequencyPicker()
                         .applyPaddedBackground(10)
                 }
-              
-                
+
+
                 Text("Notifications")
                     .font(.caption)
                     .foregroundStyle(.gray)
                     .padding(.top, 5)
-                
+
                 NotificationProperties()
-                
+
                 HabitCreationButton()
                     .padding(.top, 10)
             }
@@ -62,15 +62,15 @@ struct HabitCreationView: View {
             enableNotifications = habit.isNotificationEnabled
             notificationDate = habit.notificationTiming ?? .now
             frequencies = habit.frequencies
-            
+
         }
         .task {
             isNotificationPermissionGranted =
                 (try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge])) ?? false
         }
-        
+
     }
-    
+
     @ViewBuilder
     func FrequencyPicker() -> some View {
         HStack(spacing: 5) {
@@ -95,31 +95,31 @@ struct HabitCreationView: View {
                             }
                         }
                     }
-                        
+
             }
         }
     }
-    
+
     @ViewBuilder
     func NotificationProperties() -> some View {
         Toggle("Enable Notification", isOn: $enableNotifications)
             .font(.callout)
             .applyPaddedBackground(12)
             .disableWithOpacity(!isNotificationPermissionGranted)
-        
+
         if enableNotifications && isNotificationPermissionGranted {
             DatePicker("Preferred Reminder Time", selection: $notificationDate, displayedComponents: [.hourAndMinute])
                 .applyPaddedBackground(12)
                 .transition(.blurReplace)
         }
-        
+
         if !isNotificationPermissionGranted {
             Text("Notification permission is required to enable reminders. Please enable notifications in your device settings")
                 .font(.caption2)
                 .foregroundStyle(.gray)
         }
     }
-    
+
     @ViewBuilder
     func HabitCreationButton() -> some View {
         HStack(spacing: 10){
@@ -136,7 +136,7 @@ struct HabitCreationView: View {
                 .contentShape(.rect)
             }
             .disableWithOpacity(habitValidation)
-            
+
             /// Delete habit
             if !isNewHabit {
                 Button {
@@ -158,8 +158,8 @@ struct HabitCreationView: View {
             }
         }
     }
-    
-    
+
+
     /// Helpers
     private func createHabit() {
         Task { @MainActor in
@@ -184,58 +184,58 @@ struct HabitCreationView: View {
                         notificationTiming: notificationDate
                     )
                     context.insert(habit)
-                    
+
                 } else {
                     let habit = Habit(name: habitName, frequency: frequencies)
                     context.insert(habit)
                 }
-                
+
             }
-            
+
             try? context.save()
             dismiss()
         }
     }
-    
+
     private func cancelNotifications(_ ids: [String]) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
     }
-    
+
     /// create notifications and return it's ids
     private func scheduleNotifications() async throws -> [String] {
         var notificationIDs: [String] = []
         let weekdaySymbols: [String] = Calendar.current.weekdaySymbols
-        
+
         let content = UNMutableNotificationContent()
         content.title = "Habit Reminder"
         content.body = "Time for \(habitName)"
-        
+
         for frequency in frequencies {
             let hour = Calendar.current.component(.hour, from: notificationDate)
             let minute = Calendar.current.component(.minute, from: notificationDate)
             let id: String = UUID().uuidString
-            
+
             if let dayIndex = weekdaySymbols.firstIndex(of: frequency.rawValue) {
                 var scheduleDateComponents = DateComponents()
                 scheduleDateComponents.weekday = dayIndex + 1
                 scheduleDateComponents.hour = hour
                 scheduleDateComponents.minute = minute
-                
+
                 let trigger = UNCalendarNotificationTrigger(dateMatching: scheduleDateComponents, repeats: true)
                 let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
                 try await UNUserNotificationCenter.current().add(request)
-                
+
                 notificationIDs.append(id)
             }
 
         }
         return notificationIDs
     }
-    
+
     var habitValidation: Bool {
         frequencies.isEmpty && habitName.isEmpty
     }
-    
+
     var isNewHabit: Bool  {
         habit == nil
     }

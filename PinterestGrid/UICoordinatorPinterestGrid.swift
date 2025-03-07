@@ -14,18 +14,18 @@ class UICoordinatorPinterestGrid {
     var scrollView: UIScrollView = .init(frame: .zero)
     var rect: CGRect = .zero
     var selectedItem : PhotoItem?
-    
+
     /// Animation Layer properties
     var animationLayer: UIImage?
     var animateView: Bool = false
     var hideLayer: Bool = false
-    
+
     /// Root View properties
     var hideRootView: Bool = false
-    
+
     /// Detail Grid View Properties
     var headerOffset: CGFloat = .zero
-    
+
     /// Capture snapshot for scrollView's visible region, not the complete scroll region.
     func createVisibleAreaSnapshot() {
         let renderer = UIGraphicsImageRenderer(size: scrollView.bounds.size)
@@ -35,7 +35,7 @@ class UICoordinatorPinterestGrid {
         }
         animationLayer = image
     }
-    
+
     func toggleView(show: Bool, frame: CGRect, post: PhotoItem) {
         if show {
             selectedItem = post
@@ -62,7 +62,7 @@ class UICoordinatorPinterestGrid {
             }
         }
     }
-    
+
     /// Cannot have rect = .zero due to we wrap in dispatch queue
     /// thus negative rect values will appear in the detail view b.c the detail height was calculated using it
     private func resetAnimationProperties() {
@@ -81,7 +81,7 @@ struct ScrollViewExtractor: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let view = UIView()
         view.backgroundColor = .clear
-        
+
         DispatchQueue.main.async {
             if let scrollView = view.superview?.superview?.superview as? UIScrollView {
                 result(scrollView)
@@ -89,6 +89,6 @@ struct ScrollViewExtractor: UIViewRepresentable {
         }
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {}
 }

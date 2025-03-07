@@ -39,7 +39,7 @@ struct GridTransitionView: View {
             ScrollView(.vertical) {
                 VStack(spacing: 20) {
                     SearchBar()
-                    
+
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                         ForEach(notes) { note in
                             CardView(note)
@@ -47,7 +47,7 @@ struct GridTransitionView: View {
                                 .onTapGesture {
                                     guard selectedNote == nil else { return }
                                     isKeyboardActive = false
-                                    
+
                                     selectedNote = note
                                     note.allowsHitTesting = true
                                     withAnimation(noteAnimation) {
@@ -77,19 +77,19 @@ struct GridTransitionView: View {
             .focused($isKeyboardActive) // this modifier applies to detailView which has text field too
         }
     }
-    
+
     @ViewBuilder
     func SearchBar() -> some View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
-            
+
             TextField("Search", text: $searchText)
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 15)
         .background(Color.primary.opacity(0.06), in: .rect(cornerRadius: 10))
     }
-    
+
     /// matchedGeometry effect must be presented only one  in a view
     ///  thus when we show destination view, we must also hide the source view without it's modifying size/position
     @ViewBuilder
@@ -115,7 +115,7 @@ struct GridTransitionView: View {
             titleNoteSize = newValue
         }
     }
-    
+
     @ViewBuilder
     func BottomBar() -> some View {
         HStack(spacing: 15) {
@@ -146,7 +146,7 @@ struct GridTransitionView: View {
                     }
                 }
             }
-            
+
             Spacer(minLength: 0)
             ZStack {
                 if isKeyboardActive {
@@ -157,7 +157,7 @@ struct GridTransitionView: View {
                     .foregroundStyle(Color.primary)
                     .transition(.blurReplace)
                 }
-                
+
                 if selectedNote != nil && !isKeyboardActive{
                     Button {
                         // no more need this when using swift data as it's reflecting to object direclty
@@ -165,13 +165,13 @@ struct GridTransitionView: View {
     //                        notes[index].allowsHitTesting = false
     //                    }
                         selectedNote?.allowsHitTesting = false
-                        
+
                         if let selectedNote, (
                             selectedNote.title.isEmpty && selectedNote.content.isEmpty
                         ) {
                             deleteNote = selectedNote
                         }
-                        
+
                         withAnimation(
                             noteAnimation.logicallyComplete(after: 0.1), /// noteAnimation is spring based thus need some delay
                             completionCriteria: .logicallyComplete
@@ -210,7 +210,7 @@ struct GridTransitionView: View {
         .animation(noteAnimation, value: selectedNote != nil) /// limited trigger of animation only when selectedNote is nil or not nil
         .animation(noteAnimation, value: isKeyboardActive)
     }
-    
+
     @ViewBuilder
     func CardColorPicker() -> some View {
         let colorString = ["AI_grn", "AI_pink"]
@@ -228,24 +228,24 @@ struct GridTransitionView: View {
             }
         }
     }
-    
+
     func createEmptyNote() {
         /// Converting Image -> UIColor -> Color
         let randomColor = ["AI_grn", "AI_pink"].randomElement()!
         let note = Note(colorString: randomColor, title: "", content: "")
         context.insert(note)
-        
+
         Task {
             try? await Task.sleep(for: .seconds(0))
             selectedNote = note
             selectedNote?.allowsHitTesting = true
-            
+
             withAnimation(noteAnimation) {
                 animateView = true
             }
         }
     }
-    
+
     func deleteNoteFromContext() {
         if let deleteNote {
             context.delete(deleteNote)
@@ -253,7 +253,7 @@ struct GridTransitionView: View {
             self.deleteNote = nil
         }
     }
-    
+
     func getColor(from colorString: String) -> Color {
         if let image = UIImage(named: colorString) {
             return Color(image.averageColor() ?? .darkGray)
@@ -308,18 +308,18 @@ struct DetailView: View {
                 }
             }
     }
-    
+
     @ViewBuilder
     func NotesContent() -> some View {
         GeometryReader {
             let currentSize: CGSize = $0.size
             //let safeArea = $0.safeAreaInsets // not always work, use UIKit way below
-            
+
             VStack(alignment: .leading, spacing: 15) {
                 TextField("Title", text: $note.title, axis: .vertical)
                     .font(.title)
                     .lineLimit(2)
-                
+
                 TextEditor(text: $note.content)
                     .font(.title)
                     .scrollContentBackground(.hidden)
@@ -346,7 +346,7 @@ struct DetailView: View {
         .blur(radius: animateLayers ? 0 : 100)
         .opacity(animateLayers ? 1 : 0)
     }
-    
+
     /// Safe area value (increase bottom padding for tab bar)
     var safeArea: UIEdgeInsets {
         if let safeArea = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.safeAreaInsets {

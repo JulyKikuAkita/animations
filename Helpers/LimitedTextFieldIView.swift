@@ -22,7 +22,7 @@ struct LimitedTextFieldIView: View {
                         /// show keyboard
                         isKeyboardShowing = true
                     }
-                
+
                 TextField(hint, text: $value, axis: .vertical)
                     .focused($isKeyboardShowing)
                     .onChange(of: value, initial: true) { oldValue, newValue in // set text limit
@@ -41,14 +41,14 @@ struct LimitedTextFieldIView: View {
                 RoundedRectangle(cornerRadius: config.borderConfig.radius)
                     .stroke(progressColor.gradient, lineWidth: config.borderConfig.width)
             }
-            
+
             /// Progress bar / Text indicator
             HStack(alignment: .top, spacing: 12) {
                 if config.progressConfig.showsRing {
                     ZStack{
                         Circle()
                             .stroke(.ultraThinMaterial, lineWidth: 5)
-                        
+
                         Circle()
                             .trim(from: 0, to: progress)
                             .stroke(progressColor.gradient, lineWidth: 5)
@@ -56,7 +56,7 @@ struct LimitedTextFieldIView: View {
                     }
                     .frame(width: 20, height: 20)
                 }
-                
+
                 if config.progressConfig.showsText {
                     Text("\(value.count)/\(config.limit)")
                         .foregroundStyle(progressColor.gradient)
@@ -64,15 +64,15 @@ struct LimitedTextFieldIView: View {
             }
         }
     }
-    
+
     var progress: CGFloat {
         return max(min(CGFloat(value.count) / CGFloat(config.limit), 1),0)
     }
-    
+
     var progressColor: Color {
         return progress < 0.6 ? config.tint : progress == 1.0 ? .red : .orange
     }
-    
+
     struct Config {
         var limit: Int
         var tint: Color = .blue
@@ -81,14 +81,14 @@ struct LimitedTextFieldIView: View {
         var progressConfig: ProgressConfig = .init()
         var borderConfig: BorderConfig = .init()
     }
-    
+
     struct ProgressConfig {
         var showsRing: Bool = false
         var showsText: Bool = true
         var alignment: HorizontalAlignment = .trailing
 
     }
-    
+
     struct BorderConfig {
         var show: Bool = true
         var radius: CGFloat = 12

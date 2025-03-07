@@ -37,4 +37,3 @@ var text4 = "If the sanity check fails, the cascading merge will not proceed, th
 var text5 = "Workflow Name Matching: Ensure that the workflow name in the workflows array matches exactly the name defined in the first workflow."
 var text6 = "Permissions: Ensure that the repository has the necessary permissions for GitHub Actions to trigger workflows and perform required actions."
 var text7 = "Correct Event Types: Ensure that the workflow_run event is correctly set to trigger on completed workflows and the condition conclusion == 'success' is used correctly."
-

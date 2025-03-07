@@ -42,7 +42,7 @@ struct ChipsView<Content: View>: View {
     var body: some View {
         Group(subviews: content) { collection in
             let chunkedCollection = collection.chunkByWidth(maxWidth)
-            
+
             VStack(alignment: .center, spacing: 10) {
                 ForEach(chunkedCollection.indices, id: \.self) { index in
                     HStack(spacing: 10) {
@@ -64,7 +64,7 @@ fileprivate extension SubviewsCollection {
         var rowWidth: CGFloat = 0
         var rows: [[Subview]] = []
         let spacing: CGFloat = 10
-        
+
         for subview in self {
             let viewWidth = subview.containerValues.viewWidth + spacing
             rowWidth += viewWidth
@@ -76,13 +76,13 @@ fileprivate extension SubviewsCollection {
                 rowWidth = viewWidth
             }
         }
-        
+
         if !row.isEmpty {
             rows.append(row)
         }
         return rows
     }
-    
+
     func chunked(_ size: Int) -> [[Subview]] {
         return stride(from: 0, through: count, by: size).map { index in
             Array(self[index..<Swift.min(index + size, count)])

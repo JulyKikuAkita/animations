@@ -14,7 +14,7 @@ struct AppleMusicHomeView: View {
     /// Animation properties
     @State private var expandSheet: Bool = false
     @Namespace private var animation
-    
+
     var body: some View {
         TabView {
             ListenView()
@@ -27,7 +27,7 @@ struct AppleMusicHomeView: View {
             .toolbarBackground(.ultraThickMaterial, for: .tabBar)
             /// Hiding tab bar when sheet is expanded
             .toolbar(expandSheet ? .hidden : .visible, for: .tabBar)
-            
+
             SampleTab(AppleMusicTab.browse.title, AppleMusicTab.browse.rawValue)
             SampleTab(AppleMusicTab.radis.title, AppleMusicTab.radis.rawValue)
             SampleTab(AppleMusicTab.music.title, AppleMusicTab.music.rawValue)
@@ -46,7 +46,7 @@ struct AppleMusicHomeView: View {
             }
         }
     }
-    
+
     /// Custom listen now  view
     @ViewBuilder
     func ListenView() -> some View {
@@ -61,13 +61,13 @@ struct AppleMusicHomeView: View {
                     .padding()
                     .padding(.bottom, 100)
                 }
-               
+
             }
             .navigationTitle("Listen now")
         }
     }
-    
-    
+
+
     /// Custom bottom sheet
     @ViewBuilder
     func CustomBottomSheet() -> some View {
@@ -96,8 +96,8 @@ struct AppleMusicHomeView: View {
         })
         .offset(y: -AppleMusicConstant.defaultTabBarHeight)
     }
-    
-    
+
+
     @ViewBuilder
     func SampleTab(_ title: String, _ icon: String) -> some View {
         /// iOS bug of tab bar animation, it can be avoided by wrapping the view inside scrollview

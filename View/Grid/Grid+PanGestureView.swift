@@ -3,7 +3,7 @@
 //  animation
 //  iOS 18
 // Using UIKit pan gesture as SwiftUI gesture support still not perform well
-// 
+//
 import SwiftUI
 
 struct GridColorBlockDemoView: View {
@@ -29,7 +29,7 @@ struct GridColorBlockView: View {
                         .overlay(alignment: .trailing) {
                             Button(isSelectionEnabled ? "Cancel" : "Select") {
                                 isSelectionEnabled.toggle()
-                                
+
                                 if !isSelectionEnabled {
                                     properties = .init()
                                 }
@@ -38,7 +38,7 @@ struct GridColorBlockView: View {
                             .buttonStyle(.borderedProminent)
                             .buttonBorderShape(.capsule)
                         }
-                    
+
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 4)) {
                         ForEach($items) { $item in
                             ItemCardView($item)
@@ -71,7 +71,7 @@ struct GridColorBlockView: View {
                  if newValue != .none {
                      guard scrollProperties.timer == nil else { return }
                      scrollProperties.manualScrollOffset = scrollProperties.currentScrollOffset
-                     
+
                      scrollProperties.timer = Timer
                          .scheduledTimer(
                             withTimeInterval: 0.01,
@@ -80,13 +80,13 @@ struct GridColorBlockView: View {
                                 if newValue == .up {
                                     scrollProperties.manualScrollOffset += 3
                                 }
-                                
+
                                 if newValue == .down {
                                     scrollProperties.manualScrollOffset -= 3
                                 }
                                 scrollProperties.position.scrollTo(y: scrollProperties.manualScrollOffset)
                             })
-                     
+
                                 scrollProperties.timer?.fire()
                             } else {
                                 resetScrollTimer()
@@ -99,7 +99,7 @@ struct GridColorBlockView: View {
                         gesture.isEnabled = isSelectionEnabled
                     }
                     let state = gesture.state
-                    
+
                     if state == .began || state == .changed {
                         onGestureChange(gesture)
                     } else {
@@ -108,7 +108,7 @@ struct GridColorBlockView: View {
                 })
             )
     }
-    
+
     @ViewBuilder
     func ItemCardView(_ binding: Binding<ColorItem>) -> some View {
         let item = binding.wrappedValue
@@ -141,17 +141,17 @@ struct GridColorBlockView: View {
                                 } else {
                                     properties.selectedIndices.append(index)
                                 }
-                                
+
                                 properties.previousIndices = properties.selectedIndices
                             }
                             .transition(.identity)
                     }
                 }
-            
+
         }
-       
+
     }
-    
+
     @ViewBuilder
     func ScrollDetectionRegion(_ isTop: Bool = true) -> some View {
         Rectangle()
@@ -168,7 +168,7 @@ struct GridColorBlockView: View {
                 }
             }
     }
-    
+
     private func onGestureChange(_ gesture: UIPanGestureRecognizer) {
         let position = gesture.location(in: gesture.view)
         if let fallingIndex = items.firstIndex(where: { $0.location.contains(position) }) {
@@ -177,9 +177,9 @@ struct GridColorBlockView: View {
                 properties.isDeleteDrag = properties.previousIndices
                     .contains(fallingIndex)
             }
-            
+
             properties.end = fallingIndex
-            
+
             if let start = properties.start, let end = properties.end {
                 let indices = (start > end ? end...start : start...end).compactMap({ $0 })
                 if properties.isDeleteDrag {
@@ -193,28 +193,28 @@ struct GridColorBlockView: View {
 
                 }
             }
-            
+
             scrollProperties.direction = scrollProperties.topRegion
                 .contains(position) ? .down :  scrollProperties.bottomRegion
                 .contains(position) ? .up : .none
         }
     }
-    
+
     private func onGestureEnded(_ gesture: UIPanGestureRecognizer) {
         for index in properties.toBeDeletedIndices {
             properties.selectedIndices.removeAll(where: { $0 == index })
         }
         properties.toBeDeletedIndices = []
-        
+
         properties.previousIndices = properties.selectedIndices
         properties.start = nil
         properties.end = nil
         properties.isDeleteDrag = false
-        
+
         resetScrollTimer()
     }
 
-    
+
     private func createRandomColor() {
         guard items.isEmpty else { return }
         let colors: [Color] = [.red, .blue, .purple, .yellow, .black, .indigo, .cyan, .brown, .mint, .orange]
@@ -224,14 +224,14 @@ struct GridColorBlockView: View {
             items.append(contentsOf: sampleItems)
         }
     }
-    
+
     private func resetScrollTimer() {
         scrollProperties.manualScrollOffset = 0
         scrollProperties.timer?.invalidate()
         scrollProperties.timer = nil
         scrollProperties.direction = .none
     }
-    
+
     struct SelectionProperties {
         var start: Int?
         var end: Int?
@@ -240,7 +240,7 @@ struct GridColorBlockView: View {
         var toBeDeletedIndices: [Int] = []
         var isDeleteDrag: Bool = false
     }
-    
+
     struct ScrollProperties {
         var position: ScrollPosition = .init()
         var currentScrollOffset: CGFloat = 0
@@ -251,7 +251,7 @@ struct GridColorBlockView: View {
         var topRegion: CGRect = .zero
         var bottomRegion: CGRect = .zero
     }
-    
+
     enum ScrollDirection {
         case up, down, none
     }
@@ -260,16 +260,16 @@ struct GridColorBlockView: View {
 /// Custom UIKit Gesture -> move to Gesture + PanGesture file
 //struct PanGesture: UIGestureRecognizerRepresentable {
 //    var handle: (UIPanGestureRecognizer) -> ()
-//    
+//
 //    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
 //        return UIPanGestureRecognizer()
 //    }
-//    
+//
 //    func updateUIGestureRecognizer(
 //        _ recognizer: UIPanGestureRecognizer,
 //        context: Context
 //    ) {}
-//    
+//
 //    func handleUIGestureRecognizerAction(
 //        _ recognizer: UIPanGestureRecognizer,
 //        context: Context

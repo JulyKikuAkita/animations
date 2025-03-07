@@ -10,18 +10,18 @@ class UICoordinator {
     var items: [PhotoItem] = sampleItems.compactMap({
         PhotoItem(title: $0.title, image: $0.image, previewImage: $0.image)
     })
-    
+
     /// Animation properties
     var selectedItem: PhotoItem?
     var animateView: Bool = false
     var showDetailView: Bool = false
     /// Scroll Positions
     var detailScrollPosition: String? // matches photoItem.id type
-    var detailIndicatorPosition: String? 
+    var detailIndicatorPosition: String?
     /// Gesture Properties
     var offset: CGSize = .zero
     var dragProgress: CGFloat = 0
-    
+
     func didDetailPageChanged() {
         if let updatedItem = items.first(where: { $0.id == detailScrollPosition }) {
             selectedItem = updatedItem
@@ -31,7 +31,7 @@ class UICoordinator {
             }
         }
     }
-    
+
     func didDetailIndicatorChanged() {
         if let updatedItem = items.first(where: { $0.id == detailIndicatorPosition }) {
             selectedItem = updatedItem
@@ -39,7 +39,7 @@ class UICoordinator {
             detailScrollPosition = updatedItem.id
         }
     }
-    
+
     func toggleView(show: Bool) {
         if show {
             detailScrollPosition = selectedItem?.id // trigger the detail scrollView to scroll to the selected photo item
@@ -59,7 +59,7 @@ class UICoordinator {
             }
         }
     }
-    
+
     func resetAnimationProperties() {
         selectedItem = nil
         detailScrollPosition = nil

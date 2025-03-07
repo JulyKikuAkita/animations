@@ -41,7 +41,7 @@ struct DynamicSheetView: View {
     var body: some View {
         VStack {
             Spacer()
-            
+
             Button("Show Sheet") {
                 showSheet.toggle()
             }
@@ -64,7 +64,7 @@ struct DynamicSheetView: View {
                             HStack(alignment: .top, spacing: 0) {
                                 OnBoardingView(size)
                                     .id("First Page")
-                                
+
                                 LoginView(size)
                                     .id("Second Page")
                             }
@@ -97,7 +97,7 @@ struct DynamicSheetView: View {
                                         /// Next page text
                                         HStack(spacing: 8) {
                                             Text(hasAccount ? "Login" : "Get Started")
-                                            
+
                                             Image(systemName: "arrow.right")
                                         }
                                         .fontWeight(.semibold)
@@ -117,7 +117,7 @@ struct DynamicSheetView: View {
                             .offset(y: sheetScrollProgress * -120) /// Sec view height 220 - first view height 100
                         }
                     })
-                   
+
                 })
                 /// Custom Presentation update
                 .presentationCornerRadius(30)
@@ -136,7 +136,7 @@ struct DynamicSheetView: View {
                 })
             })
     }
-    
+
     /// First View for Sheet
     @ViewBuilder
     func OnBoardingView(_ size: CGSize) -> some View {
@@ -144,7 +144,7 @@ struct DynamicSheetView: View {
             Text("Know Everything\nabout the Abyss")
                 .font(.largeTitle.bold())
                 .lineLimit(2)
-            
+
             /// Custom Attribute Subtitle
             Text(attributeSubTitle)
                 .font(.callout)
@@ -162,7 +162,7 @@ struct DynamicSheetView: View {
             sheetHeight = height
         }
     }
-    
+
     var attributeSubTitle: AttributedString {
         let string = "Start now and learn more about the Abyss instantly."
         var attString = AttributedString(stringLiteral: string)
@@ -172,7 +172,7 @@ struct DynamicSheetView: View {
         }
         return attString
     }
-    
+
     /// Second View for Sheet
     @ViewBuilder
     func LoginView(_ size: CGSize) -> some View {
@@ -180,10 +180,10 @@ struct DynamicSheetView: View {
             Text("Descend to the Abyss")
                 .minimumScaleFactor(0.9)
                 .font(.largeTitle.bold())
-            
+
             CustomTextField(hint: "Email address", text: $emailAddress, icon: "envelope")
                 .padding(.top, 20)
-            
+
             CustomTextField(
                 hint: "*****",
                 text: $password,
@@ -203,7 +203,7 @@ struct DynamicSheetView: View {
                         HStack(spacing: 4) {
                             Text("Already have an account?")
                                 .foregroundStyle(.gray)
-                            
+
                             Button("Login") {
                                 withAnimation(.snappy) {
                                     hasAccount.toggle()
@@ -215,7 +215,7 @@ struct DynamicSheetView: View {
                         HStack(spacing: 4) {
                             Text("Don't have an account?")
                                 .foregroundStyle(.gray)
-                            
+
                             Button("Create an account") {
                                 withAnimation(.snappy) {
                                     hasAccount.toggle()
@@ -228,7 +228,7 @@ struct DynamicSheetView: View {
                 .font(.callout)
                 .textScale(.secondary)
                 .padding(.bottom, hasAccount ? 0 : 15)
-                
+
                 if !hasAccount {
                     Text("By signing up, you're agreeing to out **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)**")
                         .font(.caption)
@@ -286,7 +286,7 @@ private struct CustomTextField: View {
             } else {
                 TextField(hint, text: $text)
             }
-            
+
             Divider()
         }
         .overlay(alignment: .trailing) {

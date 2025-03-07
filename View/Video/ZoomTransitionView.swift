@@ -11,11 +11,11 @@ struct ZoomTransitionDemoView: View {
         @Bindable var bindings = sharedModel
         GeometryReader {
             let screenSize: CGSize = $0.size
-            
+
             NavigationStack {
                 VStack(spacing: 0) {
                     HeaderView()
-                    
+
                     ScrollView(.vertical) {
                         LazyVGrid(columns: Array(repeating: GridItem(spacing: 10), count: 2),
                             spacing: 10) {
@@ -43,23 +43,23 @@ struct ZoomTransitionDemoView: View {
                 }
             }
         }
-        
+
     }
-    
+
     @ViewBuilder
     private func HeaderView() -> some View {
         HStack {
             Button {
-                
+
             } label: {
                 Image(systemName: "magnifyingglass")
                     .font(.title3)
             }
-            
+
             Spacer(minLength: 0)
-            
+
             Button {
-                
+
             } label: {
                 Image(systemName: "person.fill")
                     .font(.title3)
@@ -82,7 +82,7 @@ struct VideoCardView: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             if let thumbnail = video.thumbnail {
                 Image(uiImage: thumbnail)
                     .resizable()

@@ -24,11 +24,11 @@ struct TravelCardView: View {
                             .font(.title)
                             .foregroundStyle(.blue)
                     })
-                    
+
                     HStack(spacing: 12) {
                         Image(systemName: "magnifyingglass")
                             .foregroundStyle(.gray)
-                        
+
                         TextField("Search", text: $searchText)
 
                     }
@@ -36,12 +36,12 @@ struct TravelCardView: View {
                 .padding(.horizontal, 15)
                 .padding(.vertical, 10)
                 .background(.ultraThinMaterial, in: .capsule)
-                
+
                 Text("Where do you want to \ntravel?")
                     .font(.largeTitle.bold())
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                     .padding(.top, 10)
-                
+
                 /// Parallax Carousel
                 GeometryReader { geometry in
                     let minX = geometry.frame(in: .scrollView).minX - 30.0
@@ -58,7 +58,7 @@ struct TravelCardView: View {
         }
         .scrollIndicators(.hidden)
     }
-    
+
     @ViewBuilder
     func ParallaxCarousel18View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
@@ -89,7 +89,7 @@ struct TravelCardView: View {
         .safeAreaPadding(.horizontal, 15)
         .scrollIndicators(.hidden)
     }
-    
+
     @ViewBuilder
     func ParallaxCarousel17View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
@@ -101,7 +101,7 @@ struct TravelCardView: View {
                         let minX = proxy.frame(in: .scrollView).minX - 30.0
                         /// Simple Parallax effect (2)
 //                                    let minX = min((proxy.frame(in: .scrollView).minX - 30.0), proxy.size.width * 1.4)
-                        
+
                         Image(card.image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -135,7 +135,7 @@ struct TravelCardView: View {
         .scrollTargetBehavior(.viewAligned) // iOS 17 new scroll api
         .scrollIndicators(.hidden)
     }
-    
+
     @ViewBuilder
     func OverlayView(_ card: Card) -> some View {
         ZStack(alignment: .bottomLeading, content: {
@@ -149,13 +149,13 @@ struct TravelCardView: View {
                 .black.opacity(0.5),
                 .black
             ], startPoint: .top, endPoint: .bottom)
-            
+
             VStack(alignment: .leading, spacing: 4, content: {
                 Text(card.title)
                     .font(.title2)
                     .fontWeight(.black)
                     .foregroundStyle(.white)
-                
+
                 Text(card.subTitle)
                     .font(.callout)
                     .foregroundStyle(.white.opacity(0.8))

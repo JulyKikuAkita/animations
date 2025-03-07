@@ -18,7 +18,7 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
     @State private var activeTabID: Subview.ID?
     @State private var transitionSource: Int = 0
     @Namespace private var animation
-    
+
     var body: some View {
         Group(subviews: content) { collection in
             /// iOS 18 subviews api to retrieve SubView collection from the given view content
@@ -29,12 +29,12 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
                     let index = collection.index(item.id)
                     GeometryReader {
                         let size = $0.size
-                        
+
                         item
                             .aspectRatio(contentMode: .fill)
                             .frame(width: size.width, height: size.height)
                             .clipShape(.rect(cornerRadius: config.cornerRadius))
-                        
+
                         if collection.prefix(4).last?.id == item.id && remainingCount > 0 {
                             RoundedRectangle(cornerRadius: config.cornerRadius)
                                 .fill(.black.opacity(0.35))
@@ -94,7 +94,7 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
             }
         }
     }
-    
+
     private func sendUpdate(_ collection: SubviewsCollection, id: Subview.ID?) {
         if let viewID = collection.first(where: { $0.id == id})?.containerValues.activeViewID {
             updates(isPresented, viewID)

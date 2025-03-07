@@ -13,7 +13,7 @@ struct FlipClockTextEffectDemoView: View {
         NavigationStack {
             VStack {
                 timerCountDownView()
-                
+
                 Button("Update") {
                     count += 1
                 }
@@ -30,7 +30,7 @@ struct FlipClockTextEffectDemoView: View {
             .padding()
         }
     }
-    
+
     @ViewBuilder
     func timerCountDownView() -> some View {
         HStack(spacing: 4) {
@@ -42,7 +42,7 @@ struct FlipClockTextEffectDemoView: View {
                 foreground: .white,
                 background: .brown
             )
-            
+
             FlipClockTextEffectView(
                 value: .constant(seconds % 10),
                 size: CGSize(width: 100, height: 150),
@@ -68,7 +68,7 @@ struct FlipClockTextEffectView: View {
     var foreground: Color
     var background: Color
     var animationDuration: CGFloat = 0.8
-    
+
     /// View Properties
     @State private var nextValue: Int = 0
     @State private var currentValue: Int = 0
@@ -92,7 +92,7 @@ struct FlipClockTextEffectView: View {
             }
             .clipped()
             .frame(maxHeight: .infinity, alignment: .top)
-            
+
             UnevenRoundedRectangle(
                 topLeadingRadius: cornerRadius,
                 bottomLeadingRadius: 0,
@@ -121,7 +121,7 @@ struct FlipClockTextEffectView: View {
             )
             .frame(maxHeight: .infinity, alignment: .top)
             .zIndex(10)
-            
+
             UnevenRoundedRectangle(
                 topLeadingRadius: 0,
                 bottomLeadingRadius: cornerRadius,
@@ -142,14 +142,14 @@ struct FlipClockTextEffectView: View {
         .onChange(of: value, initial: true) { oldValue, newValue in
             currentValue = oldValue
             nextValue = newValue
-            
+
             guard rotation == 0 else { /// prevent interrupt flip animation
                 currentValue = newValue
                 return
             }
-            
+
             guard oldValue != newValue else { return }
-            
+
             withAnimation(.easeInOut(duration: animationDuration), completionCriteria: .logicallyComplete) {
                 rotation = -180
             } completion: { /// update value and rotation when the flip animation finishes
@@ -158,7 +158,7 @@ struct FlipClockTextEffectView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func TextView(_ value: Int) -> some View  {
         Text("\(value)")
@@ -182,7 +182,7 @@ fileprivate struct RotationModifier: ViewModifier, Animatable {
         get { rotation }
         set { rotation = newValue }
     }
-    
+
     func body(content: Content) -> some View {
         content
             .overlay(alignment: .top) {
@@ -206,7 +206,7 @@ fileprivate struct RotationModifier: ViewModifier, Animatable {
                 .drawingGroup()
             }
     }
-  
+
 }
 
 #Preview {

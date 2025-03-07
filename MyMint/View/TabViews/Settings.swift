@@ -19,10 +19,10 @@ struct Settings: View {
                 Section("User Name") {
                     TextField("Nanachi", text: $userName)
                 }
-                
+
                 Section("App Lock") {
                     Toggle("Enable App Lock", isOn: $isAppLockEnabled)
-                    
+
                     if isAppLockEnabled {
                         Toggle("Lock When App Goes Background", isOn: $lockWhenAppGoesBackground)
 

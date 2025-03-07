@@ -15,7 +15,7 @@ struct ExpandedBottomSheet: View {
         GeometryReader {
             let size = $0.size
             let safeArea = $0.safeAreaInsets
-            
+
             ZStack {
                 Rectangle()
                     .fill(.ultraThickMaterial)
@@ -31,7 +31,7 @@ struct ExpandedBottomSheet: View {
                             .opacity(animateContent ? 0 : 1)
                     }
                     .matchedGeometryEffect(id: "BGVIEW", in: animation)
-                
+
                 VStack(spacing: 15) {
                     /// Grab Indicator
                     Capsule()
@@ -40,11 +40,11 @@ struct ExpandedBottomSheet: View {
                         .opacity(animateContent ? 1 : 0)
                         /// Matching with slide animation
                         .offset(y: animateContent ? 0 : size.height)
-                    
+
                     /// Artwork hero view
                     GeometryReader {
                         let size = $0.size
-                        
+
                         Image("fox")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -56,13 +56,13 @@ struct ExpandedBottomSheet: View {
                     .frame(height: size.width - 50)
                     /// For smaller devices the padding will be 10 and for larger devices the padding will be 30
                     .padding(.vertical, size.height < 700 ? 10 : 30)
-                    
+
                     /// Player view
                     PlayerView(size)
                         /// Moving it from bottom
                         .offset(y: animateContent ? 0 : size.height)
-                    
-                    
+
+
                 }
                 .padding(.top, safeArea.top + (safeArea.bottom == 0 ? 10 : 0))
                 .padding(.bottom, safeArea.bottom  == 0 ? 10 : safeArea.bottom)
@@ -96,14 +96,14 @@ struct ExpandedBottomSheet: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func PlayerView(_ mainSize: CGSize) -> some View {
         GeometryReader {
             let size = $0.size
             /// Dynamic spacing using available height
             let spacing = size.height * 0.04
-            
+
             /// Sizing it for more compact look
             VStack(spacing: spacing) {
                 VStack(spacing: spacing) {
@@ -113,14 +113,14 @@ struct ExpandedBottomSheet: View {
                                 .foregroundColor(.white)
                                 .font(.title3)
                                 .fontWeight(.semibold)
-                            
+
                             Text("Mr Fox")
                                 .foregroundColor(.gray)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        
+
                         Button {
-                            
+
                         } label: {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.white)
@@ -132,52 +132,52 @@ struct ExpandedBottomSheet: View {
                                 }
                         }
                     }
-                    
+
                     /// Timing indicator
                     Capsule()
                         .fill(.ultraThinMaterial)
                         .environment(\.colorScheme, .light)
                         .frame(height: 5)
                         .padding(.top, spacing)
-                    
+
                     /// Timing label view
                     HStack {
                         Text("0:00")
                             .font(.caption)
                             .foregroundColor(.gray)
-                        
+
                         Spacer(minLength: 0)
-                        
+
                         Text("3:33")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
-                    
+
                 }
                 /// Moving it to top
                 .frame(height: size.height / 2.5, alignment: .top)
-                
+
                 /// Playback controls
                 HStack(spacing: size.width * 0.18) {
                     Button {
-                        
+
                     } label: {
                         Image(systemName: "backward.fill")
                         /// dynamic sizing for smaller to larger iPhones
                             .font(size.height < 300 ? .title3 : .title)
                     }
-                    
+
                     /// making play/pause little bigger
                     Button {
-                        
+
                     } label: {
                         Image(systemName: "pause.fill")
                         /// dynamic sizing for smaller to larger iPhones
                             .font(size.height < 300 ? .largeTitle : .system(size: 50))
                     }
-                    
+
                     Button {
-                        
+
                     } label: {
                         Image(systemName: "forward.fill")
                         /// dynamic sizing for smaller to larger iPhones
@@ -186,45 +186,45 @@ struct ExpandedBottomSheet: View {
                 }
                 .foregroundColor(.white)
                 .frame(maxHeight: .infinity)
-                
+
                 /// Volume & other controls
                 VStack(spacing: spacing) {
                     HStack(spacing: 15) {
                         Image(systemName: "speaker.fill")
                             .foregroundColor(.gray)
-                        
+
                         Capsule()
                             .fill(.ultraThinMaterial)
                             .environment(\.colorScheme, .light)
                             .frame(height: 5)
-                        
+
                         Image(systemName: "speaker.wave.3.fill")
                             .foregroundColor(.gray)
                     }
-                    
+
                     HStack(alignment: .top, spacing: size.width * 0.18) {
                         Button {
-                            
+
                         } label: {
                             Image(systemName: "quote.bubble")
                                 .font(.title2)
                         }
-                        
+
                         VStack(spacing: 6) {
                             Button {
-                                
+
                             } label: {
                                 Image(systemName: "airpods.gen3")
                                     .font(.title2)
                             }
-                            
+
                             Text("Nanachi's Airpods")
                                 .font(.caption)
                         }
-                        
-                        
+
+
                         Button {
-                            
+
                         } label: {
                             Image(systemName: "list.bullet")
                                 .font(.title2)
@@ -253,7 +253,7 @@ extension View {
             if let cornerRadius = screen.value(forKey: key) as? CGFloat {
                 return cornerRadius
             }
-            
+
             return 0
         }
         return 0

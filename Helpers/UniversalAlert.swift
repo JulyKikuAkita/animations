@@ -13,7 +13,7 @@ struct AlertConfig {
     /// Properties for animation
     var show: Bool = true
     var showView: Bool = false
-        
+
     init(enabledBackgroundBlur: Bool = true,
          disableOutsideTap: Bool = true,
          transitionType: TransitionType = .slide,
@@ -29,12 +29,12 @@ struct AlertConfig {
         case slide
         case opacity
     }
-    
+
     /// Alert Present/Dismiss Methods
     mutating func present() {
         show = true
     }
-    
+
     mutating func dismiss() {
         show = false
     }
@@ -66,7 +66,7 @@ struct AlertView<Content: View>: View {
                 }
             }
             .opacity(showView ? 1: 0)
-            
+
             if showView && config.transitionType == .slide {
                 content()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -121,7 +121,7 @@ struct AlertModifer<AlertContent: View>: ViewModifier {
                         withAnimation(.smooth(duration:0.35, extraBounce: 0)) {
                             config.showView = false
                         }
-                        
+
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             if sceneDelegate.alerts.isEmpty {
                                 alertWindow.rootViewController = nil
@@ -134,13 +134,13 @@ struct AlertModifer<AlertContent: View>: ViewModifier {
                                     alertWindow.rootViewController?.view.subviews.forEach({ view in
                                         view.removeFromSuperview()
                                     })
-                                    
+
                                     alertWindow.rootViewController?.view.addSubview(first)
                                     /// Removing the added alert from the array
                                     sceneDelegate.alerts.removeFirst()
                                 }
                             }
-                           
+
                         }
                     } else {
                         print("View is not Appeared")
@@ -159,7 +159,7 @@ struct CustomAlertDemoView: View {
     @State private var alert2: AlertConfig = .init(slideEdge: .leading)
     @State private var alert3: AlertConfig = .init(disableOutsideTap: false, slideEdge: .trailing)
 
-    
+
     var body: some View {
         Button("Show alert") {
             alert.present()

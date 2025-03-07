@@ -14,7 +14,7 @@ struct ScrollToHideHeaderView: View {
         GeometryReader {
             let safeArea = $0.safeAreaInsets
             let headerHeight = 60 + safeArea.top
-            
+
             ScrollView(.vertical) {
                 LazyVStack(spacing: 15) {
                     ForEach(1...50, id:\.self) { _ in
@@ -42,7 +42,7 @@ struct ScrollToHideHeaderView: View {
                     max(newValue - lastNatureOffset, 0),
                     headerHeight)
                 self.isScrollingUp = isScrollingUp
-                
+
                 naturalScrollOffset = newValue
             }
             .onScrollPhaseChange({ oldPhase, newPhase, context in
@@ -67,7 +67,7 @@ struct ScrollToHideHeaderView: View {
             .ignoresSafeArea(.container, edges: .top)
         }
     }
-    
+
     @ViewBuilder
     func HeaderView() -> some View {
         HStack(spacing: 20) {
@@ -75,11 +75,11 @@ struct ScrollToHideHeaderView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 25)
-            
+
             Spacer(minLength: 0)
-            
+
             Button("", systemImage: "airplayvideo") {}
-            
+
             Button("", systemImage: "bell") {}
 
             Button("", systemImage: "magnifyingglass") {}
@@ -88,29 +88,29 @@ struct ScrollToHideHeaderView: View {
         .foregroundStyle(Color.primary)
         .padding(.horizontal, 15)
     }
-    
+
     @ViewBuilder
     func DummyCardView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
             RoundedRectangle(cornerRadius: 6)
                 .frame(minHeight: 220)
-            
+
             HStack(spacing: 10) {
                 Circle()
                     .frame(width: 45, height: 45)
-                
+
                 VStack(alignment: .leading, spacing: 4) {
                     Rectangle()
                         .frame(height: 10)
-                    
+
                     HStack(spacing: 10) {
                         Rectangle()
                             .frame(width: 100)
-                        
+
                         Rectangle()
                             .frame(width: 80)
-                        
-                        
+
+
                         Rectangle()
                             .frame(width: 60)
                     }

@@ -9,7 +9,7 @@ enum TabState: String, CaseIterable {
     case search = "Search"
     case notifications = "Notifications"
     case profile = "Profile"
-    
+
     var symbolImage: String {
         switch self {
         case .home: "house"
@@ -30,28 +30,28 @@ struct AdaptiveLayoutView: View {
     @State private var progress: CGFloat = .zero
     /// Navigation Path
     @State private var navigationPath: NavigationPath = .init()
-    
+
     var body: some View {
         AdaptiveView { size, isLandscape in
             let sideBarWidth: CGFloat = isLandscape ? 220 : 250
             let layout = isLandscape ? AnyLayout(
                 HStackLayout(spacing: 0)
             ) : AnyLayout(ZStackLayout(alignment: .leading))
-            
+
             NavigationStack(path: $navigationPath) {
                 layout {
                     SideBarView(path: $navigationPath) {
-                        toggleSideBar() 
+                        toggleSideBar()
                     }
                     .frame(width: sideBarWidth)
                     .offset(x: isLandscape ? 0 : -sideBarWidth)
                     .offset(x: isLandscape ? 0 : offset)
-                    
+
                     TabView(selection: $activeTab) {
                         Tab(TabState.home.rawValue, systemImage: TabState.home.symbolImage, value: .home) {
                             Text("home")
                         }
-                        
+
                         Tab(
                             TabState.search.rawValue,
                             systemImage: TabState.search.symbolImage,
@@ -59,7 +59,7 @@ struct AdaptiveLayoutView: View {
                         ) {
                             Text("Search")
                         }
-                        
+
                         Tab(
                             TabState.notifications.rawValue,
                             systemImage: TabState.notifications.symbolImage,
@@ -67,7 +67,7 @@ struct AdaptiveLayoutView: View {
                         ) {
                             Text("Notifications")
                         }
-                        
+
                         Tab(
                             TabState.profile.rawValue,
                             systemImage: TabState.profile.symbolImage,
@@ -95,13 +95,13 @@ struct AdaptiveLayoutView: View {
                         let translation = gesture.translation(
                             in: gesture.view
                         ).x + lastDragOffset
-                        
+
                         let velocity = gesture.velocity(in: gesture.view).x / 3
-                        
+
                         if state == .began || state == .changed {
                             /// onChanged
                             offset = max(min(translation, sideBarWidth), 0)
-                            
+
                             /// storing drag progress for fading tab view when dragging effect
                             progress = max(min(offset / sideBarWidth, 1), 0)
                         } else {
@@ -116,7 +116,7 @@ struct AdaptiveLayoutView: View {
                                     progress = 0
                                 }
                             }
-                            
+
                             /// Saving last drag offset
                             lastDragOffset = offset
                         }
@@ -159,7 +159,7 @@ struct AdaptiveLayoutView: View {
             }
         }
     }
-    
+
     func toggleSideBar() {
         withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
             progress = 0
@@ -180,14 +180,14 @@ fileprivate struct CustomGesture:UIGestureRecognizerRepresentable {
         let gesture = UIPanGestureRecognizer()
         return gesture
     }
-    
+
     func updateUIGestureRecognizer(
         _ recognizer: UIPanGestureRecognizer,
         context: Context
     ) {
         recognizer.isEnabled = isEnabled
     }
-    
+
     func handleUIGestureRecognizerAction(
         _ recognizer: UIPanGestureRecognizer,
         context: Context

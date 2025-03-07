@@ -10,7 +10,7 @@ enum Tab_iOS17: String, CaseIterable {
     case apps = "square.3.layers.3d"
     case notifications = "bell.and.waves.left.and.right"
     case profile = "person.2.crop.square.stack.fill"
-    
+
     var title: String {
         switch self {
         case.photos:
@@ -25,7 +25,7 @@ enum Tab_iOS17: String, CaseIterable {
             return "Profile"
         }
     }
-    
+
     /// for  SwiftUI TabView Offset Reader - Scrollable Tabs
     var color: Color {
         switch self {
@@ -41,7 +41,7 @@ enum Tab_iOS17: String, CaseIterable {
                 .cyan
         }
     }
-    
+
     /// DraggableTabbariOS18DemoView
     var index: Int {
         Self.allCases.firstIndex(of: self) ?? 0
@@ -61,7 +61,7 @@ enum VideoTab: String, CaseIterable {
     case progress = "Progress"
     case carousel = "Carousel"
     case profile = "Profile"
-    
+
     var symbol: String {
         switch self {
         case.home:
@@ -76,7 +76,7 @@ enum VideoTab: String, CaseIterable {
             return "person.2.crop.square.stack.fill"
         }
     }
-    
+
     var index: Int {
         return VideoTab.allCases.firstIndex(of: self) ?? 0
     }
@@ -89,7 +89,7 @@ enum AppleMusicTab: String, CaseIterable {
     case radis = "dot.radiowaves.left.and.right"
     case music = "play.square.stack"
     case search = "magnifyingglass"
-    
+
     var title: String {
         switch self {
         case .listenNow:
@@ -118,11 +118,11 @@ struct TabModel: Identifiable {
     private(set) var id: HorizonTab
     var size: CGSize = .zero
     var minX: CGFloat = .zero
-    
+
     var idInt: Int = 0
     var symbolImage: String = ""
     var rect: CGRect = .zero
-    
+
     enum HorizonTab: String, CaseIterable {
         case research = "Research"
         case development = "Development"
