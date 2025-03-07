@@ -10,13 +10,13 @@ extension View {
         self
             .frame(maxWidth: .infinity, alignment: alignment)
     }
-    
+
     @ViewBuilder
     func vSpacing(_ alignment: Alignment) -> some View {
         self
             .frame(maxHeight: .infinity, alignment: alignment)
     }
-    
+
     @ViewBuilder
     func loadingScreen(status: Binding<Bool>) -> some View {
         self
@@ -25,7 +25,7 @@ extension View {
                     Rectangle()
                         .fill(.ultraThinMaterial)
                         .ignoresSafeArea()
-                    
+
                     ProgressView()
                         .frame(width: 40, height: 40)
                         .background(.bar, in: .rect(cornerRadius: 10))
@@ -34,7 +34,7 @@ extension View {
                 .allowsHitTesting(status.wrappedValue)
         }
     }
-    
+
     var snappy: Animation {
         .snappy(duration: 0.25, extraBounce: 0)
     }

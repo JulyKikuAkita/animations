@@ -15,7 +15,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 15) {
                 HeaderView()
-                
+
                 CarouselView()
                     /// placing at the lowest level of all views
                     .zIndex(-1)
@@ -38,39 +38,39 @@ struct ImageWithAmbientBackgroundDemoView: View {
             scrollOffsetY = newValue.contentOffset.y + newValue.contentInsets.top
         }
     }
-    
+
     @ViewBuilder
     func HeaderView() -> some View {
         HStack {
             Image(systemName: "xbox.logo")
                 .font(.system(size: 35))
-            
+
             VStack(alignment: .leading, spacing: 6) {
                 Text("Xbox")
                     .font(.callout)
                     .fontWeight(.semibold)
-                
+
                 HStack(spacing: 6) {
                     Image(systemName: "z.circle.fill")
-                    
+
                     Text("87,777")
                         .font(.caption)
                 }
             }
-            
+
             Spacer(minLength: 0)
-            
+
             Image(systemName: "square.and.arrow.up.circle.fill")
                 .font(.largeTitle)
                 .foregroundStyle(.white, .fill)
-            
+
             Image(systemName: "bell.circle.fill")
                 .font(.largeTitle)
                 .foregroundStyle(.white, .fill)
         }
         .padding(.bottom, 15)
     }
-    
+
     @ViewBuilder
     func CarouselView() -> some View {
         let spacing: CGFloat = 10
@@ -96,19 +96,19 @@ struct ImageWithAmbientBackgroundDemoView: View {
         .onScrollGeometryChange(for: CGFloat.self) {
             let offsetX = $0.contentOffset.x + $0.contentInsets.leading
             let width = $0.containerSize.width + spacing
-            
+
             return offsetX / width
         } action: { oldValue, newValue in
             let maxValue = CGFloat(images.count - 1)
             scrollProgressX = min(max(newValue, 0), maxValue)
         }
     }
-    
+
     @ViewBuilder
     func BackdropCarouselView() -> some View {
         GeometryReader {
             let size = $0.size
-            
+
             ZStack {
                 ForEach(images.reversed()) { model in
                     let index = CGFloat(images.firstIndex(where: { $0.id == model.id }) ?? 0) + 1

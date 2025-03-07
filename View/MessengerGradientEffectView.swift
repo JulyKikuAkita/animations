@@ -44,7 +44,7 @@ struct MessageCardView: View {
                         let rect = $0.frame(in: .global)
                         let screenSize = screenProxy.size
                         let safeArea = screenProxy.safeAreaInsets
-                        
+
                         Rectangle()
                             .fill(.linearGradient(colors: [
                                     .pink,
@@ -78,7 +78,7 @@ struct MessageCardView: View {
                 maxWidth: .infinity,
                 alignment: message.isReply ? .leading : .trailing
             )
-        
+
     }
 }
 

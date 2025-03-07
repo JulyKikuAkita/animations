@@ -18,7 +18,7 @@ struct HeroWrapper<Content: View>: View {
             }
             .environmentObject(model)
     }
-    
+
     /// Adding overlay window
     func addOverlayWindow() {
         for scene in UIApplication.shared.connectedScenes {
@@ -28,16 +28,16 @@ struct HeroWrapper<Content: View>: View {
                 window.backgroundColor = .clear
                 window.isUserInteractionEnabled = false
                 window.isHidden = false
-                
+
                 let rootController = UIHostingController(rootView: HeroLayerView().environmentObject(model))
                 rootController.view.frame = windowScene.screen.bounds
                 rootController.view.backgroundColor = .clear
                 window.rootViewController = rootController
-                
+
                 self.overlayWindow = window
             }
         }
-        
+
         if overlayWindow == nil {
             print("No window scene found")
         }
@@ -58,21 +58,21 @@ struct SourceView<Content: View>: View {
                 return [:]
             })
             .onPreferenceChange(AnchorKey.self, perform: { value in
-                if let index, 
+                if let index,
                     model.info[index].isActive,
                     model.info[index].sourceAnchor == nil {
                     model.info[index].sourceAnchor = value[id]
                 }
             })
     }
-    
+
     var index: Int? {
         if let index = model.info.firstIndex(where: { $0.infoID == id }) {
             return index
         }
         return nil
     }
-    
+
     var opacity: CGFloat {
         if let index {
             return model.info[index].isActive ? 0 : 1
@@ -101,14 +101,14 @@ struct DestinationView<Content: View>: View {
                 }
             })
     }
-    
+
     var index: Int? {
         if let index = model.info.firstIndex(where: { $0.infoID == id }) {
             return index
         }
         return nil
     }
-    
+
     var opacity: CGFloat {
         if let index {
             return model.info[index].isActive ? (model.info[index].hideView ? 1: 0) : 0
@@ -163,7 +163,7 @@ fileprivate struct HeroLayerViewModifier<Layer: View>: ViewModifier {
                     model.info[index].sCornerRadius = sourceCornerRadius
                     model.info[index].dCornerRadius = destinationCornerRadius
                     model.info[index].completion = completion
-                    
+
                     if newValue {
                         /// delay for desintation view to loaded with anchor vlaues
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
@@ -200,7 +200,7 @@ fileprivate struct HeroInfo: Identifiable {
     var sCornerRadius: CGFloat = 0
     var dCornerRadius: CGFloat = 0
     var completion: (Bool) -> () = { _ in }
-    
+
     init(id: String) {
         self.infoID = id
     }
@@ -241,13 +241,13 @@ fileprivate struct HeroLayerView: View {
                             width: animateView ? dRect.size.width : sRect.size.width,
                             height: animateView ? dRect.size.height : sRect.size.height
                         )
-                        
+
                         /// Position
                         let offset = CGSize(
                             width: animateView ? dRect.minX : sRect.minX,
                             height: animateView ? dRect.minY : sRect.minY
                         )
-                        
+
                         layerView
                             .frame(width: size.width, height: size.height)
                             .clipShape(.rect(cornerRadius: animateView ? info.dCornerRadius : info.sCornerRadius))
@@ -266,7 +266,7 @@ fileprivate struct HeroLayerView: View {
                             info.destinationAnchor = nil
                             info.sCornerRadius = 0
                             info.dCornerRadius = 0
-                            
+
                             info.completion(false)
                         } else {
                             info.hideView = true
@@ -276,7 +276,7 @@ fileprivate struct HeroLayerView: View {
                 }
             }
         }
-        
+
     }
 }
 

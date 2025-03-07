@@ -10,15 +10,15 @@ struct TitleTextRenderer: TextRenderer, Animatable {
         get { progress }
         set { progress = newValue }
     }
-    
+
     func draw(layout: Text.Layout, in ctx: inout GraphicsContext) {
         let allLines = layout.flatMap({ $0 })
         let allChars = allLines.flatMap({ $0 }) /// get all chars in the line
-    
+
         for (index, char) in allChars.enumerated() {
             let sliceProcessIndex = CGFloat(allChars.count) * progress
             let sliceProgress = max(min(sliceProcessIndex / CGFloat(index + 1), 1), 0)
-            
+
             /// Note: to have each slice to begin from it's original point, create a local copy context for each loop
             ///  var copy = context
             ///  using the context directly without copy creates the effect for the context to be incremented after each loop

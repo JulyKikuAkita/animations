@@ -12,7 +12,7 @@ struct StackedScrollDemoView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .ignoresSafeArea()
-                
+
                 StackedScrollView()
             }
         }
@@ -31,30 +31,30 @@ struct StackedScrollView: View {
                     StackCardView(item)
             }
             .padding(.bottom, 20)
-            
+
             BottomActionBar()
         }
         .padding(20)
     }
-    
+
     @ViewBuilder
     func StackCardView(_ item: Profile) -> some View {
         if item.username.isEmpty {
             Rectangle()
                 .fill(.clear)
-            
+
         } else {
             HStack(spacing: 12) {
                 Image(item.profilePicture)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 40, height: 40)
-                
+
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text(item.username)
                         .font(.callout)
                         .fontWeight(.bold)
-                    
+
                     Text(item.lastMsg)
                         .font(.caption)
                         .lineLimit(1)
@@ -67,7 +67,7 @@ struct StackedScrollView: View {
             .clipShape(.rect(cornerRadius: 20))
         }
     }
-    
+
     @ViewBuilder
     func BottomActionBar() -> some View {
         HStack {
@@ -79,9 +79,9 @@ struct StackedScrollView: View {
             .buttonStyle(.borderedProminent)
             .tint(.white.opacity(0.2))
             .buttonBorderShape(.circle)
-            
+
             Spacer(minLength: 0)
-            
+
             Button(action: {}, label: {
                 Image(systemName: "camera.fill")
                     .font(.title3)

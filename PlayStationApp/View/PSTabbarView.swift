@@ -22,7 +22,7 @@ struct PSTabbarView: View {
                             }
                         }
                         .frame(maxWidth: .infinity)
-                    
+
                 }
             }
             .padding(.top, 12)
@@ -36,7 +36,7 @@ struct PSTabbarView: View {
                     .stroke(.black, lineWidth: 0.5)
                     .blur(radius: 0.5)
                     .padding(.horizontal, -10)
-                
+
                 TabBarTopCurve()
                     .fill(.pink.opacity(0.5).gradient)
             }
@@ -47,7 +47,7 @@ struct PSTabbarView: View {
                 let width = rect.width
                 let maxedWidth = width * 5
                 let height = rect.height
-                
+
                 Circle()
                     .fill(.clear)
                     .frame(width: maxedWidth, height: maxedWidth)
@@ -95,7 +95,7 @@ struct PSTabbarView: View {
                             .rotationEffect(.init(degrees: calculateRotation(maxedWidth: maxedWidth / 2, actualWidth: width)))
                     })
                     .offset(y: height / 2.1)
-                
+
             }
             /// Active Tab text
             .overlay(alignment: .bottom) {
@@ -108,7 +108,7 @@ struct PSTabbarView: View {
         }
         .preferredColorScheme(.light)
     }
-    
+
     /// https://www.youtube.com/watch?v=4zyuGXTyZ80 at 8:00-8:10 to get 85.4 degree s of rotation
     ///  tan - 1(y/x) = tan - 1(975/78) = tan -1(12.5) = 1.4 radians == 84.5 degrees
     /// calculating rotate using Trigonometry
@@ -118,16 +118,16 @@ struct PSTabbarView: View {
         let tan = y / firstTabPositionX
         let radians = atan(tan) /// reverse of tan == atan
         let degree = radians * 180 / .pi
-        
+
         if isInitial {
             return -(degree + 90)
         }
-        
+
         let x = tabWidth * activeTab.index
         let tan_ = y / x
         let radian_ = atan(tan_)
         let degree_ = radian_ * 180 / .pi
-        
+
         return -(degree_ - 90)
     }
     ///  Offset based on Tab position
@@ -141,7 +141,7 @@ struct PSTabbarView: View {
         let totalIndices = PS_Tab.count
         let currentIndex = tab.index
         let progress = currentIndex / totalIndices
-        
+
         return progress < 0.5 ? (currentIndex * -10) : (
             (totalIndices - currentIndex - 1) * -10
         )
@@ -159,9 +159,9 @@ struct TabBarTopCurve: Shape {
             let width = rect.width
             let height = rect.height
             let midWith = width / 2
-            
+
             path.move(to: .init(x: 0, y: 5))
-            
+
             /// Adding Curve
             path
                 .addCurve(
@@ -169,18 +169,18 @@ struct TabBarTopCurve: Shape {
                     control1: .init(x: midWith / 2, y: -20),
                     control2: .init(x: midWith, y: -20)
                 )
-            
+
             path
                 .addCurve(
                     to: .init(x: width, y: -5),
                     control1: .init(x: midWith + (midWith / 2), y: -20),
                     control2: .init(x: width, y: -5)
                 )
-            
+
             /// complete rectangle
             path.addLine(to: .init(x: width, y: height))
             path.addLine(to: .init(x: 0, y: height))
-            
+
             /// closing path
             path.closeSubpath()
         }

@@ -25,7 +25,7 @@ struct LoopingStackCardsDemoView: View {
                                     }
                             }
                         }
-                        
+
                         LoopingStack(maxTranslationWidth: width) {
                             ForEach(firstSetCards) { image in
                                 Image(image.image)
@@ -64,7 +64,7 @@ struct LoopingStack<Content: View>: View {
         Group(subviews: content) { collection in
             let collection = collection.rotateFromLeft(by: rotation)
             let count = collection.count
-            
+
             ZStack {
                 ForEach(collection) { view in
                     /// reverse the view stack with zIndex
@@ -82,7 +82,7 @@ struct LoopingStack<Content: View>: View {
                     .zIndex(zIndex)
                 }
             }
-            
+
         }
     }
 }
@@ -105,7 +105,7 @@ struct LoopingStackCardView<Content: View>: View {
         let scale = 1 - min(CGFloat(index) * 0.07, CGFloat(visibleCardsCount) * 0.07)
         let rotationDegree: CGFloat = -30
         let rotation = max(min(-offset / viewSize.width, 1), 0) * rotationDegree
-        
+
         content
             .onGeometryChange(for: CGSize.self, of: {
                 $0.size
@@ -142,7 +142,7 @@ struct LoopingStackCardView<Content: View>: View {
                 isEnabled: index == 0 && count > 1
             )
     }
-    
+
     /// 1. shift the card to it's view's width
     /// 2. apply rotation effect: update zIndex and reset offset to 0
     private func pushToNextCard() {

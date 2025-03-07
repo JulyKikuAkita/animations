@@ -9,7 +9,7 @@ struct ImageView: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             if let image = post.image {
                 Image(uiImage: image)
                     .resizable()

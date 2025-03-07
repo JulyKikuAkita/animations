@@ -18,11 +18,11 @@ struct MintTransactionCardView: View {
                     .foregroundStyle(.white)
                     .frame(width: 45, height: 45)
                     .background(transaction.color.gradient, in: .circle)
-                
+
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text(transaction.title)
                         .foregroundStyle(Color.primary)
-                    
+
                     Text(transaction.remarks)
                         .font(.caption)
                         .foregroundStyle(Color.secondary)
@@ -30,7 +30,7 @@ struct MintTransactionCardView: View {
                     Text(format(date: transaction.dateAdded, format: "dd MMM yyyy"))
                         .font(.caption2)
                         .foregroundStyle(.gray)
-                    
+
                     if showCategory {
                         Text(transaction.category)
                             .font(.caption2)
@@ -39,7 +39,7 @@ struct MintTransactionCardView: View {
                             .foregroundColor(.white)
                             .background(transaction.category == MintCategory.income.rawValue ? Color.green.gradient : Color.red.gradient, in: .capsule)
                     }
-                    
+
                     if showRule {
                         Text(transaction.rule)
                             .font(.caption2)
@@ -50,7 +50,7 @@ struct MintTransactionCardView: View {
                 })
                 .lineLimit(1)
                 .hSpacing(.leading)
-                
+
                 Text(currencyString(transaction.amount, allowedDigits: 2))
                     .fontWeight(.semibold)
             }

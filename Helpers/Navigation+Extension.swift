@@ -2,7 +2,7 @@
 //  Navigation+Extension.swift
 //  animation
 
-/// Show/ Hide navigation bar 
+/// Show/ Hide navigation bar
 import SwiftUI
 
 /// Custom View modifier
@@ -37,7 +37,7 @@ private struct NavigationControllerExtractor: UIViewRepresentable {
     func makeUIView(context: Context) -> some UIView {
         return UIView()
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             /// extract the associated root UIViewController from the UIView. which will hold a UINavigationController

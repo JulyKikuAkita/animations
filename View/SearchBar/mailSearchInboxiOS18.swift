@@ -9,7 +9,7 @@ struct mailSearchInboxiOS18DemoView: View {
     @State private var searchText: String = ""
     @State private var isSearchActive: Bool = false
     @State private var activeTab: InboxTabModel = .primary
-    
+
     /// Scroll Properties: iOS 18 api
     @State private var scrollOffset: CGFloat = 0
     @State private var topInset: CGFloat = 0
@@ -24,11 +24,11 @@ struct mailSearchInboxiOS18DemoView: View {
                         .padding(.bottom, 10)
                         .background {
                             let progress = min(max((scrollOffset + startTopInset - 110) / 15, 0), 1)
-                            
+
                             ZStack(alignment: .bottom) {
                                 Rectangle()
                                     .fill(.ultraThinMaterial)
-                                
+
                                 /// divider
                                 Rectangle()
                                     .fill(.gray.opacity(0.3))
@@ -39,7 +39,7 @@ struct mailSearchInboxiOS18DemoView: View {
                         }
                         .offset(y: (scrollOffset + topInset) > 0 ? (scrollOffset + topInset) : 0) ///sticky search bar
                         .zIndex(1000)
-                    
+
                     /// demo mail view
                     LazyVStack(alignment: .leading) {
                         Text("Mail Content")
@@ -89,7 +89,7 @@ struct InboxTabBar: View {
                         ResizableTabButton(tab)
                     }
                 }
-                
+
                 if activeTab == .allMails {
                     ResizableTabButton(.allMails)
                         .transition(.offset(x: 200))
@@ -99,7 +99,7 @@ struct InboxTabBar: View {
         }
         .frame(height: 50)
     }
-    
+
     @ViewBuilder
     func ResizableTabButton(_ tab: InboxTabModel) -> some View {
         HStack(spacing: 8) {
@@ -110,7 +110,7 @@ struct InboxTabBar: View {
                         .symbolVariant(.fill)
                         .opacity(activeTab == tab ? 1 : 0)
                 }
-            
+
             if activeTab == tab {
                 Text(tab.rawValue)
                     .font(.callout)
@@ -144,7 +144,7 @@ struct InboxTabBar: View {
             }
         }
     }
-    
+
     var schemeColor: Color {
         scheme == .dark ? .black : .white
     }

@@ -18,7 +18,7 @@ struct TextFieldSelectionAPIView: View {
                     .padding(.vertical, 15)
                     .frame(height: 150)
                     .background(.background, in: .rect(cornerRadius: 10))
-                
+
                 VStack(spacing: 15) {
                     HStack(spacing: 20) {
                         Button("Move After Hello World") {
@@ -27,24 +27,24 @@ struct TextFieldSelectionAPIView: View {
                                 selection = .init(insertionPoint: endIndex)
                             }
                         }
-                        
+
                         Button("Select Hello World") {
                             if let range = text.range(of: "Hello") {
                                 selection = .init(range: range)
                             }
                         }
                     }
-                    
+
                     HStack(spacing: 20) {
                         Button("Move to First") {
                             selection = .init(insertionPoint: text.startIndex)
                         }
-                        
+
                         Button("Move to Last") {
                             selection = .init(insertionPoint: text.endIndex)
                         }
                     }
-                    
+
                     if let selectedTextRange, text[selectedTextRange] == "Hello" {
                         Button("Replace with Hi There") {
                             text.replaceSubrange(selectedTextRange, with: "Hi There")
@@ -62,7 +62,7 @@ struct TextFieldSelectionAPIView: View {
                         }
                     }
                 }
-                
+
                 Spacer(minLength: 0)
             }
             .padding(15)
@@ -77,12 +77,12 @@ struct TextFieldSelectionAPIView: View {
                     default:
                         print("Others")
                     }
-                
+
                 }
             }
         }
     }
-    
+
     var selectedTextRange: Range<String.Index>? {
         if let selection, !selection.isInsertion {
             switch selection.indices {
@@ -91,7 +91,7 @@ struct TextFieldSelectionAPIView: View {
             default: return nil
             }
         }
-        
+
         return nil
     }
 }

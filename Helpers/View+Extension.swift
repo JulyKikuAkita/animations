@@ -12,7 +12,7 @@ extension View {
             .overlay {
                 GeometryReader(content: { geometry in
                     let rect = geometry.frame(in: .global)
-                    
+
                     Color.clear
                         .preference(key: OffsetKey.self, value: rect)
                         .onPreferenceChange(OffsetKey.self, perform: { rect in
@@ -21,7 +21,7 @@ extension View {
                 })
             }
     }
-    
+
     @ViewBuilder
     func createImages(toggleDarkMode: Bool, currentImage: Binding<UIImage?>, previousImage:Binding<UIImage?>, activeDarkMode: Binding<Bool>) -> some View {
         self
@@ -34,7 +34,7 @@ extension View {
                         imageView.image = window.rootViewController?.view.image(window.frame.size)
                         imageView.contentMode = .scaleAspectFit
                         window.addSubview(imageView)
-                        
+
                         if let rootView = window.rootViewController?.view {
                             let frameSize = rootView.frame.size
                             /// Creating snapshots
@@ -65,7 +65,7 @@ extension View {
             GeometryReader {
                 let frame = $0.frame(in: .scrollView(axis: .vertical))
                 let bounds = $0.bounds(of: .scrollView(axis: .vertical)) ?? .zero
-                
+
                 Color.clear
                     .preference(key: FrameKey.self, value: .init(frame: frame, bounds: bounds))
                     .onPreferenceChange(FrameKey.self, perform: { value in
@@ -107,7 +107,7 @@ extension View {
         }
         return .zero
     }
-    
+
     @ViewBuilder
     func offsetY(result: @escaping(CGFloat) -> ()) -> some View {
         self
@@ -119,7 +119,7 @@ extension View {
                         .onPreferenceChange(CGFloatKey.self, perform: { value in
                             result(value)
                         })
-                        
+
                 })
             }
     }
@@ -147,11 +147,11 @@ extension View {
                         .onPreferenceChange(CGFloatKey.self, perform: { value in
                             completion(value)
                         })
-                    
+
                 })
             }
     }
-    
+
     @ViewBuilder
     func minXChangePreference(completion: @escaping(CGFloat) -> ()) -> some View {
         self
@@ -163,7 +163,7 @@ extension View {
                         .onPreferenceChange(CGFloatKey.self, perform: { value in
                             completion(value)
                         })
-                        
+
                 })
             }
     }

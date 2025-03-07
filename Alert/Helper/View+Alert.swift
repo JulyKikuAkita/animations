@@ -26,7 +26,7 @@ fileprivate struct CustomAlertIOS18APIModifier<AlertContent: View, Background: V
     @State private var showFullscreenCover: Bool = false
     @State private var animatedValue: Bool = false
     @State private var allowsInteraction: Bool = false
-    
+
     /// use full screen cover to show alert content on top of current content
     func body(content: Content) -> some View {
         content
@@ -46,7 +46,7 @@ fileprivate struct CustomAlertIOS18APIModifier<AlertContent: View, Background: V
                     withAnimation(.easeInOut(duration: 0.3)) {
                         animatedValue = true
                     }
-                    
+
                     /// enable view interaction after animation completes
                     try? await Task.sleep(for: .seconds(0.3))
                     allowsInteraction = true
@@ -55,7 +55,7 @@ fileprivate struct CustomAlertIOS18APIModifier<AlertContent: View, Background: V
             .onChange(of: isPresented) { oldValue, newValue in
                 var transaction = Transaction()
                 transaction.disablesAnimations = true
-                
+
                 if newValue {
                     withTransaction(transaction) {
                         showFullscreenCover = true

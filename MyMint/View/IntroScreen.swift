@@ -14,21 +14,21 @@ struct IntroScreen: View {
                 .multilineTextAlignment(.center)
                 .padding(.top, 65)
                 .padding(.bottom, 35)
-            
-            
+
+
             /// Points View
             VStack(alignment: .leading, spacing: 25, content: {
                 PointView(symbol: "dollarsign", title: "Transactions", subTitle: "Track your earnings and spending and apply 50/30/20 rules to plan wisely.")
-                
+
                 PointView(symbol: "chart.bar.fill", title: "Visual Charts", subTitle: "View your transactions using eye-catching graphic representations.")
-                
+
                 PointView(symbol: "magnifyingglass", title: "Advance Filters", subTitle: "Find the expenses by advance search and filtering.")
             })
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 15)
-            
+
             Spacer(minLength: 10)
-            
+
             Button(action: {
                 isFirstTime = false
             }, label: {
@@ -43,7 +43,7 @@ struct IntroScreen: View {
         }
         .padding(15)
     }
-    
+
     /// Point View
     @ViewBuilder
     func PointView(symbol: String, title: String, subTitle: String) -> some View {
@@ -52,18 +52,18 @@ struct IntroScreen: View {
                 .font(.largeTitle)
                 .foregroundStyle(appTint.gradient)
                 .frame(width: 45)
-            
+
             VStack(alignment: .leading, spacing: 6, content: {
                 Text(title)
                     .font(.title3)
                     .fontWeight(.semibold)
-                
+
                 Text(subTitle)
                     .foregroundStyle(.gray)
             })
-            
+
         }
-        
+
     }
 }
 

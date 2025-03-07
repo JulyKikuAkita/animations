@@ -21,22 +21,22 @@ struct ExpandableWheelPickerDemoView: View {
                         HStack {
                             Text("Framework")
                                 .foregroundStyle(.gray)
-                            
+
                             Spacer(minLength: 0)
-                            
+
                             ExpandableWheelPickerView(config: $config)
                         }
                     }
-                    
+
                     Button {
                         config1.show.toggle()
                     } label: {
                         HStack {
                             Text("Colors")
                                 .foregroundStyle(.gray)
-                            
+
                             Spacer(minLength: 0)
-                            
+
                             ExpandableWheelPickerView(config: $config1)
                         }
                     }
@@ -46,7 +46,7 @@ struct ExpandableWheelPickerDemoView: View {
         }
         .customWheelPicker($config, items: pickerValues)
         .customWheelPicker($config1, items: pickerValues1)
-        
+
     }
 }
 
@@ -73,16 +73,16 @@ fileprivate struct CustomWheelPickerView: View {
     @State private var showContents: Bool = false
     @State private var showScrollview: Bool = false
     @State private var expandItems: Bool = false
-    
+
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             Rectangle()
                 .fill(.ultraThinMaterial)
                 .opacity(showContents ? 1: 0)
                 .ignoresSafeArea()
-            
+
             ScrollView(.vertical) {
                 VStack(spacing: 0) {
                     ForEach(texts, id: \.self) { text in
@@ -100,12 +100,12 @@ fileprivate struct CustomWheelPickerView: View {
             .scrollIndicators(.hidden)
             .opacity(showScrollview ? 1 : 0)
             .allowsHitTesting(expandItems && showScrollview)
-            
+
             let offset: CGSize = .init(
                 width: showContents ? size.width * -0.3 : config.sourceFrame.minX,
                 height: showContents ?  -10 : config.sourceFrame.minY // y: place at center of vi
             )
-            
+
             /// the position is in global space so the view position must from the top leading and ignore safe area
             Text(config.text)
                 .fontWeight(showContents ? .semibold : .regular)
@@ -119,7 +119,7 @@ fileprivate struct CustomWheelPickerView: View {
                 .offset(offset)
                 .opacity(showScrollview ? 0 : 1)
                 .ignoresSafeArea(.all, edges: showContents ? [] : .all)
-            
+
             CloseButton()
         }
         .task {
@@ -129,10 +129,10 @@ fileprivate struct CustomWheelPickerView: View {
             withAnimation(.easeInOut(duration: 0.3)) {
                 showContents = true
             }
-            
+
             try? await Task.sleep(for: .seconds(0.3))
             showScrollview = true
-            
+
             withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
                 expandItems = true
             }
@@ -148,7 +148,7 @@ fileprivate struct CustomWheelPickerView: View {
 //            }
 //        }
     }
-    
+
     /// Close expanded wheel view
     @ViewBuilder
     func CloseButton() -> some View {
@@ -159,14 +159,14 @@ fileprivate struct CustomWheelPickerView: View {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     expandItems = false
                 }
-                
+
                 /// 2. Hiding scroll view and place the active back to it's source  position
                 try? await Task.sleep(for: .seconds(0.2))
                 showScrollview = false
                 withAnimation(.easeInOut(duration: 0.2)) {
                     showContents = false
                 }
-                
+
                 /// 3. Closing the overlay view
                 try? await Task.sleep(for: .seconds(0.2))
                 config.show = false
@@ -185,12 +185,12 @@ fileprivate struct CustomWheelPickerView: View {
         )
         .offset(x: expandItems ? -50 : 50, y: -10)
     }
-    
+
     @ViewBuilder
     private func WheelTextView(_ text: String, size: CGSize) -> some View {
         GeometryReader { proxy in
             let width = proxy.size.width
-            
+
             Text(text)
                 .fontWeight(.semibold)
                 .foregroundStyle(config.text == text ? .blue : .gray)
@@ -212,23 +212,23 @@ fileprivate struct CustomWheelPickerView: View {
         .frame(height: 20)
         .lineLimit(1)
     }
-    
+
     /// View Transition Helpers
     private func offset(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         return expandItems ? 0 : -minY
     }
-    
+
     private func rotation(_ proxy: GeometryProxy, _ size: CGSize) -> CGFloat {
         let height = size.height * 0.5
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
-        
+
         let maxRotation: CGFloat = 220 /// can be a custom value
         let progress = minY / height
-        
+
         return progress * maxRotation
     }
-    
+
     private func opacity(_ proxy: GeometryProxy, _ size: CGSize) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
         let height = size.height * 0.5
@@ -237,12 +237,12 @@ fileprivate struct CustomWheelPickerView: View {
         let opacity = progress < 0 ? 1 + progress : 1 - progress
         return opacity
     }
-    
+
     @ViewBuilder
     private func LeadingSideWheelTextView(_ text: String, size: CGSize) -> some View {
         GeometryReader { proxy in
             let width = proxy.size.width
-            
+
             Text(text)
                 .fontWeight(.semibold)
                 .offset(x: width * 0.3)

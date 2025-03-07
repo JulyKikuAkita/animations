@@ -15,9 +15,9 @@ struct ZoomVideoDetailView: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             Color.black
-            
+
             ScrollView(.vertical) {
                 LazyVStack(spacing: 0) {
                     ForEach(sharedModel.videos) { video in
@@ -31,7 +31,7 @@ struct ZoomVideoDetailView: View {
             .scrollTargetBehavior(.paging)
             .scrollIndicators(.hidden)
             .zIndex(hideThumbnail ? 1 : 0)
-            
+
             if let thumbnail = video.thumbnail, !hideThumbnail {
                 Image(uiImage: thumbnail)
                     .resizable()
@@ -75,7 +75,7 @@ struct VideoPlayerView: View  {
             .onGeometryChange(for: Bool.self) { proxy in
                 let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
                 let height = proxy.size.height * 0.97
-                
+
                 return -minY < height || minY > height
             } action: { newValue in
                 if newValue {

@@ -58,7 +58,7 @@ struct SnapshotDemoImageView: View {
             Button("Take Snapshot") {
                 trigger.toggle()
             }
-            
+
             VStack {
                 Image(systemName: "globe")
                     .imageScale(.large)
@@ -70,7 +70,7 @@ struct SnapshotDemoImageView: View {
             .snapshot(trigger: trigger) {
                 snapshot = $0
             }
-            
+
             if let snapshot {
                 Image(uiImage: snapshot)
                     .aspectRatio(contentMode: .fit)

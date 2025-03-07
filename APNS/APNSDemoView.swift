@@ -28,17 +28,17 @@ struct APNSDemoAPNSDemoView: App {
 @Observable
 class AppData: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var mainPageNavigationPath: [String] = []
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self
         return true
     }
-    
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         /// showing alert even when app is active
         return [.sound, .banner]
     }
-    
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         if let pageLink = response.notification.request.content.userInfo["pageLink"] as? String {
             /// Use navigation link to route notification link
@@ -47,11 +47,11 @@ class AppData: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate
 //               /// push new page
 //                mainPageNavigationPath.append(pageLink)
 //            }
-            
+
             /// Use deep link  to route notification link
             guard let url = URL(string: pageLink) else { return }
             UIApplication.shared.open(url, options: [:]) { _ in
-                
+
             }
         }
     }

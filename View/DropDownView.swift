@@ -22,19 +22,19 @@ struct DropDownView: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             VStack(spacing: 0) {
                 if showOptions && anchor == .top{
                     OptionsView()
                 }
-                
+
                 HStack(spacing: 0) {
                     Text(selection ?? hint)
                         .foregroundStyle(selection == nil ? .gray : .primary)
                         .lineLimit(1)
-                    
+
                     Spacer(minLength: 0)
-                    
+
                     Image(systemName: "chevron.down")
                         .font(.title3)
                         .foregroundStyle(.gray)
@@ -53,7 +53,7 @@ struct DropDownView: View {
                     }
                 }
                 .zIndex(10)
-                
+
                 if showOptions && anchor == .bottom{
                     OptionsView()
                 }
@@ -68,7 +68,7 @@ struct DropDownView: View {
         .frame(width: maxWidth, height: 50)
         .zIndex(zIndex) /// if just assign number to zindex for all dropdown, multiple dropdowns still overlap
     }
-    
+
     /// Options View
     @ViewBuilder
     func OptionsView() -> some View {
@@ -77,9 +77,9 @@ struct DropDownView: View {
                 HStack(spacing: 0) {
                     Text(option)
                         .lineLimit(1)
-                    
+
                     Spacer(minLength: 0)
-                    
+
                     Image(systemName: "checkmark")
                         .font(.caption)
                         .opacity(selection == option ? 1: 0)
@@ -101,7 +101,7 @@ struct DropDownView: View {
         /// adding transition
         .transition(.move(edge: anchor == .top ? .bottom : .top))
     }
-    
+
     /// Drop down direction
     enum Anchor {
         case top

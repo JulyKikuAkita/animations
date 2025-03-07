@@ -11,7 +11,7 @@ struct SideBarView: View {
         GeometryReader {
             let safeArea = $0.safeAreaInsets
             let isSidesHavingValues = safeArea.leading != 0 || safeArea.trailing != 0
-            
+
             ScrollView(.vertical) {
                 VStack(alignment: .leading, spacing: 6) {
                     Image(.fox)
@@ -19,27 +19,27 @@ struct SideBarView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 60, height: 60)
                         .clipShape(.circle)
-                    
+
                     Text("Mr. Fox")
                         .font(.callout)
                         .fontWeight(.semibold)
-                    
+
                     Text("@FoxFarm")
                         .font(.caption2)
                         .foregroundStyle(.gray)
-                    
+
                     HStack(spacing: 4) {
                         Text("3.1K")
                             .fontWeight(.semibold)
-                        
+
                         Text("Following")
                             .font(.caption)
                             .foregroundStyle(.gray)
-                        
+
                         Text("1.8M")
                             .fontWeight(.semibold)
                             .padding(.leading, 5)
-                        
+
                         Text("Followers")
                             .font(.caption)
                             .foregroundStyle(.gray)
@@ -47,7 +47,7 @@ struct SideBarView: View {
                     .font(.system(size: 14))
                     .lineLimit(1)
                     .padding(.top, 5)
-                    
+
                     /// Side bar navigation items
                     VStack(alignment: .leading, spacing: 20) {
                         ForEach(SideBarActions.allCases, id: \.rawValue) { action in
@@ -74,10 +74,10 @@ struct SideBarView: View {
                     }
                     .ignoresSafeArea()
             }
-            
+
         }
     }
-    
+
     @ViewBuilder
     func SideBarActionButton(value: SideBarActions, action: @escaping () -> ()) -> some View {
         Button(action: action) {
@@ -85,10 +85,10 @@ struct SideBarView: View {
                 Image(systemName: value.symbolImage)
                     .font(.title3)
                     .frame(width: 30)
-                
+
                 Text(value.rawValue)
                     .fontWeight(.semibold)
-                
+
                 Spacer(minLength: 0)
             }
             .foregroundStyle(Color.primary)
@@ -106,7 +106,7 @@ enum SideBarActions: String, CaseIterable {
     case messages = "Messages"
     case monetization = "Monetization"
     case settings = "Settings"
-    
+
     var symbolImage: String {
         switch self {
         case .communities: "person.2"

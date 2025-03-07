@@ -18,7 +18,7 @@ class NavigationHelper: NSObject, UIGestureRecognizerDelegate {
         controller.interactivePopGestureRecognizer?.delegate = self /// hide tool bar
         isAdded = true
     }
-    
+
     /// we use UINavigationController to get the view pop progress for fade in fade out animation
     @objc
     func didInteractivePopGestureChange() {
@@ -27,7 +27,7 @@ class NavigationHelper: NSObject, UIGestureRecognizerDelegate {
            navController?.viewControllers.count == 1 /// we want fade in/out animation only on root view /// use SwiftUI Path didn't work as this is UIKit view callback
         {
             popProgress = completeProfess
-            
+
             if state == .ended || state == .cancelled {
                 if completeProfess > 0.5 {
                     popProgress = 1 /// pop view
@@ -38,7 +38,7 @@ class NavigationHelper: NSObject, UIGestureRecognizerDelegate {
             }
         }
     }
-    
+
     /// enable interactive pop gesture even with navigation bar is hidden
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         navController?.viewControllers.count ?? 0 > 1
@@ -76,7 +76,7 @@ struct InteractiveNavigationGestureDemoView: View {
                     navigationHelper.addPopGestureListener(navController)
                 }
             }
-            
+
             CustomBottomBar()
         }
         .environment(navigationHelper)
@@ -92,7 +92,7 @@ struct CustomBottomBar: View {
             ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
                 Button {
                     if tab == .apps {
-                        
+
                     } else {
                         selectedTab = tab
                     }
@@ -111,17 +111,17 @@ struct CustomBottomBar: View {
                     ZStack {
                         if tab == .notifications {
                             Button {
-                               
+
                             } label:  {
                                 Image(systemName: "exclamationmark.bubble")
                                     .font(.title3)
                                     .foregroundStyle(Color.primary)
                             }
                         }
-                        
+
                         if tab == .profile {
                             Button {
-                               
+
                             } label:  {
                                 Image(systemName: "ellipsis")
                                     .font(.title3)
@@ -131,7 +131,7 @@ struct CustomBottomBar: View {
                     }
                     .opacity(1 - navigationHelper.popProgress)
                 }
-                
+
             }
         }
         .onChange(of: navigationHelper.path) { oldValue, newValue in

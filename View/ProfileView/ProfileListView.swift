@@ -12,7 +12,7 @@ struct ProfileListView: View {
     @State private var showDetail: Bool = false
     @State private var heroProgress: CGFloat = 0
     @State private var showHeroView: Bool = true
-    
+
     /// View properties - dark mode animation
     @AppStorage("toggleDarkMode") private var toggleDarkMode: Bool = false // persisted with app storage
     @AppStorage("activeDarkMode") private var activeDarkMode: Bool = false // persisted with app storage
@@ -37,11 +37,11 @@ struct ProfileListView: View {
                         .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
                             return [profile.id.uuidString: anchor]
                         })
-                    
+
                     VStack(alignment: .leading, spacing: 6) {
                         Text(profile.username)
                             .fontWeight(.semibold)
-                        
+
                         Text(profile.lastMsg)
                             .font(.caption2)
                             .foregroundStyle(.gray)
@@ -51,7 +51,7 @@ struct ProfileListView: View {
                 .onTapGesture {
                     selectedProfile = profile
                     showDetail = true
-                    
+
                     withAnimation(.snappy(duration: 0.35, extraBounce: 0), completionCriteria: .logicallyComplete) {
                         heroProgress = 1.0
                     } completion: {
@@ -68,8 +68,8 @@ struct ProfileListView: View {
         .overlay {
             DetailedView(
                 selectedProfile: $selectedProfile,
-                showDetail: $showDetail, 
-                heroProgress: $heroProgress, 
+                showDetail: $showDetail,
+                heroProgress: $heroProgress,
                 showHeroView: $showHeroView
             )
         }
@@ -82,17 +82,17 @@ struct ProfileListView: View {
                     let sourceRect = geometry[source]
                     let radius = sourceRect.height / 2
                     let destinationRect = geometry[destination]
-                    
+
                     let diffSize = CGSize(
                         width: destinationRect.width - sourceRect.width,
                         height: destinationRect.height - sourceRect.height
                     )
-                    
+
                     let diffOrigin = CGPoint(
                         x: destinationRect.minX - sourceRect.minX,
                         y: destinationRect.minY - sourceRect.minY
                     )
-                    
+
                     // TODO: put hero view here
                     Image(selectedProfile.profilePicture)
                         .resizable()
@@ -130,7 +130,7 @@ struct ProfileListView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: size.width, height: size.height)
-                        
+
                         Image(uiImage: currentImage)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -198,7 +198,7 @@ struct DetailedView: View {
 
     /// Color scheme based background color
     @Environment(\.colorScheme) private var scheme
-    
+
     /// Gesture properties
     @GestureState private var isDragging: Bool = false
     @State private var offset: CGFloat = .zero
@@ -224,7 +224,7 @@ struct DetailedView: View {
                         }
                         .frame(height: 400)
                     /// Destination Anchor Frame
-                        .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { 
+                        .anchorPreference(key: AnchorKey.self, value: .bounds, transform: {
                             anchor in
                             return ["DESTINATION": anchor]
                         })
@@ -253,7 +253,7 @@ struct DetailedView: View {
                                 showDetail = false
                                 self.selectedProfile = nil
                             }
-                            
+
                         }, label: {
                             Image(systemName: "xmark.circle.fill")
                                 .font(.largeTitle)
@@ -265,7 +265,7 @@ struct DetailedView: View {
                         .padding()
                         .opacity(showHeroView ? 0 : 1)
                         .animation(.snappy(duration: 0.2, extraBounce: 0), value: showHeroView)
-                        
+
                     }
                 }
                 .offset(x: size.width - (size.width * heroProgress))
@@ -298,7 +298,7 @@ struct DetailedView: View {
                                 .onEnded({ value in
                                     /// Closing/Resetting based on end target
                                     let velocity = value.velocity.width
-                                    
+
                                     if (offset + velocity) > (size.width * 0.8) {
                                         /// Close view
                                         withAnimation(.snappy(duration: 0.35, extraBounce: 0), completionCriteria: .logicallyComplete) {

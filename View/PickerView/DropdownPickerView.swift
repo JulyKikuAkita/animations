@@ -32,7 +32,7 @@ fileprivate struct DropdownView: View {
             LazyVStack(spacing: 0) {
                 ItemView(config.activeText)
                     .id(config.activeText)
-                
+
                 ForEach(filteredValues, id: \.self) { item in
                     ItemView(item)
                 }
@@ -84,12 +84,12 @@ fileprivate struct DropdownView: View {
         }
         .ignoresSafeArea()
     }
-    
+
     @ViewBuilder
     func ItemView(_ item: String) -> some View {
         HStack {
             Text(item)
-            
+
             Spacer(minLength: 0)
         }
         .padding(.horizontal, 15)
@@ -99,7 +99,7 @@ fileprivate struct DropdownView: View {
             closeDropdown(item)
         }
     }
-    
+
     func closeDropdown(_ item: String) {
         withAnimation(
             .easeInOut(duration: 0.35),
@@ -112,7 +112,7 @@ fileprivate struct DropdownView: View {
             config.show = false
         }
     }
-    
+
     var filteredValues: [String] {
         values.filter { $0 != config.activeText }
     }
@@ -153,9 +153,9 @@ struct DropdownPickerView: View {
     var body: some View {
         HStack {
             Text(config.activeText)
-            
+
             Spacer(minLength: 0)
-            
+
             Image(systemName: "chevron.down")
         }
         .padding(.horizontal, 15)
@@ -175,7 +175,7 @@ struct DropdownPickerView: View {
             config.anchor = newValue
         }
     }
-    
+
 }
 
 struct DropdownConfig {

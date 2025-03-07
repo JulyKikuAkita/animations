@@ -13,14 +13,14 @@ struct CustomiOS18Gesture: UIGestureRecognizerRepresentable {
         let gesture = UIPanGestureRecognizer()
         return gesture
     }
-    
+
     func updateUIGestureRecognizer(
         _ recognizer: UIPanGestureRecognizer,
         context: Context
     ) {
         recognizer.isEnabled = isEnabled
     }
-    
+
     func handleUIGestureRecognizerAction(
         _ recognizer: UIPanGestureRecognizer,
         context: Context
@@ -28,9 +28,9 @@ struct CustomiOS18Gesture: UIGestureRecognizerRepresentable {
         let view = recognizer.view
         let location = recognizer.location(in: view)
         let translation = recognizer.translation(in: view)
-        
+
         let offset = CGSize(width: translation.x, height: translation.y)
-        
+
         if recognizer.state == .began {
             trigger(true)
         } else if recognizer.state == .ended || recognizer.state == .cancelled {

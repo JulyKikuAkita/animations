@@ -60,13 +60,13 @@ struct SchemeHostView<Content: View>: View {
                     window.isUserInteractionEnabled = false
                     let emptyController = UIViewController()
                     emptyController.view.backgroundColor = .clear
-                    
+
                     window.rootViewController = emptyController
                     overlayWindow = window
                 }
             }
     }
-    
+
     /// Generating scheme previews and then push the sheet view
     private func generateSchemePreviews() {
         Task {
@@ -74,7 +74,7 @@ struct SchemeHostView<Content: View>: View {
                 UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow, schemePreviews.isEmpty {
                 let size = window.screen.bounds.size
                 let defaultStyle = window.overrideUserInterfaceStyle
-                
+
                 /// check UIView extension  function of image()
                 let defaultSchemePreview = window.image(size)
                 schemePreviews.append(
@@ -83,19 +83,19 @@ struct SchemeHostView<Content: View>: View {
                         text: scheme == .dark ? AppScheme.dark.rawValue : AppScheme.light.rawValue
                     )
                 )
-                
+
                 showOverlayImageView(defaultSchemePreview) // avoid blink of black screen when switch colorScheme
-                
+
                 window.overrideUserInterfaceStyle = scheme.oppositeInterfaceStyle
                 let otherSchemePreviewImage = window.image(size)
-                
+
                 schemePreviews.append(
                     .init(
                         image: otherSchemePreviewImage,
                         text: scheme == .dark ? AppScheme.light.rawValue : AppScheme.dark.rawValue
                     )
                 )
-                
+
                 /// Maintain the order of light scheme -> dark scheme
                 if scheme == .dark {
                     schemePreviews = schemePreviews.reversed()
@@ -104,23 +104,23 @@ struct SchemeHostView<Content: View>: View {
                 window.overrideUserInterfaceStyle = defaultStyle
                 /// wrap up snapshot task without UI glitch
                 try? await Task.sleep(for: .seconds(0))
-                
+
                 removeOverlayImageView()
-                
+
                 showSheet = true
             }
         }
     }
-    
+
     private func showOverlayImageView(_ image: UIImage?) {
         if overlayWindow?.rootViewController?.view.subviews.isEmpty ?? false {
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
-            
+
             overlayWindow?.rootViewController?.view.addSubview(imageView)
         }
     }
-    
+
     private func removeOverlayImageView() {
         overlayWindow?.rootViewController?.view.subviews.forEach {
             $0.removeFromSuperview()
@@ -145,15 +145,15 @@ struct SchemePickerView: View {
         VStack(alignment: .leading, spacing: 15) {
             Text("Appearance")
                 .font(.title3.bold())
-            
+
             Spacer(minLength: 0)
-            
+
             GeometryReader { _ in
                 HStack(spacing: 0) {
                     ForEach(previews) { preview in
                         SchemeCardView([preview])
                     }
-                    
+
                     SchemeCardView(previews)
                 }
             }
@@ -168,10 +168,10 @@ struct SchemePickerView: View {
             ZStack {
                 Rectangle()
                     .fill(.background)
-                
+
                 Rectangle()
                     .fill(Color.primary.opacity(0.05))
-                
+
             }
             .clipShape(.rect(cornerRadius: 20))
         }
@@ -183,7 +183,7 @@ struct SchemePickerView: View {
         }
         .animation(.easeInOut(duration: 0.25), value: appScheme)
     }
-    
+
     @ViewBuilder
     fileprivate func SchemeCardView(_ preview: [SchemePreview]) -> some View {
         VStack(spacing: 6) {
@@ -195,7 +195,7 @@ struct SchemePickerView: View {
                         if let secondImage = preview.last?.image, preview.count == 2 {
                             GeometryReader {
                                 let width = $0.size.width / 2
-                                
+
                                 Image(uiImage: secondImage)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -208,15 +208,15 @@ struct SchemePickerView: View {
                     }
                     .clipShape(.rect(cornerRadius: 15))
             }
-            
+
             let text = preview.count == 2 ? "Device" : preview.first?.text ?? ""
             Text(text)
                 .font(.caption)
                 .foregroundStyle(.gray)
-            
+
             ZStack {
                 Image(systemName: "circle")
-                
+
                 if localSchemeState.rawValue == text {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(Color.primary)
@@ -232,11 +232,11 @@ struct SchemePickerView: View {
             } else {
                 appScheme = preview.first?.text == AppScheme.dark.rawValue ? .dark : .light
             }
-            
+
             updateScheme()
         }
     }
-    
+
     private func updateScheme() {
         if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow {
             window.overrideUserInterfaceStyle = appScheme == .dark ? .dark : appScheme == .light ? .light : .unspecified

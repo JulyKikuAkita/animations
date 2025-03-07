@@ -22,11 +22,11 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
     let cameraOutput: AVCapturePhotoOutput = .init()
     let videoGravity: AVLayerVideoGravity = .resizeAspectFill
     var permission: CameraPermission = .idle
-    
+
     override init() {
         super.init()
     }
-    
+
     /// Check and ask for camera permission
     private func checkCameraPermission() {
         Task {
@@ -46,11 +46,11 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
             }
         }
     }
-    
+
     private func setupCamera() {
         do {
             session.beginConfiguration()
-            
+
             guard let device = AVCaptureDevice.DiscoverySession(
                 deviceTypes: [.builtInWideAngleCamera],
                 mediaType: .video,
@@ -61,14 +61,14 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
                 session.commitConfiguration()
                 return
             }
-            
+
             let input = try AVCaptureDeviceInput(device: device)
             guard session.canAddInput(input), session.canAddOutput(cameraOutput) else {
                 print("Couldn't add camera output")
                 session.commitConfiguration()
                 return
             }
-            
+
             session.addInput(input)
             session.addOutput(cameraOutput)
             setupCameraControl(device)
@@ -78,7 +78,7 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
             print(error.localizedDescription)
         }
     }
-    
+
     func startSession() {
         guard !session.isRunning else { return }
         /// Session start/stop must run on background thread not on the main thread
@@ -86,7 +86,7 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
             await self.session.startRunning()
         }
     }
-    
+
     func stopSession() {
         guard session.isRunning else { return }
         /// Session start/stop must run on background thread not on the main thread
@@ -94,25 +94,25 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
             await self.session.stopRunning()
         }
     }
-    
+
     /// Set up camera control action for iPhone 16+ models
     private func setupCameraControl(_ device: AVCaptureDevice) {
         /// Checking if the device is eligible for camera control
         guard session.supportsControls else { return }
         session.setControlsDelegate(self, queue: queue)
-        
+
         /// Removing any previously added controls, if any
         for control in session.controls {
             session.removeControl(control)
         }
-        
+
         /// Default control
         let zoomControl = AVCaptureSlider("Zoom", symbolName: "", in: -0.5...1)
         zoomControl.setActionQueue(queue) { progress in
             print(progress)
             /// Update Camera
         }
-        
+
         let filters: [String] = ["None", "B/W", "Vivid", "Comic", "Humid"]
         let filterControl = AVCaptureIndexPicker(
             "Filters",
@@ -123,7 +123,7 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
             print("Selected Filter: ", filters[index])
             /// Update Camera
         }
-        
+
         let controls: [AVCaptureControl] = [zoomControl, filterControl]
         for control in controls {
             /// Always check whether the control can be added to a session
@@ -134,24 +134,24 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
             }
         }
     }
-    
+
     /// Camera control protocols
     nonisolated func sessionControlsDidBecomeActive(_ session: AVCaptureSession) {
-        
+
     }
-    
+
     nonisolated func sessionControlsWillEnterFullscreenAppearance(_ session: AVCaptureSession) {
-        
+
     }
-    
+
     nonisolated func sessionControlsWillExitFullscreenAppearance(_ session: AVCaptureSession) {
-        
+
     }
-    
+
     nonisolated func sessionControlsDidBecomeInactive(_ session: AVCaptureSession) {
-        
+
     }
-    
+
     func capturePhoto() {
         print("Capturing photo")
     }
@@ -180,29 +180,29 @@ struct CameraControlView: View {
 struct CameraLayerView: UIViewRepresentable {
     var size: CGSize
     @Environment(Camera.self) private var camera
-    
+
     func makeUIView(context: Context) -> some UIView {
         let frame = CGRect(origin: .zero, size: size)
-        
+
         let view = UIView(frame: frame)
         view.backgroundColor = .clear
         view.clipsToBounds = true
-        
+
         /// AVCamera Layer
         let layer = AVCaptureVideoPreviewLayer(session: camera.session)
         layer.videoGravity = camera.videoGravity
         layer.frame = frame
         layer.masksToBounds = true
-        
+
         view.layer.addSublayer(layer)
         setupCameraInteraction(view)
-        
+
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
     }
-    
+
     func setupCameraInteraction(_ view: UIView) {
         let cameraControlInteraction = AVCaptureEventInteraction { event in
             if event.phase == .ended {
@@ -210,7 +210,7 @@ struct CameraLayerView: UIViewRepresentable {
                 camera.capturePhoto()
             }
         }
-        
+
         view.addInteraction(cameraControlInteraction)
     }
 }

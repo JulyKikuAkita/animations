@@ -9,8 +9,8 @@ enum InboxTabModel: String, CaseIterable {
     case update = "Updates"
     case promotions = "Promotions"
     case allMails = "All Mails"
-    
-    
+
+
     var color: Color {
         switch self {
         case .primary: .blue
@@ -20,7 +20,7 @@ enum InboxTabModel: String, CaseIterable {
         case .allMails: Color.primary
         }
     }
-        
+
     var symbolImage: String {
         switch self {
         case .primary: "person"

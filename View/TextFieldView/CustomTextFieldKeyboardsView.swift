@@ -16,7 +16,7 @@ struct CustomTextFieldKeyboardsDemoView: View {
                     .frame(width: 150)
                     .background(.fill, in: .rect(cornerRadius: 12))
                     .focused($isActive)
-                
+
             } keyboard : {
                 CustomKeyboardView(text: $text, isActive: $isActive)
             }
@@ -33,7 +33,7 @@ struct CustomKeyboardView: View {
             ForEach(1...9, id: \.self) { index in
                 ButtonView("\(index)")
             }
-            
+
             ButtonView("delete.backward.fill", isImage: true)
             ButtonView("0")
             ButtonView("checkmark.circle.fill", isImage: true)
@@ -41,7 +41,7 @@ struct CustomKeyboardView: View {
         .padding(15)
         .background(.background.shadow(.drop(color: .black.opacity(0.08),radius: 5, x: 0, y:-5)))
     }
-    
+
     @ViewBuilder
     func ButtonView(_ value: String, isImage: Bool = false) -> some View {
         Button {
@@ -50,7 +50,7 @@ struct CustomKeyboardView: View {
                 if value == "delete.backward.fill" && !text.isEmpty {
                     text.removeLast()
                 }
-                
+
                 // Close keyboard
                 if value == "checkmark.circle.fill" {
                     isActive = false

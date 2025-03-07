@@ -21,7 +21,7 @@ struct UniversalOverlayDemoView: View {
     @State private var show: Bool = false
     @State private var showSheet: Bool = false
     @State private var showMiniPlayer: Bool = false
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -33,12 +33,12 @@ struct UniversalOverlayDemoView: View {
                 .universalOverlay(show: $show) {
                     FloatingVideoPlayerView(show: $show)
                 }
-                
+
                 Button("Dummy Sheet") {
                     showSheet.toggle()
                 }
-                
-                
+
+
                 Button("MiniPlayer Demo") {
                     showMiniPlayer.toggle()
                 }
@@ -60,11 +60,11 @@ struct FloatingVideoPlayerView: View {
     @State private var player: AVPlayer?
     @State private var offset: CGSize = .zero
     @State private var lastStoredOffset: CGSize = .zero
-    
+
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             Group {
                 if let videoURL {
                     VideoPlayer(player: player)
@@ -85,15 +85,15 @@ struct FloatingVideoPlayerView: View {
                         withAnimation(.bouncy) {
                             /// limiting movement within the screen
                             offset.width = 0
-                            
+
 //                            if offset.height < 0 {
 //                                offset.height = 0
 //                            }
-//                            
+//
 //                            if offset.height > (size.height - 250) {
 //                                offset.height = (size.height - 250)
 //                            }
-                            
+
                             offset.height = max((size.height - 250), 0)
                             lastStoredOffset = offset
                         }
@@ -110,8 +110,8 @@ struct FloatingVideoPlayerView: View {
             }
         }
     }
-    
-    
+
+
     var videoURL: URL? {
         if let bundle = Bundle.main.path(forResource: "Reel1", ofType: "mp4") {
             return .init(filePath: bundle)
@@ -133,11 +133,11 @@ fileprivate struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier
     var animation: Animation
     @Binding var show: Bool
     @ViewBuilder var viewContent: ViewContent
-    
+
     /// Local View Properties
     @Environment(UniversalOverlayProperties.self) private var properties
     @State private var viewID: String?
-    
+
     func body(content: Content) -> some View {
         content
             .onChange(of: show) { oldValue, newValue in
@@ -148,19 +148,19 @@ fileprivate struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier
                 }
             }
     }
-    
+
     private func addView() {
         if properties.window != nil && viewID == nil {
             viewID = UUID().uuidString
             guard let viewID else { return }
-            
+
             withAnimation(animation) {
                 properties.views
                     .append(.init(id: viewID, view: .init(viewContent)))
             }
         }
     }
-    
+
     private func removeView() {
         if let viewID {
             withAnimation(animation) {
@@ -186,7 +186,7 @@ fileprivate class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let hitView = super.hitTest(point, with: event),
               let rootView = rootViewController?.view else { return nil }
-        
+
         if #available(iOS 18, *) {
             for subview in rootView.subviews.reversed() {
                 /// Finding if any of root view's receiving hit test
@@ -195,7 +195,7 @@ fileprivate class PassthroughWindow: UIWindow {
                     return hitView
                 }
             }
-            
+
             return nil
         } else {
             return hitView == rootView ? nil : hitView
@@ -209,7 +209,7 @@ fileprivate class PassthroughWindow: UIWindow {
 class UniversalOverlayProperties {
     var window: UIWindow?
     var views: [OverlayView] = []
-    
+
     struct OverlayView: Identifiable {
         var id: String = UUID().uuidString
         var view: AnyView
@@ -225,9 +225,9 @@ struct RootView<Content: View>: View {
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content()
     }
-    
+
     private var properties = UniversalOverlayProperties()
-    
+
     var body: some View {
         content
             .environment(properties)

@@ -52,7 +52,7 @@ struct OverlayView: View {
                     .contentShape(.rect)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             Spacer(minLength: 0)
         }
         .padding(15)

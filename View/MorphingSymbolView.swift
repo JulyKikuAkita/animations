@@ -14,7 +14,7 @@ struct MorphingSymbolView: View {
     var body: some View {
         Canvas { ctx, size in
             ctx.addFilter(.alphaThreshold(min: 0.4, color: config.foregroundColor))
-            
+
             if let renderedImage = ctx.resolveSymbol(id: 0) {
                 ctx.draw(renderedImage, at: CGPoint(x: size.width / 2, y: size.height / 2))
             }
@@ -32,7 +32,7 @@ struct MorphingSymbolView: View {
             displayingSymbol = symbol
         }
     }
-    
+
     @ViewBuilder
     func ImageView() -> some View {
         KeyframeAnimator(
@@ -50,14 +50,14 @@ struct MorphingSymbolView: View {
                                 displayingSymbol = nextSymbol
                             }
                         }
-                        
+
                     }
             } keyframes: { _ in
                 CubicKeyframe(config.radius, duration: config.keyFrameDuration)
                 CubicKeyframe(0, duration: config.keyFrameDuration)
             }
     }
-    
+
     struct MorphingSymbolConfig {
         var font: Font
         var frame: CGSize

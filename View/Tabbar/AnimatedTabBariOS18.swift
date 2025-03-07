@@ -31,7 +31,7 @@ struct AnimatedTabViewiOS18DemoView: View {
             Tab.init(value: .home) {
                 Text("Home")
             }
-            
+
             Tab.init(value: .shorts) {
                 TextField("Tap me to start typing", text: .constant(""))
                     .overlay(alignment: .topTrailing, content: {
@@ -44,12 +44,12 @@ struct AnimatedTabViewiOS18DemoView: View {
                     })
                     .toolbarVisibility(tabBarData.hideTabBar ? .hidden : .visible, for: .tabBar)
             }
-            
+
             Tab.init(value: .progress) {
                 Text("Profile")
             }
 
-            
+
             Tab.init(value: .carousel) {
                 DummyScrollView()
                     .overlay(alignment: .topTrailing, content: {
@@ -62,7 +62,7 @@ struct AnimatedTabViewiOS18DemoView: View {
                     })
                     .toolbarVisibility(tabBarData.hideTabBar ? .hidden : .visible, for: .tabBar)
             }
-            
+
             Tab.init(value: .profile) {
                 Text("Photos")
             }
@@ -74,7 +74,7 @@ struct AnimatedTabViewiOS18DemoView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .all) /// this api helps hide tab bar automatically
     }
-    
+
     @ViewBuilder
     func AnimatedTabBar() -> some View {
         HStack(spacing: 0) {
@@ -90,7 +90,7 @@ struct AnimatedTabViewiOS18DemoView: View {
                                 options: .speed(1.2),
                                 value: symbolEffectTrigger == tab
                             )
-                                    
+
                             case .profile:
                                 content.symbolEffect(
                                     .breathe.byLayer,
@@ -116,7 +116,7 @@ struct AnimatedTabViewiOS18DemoView: View {
                                 )
                             }
                         }
-                    
+
                     Text(tab.rawValue)
                         .font(.caption2)
                 }
@@ -127,7 +127,7 @@ struct AnimatedTabViewiOS18DemoView: View {
         .allowsTightening(false)
         .frame(height: 48) /// best for override the original tab height
     }
-    
+
     @ViewBuilder
     func DummyScrollView() -> some View {
         ScrollView {

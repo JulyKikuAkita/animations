@@ -13,7 +13,7 @@ struct MintFilterTransactionsView<Content: View>: View {
         /// Custom Predicate
         let rawCategoryValue = category?.rawValue ?? ""
         let rawRuleValue = rule?.rawValue ?? ""
-        
+
         let predicate = #Predicate<Transaction> { transaction in
             return (transaction.title.localizedStandardContains(searchText) ||
             transaction.remarks.localizedStandardContains(searchText)) &&
@@ -23,7 +23,7 @@ struct MintFilterTransactionsView<Content: View>: View {
         _transactions = Query(filter: predicate,sort:[SortDescriptor(\Transaction.dateAdded, order: .reverse)], animation: .snappy)
         self.content = content
     }
-    
+
     /// date filter
     init(startDate: Date, endDate: Date, @ViewBuilder content: @escaping ([Transaction]) -> Content) {
         let predicate = #Predicate<Transaction> { transaction in
@@ -32,7 +32,7 @@ struct MintFilterTransactionsView<Content: View>: View {
         _transactions = Query(filter: predicate,sort:[SortDescriptor(\Transaction.dateAdded, order: .reverse)], animation: .snappy)
         self.content = content
     }
-    
+
     /// custom filter
     init(startDate: Date, endDate: Date, category: MintCategory?, @ViewBuilder content: @escaping ([Transaction]) -> Content) {
         let rawCategoryValue = category?.rawValue ?? ""
@@ -42,7 +42,7 @@ struct MintFilterTransactionsView<Content: View>: View {
         _transactions = Query(filter: predicate,sort:[SortDescriptor(\Transaction.dateAdded, order: .reverse)], animation: .snappy)
         self.content = content
     }
-    
+
     var body: some View {
         content(transactions)
     }

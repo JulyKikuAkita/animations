@@ -13,9 +13,9 @@ struct SliderWorkaroundScrollDemoView: View {
                     Text("Volume")
                         .font(.caption2)
                         .foregroundStyle(.gray)
-                    
+
                     Text(isScrollDisabled ? "Scroll Disabled" : "Scroll Enabled")
-                    
+
                     VolumeSliderWithSimultaneousGesture(isScrollDisabled: $isScrollDisabled)
                 }
                 .padding()
@@ -35,11 +35,11 @@ struct VolumeSlider: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                
+
                 Rectangle()
                     .fill(.black)
                     .frame(width: progress * size.width)
@@ -66,15 +66,15 @@ struct VolumeSliderWithSimultaneousGesture: View {
     @State private var progress: CGFloat = 0
     @State private var lastProgress: CGFloat = 0
     @State private var velocity: CGSize = .zero /// help identity  scroll or slider gesture
-    
+
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                
+
                 Rectangle()
                     .fill(.black)
                     .frame(width: progress * size.width)
@@ -87,7 +87,7 @@ struct VolumeSliderWithSimultaneousGesture: View {
                             if velocity == .zero {
                                 velocity = value.velocity
                             }
-                            
+
                             guard velocity.height == 0 else { return }
                             isScrollDisabled = true
                         }
@@ -104,7 +104,7 @@ struct VolumeSliderWithSimultaneousGesture: View {
         }
         .frame(height: 40)
     }
-    
+
     var customGesture: DragGesture {
         if #available(iOS 18, *) {
             DragGesture(minimumDistance: 1) /// don't use 0 otherwise won't trigger when we  touch it
@@ -124,11 +124,11 @@ struct VolumeSliderWithIssue: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                
+
                 Rectangle()
                     .fill(.black)
                     .frame(width: progress * size.width)

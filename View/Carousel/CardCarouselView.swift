@@ -10,16 +10,16 @@ import SwiftUI
 private let customCardWidth: CGFloat = 100.0
 
 struct CardCarouselView: View {
-    
+
     /// Drop down View properties
     @State private var selection: String?
     @State private var selection2: String?
     @State private var selection3: String?
-    
-    
+
+
     /// Textfield View Properties
     @State private var text: String = ""
-    
+
     var body: some View {
         NavigationStack {
             List{
@@ -37,7 +37,7 @@ struct CardCarouselView: View {
 
 extension CardCarouselView {
     @ViewBuilder
-    func randomView() -> some View {        
+    func randomView() -> some View {
         LimitedTextFieldIView(
             config: .init(
                 limit: 10,
@@ -49,26 +49,26 @@ extension CardCarouselView {
         )
         .autocorrectionDisabled()
         .frame(maxHeight: 150)
-        
-        
+
+
         DropDownView(
             hint: "Select",
             options: ["Shiba", "Akita", "Bernes", "Malamute"],
             anchor: .bottom,
             selection: $selection
         )
-        
+
         ParticleEffectsView()
             .scaleEffect(0.7, anchor: .bottom)
             .padding()
-        
+
         DropDownView(
             hint: "Select",
             options: ["list", "grid", "stack"],
             anchor: .bottom,
             selection: $selection2
         )
-        
+
         DropDownView(
             hint: "Select",
             options: ["1", "2", "3"],
@@ -84,7 +84,7 @@ struct CarouselView1: View {
         VStack {
             GeometryReader {
                 let size = $0.size
-                
+
                 ScrollView(.horizontal) {
                     HStack(spacing: 0) {
                         ForEach(cards) { card in
@@ -101,7 +101,7 @@ struct CarouselView1: View {
             .padding(.horizontal, 15)
             .padding(.top, 30)
             .frame(height: 210)
-            
+
             Spacer(minLength: 0)
         }
     }
@@ -113,7 +113,7 @@ struct CarouselView2: View {
         VStack {
             GeometryReader {
                 let size = $0.size
-                
+
                 ScrollView(.horizontal) {
                     HStack(spacing: 0) {
                         ForEach(cards) { card in
@@ -130,7 +130,7 @@ struct CarouselView2: View {
             .padding(.horizontal, 15)
             .padding(.top, 30)
             .frame(height: 210)
-            
+
             Spacer(minLength: 0)
         }
     }
@@ -146,9 +146,9 @@ extension CarouselView1 {
             /// 190: 180 - card width; 10 - spacing
             let reducingWidth = (minX / 190) * customCardWidth
             let cappedWidth = min(reducingWidth, customCardWidth)
-            
+
             let frameWidth = size.width - (minX > 0 ? cappedWidth : -cappedWidth)
-            
+
             Image(card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -162,7 +162,7 @@ extension CarouselView1 {
         .offsetX { offset in
             let reducingWidth = (offset / 190) * customCardWidth
             let index = cards.indexOf(card)
-            
+
             if cards.indices.contains(index + 1) {
                 cards[index + 1].previousOffset = (offset < 0 ? 0 : reducingWidth)
             }
@@ -180,9 +180,9 @@ extension CarouselView2 {
             /// 190: 180 - card width; 10 - spacing
             let reducingWidth = (minX / 190) * customCardWidth
             let cappedWidth = min(reducingWidth, customCardWidth)
-            
+
             let frameWidth = size.width - (minX > 0 ? cappedWidth : -cappedWidth)
-            
+
             Image(card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -196,7 +196,7 @@ extension CarouselView2 {
         .offsetX { offset in
             let reducingWidth = (offset / 190) * customCardWidth
             let index = cards.indexOf(card)
-            
+
             if cards.indices.contains(index + 1) {
                 cards[index + 1].previousOffset = (offset < 0 ? 0 : reducingWidth)
             }

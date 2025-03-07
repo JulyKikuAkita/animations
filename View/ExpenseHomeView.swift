@@ -10,7 +10,7 @@ struct ExpenseHomeView: View {
     @State private var activeExpenseCard: UUID?
     /// Environment Values
     @Environment(\.colorScheme) private var scheme
-    
+
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 0) {
@@ -19,11 +19,11 @@ struct ExpenseHomeView: View {
                         .font(.largeTitle.bold())
                         .frame(height: 45) /// use fix value to help calculate top offset for animation
                         .padding(.horizontal, 15)
-                    
+
                     GeometryReader {
                         let rect = $0.frame(in: .scrollView)
                         let minY = rect.minY.rounded()
-                        
+
                         /// Card View
                         ScrollView(.horizontal) {
                             LazyHStack(spacing: 0) {
@@ -57,10 +57,10 @@ struct ExpenseHomeView: View {
                     }
                     .frame(height: 125) // card height
                 })
-                
+
                 LazyVStack(spacing: 15) {
                     Menu {
-                        
+
                     } label: {
                         HStack(spacing: 4) {
                             Text("Filter By")
@@ -70,7 +70,7 @@ struct ExpenseHomeView: View {
                         .foregroundStyle(.gray)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    
+
                     ForEach(allExpenses) { expense in
                             ExpenseCardView(expense)
                     }
@@ -88,7 +88,7 @@ struct ExpenseHomeView: View {
                         let rect = $0.frame(in: .scrollView)
                         let minY = min(rect.minY - 125, 0)
                         let progress = max(min(-minY / 25, 1), 0)
-                        
+
                         RoundedRectangle(
                             cornerRadius: 30 * progress,
                             style: .continuous
@@ -117,26 +117,26 @@ struct ExpenseHomeView: View {
             }
         }
     }
-    
-    
+
+
     /// Background Limit Offset
     nonisolated func backgroundLimitOffset(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView).minY
         let customHeight: CGFloat = 100.0 // adjustable; try 75.0 to see the diff; the overlapping height is 125 (card height) - 100
         return minY < customHeight ? -minY + customHeight : 0 // 100
     }
-    
+
     @ViewBuilder
     func CardView( _ card: ExpenseCard) -> some View {
         GeometryReader {
             let rect = $0.frame(in: .scrollView(axis: .vertical))
             let minY = rect.minY
             let topValue = 75.0 /// 75 is card height 45 + 15 padding + 15 spacing
-            
+
             let offset = min(minY - topValue, 0)
             let progress = max(min(-offset / topValue, 1), 0)
             let scale: CGFloat = 1 + progress
-            
+
             ZStack {
                 RoundedRectangle(cornerRadius: 25, style: .continuous)
                     .fill(card.bgColor)
@@ -154,13 +154,13 @@ struct ExpenseHomeView: View {
                         RoundedRectangle(cornerRadius: 25, style: .continuous)
                     )
                     .scaleEffect(scale, anchor: .bottom)
-                
+
                 VStack(alignment: .leading, spacing: 4) {
                     Spacer(minLength: 0)
-                    
+
                     Text("Current Balance \(offset)") // print offset for debug
                         .font(.callout)
-                    
+
                     Text(card.balance)
                         .font(.title.bold())
                 }
@@ -177,7 +177,7 @@ struct ExpenseHomeView: View {
         .padding(.horizontal, 15)
 
     }
-    
+
     /// Expense Card View
     @ViewBuilder
     func ExpenseCardView(_ expense: Expense) -> some View {
@@ -186,14 +186,14 @@ struct ExpenseHomeView: View {
                 Text(expense.product)
                     .font(.callout)
                     .fontWeight(.semibold)
-                
+
                 Text(expense.spendType)
                     .font(.caption)
                     .foregroundStyle(.gray)
             }
-            
+
             Spacer(minLength: 0)
-            
+
             Text(expense.amountSpend)
                 .fontWeight(.black)
         }

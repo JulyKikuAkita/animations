@@ -23,12 +23,12 @@ struct ContentView: View {
                         modifyOrientation(newValue.mask)
                     }
                 }
-              
+
                 Section("Actions") {
                     NavigationLink("Detail View") {
                         DetailView(userSelection: orientation)
                     }
-                    
+
                     Button("Show full screen cover") {
                         modifyOrientation(.landscapeRight)
                         DispatchQueue.main.async { /// animation delay
@@ -99,7 +99,7 @@ enum Orientation: String, CaseIterable {
     case portrait = "Portrait"
     case landscapeLeft = "Left"
     case landscapeRight = "Right"
-    
+
     var mask: UIInterfaceOrientationMask {
         switch self {
             case .all:

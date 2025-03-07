@@ -17,7 +17,7 @@ struct MorphingSymbolDemoView: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             VStack {
                 Spacer(minLength: 0)
                 MorphingSymbolView(
@@ -29,13 +29,13 @@ struct MorphingSymbolDemoView: View {
                        foregroundColor: .white
                     )
                 )
-                
+
                 TextContent(size: size)
 
                 Spacer(minLength: 0)
-                
+
                 IndicatorView()
-                
+
                 ContinueButton()
             }
             .frame(maxWidth: .infinity)
@@ -49,7 +49,7 @@ struct MorphingSymbolDemoView: View {
                 .ignoresSafeArea()
         }
     }
-    
+
     @ViewBuilder
     func HeaderView() -> some View {
         HStack() {
@@ -62,9 +62,9 @@ struct MorphingSymbolDemoView: View {
                     .contentShape(.rect)
             }
             .opacity(activePage != .page1 ? 1: 0)
-            
+
             Spacer(minLength: 0)
-            
+
             Button("Skip") {
                 activePage = .page4
             }
@@ -75,7 +75,7 @@ struct MorphingSymbolDemoView: View {
         .animation(.snappy(duration: 0.35, extraBounce: 0), value: activePage)
         .padding(15)
     }
-    
+
     @ViewBuilder
     func IndicatorView() -> some View {
         HStack(spacing: 6) {
@@ -88,7 +88,7 @@ struct MorphingSymbolDemoView: View {
         .animation(.smooth(duration: 0.5, extraBounce: 0), value: activePage)
         .padding(.bottom, 12)
     }
-    
+
     @ViewBuilder
     func TextContent(size: CGSize) -> some View {
         VStack(spacing: 8) {
@@ -105,7 +105,7 @@ struct MorphingSymbolDemoView: View {
             /// sliding text view left/right based on the current active page
             .offset(x: -activePage.index * size.width)
             .animation(.smooth(duration: 0.7, extraBounce: 0.1), value: activePage)
-            
+
             HStack(alignment: .top, spacing: 0) {
                 ForEach(Page.allCases, id: \.rawValue) { page in
                     Text(page.subTitle)
@@ -122,7 +122,7 @@ struct MorphingSymbolDemoView: View {
         .padding(.top, 15)
         .frame(width: size.width, alignment: .leading)
     }
-    
+
     @ViewBuilder
     func ContinueButton() -> some View {
         Button {

@@ -15,7 +15,7 @@ class Transaction {
     var category: String
     var rule: String
     var tintColor: String
-    
+
     init(title: String, remarks: String, amount: Double, dateAdded: Date, category: MintCategory, rule: MintRule, tintColor: TintColor) {
         self.title = title
         self.remarks = remarks
@@ -25,24 +25,24 @@ class Transaction {
         self.rule = rule.rawValue
         self.tintColor = tintColor.color
     }
-    
+
     /// Extracting color value from tintColor String
     ///  Note: by default, SwiftData does not persist computed properties but still annotate @Transient below for learning purpose
     @Transient
     var color: Color {
         return tints.first(where: { $0.color == tintColor })?.value ?? appTint
     }
-    
+
     @Transient
     var tint: TintColor? {
         return tints.first(where: { $0.color == tintColor })
     }
-    
+
     @Transient
     var rawCategory: MintCategory? {
         return MintCategory.allCases.first(where: { category == $0.rawValue })
     }
-    
+
     @Transient
     var rawRule: MintRule? {
         return MintRule.allCases.first(where: { rule == $0.rawValue })

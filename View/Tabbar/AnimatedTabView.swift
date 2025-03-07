@@ -17,7 +17,7 @@ struct AnimatedTabView: View {
     /// View properties
     @State private var activeTab: Tab_iOS17 = .photos
     @State private var tabState: Visibility = .visible
-    
+
     /// All tabs
     @State private var allTabs: [AnimatedTab] = Tab_iOS17.allCases.compactMap { tab -> AnimatedTab? in
         return .init(tab: tab)
@@ -33,7 +33,7 @@ struct AnimatedTabView: View {
                             ForEach(profiles) { profile in
                                 GeometryReader(content: { geometry in
                                     let size = geometry.size
-                                    
+
                                     Image(profile.profilePicture)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
@@ -46,7 +46,7 @@ struct AnimatedTabView: View {
                     }
                     .navigationTitle(Tab_iOS17.photos.title)
                 }
-                
+
 //                .setupTab(.photos, tabState)
                 .toolbar(tabState, for: .tabBar)
                 .animation(.easeInOut(duration: 0.3), value: tabState)
@@ -54,11 +54,11 @@ struct AnimatedTabView: View {
                     Image(systemName: Tab_iOS17.photos.rawValue)
                     Text(Tab_iOS17.photos.title)
                 }
-                
+
 
                 NavigationStack {
                     VStack {
-                        
+
                     }
                     .navigationTitle(Tab_iOS17.chat.title)
                 }
@@ -67,10 +67,10 @@ struct AnimatedTabView: View {
                     Image(systemName: Tab_iOS17.chat.rawValue)
                     Text(Tab_iOS17.chat.title)
                 }
-                
+
                 NavigationStack {
                     VStack {
-                        
+
                     }
                     .navigationTitle(Tab_iOS17.apps.title)
                 }
@@ -79,10 +79,10 @@ struct AnimatedTabView: View {
                     Image(systemName: Tab_iOS17.apps.rawValue)
                     Text(Tab_iOS17.apps.title)
                 }
-                
+
                 NavigationStack {
                     VStack {
-                        
+
                     }
                     .navigationTitle(Tab_iOS17.notifications.title)
                 }
@@ -91,10 +91,10 @@ struct AnimatedTabView: View {
                     Image(systemName: Tab_iOS17.notifications.rawValue)
                     Text(Tab_iOS17.notifications.title)
                 }
-                
+
                 NavigationStack {
                     VStack {
-                        
+
                     }
                     .navigationTitle(Tab_iOS17.profile.title)
                 }
@@ -103,31 +103,31 @@ struct AnimatedTabView: View {
                     Image(systemName: Tab_iOS17.profile.rawValue)
                     Text(Tab_iOS17.profile.title)
                 }
-                
+
             }
-            
+
             Picker("", selection: $bounceDown) {
                 Text("Bounces Down")
                     .tag(true)
-                
+
                 Text("Bounces Up")
                     .tag(false)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal,15)
             .padding(.bottom, 20)
-            
+
             CustomTabBar()
         }
     }
-    
+
     /// Custom Tab Bar
     @ViewBuilder
     func CustomTabBar() -> some View {
         HStack(spacing: 0) {
             ForEach($allTabs) { $animatedTab in
                 let tab = animatedTab.tab
-                
+
                 VStack(spacing: 4) {
                     Image(systemName: tab.rawValue)
                         .font(.title2)
@@ -137,11 +137,11 @@ struct AnimatedTabView: View {
                             .bounce.down.byLayer : .bounce.up.byLayer ,
                             value: animatedTab.isAnimating
                         )
-                    
+
                     Text(tab.title)
                         .font(.caption2)
                         .textScale(.secondary)
-                    
+
                 }
                 .frame(maxWidth: .infinity)
                 .foregroundStyle(activeTab == tab ? Color.primary : Color.gray.opacity(0.8))

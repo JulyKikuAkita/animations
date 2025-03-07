@@ -15,7 +15,7 @@ struct FloatingButton<Label: View>: View {
         self.actions = actions()
         self.label = label
     }
-    
+
     /// View Properties
     @State private var isExpanded: Bool = false
     @State private var dragLocation: CGPoint = .zero
@@ -58,7 +58,7 @@ struct FloatingButton<Label: View>: View {
         .coordinateSpace(.named("FLOATING VIEW"))
         .animation(.snappy(duration: 0.4, extraBounce: 0), value: isExpanded)
     }
-    
+
     /// Action view
     @ViewBuilder
     func ActionView(_ action: FloatingAction) -> some View {
@@ -83,7 +83,7 @@ struct FloatingButton<Label: View>: View {
         .background {
             GeometryReader {
                 let rect = $0.frame(in: .named("FLOATING VIEW"))
-                
+
                 Color.clear
                     .onChange(of: dragLocation) { oldValue, newValue in
                         if isExpanded && isDragging {
@@ -98,7 +98,7 @@ struct FloatingButton<Label: View>: View {
                                 }
                             }
                         }
-                        
+
                     }
             }
         }
@@ -106,7 +106,7 @@ struct FloatingButton<Label: View>: View {
         .offset(x: isExpanded ? -offset / 2 : 0)
         .rotationEffect(.init(degrees: progress(action) * 90))
     }
-    
+
     private var offset: CGFloat {
         let buttonSize = buttonSize + 10
         var base: CGFloat = 1
@@ -120,7 +120,7 @@ struct FloatingButton<Label: View>: View {
         }
         return Double(actions.count) * base
     }
-    
+
     private func progress(_ action: FloatingAction) -> CGFloat {
         let index = CGFloat(actions.firstIndex(where: { $0.id == action.id }) ?? 0)
         return actions.count == 1 ? 1 : index / CGFloat(actions.count - 1)

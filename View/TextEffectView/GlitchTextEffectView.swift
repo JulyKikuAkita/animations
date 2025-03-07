@@ -11,21 +11,21 @@ struct GlitchTextEffectDemoView: View {
         VStack {
             GlitchText("Made in Abyss", trigger: trigger.0)
                 .font(.system(size: 48, weight: .semibold))
-            
+
             GlitchText("Nanachi", trigger: trigger.1)
                 .font(.system(size: 32, design: .rounded))
-            
+
             GlitchText("Season 1", trigger: trigger.2)
                 .font(.system(size: 20))
-            
+
             Button(action: {
                 Task {
                     trigger.0.toggle()
                     try? await Task.sleep(for: .seconds(0.6))
-                    
+
                     trigger.1.toggle()
                     try? await Task.sleep(for: .seconds(0.6))
-                    
+
                     trigger.2.toggle()
                 }
             }, label: {
@@ -38,7 +38,7 @@ struct GlitchTextEffectDemoView: View {
         }
         .padding()
     }
-    
+
     @ViewBuilder
     func GlitchText(_ text: String, trigger: Bool) -> some View {
         ZStack {
@@ -47,59 +47,59 @@ struct GlitchTextEffectDemoView: View {
                     GlitchFrame(top: -5, center: 0, bottom: 0, shadowOpacity: 0.2),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: -5, center: -5, bottom: -5, shadowOpacity: 0.6),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: -5, center: -5, bottom: 5, shadowOpacity: 0.8),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.4),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: 5, center: 0, bottom: 5, shadowOpacity: 0.2),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(),
                     duration: 0.1
                 )
             }
-            
+
             GlitchTextEffectView(text: text, trigger: trigger, shadow: .green) {
                 LinearKeyframe(
                     GlitchFrame(top: 0, center: 5, bottom: 0, shadowOpacity: 0.2),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.3),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: 5, center: 5, bottom: -5, shadowOpacity: 0.5),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: 0, center: 5, bottom: -5, shadowOpacity: 0.6),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(top: 0, center: -5, bottom: 0, shadowOpacity: 0.3),
                     duration: 0.1
                 )
-                
+
                 LinearKeyframe(
                     GlitchFrame(),
                     duration: 0.1
@@ -123,7 +123,7 @@ struct GlitchFrame: Animatable {
             shadowOpacity = newValue.second.second.second
         }
     }
-    
+
     /// X-offset's
     var top: CGFloat = 0
     var center: CGFloat = 0
@@ -145,7 +145,7 @@ struct GlitchTextEffectView: View {
     var shadow: Color
     var radius: CGFloat
     var frames: [LinearKeyframe<GlitchFrame>]
-    
+
     init(text: String, trigger: Bool, shadow: Color = .red, radius: CGFloat = 1, @GlitchFrameBuilder frames: @escaping () -> [LinearKeyframe<GlitchFrame>]) {
         self.text = text
         self.trigger = trigger
@@ -167,7 +167,7 @@ struct GlitchTextEffectView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func TextView(_ alignment: Alignment, offset: CGFloat, opacity: CGFloat) -> some View {
         Text(text)
@@ -196,7 +196,7 @@ struct GlitchTextEffectView: View {
             .shadow(color: shadow.opacity(opacity), radius: radius, x: offset, y: offset / 2) // use your choice of offset for y, input a new value if preferred
             .offset(x: offset)
     }
-    
+
     @ViewBuilder
     func ExtendedSpacer() -> some View {
         Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)

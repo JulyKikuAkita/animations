@@ -27,7 +27,7 @@ struct CardView: View {
             SourceView(id: item.id.uuidString) {
                 ImageView()
             }
-            
+
             Text(item.title)
             Spacer(minLength: 0)
         }
@@ -35,7 +35,7 @@ struct CardView: View {
         .onTapGesture {
             expandSheet.toggle()
         }
-        
+
         .sheet(isPresented: $expandSheet, content: {
             DestinationView(id: item.id.uuidString) {
                 ImageView()
@@ -50,10 +50,10 @@ struct CardView: View {
                    animate: $expandSheet) {
             ImageView()
         }  completion: { _ in
-            
+
         }
     }
-    
+
     @ViewBuilder
     func ImageView() -> some View {
         Image(systemName: item.symbol)
@@ -99,7 +99,7 @@ struct DemoView: View {
             Circle()
                 .fill(.red)
         } completion: { status in
-            
+
         }
     }
 }

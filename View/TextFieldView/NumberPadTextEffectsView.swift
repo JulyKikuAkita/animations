@@ -7,7 +7,7 @@ import SwiftUI
 struct KeypadValue {
     var stringValue: String = ""
     var stackViews: [Number] = []
-    
+
     struct Number: Identifiable {
         var id: String = UUID().uuidString
         var value: String = ""
@@ -15,7 +15,7 @@ struct KeypadValue {
         /// id for matched gemonetry effect
         var commaID: Int = 0
     }
-    
+
     mutating func append(_ number: Int) {
         /// do not start with number 0 first or not exceed max number length
         guard !isExceedMaxLength && ( number == 0 ? !stringValue.isEmpty : true) else { return }
@@ -23,30 +23,30 @@ struct KeypadValue {
         stackViews.append(.init(value: String(number)))
         updateCommas()
     }
-    
+
     mutating func removeLast() {
         guard !stringValue.isEmpty else { return }
         stringValue.removeLast()
         stackViews.removeLast()
         updateCommas()
     }
-    
+
     mutating func updateCommas() {
         guard let number = Int(stringValue) else { return }
-        
+
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = Locale(identifier: localFormat)
-        
+
         if let formattedNumber = formatter.string(from: .init(value: number)) {
             /// remove existing commas
             stackViews.removeAll(where: \.isComma)
-            
+
             let stackWithCommas = formattedNumber.compactMap {
                 let value = String($0)
                 return Number(value: value, isComma: value == ",")
             }
-            
+
             /// We only want to update commas without impacting existing number stack views
             /// in order to preserve the animation id to achive a text push effect instead of replace effect
             /// aka animating slide the comma to the updated postiion
@@ -61,20 +61,20 @@ struct KeypadValue {
             }
         }
     }
-    
-    
+
+
     var isEmpty: Bool {
         stringValue.isEmpty
     }
-    
+
     var isExceedMaxLength: Bool {
         stringValue.count >= 11
     }
-    
+
     var intValue: Int {
         Int(stringValue) ?? 0
     }
-    
+
     var localFormat: String {
         "en_US"
     }
@@ -90,26 +90,26 @@ struct NumberPadTextEffectsViewDemoView: View {
                 .font(.largeTitle.bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 5)
-            
+
             VStack(spacing: 6) {
                 Image(.fox)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
                     .clipShape(.circle)
-                
+
                 Text("Fox")
                     .font(.caption)
                     .fontWeight(.semibold)
             }
             .frame(maxHeight: .infinity)
-            
+
             HStack(spacing: 2) {
                 AnimatedNumberTextView()
             }
             .frame(height: 50)
             .padding(.bottom, 30)
-            
+
             CustomNumberKeypad()
         }
         .fontDesign(.rounded)
@@ -120,12 +120,12 @@ struct NumberPadTextEffectsViewDemoView: View {
     func AnimatedNumberTextView() -> some View {
         HStack(spacing: 2) {
             Text("$")
-            
+
             Text(value.isEmpty ? "0" : "")
                 .frame(width: value.isEmpty ? nil : 0)
                 .contentTransition(.numericText())
                 .padding(.leading, 3)
-            
+
             ForEach(value.stackViews) { number in
                 Group {
                     if number.isComma {
@@ -142,7 +142,7 @@ struct NumberPadTextEffectsViewDemoView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func CustomNumberKeypad() -> some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3)) {
@@ -157,12 +157,12 @@ struct NumberPadTextEffectsViewDemoView: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 70)
                         .contentShape(.rect)
-                        
+
                 }
             }
-            
+
             Spacer()
-            
+
             ForEach(["0", "delete.backward.fill"], id: \.self) { string in
                 Button {
                     withAnimation(.easeInOut(duration: 0.25)) {

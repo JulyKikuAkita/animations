@@ -13,7 +13,7 @@ struct MintDateFilterView: View {
         VStack(spacing: 15) {
             DatePicker("Start Date", selection: $start, displayedComponents: [.date])
             DatePicker("End Date", selection: $end, displayedComponents: [.date])
-            
+
             HStack(spacing: 15) {
                 Button("Cancel") {
                     onClose()
@@ -21,7 +21,7 @@ struct MintDateFilterView: View {
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.roundedRectangle(radius: 5))
                 .tint(.red)
-                
+
                 Button("Filter") {
                     onSubmit(start, end)
                 }
@@ -36,4 +36,3 @@ struct MintDateFilterView: View {
         .padding(.horizontal, 30)
     }
 }
-

@@ -32,20 +32,20 @@ struct ParticleEffectsView: View {
                     toggleAnimation(frame.id, false)
                 }
                 .buttonRepeatBehavior(.enabled)
-                
+
                 CustomNumberKeyFrameView(count: $count, imageName: $imageName)
-                
+
                 CustomButton(systemImage: "suit.heart.fill", status: heart, activeTint: .pink, inActiveTint: .red) {
                     heart.toggle()
                 }
-                
+
                 CustomButton(systemImage: "star.fill", status: star, activeTint: .yellow, inActiveTint: .yellow) {
                     star.toggle()
                 }
             }
         }
     }
-    
+
     @ViewBuilder
     func CustomButton(systemImage: String, status: Bool, activeTint: Color, inActiveTint: Color, drop: Bool = true, useKeyFrame: Bool = false, onTap: @escaping () -> ()) -> some View {
         Button(action: onTap) {
@@ -82,7 +82,7 @@ struct ParticleEffectsView: View {
                                 .opacity(frame.opacity)
                                 /// adding blur effect
                                 .blur(radius: (1 - frame.opacity) * 10)
-                                
+
                             } keyframes: { _ in
                                 /// Definitng key frames
                                 KeyframeTrack(\.offset) {
@@ -90,27 +90,27 @@ struct ParticleEffectsView: View {
                                     LinearKeyframe(CGSize(width: .random(in: -2...2), height: -70), duration: 0.2)
                                     LinearKeyframe(CGSize(width: .random(in: -2...2), height: -110), duration: 0.4)
                                 }
-                                
+
                                 KeyframeTrack(\.opacity) {
                                     LinearKeyframe(1, duration: 0.2)
                                     LinearKeyframe(1, duration: 0.2)
                                     LinearKeyframe(0.7, duration: 0.2)
                                     LinearKeyframe(0, duration: 0.2)
                                 }
-                                
+
                             }
                         }
                     }
                 }
         }
     }
-    
+
     func toggleAnimation(_ id: UUID, _ increment: Bool = true) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { // we need the delay for keyFrame animation to show up
             if let index = buttonFrames2.firstIndex(where: { $0.id == id }) {
                 /// triggering keyframe animation
                 buttonFrames2[index].triggerKeyFrame = true
-                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { /// keyframe animation takes about 0.8, use the same delay to remove frame to decrease memory usage
                     buttonFrames2.removeAll(where: { $0.id  == id })
                 }
@@ -137,7 +137,7 @@ struct CustomNumberKeyFrameView: View {
                 Image(systemName: "minus")
             })
             .buttonRepeatBehavior(.enabled)
-            
+
             Text("\(count)")
                 .frame(width: 45, height: 45)
                 .background(.white.shadow(.drop(color: .black.opacity(0.15), radius: 5)), in: .rect(cornerRadius: 10))
@@ -156,7 +156,7 @@ struct CustomNumberKeyFrameView: View {
                             .opacity(frame.opacity)
                             /// adding blur effect
                             .blur(radius: (1 - frame.opacity) * 10)
-                            
+
                         } keyframes: { _ in
                             /// Definitng key frames
                             KeyframeTrack(\.offset) {
@@ -164,23 +164,23 @@ struct CustomNumberKeyFrameView: View {
                                 LinearKeyframe(CGSize(width: .random(in: -2...2), height: -40), duration: 0.2)
                                 LinearKeyframe(CGSize(width: .random(in: -2...2), height: -90), duration: 0.4)
                             }
-                            
+
                             KeyframeTrack(\.opacity) {
                                 LinearKeyframe(1, duration: 0.2)
                                 LinearKeyframe(1, duration: 0.2)
                                 LinearKeyframe(0.7, duration: 0.2)
                                 LinearKeyframe(0, duration: 0.2)
                             }
-                            
+
                         }
                     }
                 }
-            
+
             Button(action: {
                 let frame = ButtonFrame(value: count)
                 buttonFrames.append(frame)
                 toggleAnimation(frame.id)
-                
+
             }, label: {
                 Image(systemName: "plus")
             })
@@ -193,18 +193,18 @@ struct CustomNumberKeyFrameView: View {
             if let index = buttonFrames.firstIndex(where: { $0.id == id }) {
                 /// triggering keyframe animation
                 buttonFrames[index].triggerKeyFrame = true
-                
+
                 if increment {
                     count += 1
                 } else {
                     count -= 1
                 }
-                
+
                 removeFrame(id)
             }
         }
     }
-    
+
     func removeFrame(_ id: UUID) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { /// keyframe animation takes about 0.8, use the same delay to remove frame to decrease memory usage
             buttonFrames.removeAll(where: { $0.id  == id })

@@ -7,7 +7,7 @@ import SwiftUI
 struct ThemeSwitcherDemoView: View {
     @AppStorage("AppScheme") private var appScheme: AppScheme = .device
     @SceneStorage("ShowScenePickerView") private var showPickerView: Bool = false
-    
+
     var body: some View {
         NavigationStack {
             List {

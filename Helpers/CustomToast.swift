@@ -25,10 +25,10 @@ import SwiftUI
 //                    window.isHidden = false
 //                    window.isUserInteractionEnabled = true
 //                    window.tag = 1009 // use the tag view to extract the overlay window from the window scene
-//                    
+//
 //                    overlayWindow = window
 //                }
-//                    
+//
 //            }
 //    }
 //}
@@ -46,7 +46,7 @@ fileprivate class PassthroughWindow: UIWindow {
 class Toast {
     static let shared = Toast()
     fileprivate var toasts: [ToastItem] = []
-    
+
     func present(title: String, symbol: String?, tint: Color = .primary, isUserInteractionEnabled: Bool = false, timing: ToastTime = .medium) {
         withAnimation(.snappy) {
             toasts.append(.init(title: title, symbol: symbol, tint: tint, isUserInteractionEnabled: isUserInteractionEnabled, timing: timing))
@@ -79,11 +79,11 @@ fileprivate struct ToastGroup: View {
         GeometryReader {
             let size = $0.size
             let safeArea = $0.safeAreaInsets
-            
+
             ZStack {
 //                Text("\(model.toasts.count)")
 //                    .offset(y: -100)
-                
+
                 ForEach(model.toasts) { toast in
                     ToastViewiOS17(size: size, item: toast)
                         .scaleEffect(scale(toast))
@@ -101,7 +101,7 @@ fileprivate struct ToastGroup: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
     }
-    
+
     /// creating a stack feel animation with offsetY and scale
     /// calculating toast stack animation offset, each with offset size 10
     func offsetY(_ item: ToastItem) -> CGFloat {
@@ -109,7 +109,7 @@ fileprivate struct ToastGroup: View {
         let totalCount = CGFloat(model.toasts.count) - 1
         return (totalCount - index) >= 2 ? -20 : ((totalCount - index) * -10)
     }
-    
+
     func scale(_ item: ToastItem) -> CGFloat {
         let index = CGFloat(model.toasts.firstIndex(where: { $0.id == item.id }) ?? 0)
         let totalCount = CGFloat(model.toasts.count) - 1
@@ -120,13 +120,13 @@ fileprivate struct ToastGroup: View {
 fileprivate struct ToastViewiOS17: View {
     var size: CGSize
     var item: ToastItem
-    
+
     /// View Properties
     ///  for state style animation
 //    @State private var animateIn: Bool = false
 //    @State private var animateOut: Bool = false
     @State private var delayTask: DispatchWorkItem?
-    
+
     var body: some View {
         HStack(spacing: 0) {
             if let symbol = item.symbol {
@@ -134,7 +134,7 @@ fileprivate struct ToastViewiOS17: View {
                     .font(.title3)
                     .padding(.trailing, 10)
             }
-            
+
             Text(item.title)
                 .lineLimit(1)
         }
@@ -154,12 +154,12 @@ fileprivate struct ToastViewiOS17: View {
                     guard item.isUserInteractionEnabled else { return }
                     let endY = value.translation.height
                     let velocityY = value.translation.height
-                    
+
                     if (endY + velocityY) > 100 {
                         /// swipe gesture to remove toast
                         transitionRemoveToast()
                     }
-                    
+
                 })
         )
 //        .offset(y: animateIn ? 0 : 150) // use state change for animation; can use transition too
@@ -170,9 +170,9 @@ fileprivate struct ToastViewiOS17: View {
 ////            withAnimation(.snappy) {
 ////                animateIn = true
 ////            }
-//            
+//
 //            try? await Task.sleep(for: .seconds(item.timing.rawValue))
-//            
+//
 //            transitionRemoveToast()
 //        }
         .onAppear {
@@ -180,7 +180,7 @@ fileprivate struct ToastViewiOS17: View {
             delayTask = .init(block: {
                 removeToastItem()
             })
-            
+
             if let delayTask {
                 DispatchQueue.main.asyncAfter(deadline: .now() + item.timing.rawValue, execute: delayTask)
             }
@@ -189,7 +189,7 @@ fileprivate struct ToastViewiOS17: View {
         .frame(maxWidth: size.width * 0.7)
         .transition(.offset(y: 150))
     }
-    
+
     /// animation has no delay when item is removed
     func transitionRemoveToast() {
         if let delayTask {
@@ -199,7 +199,7 @@ fileprivate struct ToastViewiOS17: View {
             Toast.shared.toasts.removeAll(where: { $0.id == item.id })
         }
     }
-    
+
     /// use state change for animation -> animation has delay when item is removed
 //    func removeToast() {
 //        guard !animateOut else { return }
@@ -209,7 +209,7 @@ fileprivate struct ToastViewiOS17: View {
 //            removeToastItem()
 //        }
 //    }
-    
+
     /// use state change for animation
     func removeToastItem() {
         Toast.shared.toasts.removeAll(where: { $0.id == item.id })

@@ -13,7 +13,7 @@ struct TagLayout: Layout {
         let maxWidth = proposal.width ?? 0
         var height: CGFloat = 0
         let rows = generateRows(maxWidth, proposal, subviews)
-        
+
         for (index, row) in rows.enumerated() {
             /// Finding max height in each row and adding it to the View's total height
             if index == (rows.count - 1) {
@@ -25,19 +25,19 @@ struct TagLayout: Layout {
         }
         return .init(width: maxWidth, height: height)
     }
-    
+
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         /// Placing views
         var origin = bounds.origin
         let maxWidth = bounds.width
         let rows = generateRows(maxWidth, proposal, subviews)
-        
+
         for row in rows {
             /// Changing Origin X based on Alignments
             let leading: CGFloat = bounds.maxX - maxWidth
             let trailing = bounds.maxX - (row.reduce(CGFloat.zero) { partialResult, view in
                 let width = view.sizeThatFits(proposal).width
-                
+
                 if view == row.last {
                     /// No Spacing
                     return partialResult + width
@@ -45,35 +45,35 @@ struct TagLayout: Layout {
                 /// With Spacing
                 return partialResult + width + spacing
             })
-            
+
             let center = (trailing + leading) / 2
-            
+
             /// Resetting origin x to zero for each row
             origin.x = (alignment == .leading ? leading : alignment == .trailing ? trailing : center)
-            
+
             for view in row {
                 let viewSize = view.sizeThatFits(proposal)
                 view.place(at: origin, proposal: proposal)
                 /// Updating Origin X
                 origin.x += (viewSize.width + spacing)
             }
-            
+
             /// Updating Origin Y
             origin.y += (row.maxHeight(proposal) + spacing)
         }
     }
-    
+
     /// Generating rows based on available size
     func generateRows(_ maxWidth: CGFloat, _ proposal: ProposedViewSize, _ subviews: Subviews) -> [[LayoutSubviews.Element]] {
         var row: [LayoutSubviews.Element] = []
         var rows: [[LayoutSubviews.Element]] = []
-        
+
         /// origin
         var origin = CGRect.zero.origin
-        
+
         for view in subviews {
             let viewSize = view.sizeThatFits(proposal)
-            
+
             /// pushing to new row
             if (origin.x + viewSize.width + spacing) > maxWidth {
                 rows.append(row)
@@ -90,7 +90,7 @@ struct TagLayout: Layout {
                 origin.x += (viewSize.width + spacing)
             }
         }
-        
+
         /// Checking for au exhaust row
         if !row.isEmpty {
             rows.append(row)

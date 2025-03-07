@@ -20,7 +20,7 @@ class Recent {
         self.minutes = minutes
         self.seconds = seconds
     }
-    
+
     var totalInSeconds: Int {
         return (hours * 60 * 60) + (minutes * 60) + seconds
     }

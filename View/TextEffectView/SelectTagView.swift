@@ -10,7 +10,7 @@ struct SelectTagViewDemo: View {
     @State private var tags:[String] = [
         "Berserk", "Hunter", "One Piece", "Chainsaw Man", "Tokyo Ghoul", "Solo Leveling", "Naruto", "Monster",  "Vagabond", "SpyFamily", "One Punch-Man", "Hero Academia", "Jujutsu Kaisen", "Fullmetal Alchemist", "Pandora Hearts", "Bleach", "Gantz", "Frieren"
     ]
-    
+
     /// Selection
     @State private var selectedTags: [String] = []
     /// Adding matched geometry effect
@@ -42,7 +42,7 @@ struct SelectTagViewDemo: View {
             })
             .background(.white)
             .zIndex(1)
-            
+
             ScrollView(.vertical) {
                 TagLayout(spacing: 10) {
                     ForEach(tags.filter { !selectedTags.contains($0) }, id: \.self) { tag in
@@ -62,7 +62,7 @@ struct SelectTagViewDemo: View {
             .scrollIndicators(.hidden)
             .background(.black.opacity(0.05))
             .zIndex(0)
-            
+
             ZStack {
                 Button(action: {
                     selectedTags.removeAll()
@@ -87,7 +87,7 @@ struct SelectTagViewDemo: View {
         }
         .preferredColorScheme(.light)
     }
-    
+
     /// Tag view
     @ViewBuilder
     func TagView(_ tag: String, _ color: Color, _ icon: String) -> some View {
@@ -95,7 +95,7 @@ struct SelectTagViewDemo: View {
             Text(tag)
                 .font(.callout)
                 .fontWeight(.semibold)
-            
+
             Image(systemName: icon)
         }
         .frame(height: 35)

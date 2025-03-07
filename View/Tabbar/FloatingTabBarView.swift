@@ -27,17 +27,17 @@ struct FloatingTabBarDemoView: View {
                             FloatingTabBarView()
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
-                        
+
                         Tab.init(value: .photos) {
                             Text("Photos")
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
-                        
+
                         Tab.init(value: .chat) {
                             Text("Chat")
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
-                        
+
                         Tab.init(value: .profile) {
                             Text("Profile")
                                 .toolbarVisibility(.hidden, for: .tabBar)
@@ -57,23 +57,23 @@ struct FloatingTabBarDemoView: View {
                                     }
                                 }
                             }
-                        
+
                         Text("Photos")
                             .tag(Tab_iOS17.photos)
 //                            .toolbar(.hidden, for: .tabBar)
-                        
+
                         Text("Chat")
                             .tag(Tab_iOS17.chat)
 //                            .toolbar(.hidden, for: .tabBar)
-                        
+
                         Text("Profile")
                             .tag(Tab_iOS17.profile)
 //                            .toolbar(.hidden, for: .tabBar)
-                        
+
                     }
                 }
             }
-            
+
             FloatingTabbar(activeTab: $activeTab)
         }
     }
@@ -104,13 +104,13 @@ fileprivate struct HideTabBar: UIViewRepresentable {
        UITabBar.appearance().isHidden = true
        self.result = result
     }
-    
+
     var result: () -> ()
-    
+
     func makeUIView(context: Context) -> some UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        
+
         DispatchQueue.main.async {
             if let tabController = view.tabController {
                 UITabBar.appearance().isHidden = false
@@ -120,7 +120,7 @@ fileprivate struct HideTabBar: UIViewRepresentable {
         }
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
     }
 }

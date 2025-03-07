@@ -10,7 +10,7 @@ enum Page: String, CaseIterable {
     case page2 = "gamecontroller.fill"
     case page3 = "xbox.logo"
     case page4 = "arcade.stick.console.fill"
-    
+
     var title: String {
         switch self {
             case .page1: "Welcome to PlayStation"
@@ -26,7 +26,7 @@ enum Page: String, CaseIterable {
             case .page3: "Stream your PS5 to Apple devices"
             case .page4: "Apple Arcade gives you unlimited, uninterrupted access to the games you love"
         }
-        
+
     }
     var index: CGFloat {
         switch self {
@@ -36,7 +36,7 @@ enum Page: String, CaseIterable {
             case .page4: 3
         }
     }
-    
+
     // fetch the next page if it's not the last page
     var nextPage: Page {
         let index = Int(self.index) + 1
@@ -45,7 +45,7 @@ enum Page: String, CaseIterable {
         }
         return self
     }
-    
+
     // fetch the previous page if it's not the first page
     var previousPage: Page {
         let index = Int(self.index) - 1

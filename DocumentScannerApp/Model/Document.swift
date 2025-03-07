@@ -13,10 +13,10 @@ class Document {
     @Relationship(deleteRule: .cascade, inverse: \DocumentPage.document)
     var pages: [DocumentPage]?
     var isLocked: Bool = false
-    
+
     /// for zoom transition animation
     var uniqueViewID: String = UUID().uuidString
-    
+
     init(name: String, pages: [DocumentPage]? = nil) {
         self.name = name
         self.pages = pages

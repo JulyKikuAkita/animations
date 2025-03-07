@@ -31,14 +31,14 @@ struct TabbarOverSheetView: View {
             }
             .tag(Tab_iOS17.photos)
             .hideNaviTabBar()
-            
+
             NavigationStack {
                 /// Mock map location
                 Map(initialPosition: .region(.applePark))
             }
             .tag(Tab_iOS17.apps)
             .hideNaviTabBar()
-            
+
             NavigationStack {
                 Text("Chat")
             }
@@ -71,11 +71,11 @@ struct TabbarOverSheetView: View {
                         Text(windowSharedModel.activeTab.title)
                             .font(.title3.bold())
                     }
-                    
+
                     if windowSharedModel.activeTab == .apps {
                         ToolbarItem(placement: .topBarLeading) {
                             Button(action: {
-                                
+
                             }, label: {
                                 Image(systemName: "plus")
                             })
@@ -89,7 +89,7 @@ struct TabbarOverSheetView: View {
 //            sceneDelegate.addTabBar(windowSharedModel)
 //        }
     }
-    
+
     @ViewBuilder
     func DeviceRowView(_ image: String, _ title: String, _ subTitle: String) -> some View {
         HStack(spacing: 12) {
@@ -97,17 +97,17 @@ struct TabbarOverSheetView: View {
                 .font(.title2)
                 .padding(12)
                 .background(.background, in: .circle)
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .fontWeight(.black)
-                
+
                 Text(subTitle)
                     .font(.caption)
                     .foregroundStyle(.gray)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             Text("0 km")
                 .font(.callout)
         }
@@ -119,16 +119,16 @@ struct CustomTabBar: View {
     var body: some View {
         VStack(spacing: 0) {
             Divider()
-            
+
             HStack(spacing: 0) {
                 ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
                     Button {
-                        
+
                     } label: {
                         VStack {
                             Image(systemName: tab.rawValue)
                                 .font(.title2)
-                            
+
                             Text(tab.title)
                                 .font(.caption)
                         }

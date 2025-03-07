@@ -17,7 +17,7 @@ struct DraggableTabBariOS18DemoView: View {
                             Text(tab.title)
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
-                        
+
                     }
                 }
             } else {
@@ -31,9 +31,9 @@ struct DraggableTabBariOS18DemoView: View {
                 }
             }
         }
-                
+
         FloatingInteractiveTabBar(activeTab: $activeTab)
-        
+
         DraggableTabBariOS18(activeTab: $activeTab)
     }
 }
@@ -61,11 +61,11 @@ struct FloatingInteractiveTabBar: View {
         .padding(.horizontal, 15)
         .padding(.bottom, 10)
     }
-    
+
     @ViewBuilder
     func TabButton(_ tab: Tab_iOS17) -> some View {
         let isActive = (activeDraggingTab ?? activeTab) == tab
-        
+
         VStack(spacing: 6) {
             Image(systemName: tab.rawValue)
                 .symbolVariant(.fill)
@@ -110,7 +110,7 @@ struct FloatingInteractiveTabBar: View {
         )
     }
 }
-    
+
 struct DraggableTabBariOS18: View {
     @Binding var activeTab: Tab_iOS17
     /// View Properties
@@ -136,11 +136,11 @@ struct DraggableTabBariOS18: View {
         }
         .coordinateSpace(.named("TABBAR"))
     }
-    
+
     @ViewBuilder
     func TabButton(_ tab: Tab_iOS17) -> some View {
         let isActive = (activeDraggingTab ?? activeTab) == tab
-        
+
         VStack(spacing: 6) {
             Image(systemName: tab.rawValue)
                 .symbolVariant(.fill)
@@ -155,7 +155,7 @@ struct DraggableTabBariOS18: View {
                 /// create an elevation effect when push the active tab
                 .frame(width: 25, height: 25, alignment: .bottom)
                 .foregroundStyle(isActive ? .white : .primary)
-            
+
             Text(tab.title)
                 .font(.caption2)
                 .foregroundStyle(isActive ? .blue : .gray)

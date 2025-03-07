@@ -11,7 +11,7 @@ struct SynchronizedScrollView: View {
     @State private var detailViewAnimation: Bool = false
     @State private var selectedPicID: UUID?
     @State private var selectedPost: Post?
-    
+
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
@@ -28,7 +28,7 @@ struct SynchronizedScrollView: View {
             if let selectedPost, showDetailView {
                 DetailView(
                     post: selectedPost,
-                    showDetailView: $showDetailView, 
+                    showDetailView: $showDetailView,
                     detailViewAnimation: $detailViewAnimation,
                     selectedPicID: $selectedPicID
                 ) { id in
@@ -48,7 +48,7 @@ struct SynchronizedScrollView: View {
                     let picItem = selectedImage(), showDetailView {
                          let sRect = proxy[source]
                          let dRect = proxy[destination]
-                         
+
                          Image(picItem.image)
                          .resizable()
                          .aspectRatio(contentMode: .fill)
@@ -63,14 +63,14 @@ struct SynchronizedScrollView: View {
                 }
         })
     }
-    
+
     func selectedImage() -> PicItem? {
         if let pic = selectedPost?.pics.first(where: { $0.id == selectedPicID }) {
             return pic
         }
         return nil
     }
-    
+
     @ViewBuilder
     func CardView(_ post: Post) -> some View {
         VStack(spacing: 10) {
@@ -80,28 +80,28 @@ struct SynchronizedScrollView: View {
                     .foregroundStyle(.teal)
                     .frame(width: 30, height: 30)
                     .background(.background)
-                
+
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text(post.username)
                         .fontWeight(.semibold)
                         .textScale(.secondary)
-                    
+
                     Text(post.content)
                 })
-                
+
                 Spacer(minLength: 0)
-                
+
                 Button("", systemImage: "ellipsis") {
-                    
+
                 }
                 .foregroundStyle(.primary)
                 .offset(y: -10)
             }
-            
+
             VStack(alignment: .leading, spacing: 10) {
                 GeometryReader {
                     let size = $0.size
-                    
+
                     ScrollView(.horizontal) {
                         HStack(spacing: 10) {
                             ForEach(post.pics) { pic in
@@ -139,43 +139,43 @@ struct SynchronizedScrollView: View {
                     .scrollClipDisabled()
                 }
                 .frame(height: 200)
-                
+
                 /// Image buttons
                 HStack(spacing: 20) {
                     ImageButton("suit.heart") {
-                        
+
                     }
-                    
+
                     ImageButton("message") {
-                        
+
                     }
-                    
+
                     ImageButton("arrow.2.squarepath") {
-                        
+
                     }
                     ImageButton("paperplane") {
-                        
+
                     }
                 }
             }
             .safeAreaPadding(.leading, 45)
-            
-            
+
+
             /// Likes and replies
             HStack(spacing: 10) {
                 Image(systemName: "person.circle.fill")
                     .frame(width: 30, height: 30)
                     .background(.background)
-                
+
                 Button("10 replies") {
-                    
+
                 }
-                
+
                 Button("810 likes") {
-                    
+
                 }
                 .padding(.leading, -5)
-                
+
                 Spacer()
             }
             .textScale(.secondary)
@@ -189,10 +189,10 @@ struct SynchronizedScrollView: View {
                 .padding(.bottom, 30)
                 .offset(x: 15, y: 10)
         }
-        
-        
+
+
     }
-    
+
     @ViewBuilder
     func ImageButton(_ icon: String, onTap: @escaping () -> ()) -> some View {
         Button("", systemImage: icon, action: onTap)
@@ -213,7 +213,7 @@ private struct DetailView: View {
     var updateScrollPosition: (UUID?) -> ()
     /// View Properties
     @State private var detailScrollPosition: UUID?
-    
+
     /// Dispatch Tasks
     @State private var startTask1: DispatchWorkItem?
     @State private var startTask2: DispatchWorkItem?
@@ -256,7 +256,7 @@ private struct DetailView: View {
                     withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
                         detailViewAnimation = false
                     }
-                    
+
                     /// Animated and removing detail View
                     initiateTask(ref: &startTask2, task: .init(block: {
                         showDetailView = false
@@ -275,13 +275,13 @@ private struct DetailView: View {
             /// avoid multiple calls
             guard detailScrollPosition == nil else { return }
             detailScrollPosition = selectedPicID /// make sure carousel start from the select image
-            
+
             /// Giving some time to set scroll position for hero animation
             initiateTask(ref: &startTask1, task: .init(block: {
                 withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
                     detailViewAnimation = true
                 }
-                
+
                 /// Animated and removing Layer View
                 initiateTask(ref: &startTask2, task: .init(block: {
                     selectedPicID = nil
@@ -289,12 +289,12 @@ private struct DetailView: View {
             }), duration: 0.05)
         }
     }
-    
+
     func initiateTask(ref: inout DispatchWorkItem?, task: DispatchWorkItem, duration: CGFloat) {
         ref = task
         DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: task)
     }
-    
+
     func cancellingPreviousTasks() {
 //        if let startTask1, let startTask2{
 //            startTask1.cancel()
@@ -302,16 +302,16 @@ private struct DetailView: View {
 //            self.startTask1 = nil
 //            self.startTask2 = nil
 //        }
-        
+
         if let startTask1 {
             startTask1.cancel()
             self.startTask1 = nil
         }
-        
+
         if let startTask2 {
             startTask2.cancel()
             self.startTask2 = nil
         }
-        
+
     }
 }

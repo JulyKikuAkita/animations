@@ -53,14 +53,14 @@ struct LoopingScrollView<Content: View, Item: RandomAccessCollection>: View wher
         GeometryReader {
             let size = $0.size
             let repeatingCount = width > 0 ?  Int((size.width / width).rounded()) + 1 : 1 // should not == 0
-            
+
             ScrollView(.horizontal) {
                 LazyHStack(spacing: spacing) {
                     ForEach(items) { item in
                         content(item)
                             .frame(width: width)
                     }
-                    
+
                     ForEach(0..<repeatingCount, id: \.self) { index in
                         let item = Array(items)[index % items.count]
                         content(item)
@@ -85,7 +85,7 @@ fileprivate struct ScrollViewHelper: UIViewRepresentable {
     var spacing: CGFloat
     var itemsCount: Int
     var repeatingCount: Int
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(
             width: width,
@@ -94,11 +94,11 @@ fileprivate struct ScrollViewHelper: UIViewRepresentable {
             repeatingCount: repeatingCount
         )
     }
-    
+
     func makeUIView(context: Context) -> UIView {
         return .init()
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
             if let scrollView = uiView.superview?.superview?.superview as? UIScrollView, !context.coordinator .isAdded {
@@ -111,13 +111,13 @@ fileprivate struct ScrollViewHelper: UIViewRepresentable {
         context.coordinator.itemsCount = itemsCount
         context.coordinator.repeatingCount = repeatingCount
     }
-    
+
     class Coordinator: NSObject, UIScrollViewDelegate {
         var width: CGFloat
         var spacing: CGFloat
         var itemsCount: Int
         var repeatingCount: Int
-        
+
         init(
             width: CGFloat,
             spacing: CGFloat,
@@ -129,20 +129,20 @@ fileprivate struct ScrollViewHelper: UIViewRepresentable {
             self.itemsCount = itemsCount
             self.repeatingCount = repeatingCount
         }
-        
+
         /// whether the delegate is added or not
         var isAdded: Bool = false
-        
+
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             guard itemsCount > 0 else { return }
             let minX = scrollView.contentOffset.x
             let mainContentSize = CGFloat(itemsCount) * width
             let spacingSize = CGFloat(itemsCount) * spacing
-            
+
             if minX > (mainContentSize + spacingSize) {
                 scrollView.contentOffset.x -= (mainContentSize + spacingSize)
             }
-            
+
             if minX < 0 {
                 scrollView.contentOffset.x += (mainContentSize + spacingSize)
             }

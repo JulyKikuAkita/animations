@@ -31,21 +31,21 @@ struct ContentView: View {
             }
         }
     }
-    
+
     var safeArea: UIEdgeInsets {
         if let safeArea = (
             UIApplication.shared.connectedScenes.first as? UIWindowScene
         )?.keyWindow?.safeAreaInsets {
             return safeArea
         }
-        
+
         return .zero
     }
 }
 
 struct HorizontalSplashTransition: Transition {
     var isSplash: Bool
-    
+
     func body(content: Content, phase: TransitionPhase) -> some View {
         content
             .rotation3DEffect(
@@ -55,7 +55,7 @@ struct HorizontalSplashTransition: Transition {
             )
             .offset(x: phase.isIdentity ? 0 : isSplash ? -screenSize.width : screenSize.width)
     }
-    
+
     /// current screen size without the usage of GeometryReader
     var screenSize: CGSize {
         if let screenSize = (
@@ -69,12 +69,12 @@ struct HorizontalSplashTransition: Transition {
 
 struct VerticalSplashTransition: Transition {
     var isSplash: Bool
-    
+
     func body(content: Content, phase: TransitionPhase) -> some View {
         content
             .offset(y: phase.isIdentity ? 0 : isSplash ? -screenSize.height : screenSize.height)
     }
-    
+
     /// current screen size without the usage of GeometryReader
     var screenSize: CGSize {
         if let screenSize = (
@@ -91,7 +91,7 @@ struct SplashScreen: View {
         ZStack {
             Rectangle()
                 .fill(.primary)
-            
+
             Image("AI_grn")
         }
         .ignoresSafeArea()

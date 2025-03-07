@@ -52,7 +52,7 @@ struct Search: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func ToolBarContent() -> some View {
         Menu {
@@ -61,27 +61,27 @@ struct Search: View {
             } label : {
                 HStack {
                     Text("Both")
-                    
+
                     if selectedCategory == nil {
                         Image(systemName: "checkmark")
                     }
                 }
             }
-            
+
             ForEach(MintCategory.allCases, id:\.rawValue) { category in
                 Button {
                     selectedCategory = category
                 } label : {
                     HStack {
                         Text(category.rawValue)
-                        
+
                         if selectedCategory == category {
                             Image(systemName: "checkmark")
                         }
                     }
                 }
             }
-            
+
         } label: {
             Image(systemName: "slider.vertical.3")
         }

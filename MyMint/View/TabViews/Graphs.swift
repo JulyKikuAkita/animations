@@ -30,23 +30,23 @@ struct Graphs: View {
 //                .padding(10)
 //                .padding(.top, 10)
 //                .background(.background, in: .rect(cornerRadius: 10))
-               
+
                 LazyVStack(spacing: 10) {
                     ChartView()
                         .frame(height: 200)
                         .padding(10)
                         .padding(.top, 10)
                         .background(.background, in: .rect(cornerRadius: 10))
-                    
-                  
-                    
+
+
+
                     ForEach(chartGroups) { group in
                         VStack(alignment: .leading, spacing: 10) {
                             Text(format(date: group.date, format: "MMM yy"))
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                                 .hSpacing(.leading)
-                            
+
                             NavigationLink {
                                 ListOfExpenses(month: group.date)
                             } label: {
@@ -65,7 +65,7 @@ struct Graphs: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func ChartView() -> some View {
         /// Chart View
@@ -90,7 +90,7 @@ struct Graphs: View {
         .chartYAxis {
             AxisMarks(position: .leading) { value in
                 let doubleValue = value.as(Double.self) ?? 0
-                
+
                 AxisGridLine()
                 AxisTick()
                 AxisValueLabel {
@@ -101,33 +101,33 @@ struct Graphs: View {
         /// Foreground colors
         .chartForegroundStyleScale(range: [Color.green.gradient, Color.red.gradient])
     }
-    
+
     func createChartGroup() {
         Task.detached(priority: .high) {
             let calendar = Calendar.current
-            
+
             let groupByDate = Dictionary(grouping: transactions) { transaction in
                 let components = calendar.dateComponents([.month, .year], from: transaction.dateAdded)
                 return components
             }
-            
+
             /// Sorting groups by date
             let sortedGroup = groupByDate.sorted {
                 let date1 = calendar.date(from: $0.key) ?? .init()
                 let date2 = calendar.date(from: $1.key) ?? .init()
-                
+
                 return calendar.compare(date1, to: date2, toGranularity: .day) == .orderedDescending
             }
-            
+
             let chartGroups = sortedGroup.compactMap { dict -> ChartGroup? in
                 let date = calendar.date(from: dict.key) ?? .init()
                 /// category
                 let income = dict.value.filter({ $0.category == MintCategory.income.rawValue})
                 let expense = dict.value.filter({ $0.category == MintCategory.expense.rawValue})
-                
+
                 let incomeTotalValue = total(income, category: .income)
                 let expenseTotalValue = total(expense, category: .expense)
-                
+
                 /// rule
                 let need = dict.value.filter({ $0.rule == MintRule.need.rawValue})
                 let want = dict.value.filter({ $0.rule == MintRule.want.rawValue})
@@ -143,7 +143,7 @@ struct Graphs: View {
                         .init(totalValue: expenseTotalValue, category: .expense)
                     ],
                     totalIncome: incomeTotalValue,
-                    totalExpense: expenseTotalValue, 
+                    totalExpense: expenseTotalValue,
                     rule: [
                         .init(totalValue: totalNeed, rule: .need),
                         .init(totalValue: totalWant, rule: .want),
@@ -154,20 +154,20 @@ struct Graphs: View {
                     totalSave: totalSave
                 )
             }
-            
+
             /// UI must be updated on Main thread
             await MainActor.run {
                 self.chartGroups = chartGroups
             }
         }
     }
-    
+
     func axisLabel(_ value: Double) -> String {
         let intValue = Int(value)
         let kValue = intValue / 1000
         return intValue < 1000 ? "\(intValue)" : "\(kValue)K"
     }
-    
+
     @ViewBuilder
     func PieChartView() -> some View {
         /// Pie Chart View
@@ -193,7 +193,7 @@ struct Graphs: View {
             Color.brown.gradient,
             Color.pink.gradient])
     }
-    
+
     func colorBarMark(for data: ChartGroup, ruleValue: Double) -> Double {
         let categoryTotal = data.totalExpense + data.totalIncome
         let ruleTotal = data.totalNeed + data.totalWant + data.totalSave
@@ -227,7 +227,7 @@ struct ListOfExpenses: View {
                         .foregroundStyle(.gray)
                         .hSpacing(.leading)
                 }
-                
+
                 Section {
                     MintFilterTransactionsView(startDate: month.startOfMonth, endDate: month.endOfMonth, category: .expense) {
                         transactions in

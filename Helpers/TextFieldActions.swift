@@ -31,24 +31,24 @@ struct TextFieldActionBuilder {
 fileprivate struct TextFieldActionHelper: UIViewRepresentable {
     var showSuggestions: Bool
     var actions: [TextFieldAction]
-    
+
     func makeUIView(context: Context) -> some UIView {
         let view =  UIView(frame: .zero)
         view.backgroundColor = .clear
-        
+
         DispatchQueue.main.async {
             if let textField = view.superview?.superview?.subviews.last?.subviews.first as? UITextField {
                 context.coordinator.originalDelegate = textField.delegate
                 textField.delegate = context.coordinator
             }
         }
-        
+
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
     }
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
@@ -58,9 +58,9 @@ fileprivate struct TextFieldActionHelper: UIViewRepresentable {
         init(parent: TextFieldActionHelper) {
             self.parent = parent
         }
-        
+
         var originalDelegate: UITextFieldDelegate?
-        
+
         func textFieldDidChangeSelection(_ textField: UITextField)  {
             originalDelegate?.textFieldDidChangeSelection?(textField)
         }
@@ -73,13 +73,13 @@ fileprivate struct TextFieldActionHelper: UIViewRepresentable {
                 }
                 return action
             }
-            
+
             if parent.showSuggestions {
                 actions = customActions + suggestedActions
             } else {
                 actions = customActions
             }
-            
+
             let menu = UIMenu(children: actions)
             return menu
         }

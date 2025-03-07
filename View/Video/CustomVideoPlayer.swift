@@ -13,7 +13,7 @@ struct CustomVideoPlayer: UIViewControllerRepresentable {
         controller.videoGravity = .resizeAspectFill
         return controller
     }
-    
+
     func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
         uiViewController.player = player
     }

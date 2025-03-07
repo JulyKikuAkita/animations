@@ -31,7 +31,7 @@ struct ProfileSheetAnimationView: View {
                         /// to find view's position
                         GeometryReader(content: { geometry in
                             let rect = geometry.frame(in: .global)
-                            
+
                             Image(profile.profilePicture)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -51,30 +51,30 @@ struct ProfileSheetAnimationView: View {
                                         try? await Task.sleep(for: .seconds(0))
                                         windowSharedModel.hideNativeView = true
                                         showProfileView.toggle()
-                                        
+
                                         /// After animation finished, removing hero view
                                         try? await Task.sleep(for: .seconds(0))
                                         if windowSharedModel.hideNativeView {
                                             windowSharedModel.hideNativeView = false
                                         }
                                     }
-                                   
+
                                 }
                         })
                         .frame(width: 50, height: 50)
 
-                            
-                        
+
+
                         VStack(alignment: .leading, spacing: 4, content: {
                             Text(profile.username)
                                 .fontWeight(.bold)
-                            
+
                             Text(profile.lastMsg)
                                 .font(.caption)
                                 .foregroundStyle(.gray)
                         })
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        
+
                         Text(profile.lastActive)
                             .font(.caption2)
                             .foregroundStyle(.gray)
@@ -116,7 +116,7 @@ struct DetailedSheetProfileView: View {
             GeometryReader(content: { geometry in
                 let size = geometry.size
                 let rect = geometry.frame(in: .global)
-                
+
                 if let selectedProfile {
                     Image(selectedProfile.profilePicture)
                         .resizable()
@@ -178,7 +178,7 @@ struct DetailedSheetProfileView: View {
                 .opacity(windowSharedModel.hideNativeView ? 0 : 1)
                 .animation(.snappy, value: windowSharedModel.hideNativeView)
             }
-            
+
             Spacer()
         }
     }

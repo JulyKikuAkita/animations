@@ -10,7 +10,7 @@ struct PSHeaderView: View {
     @State private var activeTab: PSHeaderTab = .chat
     var body: some View {
         let height: CGFloat = size.height + safeArea.top
-        
+
         VStack(spacing: 0) {
             Group {
                 if #available(iOS 18, *) {
@@ -18,7 +18,7 @@ struct PSHeaderView: View {
                         SwiftUI.Tab.init(value: .chat) {
                             Text("Chat")
                         }
-                        
+
                         SwiftUI.Tab.init(value: .friends) {
                             Text("Friends")
                         }
@@ -28,14 +28,14 @@ struct PSHeaderView: View {
                     TabView(selection: $activeTab) {
                         Text("Chat")
                             .tag(PSHeaderTab.chat)
-                        
+
                         Text("Friends")
                             .tag(PSHeaderTab.friends)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                 }
             }
-            
+
             /// minimized header view
             Rectangle()
                 .fill(.pink)

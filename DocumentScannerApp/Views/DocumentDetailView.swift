@@ -11,7 +11,7 @@ struct DocumentDetailView: View {
     @State private var isLoading: Bool = false
     @State private var showFileMover: Bool = false
     @State private var fileURL: URL?
-    
+
     /// Lock screen properties
     @State private var isLockAvailable: Bool?
     @State private var isUnlocked: Bool = false
@@ -21,15 +21,15 @@ struct DocumentDetailView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scene
-    
+
     var document: Document
     var body: some View {
         if let pages = document.pages?.sorted(by: { $0.pageIndex < $1.pageIndex }) {
             VStack(spacing: 10) {
-                
+
                 HeaderView()
                     .padding([.horizontal, .top], 15)
-                
+
                 TabView {
                     ForEach(pages) { page in
                         if let image = UIImage(data: page.pageData) {
@@ -40,7 +40,7 @@ struct DocumentDetailView: View {
                     }
                 }
                 .tabViewStyle(.automatic)
-                
+
                 /// footer view
                 FooterView()
             }
@@ -63,7 +63,7 @@ struct DocumentDetailView: View {
                     isUnlocked = true
                     return
                 }
-                
+
                 let context = LAContext()
                 isLockAvailable = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
             }
@@ -74,7 +74,7 @@ struct DocumentDetailView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func HeaderView() -> some View {
         Text(document.name)
@@ -94,7 +94,7 @@ struct DocumentDetailView: View {
                 }
             }
     }
-    
+
     @ViewBuilder
     private func FooterView() -> some View {
         HStack {
@@ -103,9 +103,9 @@ struct DocumentDetailView: View {
                     .font(.title3)
                     .foregroundStyle(.purple)
             }
-            
+
             Spacer(minLength: 0)
-            
+
             Button {
                 dismiss()
                 Task { @MainActor in
@@ -113,7 +113,7 @@ struct DocumentDetailView: View {
                     context.delete(document)
                     try? context.save()
                 }
-                
+
             } label: {
                 Image(systemName: "trash.fill")
                     .font(.title3)
@@ -122,7 +122,7 @@ struct DocumentDetailView: View {
         }
         .padding([.horizontal, .bottom], 15)
     }
-    
+
     @ViewBuilder
     private func LockView() -> some View {
         if document.isLocked {
@@ -130,17 +130,17 @@ struct DocumentDetailView: View {
                 Rectangle()
                     .fill(.ultraThinMaterial)
                     .ignoresSafeArea()
-                
+
                 VStack(spacing: 4) {
                     if let isLockAvailable, !isLockAvailable {
                         Text("Please enable biometric access in Settings to unlock this document.")
                             .multilineTextAlignment(.center)
                             .frame(width: 200)
-                        
+
                     } else {
                         Image(systemName: "lock.fill")
                             .font(.largeTitle)
-                        
+
                         Text("Tap to unlock!")
                             .font(.callout)
                     }
@@ -154,11 +154,11 @@ struct DocumentDetailView: View {
             .animation(snappy, value: isUnlocked)
         }
     }
-    
+
     /// Converting SwiftData document into a PDF document
     private func createAndShareDocument() {
         guard let pages = document.pages?.sorted(by: { $0.pageIndex < $1.pageIndex }) else { return }
-        
+
         isLoading = true
         /// creating pdf file in non-main thread
         Task.detached(priority: .userInitiated) { [document] in
@@ -170,11 +170,11 @@ struct DocumentDetailView: View {
                     pdfDocument.insert(pdfPage, at: index)
                 }
             }
-            
+
             var pdfURL = FileManager.default.temporaryDirectory
             let fileName = "\(document.name).pdf"
             pdfURL.append(path: fileName)
-            
+
             if pdfDocument.write(to: pdfURL) {
                 /// update UI
                 await MainActor.run { [pdfURL] in
@@ -186,7 +186,7 @@ struct DocumentDetailView: View {
         }
     }
 
-    
+
     private func authenticateUser() {
         let context = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {

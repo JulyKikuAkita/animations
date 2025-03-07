@@ -10,8 +10,8 @@ import SwiftUI
 /// AppleMusicHomeView()
 /// ApplePhotoHomeView()
 /// PinchZoomDemoView()
-@main
-struct demoApp: App {
+//@main
+struct demoApps: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

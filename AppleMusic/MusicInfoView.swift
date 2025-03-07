@@ -7,7 +7,7 @@ import SwiftUI
 struct MusicInfoView: View {
     @Binding var expandSheet: Bool
     var animation: Namespace.ID
-    
+
     var body: some View {
         HStack(spacing: 0) {
             /// Adding Matched Geometry Effect (Hero Animation)
@@ -15,7 +15,7 @@ struct MusicInfoView: View {
                 if !expandSheet {
                     GeometryReader {
                         let size = $0.size
-                        
+
                         Image("fox")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -26,23 +26,23 @@ struct MusicInfoView: View {
                 }
             }
             .frame(width:45, height:45)
-            
+
             Text("Hanging Around(Flying Fox)")
                 .fontWeight(.semibold)
                 .lineLimit(1)
                 .padding(.horizontal, 15)
-            
+
             Spacer(minLength: 0)
-            
+
             Button {
-                
+
             } label: {
                 Image(systemName: "pause.fill")
                     .font(.title2)
             }
-            
+
             Button {
-                
+
             } label: {
                 Image(systemName: "forward.fill")
                     .font(.title2)

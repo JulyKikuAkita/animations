@@ -15,8 +15,8 @@ struct FloatingBottomSheetsViewDemo: View {
                 Button("Show Style1") {
                     showStyle1.toggle()
                 }
-                
-                
+
+
                 Button("Show Style2") {
                     showStyle2.toggle()
                 }
@@ -75,18 +75,18 @@ struct FloatingBottomSheetsView: View {
                 .foregroundStyle(image.foreground)
                 .frame(width: 65, height: 65)
                 .background(image.tint.gradient, in: .circle)
-            
+
             Text(title)
                 .font(.title3.bold())
-            
+
             Text(content)
                 .font(.callout)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .foregroundStyle(.gray)
-            
+
             ButtonView(button1)
-            
+
             if let button2 {
                 ButtonView(button2)
             }
@@ -100,11 +100,11 @@ struct FloatingBottomSheetsView: View {
         .shadow(color: .black.opacity(0.12), radius: 8)
         .padding(.horizontal, 15)
     }
-    
+
     @ViewBuilder
     func ButtonView(_ config: Config) -> some View {
         Button {
-            
+
         } label: {
             Text(config.content)
                 .fontWeight(.bold)
@@ -114,7 +114,7 @@ struct FloatingBottomSheetsView: View {
                 .background(config.tint.gradient, in: .rect(cornerRadius: 10))
         }
     }
-    
+
     struct Config {
         var content: String
         var foreground: Color
@@ -147,7 +147,7 @@ fileprivate struct sheetShadowRemover: UIViewRepresentable {
     func makeUIView(context: Context) -> some UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
-        
+
         DispatchQueue.main.async {
             if let uiSheetView = view.viewBeforeWindow {
                 for view in uiSheetView.subviews {
@@ -165,7 +165,7 @@ fileprivate extension UIView {
         if let superview, superview is UIWindow {
             return self
         }
-        
+
         return superview?.viewBeforeWindow
     }
 }

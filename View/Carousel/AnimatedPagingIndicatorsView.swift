@@ -51,7 +51,7 @@ struct AnimatedPagingIndicatorsView: View {
                 Section("Options") {
                     Toggle("Opacity Effect", isOn: $opacityEffect)
                     Toggle("Clip Edges", isOn: $clipEdges)
-                    
+
                     Button("Add Card") {
                         colors.append(.brown)
                     }

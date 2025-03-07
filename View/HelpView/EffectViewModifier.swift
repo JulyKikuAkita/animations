@@ -24,7 +24,7 @@ struct EffectViewModifierDemo: View {
             }
             .pickerStyle(.segmented)
             .padding(15)
-            
+
             VStack {
                 Image(systemName: "heart.fill")
                     .font(.largeTitle)
@@ -41,7 +41,7 @@ struct EffectViewModifierDemo: View {
                             image.symbolEffect(.rotate)
                         }
                     }
-                    
+
                 Rectangle()
                     .modifiers { rectangle in
                         switch effect {
@@ -54,10 +54,10 @@ struct EffectViewModifierDemo: View {
                     .frame(width: 50, height: 20)
 
             }
-           
+
         }
     }
-    
+
 }
 
 
@@ -68,7 +68,7 @@ fileprivate extension View {
         content(self)
     }
 }
-    
+
 #Preview {
     EffectViewModifierDemo()
 }
@@ -102,5 +102,3 @@ struct EffectViewModifierDuplicatedCode: View {
         }
     }
 }
-                    
-               

@@ -3,7 +3,7 @@
 //  animation
 //
 // We need to downsized image to save memory in SwiftUI view
- 
+
 import SwiftUI
 
 struct ResizedImageToScreenDemoView: View {
@@ -16,11 +16,11 @@ struct ResizedImageToScreenDemoView: View {
                         /// provide any large size image and monitor memory change when app startup
                         let id = "IMG_020\(index)"
                         let heicImage = UIImage(named: id)
-                        
+
                         ResizedImageToScreenView(id: id, image: heicImage, size: size) { image in
                             GeometryReader {
                                 let size = $0.size
-                                
+
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -44,7 +44,7 @@ struct ResizedImageToScreenView<Content: View>: View {
     var size: CGSize
     @ViewBuilder var content: (Image) -> Content
     @State private var resizedImageView: Image?
-    
+
     var body: some View {
         ZStack {
             if let resizedImageView {
@@ -62,21 +62,21 @@ struct ResizedImageToScreenView<Content: View>: View {
             guard oldValue != newValue else { return }
         }
     }
-    
+
     private func createDownsizedImage(_ image: UIImage?) {
         if let cacheData = try? CacheManager.shared.get(id: id)?.data, let uiImage = UIImage(data: cacheData) {
             resizedImageView = .init(uiImage: uiImage)
         } else {
             guard let image else { return }
             let aspectSize = image.size.aspectFit(size)
-            
+
             /// Creating image in non-main thread
             Task.detached(priority: .high) {
                 let renderer = UIGraphicsImageRenderer(size: aspectSize)
                 let resizedImage = renderer.image { ctx in
                     image.draw(in: .init(origin: .zero, size: aspectSize))
                 }
-                
+
                 /// Storing cached image
                 if let jpegData = resizedImage.jpegData(compressionQuality: 1) {
                     /// Cache manger runs on main actor
@@ -98,7 +98,7 @@ extension CGSize {
     func aspectFit(_ to: CGSize) -> CGSize {
         let scaleX = to.width / self.width
         let scaleY = to.height / self.height
-        
+
         let aspectRatio = min(scaleX, scaleY)
         return .init(width: aspectRatio * width, height: aspectRatio * height)
     }

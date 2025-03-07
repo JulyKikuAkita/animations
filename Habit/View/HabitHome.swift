@@ -17,7 +17,7 @@ struct HabitHome: View {
             LazyVStack(spacing: 15) {
                 HeaderView()
                     .padding(.bottom, 15)
-                
+
                 ForEach(habits) { habit in
                     HabitCardView(animationID: animationID, habit: habit)
                         .onTapGesture {
@@ -53,18 +53,18 @@ struct HabitHome: View {
                 .navigationTransition(.zoom(sourceID: selectedHabit.uniqueID, in: animationID))
         }
     }
-    
+
     @ViewBuilder
     func HeaderView() -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Welcome Back!")
                 .font(.largeTitle.bold())
-            
+
             HStack(spacing: 0) {
                 Text(username)
                     .fontWeight(.semibold)
                     .lineLimit(1)
-                
+
                 Text(", " + Date.startDateOfThisMonth.format("MMMM YY"))
                     .textScale(.secondary)
                     .foregroundStyle(.gray)
@@ -73,7 +73,7 @@ struct HabitHome: View {
         }
         .hSpacing(.leading)
     }
-    
+
     @ViewBuilder
     func CreateButton() -> some View {
         NavigationLink {
@@ -82,7 +82,7 @@ struct HabitHome: View {
         } label: {
             HStack(spacing: 10) {
                 Text("Create Habit")
-                
+
                 Image(systemName: "plus.circle.fill")
             }
             .foregroundStyle(.white)
@@ -116,4 +116,3 @@ struct HabitHome: View {
         ContentView()
     }
 }
-   

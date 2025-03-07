@@ -13,7 +13,7 @@ struct ImagePickerDemo: View {
                 }
                 .frame(maxWidth: 300, maxHeight: 250)
                 .padding(.top, 20)
-                
+
                 Spacer()
             }
             .padding()
@@ -30,7 +30,7 @@ struct ImagePicker: View {
     var systemImage: String
     var tint: Color
     var onImageChange: (UIImage) -> ()
-    
+
     /// View Properties
     @State private var showImagePicker: Bool = false
     @State private var photoItem: PhotosPickerItem?
@@ -39,21 +39,21 @@ struct ImagePicker: View {
     /// Loading status
     @State private var isLoading: Bool = false
 
-    
+
     var body: some View {
         GeometryReader {
             let size = $0.size
-            
+
             VStack(spacing: 4) {
                 Image(systemName: systemImage)
                     .font(.largeTitle)
                     .imageScale(.large)
                     .foregroundStyle(tint)
-                
+
                 Text(title)
                     .font(.callout)
                     .padding(.top, 15)
-                
+
                 Text(subTitle)
                     .font(.caption)
                     .foregroundStyle(.gray)
@@ -92,7 +92,7 @@ struct ImagePicker: View {
                 }
                 return false
             }, isTargeted: { _ in
-                
+
             })
             .onTapGesture {
                 showImagePicker.toggle()
@@ -121,7 +121,7 @@ struct ImagePicker: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .fill(tint.opacity(0.08).gradient)
-                    
+
                     RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .stroke(tint, style: .init(lineWidth: 1, dash: [12]))
                         .padding(1)
@@ -130,11 +130,11 @@ struct ImagePicker: View {
             }
         }
     }
-    
+
     func extractImage(_ photoItem: PhotosPickerItem, _ viewSize: CGSize) {
         Task.detached {
             guard let imageData = try? await photoItem.loadTransferable(type: Data.self) else { return }
-            
+
             // UI must update on the main thread
             await MainActor.run {
                 if let selectedImage = UIImage(data: imageData) {
@@ -143,13 +143,13 @@ struct ImagePicker: View {
                     /// Send original image to callback
                     onImageChange(selectedImage)
                 }
-                
+
                 /// clearing photoitem
                 self.photoItem = nil
             }
         }
     }
-    
+
     /// Creating Image Thumbnail
     func generatingImageThumbnail( _ image: UIImage, _ size: CGSize) {
         Task.detached {

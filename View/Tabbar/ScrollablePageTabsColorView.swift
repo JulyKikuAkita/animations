@@ -18,12 +18,12 @@ struct ScrollablePageTabsColorDemoView: View {
                             let tabCount = CGFloat(Tab_iOS17.allCases.count)
                             let capsuleWidth = width / tabCount
                             let progress = offsetObserver.offset / collectionViewBounds.width
-                            
+
                             Capsule()
                                 .fill(.black)
                                 .frame(width: capsuleWidth)
                                 .offset(x: progress * capsuleWidth)
-                            
+
                             Tabbar(.white, .semibold)
                                 .mask(alignment: .leading) {
                                     Capsule()
@@ -52,13 +52,13 @@ struct ScrollablePageTabsColorDemoView: View {
                             }
                         }
                     }
-                
+
                 Tab_iOS17.photos.color
                     .tag(Tab_iOS17.photos)
-                
+
                 Tab_iOS17.profile.color
                     .tag(Tab_iOS17.profile)
-                
+
                 Tab_iOS17.chat.color
                     .tag(Tab_iOS17.chat)
             }
@@ -68,7 +68,7 @@ struct ScrollablePageTabsColorDemoView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     func Tabbar(_ tint: Color, _ weight: Font.Weight = .regular) -> some View {
         HStack(spacing: 0) {
@@ -103,22 +103,22 @@ class PageOffsetObserver: NSObject {
     var collectionView: UICollectionView?
     var offset: CGFloat = 0
     private(set) var isObserving: Bool = false
-    
+
     deinit { // remove observer when class is deinit
         remove()
     }
-    
+
     func observe() {
         guard !isObserving else { return }
         collectionView?.addObserver(self, forKeyPath: "contentOffset", context: nil)
         isObserving = true
     }
-    
+
     func remove() {
         isObserving = false
         collectionView?.removeObserver(self, forKeyPath: "contentOffset")
     }
-    
+
     /// benefit for using observer to monitor content offset change  than using delegate is to avoid
     /// customizing delegate might remove any of the SwiftUI default functionality
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -127,7 +127,7 @@ class PageOffsetObserver: NSObject {
             offset = contentOffset.x
         }
     }
-    
+
 }
 
 struct FindCollectionView: UIViewRepresentable {
@@ -135,7 +135,7 @@ struct FindCollectionView: UIViewRepresentable {
     func makeUIView(context: Context) -> some UIView {
         let view = UIView()
         view.backgroundColor = .clear
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             if let collectionView = view.collectionSuperView {
                 result(collectionView)
@@ -143,9 +143,9 @@ struct FindCollectionView: UIViewRepresentable {
         }
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
-       
+
     }
 }
 

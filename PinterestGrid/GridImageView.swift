@@ -22,7 +22,7 @@ struct GridImageView: View {
                 Text("Welcome Back!")
                     .font(.largeTitle.bold())
                     .padding(.vertical, 10)
-                
+
                 /// Grid image view
                 LazyVGrid(columns: Array(repeating: GridItem(spacing: 10), count: 2), spacing: 10) {
                     ForEach(posts) { post in
@@ -45,13 +45,13 @@ struct GridImageView: View {
                 .allowsHitTesting(coordinator.hideLayer)
         }
     }
-    
+
     /// Post card view
     @ViewBuilder
     func PostCardView(_ post: PhotoItem) -> some View {
         GeometryReader {
             let frame = $0.frame(in: .global)
-            
+
             ImageView(post: post)
                 .clipShape(.rect(cornerRadius: 10))
                 .contentShape(.rect(cornerRadius: 10))

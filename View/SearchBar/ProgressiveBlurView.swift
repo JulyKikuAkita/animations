@@ -11,7 +11,7 @@ struct ProgressiveBlurView: UIViewRepresentable {
         view.backgroundColor = .clear
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
     }
 }
@@ -19,9 +19,9 @@ struct ProgressiveBlurView: UIViewRepresentable {
 class CustomBlurView: UIVisualEffectView {
     init() {
         super.init(effect: UIBlurEffect(style: .systemUltraThinMaterial))
-        
+
         removeFilters()
-        
+
         registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, _ )  in
             DispatchQueue.main.async {
                 self.removeFilters()
@@ -32,7 +32,7 @@ class CustomBlurView: UIVisualEffectView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     /// Removing All Filters
     private func removeFilters() {
         if let filterLayer = layer.sublayers?.first {

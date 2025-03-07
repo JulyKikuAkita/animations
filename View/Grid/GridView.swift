@@ -19,10 +19,10 @@ struct GridView: View {
                     ForEach(colors, id: \.self) { color in
                         GeometryReader {
                             let _ = $0.size
-                            
+
                             RoundedRectangle(cornerRadius: 10)
                             .fill(color.gradient)
-            
+
                             /// Drag
                             .draggable(color) { // any object conforms to Transferable protocol (DATA, string, image)
                                 RoundedRectangle(cornerRadius: 10)
@@ -48,7 +48,7 @@ struct GridView: View {
                                     }
                                 }
                             }
-                            
+
                         }
                         .frame(height: 100)
 

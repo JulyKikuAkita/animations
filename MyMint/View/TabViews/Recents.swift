@@ -9,7 +9,7 @@ struct Recents: View {
     @Query(sort: [SortDescriptor(\Transaction.dateAdded, order: .reverse)], animation: .snappy) private var transactions: [Transaction]
     /// User properties
     @AppStorage("userName") private var userName: String = ""
-    
+
     /// View Properties
     @State private var startDate: Date = .now.startOfMonth
     @State private var endDate: Date = .now.endOfMonth
@@ -22,7 +22,7 @@ struct Recents: View {
         GeometryReader {
             /// for animation purpose
             let size = $0.size
-            
+
             NavigationStack {
                 ScrollView(.vertical) {
                     LazyVStack(spacing: 10, pinnedViews: [.sectionHeaders]) {
@@ -37,16 +37,16 @@ struct Recents: View {
                                 .foregroundStyle(.gray)
                             })
                             .hSpacing(.leading)
-                            
+
                             MintFilterTransactionsView(startDate: startDate, endDate: endDate) { transaction in
                                 /// Card view
                                 MintCardView(income: total(transactions, category: .income),
                                              expense: total(transactions, category: .expense))
-                                
+
                                 /// Segmented control
                                 CustomSegmentedControl()
                                     .padding(.bottom, 10)
-                                
+
                                 /// when using mock data
                                 /// ForEach(mockTransactions.filter({ $0.category == selectedCategory.rawValue }))
                                 ForEach(transactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
@@ -56,7 +56,7 @@ struct Recents: View {
                                     .buttonStyle(.plain)
                                 }
                             }
-                           
+
                         } header: {
                             HeaderView(size)
                         }
@@ -85,7 +85,7 @@ struct Recents: View {
             .animation(.snappy, value: showFilterView)
         }
     }
-    
+
     /// Header View
     @ViewBuilder
     func HeaderView(_ size: CGSize) -> some View {
@@ -93,7 +93,7 @@ struct Recents: View {
             VStack(alignment: .leading, spacing: 5, content: {
                 Text("Welcome!")
                     .font(.title.bold())
-                
+
                 if !userName.isEmpty {
                     Text(userName)
                         .font(.callout)
@@ -104,9 +104,9 @@ struct Recents: View {
                 content
                     .scaleEffect(headerScale(size, proxy: geometryProxy), anchor: .topLeading)
             }
-            
+
             Spacer(minLength: 0)
-            
+
             NavigationLink {
                 MintExpenseView()
             } label: {
@@ -124,7 +124,7 @@ struct Recents: View {
             VStack(spacing: 0) {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                
+
                 Divider()
             }
             .visualEffect { content, geometryProxy in
@@ -135,7 +135,7 @@ struct Recents: View {
             .padding(.top, -(safeArea.top + 15))
         }
     }
-    
+
     /// Segment Control
     @ViewBuilder
     func CustomSegmentedControl() -> some View {
@@ -157,23 +157,23 @@ struct Recents: View {
                             selectedCategory = category
                         }
                     }
-                
+
             }
         }
         .background(.gray.opacity(0.15), in: .capsule)
         .padding(.top, 5)
     }
-    
+
     /// scale view along with screen Height: pulldown welcome view enlarge the text
     func headerScale(_ size: CGSize, proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView).minY
         let screenHeight = size.height
-        
+
         let progress = minY / screenHeight
         let scale = (min(max(progress, 0), 1)) * 0.3
         return 1 + scale
     }
-    
+
     func headerBGOpacity(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView).minY + safeArea.top
         return minY > 0 ? 0 : (-minY / 15)

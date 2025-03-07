@@ -24,7 +24,7 @@ struct FloatingTabbar: View {
                             Image(systemName: tab.rawValue)
                                 .font(.title3)
                                 .frame(width: 30, height: 30)
-                            
+
                             if activeTab == tab {
                                 Text(tab.title)
                                     .font(.caption)
@@ -71,13 +71,13 @@ struct FloatingTabbar: View {
                 in: .capsule
             )
             .zIndex(10)
-            
-            
+
+
             Button {
                 if activeTab == .apps  {
-                    
+
                 } else {
-                    
+
                 }
             } label: {
                 MorphingSymbolView(

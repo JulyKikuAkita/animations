@@ -18,10 +18,10 @@ extension View {
 fileprivate struct SnapshotModifier: ViewModifier {
     var trigger: Bool
     var onComplete: (UIImage) -> ()
-    
+
     /// Local view modifier properties
     @State private var view: UIView = .init(frame: .zero)
-    
+
     func body(content: Content) -> some View {
         if #available(iOS 17, *) {
             content
@@ -39,14 +39,14 @@ fileprivate struct SnapshotModifier: ViewModifier {
                 }
         }
     }
-    
+
     private func generateSnapshot() {
         if let superView = view.superview?.superview {
             let renderer = UIGraphicsImageRenderer(size: superView.bounds.size)
             let image = renderer.image { _ in
                 superView.drawHierarchy(in: superView.bounds, afterScreenUpdates: true)
             }
-            
+
             onComplete(image)
         }
     }
@@ -58,7 +58,7 @@ fileprivate struct ViewExtractor: UIViewRepresentable {
         view.backgroundColor = .clear
         return view
     }
-    
+
     func updateUIView(_ uiView: UIViewType, context: Context) {
     }
 

@@ -22,7 +22,7 @@ struct MetaballAnimationView: View {
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(15)
-            
+
             Picker(selection: $type) {
                 Text("Metaball")
                     .tag("Single")
@@ -31,7 +31,7 @@ struct MetaballAnimationView: View {
             } label: {
             }
             .pickerStyle(.segmented)
-            
+
             if type == "Single" {
                 SingleMetaBall()
             } else {
@@ -55,7 +55,7 @@ struct MetaballAnimationView: View {
                         context.addFilter(.alphaThreshold(min: 0.5, color: .white))
                         /// blur radius used to determines the amount of elasticity between 2 elements
                         context.addFilter(.blur(radius: 30))
-                        
+
                         context.drawLayer { ctx in
                             for index in 1...15 {
                                 if let resolvedView = context.resolveSymbol(id: index) {
@@ -71,7 +71,7 @@ struct MetaballAnimationView: View {
                                 width: .random(in: -180...180),
                                 height: .random(in: -240...240)) : .zero
                             )
-                            
+
                             ClubbedRoundedRectangle(offset: offset)
                                 .tag(index)
                         }
@@ -82,9 +82,9 @@ struct MetaballAnimationView: View {
             .onTapGesture{
                 startClubAnimation.toggle()
             }
-            
+
     }
-    
+
     @ViewBuilder
     func ClubbedRoundedRectangle(offset: CGSize) -> some View {
         RoundedRectangle(cornerRadius: 30, style: .continuous)
@@ -94,7 +94,7 @@ struct MetaballAnimationView: View {
         /// animation duration should less than timeline refresh rate, at line53
             .animation(.easeInOut(duration: 10), value: offset)
     }
-    
+
     @ViewBuilder
     func SingleMetaBall() -> some View {
         Rectangle()
@@ -110,7 +110,7 @@ struct MetaballAnimationView: View {
                     context.addFilter(.alphaThreshold(min: 0.5, color: .orange))
                     /// blur radius used to determines the amount of elasticity between 2 elements
                     context.addFilter(.blur(radius: 35))
-                    
+
                     context.drawLayer { ctx in
                         for index in [1, 2] {
                             if let resolvedView = context.resolveSymbol(id: index) {
@@ -122,7 +122,7 @@ struct MetaballAnimationView: View {
                 } symbols: {
                     Ball()
                         .tag(1)
-                    
+
                     Ball(offset: dragOffset)
                         .tag(2)
                 }
@@ -138,7 +138,7 @@ struct MetaballAnimationView: View {
                     })
             )
     }
-    
+
     @ViewBuilder
     func Ball(offset: CGSize = .zero) -> some View {
         Circle()

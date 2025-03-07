@@ -9,7 +9,7 @@ struct ProfileCardView: View {
     @Binding var config: HeroConfiguration
 
     var onClick: (CGRect) -> ()
-    
+
     /// View properties
     @State private var viewRect: CGRect = .zero
     var body: some View {
@@ -28,20 +28,20 @@ struct ProfileCardView: View {
                     } action: { newValue in
                         viewRect = newValue
                     }
-                    
-                
+
+
                 VStack(alignment: .leading, spacing: 4) {
                     Text(profile.username)
                         .font(.callout)
                         .foregroundStyle(Color.primary)
-                    
+
                     Text(profile.lastMsg)
                         .font(.caption2)
                         .foregroundStyle(.gray)
                 }
-                
+
                 Spacer(minLength: 0)
-                
+
                 Image(systemName: "chevron.right")
                     .font(.caption2)
                     .foregroundStyle(.gray)

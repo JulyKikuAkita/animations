@@ -9,7 +9,7 @@ struct PageIndicatorView: View {
     var inactiveTint: Color = .primary.opacity(0.15)
     var opacityEffect: Bool = false
     var clipEdges: Bool = false
-    
+
     var body: some View {
         GeometryReader {
             /// Entire view size for calculating page indicators
@@ -30,7 +30,7 @@ struct PageIndicatorView: View {
                 /// Index
                 let activeIndex = Int(progress)
                 let nextIndex = Int(progress.rounded(.awayFromZero))
-                
+
                 let indicatorProgress = progress - CGFloat(activeIndex)
                 /// Indicator width: current and upcoming
                 /// 18 = indicator width of 8 and the hstack spacing of 10
@@ -51,12 +51,12 @@ struct PageIndicatorView: View {
                                 ZStack {
                                     Capsule()
                                         .fill(inactiveTint)
-                                    
+
                                     Capsule()
                                         .fill(activeTint)
                                         .opacity(opacityEffect ? activeIndex == index ? 1 -  indicatorProgress
                                                  : nextIndex == index ? indicatorProgress : 0 : 1)
-                                    
+
                                 }
                             }
                     }

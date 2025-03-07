@@ -10,4 +10,3 @@ using namespace metal;
     float2 pixellatedPosition = round(position / size) * size;
     return pixellatedPosition;
 }
-

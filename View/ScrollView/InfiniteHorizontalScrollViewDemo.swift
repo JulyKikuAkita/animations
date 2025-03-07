@@ -29,12 +29,12 @@ struct InfiniteHorizontalScrollView: View {
     @State private var scrollPhase: ScrollPhase = .idle
     /// use timer to auto-scroll
     @State private var timer = Timer.publish(every: 0.01, on: .current  , in: .default).autoconnect()
-    
+
     var body: some View {
         ZStack {
             AmbientBackground()
                 .animation(.easeInOut(duration: 1), value: activeCard)
-            
+
             VStack(spacing: 40) {
                 InfiniteScrollView {
                     ForEach(firstSetCards) { card in
@@ -54,7 +54,7 @@ struct InfiniteHorizontalScrollView: View {
                     $0.contentOffset.x + $0.contentInsets.leading
                 } action: { oldValue, newValue in
                     currentScrollOffset = newValue
-                    
+
                     if scrollPhase != .decelerating || scrollPhase != .animating {
                         let activeIndex = Int((currentScrollOffset / 220).rounded()) % firstSetCards.count
                         activeCard = firstSetCards[activeIndex]
@@ -65,26 +65,26 @@ struct InfiniteHorizontalScrollView: View {
                     content
                         .offset(y: !initialAnimation ? -(proxy.size.height + 200) : 0)
                 }
-                
+
                 VStack(spacing: 4) {
                     Text("Welcome to")
                         .fontWeight(.semibold)
                         .foregroundStyle(.white.secondary)
                         .blurOpacityEffect(initialAnimation)
-                    
+
                     Text("Apple Invites")
                         .font(.largeTitle.bold())
                         .foregroundStyle(.white)
                         .textRenderer(TitleTextRenderer(progress: titleProgress))
                         .padding(.bottom, 12)
-                    
+
                     Text("Create beautiful invitations for all your events.\nAnyone can receive invitations. Sending included\n with iCloud+.")
                         .font(.callout)
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.white.secondary)
                         .blurOpacityEffect(initialAnimation)
                 }
-                
+
                 Button {
                     /// cancel the timer before navigate out of the view
                     timer.upstream.connect().cancel()
@@ -106,22 +106,22 @@ struct InfiniteHorizontalScrollView: View {
         }
         .task {
             try? await Task.sleep(for: .seconds(0.35))
-            
+
             withAnimation(.smooth(duration: 0.75, extraBounce: 0)) {
                 initialAnimation = true
             }
-            
+
             withAnimation(.smooth(duration: 2.5, extraBounce: 0).delay(0.3)) {
                 titleProgress = 2
             }
         }
     }
-    
+
     @ViewBuilder
     private func AmbientBackground() -> some View {
         GeometryReader {
             let size = $0.size
-            
+
             ZStack {
                 ForEach(firstSetCards) { card in
                     Image(card.image)
@@ -131,7 +131,7 @@ struct InfiniteHorizontalScrollView: View {
                         .frame(width: size.width, height: size.height)
                         .opacity(activeCard?.id == card.id ? 1 : 0)
                 }
-                
+
                 Rectangle()
                     .fill(.black.opacity(0.45))
                     .ignoresSafeArea()
@@ -140,12 +140,12 @@ struct InfiniteHorizontalScrollView: View {
             .blur(radius: 90, opaque: true)
         }
     }
-    
+
     @ViewBuilder
     private func CarouselCardView(_ card: Card) -> some View {
         GeometryReader {
             let size = $0.size
-            
+
             Image(card.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)

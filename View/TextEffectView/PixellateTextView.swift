@@ -20,12 +20,12 @@ struct PixellateTextView: View {
                 }
             }
             .pickerStyle(.segmented)
-            
+
             let apiKey = Text("qazwsx123edcrfv")
                 .fontWeight(.semibold)
                 .foregroundStyle(Color.primary)
                 .customAttribute(APIKeyAttribute())
-                              
+
              Text("Your API Key is \(apiKey).\n Don't share it.")
                 .font(.largeTitle)
                 .fontDesign(.rounded)
@@ -36,7 +36,7 @@ struct PixellateTextView: View {
                     RevealRenderer(type: type, progress: revealProgress)
                 ) // count as a new line
                 .padding(.vertical, 20)
-        
+
             Button {
                 reveal.toggle()
                 withAnimation(.smooth) {
@@ -50,9 +50,9 @@ struct PixellateTextView: View {
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .tint(.black)
-            
+
             Spacer(minLength: 0)
-            
+
         }
         .padding(15)
         .navigationTitle("Text Rendered")
@@ -69,5 +69,5 @@ struct PixellateTextView: View {
 
 /// Text Attribute: distinguish text that has to be rendered differently
 struct APIKeyAttribute: TextAttribute {
-    
+
 }
