@@ -6,16 +6,16 @@
 import SwiftUI
 
 struct KeyPadAction: Identifiable, Hashable {
-    let id: UUID = UUID()
+    let id: String = UUID().uuidString
     var image: String
     var title: String
 }
 
-let keypadAcitons: [KeyPadAction] = [
+let keypadActions: [KeyPadAction] = [
     .init(image: "xbox.logo", title: "Game Pass"),
     .init(image: "playstation.logo", title: "PS Plus"),
     .init(image: "apple.logo", title: "iCloud+"),
-    .init(image: "appletv.lfill", title: "Apple TV"),
+    .init(image: "appletv.fill", title: "Apple TV"),
 ]
 
 struct Period: Identifiable {

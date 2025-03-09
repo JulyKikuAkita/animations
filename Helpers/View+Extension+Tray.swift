@@ -33,7 +33,32 @@ extension View {
                     .presentationBackground(.clear)
                     .presentationDragIndicator(.hidden)
                     .interactiveDismissDisabled(config.isInteractiveDismissDisabled)
-                    .background()
+                    .background(RemoveSheetShadow())
             }
+    }
+}
+
+fileprivate struct RemoveSheetShadow: UIViewRepresentable {
+    func updateUIView(_ uiView: UIViewType, context: Context) {}
+
+    func makeUIView(context: Context) -> some UIView {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+
+        DispatchQueue.main.async {
+            if let uiSheetView = view.dropShadowView {
+                uiSheetView.layer.shadowColor = UIColor.clear.cgColor
+            }
+        }
+        return view
+    }
+}
+
+extension UIView {
+    var dropShadowView: UIView? {
+        if let superview, String(describing: type(of: superview)) == "UIDropShadowView" {
+            return superview
+        }
+        return superview?.dropShadowView
     }
 }
