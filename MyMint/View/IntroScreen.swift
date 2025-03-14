@@ -15,7 +15,6 @@ struct IntroScreen: View {
                 .padding(.top, 65)
                 .padding(.bottom, 35)
 
-
             /// Points View
             VStack(alignment: .leading, spacing: 25, content: {
                 PointView(symbol: "dollarsign", title: "Transactions", subTitle: "Track your earnings and spending and apply 50/30/20 rules to plan wisely.")
@@ -61,9 +60,7 @@ struct IntroScreen: View {
                 Text(subTitle)
                     .foregroundStyle(.gray)
             })
-
         }
-
     }
 }
 

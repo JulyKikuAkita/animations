@@ -2,11 +2,11 @@
 //  UniversalOverlayView.swift
 //  animation
 
-import SwiftUI
 import AVKit
+import SwiftUI
 
 // example
-//@main
+// @main
 struct UniversalViewApp: App {
     var body: some Scene {
         WindowGroup {
@@ -37,7 +37,6 @@ struct UniversalOverlayDemoView: View {
                 Button("Dummy Sheet") {
                     showSheet.toggle()
                 }
-
 
                 Button("MiniPlayer Demo") {
                     showMiniPlayer.toggle()
@@ -81,7 +80,7 @@ struct FloatingVideoPlayerView: View {
                     .onChanged { value in
                         let transition = value.translation + lastStoredOffset
                         offset = transition
-                    }.onEnded { value in
+                    }.onEnded { _ in
                         withAnimation(.bouncy) {
                             /// limiting movement within the screen
                             offset.width = 0
@@ -94,7 +93,7 @@ struct FloatingVideoPlayerView: View {
 //                                offset.height = (size.height - 250)
 //                            }
 
-                            offset.height = max((size.height - 250), 0)
+                            offset.height = max(size.height - 250, 0)
                             lastStoredOffset = offset
                         }
                     }
@@ -111,7 +110,6 @@ struct FloatingVideoPlayerView: View {
         }
     }
 
-
     var videoURL: URL? {
         if let bundle = Bundle.main.path(forResource: "Reel1", ofType: "mp4") {
             return .init(filePath: bundle)
@@ -120,16 +118,16 @@ struct FloatingVideoPlayerView: View {
     }
 }
 
-fileprivate extension CGSize {
-    static func +(lhs: CGSize, rhs: CGSize) -> CGSize {
-        return .init(
+private extension CGSize {
+    static func + (lhs: CGSize, rhs: CGSize) -> CGSize {
+        .init(
             width: lhs.width + rhs.width,
             height: lhs.height + rhs.height
         )
     }
 }
 
-fileprivate struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier {
+private struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier {
     var animation: Animation
     @Binding var show: Bool
     @ViewBuilder var viewContent: ViewContent
@@ -140,7 +138,7 @@ fileprivate struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: show) { oldValue, newValue in
+            .onChange(of: show) { _, newValue in
                 if newValue {
                     addView()
                 } else {
@@ -150,7 +148,7 @@ fileprivate struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier
     }
 
     private func addView() {
-        if properties.window != nil && viewID == nil {
+        if properties.window != nil, viewID == nil {
             viewID = UUID().uuidString
             guard let viewID else { return }
 
@@ -170,7 +168,7 @@ fileprivate struct UniversalOverlayViewModifier<ViewContent: View>: ViewModifier
     }
 }
 
-fileprivate struct UniversalOverlayViews: View {
+private struct UniversalOverlayViews: View {
     @Environment(UniversalOverlayProperties.self) private var properties
     var body: some View {
         ZStack {
@@ -182,7 +180,7 @@ fileprivate struct UniversalOverlayViews: View {
 }
 
 /// not working for iOS 18 and above
-fileprivate class PassthroughWindow: UIWindow {
+private class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let hitView = super.hitTest(point, with: event),
               let rootView = rootViewController?.view else { return nil }
@@ -199,7 +197,6 @@ fileprivate class PassthroughWindow: UIWindow {
             return nil
         } else {
             return hitView == rootView ? nil : hitView
-
         }
     }
 }
@@ -215,7 +212,6 @@ class UniversalOverlayProperties {
         var view: AnyView
     }
 }
-
 
 /// Root View Wrapper to place views on top of the SwiftUI app
 ///  by crating an overlay window on top of the active key window
@@ -233,7 +229,8 @@ struct RootView<Content: View>: View {
             .environment(properties)
             .onAppear {
                 if let windowScene = (UIApplication.shared.connectedScenes.first as? UIWindowScene),
-                   properties.window == nil {
+                   properties.window == nil
+                {
                     let window = PassthroughWindow(windowScene: windowScene) // for interacting with overlay view
                     window.isHidden = false
                     window.isUserInteractionEnabled = true
@@ -258,18 +255,17 @@ struct RootView<Content: View>: View {
 
 extension View {
     @ViewBuilder
-    func universalOverlay<Content: View>(
+    func universalOverlay(
         animation: Animation = .snappy,
         show: Binding<Bool>,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> some View
     ) -> some View {
-        self
-            .modifier(
-                UniversalOverlayViewModifier(
-                    animation: animation,
-                    show: show,
-                    viewContent: content
-                )
+        modifier(
+            UniversalOverlayViewModifier(
+                animation: animation,
+                show: show,
+                viewContent: content
             )
+        )
     }
 }

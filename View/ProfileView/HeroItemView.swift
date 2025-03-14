@@ -47,10 +47,10 @@ struct CardView: View {
             .padding()
         })
         .heroLayer(id: item.id.uuidString,
-                   animate: $expandSheet) {
+                   animate: $expandSheet)
+        {
             ImageView()
-        }  completion: { _ in
-
+        } completion: { _ in
         }
     }
 
@@ -98,8 +98,7 @@ struct DemoView: View {
         .heroLayer(id: "View 1", animate: $showView) {
             Circle()
                 .fill(.red)
-        } completion: { status in
-
+        } completion: { _ in
         }
     }
 }
@@ -116,5 +115,5 @@ struct Item: Identifiable {
 var items: [Item] = [
     .init(title: "Book Icon", color: .red, symbol: "book.fill"),
     .init(title: "Stack Icon", color: .blue, symbol: "square.stack.3d.up"),
-    .init(title: "Rectangle Icon", color: .orange, symbol: "rectangle.portrait")
+    .init(title: "Rectangle Icon", color: .orange, symbol: "rectangle.portrait"),
 ]

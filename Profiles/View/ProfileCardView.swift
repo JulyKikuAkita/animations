@@ -8,7 +8,7 @@ struct ProfileCardView: View {
     var profile: Profile
     @Binding var config: HeroConfiguration
 
-    var onClick: (CGRect) -> ()
+    var onClick: (CGRect) -> Void
 
     /// View properties
     @State private var viewRect: CGRect = .zero
@@ -28,7 +28,6 @@ struct ProfileCardView: View {
                     } action: { newValue in
                         viewRect = newValue
                     }
-
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(profile.username)

@@ -7,14 +7,12 @@ import SwiftUI
 extension View {
     @ViewBuilder
     func hSpacing(_ alignment: Alignment = .center) -> some View {
-        self
-            .frame(maxWidth: .infinity, alignment: alignment)
+        frame(maxWidth: .infinity, alignment: alignment)
     }
 
     @ViewBuilder
     func vSpacing(_ alignment: Alignment = .center) -> some View {
-        self
-            .frame(maxHeight: .infinity, alignment: alignment)
+        frame(maxHeight: .infinity, alignment: alignment)
     }
 
     var safeArea: UIEdgeInsets {
@@ -44,14 +42,14 @@ extension View {
     }
 
     func total(_ transactions: [Transaction], category: MintCategory) -> Double {
-        return transactions.filter({ $0.category == category.rawValue }).reduce(Double.zero) { partialResult, transaction in
-            return partialResult + transaction.amount
+        transactions.filter { $0.category == category.rawValue }.reduce(Double.zero) { partialResult, transaction in
+            partialResult + transaction.amount
         }
     }
 
     func total(_ transactions: [Transaction], rule: MintRule) -> Double {
-        return transactions.filter({ $0.rule == rule.rawValue }).reduce(Double.zero) { partialResult, transaction in
-            return partialResult + transaction.amount
+        transactions.filter { $0.rule == rule.rawValue }.reduce(Double.zero) { partialResult, transaction in
+            partialResult + transaction.amount
         }
     }
 }

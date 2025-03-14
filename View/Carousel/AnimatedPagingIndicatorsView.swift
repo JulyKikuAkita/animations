@@ -41,7 +41,7 @@ struct AnimatedPagingIndicatorsView: View {
             .scrollTargetBehavior(.paging) // comment this out for carousel style
             .scrollIndicators(.hidden)
             .frame(height: 220)
-            .padding(15)  // comment this out for carousel style
+            .padding(15) // comment this out for carousel style
             /// use below for carousel style
 //            .scrollTargetBehavior(.viewAligned)
 //            .safeAreaPadding(.vertical, 15)
@@ -55,7 +55,6 @@ struct AnimatedPagingIndicatorsView: View {
                     Button("Add Card") {
                         colors.append(.brown)
                     }
-
                 }
             }
             .clipShape(.rect(cornerRadius: 15))

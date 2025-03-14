@@ -12,7 +12,6 @@ struct InfiniteHorizontalScrollApp: App {
     }
 }
 
-
 struct InfiniteHorizontalScrollViewDemo: View {
     var body: some View {
         InfiniteHorizontalScrollView()
@@ -28,7 +27,7 @@ struct InfiniteHorizontalScrollView: View {
     @State private var titleProgress: CGFloat = 0
     @State private var scrollPhase: ScrollPhase = .idle
     /// use timer to auto-scroll
-    @State private var timer = Timer.publish(every: 0.01, on: .current  , in: .default).autoconnect()
+    @State private var timer = Timer.publish(every: 0.01, on: .current, in: .default).autoconnect()
 
     var body: some View {
         ZStack {
@@ -47,12 +46,12 @@ struct InfiniteHorizontalScrollView: View {
                 .containerRelativeFrame(.vertical) { value, _ in
                     value * 0.45
                 }
-                .onScrollPhaseChange { oldPhase, newPhase in
+                .onScrollPhaseChange { _, newPhase in
                     scrollPhase = newPhase
                 }
                 .onScrollGeometryChange(for: CGFloat.self) {
                     $0.contentOffset.x + $0.contentInsets.leading
-                } action: { oldValue, newValue in
+                } action: { _, newValue in
                     currentScrollOffset = newValue
 
                     if scrollPhase != .decelerating || scrollPhase != .animating {
@@ -168,8 +167,7 @@ struct InfiniteHorizontalScrollView: View {
 
 extension View {
     func blurOpacityEffect(_ show: Bool) -> some View {
-        self
-            .blur(radius: show ? 0 : 2)
+        blur(radius: show ? 0 : 2)
             .opacity(show ? 1 : 0)
             .scaleEffect(show ? 1 : 0.9)
     }

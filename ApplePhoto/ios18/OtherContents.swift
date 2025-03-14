@@ -18,9 +18,7 @@ struct OtherContents: View {
     @ViewBuilder
     func DummyView(_ title: String, _ color: Color) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Button {
-
-            } label: {
+            Button {} label: {
                 HStack(spacing: 6) {
                     Text(title)
                         .font(.title3.bold())
@@ -31,12 +29,11 @@ struct OtherContents: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.gray)
                 }
-
             }
 
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 10) {
-                    ForEach(1...10, id:\.self) { _ in
+                    ForEach(1 ... 10, id: \.self) { _ in
                         RoundedRectangle(cornerRadius: 15)
                             .fill(color)
                             .frame(width: 220, height: 120)

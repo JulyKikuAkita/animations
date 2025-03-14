@@ -17,10 +17,10 @@ struct CustomAlertIOS18DemoView: View {
                         title: "Folder Name",
                         content: "Enter a file Name",
                         image: .init(content: "folder.fill.badge.plus", tint: .blue, foreground: .white),
-                        button1: .init(content: "Save Folder", tint: .blue, foreground: .white, action: { folder in
+                        button1: .init(content: "Save Folder", tint: .blue, foreground: .white, action: { _ in
                             showAlert = false
                         }),
-                        button2: .init(content: "Cancel", tint: .red, foreground: .white, action: { folder in
+                        button2: .init(content: "Cancel", tint: .red, foreground: .white, action: { _ in
                             showAlert = false
                         }),
                         addsTextField: true,
@@ -125,14 +125,13 @@ struct CustomDialog: View {
         }
         .frame(maxWidth: 310)
         .compositingGroup()
-
     }
 
     @ViewBuilder
     private func ButtonView(_ config: Config) -> some View {
         Button {
             config.action(addsTextField ? text : "")
-        } label : {
+        } label: {
             Text(config.content)
                 .fontWeight(.bold)
                 .foregroundStyle(config.foreground)
@@ -146,7 +145,7 @@ struct CustomDialog: View {
         var content: String
         var tint: Color
         var foreground: Color
-        var action: (String) -> () = { _ in }
+        var action: (String) -> Void = { _ in }
     }
 }
 

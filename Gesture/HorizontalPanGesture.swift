@@ -13,9 +13,9 @@ struct PanGestureValue {
 
 @available(iOS 18, *)
 struct HorizontalPanGesture: UIGestureRecognizerRepresentable {
-    var onBegan: (() -> ())
-    var onChange: (PanGestureValue) -> ()
-    var onEnd: (PanGestureValue) -> ()
+    var onBegan: () -> Void
+    var onChange: (PanGestureValue) -> Void
+    var onEnd: (PanGestureValue) -> Void
 
     func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
         let gesture = UIPanGestureRecognizer()
@@ -23,27 +23,27 @@ struct HorizontalPanGesture: UIGestureRecognizerRepresentable {
         return gesture
     }
 
-    func updateUIGestureRecognizer(_ recognizer: UIPanGestureRecognizer, context: Context) {}
+    func updateUIGestureRecognizer(_: UIPanGestureRecognizer, context _: Context) {}
 
-    func handleUIGestureRecognizerAction(_ recognizer: UIPanGestureRecognizer, context: Context) {
+    func handleUIGestureRecognizerAction(_ recognizer: UIPanGestureRecognizer, context _: Context) {
         let state = recognizer.state
         let translation = recognizer.translation(in: recognizer.view).toSize()
         let velocity = recognizer.velocity(in: recognizer.view).toSize()
         let gestureValue = PanGestureValue(translation: translation, velocity: velocity)
 
         switch state {
-            case .began:
-                onBegan()
-            case .changed:
-                onChange(gestureValue)
-            case .ended:
-                onEnd(gestureValue)
-            default:
-                break
+        case .began:
+            onBegan()
+        case .changed:
+            onChange(gestureValue)
+        case .ended:
+            onEnd(gestureValue)
+        default:
+            break
         }
     }
 
-    func makeCoordinator(converter: CoordinateSpaceConverter) -> Coordinator {
+    func makeCoordinator(converter _: CoordinateSpaceConverter) -> Coordinator {
         Coordinator()
     }
 

@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-fileprivate enum Effect: String, CaseIterable {
+private enum Effect: String, CaseIterable {
     case bounce = "Bounce"
     case breath = "Breath"
     case pulse = "Pulse"
@@ -52,18 +52,14 @@ struct EffectViewModifierDemo: View {
                         }
                     }
                     .frame(width: 50, height: 20)
-
             }
-
         }
     }
-
 }
 
-
-fileprivate extension View {
+private extension View {
     @ViewBuilder
-    func modifiers<Content: View>(@ViewBuilder content: @escaping (Self) -> Content) -> some View {
+    func modifiers(@ViewBuilder content: @escaping (Self) -> some View) -> some View {
         /// since we are passing self, we can also utilize fill() modifier
         content(self)
     }

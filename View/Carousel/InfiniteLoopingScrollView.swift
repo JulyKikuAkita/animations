@@ -17,19 +17,19 @@ struct InfiniteLoopingScrollView: View {
     @State private var items: [CreditCard] = creditCards
     var body: some View {
         ScrollView(.vertical) {
-            VStack() {
+            VStack {
                 GeometryReader {
                     let size = $0.size
                     LoopingScrollView(width: size.width, spacing: 0, items: items) { item in
-                        let index = items.firstIndex(where: { $0.id == item.id}) ?? -100
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(item.color.gradient)
-                                .padding(.horizontal, 15)
-                                .overlay {
-                                    Text("\(index + 1)")
-                                        .font(.largeTitle)
-                                        .foregroundStyle(.gray)
-                                }
+                        let index = items.firstIndex(where: { $0.id == item.id }) ?? -100
+                        RoundedRectangle(cornerRadius: 15)
+                            .fill(item.color.gradient)
+                            .padding(.horizontal, 15)
+                            .overlay {
+                                Text("\(index + 1)")
+                                    .font(.largeTitle)
+                                    .foregroundStyle(.gray)
+                            }
                     }
 //                    .contentMargins(.horizontal, 15, for: .scrollContent) /// adding margin to scrollview w/o impacting it's natural bound
                     .scrollTargetBehavior(.paging)
@@ -47,12 +47,12 @@ struct LoopingScrollView<Content: View, Item: RandomAccessCollection>: View wher
     /// Custom Properties
     var width: CGFloat
     var spacing: CGFloat = 0
-    var items : Item
+    var items: Item
     @ViewBuilder var content: (Item.Element) -> Content
     var body: some View {
         GeometryReader {
             let size = $0.size
-            let repeatingCount = width > 0 ?  Int((size.width / width).rounded()) + 1 : 1 // should not == 0
+            let repeatingCount = width > 0 ? Int((size.width / width).rounded()) + 1 : 1 // should not == 0
 
             ScrollView(.horizontal) {
                 LazyHStack(spacing: spacing) {
@@ -61,7 +61,7 @@ struct LoopingScrollView<Content: View, Item: RandomAccessCollection>: View wher
                             .frame(width: width)
                     }
 
-                    ForEach(0..<repeatingCount, id: \.self) { index in
+                    ForEach(0 ..< repeatingCount, id: \.self) { index in
                         let item = Array(items)[index % items.count]
                         content(item)
                             .frame(width: width)
@@ -80,14 +80,14 @@ struct LoopingScrollView<Content: View, Item: RandomAccessCollection>: View wher
     }
 }
 
-fileprivate struct ScrollViewHelper: UIViewRepresentable {
+private struct ScrollViewHelper: UIViewRepresentable {
     var width: CGFloat
     var spacing: CGFloat
     var itemsCount: Int
     var repeatingCount: Int
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(
+        Coordinator(
             width: width,
             spacing: spacing,
             itemsCount: itemsCount,
@@ -95,13 +95,13 @@ fileprivate struct ScrollViewHelper: UIViewRepresentable {
         )
     }
 
-    func makeUIView(context: Context) -> UIView {
-        return .init()
+    func makeUIView(context _: Context) -> UIView {
+        .init()
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
-            if let scrollView = uiView.superview?.superview?.superview as? UIScrollView, !context.coordinator .isAdded {
+            if let scrollView = uiView.superview?.superview?.superview as? UIScrollView, !context.coordinator.isAdded {
                 scrollView.delegate = context.coordinator
                 context.coordinator.isAdded = true
             }

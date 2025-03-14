@@ -2,8 +2,8 @@
 //  ColorModel.swift
 //  animation
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @Model
 class ColorModel {
@@ -15,6 +15,7 @@ class ColorModel {
         self.color = UIColor(color)
     }
 }
+
 /// Custom transformer to accept color values
 class ColorTransformer: ValueTransformer {
     override func transformedValue(_ value: Any?) -> Any? {
@@ -40,11 +41,11 @@ class ColorTransformer: ValueTransformer {
     }
 
     override class func transformedValueClass() -> AnyClass {
-        return UIColor.self
+        UIColor.self
     }
 
     override class func allowsReverseTransformation() -> Bool {
-        return true
+        true
     }
 
     static func register() {

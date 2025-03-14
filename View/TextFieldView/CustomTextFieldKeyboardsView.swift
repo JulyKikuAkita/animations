@@ -17,7 +17,7 @@ struct CustomTextFieldKeyboardsDemoView: View {
                     .background(.fill, in: .rect(cornerRadius: 12))
                     .focused($isActive)
 
-            } keyboard : {
+            } keyboard: {
                 CustomKeyboardView(text: $text, isActive: $isActive)
             }
 //            .navigationTitle("Custom Keyboard")
@@ -30,7 +30,7 @@ struct CustomKeyboardView: View {
     @FocusState.Binding var isActive: Bool
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(spacing: 0), count: 3), spacing: 15) {
-            ForEach(1...9, id: \.self) { index in
+            ForEach(1 ... 9, id: \.self) { index in
                 ButtonView("\(index)")
             }
 
@@ -39,7 +39,7 @@ struct CustomKeyboardView: View {
             ButtonView("checkmark.circle.fill", isImage: true)
         }
         .padding(15)
-        .background(.background.shadow(.drop(color: .black.opacity(0.08),radius: 5, x: 0, y:-5)))
+        .background(.background.shadow(.drop(color: .black.opacity(0.08), radius: 5, x: 0, y: -5)))
     }
 
     @ViewBuilder
@@ -47,7 +47,7 @@ struct CustomKeyboardView: View {
         Button {
             if isImage {
                 /// delete  the last input character
-                if value == "delete.backward.fill" && !text.isEmpty {
+                if value == "delete.backward.fill", !text.isEmpty {
                     text.removeLast()
                 }
 
@@ -72,7 +72,7 @@ struct CustomKeyboardView: View {
             .background {
                 if !isImage {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.background.shadow(.drop(color: .black.opacity(0.08), radius: 3, x: 0, y:0)))
+                        .fill(.background.shadow(.drop(color: .black.opacity(0.08), radius: 3, x: 0, y: 0)))
                 }
             }
             .foregroundStyle(Color.primary)

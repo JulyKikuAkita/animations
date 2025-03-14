@@ -58,12 +58,9 @@ struct ProfileSheetAnimationView: View {
                                             windowSharedModel.hideNativeView = false
                                         }
                                     }
-
                                 }
                         })
                         .frame(width: 50, height: 50)
-
-
 
                         VStack(alignment: .leading, spacing: 4, content: {
                             Text(profile.username)
@@ -131,7 +128,7 @@ struct DetailedSheetProfileView: View {
                                 color.opacity(0.1),
                                 color.opacity(0.5),
                                 color.opacity(0.9),
-                                color
+                                color,
                             ], startPoint: .top, endPoint: .bottom)
                         }
                         .clipped()

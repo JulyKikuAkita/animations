@@ -25,7 +25,7 @@ struct MusicInfoView: View {
                     .matchedGeometryEffect(id: "ARTWORK", in: animation)
                 }
             }
-            .frame(width:45, height:45)
+            .frame(width: 45, height: 45)
 
             Text("Hanging Around(Flying Fox)")
                 .fontWeight(.semibold)
@@ -34,16 +34,12 @@ struct MusicInfoView: View {
 
             Spacer(minLength: 0)
 
-            Button {
-
-            } label: {
+            Button {} label: {
                 Image(systemName: "pause.fill")
                     .font(.title2)
             }
 
-            Button {
-
-            } label: {
+            Button {} label: {
                 Image(systemName: "forward.fill")
                     .font(.title2)
             }

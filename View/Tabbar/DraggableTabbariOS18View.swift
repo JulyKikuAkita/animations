@@ -1,5 +1,5 @@
 //
-//  DraggableTabBariOS18View.swift
+//  DraggableTabbariOS18View.swift
 //  animation
 // support both iOS 17 & 18
 
@@ -11,21 +11,20 @@ struct DraggableTabBariOS18DemoView: View {
         ZStack(alignment: .bottom) {
             if #available(iOS 18, *) {
                 TabView(selection: $activeTab) {
-                    ForEach(Tab_iOS17.allCases, id:\.rawValue) { tab in
-                        Tab.init(value: tab) {
+                    ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+                        Tab(value: tab) {
                             // must hide the native tab bar
                             Text(tab.title)
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
-
                     }
                 }
             } else {
                 TabView(selection: $activeTab) {
-                    ForEach(Tab_iOS17.allCases, id:\.rawValue) { tab in
+                    ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
                         Text(tab.title)
                             .tag(tab)
-                        // must hide the native tab bar
+                            // must hide the native tab bar
                             .toolbar(.hidden, for: .tabBar)
                     }
                 }
@@ -49,7 +48,7 @@ struct FloatingInteractiveTabBar: View {
     var body: some View {
         HStack(spacing: 0) {
             ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
-                    TabButton(tab)
+                TabButton(tab)
             }
         }
         .frame(height: 40)
@@ -106,7 +105,7 @@ struct FloatingInteractiveTabBar: View {
                     }
                     activeDraggingTab = nil
                 },
-            isEnabled: activeTab == tab  /// do not use isActive  -> as it will immediate disabled when tab is moved as it checks drag value
+            isEnabled: activeTab == tab /// do not use isActive  -> as it will immediate disabled when tab is moved as it checks drag value
         )
     }
 }
@@ -122,7 +121,7 @@ struct DraggableTabBariOS18: View {
     var body: some View {
         HStack(spacing: 0) {
             ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
-                    TabButton(tab)
+                TabButton(tab)
             }
         }
         .frame(height: 70)
@@ -144,7 +143,7 @@ struct DraggableTabBariOS18: View {
         VStack(spacing: 6) {
             Image(systemName: tab.rawValue)
                 .symbolVariant(.fill)
-                .frame(width: isActive ? 50 : 25, height: isActive ? 50 :25)
+                .frame(width: isActive ? 50 : 25, height: isActive ? 50 : 25)
                 .background {
                     if isActive {
                         Circle()
@@ -189,7 +188,7 @@ struct DraggableTabBariOS18: View {
                     }
                     activeDraggingTab = nil
                 },
-            isEnabled: activeTab == tab  /// do not use isActive  -> as it will immediate disabled when tab is moved as it checks drag value
+            isEnabled: activeTab == tab /// do not use isActive  -> as it will immediate disabled when tab is moved as it checks drag value
         )
     }
 }

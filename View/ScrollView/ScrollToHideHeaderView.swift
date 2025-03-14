@@ -17,14 +17,14 @@ struct ScrollToHideHeaderView: View {
 
             ScrollView(.vertical) {
                 LazyVStack(spacing: 15) {
-                    ForEach(1...50, id:\.self) { _ in
+                    ForEach(1 ... 50, id: \.self) { _ in
                         DummyCardView()
                     }
                 }
                 .padding(15)
             }
             .overlay(content: {
-                Text("\(naturalScrollOffset) \(headerHeight)") //debug
+                Text("\(naturalScrollOffset) \(headerHeight)") // debug
             })
             .safeAreaInset(edge: .top, spacing: 0) {
                 HeaderView()
@@ -40,18 +40,19 @@ struct ScrollToHideHeaderView: View {
                 let isScrollingUp = oldValue < newValue
                 headerOffset = min(
                     max(newValue - lastNatureOffset, 0),
-                    headerHeight)
+                    headerHeight
+                )
                 self.isScrollingUp = isScrollingUp
 
                 naturalScrollOffset = newValue
             }
-            .onScrollPhaseChange({ oldPhase, newPhase, context in
+            .onScrollPhaseChange { _, newPhase, _ in
                 // when user stop scrolling and header animation is in between state
-                if !newPhase.isScrolling && (
-                    headerOffset != 0 || headerOffset != headerHeight
-                ) {
+                if !newPhase.isScrolling,
+                   headerOffset != 0 || headerOffset != headerHeight
+                {
                     withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
-                        if headerOffset > (headerHeight * 0.5) && naturalScrollOffset > headerHeight {
+                        if headerOffset > (headerHeight * 0.5), naturalScrollOffset > headerHeight {
                             headerOffset = headerHeight
                         } else {
                             headerOffset = 0
@@ -59,11 +60,11 @@ struct ScrollToHideHeaderView: View {
                         lastNatureOffset = naturalScrollOffset - headerOffset
                     }
                 }
-            })
+            }
             // show/hide header view based on scroll direction
-            .onChange(of: isScrollingUp, { oldValue, newValue in
+            .onChange(of: isScrollingUp) { _, _ in
                 lastNatureOffset = naturalScrollOffset - headerOffset
-            })
+            }
             .ignoresSafeArea(.container, edges: .top)
         }
     }
@@ -109,7 +110,6 @@ struct ScrollToHideHeaderView: View {
 
                         Rectangle()
                             .frame(width: 80)
-
 
                         Rectangle()
                             .frame(width: 60)

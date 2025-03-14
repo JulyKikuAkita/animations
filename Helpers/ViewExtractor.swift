@@ -8,9 +8,8 @@ import SwiftUI
 // Add this to the view we want to tract (not after the modifier otherwise we get result as modifier)
 extension View {
     @ViewBuilder
-    func ViewExtractor(result: @escaping (UIView) -> ()) -> some View {
-        self
-            .background(ViewExtractHelper(result: result))
+    func ViewExtractor(result: @escaping (UIView) -> Void) -> some View {
+        background(ViewExtractHelper(result: result))
             .compositingGroup()
     }
 }
@@ -23,10 +22,10 @@ extension View {
 ///  - swiftUI view (subviews.last)
 ///  - hosting kind a view
 ///  - UIKit view(subviews.first)  <-- if no UIKit view, this will be null
-fileprivate struct ViewExtractHelper: UIViewRepresentable {
-    var result: (UIView) -> ()
+private struct ViewExtractHelper: UIViewRepresentable {
+    var result: (UIView) -> Void
 
-    func makeUIView(context: Context) -> UIView {
+    func makeUIView(context _: Context) -> UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
         view.isUserInteractionEnabled = false
@@ -40,8 +39,7 @@ fileprivate struct ViewExtractHelper: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
-    }
+    func updateUIView(_: UIView, context _: Context) {}
 }
 
 /// Demo for how to use view extractor
@@ -58,15 +56,13 @@ struct demoViewExtractorControllerView: View {
             }
         }
 
-        TabView {
-
-        }
-        .ViewExtractor { view in
-            if let tabController = view.next as? UITabBarController {
-                tabController.tabBar.isHidden = true
-                print(tabController)
+        TabView {}
+            .ViewExtractor { view in
+                if let tabController = view.next as? UITabBarController {
+                    tabController.tabBar.isHidden = true
+                    print(tabController)
+                }
             }
-        }
     }
 }
 
@@ -81,7 +77,7 @@ struct demoViewExtractorView: View {
             /// native SwiftUI view
             Text("Native SwiftUI View which has no UIKit view")
                 .ViewExtractor { view in
-                        print(view)
+                    print(view)
                 }
 
             /// UIKit View wrapped with SwiftUI Wrapper: textfield, slider, list etc

@@ -23,13 +23,14 @@ struct SchemeHostView<Content: View>: View {
 
     /// View Properties
     @AppStorage("AppScheme") private var appScheme: AppScheme = .device
-    init(@ViewBuilder content: @escaping () -> Content ) {
+    init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content()
         /// load saved color scheme
         if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow {
             window.overrideUserInterfaceStyle = appScheme == .dark ? .dark : appScheme == .light ? .light : .unspecified
         }
     }
+
     @SceneStorage("ShowScenePickerView") private var showPickerView: Bool = false
     @Environment(\.colorScheme) private var scheme
     @State private var schemePreviews: [SchemePreview] = []
@@ -43,7 +44,7 @@ struct SchemeHostView<Content: View>: View {
             }, content: {
                 SchemePickerView(previews: $schemePreviews)
             })
-            .onChange(of: showPickerView) { oldValue, newValue in
+            .onChange(of: showPickerView) { _, newValue in
                 if newValue {
                     generateSchemePreviews()
                 } else {
@@ -71,7 +72,8 @@ struct SchemeHostView<Content: View>: View {
     private func generateSchemePreviews() {
         Task {
             if let window = (
-                UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow, schemePreviews.isEmpty {
+                UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow, schemePreviews.isEmpty
+            {
                 let size = window.screen.bounds.size
                 let defaultStyle = window.overrideUserInterfaceStyle
 
@@ -128,9 +130,9 @@ struct SchemeHostView<Content: View>: View {
     }
 }
 
-fileprivate extension ColorScheme {
+private extension ColorScheme {
     var oppositeInterfaceStyle: UIUserInterfaceStyle {
-        return self == .dark ? .light : .dark
+        self == .dark ? .light : .dark
     }
 }
 
@@ -171,14 +173,13 @@ struct SchemePickerView: View {
 
                 Rectangle()
                     .fill(Color.primary.opacity(0.05))
-
             }
             .clipShape(.rect(cornerRadius: 20))
         }
         .padding(.horizontal, 15)
         .presentationDetents([.height(320)])
         .presentationBackground(.clear)
-        .onChange(of: appScheme, initial: true) { oldValue, newValue in
+        .onChange(of: appScheme, initial: true) { _, newValue in
             localSchemeState = newValue
         }
         .animation(.easeInOut(duration: 0.25), value: appScheme)

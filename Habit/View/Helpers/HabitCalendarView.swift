@@ -21,7 +21,7 @@ struct HabitCalendarView: View {
             }
 
             /// day 1 of the month  always start on Sundays, add offset to push it to draw at the  actual date
-            ForEach(0..<Date.startOffsetOfThisMonth, id: \.self) { _ in
+            ForEach(0 ..< Date.startOffsetOfThisMonth, id: \.self) { _ in
                 Circle()
                     .fill(.clear)
                     .frame(height: 30)
@@ -47,10 +47,10 @@ struct HabitCalendarView: View {
 
                         let isFutureHabits = date.startOfDay > Date()
 
-                        if isHabitCompleted && isHabitDay && !isDemo {
+                        if isHabitCompleted, isHabitDay, !isDemo {
                             Circle()
                                 .fill(.green.tertiary)
-                        } else if isHabitDay && !isFutureHabits && !isDemo {
+                        } else if isHabitDay, !isFutureHabits, !isDemo {
                             Circle()
                                 .fill((date.isToday ? Color.yellow : Color.red).tertiary)
                         } else {
@@ -69,5 +69,6 @@ struct HabitCalendarView: View {
     HabitCalendarView(
         createdAt: .now,
         frequency: [.sunday, .wednesday, .saturday],
-        completedDates: [])
+        completedDates: []
+    )
 }

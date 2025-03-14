@@ -18,17 +18,18 @@ struct ZoomTransitionDemoView: View {
 
                     ScrollView(.vertical) {
                         LazyVGrid(columns: Array(repeating: GridItem(spacing: 10), count: 2),
-                            spacing: 10) {
+                                  spacing: 10)
+                        {
                             ForEach($bindings.videos) { $video in
                                 NavigationLink(value: video) { /// Navigation is a form of button
                                     VideoCardView(screenSize: screenSize, video: $video)
-                                    .environment(sharedModel)
-                                    .frame(height: screenSize.height * 0.4)
-                                    .matchedTransitionSource(id: video.id, in: animation) {
-                                        $0
-                                            .background(.clear)
-                                            .clipShape(.rect(cornerRadius: 15))
-                                    }
+                                        .environment(sharedModel)
+                                        .frame(height: screenSize.height * 0.4)
+                                        .matchedTransitionSource(id: video.id, in: animation) {
+                                            $0
+                                                .background(.clear)
+                                                .clipShape(.rect(cornerRadius: 15))
+                                        }
                                 }
                                 .buttonStyle(NoOpacityButtonStyle())
                             }
@@ -43,24 +44,19 @@ struct ZoomTransitionDemoView: View {
                 }
             }
         }
-
     }
 
     @ViewBuilder
     private func HeaderView() -> some View {
         HStack {
-            Button {
-
-            } label: {
+            Button {} label: {
                 Image(systemName: "magnifyingglass")
                     .font(.title3)
             }
 
             Spacer(minLength: 0)
 
-            Button {
-
-            } label: {
+            Button {} label: {
                 Image(systemName: "person.fill")
                     .font(.title3)
             }

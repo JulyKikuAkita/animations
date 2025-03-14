@@ -14,7 +14,7 @@ struct GridCompositionalLayoutDemoView: View {
                         .padding(.bottom, 10)
 
                     GridCompositionalLayoutView(count: count) {
-                        ForEach(1...50, id: \.self) { index in
+                        ForEach(1 ... 50, id: \.self) { index in
                             Rectangle()
                                 .fill(.black.gradient)
                                 .overlay {
@@ -35,7 +35,7 @@ struct GridCompositionalLayoutDemoView: View {
     @ViewBuilder
     func PickerView() -> some View {
         Picker("", selection: $count) {
-            ForEach(1...4, id:\.self) {
+            ForEach(1 ... 4, id: \.self) {
                 Text("\($0) grid")
                     .tag($0)
             }
@@ -43,6 +43,7 @@ struct GridCompositionalLayoutDemoView: View {
         .pickerStyle(.segmented)
     }
 }
+
 struct GridCompositionalLayoutView<Content: View>: View {
     var count: Int = 3
     var spacing: CGFloat = 6
@@ -54,10 +55,10 @@ struct GridCompositionalLayoutView<Content: View>: View {
 
             ForEach(chunked) { chunk in
                 switch chunk.layoutID {
-                    case 0: OneGridLayout(chunk.collection)
-                    case 1: TwoGridLayout(chunk.collection)
-                    case 2: ThreeGridLayout(chunk.collection)
-                    default: FourGridLayout(chunk.collection)
+                case 0: OneGridLayout(chunk.collection)
+                case 1: TwoGridLayout(chunk.collection)
+                case 2: ThreeGridLayout(chunk.collection)
+                default: FourGridLayout(chunk.collection)
                 }
             }
         }
@@ -92,7 +93,6 @@ struct GridCompositionalLayoutView<Content: View>: View {
             ForEach(collection) {
                 $0
                     .matchedGeometryEffect(id: $0.id, in: gridAnimation)
-
             }
         }
         .frame(height: 100)
@@ -113,7 +113,6 @@ struct GridCompositionalLayoutView<Content: View>: View {
                     ForEach(collection.dropFirst()) {
                         $0
                             .matchedGeometryEffect(id: $0.id, in: gridAnimation)
-
                     }
                 }
             }
@@ -133,11 +132,11 @@ struct GridCompositionalLayoutView<Content: View>: View {
     }
 }
 
-fileprivate extension SubviewsCollection {
+private extension SubviewsCollection {
     func chunked(_ size: Int) -> [ChunkedCollection] {
         stride(from: 0, to: count, by: size).map {
-            let collection = Array(self[$0..<Swift.min($0 + size, count)])
-            let layoutID = ($0/size) % 4
+            let collection = Array(self[$0 ..< Swift.min($0 + size, count)])
+            let layoutID = ($0 / size) % 4
             print(layoutID)
             return .init(layoutID: layoutID, collection: collection)
         }

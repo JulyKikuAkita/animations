@@ -6,7 +6,7 @@ import SwiftUI
 
 struct ChartGroup: Identifiable {
     let id: UUID = .init()
-    var date:Date
+    var date: Date
     var categories: [ChartCategory]
     var totalIncome: Double
     var totalExpense: Double
@@ -24,7 +24,7 @@ struct ChartCategory: Identifiable {
 
 struct ChartRulesGroup: Identifiable {
     let id: UUID = .init()
-    var date:Date
+    var date: Date
     var rule: [ChartRule]
     var totalNeed: Double
     var totalWant: Double

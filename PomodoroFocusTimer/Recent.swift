@@ -5,8 +5,8 @@
 //  Swift Data Model
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @Model
 class Recent {
@@ -22,6 +22,6 @@ class Recent {
     }
 
     var totalInSeconds: Int {
-        return (hours * 60 * 60) + (minutes * 60) + seconds
+        (hours * 60 * 60) + (minutes * 60) + seconds
     }
 }

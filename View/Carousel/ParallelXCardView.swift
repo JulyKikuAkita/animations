@@ -19,7 +19,7 @@ struct TravelCardView: View {
         ScrollView(.vertical) {
             VStack(spacing: 15) {
                 HStack(spacing: 12) {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: /*@START_MENU_TOKEN@*/ {}/*@END_MENU_TOKEN@*/, label: {
                         Image(systemName: "line.3.horizontal")
                             .font(.title)
                             .foregroundStyle(.blue)
@@ -30,7 +30,6 @@ struct TravelCardView: View {
                             .foregroundStyle(.gray)
 
                         TextField("Search", text: $searchText)
-
                     }
                 }
                 .padding(.horizontal, 15)
@@ -39,7 +38,7 @@ struct TravelCardView: View {
 
                 Text("Where do you want to \ntravel?")
                     .font(.largeTitle.bold())
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                     .padding(.top, 10)
 
                 /// Parallax Carousel
@@ -105,7 +104,7 @@ struct TravelCardView: View {
                         Image(card.image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            //.scaleEffect(1.25)
+                            // .scaleEffect(1.25)
                             .offset(x: -minX)
                             .frame(width: proxy.size.width * 2.5) // or use scaling -> .scaleEffect(1.25)
                             .frame(width: cardSize.width, height: cardSize.height)
@@ -130,7 +129,6 @@ struct TravelCardView: View {
             .padding(.horizontal, 30)
             .scrollTargetLayout() // iOS 17 new scroll api
             .frame(height: size.height, alignment: .top)
-
         }
         .scrollTargetBehavior(.viewAligned) // iOS 17 new scroll api
         .scrollIndicators(.hidden)
@@ -147,7 +145,7 @@ struct TravelCardView: View {
                 .clear,
                 .black.opacity(0.1),
                 .black.opacity(0.5),
-                .black
+                .black,
             ], startPoint: .top, endPoint: .bottom)
 
             VStack(alignment: .leading, spacing: 4, content: {

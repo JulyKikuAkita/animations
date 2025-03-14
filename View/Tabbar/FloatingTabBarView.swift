@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-//@main
+// @main
 struct FloatingTabBarApp: App {
     var body: some Scene {
         WindowGroup {
@@ -23,22 +23,22 @@ struct FloatingTabBarDemoView: View {
             Group {
                 if #available(iOS 18, *) {
                     TabView(selection: $activeTab) {
-                        Tab.init(value: .apps) {
+                        Tab(value: .apps) {
                             FloatingTabBarView()
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
 
-                        Tab.init(value: .photos) {
+                        Tab(value: .photos) {
                             Text("Photos")
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
 
-                        Tab.init(value: .chat) {
+                        Tab(value: .chat) {
                             Text("Chat")
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
 
-                        Tab.init(value: .profile) {
+                        Tab(value: .profile) {
                             Text("Profile")
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
@@ -49,7 +49,7 @@ struct FloatingTabBarDemoView: View {
                     TabView(selection: $activeTab) {
                         FloatingTabBarView()
                             .tag(Tab_iOS17.apps)
-        //                    .toolbar(.hidden, for: .tabBar) // glitch
+                            //                    .toolbar(.hidden, for: .tabBar) // glitch
                             .background {
                                 if !isTabBarHidden {
                                     HideTabBar {
@@ -69,7 +69,6 @@ struct FloatingTabBarDemoView: View {
                         Text("Profile")
                             .tag(Tab_iOS17.profile)
 //                            .toolbar(.hidden, for: .tabBar)
-
                     }
                 }
             }
@@ -78,12 +77,13 @@ struct FloatingTabBarDemoView: View {
         }
     }
 }
+
 struct FloatingTabBarView: View {
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 LazyVStack(spacing: 12) {
-                    ForEach(1...50, id: \.self) { _ in
+                    ForEach(1 ... 50, id: \.self) { _ in
                         RoundedRectangle(cornerRadius: 12)
                             .fill(.background)
                             .frame(height: 50)
@@ -99,15 +99,15 @@ struct FloatingTabBarView: View {
 }
 
 /// Fix iOS17.3/4 has some glitch of  modifier .toolbar(.hidden, for: .tabBar) to hide tab bar
-fileprivate struct HideTabBar: UIViewRepresentable {
+private struct HideTabBar: UIViewRepresentable {
     init(result: @escaping () -> Void) {
-       UITabBar.appearance().isHidden = true
-       self.result = result
+        UITabBar.appearance().isHidden = true
+        self.result = result
     }
 
-    var result: () -> ()
+    var result: () -> Void
 
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context _: Context) -> some UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
 
@@ -121,8 +121,7 @@ fileprivate struct HideTabBar: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-    }
+    func updateUIView(_: UIViewType, context _: Context) {}
 }
 
 extension UIView {

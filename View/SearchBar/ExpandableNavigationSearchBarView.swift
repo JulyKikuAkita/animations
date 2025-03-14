@@ -49,7 +49,7 @@ struct ExpandableNavigationSearchBarView: View {
             // scale title size
             let scaleProgress = minY > 0 ? 1 + (
                 max(min(minY / scrollViewHeight, 1), 0) * 0.5) : 1
-            let randomValue:CGFloat = 70.0 // any value, the lower, the faster scrolling animation
+            let randomValue: CGFloat = 70.0 // any value, the lower, the faster scrolling animation
             let progress = isSearching ? 1 : max(min(-minY / randomValue, 1), 0)
             VStack(spacing: 10) {
                 /// Title
@@ -81,7 +81,6 @@ struct ExpandableNavigationSearchBarView: View {
                             )
                         )
                     }
-
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 15 - (progress * 15))
@@ -98,7 +97,7 @@ struct ExpandableNavigationSearchBarView: View {
                 /// Custom Segmented Picker
                 ScrollView(.horizontal) {
                     HStack(spacing: 12) {
-                        ForEach(SimpleTabs.allCases, id:\.rawValue) { tab in
+                        ForEach(SimpleTabs.allCases, id: \.rawValue) { tab in
                             Button(action: {
                                 withAnimation(.snappy) {
                                     activeTab = tab
@@ -109,7 +108,7 @@ struct ExpandableNavigationSearchBarView: View {
                                     .foregroundStyle(
                                         activeTab == tab ? (
                                             scheme == .dark ? .black
-                                            : .white) : Color.primary)
+                                                : .white) : Color.primary)
                                     .padding(.vertical, 8)
                                     .padding(.horizontal, 15)
                                     .background {
@@ -128,11 +127,10 @@ struct ExpandableNavigationSearchBarView: View {
                     }
                 }
                 .frame(height: 50)
-
             }
             .padding(.top, 25)
             .safeAreaPadding(.horizontal, 15)
-            .offset(y: (minY < 0  || isSearching) ? -minY : 0) // pin nav bar on top when is searching
+            .offset(y: (minY < 0 || isSearching) ? -minY : 0) // pin nav bar on top when is searching
             .offset(y: -progress * 65)
         }
         .frame(height: 190) // fixed heights: sum of all navigation bar component
@@ -143,7 +141,7 @@ struct ExpandableNavigationSearchBarView: View {
     /// Dummy messages View
     @ViewBuilder
     func DummyMessagesView() -> some View {
-        ForEach(0..<20, id: \.self) { _ in
+        ForEach(0 ..< 20, id: \.self) { _ in
             HStack(spacing: 12) {
                 Circle()
                     .frame(width: 55, height: 55)
@@ -168,7 +166,7 @@ struct ExpandableNavigationSearchBarView: View {
 struct CustomScrollTargetBehavior: ScrollTargetBehavior {
     /// auto reset scroll animation to either finish or origin state
     /// otherwise the scroll will be state in the half transition view
-    func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+    func updateTarget(_ target: inout ScrollTarget, context _: TargetContext) {
         if target.rect.minY < 70 {
             if target.rect.minY < 35 {
                 target.rect.origin = .zero
@@ -177,8 +175,6 @@ struct CustomScrollTargetBehavior: ScrollTargetBehavior {
             }
         }
     }
-
-
 }
 
 #Preview {

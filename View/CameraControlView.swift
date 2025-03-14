@@ -96,7 +96,7 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
     }
 
     /// Set up camera control action for iPhone 16+ models
-    private func setupCameraControl(_ device: AVCaptureDevice) {
+    private func setupCameraControl(_: AVCaptureDevice) {
         /// Checking if the device is eligible for camera control
         guard session.supportsControls else { return }
         session.setControlsDelegate(self, queue: queue)
@@ -107,7 +107,7 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
         }
 
         /// Default control
-        let zoomControl = AVCaptureSlider("Zoom", symbolName: "", in: -0.5...1)
+        let zoomControl = AVCaptureSlider("Zoom", symbolName: "", in: -0.5 ... 1)
         zoomControl.setActionQueue(queue) { progress in
             print(progress)
             /// Update Camera
@@ -136,21 +136,13 @@ class Camera: NSObject, AVCaptureSessionControlsDelegate {
     }
 
     /// Camera control protocols
-    nonisolated func sessionControlsDidBecomeActive(_ session: AVCaptureSession) {
+    nonisolated func sessionControlsDidBecomeActive(_: AVCaptureSession) {}
 
-    }
+    nonisolated func sessionControlsWillEnterFullscreenAppearance(_: AVCaptureSession) {}
 
-    nonisolated func sessionControlsWillEnterFullscreenAppearance(_ session: AVCaptureSession) {
+    nonisolated func sessionControlsWillExitFullscreenAppearance(_: AVCaptureSession) {}
 
-    }
-
-    nonisolated func sessionControlsWillExitFullscreenAppearance(_ session: AVCaptureSession) {
-
-    }
-
-    nonisolated func sessionControlsDidBecomeInactive(_ session: AVCaptureSession) {
-
-    }
+    nonisolated func sessionControlsDidBecomeInactive(_: AVCaptureSession) {}
 
     func capturePhoto() {
         print("Capturing photo")
@@ -167,7 +159,7 @@ struct CameraControlView: View {
             CameraLayerView(size: size)
         }
         .environment(camera)
-        .onChange(of: scene) { oldValue, newValue in
+        .onChange(of: scene) { _, newValue in
             if newValue == .active {
                 camera.startSession()
             } else {
@@ -181,7 +173,7 @@ struct CameraLayerView: UIViewRepresentable {
     var size: CGSize
     @Environment(Camera.self) private var camera
 
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context _: Context) -> some UIView {
         let frame = CGRect(origin: .zero, size: size)
 
         let view = UIView(frame: frame)
@@ -200,8 +192,7 @@ struct CameraLayerView: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-    }
+    func updateUIView(_: UIViewType, context _: Context) {}
 
     func setupCameraInteraction(_ view: UIView) {
         let cameraControlInteraction = AVCaptureEventInteraction { event in

@@ -16,7 +16,6 @@ struct FloatingBottomSheetsViewDemo: View {
                     showStyle1.toggle()
                 }
 
-
                 Button("Show Style2") {
                     showStyle2.toggle()
                 }
@@ -46,7 +45,7 @@ struct FloatingBottomSheetsViewDemo: View {
             .presentationDetents([.height(330)])
             /// demo the shadow area - by default sheet background has shadows even if set background to clear color
             /// this might be issue say as below example
-            //.presentationBackgroundInteraction(.enabled(upThrough: .height(330)))
+            // .presentationBackgroundInteraction(.enabled(upThrough: .height(330)))
         }
         .floatingBottomSheet(isPresented: $showStyle2) {
             // need to define background color and shadow
@@ -55,7 +54,7 @@ struct FloatingBottomSheetsViewDemo: View {
                 .background(.background.shadow(.drop(radius: 5)), in: .rect(cornerRadius: 25))
                 .padding(.horizontal, 15)
                 .padding(.top, 15)
-            /// don't use .large, it will make the main view shrink, use fraction(0.999) instead
+                /// don't use .large, it will make the main view shrink, use fraction(0.999) instead
                 .presentationDetents([.height(100), .height(330), .fraction(0.999)])
                 .presentationBackgroundInteraction(.enabled(upThrough: .height(330)))
         }
@@ -103,9 +102,7 @@ struct FloatingBottomSheetsView: View {
 
     @ViewBuilder
     func ButtonView(_ config: Config) -> some View {
-        Button {
-
-        } label: {
+        Button {} label: {
             Text(config.content)
                 .fontWeight(.bold)
                 .foregroundStyle(config.foreground)
@@ -128,23 +125,21 @@ struct FloatingBottomSheetsView: View {
 
 extension View {
     @ViewBuilder
-    func floatingBottomSheet<Content: View>(isPresented: Binding<Bool>, onDismiss: @escaping () -> () = {}, @ViewBuilder content: @escaping () -> Content) -> some View {
-        self
-            .sheet(isPresented: isPresented, onDismiss: onDismiss) {
-                content()
-                    .presentationCornerRadius(0)
-                    .presentationBackground(.clear)
-                    .presentationDragIndicator(.hidden)
-                    .background(sheetShadowRemover())
-            }
+    func floatingBottomSheet(isPresented: Binding<Bool>, onDismiss: @escaping () -> Void = {}, @ViewBuilder content: @escaping () -> some View) -> some View {
+        sheet(isPresented: isPresented, onDismiss: onDismiss) {
+            content()
+                .presentationCornerRadius(0)
+                .presentationBackground(.clear)
+                .presentationDragIndicator(.hidden)
+                .background(sheetShadowRemover())
+        }
     }
 }
 
+private struct sheetShadowRemover: UIViewRepresentable {
+    func updateUIView(_: UIViewType, context _: Context) {}
 
-fileprivate struct sheetShadowRemover: UIViewRepresentable {
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
-
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context _: Context) -> some UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
 
@@ -160,7 +155,7 @@ fileprivate struct sheetShadowRemover: UIViewRepresentable {
     }
 }
 
-fileprivate extension UIView {
+private extension UIView {
     var viewBeforeWindow: UIView? {
         if let superview, superview is UIWindow {
             return self

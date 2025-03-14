@@ -28,8 +28,8 @@ struct AsyncImageViewerViewDemo: View {
                     }
                 } overlay: {
                     OverlayView()
-                } updates: { isPresented, activeViewID in
-                    //print(isPresented, activeViewID)
+                } updates: { _, _ in
+                    // print(isPresented, activeViewID)
                 }
             }
             .padding(15)

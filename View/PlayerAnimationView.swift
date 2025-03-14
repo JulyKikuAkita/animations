@@ -5,8 +5,8 @@
 //  Created by IFang Lee on 3/2/24.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct PlayerAnimationView: View {
     /// For smooth custom drawing path tab bar animation
@@ -38,7 +38,7 @@ struct PlayerAnimationView: View {
                     .setupTab(.progress)
 
                 BasicProfileAnimationListView()
-                .setupTab(VideoTab.profile)
+                    .setupTab(VideoTab.profile)
 
                 CardCarouselView()
                     .setupTab(.carousel)
@@ -120,7 +120,6 @@ struct PlayerAnimationView: View {
                     FloatingAction(symbol: "bird.fill", background: DummyColors.brown.color) {
                         selectedColor = .brown
                         insertColorModels() // this crash preview
-
                     }
                 } label: { isExpanded in
                     Image(systemName: "plus")
@@ -134,7 +133,6 @@ struct PlayerAnimationView: View {
                         .shadow(color: .black.opacity(0.5), radius: 6)
                         ///  scale effect when expanded
                         .scaleEffect(isExpanded ? 0.9 : 1)
-
                 }
                 .padding()
             }
@@ -143,7 +141,7 @@ struct PlayerAnimationView: View {
             .toolbarBackground(.background, for: .navigationBar)
             .toolbar(content: {
                 ToolbarItem(placement: .topBarTrailing) {
-                    HStack{
+                    HStack {
                         Button(action: {
                             hideNavBar.toggle()
                         }, label: {
@@ -166,7 +164,7 @@ struct PlayerAnimationView: View {
 
     /// Player Item Card View
     @ViewBuilder
-    func PlayerItemCardView(_ item: PlayerItem, onTap: @escaping () -> ()) -> some View {
+    func PlayerItemCardView(_ item: PlayerItem, onTap: @escaping () -> Void) -> some View {
         VStack(alignment: .leading, spacing: 6, content: {
             Image(item.image)
                 .resizable()
@@ -175,7 +173,6 @@ struct PlayerAnimationView: View {
                 .clipShape(.rect(cornerRadius: 10))
                 .contentShape(.rect)
                 .onTapGesture(perform: onTap)
-
 
             HStack(spacing: 10) {
                 Image(systemName: "person.circle.fill")
@@ -299,8 +296,7 @@ struct VideoTabItem: View {
 extension View {
     @ViewBuilder
     func setupTab(_ tab: VideoTab) -> some View {
-        self
-            .tag(tab)
+        tag(tab)
             /// hiding native tab bar
             .toolbar(.hidden, for: .tabBar)
     }
@@ -314,7 +310,7 @@ extension View {
     }
 
     var tabBarHeight: CGFloat { // 20 is the custom curve path
-        return 49 + safeArea.bottom
+        49 + safeArea.bottom
     }
 }
 

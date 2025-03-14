@@ -9,7 +9,7 @@ struct ApplePhotoHomeView: View {
         NavigationStack {
             HomeView()
                 .environment(coordinator)
-            /// disable home view interaction until detail view is visible
+                /// disable home view interaction until detail view is visible
                 .allowsHitTesting(coordinator.selectedItem == nil)
         }
         .overlay {
@@ -22,7 +22,7 @@ struct ApplePhotoHomeView: View {
             if coordinator.selectedItem != nil {
                 DetailView()
                     .environment(coordinator)
-                /// disabled until the showDetailView is visible
+                    /// disabled until the showDetailView is visible
                     .allowsHitTesting(coordinator.showDetailView)
             }
         }
@@ -30,7 +30,8 @@ struct ApplePhotoHomeView: View {
         .overlayPreferenceValue(AnchorKey.self) { value in
             if let selectedItem = coordinator.selectedItem,
                let sAnchor = value[selectedItem.id + "SOURCE"],
-               let dAnchor = value[selectedItem.id + "DEST"] {
+               let dAnchor = value[selectedItem.id + "DEST"]
+            {
                 HeroLayer(
                     item: selectedItem,
                     sAnchor: sAnchor,
@@ -38,7 +39,6 @@ struct ApplePhotoHomeView: View {
                 )
                 .environment(coordinator)
             }
-
         }
     }
 }
@@ -68,7 +68,6 @@ struct HomeView: View {
                                         item.appeared = false
                                     } else {
                                         item.appeared = true
-
                                     }
                                 }
                                 .onDisappear { // address LazyVGrid
@@ -82,9 +81,10 @@ struct HomeView: View {
                     .padding(.vertical, 15)
                 }
             }
-            .onChange(of: coordinator.selectedItem) { oldValue, newValue in
+            .onChange(of: coordinator.selectedItem) { _, newValue in
                 if let item = coordinator.items.first(where: { $0.id == newValue?.id }),
-                    !item.appeared {
+                   !item.appeared
+                {
                     /// Scroll to this item, as this is not visible on the screen
                     reader.scrollTo(item.id, anchor: .bottom)
                 }
@@ -102,7 +102,7 @@ struct HomeView: View {
             Rectangle()
                 .fill(.clear)
                 .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
-                    return [item.id + "SOURCE": anchor]
+                    [item.id + "SOURCE": anchor]
                 })
 
             if let previewImage = item.previewImage {
@@ -118,7 +118,6 @@ struct HomeView: View {
         .contentShape(.rect)
     }
 }
-
 
 #Preview {
     ApplePhotoHomeView()

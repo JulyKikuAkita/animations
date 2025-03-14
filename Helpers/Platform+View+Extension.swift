@@ -37,38 +37,38 @@ enum PlatformType {
 
 extension View {
     @ViewBuilder
-    func platform<Content:View>(_ type: PlatformType, @ViewBuilder content: (Self) -> Content) -> some View {
+    func platform(_ type: PlatformType, @ViewBuilder content: (Self) -> some View) -> some View {
         switch type {
         case .iOS:
             #if os(iOS)
-            content(self)
+                content(self)
             #else
-            self
+                self
             #endif
 
         case .macOS:
             #if os(macOS)
-            content(self)
+                content(self)
             #else
-            self
+                self
             #endif
         case .tvOS:
             #if os(tvOS)
-            content(self)
+                content(self)
             #else
-            self
+                self
             #endif
         case .watchOS:
             #if os(watchOS)
-            content(self)
+                content(self)
             #else
-            self
+                self
             #endif
         case .visionOS:
             #if os(visionOS)
-            content(self)
+                content(self)
             #else
-            self
+                self
             #endif
         }
     }

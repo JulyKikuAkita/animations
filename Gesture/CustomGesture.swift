@@ -7,23 +7,23 @@ import SwiftUI
 struct CustomiOS18Gesture: UIGestureRecognizerRepresentable {
     @Binding var isEnabled: Bool
     /// Only Receives Start and End updates
-    var trigger: (Bool) -> ()
-    var onChanged: (CGSize, CGPoint) -> ()
-    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
+    var trigger: (Bool) -> Void
+    var onChanged: (CGSize, CGPoint) -> Void
+    func makeUIGestureRecognizer(context _: Context) -> UIPanGestureRecognizer {
         let gesture = UIPanGestureRecognizer()
         return gesture
     }
 
     func updateUIGestureRecognizer(
         _ recognizer: UIPanGestureRecognizer,
-        context: Context
+        context _: Context
     ) {
         recognizer.isEnabled = isEnabled
     }
 
     func handleUIGestureRecognizerAction(
         _ recognizer: UIPanGestureRecognizer,
-        context: Context
+        context _: Context
     ) {
         let view = recognizer.view
         let location = recognizer.location(in: view)

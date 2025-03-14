@@ -9,6 +9,7 @@
 // source: https://www.youtube.com/watch?v=cyVQJ31AYKs&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=22
 
 import SwiftUI
+
 struct BasicProfileAnimationListView: View {
     /// View properties
     @State private var selectedProfile: Profile?
@@ -31,20 +32,20 @@ struct BasicProfileAnimationListView: View {
                     }
             }
         }
-        .overlayPreferenceValue(AnchorKey.self, { value in
+        .overlayPreferenceValue(AnchorKey.self) { value in
             GeometryReader(content: { geometry in
                 if let selectedProfile,
-                    let anchor = value[selectedProfile.id.uuidString],
-                   !hideView.0 {
+                   let anchor = value[selectedProfile.id.uuidString],
+                   !hideView.0
+                {
                     let rect = geometry[anchor]
                     ImageView(profile: selectedProfile, size: rect.size)
                         .offset(x: rect.minX, y: rect.minY)
-                    /// Simply animating the rect will add the geometry effect we needed
+                        /// Simply animating the rect will add the geometry effect we needed
                         .animation(.snappy(duration: 0.35, extraBounce: 0), value: rect)
                 }
             })
-
-        })
+        }
     }
 }
 
@@ -60,11 +61,11 @@ struct BasicProfileAnimationView: View {
                 HStack {
                     Color.clear
                         .frame(width: 60, height: 60)
-                        ///Source view anchor
+                        /// Source view anchor
                         .anchorPreference(key: AnchorKey.self, value: .bounds,
                                           transform: { anchor in
-                            return [profile.id.uuidString: anchor]
-                        })
+                                              [profile.id.uuidString: anchor]
+                                          })
 
                     VStack(alignment: .leading, spacing: 6, content: {
                         Text(profile.username)
@@ -88,7 +89,7 @@ struct BasicProfileAnimationView: View {
         /// Need to disable the default list back action to achieve custom geometry effect
         /// Since it's an overlay, we cannot tap on image
         /// Enable tap on image by disable allowsHitTesting
-        .overlayPreferenceValue(AnchorKey.self, { value in
+        .overlayPreferenceValue(AnchorKey.self) { value in
             GeometryReader(content: { geometry in
                 ForEach(profiles) { profile in
                     /// Fetching each profile image view using the profile id
@@ -101,14 +102,14 @@ struct BasicProfileAnimationView: View {
                     }
                 }
             })
-        })
+        }
     }
 }
 
 struct BasicProfileAnimationDetailedView: View {
     @Binding var selectedProfile: Profile?
     @Binding var pushView: Bool
-    @Binding var hideView: (Bool,Bool)
+    @Binding var hideView: (Bool, Bool)
     var body: some View {
         if let selectedProfile {
             VStack {
@@ -117,7 +118,7 @@ struct BasicProfileAnimationDetailedView: View {
                     VStack {
                         if hideView.0 {
                             ImageView(profile: selectedProfile, size: size)
-                            /// Custom close button
+                                /// Custom close button
                                 .overlay(alignment: .top) {
                                     ZStack {
                                         Button(action: {
@@ -145,7 +146,6 @@ struct BasicProfileAnimationDetailedView: View {
                                             .foregroundStyle(.black)
                                             .padding(15)
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-
                                     }
                                     .opacity(hideView.1 ? 1 : 0)
                                     .animation(.snappy, value: hideView.1)
@@ -167,8 +167,8 @@ struct BasicProfileAnimationDetailedView: View {
                     /// Destination view anchor
                     .anchorPreference(key: AnchorKey.self, value: .bounds,
                                       transform: { anchor in
-                        return [selectedProfile.id.uuidString: anchor]
-                    })
+                                          [selectedProfile.id.uuidString: anchor]
+                                      })
                 })
                 .frame(height: 400)
                 .ignoresSafeArea()
@@ -185,9 +185,9 @@ struct BasicProfileAnimationDetailedView: View {
                 }
             })
         }
-
     }
 }
+
 struct ImageView: View {
     var profile: Profile
     var size: CGSize
@@ -196,7 +196,7 @@ struct ImageView: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: size.width, height: size.height)
-        /// Linear GRadient at bottom
+            /// Linear GRadient at bottom
             .overlay(content: {
                 LinearGradient(colors: [
                     .clear,
@@ -205,14 +205,15 @@ struct ImageView: View {
                     .white.opacity(0.1),
                     .white.opacity(0.5),
                     .white.opacity(0.9),
-                    .white
+                    .white,
                 ], startPoint: .top, endPoint: .bottom)
-                .opacity(size.width > 60 ? 1 : 0)
+                    .opacity(size.width > 60 ? 1 : 0)
             })
             /// make sourcce circle shape and destination rect shape
             .clipShape(.rect(cornerRadius: size.width > 60 ? 0 : 30)) // source size is 60
     }
 }
+
 #Preview {
     ContentView()
 }

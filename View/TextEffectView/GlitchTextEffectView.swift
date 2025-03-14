@@ -112,9 +112,9 @@ struct GlitchTextEffectDemoView: View {
 /// KeyFrame must conform to the Animatable protocol
 /// Below demo how to use several values in the Animatable protocol (AnimatablePair)
 struct GlitchFrame: Animatable {
-    var animatableData: AnimatablePair<CGFloat, AnimatablePair<CGFloat,  AnimatablePair<CGFloat, CGFloat>>> {
+    var animatableData: AnimatablePair<CGFloat, AnimatablePair<CGFloat, AnimatablePair<CGFloat, CGFloat>>> {
         get {
-            return .init(top, .init(center, .init(bottom, shadowOpacity)))
+            .init(top, .init(center, .init(bottom, shadowOpacity)))
         }
         set {
             top = newValue.first
@@ -135,9 +135,10 @@ struct GlitchFrame: Animatable {
 @resultBuilder
 struct GlitchFrameBuilder {
     static func buildBlock(_ components: LinearKeyframe<GlitchFrame>...) -> [LinearKeyframe<GlitchFrame>] {
-        return components
+        components
     }
 }
+
 struct GlitchTextEffectView: View {
     var text: String
     /// Config
@@ -153,6 +154,7 @@ struct GlitchTextEffectView: View {
         self.radius = radius
         self.frames = frames()
     }
+
     var body: some View {
         KeyframeAnimator(initialValue: GlitchFrame(), trigger: trigger) { value in
             ZStack {

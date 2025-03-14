@@ -40,14 +40,15 @@ struct SegmentControl<Indicator: View>: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .contentShape(.rect)
                     .onTapGesture {
-
                         if let index = tabs.firstIndex(of: tab),
-                            let activeIndex = tabs.firstIndex(of: activeTab) {
+                           let activeIndex = tabs.firstIndex(of: activeTab)
+                        {
                             activeTab = tab
 
                             /// Creating a stretch effect by widen the indicator than set excessTabWidth to 0
                             withAnimation(.snappy(duration: 0.25, extraBounce: 0),
-                                          completionCriteria: .logicallyComplete) {
+                                          completionCriteria: .logicallyComplete)
+                            {
                                 excessTabWidth = containerWidthForEachTab * CGFloat(index - activeIndex)
                             } completion: {
                                 withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
@@ -70,11 +71,10 @@ struct SegmentControl<Indicator: View>: View {
                             }
                         }
                     }
-
                 }
             }
             .preference(key: SizeKey.self, value: size)
-            .onPreferenceChange(SizeKey.self) { size in
+            .onPreferenceChange(SizeKey.self) { _ in
                 if let index = tabs.firstIndex(of: activeTab) {
                     minX = containerWidthForEachTab * CGFloat(index)
                     excessTabWidth = 0
@@ -100,11 +100,11 @@ struct SegmentControlView: View {
                     activeTint: type2 ? .white : .primary,
                     inactiveTint: .gray.opacity(0.5)
                 ) { size in
-                    RoundedRectangle(cornerRadius: type2 ? 30 : 0)                            .fill(.blue)
+                    RoundedRectangle(cornerRadius: type2 ? 30 : 0).fill(.blue)
                         .frame(height: type2 ? size.height : 4)
                         .padding(.horizontal, type2 ? 0 : 10)
-                            .frame(maxHeight: .infinity, alignment: .bottom)
-                    }
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                }
                 .padding(.top, type2 ? 0 : 10)
                 .background {
                     RoundedRectangle(cornerRadius: type2 ? 30 : 0)
@@ -112,7 +112,6 @@ struct SegmentControlView: View {
                         .ignoresSafeArea()
                 }
                 .padding(.horizontal, type2 ? 15 : 0)
-
 
                 Toggle("Animation 2", isOn: $type2)
                     .padding(10)

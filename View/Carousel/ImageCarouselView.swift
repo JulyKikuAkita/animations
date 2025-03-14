@@ -77,7 +77,7 @@ struct CustomCarousel<Content: View, Data: RandomAccessCollection>: View where D
             let negativeProgress = max(-progress, 0)
 
             let scaleValue = config.scaleValue * abs(progress)
-            let opacityValue = config.opacityValue  * abs(progress)
+            let opacityValue = config.opacityValue * abs(progress)
 
             content(item)
                 .frame(width: size.width, height: size.height)

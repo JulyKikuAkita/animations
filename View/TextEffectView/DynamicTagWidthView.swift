@@ -58,7 +58,7 @@ struct ChipsView<Content: View>: View {
     }
 }
 
-fileprivate extension SubviewsCollection {
+private extension SubviewsCollection {
     func chunkByWidth(_ containerWidth: CGFloat) -> [[Subview]] {
         var row: [Subview] = []
         var rowWidth: CGFloat = 0
@@ -84,8 +84,8 @@ fileprivate extension SubviewsCollection {
     }
 
     func chunked(_ size: Int) -> [[Subview]] {
-        return stride(from: 0, through: count, by: size).map { index in
-            Array(self[index..<Swift.min(index + size, count)])
+        stride(from: 0, through: count, by: size).map { index in
+            Array(self[index ..< Swift.min(index + size, count)])
         }
     }
 }
@@ -95,18 +95,17 @@ struct Chip: Identifiable {
     var name: String
 }
 
-var mockChips: [Chip] = tagNames.map { Chip.init(name: $0) }
+var mockChips: [Chip] = tagNames.map { Chip(name: $0) }
 
-private var tagNames:[String] = [
-    "Berserk", "Hunter", "One Piece", "Chainsaw Man", "Tokyo Ghoul", "Solo Leveling", "Naruto", "Monster",  "Vagabond", "SpyFamily", "One Punch-Man", "Hero Academia", "Jujutsu Kaisen", "Fullmetal Alchemist", "Pandora Hearts", "Bleach", "Gantz", "Frieren"
+private var tagNames: [String] = [
+    "Berserk", "Hunter", "One Piece", "Chainsaw Man", "Tokyo Ghoul", "Solo Leveling", "Naruto", "Monster", "Vagabond", "SpyFamily", "One Punch-Man", "Hero Academia", "Jujutsu Kaisen", "Fullmetal Alchemist", "Pandora Hearts", "Bleach", "Gantz", "Frieren",
 ]
-
 
 /// get the size of text view based on the font type
 extension String {
     func size(_ font: UIFont) -> CGSize {
         let attributes = [NSAttributedString.Key.font: font]
-        return self.size(withAttributes: attributes)
+        return size(withAttributes: attributes)
     }
 }
 
@@ -114,6 +113,7 @@ extension String {
 extension ContainerValues {
     @Entry var viewWidth: CGFloat = 0
 }
+
 #Preview {
     DynamicTagWidthDemoView()
 }

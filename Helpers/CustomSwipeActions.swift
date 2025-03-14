@@ -9,7 +9,7 @@ import SwiftUI
 @resultBuilder
 struct SwipeActionBuilder {
     static func buildBlock(_ components: SwipeActionModel...) -> [SwipeActionModel] {
-        return components
+        components
     }
 }
 
@@ -31,12 +31,11 @@ final class SwipeActionSharedData {
 extension View {
     @ViewBuilder
     func swipeActions(config: SwipeActionConfig = .init(), @SwipeActionBuilder actions: () -> [SwipeActionModel]) -> some View {
-        self
-            .modifier(CustomSwipeActionModifier(config: config, actions: actions()))
+        modifier(CustomSwipeActionModifier(config: config, actions: actions()))
     }
 }
 
-fileprivate struct CustomSwipeActionModifier: ViewModifier {
+private struct CustomSwipeActionModifier: ViewModifier {
     var config: SwipeActionConfig
     var actions: [SwipeActionModel]
     /// View Properties
@@ -77,8 +76,8 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
                     gestureDidEnded(translation: value.translation, velocity: value.velocity)
                 })
             )
-            .onChange(of: resetPositionTrigger) { oldValue, newValue in
-                    reset()
+            .onChange(of: resetPositionTrigger) { _, _ in
+                reset()
             }
             .onGeometryChange(for: CGFloat.self) {
                 $0.frame(in: .scrollView).minY
@@ -87,8 +86,8 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
                     reset()
                 }
             }
-            .onChange(of: sharedData.actionSwipeAction) { oldValue, newValue in
-                if newValue != currentID && offsetX != 0 {
+            .onChange(of: sharedData.actionSwipeAction) { _, newValue in
+                if newValue != currentID, offsetX != 0 {
                     reset()
                 }
             }
@@ -136,7 +135,7 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
         bounceOffset = min(translation.width - (offsetX - lastStoreOffsetX), 0) / 10
     }
 
-    private func gestureDidEnded(translation: CGSize, velocity: CGSize) {
+    private func gestureDidEnded(translation _: CGSize, velocity: CGSize) {
         let endTarget = velocity.width + offsetX
 
         withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
@@ -148,7 +147,6 @@ fileprivate struct CustomSwipeActionModifier: ViewModifier {
                 /// Reset to initial position
                 reset()
             }
-
         }
         lastStoreOffsetX = offsetX
     }

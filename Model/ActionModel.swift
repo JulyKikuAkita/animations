@@ -12,5 +12,5 @@ struct Action: Identifiable {
     var iconFont: Font = .title
     var iconTint: Color = .white
     var isEnabled: Bool = true
-    var action: () -> ()
+    var action: () -> Void
 }

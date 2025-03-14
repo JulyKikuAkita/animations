@@ -5,8 +5,8 @@
 //  Created by IFang Lee on 1/14/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct DocumentScannerAppApp: App {

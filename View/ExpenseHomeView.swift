@@ -15,7 +15,7 @@ struct ExpenseHomeView: View {
         ScrollView(.vertical) {
             VStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 15, content: {
-                        Text("Hello Nanachi")
+                    Text("Hello Nanachi")
                         .font(.largeTitle.bold())
                         .frame(height: 45) /// use fix value to help calculate top offset for animation
                         .padding(.horizontal, 15)
@@ -59,9 +59,7 @@ struct ExpenseHomeView: View {
                 })
 
                 LazyVStack(spacing: 15) {
-                    Menu {
-
-                    } label: {
+                    Menu {} label: {
                         HStack(spacing: 4) {
                             Text("Filter By")
                             Image(systemName: "chevron.down")
@@ -72,7 +70,7 @@ struct ExpenseHomeView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
 
                     ForEach(allExpenses) { expense in
-                            ExpenseCardView(expense)
+                        ExpenseCardView(expense)
                     }
                 }
                 .padding(15)
@@ -93,12 +91,12 @@ struct ExpenseHomeView: View {
                             cornerRadius: 30 * progress,
                             style: .continuous
                         )
-                            .fill(scheme == .dark ? .black : .white)
-                            /// Limiting Background Scroll below the header
-                            .visualEffect { content, proxy in
-                                content
-                                    .offset(y: backgroundLimitOffset(proxy))
-                            }
+                        .fill(scheme == .dark ? .black : .white)
+                        /// Limiting Background Scroll below the header
+                        .visualEffect { content, proxy in
+                            content
+                                .offset(y: backgroundLimitOffset(proxy))
+                        }
                     }
                 }
             }
@@ -111,13 +109,12 @@ struct ExpenseHomeView: View {
                 activeExpenseCard = expenseCards.first?.id
             }
         }
-        .onChange(of: activeExpenseCard) { oldValue, newValue in
+        .onChange(of: activeExpenseCard) { _, _ in
             withAnimation(.snappy) {
                 allExpenses = expenses.shuffled()
             }
         }
     }
-
 
     /// Background Limit Offset
     nonisolated func backgroundLimitOffset(_ proxy: GeometryProxy) -> CGFloat {
@@ -127,7 +124,7 @@ struct ExpenseHomeView: View {
     }
 
     @ViewBuilder
-    func CardView( _ card: ExpenseCard) -> some View {
+    func CardView(_ card: ExpenseCard) -> some View {
         GeometryReader {
             let rect = $0.frame(in: .scrollView(axis: .vertical))
             let minY = rect.minY
@@ -172,10 +169,8 @@ struct ExpenseHomeView: View {
             .offset(y: -offset)
             /// moving til top edge
             .offset(y: progress * -topValue)
-
         }
         .padding(.horizontal, 15)
-
     }
 
     /// Expense Card View
@@ -205,7 +200,7 @@ struct ExpenseHomeView: View {
 /// Custom Scroll Target Behavior
 /// aka scrollWillEndDragging in UIKit
 struct CustomScrollBehavior: ScrollTargetBehavior {
-    func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+    func updateTarget(_ target: inout ScrollTarget, context _: TargetContext) {
         if target.rect.minY < 75 {
             target.rect = .zero /// reset scroll position
         }

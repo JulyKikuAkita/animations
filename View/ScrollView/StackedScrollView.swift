@@ -27,8 +27,9 @@ struct StackedScrollView: View {
                 items: stackCards,
                 stackedDisplayCount: 1,
                 opacityDisplayCount: 0,
-                itemHeight: 70) { item in
-                    StackCardView(item)
+                itemHeight: 70
+            ) { item in
+                StackCardView(item)
             }
             .padding(.bottom, 20)
 

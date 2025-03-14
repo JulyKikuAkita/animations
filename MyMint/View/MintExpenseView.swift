@@ -98,7 +98,7 @@ struct MintExpenseView: View {
             /// Load all existing data from the transaction
             if let editTransaction {
                 title = editTransaction.title
-                remarks =  editTransaction.remarks
+                remarks = editTransaction.remarks
                 amount = editTransaction.amount
                 dateAdded = editTransaction.dateAdded
                 if let category = editTransaction.rawCategory {
@@ -144,7 +144,7 @@ struct MintExpenseView: View {
 
     @ViewBuilder
     func CustomSection(_ title: String, _ hint: String, value: Binding<String>) -> some View {
-        VStack(alignment: .leading,spacing: 10, content: {
+        VStack(alignment: .leading, spacing: 10, content: {
             Text(title)
                 .font(.caption)
                 .foregroundStyle(.gray)
@@ -160,14 +160,14 @@ struct MintExpenseView: View {
     @ViewBuilder
     func CustomCategoryCheckBox() -> some View {
         HStack(spacing: 10) {
-            ForEach(MintCategory.allCases, id:\.rawValue) { current in
+            ForEach(MintCategory.allCases, id: \.rawValue) { current in
                 HStack(spacing: 5) {
                     ZStack {
                         Image(systemName: "circle")
                             .font(.title3)
                             .foregroundStyle(appTint)
 
-                        if self.category == current {
+                        if category == current {
                             Image(systemName: "circle.fill")
                                 .font(.caption)
                                 .foregroundStyle(appTint)
@@ -179,7 +179,7 @@ struct MintExpenseView: View {
                 }
                 .contentShape(.rect)
                 .onTapGesture {
-                    self.category = current
+                    category = current
                 }
             }
         }
@@ -192,14 +192,14 @@ struct MintExpenseView: View {
     @ViewBuilder
     func CustomRuleCheckBox() -> some View {
         HStack(spacing: 5) {
-            ForEach(MintRule.allCases, id:\.rawValue) { current in
+            ForEach(MintRule.allCases, id: \.rawValue) { current in
                 HStack(spacing: 5) {
                     ZStack {
                         Image(systemName: "circle")
                             .font(.title3)
                             .foregroundStyle(appTint)
 
-                        if self.rule == current {
+                        if rule == current {
                             Image(systemName: "circle.fill")
                                 .font(.caption)
                                 .foregroundStyle(appTint)
@@ -211,7 +211,7 @@ struct MintExpenseView: View {
                 }
                 .contentShape(.rect)
                 .onTapGesture {
-                    self.rule = current
+                    rule = current
                 }
             }
         }

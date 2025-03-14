@@ -2,18 +2,16 @@
 //  ProgressiveBlurView.swift
 //  animation
 
-
 import SwiftUI
 
 struct ProgressiveBlurView: UIViewRepresentable {
-    func makeUIView(context: Context) -> CustomBlurView {
+    func makeUIView(context _: Context) -> CustomBlurView {
         let view = CustomBlurView()
         view.backgroundColor = .clear
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-    }
+    func updateUIView(_: UIViewType, context _: Context) {}
 }
 
 class CustomBlurView: UIVisualEffectView {
@@ -22,14 +20,15 @@ class CustomBlurView: UIVisualEffectView {
 
         removeFilters()
 
-        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, _ )  in
+        registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (self: Self, _) in
             DispatchQueue.main.async {
                 self.removeFilters()
             }
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

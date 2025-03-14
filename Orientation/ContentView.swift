@@ -19,7 +19,7 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(.segmented)
-                    .onChange(of: orientation, initial: true) { oldValue, newValue in
+                    .onChange(of: orientation, initial: true) { _, newValue in
                         modifyOrientation(newValue.mask)
                     }
                 }
@@ -102,14 +102,14 @@ enum Orientation: String, CaseIterable {
 
     var mask: UIInterfaceOrientationMask {
         switch self {
-            case .all:
-                return .all
-            case .portrait:
-                return .portrait
-            case .landscapeLeft:
-                return .landscapeLeft
-            case .landscapeRight:
-                return .landscapeRight
+        case .all:
+            .all
+        case .portrait:
+            .portrait
+        case .landscapeLeft:
+            .landscapeLeft
+        case .landscapeRight:
+            .landscapeRight
         }
     }
 }

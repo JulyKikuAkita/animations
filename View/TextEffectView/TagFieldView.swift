@@ -5,7 +5,7 @@ import SwiftUI
 
 struct TagFieldDemoView: View {
     /// View properties
-    @State private var tags:[Tag] = []
+    @State private var tags: [Tag] = []
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
@@ -23,9 +23,9 @@ struct TagField: View {
     @Binding var tags: [Tag]
     var body: some View {
         TagLayout { // tagLayout at https://www.youtube.com/watch?v=FzL11vRhzs8j
-            ForEach($tags){ $tag in
+            ForEach($tags) { $tag in
                 TagView(tag: $tag, allTags: $tags)
-                    .onChange(of: tag.value) { newValue, oldValue in
+                    .onChange(of: tag.value) { newValue, _ in
                         if newValue.last == "," {
                             /// removing last comma
                             tag.value.removeLast()
@@ -57,7 +57,7 @@ struct TagField: View {
 }
 
 /// Tag view
-fileprivate struct TagView: View {
+private struct TagView: View {
     @Binding var tag: Tag
     @Binding var allTags: [Tag]
     @FocusState private var isFocused: Bool
@@ -65,7 +65,7 @@ fileprivate struct TagView: View {
     @Environment(\.colorScheme) private var colorScheme
     var body: some View {
         BackSpaceListenerTextField(hint: "Tag", text: $tag.value, onBackPressed: {
-            if allTags.count > 1 { //keep the first tag
+            if allTags.count > 1 { // keep the first tag
                 if tag.value.isEmpty {
                     allTags.removeAll(where: { $0.id == tag.id })
                     // Activating the previously available tag
@@ -80,12 +80,13 @@ fileprivate struct TagView: View {
         .padding(.horizontal, isFocused || tag.value.isEmpty ? 0 : 10)
         .background((colorScheme == .dark ? Color.black : Color.white).opacity(isFocused || tag.value.isEmpty ? 0 : 1), in: .rect(cornerRadius: 5))
         .disabled(tag.isInitial)
-        .onChange(of: allTags, initial: true, { oldValue, newValue in
-            if newValue.last?.id == tag.id &&
-                !(newValue.last?.isInitial ?? false) && !isFocused {
+        .onChange(of: allTags, initial: true) { _, newValue in
+            if newValue.last?.id == tag.id,
+               !(newValue.last?.isInitial ?? false), !isFocused
+            {
                 isFocused = true
             }
-        })
+        }
         .overlay {
             if tag.isInitial {
                 Rectangle()
@@ -108,13 +109,13 @@ fileprivate struct TagView: View {
     }
 }
 
-fileprivate struct BackSpaceListenerTextField: UIViewRepresentable {
+private struct BackSpaceListenerTextField: UIViewRepresentable {
     var hint: String = "Tag"
     @Binding var text: String
-    var onBackPressed: () -> ()
+    var onBackPressed: () -> Void
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(text: $text)
+        Coordinator(text: $text)
     }
 
     func makeUIView(context: Context) -> CustomTextField {
@@ -129,18 +130,17 @@ fileprivate struct BackSpaceListenerTextField: UIViewRepresentable {
         return textField
     }
 
-    func updateUIView(_ uiView: CustomTextField, context: Context) {
-    }
+    func updateUIView(_: CustomTextField, context _: Context) {}
 
-    func sizeThatFits(_ proposal: ProposedViewSize, uiView: CustomTextField, context: Context) -> CGSize? {
+    func sizeThatFits(_: ProposedViewSize, uiView: CustomTextField, context _: Context) -> CGSize? {
         /// maintain the textfield size rather than taking rest of available space
-        return uiView.intrinsicContentSize
+        uiView.intrinsicContentSize
     }
 
     class Coordinator: NSObject, UITextFieldDelegate {
         @Binding var text: String
         init(text: Binding<String>) {
-            self._text = text
+            _text = text
         }
 
         /// Text change
@@ -156,14 +156,15 @@ fileprivate struct BackSpaceListenerTextField: UIViewRepresentable {
     }
 }
 
-fileprivate class CustomTextField: UITextField {
-    open var onBackPressed: (() -> ())?
+private class CustomTextField: UITextField {
+    open var onBackPressed: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -173,11 +174,10 @@ fileprivate class CustomTextField: UITextField {
         super.deleteBackward()
     }
 
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        return false
+    override func canPerformAction(_: Selector, withSender _: Any?) -> Bool {
+        false
     }
 }
-
 
 #Preview {
     TagFieldDemoView()

@@ -121,18 +121,17 @@ class PageOffsetObserver: NSObject {
 
     /// benefit for using observer to monitor content offset change  than using delegate is to avoid
     /// customizing delegate might remove any of the SwiftUI default functionality
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change _: [NSKeyValueChangeKey: Any]?, context _: UnsafeMutableRawPointer?) {
         guard keyPath == "contentOffset" else { return }
         if let contentOffset = (object as? UICollectionView)?.contentOffset {
             offset = contentOffset.x
         }
     }
-
 }
 
 struct FindCollectionView: UIViewRepresentable {
-    var result: (UICollectionView) -> ()
-    func makeUIView(context: Context) -> some UIView {
+    var result: (UICollectionView) -> Void
+    func makeUIView(context _: Context) -> some UIView {
         let view = UIView()
         view.backgroundColor = .clear
 
@@ -144,12 +143,10 @@ struct FindCollectionView: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-
-    }
+    func updateUIView(_: UIViewType, context _: Context) {}
 }
 
-fileprivate extension UIView {
+private extension UIView {
     /// Finding the collectionView by traversing the superView
     var collectionSuperView: UICollectionView? {
         if let collectionView = superview as? UICollectionView {

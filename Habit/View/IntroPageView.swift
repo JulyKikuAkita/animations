@@ -6,8 +6,8 @@ import SwiftUI
 
 struct IntroPageView: View {
     /// View properties
-    @State private var selectedSportItem : IntroPageItem = introItems.first!
-    @State private var introSportItems : [IntroPageItem] = introItems
+    @State private var selectedSportItem: IntroPageItem = introItems.first!
+    @State private var introSportItems: [IntroPageItem] = introItems
     @State private var activeIndex: Int = 0
     @State private var askUserName: Bool = false
     @AppStorage("username") private var username: String = ""
@@ -107,8 +107,8 @@ struct IntroPageView: View {
             .background {
                 RoundedRectangle(cornerRadius: 35)
                     .fill(.background)
-                    .shadow(color: .primary.opacity(0.2) ,radius: 1, x: 1, y: 1)
-                    .shadow(color: .primary.opacity(0.2) ,radius: 1, x: -1, y: -1)
+                    .shadow(color: .primary.opacity(0.2), radius: 1, x: 1, y: 1)
+                    .shadow(color: .primary.opacity(0.2), radius: 1, x: -1, y: -1)
                     .padding(-3)
                     .opacity(selectedSportItem.id == item.id ? 1 : 0)
             }
@@ -210,7 +210,6 @@ struct IntroPageView: View {
         }
     }
 }
-
 
 #Preview {
     ContentView()

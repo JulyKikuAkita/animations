@@ -27,10 +27,8 @@ struct MessageCardView: View {
                 maxWidth: .infinity,
                 alignment: message.isReply ? .leading : .trailing
             )
-
     }
 }
-
 
 #Preview {
     MessageCardView(message: messages.first!)

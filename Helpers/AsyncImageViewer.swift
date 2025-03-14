@@ -12,7 +12,7 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
     @ViewBuilder var content: Content
     @ViewBuilder var overlay: Overlay
     /// update to the main view
-    var updates: (Bool, AnyHashable?) -> () = { _, _ in }
+    var updates: (Bool, AnyHashable?) -> Void = { _, _ in }
     /// View Properties
     @State private var isPresented: Bool = false
     @State private var activeTabID: Subview.ID?
@@ -35,7 +35,7 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
                             .frame(width: size.width, height: size.height)
                             .clipShape(.rect(cornerRadius: config.cornerRadius))
 
-                        if collection.prefix(4).last?.id == item.id && remainingCount > 0 {
+                        if collection.prefix(4).last?.id == item.id, remainingCount > 0 {
                             RoundedRectangle(cornerRadius: config.cornerRadius)
                                 .fill(.black.opacity(0.35))
                                 .overlay {
@@ -85,18 +85,18 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
             }
             /// update transitionSource when tab item updated
             /// pin to index 3 to make sure match transition - zoom transition animation effect works for image not in display (index > 3), aka indexes > 3 will always have a transition id of 3
-            .onChange(of: activeTabID) { oldValue, newValue in
+            .onChange(of: activeTabID) { _, newValue in
                 transitionSource = min(collection.index(newValue), 3)
                 sendUpdate(collection, id: newValue)
             }
-            .onChange(of: isPresented) { oldValue, newValue in
+            .onChange(of: isPresented) { _, _ in
                 sendUpdate(collection, id: activeTabID)
             }
         }
     }
 
     private func sendUpdate(_ collection: SubviewsCollection, id: Subview.ID?) {
-        if let viewID = collection.first(where: { $0.id == id})?.containerValues.activeViewID {
+        if let viewID = collection.first(where: { $0.id == id })?.containerValues.activeViewID {
             updates(isPresented, viewID)
         }
     }
@@ -108,15 +108,14 @@ struct AsyncImageViewerConfig {
     var spacing: CGFloat = 10
 }
 
-
-fileprivate extension SubviewsCollection {
+private extension SubviewsCollection {
     func index(_ id: SubviewsCollection.Element.ID?) -> Int {
         firstIndex(where: { $0.id == id }) ?? 0
     }
 }
 
 /// To retrieve the current active ID, we can utilize container values to pass the ID to the view and the extract it from the subview
- extension ContainerValues {
+extension ContainerValues {
     @Entry var activeViewID: AnyHashable?
 }
 

@@ -22,7 +22,6 @@ struct PSTabbarView: View {
                             }
                         }
                         .frame(maxWidth: .infinity)
-
                 }
             }
             .padding(.top, 12)
@@ -70,7 +69,8 @@ struct PSTabbarView: View {
                                     .frame(
                                         width: maxedWidth,
                                         height: maxedWidth,
-                                        alignment: .top)
+                                        alignment: .top
+                                    )
                             }
                     }
                     /// Border
@@ -95,7 +95,6 @@ struct PSTabbarView: View {
                             .rotationEffect(.init(degrees: calculateRotation(maxedWidth: maxedWidth / 2, actualWidth: width)))
                     })
                     .offset(y: height / 2.1)
-
             }
             /// Active Tab text
             .overlay(alignment: .bottom) {
@@ -130,6 +129,7 @@ struct PSTabbarView: View {
 
         return -(degree_ - 90)
     }
+
     ///  Offset based on Tab position
     ///  Offset gradually increased until mid tab and then decreasing, produce a smooth circle type layout
     ///  index 0: 0
@@ -155,7 +155,7 @@ struct PSTabbarView: View {
 /// Tab bar custom shapes
 struct TabBarTopCurve: Shape {
     func path(in rect: CGRect) -> Path {
-        return Path { path in
+        Path { path in
             let width = rect.width
             let height = rect.height
             let midWith = width / 2

@@ -2,8 +2,8 @@
 //  ReelView.swift
 //  animation
 
-import SwiftUI
 import AVKit
+import SwiftUI
 
 struct ReelView: View {
     @Binding var reel: Reel
@@ -19,7 +19,7 @@ struct ReelView: View {
 
             /// Custom Video Player  view
             CustomVideoPlayer(player: $player)
-                 /// Offset update
+                /// Offset update
                 .preference(key: OffsetKey.self, value: rect)
                 .onPreferenceChange(OffsetKey.self, perform: { value in
                     playPause(value)
@@ -111,14 +111,11 @@ struct ReelView: View {
                 .symbolEffect(.bounce, value: reel.isLiked)
                 .foregroundStyle(reel.isLiked ? .red : .white)
 
-                Button("", systemImage: "message") {
-                }
+                Button("", systemImage: "message") {}
 
-                Button("", systemImage: "paperplane") {
-                }
+                Button("", systemImage: "paperplane") {}
 
-                Button("", systemImage: "ellipsis") {
-                }
+                Button("", systemImage: "ellipsis") {}
             }
             .font(.title2)
             .foregroundStyle(.white)
@@ -129,7 +126,7 @@ struct ReelView: View {
     }
 }
 
-//struct CustomVideoPlayer: UIViewControllerRepresentable {
+// struct CustomVideoPlayer: UIViewControllerRepresentable {
 //    @Binding var player: AVPlayer?
 //    func makeUIViewController(context: Context) -> AVPlayerViewController {
 //        let controller = AVPlayerViewController()
@@ -144,7 +141,7 @@ struct ReelView: View {
 //        /// updating player
 //        uiViewController.player = player
 //    }
-//}
+// }
 
 #Preview {
     ContentView()

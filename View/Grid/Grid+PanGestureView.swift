@@ -21,92 +21,95 @@ struct GridColorBlockView: View {
     @State private var scrollProperties: ScrollProperties = .init()
 
     var body: some View {
-            ScrollView(.vertical) {
-                VStack(spacing: 20) {
-                    Text("Grid View")
-                        .font(.title.bold())
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .overlay(alignment: .trailing) {
-                            Button(isSelectionEnabled ? "Cancel" : "Select") {
-                                isSelectionEnabled.toggle()
+        ScrollView(.vertical) {
+            VStack(spacing: 20) {
+                Text("Grid View")
+                    .font(.title.bold())
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .overlay(alignment: .trailing) {
+                        Button(isSelectionEnabled ? "Cancel" : "Select") {
+                            isSelectionEnabled.toggle()
 
-                                if !isSelectionEnabled {
-                                    properties = .init()
-                                }
+                            if !isSelectionEnabled {
+                                properties = .init()
                             }
-                            .font(.caption)
-                            .buttonStyle(.borderedProminent)
-                            .buttonBorderShape(.capsule)
                         }
+                        .font(.caption)
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.capsule)
+                    }
 
-                    LazyVGrid(columns: Array(repeating: GridItem(), count: 4)) {
-                        ForEach($items) { $item in
-                            ItemCardView($item)
-                        }
+                LazyVGrid(columns: Array(repeating: GridItem(), count: 4)) {
+                    ForEach($items) { $item in
+                        ItemCardView($item)
                     }
                 }
-                .scrollTargetLayout()
             }
-            .safeAreaPadding(15)
-            .scrollPosition($scrollProperties.position)
-            .overlay(alignment: .top) {
-                ScrollDetectionRegion()
+            .scrollTargetLayout()
+        }
+        .safeAreaPadding(15)
+        .scrollPosition($scrollProperties.position)
+        .overlay(alignment: .top) {
+            ScrollDetectionRegion()
+        }
+        .overlay(alignment: .bottom) {
+            ScrollDetectionRegion(false)
+        }
+        .onAppear(perform: createRandomColor)
+        .onChange(of: isSelectionEnabled) { _, newValue in
+            panGesture?.isEnabled = newValue
+        }
+        .onScrollGeometryChange(
+            for: CGFloat.self,
+            of: { $0.contentOffset
+                .y + $0.contentInsets.top
+            },
+            action: { _, newValue in
+                scrollProperties.currentScrollOffset = newValue
             }
-            .overlay(alignment: .bottom) {
-                ScrollDetectionRegion(false)
-            }
-            .onAppear(perform: createRandomColor)
-            .onChange(of: isSelectionEnabled, { oldValue, newValue in
-                panGesture?.isEnabled = newValue
-            })
-            .onScrollGeometryChange(
-                for: CGFloat.self,
-                of: { $0.contentOffset
-                    .y + $0.contentInsets.top },
-                action: { oldValue, newValue in
-                    scrollProperties.currentScrollOffset = newValue
-            })
+        )
         /// autoScroll when selection hit top or bottom at the specific range in the onScrollGeometryChange
-            .onChange(of: scrollProperties.direction, { oldValue, newValue in
-                 if newValue != .none {
-                     guard scrollProperties.timer == nil else { return }
-                     scrollProperties.manualScrollOffset = scrollProperties.currentScrollOffset
+        .onChange(of: scrollProperties.direction) { _, newValue in
+            if newValue != .none {
+                guard scrollProperties.timer == nil else { return }
+                scrollProperties.manualScrollOffset = scrollProperties.currentScrollOffset
 
-                     scrollProperties.timer = Timer
-                         .scheduledTimer(
-                            withTimeInterval: 0.01,
-                            repeats: true,
-                            block: { _ in
-                                if newValue == .up {
-                                    scrollProperties.manualScrollOffset += 3
-                                }
-
-                                if newValue == .down {
-                                    scrollProperties.manualScrollOffset -= 3
-                                }
-                                scrollProperties.position.scrollTo(y: scrollProperties.manualScrollOffset)
-                            })
-
-                                scrollProperties.timer?.fire()
-                            } else {
-                                resetScrollTimer()
+                scrollProperties.timer = Timer
+                    .scheduledTimer(
+                        withTimeInterval: 0.01,
+                        repeats: true,
+                        block: { _ in
+                            if newValue == .up {
+                                scrollProperties.manualScrollOffset += 3
                             }
-            })
-            .gesture(
-                PanGesture(handle: { gesture in
-                    if panGesture == nil {
-                        panGesture = gesture
-                        gesture.isEnabled = isSelectionEnabled
-                    }
-                    let state = gesture.state
 
-                    if state == .began || state == .changed {
-                        onGestureChange(gesture)
-                    } else {
-                        onGestureEnded(gesture)
-                    }
-                })
-            )
+                            if newValue == .down {
+                                scrollProperties.manualScrollOffset -= 3
+                            }
+                            scrollProperties.position.scrollTo(y: scrollProperties.manualScrollOffset)
+                        }
+                    )
+
+                scrollProperties.timer?.fire()
+            } else {
+                resetScrollTimer()
+            }
+        }
+        .gesture(
+            PanGesture(handle: { gesture in
+                if panGesture == nil {
+                    panGesture = gesture
+                    gesture.isEnabled = isSelectionEnabled
+                }
+                let state = gesture.state
+
+                if state == .began || state == .changed {
+                    onGestureChange(gesture)
+                } else {
+                    onGestureEnded(gesture)
+                }
+            })
+        )
     }
 
     @ViewBuilder
@@ -122,8 +125,9 @@ struct GridColorBlockView: View {
                     binding.wrappedValue.location = newValue
                 }
                 .overlay(alignment: .topLeading) {
-                    if properties.selectedIndices.contains(index) &&
-                        !properties.toBeDeletedIndices.contains(index) {
+                    if properties.selectedIndices.contains(index),
+                       !properties.toBeDeletedIndices.contains(index)
+                    {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.title3)
                             .foregroundStyle(.black, .white)
@@ -147,9 +151,7 @@ struct GridColorBlockView: View {
                             .transition(.identity)
                     }
                 }
-
         }
-
     }
 
     @ViewBuilder
@@ -181,26 +183,25 @@ struct GridColorBlockView: View {
             properties.end = fallingIndex
 
             if let start = properties.start, let end = properties.end {
-                let indices = (start > end ? end...start : start...end).compactMap({ $0 })
+                let indices = (start > end ? end ... start : start ... end).compactMap(\.self)
                 if properties.isDeleteDrag {
-                    properties.toBeDeletedIndices =  Set(
+                    properties.toBeDeletedIndices = Set(
                         properties.previousIndices
                     )
-                        .intersection(indices).compactMap({ $0 })
+                    .intersection(indices).compactMap(\.self)
                 } else {
                     properties.selectedIndices = Set(properties.previousIndices)
-                        .union(indices).compactMap({ $0 })
-
+                        .union(indices).compactMap(\.self)
                 }
             }
 
             scrollProperties.direction = scrollProperties.topRegion
-                .contains(position) ? .down :  scrollProperties.bottomRegion
+                .contains(position) ? .down : scrollProperties.bottomRegion
                 .contains(position) ? .up : .none
         }
     }
 
-    private func onGestureEnded(_ gesture: UIPanGestureRecognizer) {
+    private func onGestureEnded(_: UIPanGestureRecognizer) {
         for index in properties.toBeDeletedIndices {
             properties.selectedIndices.removeAll(where: { $0 == index })
         }
@@ -214,13 +215,12 @@ struct GridColorBlockView: View {
         resetScrollTimer()
     }
 
-
     private func createRandomColor() {
         guard items.isEmpty else { return }
         let colors: [Color] = [.red, .blue, .purple, .yellow, .black, .indigo, .cyan, .brown, .mint, .orange]
 
-        for _ in 0...4 {
-            let sampleItems = colors.shuffled().compactMap({ ColorItem(color: $0) })
+        for _ in 0 ... 4 {
+            let sampleItems = colors.shuffled().compactMap { ColorItem(color: $0) }
             items.append(contentsOf: sampleItems)
         }
     }
@@ -258,7 +258,7 @@ struct GridColorBlockView: View {
 }
 
 /// Custom UIKit Gesture -> move to Gesture + PanGesture file
-//struct PanGesture: UIGestureRecognizerRepresentable {
+// struct PanGesture: UIGestureRecognizerRepresentable {
 //    var handle: (UIPanGestureRecognizer) -> ()
 //
 //    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
@@ -276,8 +276,7 @@ struct GridColorBlockView: View {
 //    ) {
 //        handle(recognizer)
 //    }
-//}
-
+// }
 
 #Preview {
     GridColorBlockDemoView()

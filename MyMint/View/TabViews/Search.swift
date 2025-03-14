@@ -2,14 +2,15 @@
 //  Search.swift
 //  MyMint
 
-import SwiftUI
 import Combine
+import SwiftUI
+
 struct Search: View {
     /// View Properties
     @State private var searchText: String = ""
     @State private var filterText: String = ""
-    @State private var selectedCategory: MintCategory? = nil
-    @State private var selectedRule: MintRule? = nil
+    @State private var selectedCategory: MintCategory?
+    @State private var selectedRule: MintRule?
 
     let searchPublisher = PassthroughSubject<String, Never>() // use combine debounce method
     var body: some View {
@@ -33,12 +34,12 @@ struct Search: View {
                 ContentUnavailableView("Search Transactions", image: "magnifyingglass")
                     .opacity(filterText.isEmpty ? 1 : 0)
             })
-            .onChange(of: searchText, { oldValue, newValue in
+            .onChange(of: searchText) { _, newValue in
                 if newValue.isEmpty {
                     filterText = ""
                 }
                 searchPublisher.send(newValue)
-            })
+            }
             .onReceive(searchPublisher.debounce(for: .seconds(0.3), scheduler: DispatchQueue.main), perform: { text in
                 filterText = text
             })
@@ -58,7 +59,7 @@ struct Search: View {
         Menu {
             Button {
                 selectedCategory = nil
-            } label : {
+            } label: {
                 HStack {
                     Text("Both")
 
@@ -68,10 +69,10 @@ struct Search: View {
                 }
             }
 
-            ForEach(MintCategory.allCases, id:\.rawValue) { category in
+            ForEach(MintCategory.allCases, id: \.rawValue) { category in
                 Button {
                     selectedCategory = category
-                } label : {
+                } label: {
                     HStack {
                         Text(category.rawValue)
 

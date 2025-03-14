@@ -10,6 +10,7 @@ struct MetaballAnimationDemoView: View {
             .preferredColorScheme(.dark)
     }
 }
+
 struct MetaballAnimationView: View {
     /// View Properties
     @State private var dragOffset: CGSize = .zero
@@ -28,9 +29,8 @@ struct MetaballAnimationView: View {
                     .tag("Single")
                 Text("Clubbed")
                     .tag("Clubbed")
-            } label: {
-            }
-            .pickerStyle(.segmented)
+            } label: {}
+                .pickerStyle(.segmented)
 
             if type == "Single" {
                 SingleMetaBall()
@@ -39,6 +39,7 @@ struct MetaballAnimationView: View {
             }
         }
     }
+
     @ViewBuilder
     func ClubbedView() -> some View {
         Rectangle()
@@ -57,7 +58,7 @@ struct MetaballAnimationView: View {
                         context.addFilter(.blur(radius: 30))
 
                         context.drawLayer { ctx in
-                            for index in 1...15 {
+                            for index in 1 ... 15 {
                                 if let resolvedView = context.resolveSymbol(id: index) {
                                     ctx.draw(resolvedView,
                                              at: CGPoint(x: size.width / 2, y: size.height / 2))
@@ -65,11 +66,12 @@ struct MetaballAnimationView: View {
                             }
                         }
                     } symbols: {
-                        ForEach(1...15, id: \.self) { index in
+                        ForEach(1 ... 15, id: \.self) { index in
                             /// Generate custom offset each time to have view show up at random place and clubbed with each other
                             let offset = (startClubAnimation ? CGSize(
-                                width: .random(in: -180...180),
-                                height: .random(in: -240...240)) : .zero
+                                width: .random(in: -180 ... 180),
+                                height: .random(in: -240 ... 240)
+                            ) : .zero
                             )
 
                             ClubbedRoundedRectangle(offset: offset)
@@ -79,10 +81,9 @@ struct MetaballAnimationView: View {
                 }
             }
             .contentShape(Rectangle())
-            .onTapGesture{
+            .onTapGesture {
                 startClubAnimation.toggle()
             }
-
     }
 
     @ViewBuilder
@@ -91,7 +92,7 @@ struct MetaballAnimationView: View {
             .fill(.white)
             .frame(width: 120, height: 120)
             .offset(offset)
-        /// animation duration should less than timeline refresh rate, at line53
+            /// animation duration should less than timeline refresh rate, at line53
             .animation(.easeInOut(duration: 10), value: offset)
     }
 
@@ -129,13 +130,13 @@ struct MetaballAnimationView: View {
             }
             .gesture(
                 DragGesture()
-                    .onChanged({ value in
+                    .onChanged { value in
                         dragOffset = value.translation
-                    }).onEnded({ _ in
+                    }.onEnded { _ in
                         withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
                             dragOffset = .zero
                         }
-                    })
+                    }
             )
     }
 

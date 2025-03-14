@@ -26,7 +26,7 @@ struct ExpandedBottomSheet: View {
                     })
                     .overlay(alignment: .top) {
                         MusicInfoView(expandSheet: $expandSheet, animation: animation)
-                        /// Disabling interaction (since it's not necessary here)
+                            /// Disabling interaction (since it's not necessary here)
                             .allowsHitTesting(false)
                             .opacity(animateContent ? 0 : 1)
                     }
@@ -61,11 +61,9 @@ struct ExpandedBottomSheet: View {
                     PlayerView(size)
                         /// Moving it from bottom
                         .offset(y: animateContent ? 0 : size.height)
-
-
                 }
                 .padding(.top, safeArea.top + (safeArea.bottom == 0 ? 10 : 0))
-                .padding(.bottom, safeArea.bottom  == 0 ? 10 : safeArea.bottom)
+                .padding(.bottom, safeArea.bottom == 0 ? 10 : safeArea.bottom)
                 .padding(.horizontal, 25)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .clipped()
@@ -73,10 +71,10 @@ struct ExpandedBottomSheet: View {
                 .offset(y: offsetY)
                 .gesture(
                     DragGesture()
-                        .onChanged({ value in
+                        .onChanged { value in
                             let translationY = value.translation.height
                             offsetY = (translationY > 0 ? translationY : 0)
-                        }).onEnded({ value in
+                        }.onEnded { _ in
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 if offsetY > size.height * 0.4 {
                                     expandSheet = false
@@ -85,7 +83,7 @@ struct ExpandedBottomSheet: View {
                                     offsetY = .zero
                                 }
                             }
-                        })
+                        }
                 )
             }
             .ignoresSafeArea(.container, edges: .all)
@@ -98,7 +96,7 @@ struct ExpandedBottomSheet: View {
     }
 
     @ViewBuilder
-    func PlayerView(_ mainSize: CGSize) -> some View {
+    func PlayerView(_: CGSize) -> some View {
         GeometryReader {
             let size = $0.size
             /// Dynamic spacing using available height
@@ -119,9 +117,7 @@ struct ExpandedBottomSheet: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                        Button {
-
-                        } label: {
+                        Button {} label: {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.white)
                                 .padding(12)
@@ -152,35 +148,28 @@ struct ExpandedBottomSheet: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
-
                 }
                 /// Moving it to top
                 .frame(height: size.height / 2.5, alignment: .top)
 
                 /// Playback controls
                 HStack(spacing: size.width * 0.18) {
-                    Button {
-
-                    } label: {
+                    Button {} label: {
                         Image(systemName: "backward.fill")
-                        /// dynamic sizing for smaller to larger iPhones
+                            /// dynamic sizing for smaller to larger iPhones
                             .font(size.height < 300 ? .title3 : .title)
                     }
 
                     /// making play/pause little bigger
-                    Button {
-
-                    } label: {
+                    Button {} label: {
                         Image(systemName: "pause.fill")
-                        /// dynamic sizing for smaller to larger iPhones
+                            /// dynamic sizing for smaller to larger iPhones
                             .font(size.height < 300 ? .largeTitle : .system(size: 50))
                     }
 
-                    Button {
-
-                    } label: {
+                    Button {} label: {
                         Image(systemName: "forward.fill")
-                        /// dynamic sizing for smaller to larger iPhones
+                            /// dynamic sizing for smaller to larger iPhones
                             .font(size.height < 300 ? .title3 : .title)
                     }
                 }
@@ -203,17 +192,13 @@ struct ExpandedBottomSheet: View {
                     }
 
                     HStack(alignment: .top, spacing: size.width * 0.18) {
-                        Button {
-
-                        } label: {
+                        Button {} label: {
                             Image(systemName: "quote.bubble")
                                 .font(.title2)
                         }
 
                         VStack(spacing: 6) {
-                            Button {
-
-                            } label: {
+                            Button {} label: {
                                 Image(systemName: "airpods.gen3")
                                     .font(.title2)
                             }
@@ -222,10 +207,7 @@ struct ExpandedBottomSheet: View {
                                 .font(.caption)
                         }
 
-
-                        Button {
-
-                        } label: {
+                        Button {} label: {
                             Image(systemName: "list.bullet")
                                 .font(.title2)
                         }
@@ -236,7 +218,6 @@ struct ExpandedBottomSheet: View {
                 }
                 /// Moving it to bottom
                 .frame(height: size.height / 2.5, alignment: .bottom)
-
             }
         }
     }

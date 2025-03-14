@@ -13,5 +13,5 @@ struct SwipeActionModel: Identifiable {
     var font: Font = .title3
     var size: CGSize = .init(width: 45, height: 45)
     var shape: some Shape = .circle
-    var action: (inout Bool) -> ()
+    var action: (inout Bool) -> Void
 }

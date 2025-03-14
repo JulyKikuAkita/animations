@@ -26,7 +26,7 @@ struct GridImageDetailContentView: View {
     }
 
     @ViewBuilder
-    func DummySection(title: String, isLong: Bool = false) -> some View {
+    func DummySection(title: String, isLong _: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 8, content: {
             Text(title)
                 .font(.title.bold())

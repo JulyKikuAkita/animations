@@ -7,15 +7,15 @@ import SwiftUI
 @available(iOS 18.0, *)
 struct MeshGradientView: View {
     @State private var top: [MeshPoint] = [
-        .init(x: 0, y: 0), .init(x: 0.5, y: 0), .init(x: 1, y: 0)
+        .init(x: 0, y: 0), .init(x: 0.5, y: 0), .init(x: 1, y: 0),
     ]
 
     @State private var center: [MeshPoint] = [
-        .init(x: 0, y: 0.5), .init(x: 0.5, y: 0.5), .init(x: 1, y: 0.5)
+        .init(x: 0, y: 0.5), .init(x: 0.5, y: 0.5), .init(x: 1, y: 0.5),
     ]
 
     @State private var bottom: [MeshPoint] = [
-        .init(x: 0, y: 1), .init(x: 0.5, y: 1), .init(x: 1, y: 1)
+        .init(x: 0, y: 1), .init(x: 0.5, y: 1), .init(x: 1, y: 1),
     ]
 
     var body: some View {
@@ -30,9 +30,8 @@ struct MeshGradientView: View {
             colors: [
                 .red, .orange, .pink,
                 .purple, .green, .yellow,
-                .indigo, .mint, .cyan
+                .indigo, .mint, .cyan,
             ]
-
         )
         .overlay {
             GeometryReader {
@@ -41,20 +40,20 @@ struct MeshGradientView: View {
                     HStack(spacing: 0) {
                         CircleView($top[0], size)
                         CircleView($top[1], size)
-                        CircleView($top[2], size, isLast:  true)
+                        CircleView($top[2], size, isLast: true)
                     }
 
                     HStack(spacing: 0) {
                         CircleView($center[0], size)
                         CircleView($center[1], size)
-                        CircleView($center[2], size, isLast:  true)
+                        CircleView($center[2], size, isLast: true)
                     }
                     .frame(maxHeight: .infinity)
 
                     HStack(spacing: 0) {
                         CircleView($bottom[0], size)
                         CircleView($bottom[1], size)
-                        CircleView($bottom[2], size, isLast:  true)
+                        CircleView($bottom[2], size, isLast: true)
                     }
                 }
             }
@@ -83,7 +82,7 @@ struct MeshGradientView: View {
 
                         point.wrappedValue.offset = offset + lastOffset
                     }
-                    .onEnded { value in
+                    .onEnded { _ in
                         point.wrappedValue.lastOffset = point.wrappedValue.offset
                     }
             )
@@ -91,8 +90,6 @@ struct MeshGradientView: View {
         if !isLast {
             Spacer(minLength: 0)
         }
-
-
     }
 }
 
@@ -111,13 +108,13 @@ struct MeshPoint {
 
 private extension SIMD2<Float> {
     static func p(_ point: MeshPoint) -> Self {
-        return .init(point.x, point.y)
+        .init(point.x, point.y)
     }
 }
 
 private extension CGSize {
-    static func +(lhs: CGSize, rhs: CGSize) -> CGSize {
-        return .init(
+    static func + (lhs: CGSize, rhs: CGSize) -> CGSize {
+        .init(
             width: lhs.width + rhs.width,
             height: lhs.height + rhs.height
         )

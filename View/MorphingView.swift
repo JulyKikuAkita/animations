@@ -3,7 +3,6 @@
 //  animation
 //  iOS17
 
-
 import SwiftUI
 
 struct MorphingDemoView: View {
@@ -12,10 +11,11 @@ struct MorphingDemoView: View {
             .preferredColorScheme(.dark)
     }
 }
+
 struct MorphingView: View {
     /// View Properties
-    @State var currentImage: CustomShape  = .heart
-    @State var pickerImage: CustomShape  = .heart
+    @State var currentImage: CustomShape = .heart
+    @State var pickerImage: CustomShape = .heart
 
     @State var turnOffImageMorph: Bool = false
     @State var blurRadius: CGFloat = .zero
@@ -43,13 +43,13 @@ struct MorphingView: View {
                             context.addFilter(.alphaThreshold(min: 0.3)) /// try different value for morph shape change
                             /// blur plays a major role to achieve morphing effect
                             context.addFilter(
-                                    .blur(radius: blurRadius >= 20 ? 20 - (blurRadius - 20) : blurRadius)
+                                .blur(radius: blurRadius >= 20 ? 20 - (blurRadius - 20) : blurRadius)
                             )
 
                             context.drawLayer { ctx in
                                 if let resolvedImage = context.resolveSymbol(id: 1) {
                                     ctx.draw(resolvedImage, at: CGPoint(x: size.width / 2, y: size.height / 2),
-                                                 anchor: .center)
+                                             anchor: .center)
                                 }
                             }
                         } symbols: {
@@ -60,26 +60,26 @@ struct MorphingView: View {
                             /// demo using timer, we can use TimelineView too
                             Timer
                                 .publish(every: 0.01, on: .main, in: .common)
-                                .autoconnect()) { _ in
-                                    if animateMorph {
-                                        if blurRadius <= 40 {
-                                            blurRadius += 0.5 /// your desire value for animation speed,
+                                .autoconnect()
+                        ) { _ in
+                            if animateMorph {
+                                if blurRadius <= 40 {
+                                    blurRadius += 0.5 /// your desire value for animation speed,
 
-                                            if blurRadius.rounded() == 20 {
-                                                /// Update to the next image
-                                                currentImage = pickerImage
-                                            }
-                                        }
-
-                                        if blurRadius.rounded() == 40 {
-                                            /// end animation and reset blur radius to zero
-                                            animateMorph = false
-                                            blurRadius = 0
-                                        }
+                                    if blurRadius.rounded() == 20 {
+                                        /// Update to the next image
+                                        currentImage = pickerImage
                                     }
                                 }
-                    }
 
+                                if blurRadius.rounded() == 40 {
+                                    /// end animation and reset blur radius to zero
+                                    animateMorph = false
+                                    blurRadius = 0
+                                }
+                            }
+                        }
+                    }
             }
             .frame(height: 350)
 
@@ -100,7 +100,6 @@ struct MorphingView: View {
             .onChange(of: pickerImage) {
                 animateMorph = true
             }
-
 
             Toggle("Turn off Image Morph", isOn: $turnOffImageMorph)
                 .fontWeight(.semibold)

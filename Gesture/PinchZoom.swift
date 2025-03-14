@@ -86,11 +86,12 @@ extension View {
 /// Zoom container view
 /// wrapped the entire tab view with this consenter so that
 /// the zooming view will be displayed and zoomed above the tab view
-fileprivate struct ZoomContainer<Content: View>: View {
+private struct ZoomContainer<Content: View>: View {
     var content: Content
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content()
     }
+
     private var containerData = ZoomContainerData()
     var body: some View {
         GeometryReader { _ in
@@ -111,7 +112,6 @@ fileprivate struct ZoomContainer<Content: View>: View {
                             .offset(containerData.dragOffset)
                             /// view position
                             .offset(x: containerData.viewRect.minX, y: containerData.viewRect.minY)
-
                     }
                 }
             }
@@ -123,7 +123,7 @@ fileprivate struct ZoomContainer<Content: View>: View {
 /// Observable class to share data between container, which manages offset updating and zoom
 /// and child views, which manages gestures
 @Observable
-fileprivate class ZoomContainerData {
+private class ZoomContainerData {
     var zoomingView: AnyView?
     var viewRect: CGRect = .zero
     var dimsBackground: Bool = false
@@ -131,7 +131,7 @@ fileprivate class ZoomContainerData {
     var zoom: CGFloat = 1
     var zoomAnchor: UnitPoint = .center
     var dragOffset: CGSize = .zero
-    var isResetting:Bool = false /// avoid new event triggered while animation is still in progress
+    var isResetting: Bool = false /// avoid new event triggered while animation is still in progress
 }
 
 /// Helper View
@@ -151,7 +151,7 @@ private struct PinchZoomHelper<Content: View>: View {
                     let rect = $0.frame(in: .global)
 
                     Color.clear
-                        .onChange(of: config.isGestureActive) { oldValue, newValue in
+                        .onChange(of: config.isGestureActive) { _, newValue in
                             if newValue {
                                 guard !containerData.isResetting else { return }
                                 /// Showing view on zoom container
@@ -175,10 +175,9 @@ private struct PinchZoomHelper<Content: View>: View {
                                     containerData.isResetting = false
                                 }
                             }
-
                         }
-                        .onChange(of: config) { oldValue, newValue in
-                            if config.isGestureActive && !containerData.isResetting {
+                        .onChange(of: config) { _, _ in
+                            if config.isGestureActive, !containerData.isResetting {
                                 /// Updating View's position and scale in Zoom container
                                 containerData.zoom = config.zoom
                                 containerData.dragOffset = config.dragOffset
@@ -190,7 +189,7 @@ private struct PinchZoomHelper<Content: View>: View {
 }
 
 /// UIKit gestures overlay
-fileprivate struct GestureOverlay: UIViewRepresentable {
+private struct GestureOverlay: UIViewRepresentable {
     @Binding var config: Config
 
     func makeCoordinator() -> Coordinator {
@@ -219,12 +218,12 @@ fileprivate struct GestureOverlay: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
+    func updateUIView(_: UIViewType, context _: Context) {}
 
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
         @Binding var config: Config
         init(config: Binding<Config>) {
-            self._config = config
+            _config = config
         }
 
         @objc
@@ -257,7 +256,7 @@ fileprivate struct GestureOverlay: UIViewRepresentable {
 
         /// make both pan and pinch gesture work simultaneously
         func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-            if gestureRecognizer.name == "PINCHPANGESTURE" && otherGestureRecognizer.name == "PINCHZOOMGESTURE" {
+            if gestureRecognizer.name == "PINCHPANGESTURE", otherGestureRecognizer.name == "PINCHZOOMGESTURE" {
                 return true
             }
             return false
@@ -265,14 +264,13 @@ fileprivate struct GestureOverlay: UIViewRepresentable {
     }
 }
 
-fileprivate struct Config: Equatable {
+private struct Config: Equatable {
     var isGestureActive: Bool = false
     var zoom: CGFloat = 1
     var zoomAnchor: UnitPoint = .center
     var dragOffset: CGSize = .zero
     var hideSourceView: Bool = false
 }
-
 
 #Preview {
     PinchZoomDemoView()

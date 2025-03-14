@@ -5,8 +5,8 @@ import SwiftUI
 
 struct RotatingIconEffectDemoView: View {
     /// View properties
-    @State private var selectedSportItem : SportItem = sportItems.first!
-    @State private var introSportItems : [SportItem] = sportItems
+    @State private var selectedSportItem: SportItem = sportItems.first!
+    @State private var introSportItems: [SportItem] = sportItems
     @State private var activeIndex: Int = 0
     var body: some View {
         VStack(spacing: 0) {
@@ -82,8 +82,8 @@ struct RotatingIconEffectDemoView: View {
             .background {
                 RoundedRectangle(cornerRadius: 35)
                     .fill(.background)
-                    .shadow(color: .primary.opacity(0.2) ,radius: 1, x: 1, y: 1)
-                    .shadow(color: .primary.opacity(0.2) ,radius: 1, x: -1, y: -1)
+                    .shadow(color: .primary.opacity(0.2), radius: 1, x: 1, y: 1)
+                    .shadow(color: .primary.opacity(0.2), radius: 1, x: -1, y: -1)
                     .padding(-3)
                     .opacity(selectedSportItem.id == item.id ? 1 : 0)
             }

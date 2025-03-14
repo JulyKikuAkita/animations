@@ -17,11 +17,11 @@ struct OrientationApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientation: UIInterfaceOrientationMask = .all
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        return true
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        true
     }
 
-    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return Self.orientation
+    func application(_: UIApplication, supportedInterfaceOrientationsFor _: UIWindow?) -> UIInterfaceOrientationMask {
+        Self.orientation
     }
 }

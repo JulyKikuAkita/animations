@@ -8,7 +8,6 @@ struct DetailView: View {
     @Environment(UICoordinator.self) private var coordinator
 
     var body: some View {
-
         VStack(spacing: 0) {
             NavigationBar()
 
@@ -28,19 +27,19 @@ struct DetailView: View {
                 .scrollTargetBehavior(.paging)
                 .scrollIndicators(.hidden)
                 .scrollPosition(id: .init(get: {
-                    return coordinator.detailScrollPosition
+                    coordinator.detailScrollPosition
                 }, set: {
                     coordinator.detailScrollPosition = $0
                 }))
-                .onChange(of: coordinator.detailScrollPosition, { oldValue, newValue in
+                .onChange(of: coordinator.detailScrollPosition) { _, _ in
                     coordinator.didDetailPageChanged()
-                })
+                }
                 .background { /// the item will take the whole scrollview/scrollview take up all the view so we can add the dest anchor key to background
                     if let selectedItem = coordinator.selectedItem {
                         Rectangle()
                             .fill(.clear)
                             .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
-                                return [selectedItem.id + "DEST": anchor]
+                                [selectedItem.id + "DEST": anchor]
                             })
                     }
                 }
@@ -109,9 +108,7 @@ struct DetailView: View {
 
             Spacer(minLength: 0)
 
-            Button(action: {
-
-            }, label: {
+            Button(action: {}, label: {
                 HStack(spacing: 2) {
                     Image(systemName: "ellipsis")
                         .padding(10)
@@ -171,12 +168,12 @@ struct DetailView: View {
             }
             .scrollTargetBehavior(.viewAligned)
             .scrollPosition(id: .init(get: {
-                return coordinator.detailIndicatorPosition
+                coordinator.detailIndicatorPosition
             }, set: {
                 coordinator.detailIndicatorPosition = $0
             }))
             .scrollIndicators(.hidden)
-            .onChange(of: coordinator.detailIndicatorPosition) { oldValue, newValue in
+            .onChange(of: coordinator.detailIndicatorPosition) { _, _ in
                 coordinator.didDetailIndicatorChanged()
             }
         }

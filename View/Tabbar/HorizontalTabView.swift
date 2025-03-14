@@ -11,7 +11,7 @@ struct HorizontalTabView: View {
         .init(id: TabModel.HorizonTab.development, idInt: 2),
         .init(id: TabModel.HorizonTab.analytics, idInt: 3),
         .init(id: TabModel.HorizonTab.audience, idInt: 4),
-        .init(id: TabModel.HorizonTab.privacy, idInt: 5)
+        .init(id: TabModel.HorizonTab.privacy, idInt: 5),
     ]
     @State private var activeTab: TabModel.HorizonTab = .research
     @State private var mainViewScrollState: TabModel.HorizonTab? // scroll to view matched tab bar
@@ -45,7 +45,7 @@ struct HorizontalTabView: View {
                 .scrollIndicators(.hidden)
                 .scrollTargetBehavior(.paging)
                 // sync tab bar when swipe view
-                .onChange(of: mainViewScrollState) { oldValue, newValue in
+                .onChange(of: mainViewScrollState) { _, newValue in
                     if let newValue {
                         withAnimation(.snappy) {
                             tabBarScrollState = newValue
@@ -69,17 +69,13 @@ struct HorizontalTabView: View {
             Spacer(minLength: 0)
 
             /// Buttons
-            Button("", systemImage: "plus.circle") {
+            Button("", systemImage: "plus.circle") {}
+                .font(.title2)
+                .tint(.primary)
 
-            }
-            .font(.title2)
-            .tint(.primary)
-
-            Button("", systemImage: "bell") {
-
-            }
-            .font(.title2)
-            .tint(.primary)
+            Button("", systemImage: "bell") {}
+                .font(.title2)
+                .tint(.primary)
 
             Button(action: {}, label: {
                 Image(.fox)
@@ -111,7 +107,7 @@ struct HorizontalTabView: View {
                             .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
-                    //update minX so even when placed the indicator outside the scrollview
+                    // update minX so even when placed the indicator outside the scrollview
                     // scroll indicator also get real time updates
                     .rect { rect in
                         tab.size = rect.size
@@ -122,7 +118,7 @@ struct HorizontalTabView: View {
             .scrollTargetLayout()
         }
         .scrollPosition(id: .init(get: {
-            return tabBarScrollState
+            tabBarScrollState
         }, set: { _ in
             // we only need get
         }), anchor: .center)
@@ -133,9 +129,9 @@ struct HorizontalTabView: View {
                     .frame(height: 1)
 
                 // dynamically set indicator width
-                let inputRange = tabs.indices.compactMap{ return CGFloat($0) }
-                let outputRange = tabs.compactMap{ return $0.size.width }
-                let outputPositionRange = tabs.compactMap{ return $0.minX }
+                let inputRange = tabs.indices.compactMap { CGFloat($0) }
+                let outputRange = tabs.compactMap(\.size.width)
+                let outputPositionRange = tabs.compactMap(\.minX)
 
                 let indicatorWidth = progress.interpolate(inputRange: inputRange, outputRange: outputRange)
                 let indicatorPosition = progress.interpolate(inputRange: inputRange, outputRange: outputPositionRange)
@@ -155,19 +151,19 @@ struct HorizontalTabView: View {
 ///  to position tab indicator properly
 extension View {
     @ViewBuilder
-    func rect(completion: @escaping (CGRect) -> ()) -> some View {
-        self
-            .overlay {
-                GeometryReader {
-                    let rect = $0.frame(in: .scrollView(axis: .horizontal))
+    func rect(completion: @escaping (CGRect) -> Void) -> some View {
+        overlay {
+            GeometryReader {
+                let rect = $0.frame(in: .scrollView(axis: .horizontal))
 
-                    Color.clear
-                        .preference(key: OffsetKey.self, value: rect)
-                        .onPreferenceChange(OffsetKey.self, perform: completion)
-                }
+                Color.clear
+                    .preference(key: OffsetKey.self, value: rect)
+                    .onPreferenceChange(OffsetKey.self, perform: completion)
             }
+        }
     }
 }
+
 #Preview {
     HorizontalTabView()
 }

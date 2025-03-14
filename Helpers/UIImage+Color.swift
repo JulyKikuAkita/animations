@@ -13,7 +13,7 @@ import UIKit
 
 extension UIImage {
     func averageColor() -> UIColor? {
-        guard let cgImage = self.cgImage else {
+        guard let cgImage else {
             return nil
         }
 

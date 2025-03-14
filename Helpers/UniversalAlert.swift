@@ -17,7 +17,8 @@ struct AlertConfig {
     init(enabledBackgroundBlur: Bool = true,
          disableOutsideTap: Bool = true,
          transitionType: TransitionType = .slide,
-         slideEdge: Edge = .bottom) {
+         slideEdge: Edge = .bottom)
+    {
         self.enabledBackgroundBlur = enabledBackgroundBlur
         self.disableOutsideTap = disableOutsideTap
         self.transitionType = transitionType
@@ -48,7 +49,7 @@ struct AlertView<Content: View>: View {
     /// View properties
     @State var showView: Bool = false
     public var body: some View {
-        GeometryReader(content: { geometry in
+        GeometryReader(content: { _ in
             ZStack {
                 if config.enabledBackgroundBlur {
                     Rectangle()
@@ -65,9 +66,9 @@ struct AlertView<Content: View>: View {
                     config.dismiss()
                 }
             }
-            .opacity(showView ? 1: 0)
+            .opacity(showView ? 1 : 0)
 
-            if showView && config.transitionType == .slide {
+            if showView, config.transitionType == .slide {
                 content()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .transition(.move(edge: config.slideEdge))
@@ -82,7 +83,7 @@ struct AlertView<Content: View>: View {
                 config.showView = true
             }
         })
-        .onChange(of: config.showView) { oldValue, newValue in
+        .onChange(of: config.showView) { _, newValue in
             withAnimation((.smooth(duration: 0.35, extraBounce: 0))) {
                 showView = newValue
             }
@@ -93,9 +94,8 @@ struct AlertView<Content: View>: View {
 /// Customg Alert View
 extension View {
     @ViewBuilder
-    func alert<Content: View>(alertConfig: Binding<AlertConfig>, @ViewBuilder content: @escaping () -> Content) -> some View {
-        self
-            .modifier(AlertModifer(config: alertConfig, alertContent: content))
+    func alert(alertConfig: Binding<AlertConfig>, @ViewBuilder content: @escaping () -> some View) -> some View {
+        modifier(AlertModifer(config: alertConfig, alertContent: content))
     }
 }
 
@@ -109,16 +109,16 @@ struct AlertModifer<AlertContent: View>: ViewModifier {
     @State private var viewTag: Int = 0
     func body(content: Content) -> some View {
         content
-            .onChange(of: config.show, initial: false) { oldValue, newValue in
+            .onChange(of: config.show, initial: false) { _, newValue in
                 if newValue {
                     /// Simply call the function we implemented on sceneDelegate
                     sceneDelegate.alert(config: $config, content: alertContent) { tag in
-                            viewTag = tag
+                        viewTag = tag
                     }
                 } else {
                     guard let alertWindow = sceneDelegate.overlayWindow else { return }
                     if config.showView {
-                        withAnimation(.smooth(duration:0.35, extraBounce: 0)) {
+                        withAnimation(.smooth(duration: 0.35, extraBounce: 0)) {
                             config.showView = false
                         }
 
@@ -131,16 +131,15 @@ struct AlertModifer<AlertContent: View>: ViewModifier {
                                 /// Presenting next alert
                                 if let first = sceneDelegate.alerts.first {
                                     ///  Removing the preview view
-                                    alertWindow.rootViewController?.view.subviews.forEach({ view in
+                                    alertWindow.rootViewController?.view.subviews.forEach { view in
                                         view.removeFromSuperview()
-                                    })
+                                    }
 
                                     alertWindow.rootViewController?.view.addSubview(first)
                                     /// Removing the added alert from the array
                                     sceneDelegate.alerts.removeFirst()
                                 }
                             }
-
                         }
                     } else {
                         print("View is not Appeared")
@@ -158,7 +157,6 @@ struct CustomAlertDemoView: View {
     @State private var alert1: AlertConfig = .init(slideEdge: .top)
     @State private var alert2: AlertConfig = .init(slideEdge: .leading)
     @State private var alert3: AlertConfig = .init(disableOutsideTap: false, slideEdge: .trailing)
-
 
     var body: some View {
         Button("Show alert") {

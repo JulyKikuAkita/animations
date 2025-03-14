@@ -2,7 +2,6 @@
 //  GridImageDetailView.swift
 //  demoApp
 
-
 import SwiftUI
 
 struct GridImageDetailView: View {
@@ -13,7 +12,7 @@ struct GridImageDetailView: View {
             let animateView = coordinator.animateView
             let hideLayer = coordinator.hideLayer
 
-            let anchorX = (coordinator.rect.minX / size.width) > 0.5  ? 1.0 : 0.0
+            let anchorX = (coordinator.rect.minX / size.width) > 0.5 ? 1.0 : 0.0
             let scale = size.width / coordinator.rect.width /// scale the padding too
             let rect = coordinator.rect
 
@@ -24,8 +23,8 @@ struct GridImageDetailView: View {
             let detailHeight: CGFloat = rect.height * scale
             let scrollContentHeight: CGFloat = size.height - detailHeight
             if let image = coordinator.animationLayer,
-                let post = coordinator.selectedItem {
-
+               let post = coordinator.selectedItem
+            {
                 if !hideLayer {
                     Image(uiImage: image)
                         .scaleEffect(animateView ? scale : 1, anchor: .init(x: anchorX, y: 0))
@@ -41,7 +40,7 @@ struct GridImageDetailView: View {
                             Rectangle()
                                 .fill(.clear)
                                 .frame(height: detailHeight)
-                                .offsetY{ offset in
+                                .offsetY { offset in
                                     coordinator.headerOffset = max(min(-offset, detailHeight), 0)
                                 }
                         }
@@ -63,9 +62,8 @@ struct GridImageDetailView: View {
                 ImageView(post: post)
                     .allowsHitTesting(false)
                     .frame(width: animateView ? size.width : rect.width,
-                           height: animateView ? rect.height * scale : rect.height
-                    )
-                    .clipShape(.rect(cornerRadius:  animateView ? 0 : 10))
+                           height: animateView ? rect.height * scale : rect.height)
+                    .clipShape(.rect(cornerRadius: animateView ? 0 : 10))
                     .overlay(alignment: .top, content: {
                         HeaderActions(post)
                             .offset(y: coordinator.headerOffset)
@@ -101,7 +99,7 @@ struct GridImageDetailView: View {
         }
         .animation(.easeIn(duration: 0.3)) {
             $0
-                .opacity(coordinator.hideLayer ? 1: 0)
+                .opacity(coordinator.hideLayer ? 1 : 0)
         }
     }
 }

@@ -2,7 +2,6 @@
 //  TextFieldSelectionAPIView.swift
 //  animation
 
-
 import SwiftUI
 
 @available(iOS 18.0, *)
@@ -68,16 +67,15 @@ struct TextFieldSelectionAPIView: View {
             .padding(15)
             .navigationTitle("Text Selection API")
             .background(.gray.opacity(0.1))
-            .onChange(of: selection) { oldValue, newValue in
+            .onChange(of: selection) { _, newValue in
                 if let selection = newValue, !selection.isInsertion {
                     switch selection.indices {
-                    case .selection(let range):
+                    case let .selection(range):
                         let selectedText = text[range]
                         print(selectedText)
                     default:
                         print("Others")
                     }
-
                 }
             }
         }
@@ -86,7 +84,7 @@ struct TextFieldSelectionAPIView: View {
     var selectedTextRange: Range<String.Index>? {
         if let selection, !selection.isInsertion {
             switch selection.indices {
-            case .selection(let range):
+            case let .selection(range):
                 return range
             default: return nil
             }

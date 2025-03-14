@@ -10,7 +10,7 @@ struct FloatingButton<Label: View>: View {
     /// Actions
     var actions: [FloatingAction]
     var label: (Bool) -> Label
-    init(buttonSize: CGFloat = 50, @FloatingActionBuilder  actions: @escaping () -> [FloatingAction], @ViewBuilder label: @escaping (Bool) -> Label) {
+    init(buttonSize: CGFloat = 50, @FloatingActionBuilder actions: @escaping () -> [FloatingAction], @ViewBuilder label: @escaping (Bool) -> Label) {
         self.buttonSize = buttonSize
         self.actions = actions()
         self.label = label
@@ -85,20 +85,19 @@ struct FloatingButton<Label: View>: View {
                 let rect = $0.frame(in: .named("FLOATING VIEW"))
 
                 Color.clear
-                    .onChange(of: dragLocation) { oldValue, newValue in
-                        if isExpanded && isDragging {
+                    .onChange(of: dragLocation) { _, newValue in
+                        if isExpanded, isDragging {
                             /// checking if the drag location is inside any action's rect
                             if rect.contains(newValue) {
                                 /// user is pressing on this action
                                 selectedAction = action
                             } else {
                                 /// Checking if it is gone out of the rect
-                                if selectedAction?.id == action.id && !rect.contains(newValue) {
+                                if selectedAction?.id == action.id, !rect.contains(newValue) {
                                     selectedAction = nil
                                 }
                             }
                         }
-
                     }
             }
         }
@@ -128,13 +127,13 @@ struct FloatingButton<Label: View>: View {
 }
 
 /// Custom button style
-fileprivate struct NoAnimationButtonStyle: ButtonStyle {
+private struct NoAnimationButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
     }
 }
 
-fileprivate struct PressedButtonStyle: ButtonStyle {
+private struct PressedButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.9 : 1)
@@ -149,14 +148,14 @@ struct FloatingAction: Identifiable {
     var font: Font = .title3
     var tint: Color = .white
     var background: Color = .black
-    var action: () -> ()
+    var action: () -> Void
 }
 
 /// SwiftUI View like builder to get array of actions using ResultBuilder
 @resultBuilder
 struct FloatingActionBuilder {
     static func buildBlock(_ components: FloatingAction...) -> [FloatingAction] {
-        components.compactMap({ $0 })
+        components.compactMap(\.self)
     }
 }
 

@@ -11,8 +11,9 @@ struct RevealRenderer: TextRenderer, Animatable {
         get { progress }
         set { progress = newValue }
     }
+
     func draw(layout: Text.Layout, in ctx: inout GraphicsContext) {
-        let allLines = layout.flatMap({ $0 })
+        let allLines = layout.flatMap(\.self)
 //        let allChars = allLines.flatMap({ $0 }) /// get all chars in the line
 
         for line in allLines {

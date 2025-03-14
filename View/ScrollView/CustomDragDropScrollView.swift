@@ -22,6 +22,7 @@ struct CustomDragDropScrollDemoView: View {
         }
     }
 }
+
 struct CustomDragDropScrollView: View {
     var safeArea: EdgeInsets
     /// View Properties
@@ -43,7 +44,7 @@ struct CustomDragDropScrollView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 20) {
-            ///LazyVStack(spacing: 20) { /// using list
+                /// LazyVStack(spacing: 20) { /// using list
                 ForEach($controls) { $control in
                     ControlView(control: control)
                         .opacity(selectedControl?.id == control.id ? 0 : 1)
@@ -122,7 +123,7 @@ struct CustomDragDropScrollView: View {
             .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .global))
             .onChanged { value in
                 switch value {
-                case .second(let status, let value):
+                case let .second(status, value):
                     if status {
                         if selectedControl == nil {
                             selectedControl = control
@@ -148,8 +149,8 @@ struct CustomDragDropScrollView: View {
                 scrollTimer?.invalidate()
 
                 withAnimation(.snappy(duration: 0.25, extraBounce: 0),
-                    completionCriteria: .logicallyComplete
-                ) {
+                              completionCriteria: .logicallyComplete)
+                {
                     /// Updating control frame with latest update
                     selectedControl?.frame = selectedControlFrame
                     selectedControlScale = 1.0
@@ -172,17 +173,17 @@ struct CustomDragDropScrollView: View {
             /// Initializing only once
             guard scrollTimer == nil else { return }
             scrollTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
-                    if topStatus {
-                        lastActiveScrollOffset = max(lastActiveScrollOffset - 10, 0)
-                    } else {
-                        lastActiveScrollOffset = min(lastActiveScrollOffset + 10, maximumScrollSize)
-                    }
+                if topStatus {
+                    lastActiveScrollOffset = max(lastActiveScrollOffset - 10, 0)
+                } else {
+                    lastActiveScrollOffset = min(lastActiveScrollOffset + 10, maximumScrollSize)
+                }
 
-                    scrollPosition.scrollTo(y: lastActiveScrollOffset)
+                scrollPosition.scrollTo(y: lastActiveScrollOffset)
 
-                    /// Swapping item if it falls on any item
-                    checkAndSwapItems(location)
-                })
+                /// Swapping item if it falls on any item
+                checkAndSwapItems(location)
+            })
         } else {
             /// Removing Timer
             scrollTimer?.invalidate()
@@ -194,7 +195,8 @@ struct CustomDragDropScrollView: View {
 
     private func checkAndSwapItems(_ location: CGPoint) {
         if let currentIndex = controls.firstIndex(where: { $0.id == selectedControl?.id }),
-           let fallingIndex = controls.firstIndex(where: { $0.frame.contains(location)}) {
+           let fallingIndex = controls.firstIndex(where: { $0.frame.contains(location) })
+        {
             withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
                 (controls[currentIndex], controls[fallingIndex]) = (controls[fallingIndex], controls[currentIndex])
             }

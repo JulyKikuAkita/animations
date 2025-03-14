@@ -1,11 +1,11 @@
 //
 //  AppIntentView.swift
 //  animation
-import SwiftUI
-import SwiftData
 import AppIntents
+import SwiftData
+import SwiftUI
 
-//@main
+// @main
 struct demoIntentApp: App {
     var body: some Scene {
         WindowGroup {
@@ -71,7 +71,6 @@ struct AppIntentDemoView: View {
     AppIntentDemoView()
 }
 
-
 struct addMemoryIntent: AppIntent {
     static var title: LocalizedStringResource = "Add New Memory"
 
@@ -101,13 +100,12 @@ struct addMemoryIntent: AppIntent {
     }
 }
 
-
 struct AddMemoryShortcut: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
             intent: addMemoryIntent(),
             phrases: [
-                "create a new \(.applicationName) memory"
+                "create a new \(.applicationName) memory",
             ],
             shortTitle: "Create Memory",
             systemImageName: "memories"

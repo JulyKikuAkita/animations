@@ -8,10 +8,10 @@
 //  3. Store files in the Cache directory using FileManager
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
-//@main
+// @main
 struct CahceManagerTestApp: App {
     var body: some Scene {
         WindowGroup {
@@ -41,7 +41,7 @@ final class CacheManager {
         guard let context else { return }
 
         let today: Date = .now
-        let predicate = #Predicate<Cache>{ today > $0.expiration }
+        let predicate = #Predicate<Cache> { today > $0.expiration }
         let descriptor = FetchDescriptor(predicate: predicate)
 
         do {
@@ -89,7 +89,7 @@ final class CacheManager {
 
     func get(id: String) throws -> Cache? {
         guard let context else { return nil }
-        let predicate = #Predicate<Cache>{ $0.cacheID == id }
+        let predicate = #Predicate<Cache> { $0.cacheID == id }
         var descriptor = FetchDescriptor(predicate: predicate)
         /// for demo, only one
         descriptor.fetchLimit = 1
@@ -106,7 +106,6 @@ final class CacheManager {
             context.delete(cache)
             try context.save()
         }
-
     }
 
     func removeAll() throws {

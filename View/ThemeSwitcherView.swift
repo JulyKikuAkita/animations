@@ -11,7 +11,7 @@ struct ThemeSwitcherDemoView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(1...40, id: \.self) {
+                ForEach(1 ... 40, id: \.self) {
                     Text("Chat History \($0)")
                 }
             }
@@ -32,7 +32,7 @@ struct ThemeSwitcherDemoView: View {
 }
 
 #Preview {
-    SchemeHostView{
+    SchemeHostView {
         ThemeSwitcherDemoView()
     }
 }

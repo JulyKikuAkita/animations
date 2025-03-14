@@ -13,7 +13,7 @@ class UICoordinatorPinterestGrid {
     /// Shared view properties between home and detail view
     var scrollView: UIScrollView = .init(frame: .zero)
     var rect: CGRect = .zero
-    var selectedItem : PhotoItem?
+    var selectedItem: PhotoItem?
 
     /// Animation Layer properties
     var animationLayer: UIImage?
@@ -76,9 +76,9 @@ class UICoordinatorPinterestGrid {
 
 /// extract UIKit scroll view to SwiftUI scrollView
 struct ScrollViewExtractor: UIViewRepresentable {
-    var result: (UIScrollView) -> ()
+    var result: (UIScrollView) -> Void
 
-    func makeUIView(context: Context) -> UIView {
+    func makeUIView(context _: Context) -> UIView {
         let view = UIView()
         view.backgroundColor = .clear
 
@@ -90,5 +90,5 @@ struct ScrollViewExtractor: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
+    func updateUIView(_: UIViewType, context _: Context) {}
 }

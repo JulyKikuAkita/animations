@@ -19,7 +19,7 @@ struct PhotosScrollView: View {
             LazyHStack(alignment: .bottom, spacing: 0) {
                 /// Photo Grid Scroll View
                 GridPhotosScrollView()
-                /// try to use ContainerRelativeFrame as well.
+                    /// try to use ContainerRelativeFrame as well.
                     .frame(width: size.width)
                     .id(1)
 
@@ -45,7 +45,7 @@ struct PhotosScrollView: View {
         /// stay at the bottom when can pull up is true, modifier to scrollView content might cause glitch
         .offset(y: sharedData.canPullUp ? sharedData.photoScrollOffset : 0)
         .scrollPosition(id: .init(get: {
-            return sharedData.activePage
+            sharedData.activePage
         }, set: {
             if let newValue = $0 { sharedData.activePage = newValue }
         }))
@@ -72,7 +72,6 @@ struct PhotosScrollView: View {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         sharedData.progress = 0
                         sharedData.isExpanded = false
-
                     }
                 }
             }
@@ -83,7 +82,7 @@ struct PhotosScrollView: View {
     func GridPhotosScrollView() -> some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 4), count: 3), spacing: 4) {
-                ForEach(0...300, id:\.self) { _ in
+                ForEach(0 ... 300, id: \.self) { _ in
                     Rectangle()
                         .fill(.pink.gradient.opacity(0.5))
                         .frame(height: 120)
@@ -99,7 +98,7 @@ struct PhotosScrollView: View {
         .onScrollGeometryChange(for: CGFloat.self, of: {
             /// This will be zero when content is placed at the bottom
             $0.contentOffset.y - $0.contentSize.height + $0.containerSize.height
-        }, action: { oldValue, newValue in
+        }, action: { _, newValue in
             sharedData.photoScrollOffset = newValue
         })
     }
@@ -114,7 +113,7 @@ struct PhotosScrollView: View {
             Rectangle()
                 .fill(color)
                 .frame(width: size.width, height: size.height + (minY > 0 ? minY : 0)) /// make the view stretchable
-                .offset(y: (minY > 0 ? -minY : 0)) /// make the view stretchable
+                .offset(y: minY > 0 ? -minY : 0) /// make the view stretchable
         }
         .frame(width: size.width)
     }

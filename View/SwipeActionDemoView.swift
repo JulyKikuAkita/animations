@@ -66,7 +66,7 @@ struct SwipeActionHomeView: View {
 
 /// Custom swipe action view
 struct SwipeAction<Content: View>: View {
-    var cornerRadius:CGFloat = 0
+    var cornerRadius: CGFloat = 0
     var direction: SwipeDirection = .trailing
     @ViewBuilder var content: Content
     @ActionBuilder var actions: [Action]
@@ -140,7 +140,7 @@ struct SwipeAction<Content: View>: View {
 
     /// Action buttons
     @ViewBuilder
-    func ActionButtons(resetPosition: @escaping () -> ()) -> some View {
+    func ActionButtons(resetPosition: @escaping () -> Void) -> some View {
         /// default each button will have 100 width
         Rectangle()
             .fill(.clear)
@@ -176,18 +176,18 @@ struct SwipeAction<Content: View>: View {
     nonisolated func scrollOffset(_ proxy: GeometryProxy) -> CGFloat {
         let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
 
-        return (minX > 0 ? -minX : 0)
+        return minX > 0 ? -minX : 0
     }
 
     var filterActions: [Action] {
-        return actions.filter({ $0.isEnabled })
+        actions.filter(\.isEnabled)
     }
 }
 
 @resultBuilder
 struct ActionBuilder {
     static func buildBlock(_ components: Action...) -> [Action] {
-        return components
+        components
     }
 }
 
@@ -206,18 +206,20 @@ struct CustomTransition: Transition {
             }
     }
 }
+
 enum SwipeDirection {
     case leading, trailing
 
     var alignment: Alignment {
         switch self {
         case .leading:
-                .leading
+            .leading
         case .trailing:
-                .trailing
+            .trailing
         }
     }
 }
+
 #Preview {
     SwipeActionDemoView()
 }

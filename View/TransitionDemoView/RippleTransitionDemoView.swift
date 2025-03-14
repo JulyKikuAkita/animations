@@ -20,7 +20,7 @@ struct RippleTransitionDemoView: View {
                 GeometryReader {
                     let size = $0.size
 
-                    ForEach(0..<imageNames.count, id: \.self) { index in
+                    ForEach(0 ..< imageNames.count, id: \.self) { index in
                         if count == index {
                             ImageView(index, size: size)
                                 .transition(.ripple(location: rippleLocation))

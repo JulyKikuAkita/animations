@@ -65,9 +65,7 @@ struct ProfileDetailView: View {
             }
             .frame(width: 50, height: 50)
 
-            Button {
-
-            } label: {
+            Button {} label: {
                 HStack(spacing: 2) {
                     Text(profile.username)
 
@@ -104,8 +102,7 @@ extension View {
             self
                 .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
         } else {
-            self
-                .toolbar(.hidden, for: .navigationBar)
+            toolbar(.hidden, for: .navigationBar)
                 .navigationBarBackButtonHidden()
         }
     }
@@ -115,10 +112,8 @@ extension View {
         if #available(iOS 18, *) {
             self
         } else {
-            self
-                .toolbar(.hidden, for: .navigationBar)
+            toolbar(.hidden, for: .navigationBar)
         }
-
     }
 }
 

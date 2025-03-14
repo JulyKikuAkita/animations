@@ -34,7 +34,7 @@ struct HeroWrapper<Content: View>: View {
                 rootController.view.backgroundColor = .clear
                 window.rootViewController = rootController
 
-                self.overlayWindow = window
+                overlayWindow = window
             }
         }
 
@@ -59,8 +59,9 @@ struct SourceView<Content: View>: View {
             })
             .onPreferenceChange(AnchorKey.self, perform: { value in
                 if let index,
-                    model.info[index].isActive,
-                    model.info[index].sourceAnchor == nil {
+                   model.info[index].isActive,
+                   model.info[index].sourceAnchor == nil
+                {
                     model.info[index].sourceAnchor = value[id]
                 }
             })
@@ -96,7 +97,8 @@ struct DestinationView<Content: View>: View {
             })
             .onPreferenceChange(AnchorKey.self, perform: { value in
                 if let index,
-                    model.info[index].isActive {
+                   model.info[index].isActive
+                {
                     model.info[index].destinationAnchor = value["\(id)DESTINATION"]
                 }
             })
@@ -111,7 +113,7 @@ struct DestinationView<Content: View>: View {
 
     var opacity: CGFloat {
         if let index {
-            return model.info[index].isActive ? (model.info[index].hideView ? 1: 0) : 0
+            return model.info[index].isActive ? (model.info[index].hideView ? 1 : 0) : 0
         }
         return 1
     }
@@ -119,34 +121,33 @@ struct DestinationView<Content: View>: View {
 
 extension View {
     @ViewBuilder
-    func heroLayer<Content: View>(
-          id:String,
-          animate: Binding<Bool>,
-          sourceCornerRadius: CGFloat = 0,
-          destinationCornerRadius: CGFloat = 0,
-          @ViewBuilder content: @escaping () -> Content,
-          completion: @escaping (Bool) -> ()
+    func heroLayer(
+        id: String,
+        animate: Binding<Bool>,
+        sourceCornerRadius: CGFloat = 0,
+        destinationCornerRadius: CGFloat = 0,
+        @ViewBuilder content: @escaping () -> some View,
+        completion: @escaping (Bool) -> Void
     ) -> some View {
-        self
-            .modifier(HeroLayerViewModifier(
-                id: id,
-                animate: animate,
-                sourceCornerRadius: sourceCornerRadius,
-                destinationCornerRadius: destinationCornerRadius,
-                layer: content,
-                completion: completion
-            ))
+        modifier(HeroLayerViewModifier(
+            id: id,
+            animate: animate,
+            sourceCornerRadius: sourceCornerRadius,
+            destinationCornerRadius: destinationCornerRadius,
+            layer: content,
+            completion: completion
+        ))
     }
 }
 
 // access HeroModel environment object for passing details to source and destination views
-fileprivate struct HeroLayerViewModifier<Layer: View>: ViewModifier {
-    let id:String
+private struct HeroLayerViewModifier<Layer: View>: ViewModifier {
+    let id: String
     @Binding var animate: Bool
     var sourceCornerRadius: CGFloat
     var destinationCornerRadius: CGFloat
-    @ViewBuilder var layer:Layer
-    var completion: (Bool) -> ()
+    @ViewBuilder var layer: Layer
+    var completion: (Bool) -> Void
     @EnvironmentObject private var model: HeroModel
     func body(content: Content) -> some View {
         content
@@ -183,12 +184,12 @@ fileprivate struct HeroLayerViewModifier<Layer: View>: ViewModifier {
 }
 
 /// Environment Object
-fileprivate class HeroModel: ObservableObject {
+private class HeroModel: ObservableObject {
     @Published var info: [HeroInfo] = []
 }
 
 /// Individual Hero Animation View
-fileprivate struct HeroInfo: Identifiable {
+private struct HeroInfo: Identifiable {
     private(set) var id: UUID = .init()
     private(set) var infoID: String
     var isActive: Bool = false
@@ -199,31 +200,30 @@ fileprivate struct HeroInfo: Identifiable {
     var destinationAnchor: Anchor<CGRect>?
     var sCornerRadius: CGFloat = 0
     var dCornerRadius: CGFloat = 0
-    var completion: (Bool) -> () = { _ in }
+    var completion: (Bool) -> Void = { _ in }
 
     init(id: String) {
-        self.infoID = id
+        infoID = id
     }
 }
 
-fileprivate extension View {
+private extension View {
     @ViewBuilder
-    func customOnChange<Value: Equatable>(value: Value, completion: @escaping (Value) -> ()) -> some View {
+    func customOnChange<Value: Equatable>(value: Value, completion: @escaping (Value) -> Void) -> some View {
         if #available(iOS 17, *) {
             self
-                .onChange(of: value) { oldValue, newValue in
+                .onChange(of: value) { _, newValue in
                     completion(newValue)
                 }
         } else {
-            self
-                .onChange(of: value, perform: { value in
-                    completion(value)
-                })
+            onChange(of: value, perform: { value in
+                completion(value)
+            })
         }
     }
 }
 
-fileprivate struct HeroLayerView: View {
+private struct HeroLayerView: View {
     @EnvironmentObject private var model: HeroModel
     var body: some View {
         GeometryReader { proxy in
@@ -232,7 +232,8 @@ fileprivate struct HeroLayerView: View {
                     if let sourceAnchor = info.sourceAnchor,
                        let desitinationAnchor = info.destinationAnchor,
                        let layerView = info.layerView,
-                       !info.hideView {
+                       !info.hideView
+                    {
                         /// Retrieving bounds data from anchor values
                         let sRect = proxy[sourceAnchor]
                         let dRect = proxy[desitinationAnchor]
@@ -276,11 +277,10 @@ fileprivate struct HeroLayerView: View {
                 }
             }
         }
-
     }
 }
 
-fileprivate class PassthroughWindow: UIWindow {
+private class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let view = super.hitTest(point, with: event) else { return nil }
         return rootViewController?.view == view ? view : nil

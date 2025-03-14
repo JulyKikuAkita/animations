@@ -6,8 +6,7 @@ import SwiftUI
 
 /// App Delegate
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-
+    func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
         let config = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
         /// Connecting scene delegate
         config.delegateClass = SceneDelegate.self
@@ -33,23 +32,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 /// Adding scene delegate to the universal alert
 extension SceneDelegate {
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         windowScene = scene as? UIWindowScene
         setupOverlayWindow()
     }
 
     /// Adding hero window to the scene
     func setupOverlayWindow() {
-        guard let windowScene = windowScene else { return }
+        guard let windowScene else { return }
         let window = UIWindow(windowScene: windowScene)
         window.isHidden = true
         window.isUserInteractionEnabled = false
-        self.overlayWindow = window
+        overlayWindow = window
         print("window added")
     }
 
     /// viewTag closure will return the appropriate tag for the added alert view to let us remove the alert in some complex view hierarchy
-    func alert<Content: View>(config: Binding<AlertConfig>, @ViewBuilder content: @escaping () -> Content, viewTag: @escaping (Int) -> ()) {
+    func alert(config: Binding<AlertConfig>, @ViewBuilder content: @escaping () -> some View, viewTag: @escaping (Int) -> Void) {
         guard let alertWindow = overlayWindow else { return }
 
         let viewController = UIHostingController(rootView:

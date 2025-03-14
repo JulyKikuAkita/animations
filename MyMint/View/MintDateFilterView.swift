@@ -7,8 +7,8 @@ import SwiftUI
 struct MintDateFilterView: View {
     @State var start: Date
     @State var end: Date
-    var onSubmit: (Date, Date) -> ()
-    var onClose: () -> ()
+    var onSubmit: (Date, Date) -> Void
+    var onClose: () -> Void
     var body: some View {
         VStack(spacing: 15) {
             DatePicker("Start Date", selection: $start, displayedComponents: [.date])

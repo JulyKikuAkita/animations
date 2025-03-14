@@ -26,7 +26,7 @@ struct PixellateTextView: View {
                 .foregroundStyle(Color.primary)
                 .customAttribute(APIKeyAttribute())
 
-             Text("Your API Key is \(apiKey).\n Don't share it.")
+            Text("Your API Key is \(apiKey).\n Don't share it.")
                 .font(.largeTitle)
                 .fontDesign(.rounded)
                 .multilineTextAlignment(.center)
@@ -40,19 +40,18 @@ struct PixellateTextView: View {
             Button {
                 reveal.toggle()
                 withAnimation(.smooth) {
-                    revealProgress = reveal ? 1: 0
+                    revealProgress = reveal ? 1 : 0
                 }
             } label: {
                 Text(reveal ? "Hide Key" : "Reveal Key")
                     .padding(.horizontal, 25)
-                    .padding(.vertical,4)
+                    .padding(.vertical, 4)
             }
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .tint(.black)
 
             Spacer(minLength: 0)
-
         }
         .padding(15)
         .navigationTitle("Text Rendered")
@@ -68,6 +67,4 @@ struct PixellateTextView: View {
 }
 
 /// Text Attribute: distinguish text that has to be rendered differently
-struct APIKeyAttribute: TextAttribute {
-
-}
+struct APIKeyAttribute: TextAttribute {}

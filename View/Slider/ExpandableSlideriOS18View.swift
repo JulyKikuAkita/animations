@@ -9,7 +9,7 @@ struct ExpandableSlideriOS18DemoView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CustomExpandableSlider(value: $volume, in: 0...100) {
+                CustomExpandableSlider(value: $volume, in: 0 ... 100) {
                     /// Overlay view of image and text
                     HStack {
                         Image(systemName: "speaker.wave.3.fill", variableValue: volume / 100)
@@ -36,15 +36,16 @@ struct CustomExpandableSlider<Overlay: View>: View {
         value: Binding<CGFloat>,
         in range: ClosedRange<CGFloat>,
         config: Config = .init(),
-        @ViewBuilder overlay: @escaping () -> Overlay) {
-        self._value = value
+        @ViewBuilder overlay: @escaping () -> Overlay
+    ) {
+        _value = value
         self.range = range
         self.config = config
         self.overlay = overlay()
-        self.lastStoredValue = value.wrappedValue
+        lastStoredValue = value.wrappedValue
     }
 
-    ///View Properties
+    /// View Properties
     @State private var lastStoredValue: CGFloat
     @GestureState private var isActive: Bool = false
 
@@ -78,7 +79,7 @@ struct CustomExpandableSlider<Overlay: View>: View {
                 .compositingGroup() /// group the view to a single view
                 .animation(.easeInOut(duration: 0.3).delay(isActive ? 0.12 : 0).speed(isActive ? 1 : 2)) { /// adding delay to make animation and opacity smoother
                     $0
-                    .opacity(isActive ? 1 : 0)
+                        .opacity(isActive ? 1 : 0)
                 }
             }
             .clipShape(.rect(cornerRadius: config.cornerRadius))
@@ -105,7 +106,7 @@ struct CustomExpandableSlider<Overlay: View>: View {
     }
 
     struct Config {
-        var activeTint: Color = Color.primary
+        var activeTint: Color = .primary
         var inActiveTint: Color = .black.opacity(0.06)
         var cornerRadius: CGFloat = 15
         var extraHeight: CGFloat = 25

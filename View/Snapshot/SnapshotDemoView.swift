@@ -13,8 +13,8 @@ struct SnapshotDemoView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(1...20, id: \.self) { index in
-                        Text("List Cell \(index)")
+                ForEach(1 ... 20, id: \.self) { index in
+                    Text("List Cell \(index)")
                 }
             }
             .navigationTitle("List View")

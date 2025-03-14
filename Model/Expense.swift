@@ -5,7 +5,7 @@
 import Foundation
 
 struct Expense: Identifiable {
-    var id: UUID = UUID()
+    var id: UUID = .init()
     var amountSpend: String
     var product: String
     var spendType: String
@@ -25,5 +25,5 @@ var expenses: [Expense] = [
     Expense(amountSpend: "$1200", product: "Macbook Air", spendType: "Products"),
 
     Expense(amountSpend: "$39", product: "RHD2", spendType: "Games"),
-    Expense(amountSpend: "$89", product: "Magic Mouse", spendType: "Products")
+    Expense(amountSpend: "$89", product: "Magic Mouse", spendType: "Products"),
 ]

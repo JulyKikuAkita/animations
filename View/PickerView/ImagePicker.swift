@@ -2,14 +2,14 @@
 //  ImagePicker.swift
 //  animation
 // https://www.youtube.com/watch?v=p1U13Ch8ykk&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=31
-import SwiftUI
 import PhotosUI
+import SwiftUI
 
 struct ImagePickerDemo: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ImagePicker(title: "Drag & Drop", subTitle: "Tap to add an Image", systemImage: "square.and.arrow.up", tint: .blue) { image in
+                ImagePicker(title: "Drag & Drop", subTitle: "Tap to add an Image", systemImage: "square.and.arrow.up", tint: .blue) { _ in
                 }
                 .frame(maxWidth: 300, maxHeight: 250)
                 .padding(.top, 20)
@@ -29,7 +29,7 @@ struct ImagePicker: View {
     var subTitle: String
     var systemImage: String
     var tint: Color
-    var onImageChange: (UIImage) -> ()
+    var onImageChange: (UIImage) -> Void
 
     /// View Properties
     @State private var showImagePicker: Bool = false
@@ -38,7 +38,6 @@ struct ImagePicker: View {
     @State private var previewImage: UIImage?
     /// Loading status
     @State private var isLoading: Bool = false
-
 
     var body: some View {
         GeometryReader {
@@ -82,9 +81,10 @@ struct ImagePicker: View {
             .animation(.snappy, value: previewImage)
             .contentShape(.rect)
             /// implementing drop action & retrieving dropped image
-            .dropDestination(for: Data.self, action: { items,location in
+            .dropDestination(for: Data.self, action: { items, _ in
                 if let firstItem = items.first,
-                    let droppedImage = UIImage(data: firstItem) {
+                   let droppedImage = UIImage(data: firstItem)
+                {
                     /// sending the image using the callback
                     generatingImageThumbnail(droppedImage, size)
                     onImageChange(droppedImage)
@@ -103,7 +103,7 @@ struct ImagePicker: View {
             .optionalViewModifier { contentView in
                 if #available(iOS 17, *) {
                     contentView
-                        .onChange(of: photoItem) { oldValue, newValue in
+                        .onChange(of: photoItem) { _, newValue in
                             if let newValue {
                                 extractImage(newValue, size)
                             }
@@ -125,7 +125,6 @@ struct ImagePicker: View {
                     RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .stroke(tint, style: .init(lineWidth: 1, dash: [12]))
                         .padding(1)
-
                 }
             }
         }
@@ -151,7 +150,7 @@ struct ImagePicker: View {
     }
 
     /// Creating Image Thumbnail
-    func generatingImageThumbnail( _ image: UIImage, _ size: CGSize) {
+    func generatingImageThumbnail(_ image: UIImage, _ size: CGSize) {
         Task.detached {
             let thumbnailImage = await image.byPreparingThumbnail(ofSize: size)
             /// UI must be updated on Main thread
@@ -165,7 +164,7 @@ struct ImagePicker: View {
 /// Custom view modifier
 extension View {
     @ViewBuilder
-    func optionalViewModifier<Content: View>(@ViewBuilder content: @escaping (Self) -> Content) -> some View {
+    func optionalViewModifier(@ViewBuilder content: @escaping (Self) -> some View) -> some View {
         content(self)
     }
 }

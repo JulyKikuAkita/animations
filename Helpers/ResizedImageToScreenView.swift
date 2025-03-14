@@ -11,7 +11,7 @@ struct ResizedImageToScreenDemoView: View {
         NavigationStack {
             List {
                 HStack {
-                    ForEach(1...3, id:\.self) { index in
+                    ForEach(1 ... 3, id: \.self) { index in
                         let size = CGSize(width: 150, height: 150)
                         /// provide any large size image and monitor memory change when app startup
                         let id = "IMG_020\(index)"
@@ -73,7 +73,7 @@ struct ResizedImageToScreenView<Content: View>: View {
             /// Creating image in non-main thread
             Task.detached(priority: .high) {
                 let renderer = UIGraphicsImageRenderer(size: aspectSize)
-                let resizedImage = renderer.image { ctx in
+                let resizedImage = renderer.image { _ in
                     image.draw(in: .init(origin: .zero, size: aspectSize))
                 }
 
@@ -96,13 +96,13 @@ struct ResizedImageToScreenView<Content: View>: View {
 /// return a new size based on the given aspect ratio
 extension CGSize {
     func aspectFit(_ to: CGSize) -> CGSize {
-        let scaleX = to.width / self.width
-        let scaleY = to.height / self.height
+        let scaleX = to.width / width
+        let scaleY = to.height / height
 
         let aspectRatio = min(scaleX, scaleY)
         return .init(width: aspectRatio * width, height: aspectRatio * height)
     }
- }
+}
 
 #Preview {
     ResizedImageToScreenDemoView()

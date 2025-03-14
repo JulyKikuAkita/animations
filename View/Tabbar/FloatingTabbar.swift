@@ -72,13 +72,9 @@ struct FloatingTabbar: View {
             )
             .zIndex(10)
 
-
             Button {
-                if activeTab == .apps  {
-
-                } else {
-
-                }
+                if activeTab == .apps {
+                } else {}
             } label: {
                 MorphingSymbolView(
                     symbol: activeTab == .apps ? "person.fill" : "slider.vertical.3",

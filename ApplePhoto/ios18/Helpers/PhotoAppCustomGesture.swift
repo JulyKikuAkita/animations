@@ -6,9 +6,9 @@ import SwiftUI
 
 struct PhotoAppCustomGesture: UIGestureRecognizerRepresentable {
     var isEnabled: Bool
-    var handle: (UIPanGestureRecognizer) -> ()
+    var handle: (UIPanGestureRecognizer) -> Void
 
-    func makeCoordinator(converter: CoordinateSpaceConverter) -> Coordinator {
+    func makeCoordinator(converter _: CoordinateSpaceConverter) -> Coordinator {
         Coordinator()
     }
 
@@ -20,21 +20,21 @@ struct PhotoAppCustomGesture: UIGestureRecognizerRepresentable {
 
     func updateUIGestureRecognizer(
         _ recognizer: UIPanGestureRecognizer,
-        context: Context
+        context _: Context
     ) {
         recognizer.isEnabled = isEnabled
     }
 
     func handleUIGestureRecognizerAction(
         _ recognizer: UIPanGestureRecognizer,
-        context: Context
+        context _: Context
     ) {
         handle(recognizer)
     }
 
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
-        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-            return true
-            }
+        func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
+            true
+        }
     }
 }

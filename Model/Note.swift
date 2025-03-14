@@ -2,8 +2,8 @@
 //  Note.swift
 //  animation
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @Model
 class Note {

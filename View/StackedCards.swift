@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Data.Element: Identifiable{
+struct StackedCards<Content: View, Data: RandomAccessCollection>: View where Data.Element: Identifiable {
     var items: Data
     var stackedDisplayCount: Int = 2
     var opacityDisplayCount: Int = 2 // number of extra cards needed to get the opacity effect in addition to the main card

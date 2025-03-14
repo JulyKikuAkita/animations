@@ -10,19 +10,17 @@ import SwiftUI
 private let customCardWidth: CGFloat = 100.0
 
 struct CardCarouselView: View {
-
     /// Drop down View properties
     @State private var selection: String?
     @State private var selection2: String?
     @State private var selection3: String?
-
 
     /// Textfield View Properties
     @State private var text: String = ""
 
     var body: some View {
         NavigationStack {
-            List{
+            List {
                 CarouselView1(cards: firstSetCards)
                 CarouselView2(cards: secondSetCards)
                 CircularCarouselSliderView()
@@ -49,7 +47,6 @@ extension CardCarouselView {
         )
         .autocorrectionDisabled()
         .frame(maxHeight: 150)
-
 
         DropDownView(
             hint: "Select",
@@ -158,7 +155,7 @@ extension CarouselView1 {
                 .offset(x: minX > 0 ? 0 : -cappedWidth) // solved the gapped in progress value
                 .offset(x: -card.previousOffset)
         }
-        .frame(width: 180, height:  200)
+        .frame(width: 180, height: 200)
         .offsetX { offset in
             let reducingWidth = (offset / 190) * customCardWidth
             let index = cards.indexOf(card)
@@ -192,7 +189,7 @@ extension CarouselView2 {
                 .offset(x: minX > 0 ? 0 : -cappedWidth) // solved the gapped in progress value
                 .offset(x: -card.previousOffset)
         }
-        .frame(width: 180, height:  200)
+        .frame(width: 180, height: 200)
         .offsetX { offset in
             let reducingWidth = (offset / 190) * customCardWidth
             let index = cards.indexOf(card)

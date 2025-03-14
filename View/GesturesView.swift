@@ -13,26 +13,25 @@ struct GesturesDemoView: View {
                                   InteractionsEffect.verticalSwipe.rawValue,
                                   InteractionsEffect.tap.rawValue,
                                   InteractionsEffect.longPress.rawValue,
-                                  InteractionsEffect.pinch.rawValue
-    ]
+                                  InteractionsEffect.pinch.rawValue]
     @State var config: PickerConfig = .init(text: InteractionsEffect.pinch.rawValue)
 
     var body: some View {
         VStack {
             ZStack {
                 if showView {
-                    Interactions(effect: effect) { size, showTouch, animate  in
+                    Interactions(effect: effect) { size, _, animate in
                         switch effect {
-                            case .tap:
-                                PressView(animate: animate, scale: 0.95)
-                            case .longPress:
-                                PressView(animate: animate)
-                            case .verticalSwipe:
-                                VerticalSwipeView(size: size, animate: animate)
-                            case .horizontalSwipe:
-                                HorizontalSwipeView(size: size, animate: animate)
-                            case .pinch:
-                                PressView(animate: animate, scale: 1.3)
+                        case .tap:
+                            PressView(animate: animate, scale: 0.95)
+                        case .longPress:
+                            PressView(animate: animate)
+                        case .verticalSwipe:
+                            VerticalSwipeView(size: size, animate: animate)
+                        case .horizontalSwipe:
+                            HorizontalSwipeView(size: size, animate: animate)
+                        case .pinch:
+                            PressView(animate: animate, scale: 1.3)
                         }
                     }
                 }
@@ -156,7 +155,7 @@ struct Interactions<Content: View>: View {
                 /// Touch View
                 let isSwipe = effect == .verticalSwipe || effect == .horizontalSwipe
                 let isPinch = effect == .pinch
-                let circleSize: CGFloat = effect == .horizontalSwipe ? 18: 20
+                let circleSize: CGFloat = effect == .horizontalSwipe ? 18 : 20
 
                 Circle()
                     .fill(.fill)
@@ -172,9 +171,9 @@ struct Interactions<Content: View>: View {
                     }
                     .opacity(showTouch ? 1 : 0)
                     .blur(radius: showTouch ? 0 : 5)
-                    .offset (
+                    .offset(
                         x: effect == .horizontalSwipe ? (animate ? -25 : 25) : 0,
-                        y: effect == .verticalSwipe ? (animate ? -50: 50) : 0
+                        y: effect == .verticalSwipe ? (animate ? -50 : 50) : 0
                     )
                     .scaleEffect(isSwipe ? 1 : isPinch ? 0.8 : (animate ? 0.8 : 1.1))
             }
@@ -211,7 +210,6 @@ struct Interactions<Content: View>: View {
                 animate = true
             }
             try? await Task.sleep(for: .seconds(effect == .longPress ? 1.3 : 1))
-
         }
 
         /// Resetting animation
@@ -239,6 +237,7 @@ struct Interactions<Content: View>: View {
         await animationEffect()
     }
 }
+
 #Preview {
     GesturesDemoView()
 }
@@ -251,6 +250,6 @@ enum InteractionsEffect: String {
     case pinch
 
     static func mapEffect(text: String) -> InteractionsEffect? {
-        return InteractionsEffect(rawValue: text)
+        InteractionsEffect(rawValue: text)
     }
 }

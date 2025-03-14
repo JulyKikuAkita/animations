@@ -9,7 +9,7 @@ struct TagLayout: Layout {
     var alignment: Alignment = .center
     /// Both horizon and vertical
     var spacing: CGFloat = 10
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
         let maxWidth = proposal.width ?? 0
         var height: CGFloat = 0
         let rows = generateRows(maxWidth, proposal, subviews)
@@ -26,7 +26,7 @@ struct TagLayout: Layout {
         return .init(width: maxWidth, height: height)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
         /// Placing views
         var origin = bounds.origin
         let maxWidth = bounds.width
@@ -102,8 +102,8 @@ struct TagLayout: Layout {
 
 extension [LayoutSubviews.Element] {
     func maxHeight(_ proposal: ProposedViewSize) -> CGFloat {
-        return self.compactMap{ view in
-            return view.sizeThatFits(proposal).height
+        self.compactMap { view in
+            view.sizeThatFits(proposal).height
         }.max() ?? 0
     }
 }

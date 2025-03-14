@@ -10,11 +10,12 @@ struct PhotoAppIOS18DemoView: View {
             let size = $0.size
             let safeArea = $0.safeAreaInsets
 
-            PhotoAppIOS18View(size:size, safeArea: safeArea)
+            PhotoAppIOS18View(size: size, safeArea: safeArea)
                 .ignoresSafeArea(.all, edges: .top)
         }
     }
 }
+
 struct PhotoAppIOS18View: View {
     var size: CGSize
     var safeArea: EdgeInsets
@@ -26,7 +27,7 @@ struct PhotoAppIOS18View: View {
         ScrollView(.vertical) {
             VStack(spacing: 10) {
                 /// Photo Grid Scroll View
-                PhotosScrollView(size:size, safeArea: safeArea)
+                PhotosScrollView(size: size, safeArea: safeArea)
 
                 /// bottom half view
                 OtherContents()
@@ -39,7 +40,7 @@ struct PhotoAppIOS18View: View {
         }
         .onScrollGeometryChange(for: CGFloat.self, of: {
             $0.contentOffset.y
-        }, action: { oldValue, newValue in
+        }, action: { _, newValue in
             sharedData.mainOffset = newValue
         })
         /// disabling the main scrollview interaction when photo grid is expanded
@@ -59,45 +60,41 @@ struct PhotoAppIOS18View: View {
 
                 if isScrolling {
                     /// similar to onChanged modifier in Drag gesture
-                    if sharedData.canPullDown && !sharedData.isExpanded {
+                    if sharedData.canPullDown, !sharedData.isExpanded {
                         let progress = max(min(translation / minimizedHeight, 1), 0)
                         sharedData.progress = progress
                     }
 
-                    if sharedData.canPullUp && sharedData.isExpanded {
+                    if sharedData.canPullUp, sharedData.isExpanded {
                         let progress = max(min(-translation / minimizedHeight, 1), 0)
                         sharedData.progress = 1 - progress
                     }
                 } else {
                     /// Like onEnd modifier in drag gesture
                     withAnimation(.smooth(duration: 0.35, extraBounce: 0)) {
-                        if sharedData.canPullDown && !sharedData.isExpanded {
+                        if sharedData.canPullDown, !sharedData.isExpanded {
                             if translation > 0 { /// add more criteria as needed to trigger expand
                                 sharedData.isExpanded = true
                                 sharedData.progress = 1
                             }
-
                         }
 
-                        if sharedData.canPullUp && sharedData.isExpanded {
+                        if sharedData.canPullUp, sharedData.isExpanded {
                             if translation < 0 { /// add more criteria as needed to trigger expand
                                 sharedData.isExpanded = false
                                 sharedData.progress = 0
                             }
-
                         }
                     }
                 }
             }
         )
-        .onChange(of: sharedData.canPullDown){ oldValue, newValue in
+        .onChange(of: sharedData.canPullDown) { _, newValue in
             print(newValue)
         }
         .background(.gray.opacity(0.05))
     }
 }
-
-
 
 #Preview {
     PhotoAppIOS18DemoView()
