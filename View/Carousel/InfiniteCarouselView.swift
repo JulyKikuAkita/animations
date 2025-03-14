@@ -20,7 +20,6 @@ struct InfiniteCarouselIOS18DemoView: View {
                 }
                 .frame(height: 220)
 
-
                 /// Custom Indicators
                 HStack(spacing: 5) {
                     ForEach(items.indices, id: \.self) { index in
@@ -61,7 +60,7 @@ struct InfiniteCarousel<Content: View>: View {
                                 .id(-1)
                         }
 
-                        ForEach(collection.indices, id:\.self) { index in
+                        ForEach(collection.indices, id: \.self) { index in
                             collection[index]
                                 .frame(width: size.width, height: size.height)
                                 .id(index)
@@ -78,14 +77,14 @@ struct InfiniteCarousel<Content: View>: View {
                 .scrollPosition(id: $scrollPosition)
                 .scrollTargetBehavior(.paging)
                 .scrollIndicators(.hidden)
-                .onScrollPhaseChange{ oldPhase, newPhase in
+                .onScrollPhaseChange { _, newPhase in
                     isScrolling = newPhase.isScrolling
 
-                    if !isScrolling && scrollPosition == -1 {
+                    if !isScrolling, scrollPosition == -1 {
                         scrollPosition = collection.count - 1
                     }
 
-                    if !isScrolling && scrollPosition == collection.count && !isHoldingScreen {
+                    if !isScrolling, scrollPosition == collection.count, !isHoldingScreen {
                         scrollPosition = 0
                     }
                 }
@@ -95,19 +94,19 @@ struct InfiniteCarousel<Content: View>: View {
                             out = true
                         })
                 )
-                .onChange(of: isHoldingScreen, { oldValue, newValue in
+                .onChange(of: isHoldingScreen) { _, newValue in
                     if newValue {
                         timer.upstream.connect().cancel()
                     } else {
-                        if isSettled && scrollPosition != offsetBasePosition {
+                        if isSettled, scrollPosition != offsetBasePosition {
                             scrollPosition = offsetBasePosition
                         }
                         timer = Timer
                             .publish(every: Self.autoScrollDuration, on: .main, in: .default).autoconnect()
                     }
-                })
+                }
                 .onReceive(timer) { _ in
-                    guard !isHoldingScreen && !isScrolling else { return }
+                    guard !isHoldingScreen, !isScrolling else { return }
 
                     let nextIndex = (scrollPosition ?? 0) + 1
 
@@ -115,7 +114,7 @@ struct InfiniteCarousel<Content: View>: View {
                         scrollPosition = (nextIndex == collection.count + 1) ? 0 : nextIndex
                     }
                 }
-                .onChange(of: scrollPosition, { oldValue, newValue in
+                .onChange(of: scrollPosition) { _, newValue in
                     if let newValue {
                         /// activeIndex = max(min(newValue, collection.count - 1), 0) /// cause perceivable delay
                         if newValue == -1 {
@@ -126,16 +125,16 @@ struct InfiniteCarousel<Content: View>: View {
                             activeIndex = max(min(newValue, collection.count - 1), 0)
                         }
                     }
-                })
+                }
                 /// reposition screen when view stops in between 2 cards
                 .onScrollGeometryChange(for: CGFloat.self) {
                     $0.contentOffset.x
-                } action: { oldValue, newValue in
+                } action: { _, newValue in
                     isSettled = size.width > 0 ? (Int(newValue) % Int(size.width) == 0) : false
                     let index = size.width > 0 ? Int((newValue / size.width).rounded() - 1) : 0 /// minus one card we insert at the front
                     offsetBasePosition = index
 
-                    if isSettled && (scrollPosition != index || index == collection.count) && !isScrolling && !isHoldingScreen {
+                    if isSettled, scrollPosition != index || index == collection.count, !isScrolling, !isHoldingScreen {
                         scrollPosition = index == collection.count ? 0 : index
                     }
                 }

@@ -5,6 +5,7 @@
 //  source: https://www.youtube.com/watch?v=1h5NjJbheEU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=44
 
 import SwiftUI
+
 struct ProfileListView: View {
     /// View properties - profiles
     @State private var allProfiles: [Profile] = profiles
@@ -35,7 +36,7 @@ struct ProfileListView: View {
                         .clipShape(.circle)
                         .opacity(selectedProfile?.id == profile.id ? 0 : 1)
                         .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
-                            return [profile.id.uuidString: anchor]
+                            [profile.id.uuidString: anchor]
                         })
 
                     VStack(alignment: .leading, spacing: 6) {
@@ -74,11 +75,12 @@ struct ProfileListView: View {
             )
         }
         // Hero Animation Layer
-        .overlayPreferenceValue(AnchorKey.self, { value in
+        .overlayPreferenceValue(AnchorKey.self) { value in
             GeometryReader { geometry in
                 if let selectedProfile,
-                    let source = value[selectedProfile.id.uuidString],
-                   let destination = value["DESTINATION"] {
+                   let source = value[selectedProfile.id.uuidString],
+                   let destination = value["DESTINATION"]
+                {
                     let sourceRect = geometry[source]
                     let radius = sourceRect.height / 2
                     let destinationRect = geometry[destination]
@@ -109,7 +111,7 @@ struct ProfileListView: View {
                         .opacity(showHeroView ? 1 : 0)
                 }
             }
-        })
+        }
         /// some visual help
         .overlay(alignment: .bottom) {
             Slider(value: $heroProgress)
@@ -142,7 +144,6 @@ struct ProfileListView: View {
                                     .offset(x: buttonRect.midX, y: buttonRect.minY)
                                     .ignoresSafeArea()
                             }
-
                     }
                     .offset(y: 42) // tab bar height - safe area bottom
                     .task {
@@ -159,7 +160,7 @@ struct ProfileListView: View {
                 }
             })
             /// Reverse masking
-            .mask({
+            .mask {
                 Rectangle()
                     .overlay(alignment: .topLeading) {
                         Circle() /// the start point of transition animation
@@ -167,7 +168,7 @@ struct ProfileListView: View {
                             .offset(x: buttonRect.midX, y: buttonRect.minY)
                             .blendMode(.destinationOut)
                     }
-            })
+            }
             .ignoresSafeArea()
         })
         .overlay(alignment: .topTrailing) {
@@ -180,7 +181,7 @@ struct ProfileListView: View {
                     .symbolEffect(.bounce, value: toggleDarkMode)
                     .frame(width: 40, height: 40)
             })
-            .darkModeRect{ rect in
+            .darkModeRect { rect in
                 buttonRect = rect
             }
             .padding(10)
@@ -223,10 +224,10 @@ struct DetailedView: View {
                             }
                         }
                         .frame(height: 400)
-                    /// Destination Anchor Frame
+                        /// Destination Anchor Frame
                         .anchorPreference(key: AnchorKey.self, value: .bounds, transform: {
                             anchor in
-                            return ["DESTINATION": anchor]
+                            ["DESTINATION": anchor]
                         })
                         .visualEffect { content, geometryProxy in
                             content // add drag down offset
@@ -247,7 +248,8 @@ struct DetailedView: View {
                         Button(action: {
                             showHeroView = true
                             withAnimation(.snappy(duration: 0.35, extraBounce: 0),
-                                          completionCriteria: .logicallyComplete) {
+                                          completionCriteria: .logicallyComplete)
+                            {
                                 heroProgress = 0.0
                             } completion: {
                                 showDetail = false
@@ -265,7 +267,6 @@ struct DetailedView: View {
                         .padding()
                         .opacity(showHeroView ? 0 : 1)
                         .animation(.snappy(duration: 0.2, extraBounce: 0), value: showHeroView)
-
                     }
                 }
                 .offset(x: size.width - (size.width * heroProgress))
@@ -277,9 +278,9 @@ struct DetailedView: View {
                         .gesture(
                             DragGesture()
                                 .updating($isDragging, body: { _, out, _ in
-                                        out = true
+                                    out = true
                                 })
-                                .onChanged({ value in
+                                .onChanged { value in
                                     /// enable hero layer view when gesture start to dismiss the view
                                     var translation = value.translation.width
                                     translation = isDragging ? translation : .zero
@@ -294,8 +295,8 @@ struct DetailedView: View {
                                     if !showHeroView {
                                         showHeroView = true
                                     }
-                                })
-                                .onEnded({ value in
+                                }
+                                .onEnded { value in
                                     /// Closing/Resetting based on end target
                                     let velocity = value.velocity.width
 
@@ -318,7 +319,7 @@ struct DetailedView: View {
                                             showHeroView = false
                                         }
                                     }
-                                })
+                                }
                         )
                 }
             }

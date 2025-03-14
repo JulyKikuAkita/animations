@@ -32,7 +32,7 @@ struct AdaptiveLayoutView: View {
     @State private var navigationPath: NavigationPath = .init()
 
     var body: some View {
-        AdaptiveView { size, isLandscape in
+        AdaptiveView { _, isLandscape in
             let sideBarWidth: CGFloat = isLandscape ? 220 : 250
             let layout = isLandscape ? AnyLayout(
                 HStackLayout(spacing: 0)
@@ -122,40 +122,40 @@ struct AdaptiveLayoutView: View {
                         }
                     }
                 )
-                .onChange(of: isLandscape) { oldValue, newValue in
-                   panGesture?.isEnabled = !newValue
+                .onChange(of: isLandscape) { _, newValue in
+                    panGesture?.isEnabled = !newValue
                 }
                 .navigationDestination(for: String.self) { value in
                     Text("\(value) view")
                         .navigationTitle(value)
                 }
-    //            /// iOS 18 gesture API ignore view with buttons, tap gesture and long press gesture
-    //            /// highPriorityGesture() or SimultaneousGesture() does not have this issue but do not work with scroll view
-    //            /// UI\ikit UiPanGesture does not have the above issues
-    //            .gesture(DragGesture()
-    //                .onChanged({ value in
-    //                    let translation = value.translation.width + lastDragOffset
-    //                    offset = max(min(translation, sideBarWidth), 0)
-    //
-    //                    /// storing drag progress for fading tab view when dragging effect
-    //                    progress = max(min(offset / sideBarWidth, 1), 0)
-    //                }).onEnded({ value in
-    //                    let velocity = value.translation.width / 3
-    //
-    //                    withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
-    //                        if (velocity + offset) > (sideBarWidth * 0.5) {
-    //                            /// Expand fully
-    //                            offset = sideBarWidth
-    //                            progress = 1
-    //                        } else { /// reset value
-    //                            offset = 0
-    //                            progress = 0
-    //                        }
-    //                    }
-    //
-    //                    /// Saving last drag offset
-    //                    lastDragOffset = offset
-    //                }))
+                //            /// iOS 18 gesture API ignore view with buttons, tap gesture and long press gesture
+                //            /// highPriorityGesture() or SimultaneousGesture() does not have this issue but do not work with scroll view
+                //            /// UI\ikit UiPanGesture does not have the above issues
+                //            .gesture(DragGesture()
+                //                .onChanged({ value in
+                //                    let translation = value.translation.width + lastDragOffset
+                //                    offset = max(min(translation, sideBarWidth), 0)
+                //
+                //                    /// storing drag progress for fading tab view when dragging effect
+                //                    progress = max(min(offset / sideBarWidth, 1), 0)
+                //                }).onEnded({ value in
+                //                    let velocity = value.translation.width / 3
+                //
+                //                    withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
+                //                        if (velocity + offset) > (sideBarWidth * 0.5) {
+                //                            /// Expand fully
+                //                            offset = sideBarWidth
+                //                            progress = 1
+                //                        } else { /// reset value
+                //                            offset = 0
+                //                            progress = 0
+                //                        }
+                //                    }
+                //
+                //                    /// Saving last drag offset
+                //                    lastDragOffset = offset
+                //                }))
             }
         }
     }
@@ -173,24 +173,24 @@ struct AdaptiveLayoutView: View {
     AdaptiveLayoutView()
 }
 
-fileprivate struct CustomGesture:UIGestureRecognizerRepresentable {
+private struct CustomGesture: UIGestureRecognizerRepresentable {
     var isEnabled: Bool
-    var handle: (UIPanGestureRecognizer) -> ()
-    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
+    var handle: (UIPanGestureRecognizer) -> Void
+    func makeUIGestureRecognizer(context _: Context) -> UIPanGestureRecognizer {
         let gesture = UIPanGestureRecognizer()
         return gesture
     }
 
     func updateUIGestureRecognizer(
         _ recognizer: UIPanGestureRecognizer,
-        context: Context
+        context _: Context
     ) {
         recognizer.isEnabled = isEnabled
     }
 
     func handleUIGestureRecognizerAction(
         _ recognizer: UIPanGestureRecognizer,
-        context: Context
+        context _: Context
     ) {
         handle(recognizer)
     }

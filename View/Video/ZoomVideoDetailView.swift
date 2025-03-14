@@ -2,8 +2,8 @@
 //  ZoomVideoDetailView.swift
 //  animation
 
-import SwiftUI
 import AVKit
+import SwiftUI
 
 struct ZoomVideoDetailView: View {
     var video: Video
@@ -52,7 +52,7 @@ struct ZoomVideoDetailView: View {
     }
 }
 
-struct VideoPlayerView: View  {
+struct VideoPlayerView: View {
     var video: Video
     /// View Properties
     @State private var player: AVPlayer?

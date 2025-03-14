@@ -33,35 +33,36 @@ struct SynchronizedScrollView: View {
                     selectedPicID: $selectedPicID
                 ) { id in
                     /// Updating scroll position
-                    if let index = posts.firstIndex(where: { $0.id == selectedPost.id}) {
+                    if let index = posts.firstIndex(where: { $0.id == selectedPost.id }) {
                         posts[index].scrollPosition = id
                     }
                 }
                 .transition(.offset(y: 5)) /// try use identity transition to see the diff
             }
         }
-        .overlayPreferenceValue(OffsetKey.self, { value in
-             GeometryReader { proxy in
-                 if let selectedPicID,
-                    let source = value[selectedPicID.uuidString],
-                    let destination = value["DESTINATION\(selectedPicID.uuidString)"],
-                    let picItem = selectedImage(), showDetailView {
-                         let sRect = proxy[source]
-                         let dRect = proxy[destination]
+        .overlayPreferenceValue(OffsetKey.self) { value in
+            GeometryReader { proxy in
+                if let selectedPicID,
+                   let source = value[selectedPicID.uuidString],
+                   let destination = value["DESTINATION\(selectedPicID.uuidString)"],
+                   let picItem = selectedImage(), showDetailView
+                {
+                    let sRect = proxy[source]
+                    let dRect = proxy[destination]
 
-                         Image(picItem.image)
-                         .resizable()
-                         .aspectRatio(contentMode: .fill)
-                         .frame(
-                            width: detailViewAnimation ? dRect.width: sRect.width,
+                    Image(picItem.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(
+                            width: detailViewAnimation ? dRect.width : sRect.width,
                             height: detailViewAnimation ? dRect.height : sRect.height
-                         )
-                         .clipShape(.rect(cornerRadius: detailViewAnimation ? 0 : 10))
-                         .offset(x: detailViewAnimation ? dRect.minX : sRect.minX, y: detailViewAnimation ? dRect.minY : sRect.minY)
-                         .allowsHitTesting(false)
-                     }
+                        )
+                        .clipShape(.rect(cornerRadius: detailViewAnimation ? 0 : 10))
+                        .offset(x: detailViewAnimation ? dRect.minX : sRect.minX, y: detailViewAnimation ? dRect.minY : sRect.minY)
+                        .allowsHitTesting(false)
                 }
-        })
+            }
+        }
     }
 
     func selectedImage() -> PicItem? {
@@ -91,11 +92,9 @@ struct SynchronizedScrollView: View {
 
                 Spacer(minLength: 0)
 
-                Button("", systemImage: "ellipsis") {
-
-                }
-                .foregroundStyle(.primary)
-                .offset(y: -10)
+                Button("", systemImage: "ellipsis") {}
+                    .foregroundStyle(.primary)
+                    .offset(y: -10)
             }
 
             VStack(alignment: .leading, spacing: 10) {
@@ -118,8 +117,9 @@ struct SynchronizedScrollView: View {
                                     key: OffsetKey.self,
                                     value: .bounds,
                                     transform: { anchor in
-                                        return [pic.id.uuidString: anchor]
-                                })
+                                        [pic.id.uuidString: anchor]
+                                    }
+                                )
                                 .onTapGesture {
                                     selectedPost = post
                                     selectedPicID = pic.id
@@ -132,7 +132,7 @@ struct SynchronizedScrollView: View {
                         .scrollTargetLayout()
                     }
                     .scrollPosition(id: .init(get: {
-                        return post.scrollPosition
+                        post.scrollPosition
                     }, set: { _ in }))
                     .scrollIndicators(.hidden)
                     .scrollTargetBehavior(.viewAligned)
@@ -142,24 +142,15 @@ struct SynchronizedScrollView: View {
 
                 /// Image buttons
                 HStack(spacing: 20) {
-                    ImageButton("suit.heart") {
+                    ImageButton("suit.heart") {}
 
-                    }
+                    ImageButton("message") {}
 
-                    ImageButton("message") {
-
-                    }
-
-                    ImageButton("arrow.2.squarepath") {
-
-                    }
-                    ImageButton("paperplane") {
-
-                    }
+                    ImageButton("arrow.2.squarepath") {}
+                    ImageButton("paperplane") {}
                 }
             }
             .safeAreaPadding(.leading, 45)
-
 
             /// Likes and replies
             HStack(spacing: 10) {
@@ -167,14 +158,10 @@ struct SynchronizedScrollView: View {
                     .frame(width: 30, height: 30)
                     .background(.background)
 
-                Button("10 replies") {
+                Button("10 replies") {}
 
-                }
-
-                Button("810 likes") {
-
-                }
-                .padding(.leading, -5)
+                Button("810 likes") {}
+                    .padding(.leading, -5)
 
                 Spacer()
             }
@@ -189,12 +176,10 @@ struct SynchronizedScrollView: View {
                 .padding(.bottom, 30)
                 .offset(x: 15, y: 10)
         }
-
-
     }
 
     @ViewBuilder
-    func ImageButton(_ icon: String, onTap: @escaping () -> ()) -> some View {
+    func ImageButton(_ icon: String, onTap: @escaping () -> Void) -> some View {
         Button("", systemImage: icon, action: onTap)
             .font(.title3)
             .foregroundStyle(.primary)
@@ -210,7 +195,7 @@ private struct DetailView: View {
     @Binding var showDetailView: Bool
     @Binding var detailViewAnimation: Bool
     @Binding var selectedPicID: UUID?
-    var updateScrollPosition: (UUID?) -> ()
+    var updateScrollPosition: (UUID?) -> Void
     /// View Properties
     @State private var detailScrollPosition: UUID?
 
@@ -231,8 +216,9 @@ private struct DetailView: View {
                             key: OffsetKey.self,
                             value: .bounds,
                             transform: { anchor in
-                                return ["DESTINATION\(pic.id.uuidString)": anchor]
-                        })
+                                ["DESTINATION\(pic.id.uuidString)": anchor]
+                            }
+                        )
                         .opacity(selectedPicID == pic.id ? 0 : 1)
                 }
             }
@@ -312,6 +298,5 @@ private struct DetailView: View {
             startTask2.cancel()
             self.startTask2 = nil
         }
-
     }
 }

@@ -51,7 +51,7 @@ struct ProfileHome: View {
             .animation(.snappy(duration: 0.3, extraBounce: 0), value: config.coordinates.1)
             .ignoresSafeArea()
             .opacity(config.isExpandedCompletely ? 0 : 1)
-            .onChange(of: selectedProfile == nil) { oldValue, newValue in /// view set to nil when dismiss is only in iOS 18
+            .onChange(of: selectedProfile == nil) { _, newValue in /// view set to nil when dismiss is only in iOS 18
                 if newValue {
                     config.isExpandedCompletely = false
 

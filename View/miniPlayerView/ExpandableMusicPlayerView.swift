@@ -45,7 +45,6 @@ struct ExpandableMusicPlayerView: View {
 
                 ExpandedPlayer(size, safeArea)
                     .opacity(expandPlayer ? 1 : 0)
-
             }
             .frame(height: expandPlayer ? nil : 55, alignment: .top)
             .frame(maxHeight: .infinity, alignment: .bottom)
@@ -60,7 +59,7 @@ struct ExpandableMusicPlayerView: View {
                     windowProgress = max(min(translation / size.height, 1), 0) * 0.1
 
                     resizeWindow(0.1 - windowProgress)
-                } onEnd: { value  in
+                } onEnd: { value in
                     guard expandPlayer else { return }
                     let translation = max(value.translation.height, 0)
                     let velocity = value.velocity.height / 5
@@ -81,8 +80,7 @@ struct ExpandableMusicPlayerView: View {
                 }
             ) /// draggable on image area
             .ignoresSafeArea()
-
-         }
+        }
         .onAppear {
             if let window = (
                 UIApplication.shared.connectedScenes.first as? UIWindowScene
@@ -90,8 +88,6 @@ struct ExpandableMusicPlayerView: View {
                 mainWindow = window
             }
         }
-
-
     }
 
     @ViewBuilder
@@ -105,7 +101,6 @@ struct ExpandableMusicPlayerView: View {
                         .clipShape(.rect(cornerRadius: 10))
                         .matchedGeometryEffect(id: "Artwork", in: animation)
                 }
-
             }
             .frame(width: 45, height: 45)
 
@@ -114,13 +109,9 @@ struct ExpandableMusicPlayerView: View {
             Spacer(minLength: 0)
 
             Group {
-                Button("", systemImage: "play.fill") {
+                Button("", systemImage: "play.fill") {}
 
-                }
-
-                Button("", systemImage: "forward.fill") {
-
-                }
+                Button("", systemImage: "forward.fill") {}
             }
             .font(.title3)
             .foregroundStyle(.primary)
@@ -141,7 +132,7 @@ struct ExpandableMusicPlayerView: View {
     }
 
     @ViewBuilder
-    func ExpandedPlayer(_ size: CGSize, _ safeArea: EdgeInsets) -> some View {
+    func ExpandedPlayer(_: CGSize, _ safeArea: EdgeInsets) -> some View {
         VStack(spacing: 12) {
             Capsule()
                 .fill(.white.secondary)
@@ -159,9 +150,8 @@ struct ExpandableMusicPlayerView: View {
                             .matchedGeometryEffect(id: "Artwork", in: animation)
                             .transition(.offset(y: 1))
                     }
-
                 }
-               .frame(width: 80, height: 80)
+                .frame(width: 80, height: 80)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Fox")
@@ -173,22 +163,16 @@ struct ExpandableMusicPlayerView: View {
                         .foregroundStyle(.white.secondary)
                 }
 
-
                 Spacer(minLength: 0)
 
                 HStack {
-                    Button("", systemImage: "star.circle.fill") {
+                    Button("", systemImage: "star.circle.fill") {}
 
-                    }
-
-                    Button("", systemImage: "ellipsis.circle.fill") {
-
-                    }
+                    Button("", systemImage: "ellipsis.circle.fill") {}
                 }
                 .foregroundStyle(.white, .white.tertiary)
                 .font(.title2)
             }
-
         }
         .padding(15)
         .padding(.top, safeArea.top)

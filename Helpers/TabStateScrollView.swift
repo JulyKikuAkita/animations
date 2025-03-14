@@ -2,7 +2,6 @@
 //  TabStateScrollView.swift
 //  animation
 
-
 import SwiftUI
 
 /// Custom View
@@ -14,7 +13,7 @@ struct TabStateScrollView<Content: View>: View {
     init(axis: Axis.Set, showsIndicator: Bool, tabState: Binding<Visibility>, @ViewBuilder content: @escaping () -> Content) {
         self.axis = axis
         self.showsIndicator = showsIndicator
-        self._tabState = tabState
+        _tabState = tabState
         self.content = content()
     }
 
@@ -49,12 +48,12 @@ struct TabStateScrollView<Content: View>: View {
 
         if velocityY < 0 {
             /// Swiping up
-            if -(velocityY / 5) > 60 && tabState == .visible {
+            if -(velocityY / 5) > 60, tabState == .visible {
                 tabState = .hidden
             }
         } else {
             /// Swiping down
-            if (velocityY / 5) > 40 && tabState == .hidden {
+            if (velocityY / 5) > 40, tabState == .hidden {
                 tabState = .visible
             }
         }
@@ -62,25 +61,26 @@ struct TabStateScrollView<Content: View>: View {
 }
 
 /// Adding a custom simultaneous UIPan Gesture to know about  the direction user is swiping
-fileprivate struct CustomGesture: UIViewRepresentable {
-    var onChange: (UIPanGestureRecognizer) -> ()
+private struct CustomGesture: UIViewRepresentable {
+    var onChange: (UIPanGestureRecognizer) -> Void
     /// gesture ID
     private let gestureID = UUID().uuidString
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(onChange: onChange)
+        Coordinator(onChange: onChange)
     }
 
-    func makeUIView(context: Context) -> some UIView {
-        return UIView()
+    func makeUIView(context _: Context) -> some UIView {
+        UIView()
     }
 
     func updateUIView(_ uiView: UIViewType, context: Context) {
         DispatchQueue.main.async {
             // uiview.(background{}).sourceView
             if let superView = uiView.superview?.superview,
-                !(superView.gestureRecognizers?.contains(where: { $0.name == gestureID }) ?? false) {
-                    let gesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.gestureChange(gesture:)))
+               !(superView.gestureRecognizers?.contains(where: { $0.name == gestureID }) ?? false)
+            {
+                let gesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.gestureChange(gesture:)))
                 gesture.name = gestureID // otherwise mutiple gestures will be added
                 gesture.delegate = context.coordinator // otherwise gesture won't work
                 /// Adding gesture to the super view
@@ -91,7 +91,7 @@ fileprivate struct CustomGesture: UIViewRepresentable {
 
     /// Selector class
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
-        var onChange: (UIPanGestureRecognizer) -> ()
+        var onChange: (UIPanGestureRecognizer) -> Void
         init(onChange: @escaping (UIPanGestureRecognizer) -> Void) {
             self.onChange = onChange
         }
@@ -103,8 +103,8 @@ fileprivate struct CustomGesture: UIViewRepresentable {
         }
 
         /// enable this for gesture to work simultaneously with other gestures (such as scrollview)
-        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-            return true
+        func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
+            true
         }
     }
 }

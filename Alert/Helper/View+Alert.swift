@@ -6,19 +6,18 @@ import SwiftUI
 
 extension View {
     @ViewBuilder
-    func alert<Content: View, Background: View>(
+    func alert(
         isPresented: Binding<Bool>,
-        @ViewBuilder content: @escaping () -> Content,
-        @ViewBuilder background:  @escaping () -> Background
+        @ViewBuilder content: @escaping () -> some View,
+        @ViewBuilder background: @escaping () -> some View
     ) -> some View {
-        self
-            .modifier(
-                CustomAlertIOS18APIModifier(isPresented: isPresented, alertContent: content, background: background)
-            )
+        modifier(
+            CustomAlertIOS18APIModifier(isPresented: isPresented, alertContent: content, background: background)
+        )
     }
 }
 
-fileprivate struct CustomAlertIOS18APIModifier<AlertContent: View, Background: View>: ViewModifier {
+private struct CustomAlertIOS18APIModifier<AlertContent: View, Background: View>: ViewModifier {
     @Binding var isPresented: Bool
     @ViewBuilder var alertContent: () -> AlertContent
     @ViewBuilder var background: () -> Background
@@ -52,7 +51,7 @@ fileprivate struct CustomAlertIOS18APIModifier<AlertContent: View, Background: V
                     allowsInteraction = true
                 }
             }
-            .onChange(of: isPresented) { oldValue, newValue in
+            .onChange(of: isPresented) { _, newValue in
                 var transaction = Transaction()
                 transaction.disablesAnimations = true
 

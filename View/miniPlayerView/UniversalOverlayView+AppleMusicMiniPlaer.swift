@@ -1,10 +1,10 @@
 //
-//  UniversalOverlayView.swift
+//  UniversalOverlayView+AppleMusicMiniPlaer.swift
 //  animation
 //  iOS 18
 
-import SwiftUI
 import AVKit
+import SwiftUI
 
 struct UniversalOverlayAppleMiniPlayerDemoView: View {
     @State private var activeTab: AppleMusicTab = .music
@@ -12,21 +12,21 @@ struct UniversalOverlayAppleMiniPlayerDemoView: View {
 
     var body: some View {
         TabView {
-            Tab.init(
+            Tab(
                 AppleMusicTab.music.title, systemImage: AppleMusicTab.music.rawValue
             ) {
                 Text(AppleMusicTab.music.title)
             }
 
-            Tab.init(AppleMusicTab.browse.title, systemImage: AppleMusicTab.browse.rawValue) {
+            Tab(AppleMusicTab.browse.title, systemImage: AppleMusicTab.browse.rawValue) {
                 Text(AppleMusicTab.browse.title)
             }
 
-            Tab.init(AppleMusicTab.listenNow.title, systemImage: AppleMusicTab.listenNow.rawValue) {
+            Tab(AppleMusicTab.listenNow.title, systemImage: AppleMusicTab.listenNow.rawValue) {
                 Text(AppleMusicTab.listenNow.title)
             }
 
-            Tab.init(AppleMusicTab.search.title, systemImage: AppleMusicTab.search.rawValue) {
+            Tab(AppleMusicTab.search.title, systemImage: AppleMusicTab.search.rawValue) {
                 Text(AppleMusicTab.search.title)
             }
         }

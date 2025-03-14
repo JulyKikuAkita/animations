@@ -1,9 +1,10 @@
 //
-//  FloatingTabBarView.swift
+//  AnimatedTabBariOS18.swift
 //  animation
 // Recreate animated tab bar using iOS18 api
 
 import SwiftUI
+
 /// option 2: Use observable to show/hide custom tab bar on parent <-> child views
 @Observable
 class TabBarData {
@@ -15,7 +16,7 @@ struct AnimatedTabViewiOS18DemoView: View {
     @State private var activeTab: VideoTab = .home
     @State private var symbolEffectTrigger: VideoTab?
     /// option 1: Use SceneStorage to hide/show custom tab bar across full app (SceneStorage does not work in preview)
-    //@SceneStorage("hideTabBar") private var hideTabBar: Bool = false
+    // @SceneStorage("hideTabBar") private var hideTabBar: Bool = false
     var tabBarData = TabBarData()
     var body: some View {
         TabView(selection: .init(get: { activeTab }, set: { newValue in
@@ -28,11 +29,11 @@ struct AnimatedTabViewiOS18DemoView: View {
                 symbolEffectTrigger = nil
             }
         })) {
-            Tab.init(value: .home) {
+            Tab(value: .home) {
                 Text("Home")
             }
 
-            Tab.init(value: .shorts) {
+            Tab(value: .shorts) {
                 TextField("Tap me to start typing", text: .constant(""))
                     .overlay(alignment: .topTrailing, content: {
                         Button("Hide TabBar") {
@@ -45,12 +46,11 @@ struct AnimatedTabViewiOS18DemoView: View {
                     .toolbarVisibility(tabBarData.hideTabBar ? .hidden : .visible, for: .tabBar)
             }
 
-            Tab.init(value: .progress) {
+            Tab(value: .progress) {
                 Text("Profile")
             }
 
-
-            Tab.init(value: .carousel) {
+            Tab(value: .carousel) {
                 DummyScrollView()
                     .overlay(alignment: .topTrailing, content: {
                         Button("Hide TabBar") {
@@ -63,7 +63,7 @@ struct AnimatedTabViewiOS18DemoView: View {
                     .toolbarVisibility(tabBarData.hideTabBar ? .hidden : .visible, for: .tabBar)
             }
 
-            Tab.init(value: .profile) {
+            Tab(value: .profile) {
                 Text("Photos")
             }
         }
@@ -78,7 +78,7 @@ struct AnimatedTabViewiOS18DemoView: View {
     @ViewBuilder
     func AnimatedTabBar() -> some View {
         HStack(spacing: 0) {
-            ForEach(VideoTab.allCases, id:\.rawValue) { tab in
+            ForEach(VideoTab.allCases, id: \.rawValue) { tab in
                 VStack(spacing: 4) {
                     Image(systemName: tab.symbol)
                         .font(.title3)
@@ -86,11 +86,10 @@ struct AnimatedTabViewiOS18DemoView: View {
                         .modifiers { content in
                             switch tab {
                             case .home: content.symbolEffect(
-                                .bounce.byLayer.up,
-                                options: .speed(1.2),
-                                value: symbolEffectTrigger == tab
-                            )
-
+                                    .bounce.byLayer.up,
+                                    options: .speed(1.2),
+                                    value: symbolEffectTrigger == tab
+                                )
                             case .profile:
                                 content.symbolEffect(
                                     .breathe.byLayer,
@@ -132,7 +131,7 @@ struct AnimatedTabViewiOS18DemoView: View {
     func DummyScrollView() -> some View {
         ScrollView {
             VStack {
-                ForEach(1...50, id:\.self) { _ in
+                ForEach(1 ... 50, id: \.self) { _ in
                     Rectangle()
                         .fill(.green.gradient)
                         .frame(height: 50)
@@ -143,12 +142,13 @@ struct AnimatedTabViewiOS18DemoView: View {
     }
 }
 
-fileprivate extension View {
+private extension View {
     @ViewBuilder
-    func modifiers<Content: View>(@ViewBuilder content: @escaping (Self) -> Content) -> some View {
+    func modifiers(@ViewBuilder content: @escaping (Self) -> some View) -> some View {
         content(self)
     }
 }
+
 #Preview {
     AnimatedTabViewiOS18DemoView()
 }

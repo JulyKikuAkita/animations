@@ -61,6 +61,7 @@ struct HackerTextView: View {
         let string = "abcdefghijklmnopqrstuvwxyz1234567890-=!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         return Array(string)
     }()
+
     @State private var animationID: String = UUID().uuidString
 
     var body: some View {
@@ -68,28 +69,27 @@ struct HackerTextView: View {
             .fontDesign(.monospaced) // ensure same horizontal space for all characters
             .truncationMode(.tail)
             .contentTransition(transition)
-            .animation(.easeInOut(duration: 0.1), value: animatedText )
+            .animation(.easeInOut(duration: 0.1), value: animatedText)
             .onAppear {
                 guard animatedText.isEmpty else { return }
                 setRandomCharacters()
                 animateText()
             }
-            .customOnChange(value: trigger) { newValue in
+            .customOnChange(value: trigger) { _ in
                 animateText()
             }
-            .customOnChange(value: text) { newValue in
+            .customOnChange(value: text) { _ in
                 animatedText = text
                 animationID = UUID().uuidString
                 setRandomCharacters()
                 animateText()
             }
-
     }
 
     private func animateText() {
         let currentID = animationID
         for index in text.indices {
-            let delay = CGFloat.random(in: 0...duration)
+            let delay = CGFloat.random(in: 0 ... duration)
             var timerDuration: CGFloat = 0
 
             let timer = Timer.scheduledTimer(withTimeInterval: speed, repeats: true) { timer in
@@ -128,24 +128,23 @@ struct HackerTextView: View {
         let indexCharacter = String(animatedText[index])
 
         if indexCharacter.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
-            animatedText.replaceSubrange(index...index, with: String(character))
+            animatedText.replaceSubrange(index ... index, with: String(character))
         }
     }
 }
 
-fileprivate extension View {
+private extension View {
     @ViewBuilder
-    func customOnChange<T: Equatable>(value: T, result: @escaping (T) -> ()) -> some View {
+    func customOnChange<T: Equatable>(value: T, result: @escaping (T) -> Void) -> some View {
         if #available(iOS 17, *) {
             self
-                .onChange(of: value) { oldValue, newValue in
+                .onChange(of: value) { _, newValue in
                     result(newValue)
                 }
         } else {
-            self
-                .onChange(of: value, perform: { value in
-                    result(value)
-                })
+            onChange(of: value, perform: { value in
+                result(value)
+            })
         }
     }
 }

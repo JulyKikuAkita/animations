@@ -23,7 +23,7 @@ struct MorphingSymbolView: View {
                 .tag(0)
         }
         .frame(width: config.frame.width, height: config.frame.height)
-        .onChange(of: symbol) { oldValue, newValue in
+        .onChange(of: symbol) { _, newValue in
             trigger.toggle()
             nextSymbol = newValue
         }
@@ -36,26 +36,26 @@ struct MorphingSymbolView: View {
     @ViewBuilder
     func ImageView() -> some View {
         KeyframeAnimator(
-            initialValue: CGFloat.zero, trigger: trigger) { radius in
-                Image(systemName: displayingSymbol == "" ? symbol : displayingSymbol)
-                    .font(config.font)
-                    .blur(radius: radius)
-                    .frame(width: config.frame.width, height: config.frame.height)
-                    .onChange(of: radius) { oldValue, newValue in
-                        /// morph effect begins at 0 to config radius then ends at 0,
-                        /// when the value == config.radius, it's at the middle thus a perfect timing to switch symbol
-                        if newValue.rounded() == config.radius {
-                            /// Animating Symbol Change
-                            withAnimation(config.symbolAnimation) {
-                                displayingSymbol = nextSymbol
-                            }
+            initialValue: CGFloat.zero, trigger: trigger
+        ) { radius in
+            Image(systemName: displayingSymbol == "" ? symbol : displayingSymbol)
+                .font(config.font)
+                .blur(radius: radius)
+                .frame(width: config.frame.width, height: config.frame.height)
+                .onChange(of: radius) { _, newValue in
+                    /// morph effect begins at 0 to config radius then ends at 0,
+                    /// when the value == config.radius, it's at the middle thus a perfect timing to switch symbol
+                    if newValue.rounded() == config.radius {
+                        /// Animating Symbol Change
+                        withAnimation(config.symbolAnimation) {
+                            displayingSymbol = nextSymbol
                         }
-
                     }
-            } keyframes: { _ in
-                CubicKeyframe(config.radius, duration: config.keyFrameDuration)
-                CubicKeyframe(0, duration: config.keyFrameDuration)
-            }
+                }
+        } keyframes: { _ in
+            CubicKeyframe(config.radius, duration: config.keyFrameDuration)
+            CubicKeyframe(0, duration: config.keyFrameDuration)
+        }
     }
 
     struct MorphingSymbolConfig {

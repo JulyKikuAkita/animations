@@ -2,7 +2,6 @@
 //  KeyPadModel.swift
 //  animation
 
-
 import SwiftUI
 
 struct KeyPadAction: Identifiable, Hashable {
@@ -40,7 +39,7 @@ struct KeyPad: Identifiable {
     var isBack: Bool = false
 }
 
-let keypadValues: [KeyPad] = (1...9).compactMap({ .init(title: String($0), value: Int($0)) }) + [
+let keypadValues: [KeyPad] = (1 ... 9).compactMap { .init(title: String($0), value: Int($0)) } + [
     .init(title: "0", value: 0),
-    .init(title: "chevron.left", value: -1, isBack: true)
+    .init(title: "chevron.left", value: -1, isBack: true),
 ]

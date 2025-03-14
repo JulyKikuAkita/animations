@@ -35,8 +35,9 @@ struct HabitCardView: View {
 
             /// show completion button to complete task for today
             if habit.frequencies
-                .contains(where: { $0.rawValue == Date.now.weekDay }) && !habit.completedDates
-                .contains(Date.now.startOfDay.timeIntervalSince1970) {
+                .contains(where: { $0.rawValue == Date.now.weekDay }), !habit.completedDates
+                .contains(Date.now.startOfDay.timeIntervalSince1970)
+            {
                 CompletionButton()
             }
         }
@@ -44,7 +45,7 @@ struct HabitCardView: View {
 
     @ViewBuilder
     func CompletionProgressIndicator() -> some View {
-        let habitMatchingDatesInThisMonth = Date.datesInThisMonth.filter {  date in
+        let habitMatchingDatesInThisMonth = Date.datesInThisMonth.filter { date in
             habit.frequencies.contains {
                 $0.rawValue == date.weekDay
             } && date.startOfDay >= habit.createdAt.startOfDay
@@ -66,7 +67,7 @@ struct HabitCardView: View {
                     .stroke(.green.gradient, lineWidth: 3)
                     .rotationEffect(.init(degrees: -90))
             }
-            .frame(width:30, height: 30)
+            .frame(width: 30, height: 30)
 
             Text("\(progress * 100)%")
             Text("\(habitsCompletedInThisMonth.count)/\(habitMatchingDatesInThisMonth.count)")

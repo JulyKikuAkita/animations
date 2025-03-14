@@ -37,9 +37,7 @@ struct AppleDocIntroScreen: View {
             Spacer(minLength: 0)
 
             /// Continue button
-            Button {
-
-            } label: {
+            Button {} label: {
                 Text("Start using Document Scanner")
                     .fontWeight(.bold)
                     .foregroundStyle(.white)

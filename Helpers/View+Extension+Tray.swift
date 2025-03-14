@@ -9,39 +9,37 @@ struct TrayConfig {
     var isInteractiveDismissDisabled: Bool = false
     var horizontalPadding: CGFloat = 15
     var bottomPadding: CGFloat = 15
-
 }
 
 extension View {
     @ViewBuilder
-    func systemTrayView<Content: View>(
+    func systemTrayView(
         _ show: Binding<Bool>,
         config: TrayConfig = .init(maxDetent: .fraction(0.99)),
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> some View
     ) -> some View {
-        self
-            .sheet(isPresented: show) {
-                content()
-                    .background(.background)
-                    .clipShape(.rect(cornerRadius: config.cornerRadius))
-                    .padding(.horizontal, config.horizontalPadding)
-                    .padding(.bottom, config.bottomPadding)
-                    .frame(maxHeight: .infinity, alignment: .bottom)
+        sheet(isPresented: show) {
+            content()
+                .background(.background)
+                .clipShape(.rect(cornerRadius: config.cornerRadius))
+                .padding(.horizontal, config.horizontalPadding)
+                .padding(.bottom, config.bottomPadding)
+                .frame(maxHeight: .infinity, alignment: .bottom)
                 /// Presentation configuration
-                    .presentationDetents([config.maxDetent])
-                    .presentationCornerRadius(0)
-                    .presentationBackground(.clear)
-                    .presentationDragIndicator(.hidden)
-                    .interactiveDismissDisabled(config.isInteractiveDismissDisabled)
-                    .background(RemoveSheetShadow())
-            }
+                .presentationDetents([config.maxDetent])
+                .presentationCornerRadius(0)
+                .presentationBackground(.clear)
+                .presentationDragIndicator(.hidden)
+                .interactiveDismissDisabled(config.isInteractiveDismissDisabled)
+                .background(RemoveSheetShadow())
+        }
     }
 }
 
-fileprivate struct RemoveSheetShadow: UIViewRepresentable {
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
+private struct RemoveSheetShadow: UIViewRepresentable {
+    func updateUIView(_: UIViewType, context _: Context) {}
 
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context _: Context) -> some UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .clear
 

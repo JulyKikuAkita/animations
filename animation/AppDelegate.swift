@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /// Tab bar demo for SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet
     var tabWindow: UIWindow?
 
-    func windowScene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-            windowScene = scene as? UIWindowScene
+    func windowScene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
+        windowScene = scene as? UIWindowScene
     }
 
     /// Adding hero window to the scene
@@ -26,10 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = windowScene else { return }
         let heroViewController = UIHostingController(rootView:
             CustomHeroAnimationView()
-            .environment(windowSharedModel)
-            /// Since we don't need any interaction
-            .allowsHitTesting(false)
-        )
+                .environment(windowSharedModel)
+                /// Since we don't need any interaction
+                .allowsHitTesting(false))
 
         heroViewController.view.backgroundColor = .clear
         let heroWindow = UIWindow(windowScene: scene)
@@ -52,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         tabBarController.view.backgroundColor = .clear
         /// Window
-        let tabWindow =  UIWindow(windowScene: scene)
+        let tabWindow = UIWindow(windowScene: scene)
         tabWindow.rootViewController = tabBarController
         tabWindow.isHidden = false
         /// Storing tabBar window reference for future use

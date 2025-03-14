@@ -19,7 +19,7 @@ extension CGFloat {
         let length = inputRange.count - 1
         if x <= inputRange[0] { return outputRange[0] }
 
-        for index in 1...length {
+        for index in 1 ... length {
             let x1 = inputRange[index - 1]
             let x2 = inputRange[index]
 

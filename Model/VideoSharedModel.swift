@@ -2,8 +2,8 @@
 //  VideoSharedModel.swift
 //  animation
 
-import SwiftUI
 import AVKit
+import SwiftUI
 
 @Observable
 class VideoSharedModel {

@@ -2,8 +2,8 @@
 //  ContentView.swift
 //  DocumentScannerApp
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ContentView: View {
     @AppStorage("showIntroView") var showIntroView: Bool = true

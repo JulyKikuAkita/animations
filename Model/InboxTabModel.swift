@@ -10,7 +10,6 @@ enum InboxTabModel: String, CaseIterable {
     case promotions = "Promotions"
     case allMails = "All Mails"
 
-
     var color: Color {
         switch self {
         case .primary: .blue

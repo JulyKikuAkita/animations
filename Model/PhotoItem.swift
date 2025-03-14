@@ -1,5 +1,5 @@
 //
-//  photoItem.swift
+//  PhotoItem.swift
 //  demoApp
 
 import SwiftUI

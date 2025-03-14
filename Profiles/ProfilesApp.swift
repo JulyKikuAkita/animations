@@ -2,7 +2,6 @@
 //  ProfilesApp.swift
 //  Profiles
 
-
 import SwiftUI
 
 @main

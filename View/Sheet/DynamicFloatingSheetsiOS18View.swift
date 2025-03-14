@@ -26,14 +26,14 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
             VStack(spacing: 20) {
                 ZStack {
                     switch currentView {
-                        case .actions: View1()
-                                .transition(.blurReplace)
+                    case .actions: View1()
+                        .transition(.blurReplace)
 
-                        case .period: View2()
-                                .transition(.blurReplace)
+                    case .period: View2()
+                        .transition(.blurReplace)
 
-                        case .keypad:View3()
-                                .transition(.blurReplace)
+                    case .keypad: View3()
+                        .transition(.blurReplace)
                     }
                 }
                 .compositingGroup()
@@ -77,7 +77,7 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
             }
             .padding(.bottom, 10)
 
-            ForEach(keypadActions, id:\.self) { action in
+            ForEach(keypadActions, id: \.self) { action in
                 let isSelected: Bool = selectedKeypadAction?.id ?? "" == action.id
 
                 HStack(spacing: 10) {
@@ -103,7 +103,6 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
                     }
                 }
             }
-
         }
     }
 
@@ -170,7 +169,6 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
                     }
                 }
             }
-
         }
     }
 
@@ -208,7 +206,6 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
             }
             .padding(.vertical, 20)
 
-
             LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 15) {
                 ForEach(keypadValues) { keyValue in
                     Group {
@@ -237,7 +234,6 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
                 }
             }
             .padding(.horizontal, -15)
-
         }
     }
 }

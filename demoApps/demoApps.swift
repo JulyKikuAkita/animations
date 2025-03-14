@@ -1,5 +1,5 @@
 //
-//  demoApp.swift
+//  demoApps.swift
 //  demoApp
 
 import SwiftUI
@@ -10,7 +10,7 @@ import SwiftUI
 /// AppleMusicHomeView()
 /// ApplePhotoHomeView()
 /// PinchZoomDemoView()
-//@main
+// @main
 struct demoApps: App {
     var body: some Scene {
         WindowGroup {
@@ -20,7 +20,7 @@ struct demoApps: App {
 }
 
 /// a demo app for Timer: https://pomofocus.io/
-//struct Pomodoro_TimerApp: App {
+// struct Pomodoro_TimerApp: App {
 //    var body: some Scene {
 //        WindowGroup {
 //            TimerHomeView()
@@ -28,4 +28,4 @@ struct demoApps: App {
 //                .modelContainer(for: Recent.self)
 //        }
 //    }
-//}
+// }

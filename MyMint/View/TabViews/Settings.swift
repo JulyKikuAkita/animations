@@ -25,7 +25,6 @@ struct Settings: View {
 
                     if isAppLockEnabled {
                         Toggle("Lock When App Goes Background", isOn: $lockWhenAppGoesBackground)
-
                     }
                 }
             }

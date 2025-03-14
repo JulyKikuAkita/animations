@@ -2,10 +2,10 @@
 //  GridTransitionView.swift
 //  animation
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
-//@main
+// @main
 struct ColorNotes: App {
     var body: some Scene {
         WindowGroup {
@@ -20,6 +20,7 @@ struct GridTransitionDemoView: View {
         GridTransitionView()
     }
 }
+
 struct GridTransitionView: View {
     @Namespace private var animation
     /// View Properties
@@ -54,17 +55,17 @@ struct GridTransitionView: View {
                                         animateView = true
                                     }
                                 }
-                            }
                         }
                     }
+                }
             }
             .safeAreaPadding(15)
             .overlay {
-                GeometryReader { proxy  in
+                GeometryReader { proxy in
                     let size = proxy.size
                     // need forEach to make sure selectNote == nil while transition won't confuse geoMatched animation (seeing prev card transition is still in progress then the next selected card transition start and overlapped)
                     ForEach(notes) { note in
-                        if note.id == selectedNote?.id && animateView {
+                        if note.id == selectedNote?.id, animateView {
                             DetailView(size: size, titleNoteSize: titleNoteSize, animation: animation, note: note)
                                 .ignoresSafeArea(.container, edges: .top)
                         }
@@ -96,7 +97,7 @@ struct GridTransitionView: View {
     func CardView(_ note: Note) -> some View {
         ZStack {
             /// expanded
-            if selectedNote?.id == note.id && animateView {
+            if selectedNote?.id == note.id, animateView {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.clear)
             } else {
@@ -158,17 +159,17 @@ struct GridTransitionView: View {
                     .transition(.blurReplace)
                 }
 
-                if selectedNote != nil && !isKeyboardActive{
+                if selectedNote != nil, !isKeyboardActive {
                     Button {
                         // no more need this when using swift data as it's reflecting to object direclty
-    //                    if let index = notes.firstIndex(where: { $0.id == selectedNote?.id }) {
-    //                        notes[index].allowsHitTesting = false
-    //                    }
+                        //                    if let index = notes.firstIndex(where: { $0.id == selectedNote?.id }) {
+                        //                        notes[index].allowsHitTesting = false
+                        //                    }
                         selectedNote?.allowsHitTesting = false
 
-                        if let selectedNote, (
-                            selectedNote.title.isEmpty && selectedNote.content.isEmpty
-                        ) {
+                        if let selectedNote,
+                           selectedNote.title.isEmpty, selectedNote.content.isEmpty
+                        {
                             deleteNote = selectedNote
                         }
 
@@ -189,7 +190,6 @@ struct GridTransitionView: View {
                     }
                     .transition(.blurReplace)
                 }
-
             }
         }
         .overlay {
@@ -199,7 +199,7 @@ struct GridTransitionView: View {
                 .opacity(selectedNote != nil ? 0 : 1)
         }
         .overlay {
-            if selectedNote != nil && !isKeyboardActive {
+            if selectedNote != nil, !isKeyboardActive {
                 CardColorPicker()
                     .transition(.blurReplace)
             }
@@ -215,8 +215,8 @@ struct GridTransitionView: View {
     func CardColorPicker() -> some View {
         let colorString = ["AI_grn", "AI_pink"]
         HStack(spacing: 10) {
-            ForEach(1...colorString.count, id: \.self) { index in
-                    Circle()
+            ForEach(1 ... colorString.count, id: \.self) { index in
+                Circle()
                     .fill(getColor(from: colorString[index - 1]))
                     .frame(width: 20, height: 20)
                     .contentShape(.rect)
@@ -302,7 +302,7 @@ struct DetailView: View {
             .matchedGeometryEffect(id: note.id, in: animation)
             .transition(.offset(y: 1)) /// avoid color fade in during transition
             .allowsHitTesting(note.allowsHitTesting) // allow tap during transition
-            .onChange(of: note.allowsHitTesting, initial: true) { oldValue, newValue  in
+            .onChange(of: note.allowsHitTesting, initial: true) { _, newValue in
                 withAnimation(noteAnimation) {
                     animateLayers = newValue
                 }
@@ -313,7 +313,7 @@ struct DetailView: View {
     func NotesContent() -> some View {
         GeometryReader {
             let currentSize: CGSize = $0.size
-            //let safeArea = $0.safeAreaInsets // not always work, use UIKit way below
+            // let safeArea = $0.safeAreaInsets // not always work, use UIKit way below
 
             VStack(alignment: .leading, spacing: 15) {
                 TextField("Title", text: $note.title, axis: .vertical)

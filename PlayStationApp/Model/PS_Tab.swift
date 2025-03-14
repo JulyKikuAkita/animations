@@ -13,10 +13,10 @@ enum PS_Tab: String, CaseIterable {
     case search = "Search"
 
     var index: CGFloat {
-        return CGFloat(PS_Tab.allCases.firstIndex(of: self) ?? 0)
+        CGFloat(PS_Tab.allCases.firstIndex(of: self) ?? 0)
     }
 
     static var count: CGFloat {
-        return CGFloat(PS_Tab.allCases.count)
+        CGFloat(PS_Tab.allCases.count)
     }
 }

@@ -16,11 +16,12 @@ struct BlurEffectSearchBarDemoView: View {
         BlurEffectSearchBarView()
     }
 }
+
 struct BlurEffectSearchBarView: View {
     /// View Properties
     @State private var searchText: String = ""
     @State private var progress: CGFloat = 0
-    @FocusState private var isFocused: Bool //TODO: 7:11
+    @FocusState private var isFocused: Bool // TODO: 7:11
 
     var body: some View {
         ScrollView(.vertical) {
@@ -41,7 +42,7 @@ struct BlurEffectSearchBarView: View {
         .scrollTargetBehavior(CustomScrollTarget())
         .onScrollGeometryChange(for: CGFloat.self) {
             $0.contentOffset.y + $0.contentInsets.top
-        } action: { oldValue, newValue in
+        } action: { _, newValue in
             /// ResizableHeader height 60 + bottom padding 15
             progress = max(min(newValue / 75, 1), 0)
         }
@@ -64,9 +65,7 @@ struct BlurEffectSearchBarView: View {
                 Spacer(minLength: 0)
 
                 /// Profile Button
-                Button {
-
-                } label: {
+                Button {} label: {
                     Image("fox")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -89,9 +88,7 @@ struct BlurEffectSearchBarView: View {
                     .focused($isFocused)
 
                 /// Microphone Button
-                Button {
-
-                } label: {
+                Button {} label: {
                     Image(systemName: "microphone.fill")
                         .foregroundStyle(Color.red)
                 }
@@ -101,8 +98,8 @@ struct BlurEffectSearchBarView: View {
             .background {
                 RoundedRectangle(cornerRadius: isFocused ? 0 : 30)
                     .fill(.background
-                        .shadow(.drop(color: .black.opacity(0.08), radius: 5, x: 5, y:5))
-                        .shadow(.drop(color: .black.opacity(0.05), radius: 5, x: -5, y:-5))
+                        .shadow(.drop(color: .black.opacity(0.08), radius: 5, x: 5, y: 5))
+                        .shadow(.drop(color: .black.opacity(0.05), radius: 5, x: -5, y: -5))
                     )
                     .padding(
                         .top, isFocused ? -100 : 0
@@ -152,7 +149,7 @@ struct BlurEffectSearchBarView: View {
 }
 
 struct CustomScrollTarget: ScrollTargetBehavior {
-    func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+    func updateTarget(_ target: inout ScrollTarget, context _: TargetContext) {
         let endPoint = target.rect.minY
 
         if endPoint < 75 {

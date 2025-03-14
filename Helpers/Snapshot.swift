@@ -9,15 +9,14 @@ import SwiftUI
 
 extension View {
     @ViewBuilder
-    func snapshot(trigger: Bool, onComplete: @escaping (UIImage) -> ()) -> some View {
-        self
-            .modifier(SnapshotModifier(trigger: trigger, onComplete: onComplete))
+    func snapshot(trigger: Bool, onComplete: @escaping (UIImage) -> Void) -> some View {
+        modifier(SnapshotModifier(trigger: trigger, onComplete: onComplete))
     }
 }
 
-fileprivate struct SnapshotModifier: ViewModifier {
+private struct SnapshotModifier: ViewModifier {
     var trigger: Bool
-    var onComplete: (UIImage) -> ()
+    var onComplete: (UIImage) -> Void
 
     /// Local view modifier properties
     @State private var view: UIView = .init(frame: .zero)
@@ -27,14 +26,14 @@ fileprivate struct SnapshotModifier: ViewModifier {
             content
                 .background(ViewExtractor(view: view))
                 .compositingGroup()
-                .onChange(of: trigger) { oldValue, newValue in
+                .onChange(of: trigger) { _, _ in
                     generateSnapshot()
                 }
         } else {
             content
                 .background(ViewExtractor(view: view))
                 .compositingGroup()
-                .onChange(of: trigger) { newValue in
+                .onChange(of: trigger) { _ in
                     generateSnapshot()
                 }
         }
@@ -52,14 +51,12 @@ fileprivate struct SnapshotModifier: ViewModifier {
     }
 }
 
-fileprivate struct ViewExtractor: UIViewRepresentable {
+private struct ViewExtractor: UIViewRepresentable {
     var view: UIView
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context _: Context) -> some UIView {
         view.backgroundColor = .clear
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-    }
-
+    func updateUIView(_: UIViewType, context _: Context) {}
 }

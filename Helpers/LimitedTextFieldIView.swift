@@ -12,7 +12,7 @@ struct LimitedTextFieldIView: View {
     /// View Properties
     @FocusState private var isKeyboardShowing: Bool
     var body: some View {
-        VStack(alignment: config.progressConfig.alignment, spacing: 12){
+        VStack(alignment: config.progressConfig.alignment, spacing: 12) {
             ZStack(alignment: .top) {
                 RoundedRectangle(cornerRadius: config.borderConfig.radius)
                     .fill(.clear)
@@ -25,12 +25,12 @@ struct LimitedTextFieldIView: View {
 
                 TextField(hint, text: $value, axis: .vertical)
                     .focused($isKeyboardShowing)
-                    .onChange(of: value, initial: true) { oldValue, newValue in // set text limit
+                    .onChange(of: value, initial: true) { _, _ in // set text limit
                         guard !config.allowExcessTyping else { return }
                         value = String(value.prefix(config.limit))
                     }
                     // set value to text limit if allowExcessTyping set to false
-                    .onChange(of: config.allowExcessTyping, initial: false) { oldValue, newValue in
+                    .onChange(of: config.allowExcessTyping, initial: false) { _, _ in
                         guard !config.allowExcessTyping else { return }
                         value = String(value.prefix(config.limit))
                     }
@@ -45,7 +45,7 @@ struct LimitedTextFieldIView: View {
             /// Progress bar / Text indicator
             HStack(alignment: .top, spacing: 12) {
                 if config.progressConfig.showsRing {
-                    ZStack{
+                    ZStack {
                         Circle()
                             .stroke(.ultraThinMaterial, lineWidth: 5)
 
@@ -66,11 +66,11 @@ struct LimitedTextFieldIView: View {
     }
 
     var progress: CGFloat {
-        return max(min(CGFloat(value.count) / CGFloat(config.limit), 1),0)
+        max(min(CGFloat(value.count) / CGFloat(config.limit), 1), 0)
     }
 
     var progressColor: Color {
-        return progress < 0.6 ? config.tint : progress == 1.0 ? .red : .orange
+        progress < 0.6 ? config.tint : progress == 1.0 ? .red : .orange
     }
 
     struct Config {
@@ -86,7 +86,6 @@ struct LimitedTextFieldIView: View {
         var showsRing: Bool = false
         var showsText: Bool = true
         var alignment: HorizontalAlignment = .trailing
-
     }
 
     struct BorderConfig {

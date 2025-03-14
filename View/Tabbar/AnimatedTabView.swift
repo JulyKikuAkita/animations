@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-//@main
+// @main
 struct TabbarAnimationApp: App {
     var body: some Scene {
         WindowGroup {
@@ -22,6 +22,7 @@ struct AnimatedTabView: View {
     @State private var allTabs: [AnimatedTab] = Tab_iOS17.allCases.compactMap { tab -> AnimatedTab? in
         return .init(tab: tab)
     }
+
     /// Bounce properties
     @State private var bounceDown: Bool = true
     var body: some View {
@@ -55,12 +56,9 @@ struct AnimatedTabView: View {
                     Text(Tab_iOS17.photos.title)
                 }
 
-
                 NavigationStack {
-                    VStack {
-
-                    }
-                    .navigationTitle(Tab_iOS17.chat.title)
+                    VStack {}
+                        .navigationTitle(Tab_iOS17.chat.title)
                 }
                 .setupTab(.chat)
                 .tabItem {
@@ -69,10 +67,8 @@ struct AnimatedTabView: View {
                 }
 
                 NavigationStack {
-                    VStack {
-
-                    }
-                    .navigationTitle(Tab_iOS17.apps.title)
+                    VStack {}
+                        .navigationTitle(Tab_iOS17.apps.title)
                 }
                 .setupTab(.apps)
                 .tabItem {
@@ -81,10 +77,8 @@ struct AnimatedTabView: View {
                 }
 
                 NavigationStack {
-                    VStack {
-
-                    }
-                    .navigationTitle(Tab_iOS17.notifications.title)
+                    VStack {}
+                        .navigationTitle(Tab_iOS17.notifications.title)
                 }
                 .setupTab(.notifications)
                 .tabItem {
@@ -93,17 +87,14 @@ struct AnimatedTabView: View {
                 }
 
                 NavigationStack {
-                    VStack {
-
-                    }
-                    .navigationTitle(Tab_iOS17.profile.title)
+                    VStack {}
+                        .navigationTitle(Tab_iOS17.profile.title)
                 }
                 .setupTab(Tab_iOS17.profile)
                 .tabItem {
                     Image(systemName: Tab_iOS17.profile.rawValue)
                     Text(Tab_iOS17.profile.title)
                 }
-
             }
 
             Picker("", selection: $bounceDown) {
@@ -114,7 +105,7 @@ struct AnimatedTabView: View {
                     .tag(false)
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal,15)
+            .padding(.horizontal, 15)
             .padding(.bottom, 20)
 
             CustomTabBar()
@@ -131,17 +122,15 @@ struct AnimatedTabView: View {
                 VStack(spacing: 4) {
                     Image(systemName: tab.rawValue)
                         .font(.title2)
-                    // animates the image when the value changes, might see animate twice
-                    // use transaction to disable it
-                        .symbolEffect( bounceDown ?
-                            .bounce.down.byLayer : .bounce.up.byLayer ,
-                            value: animatedTab.isAnimating
-                        )
+                        // animates the image when the value changes, might see animate twice
+                        // use transaction to disable it
+                        .symbolEffect(bounceDown ?
+                            .bounce.down.byLayer : .bounce.up.byLayer,
+                            value: animatedTab.isAnimating)
 
                     Text(tab.title)
                         .font(.caption2)
                         .textScale(.secondary)
-
                 }
                 .frame(maxWidth: .infinity)
                 .foregroundStyle(activeTab == tab ? Color.primary : Color.gray.opacity(0.8))
@@ -167,12 +156,12 @@ struct AnimatedTabView: View {
 
 extension View {
     @ViewBuilder
-    func setupTab( _ tab: Tab_iOS17) -> some View {
-        self
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    func setupTab(_ tab: Tab_iOS17) -> some View {
+        frame(maxWidth: .infinity, maxHeight: .infinity)
             .tag(tab)
     }
 }
+
 #Preview {
     ContentView()
 }

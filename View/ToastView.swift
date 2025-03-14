@@ -65,7 +65,7 @@ struct ToastDemoView: View {
 }
 
 // iOS18
-fileprivate struct ToastViewiOS18: View {
+private struct ToastViewiOS18: View {
     @Binding var toasts: [ToastContentView]
     /// View Properties
     @State private var isExpanded: Bool = false
@@ -109,7 +109,7 @@ fileprivate struct ToastViewiOS18: View {
                                     }
                                 }
                         )
-                        .visualEffect { [isExpanded] content, proxy in
+                        .visualEffect { [isExpanded] content, _ in
                             content
                                 .scaleEffect(isExpanded ? 1 : scale(index), anchor: .bottom)
                                 .offset(y: isExpanded ? 0 : offsetY(index))
@@ -130,7 +130,7 @@ fileprivate struct ToastViewiOS18: View {
             .padding(.bottom, 15)
         }
         .animation(.bouncy, value: isExpanded)
-        .onChange(of: toasts.isEmpty) { oldValue, newValue in
+        .onChange(of: toasts.isEmpty) { _, newValue in
             if newValue {
                 isExpanded = false
             }
@@ -146,7 +146,6 @@ fileprivate struct ToastViewiOS18: View {
         let scale = min(CGFloat(index) * 0.1, 1)
         return 1 - scale
     }
-
 }
 
 #Preview {
@@ -160,7 +159,7 @@ struct ToastContentView: Identifiable {
 
     /// View Properties
     var offsetX: CGFloat = 0
-    var isDeleting: Bool = false //set zindex to avoid push back to stacj
+    var isDeleting: Bool = false // set zindex to avoid push back to stacj
 
     init(@ViewBuilder content: @escaping (String) -> some View) {
         self.content = .init(content(id))
@@ -170,8 +169,7 @@ struct ToastContentView: Identifiable {
 extension View {
     @ViewBuilder
     func interactiveToasts(_ toasts: Binding<[ToastContentView]>) -> some View {
-        self
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay(alignment: .bottom) {
                 ToastViewiOS18(toasts: toasts)
             }

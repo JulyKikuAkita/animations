@@ -43,7 +43,7 @@ struct VideoView: View {
         .background(.black)
         /// Like animation View
         .overlay(alignment: .topLeading, content: {
-            ZStack{
+            ZStack {
                 ForEach(likedCounter) { like in
                     Image(systemName: "suit.heart.fill")
                         .font(.system(size: 75))
@@ -53,7 +53,7 @@ struct VideoView: View {
                         .animation(.smooth, body: { view in
                             view
                                 .scaleEffect(like.isAnimated ? 1 : 1.8)
-                                .rotationEffect(.init(degrees: like.isAnimated ? 0 : .random(in: -30...30)))
+                                .rotationEffect(.init(degrees: like.isAnimated ? 0 : .random(in: -30 ... 30)))
                         })
                         .offset(x: like.tappedRect.x - 50, y: like.tappedRect.y - 50)
                         ///  Animate hears moving toward y axis
@@ -67,10 +67,8 @@ struct VideoView: View {
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .trailing) {
-                    Button("", systemImage: "camera") {
-
-                    }
-                    .font(.title2)
+                    Button("", systemImage: "camera") {}
+                        .font(.title2)
                 }
                 .foregroundStyle(.white)
                 .padding(.top, safeArea.top + 15)
@@ -78,7 +76,6 @@ struct VideoView: View {
         })
         .environment(\.colorScheme, .dark)
     }
-
 }
 
 #Preview {

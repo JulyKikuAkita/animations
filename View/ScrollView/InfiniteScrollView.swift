@@ -20,7 +20,7 @@ struct InfiniteScrollView<Content: View>: View {
                         /// Original content
                         HStack(spacing: spacing) {
                             ForEach(collection) { view in
-                                    view
+                                view
                             }
                         }
                         .onGeometryChange(for: CGSize.self) {
@@ -34,7 +34,7 @@ struct InfiniteScrollView<Content: View>: View {
                         let repeatingCount = contentSize.width > 0 ? Int((size.width / averageWidth).rounded()) + 1 : 1
 
                         HStack(spacing: spacing) {
-                            ForEach(0..<repeatingCount, id: \.self) { index in
+                            ForEach(0 ..< repeatingCount, id: \.self) { index in
                                 let view = Array(collection)[index % collection.count]
                                 view
                             }
@@ -44,6 +44,5 @@ struct InfiniteScrollView<Content: View>: View {
                 .background(InfiniteScrollHelper(contentSize: $contentSize, declarationRate: .constant(.fast)))
             }
         }
-
     }
 }

@@ -6,7 +6,7 @@
 import SwiftUI
 
 /// Root view for creating overlay window
-//struct RootView<Content:View>: View {
+// struct RootView<Content:View>: View {
 //    @ViewBuilder var content: Content
 //    /// View Properties
 //    @State private var overlayWindow: UIWindow?
@@ -31,10 +31,10 @@ import SwiftUI
 //
 //            }
 //    }
-//}
+// }
 
 /// pass all the user interaction from overlayWindow down to the root view controller
-fileprivate class PassthroughWindow: UIWindow {
+private class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let view = super.hitTest(point, with: event) else { return nil }
         return rootViewController?.view == view ? nil : view
@@ -71,7 +71,7 @@ enum ToastTime: CGFloat {
     case long = 3.0
 }
 
-fileprivate struct ToastGroup: View {
+private struct ToastGroup: View {
     var model = Toast.shared
     let tabbarHeigh: CGFloat = 69
 
@@ -97,7 +97,7 @@ fileprivate struct ToastGroup: View {
                 }
             }
             .padding(.bottom, tabbarHeigh)
-            .padding(.bottom, safeArea.top == .zero ? 15: 10)
+            .padding(.bottom, safeArea.top == .zero ? 15 : 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
     }
@@ -117,7 +117,7 @@ fileprivate struct ToastGroup: View {
     }
 }
 
-fileprivate struct ToastViewiOS17: View {
+private struct ToastViewiOS17: View {
     var size: CGSize
     var item: ToastItem
 
@@ -150,7 +150,7 @@ fileprivate struct ToastViewiOS17: View {
         .contentShape(.capsule)
         .gesture(
             DragGesture(minimumDistance: 0)
-                .onEnded({ value in
+                .onEnded { value in
                     guard item.isUserInteractionEnabled else { return }
                     let endY = value.translation.height
                     let velocityY = value.translation.height
@@ -159,17 +159,16 @@ fileprivate struct ToastViewiOS17: View {
                         /// swipe gesture to remove toast
                         transitionRemoveToast()
                     }
-
-                })
+                }
         )
 //        .offset(y: animateIn ? 0 : 150) // use state change for animation; can use transition too
 //        .offset(y: !animateOut ? 0 : 150) // only need for state style aniamtion
 //        .task {
 //            /// only need for state style aniamtion
-////            guard !animateIn else { return }
-////            withAnimation(.snappy) {
-////                animateIn = true
-////            }
+        ////            guard !animateIn else { return }
+        ////            withAnimation(.snappy) {
+        ////                animateIn = true
+        ////            }
 //
 //            try? await Task.sleep(for: .seconds(item.timing.rawValue))
 //
@@ -215,8 +214,6 @@ fileprivate struct ToastViewiOS17: View {
         Toast.shared.toasts.removeAll(where: { $0.id == item.id })
     }
 }
-
-
 
 struct CustomToastView: View {
     var body: some View {

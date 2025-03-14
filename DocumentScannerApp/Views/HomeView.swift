@@ -4,8 +4,8 @@
 // VisionKit API provides access to a viewController called "VNDocumentCameraViewController",
 // which provides basic scanning features to capture documents and extract result as image
 //
-import SwiftUI
 import SwiftData
+import SwiftUI
 import VisionKit
 
 struct HomeView: View {
@@ -42,7 +42,7 @@ struct HomeView: View {
             }
         }
         .fullScreenCover(isPresented: $showScannerView) { /// won't work in simulator
-            ScannerView { error in
+            ScannerView { _ in
 
             } didCancel: {
                 /// Closing View
@@ -95,7 +95,7 @@ struct HomeView: View {
                             .white.opacity(0),
                             .white.opacity(0.5),
                             .white,
-                            .white
+                            .white,
                         ], startPoint: .top, endPoint: .bottom))
                 }
                 .ignoresSafeArea()
@@ -110,7 +110,7 @@ struct HomeView: View {
             let document = Document(name: documentName)
             var pages: [DocumentPage] = []
 
-            for pageIndex in 0..<scanDocument.pageCount {
+            for pageIndex in 0 ..< scanDocument.pageCount {
                 let pageImage = scanDocument.imageOfPage(at: pageIndex)
 
                 /// compression is 0(most)..1(least)

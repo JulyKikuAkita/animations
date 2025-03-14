@@ -2,7 +2,6 @@
 //  TintColor.swift
 //  MyMint
 
-
 import SwiftUI
 
 /// Custom Tint Colors for Transaction View

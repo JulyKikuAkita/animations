@@ -11,28 +11,28 @@ struct NormalTabbarView: View {
         @Bindable var bindings = properties
         VStack(spacing: 0) {
             TabView(selection: $bindings.activeTab) {
-                Tab.init(value: 0) {
+                Tab(value: 0) {
                     ViewOne()
                         .hideTabBar()
                         .environment(properties)
                 }
 
-                Tab.init(value: 1) {
+                Tab(value: 1) {
                     Text("view2")
                         .hideTabBar()
                 }
 
-                Tab.init(value: 2) {
+                Tab(value: 2) {
                     Text("view3")
                         .hideTabBar()
                 }
 
-                Tab.init(value: 3) {
+                Tab(value: 3) {
                     Text("view4")
                         .hideTabBar()
                 }
 
-                Tab.init(value: 4) {
+                Tab(value: 4) {
                     Text("view5")
                         .hideTabBar()
                 }
@@ -40,7 +40,6 @@ struct NormalTabbarView: View {
 
             DraggableTabBarView()
                 .environment(properties)
-
         }
     }
 }
@@ -72,7 +71,8 @@ struct DraggableTabBarView: View {
         .background(.bar)
         .overlay(alignment: .topLeading) {
             if let id = properties.movingTab, let tab = properties.tabs.first(
-                where: { $0.idInt == id }) {
+                where: { $0.idInt == id })
+            {
                 Image(systemName: tab.symbolImage)
                     .font(.title2)
                     .offset(
@@ -83,12 +83,14 @@ struct DraggableTabBarView: View {
             }
         }
         .coordinateSpace(.named("VIEW"))
-        .onChange(of: properties.moveLocation) { oldValue, newValue in
+        .onChange(of: properties.moveLocation) { _, newValue in
             if let droppingIndex = properties.tabs.firstIndex(
                 where: { $0.rect.contains(newValue) }),
-               let activeIndex = properties.tabs.firstIndex(
-                where: { $0.idInt == properties
-                    .movingTab }), droppingIndex != activeIndex {
+                let activeIndex = properties.tabs.firstIndex(
+                    where: { $0.idInt == properties
+                        .movingTab
+                    }), droppingIndex != activeIndex
+            {
                 withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
                     /// swap items
                     (properties.tabs[droppingIndex], properties.tabs[activeIndex]) = (properties.tabs[activeIndex], properties.tabs[droppingIndex])
@@ -102,13 +104,12 @@ struct DraggableTabBarView: View {
 
     private func saveTabBarOrder() {
         let order: [Int] = properties.tabs.reduce([]) { partialResult, model in
-            return partialResult + [model.idInt]
+            partialResult + [model.idInt]
         }
 
         UserDefaults.standard.setValue(order, forKey: "DraggableTabBarOrder")
     }
 }
-
 
 // Tab bar button
 struct TabBarButton: View {
@@ -129,7 +130,7 @@ struct TabBarButton: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .foregroundStyle(
-                properties.activeTab == tab.idInt ? .primary : properties.editMode ? . primary : .secondary
+                properties.activeTab == tab.idInt ? .primary : properties.editMode ? .primary : .secondary
             )
             .opacity(properties.movingTab == tab.idInt ? 0 : 1)
             .overlay {
@@ -168,7 +169,8 @@ struct TabBarButton: View {
                                 onChanged: { offset, location in
                                     properties.moveOffset = offset
                                     properties.moveLocation = location
-                                })
+                                }
+                            )
                         )
                 }
             }
@@ -197,6 +199,7 @@ class TabProperties {
         }
         return defaultOrderTabs
     }()
+
     var initialTabLocation: CGRect = .zero
     var movingTab: Int?
     var moveOffset: CGSize = .zero
@@ -207,14 +210,12 @@ class TabProperties {
 private extension View {
     @ViewBuilder
     func hideTabBar() -> some View {
-        self
-            .toolbarVisibility(.hidden, for: .tabBar)
+        toolbarVisibility(.hidden, for: .tabBar)
     }
 
     @ViewBuilder
     func loopingWiggle(_ isEnabled: Bool = false) -> some View {
-        self
-            .symbolEffect(.wiggle.byLayer.counterClockwise, isActive: isEnabled)
+        symbolEffect(.wiggle.byLayer.counterClockwise, isActive: isEnabled)
     }
 }
 

@@ -20,13 +20,11 @@ struct IntroPageItem: Identifiable {
     var extraOffset: CGFloat = -350
 }
 
-
 let introItems: [IntroPageItem] = [
     .init(image: "figure.walk.circle.fill",
           title: "Keep an eye on your workout.",
           description: "Rotating Icon Effect Demo",
-          scale: 1
-         ),
+          scale: 1),
 
     .init(image: "figure.run.circle.fill",
           title: "Maintain your cardio fitness.",
@@ -34,8 +32,7 @@ let introItems: [IntroPageItem] = [
           scale: 0.6,
           anchor: .topLeading,
           offset: -70,
-          rotation: 30
-         ),
+          rotation: 30),
 
     .init(image: "figure.badminton.circle.fill",
           title: "Take a break from work and relax.",
@@ -43,8 +40,7 @@ let introItems: [IntroPageItem] = [
           scale: 0.5,
           anchor: .bottomLeading,
           offset: -60,
-          rotation: -35
-         ),
+          rotation: -35),
 
     .init(image: "figure.climbing.circle.fill",
           title: "Turn climbing into a hobby.",
@@ -53,8 +49,7 @@ let introItems: [IntroPageItem] = [
           anchor: .bottomLeading,
           offset: -50,
           rotation: 160,
-          extraOffset: -120
-         ),
+          extraOffset: -120),
 
     .init(image: "figure.cooldown.circle.fill",
           title: "Cool down after a workout.",
@@ -63,6 +58,5 @@ let introItems: [IntroPageItem] = [
           anchor: .bottomLeading,
           offset: -50,
           rotation: 250,
-          extraOffset: -100
-         )
+          extraOffset: -100),
 ]

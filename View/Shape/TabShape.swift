@@ -15,7 +15,7 @@ struct TabShape: Shape {
     }
 
     func path(in rect: CGRect) -> Path {
-        return Path { path in
+        Path { path in
             /// First drawing a rectangle shape
             path.addPath(Rectangle().path(in: rect))
             /// Now drawing upward curve shape
@@ -39,17 +39,16 @@ struct TabShape: Shape {
 /// Use OffsetKey to calculate the curve of tab
 extension View {
     @ViewBuilder
-    func viewPosition(completion: @escaping (CGRect) -> ()) -> some View {
-        self
-            .overlay {
-                GeometryReader {
-                    let rect = $0.frame(in: .global)
+    func viewPosition(completion: @escaping (CGRect) -> Void) -> some View {
+        overlay {
+            GeometryReader {
+                let rect = $0.frame(in: .global)
 
-                    Color.clear
-                        .preference(key: OffsetKey.self, value: rect)
-                        .onPreferenceChange(OffsetKey.self, perform: completion)
-                }
+                Color.clear
+                    .preference(key: OffsetKey.self, value: rect)
+                    .onPreferenceChange(OffsetKey.self, perform: completion)
             }
+        }
     }
 }
 

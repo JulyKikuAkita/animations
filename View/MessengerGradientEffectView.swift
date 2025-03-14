@@ -27,6 +27,7 @@ struct MessengerGradientEffectView: View {
         }
     }
 }
+
 struct MessageCardView: View {
     var screenProxy: GeometryProxy
     var message: Message
@@ -47,19 +48,20 @@ struct MessageCardView: View {
 
                         Rectangle()
                             .fill(.linearGradient(colors: [
-                                    .pink,
-                                    .pink.opacity(0.8),
-                                    .purple,
-                                    .purple.opacity(0.8),
-                                    .yellow,
-                                    .orange,
-                                    .brown,
-                           ], startPoint: .top, endPoint: .bottom))
+                                .pink,
+                                .pink.opacity(0.8),
+                                .purple,
+                                .purple.opacity(0.8),
+                                .yellow,
+                                .orange,
+                                .brown,
+                            ], startPoint: .top, endPoint: .bottom))
                             .mask(alignment: .topLeading) {
                                 RoundedRectangle(cornerRadius: 15)
                                     .frame(
                                         width: actualSize.width,
-                                        height: actualSize.height)
+                                        height: actualSize.height
+                                    )
                                     .offset(x: rect.minX, y: rect.minY)
                             }
                             .offset(x: -rect.minX, y: -rect.minY)
@@ -78,7 +80,6 @@ struct MessageCardView: View {
                 maxWidth: .infinity,
                 alignment: message.isReply ? .leading : .trailing
             )
-
     }
 }
 

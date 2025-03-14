@@ -12,6 +12,7 @@ struct GridImageDemoView: View {
         }
     }
 }
+
 struct GridImageView: View {
     /// UI Properties
     var coordinator: UICoordinatorPinterestGrid = .init()

@@ -1,5 +1,5 @@
 //
-//  Tab.swift
+//  Tab_iOS17.swift
 //  animation
 
 import SwiftUI
@@ -13,16 +13,16 @@ enum Tab_iOS17: String, CaseIterable {
 
     var title: String {
         switch self {
-        case.photos:
-            return "Photos"
+        case .photos:
+            "Photos"
         case .chat:
-            return "Chat"
+            "Chat"
         case .apps:
-            return "Apps"
+            "Apps"
         case .notifications:
-            return "Notifications"
+            "Notifications"
         case .profile:
-            return "Profile"
+            "Profile"
         }
     }
 
@@ -30,15 +30,15 @@ enum Tab_iOS17: String, CaseIterable {
     var color: Color {
         switch self {
         case .apps:
-                .purple
+            .purple
         case .photos:
-                .pink
+            .pink
         case .chat:
-                .orange
+            .orange
         case .notifications:
-                .green
+            .green
         case .profile:
-                .cyan
+            .cyan
         }
     }
 
@@ -64,21 +64,21 @@ enum VideoTab: String, CaseIterable {
 
     var symbol: String {
         switch self {
-        case.home:
-            return "house.fill"
+        case .home:
+            "house.fill"
         case .shorts:
-            return "video.badge.waveform.fill"
+            "video.badge.waveform.fill"
         case .profile:
-            return "play.square.stack.fill"
+            "play.square.stack.fill"
         case .carousel:
-            return "person.circle.fill"
+            "person.circle.fill"
         case .progress:
-            return "person.2.crop.square.stack.fill"
+            "person.2.crop.square.stack.fill"
         }
     }
 
     var index: Int {
-        return VideoTab.allCases.firstIndex(of: self) ?? 0
+        VideoTab.allCases.firstIndex(of: self) ?? 0
     }
 }
 
@@ -137,5 +137,5 @@ let defaultOrderTabs: [TabModel] = [
     .init(id: .research, idInt: 1, symbolImage: "magnifyingglass"),
     .init(id: .audience, idInt: 2, symbolImage: "bell.fill"),
     .init(id: .development, idInt: 3, symbolImage: "person.2.fill"),
-    .init(id: .privacy, idInt: 4, symbolImage: "gearshape.fill")
+    .init(id: .privacy, idInt: 4, symbolImage: "gearshape.fill"),
 ]

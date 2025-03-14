@@ -37,7 +37,7 @@ struct mailSearchInboxiOS18DemoView: View {
                             .padding(.top, -topInset)
                             .opacity(progress)
                         }
-                        .offset(y: (scrollOffset + topInset) > 0 ? (scrollOffset + topInset) : 0) ///sticky search bar
+                        .offset(y: (scrollOffset + topInset) > 0 ? (scrollOffset + topInset) : 0) /// sticky search bar
                         .zIndex(1000)
 
                     /// demo mail view
@@ -55,18 +55,20 @@ struct mailSearchInboxiOS18DemoView: View {
             .onScrollGeometryChange(
                 for: CGFloat.self,
                 of: { $0.contentOffset.y
-                }, action: { oldValue, newValue in
+                }, action: { _, newValue in
                     scrollOffset = newValue
-                })
+                }
+            )
             .onScrollGeometryChange(
                 for: CGFloat.self,
                 of: { $0.contentInsets.top
-                }, action: { oldValue, newValue in
+                }, action: { _, newValue in
                     if startTopInset == .zero {
                         startTopInset = newValue
                     }
                     topInset = newValue
-                })
+                }
+            )
             .navigationTitle("All Inboxes")
             .searchable(
                 text: $searchText,
@@ -82,10 +84,10 @@ struct InboxTabBar: View {
     @Binding var activeTab: InboxTabModel
     @Environment(\.colorScheme) private var scheme
     var body: some View {
-        GeometryReader {  _  in
+        GeometryReader { _ in
             HStack(spacing: 8) {
                 HStack(spacing: activeTab == .allMails ? -15 : 8) {
-                    ForEach(InboxTabModel.allCases.filter({ $0 != .allMails }), id: \.rawValue) { tab in
+                    ForEach(InboxTabModel.allCases.filter { $0 != .allMails }, id: \.rawValue) { tab in
                         ResizableTabButton(tab)
                     }
                 }

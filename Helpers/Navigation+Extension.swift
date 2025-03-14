@@ -9,8 +9,7 @@ import SwiftUI
 extension View {
     @ViewBuilder
     func hideNavBarOnSwipe(_ isHidden: Bool) -> some View {
-        self
-            .modifier(NavBarModifier(isHidden: isHidden))
+        modifier(NavBarModifier(isHidden: isHidden))
     }
 }
 
@@ -19,9 +18,9 @@ private struct NavBarModifier: ViewModifier {
     @State private var isNavBarHidden: Bool?
     func body(content: Content) -> some View {
         content
-            .onChange(of: isHidden, initial: true, { oldValue, newValue in
+            .onChange(of: isHidden, initial: true) { _, newValue in
                 isNavBarHidden = newValue
-            })
+            }
             .onDisappear(perform: {
                 isNavBarHidden = nil // set variable to nil to force view update when appears
             })
@@ -34,15 +33,16 @@ private struct NavBarModifier: ViewModifier {
 /// Extracting UINavigationController from SwiftUI View
 private struct NavigationControllerExtractor: UIViewRepresentable {
     var isHidden: Bool?
-    func makeUIView(context: Context) -> some UIView {
-        return UIView()
+    func makeUIView(context _: Context) -> some UIView {
+        UIView()
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {
+    func updateUIView(_ uiView: UIViewType, context _: Context) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             /// extract the associated root UIViewController from the UIView. which will hold a UINavigationController
             if let hostView = uiView.superview?.superview,
-               let parentController = hostView.parentController {
+               let parentController = hostView.parentController
+            {
                 if let isHidden {
                     parentController.navigationController?.hidesBarsOnSwipe = isHidden
                 }
@@ -58,7 +58,7 @@ private extension UIView {
                 .next
         }
         .first { responder in
-            return responder is UIViewController
+            responder is UIViewController
         } as? UIViewController
     }
 }

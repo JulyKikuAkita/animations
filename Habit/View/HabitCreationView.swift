@@ -8,8 +8,8 @@ struct HabitCreationView: View {
     var habit: Habit?
     /// View Properties
     @State private var habitName: String = ""
-    @State private var frequencies:  [HabitFrequency] = []
-    @State private var notificationDate: Date = Date()
+    @State private var frequencies: [HabitFrequency] = []
+    @State private var notificationDate: Date = .init()
     @State private var enableNotifications: Bool = false
     @State private var isNotificationPermissionGranted: Bool = false
     /// Environment Values
@@ -40,7 +40,6 @@ struct HabitCreationView: View {
                         .applyPaddedBackground(10)
                 }
 
-
                 Text("Notifications")
                     .font(.caption)
                     .foregroundStyle(.gray)
@@ -62,13 +61,11 @@ struct HabitCreationView: View {
             enableNotifications = habit.isNotificationEnabled
             notificationDate = habit.notificationTiming ?? .now
             frequencies = habit.frequencies
-
         }
         .task {
             isNotificationPermissionGranted =
-                (try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge])) ?? false
+                await (try? UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge])) ?? false
         }
-
     }
 
     @ViewBuilder
@@ -95,7 +92,6 @@ struct HabitCreationView: View {
                             }
                         }
                     }
-
             }
         }
     }
@@ -107,7 +103,7 @@ struct HabitCreationView: View {
             .applyPaddedBackground(12)
             .disableWithOpacity(!isNotificationPermissionGranted)
 
-        if enableNotifications && isNotificationPermissionGranted {
+        if enableNotifications, isNotificationPermissionGranted {
             DatePicker("Preferred Reminder Time", selection: $notificationDate, displayedComponents: [.hourAndMinute])
                 .applyPaddedBackground(12)
                 .transition(.blurReplace)
@@ -122,10 +118,10 @@ struct HabitCreationView: View {
 
     @ViewBuilder
     func HabitCreationButton() -> some View {
-        HStack(spacing: 10){
+        HStack(spacing: 10) {
             Button(action: createHabit) {
                 HStack(spacing: 10) {
-                    Text( isNewHabit ? "Create Habit" : "Update Habit")
+                    Text(isNewHabit ? "Create Habit" : "Update Habit")
                     Image(systemName: "checkmark.circle.fill")
                 }
                 .fontWeight(.semibold)
@@ -159,7 +155,6 @@ struct HabitCreationView: View {
         }
     }
 
-
     /// Helpers
     private func createHabit() {
         Task { @MainActor in
@@ -167,7 +162,7 @@ struct HabitCreationView: View {
                 habit.name = habitName
                 cancelNotifications(habit.notificationIDs)
                 if enableNotifications {
-                    let ids = (try? await scheduleNotifications()) ?? []
+                    let ids = await (try? scheduleNotifications()) ?? []
                     habit.notificationTiming = notificationDate
                     habit.notificationIDs = ids
                 } else {
@@ -176,7 +171,7 @@ struct HabitCreationView: View {
                 }
             } else {
                 if enableNotifications {
-                    let notificationIDs = (try? await scheduleNotifications()) ?? []
+                    let notificationIDs = await (try? scheduleNotifications()) ?? []
                     let habit = Habit(
                         name: habitName,
                         frequency: frequencies,
@@ -189,7 +184,6 @@ struct HabitCreationView: View {
                     let habit = Habit(name: habitName, frequency: frequencies)
                     context.insert(habit)
                 }
-
             }
 
             try? context.save()
@@ -227,7 +221,6 @@ struct HabitCreationView: View {
 
                 notificationIDs.append(id)
             }
-
         }
         return notificationIDs
     }
@@ -236,7 +229,7 @@ struct HabitCreationView: View {
         frequencies.isEmpty && habitName.isEmpty
     }
 
-    var isNewHabit: Bool  {
+    var isNewHabit: Bool {
         habit == nil
     }
 }

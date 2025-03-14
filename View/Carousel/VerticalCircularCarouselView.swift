@@ -19,7 +19,8 @@ struct VerticalCircularCarouselView: View {
                                     .offset(x: 150)
                                     .rotationEffect(
                                         .init(degrees: cardRotation(geometryProxy)),
-                                        anchor: .leading)
+                                        anchor: .leading
+                                    )
                                     .offset(x: -100, // push view to trailing side
                                             y: -geometryProxy.frame(in: .scrollView(axis: .vertical)).minY)
                             }
@@ -29,7 +30,7 @@ struct VerticalCircularCarouselView: View {
                 .scrollTargetLayout() // turn scroll view to snap carousel
             }
             // 75 is half of the card height
-            .safeAreaPadding(.vertical, (size.height * 0.5) - 75) //make carousel start at the center point
+            .safeAreaPadding(.vertical, (size.height * 0.5) - 75) // make carousel start at the center point
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned(limitBehavior: .always)) // turn scroll view to snap carousel
 //            .overlay { // testing
@@ -44,7 +45,7 @@ struct VerticalCircularCarouselView: View {
             }
 
             VStack(alignment: .leading, spacing: 12) {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: /*@START_MENU_TOKEN@*/ {}/*@END_MENU_TOKEN@*/, label: {
                     Image(systemName: "arrow.left")
                         .font(.title3.bold())
                         .foregroundStyle(Color.primary)
@@ -85,8 +86,8 @@ struct VerticalCircularCarouselView: View {
                 Spacer(minLength: 0)
 
                 HStack(spacing: 0) {
-                    ForEach(0..<3, id: \.self) { _ in
-                            Text("****")
+                    ForEach(0 ..< 3, id: \.self) { _ in
+                        Text("****")
                         Spacer(minLength: 0)
                     }
 
@@ -116,9 +117,9 @@ struct VerticalCircularCarouselView: View {
         let height = proxy.size.height
 
         let progress = minY / height
-        let showCardRange: Double = 3.0 // change how many card to show in above and below
+        let showCardRange = 3.0 // change how many card to show in above and below
         let angleForEachCard: CGFloat = 50 // your choice of number
-        let cappedProgress = progress < 0 ? min(max(progress, -showCardRange), 0) : max(min(progress, showCardRange), 0)  // [-1, 1]
+        let cappedProgress = progress < 0 ? min(max(progress, -showCardRange), 0) : max(min(progress, showCardRange), 0) // [-1, 1]
 
         return cappedProgress * angleForEachCard
     }

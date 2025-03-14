@@ -15,7 +15,7 @@ struct CircularCarouselSliderView: View {
     var body: some View {
         VStack {
             Picker("", selection: $pickerType) {
-                ForEach(TripPicker.allCases, id:\.rawValue) {
+                ForEach(TripPicker.allCases, id: \.rawValue) {
                     Text($0.rawValue)
                         .tag($0)
                 }
@@ -48,8 +48,7 @@ struct CircularCarouselSliderView: View {
                                 .scrollTransition(.interactive, axis: .horizontal) { view, phase in
                                     view
 //                                    .offset(y: phase.isIdentity && activeID == card.image ? 15 : 0)
-                                      .scaleEffect(phase.isIdentity && activeID == card.image && pickerType == .scaled ? 1.5 : 1, anchor: .bottom) // use activeID to enlarge the center image
-
+                                        .scaleEffect(phase.isIdentity && activeID == card.image && pickerType == .scaled ? 1.5 : 1, anchor: .bottom) // use activeID to enlarge the center image
                                 }
                         }
                     }

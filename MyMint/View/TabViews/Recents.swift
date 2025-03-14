@@ -2,8 +2,8 @@
 //  Recents.swift
 //  MyMint
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct Recents: View {
     @Query(sort: [SortDescriptor(\Transaction.dateAdded, order: .reverse)], animation: .snappy) private var transactions: [Transaction]
@@ -49,7 +49,7 @@ struct Recents: View {
 
                                 /// when using mock data
                                 /// ForEach(mockTransactions.filter({ $0.category == selectedCategory.rawValue }))
-                                ForEach(transactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
+                                ForEach(transactions.filter { $0.category == selectedCategory.rawValue }) { transaction in
                                     NavigationLink(value: transaction) {
                                         MintTransactionCardView(showRule: true, transaction: transaction)
                                     }
@@ -140,7 +140,7 @@ struct Recents: View {
     @ViewBuilder
     func CustomSegmentedControl() -> some View {
         HStack(spacing: 0) {
-            ForEach(MintCategory.allCases, id:\.rawValue) { category in
+            ForEach(MintCategory.allCases, id: \.rawValue) { category in
                 Text(category.rawValue)
                     .hSpacing()
                     .padding(.vertical, 10)
@@ -157,7 +157,6 @@ struct Recents: View {
                             selectedCategory = category
                         }
                     }
-
             }
         }
         .background(.gray.opacity(0.15), in: .capsule)
@@ -170,7 +169,7 @@ struct Recents: View {
         let screenHeight = size.height
 
         let progress = minY / screenHeight
-        let scale = (min(max(progress, 0), 1)) * 0.3
+        let scale = min(max(progress, 0), 1) * 0.3
         return 1 + scale
     }
 

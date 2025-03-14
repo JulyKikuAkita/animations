@@ -24,8 +24,8 @@ class NavigationHelper: NSObject, UIGestureRecognizerDelegate {
     func didInteractivePopGestureChange() {
         if let completeProfess = navController?.transitionCoordinator?.percentComplete,
            let state = navController?.interactivePopGestureRecognizer?.state,
-           navController?.viewControllers.count == 1 /// we want fade in/out animation only on root view /// use SwiftUI Path didn't work as this is UIKit view callback
-        {
+           navController?.viewControllers.count == 1
+        { /// we want fade in/out animation only on root view /// use SwiftUI Path didn't work as this is UIKit view callback
             popProgress = completeProfess
 
             if state == .ended || state == .cancelled {
@@ -40,7 +40,7 @@ class NavigationHelper: NSObject, UIGestureRecognizerDelegate {
     }
 
     /// enable interactive pop gesture even with navigation bar is hidden
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
         navController?.viewControllers.count ?? 0 > 1
     }
 }
@@ -82,6 +82,7 @@ struct InteractiveNavigationGestureDemoView: View {
         .environment(navigationHelper)
     }
 }
+
 struct CustomBottomBar: View {
     @Environment(NavigationHelper.self) private var navigationHelper
     @State private var selectedTab: Tab_iOS17 = .chat
@@ -92,16 +93,15 @@ struct CustomBottomBar: View {
             ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
                 Button {
                     if tab == .apps {
-
                     } else {
                         selectedTab = tab
                     }
-                } label:  {
+                } label: {
                     Image(systemName: tab.rawValue)
                         .font(.title3)
                         .foregroundStyle(selectedTab == tab || tab == .apps ? Color.primary : Color.gray)
-                        .blur(radius:  tab != .apps ? blur : 0)
-                        .scaleEffect( tab == .apps ? 1.5 : 1 - scale)
+                        .blur(radius: tab != .apps ? blur : 0)
+                        .scaleEffect(tab == .apps ? 1.5 : 1 - scale)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
                         .contentShape(.rect)
@@ -110,9 +110,7 @@ struct CustomBottomBar: View {
                 .overlay {
                     ZStack {
                         if tab == .notifications {
-                            Button {
-
-                            } label:  {
+                            Button {} label: {
                                 Image(systemName: "exclamationmark.bubble")
                                     .font(.title3)
                                     .foregroundStyle(Color.primary)
@@ -120,9 +118,7 @@ struct CustomBottomBar: View {
                         }
 
                         if tab == .profile {
-                            Button {
-
-                            } label:  {
+                            Button {} label: {
                                 Image(systemName: "ellipsis")
                                     .font(.title3)
                                     .foregroundStyle(Color.primary)
@@ -131,7 +127,6 @@ struct CustomBottomBar: View {
                     }
                     .opacity(1 - navigationHelper.popProgress)
                 }
-
             }
         }
         .onChange(of: navigationHelper.path) { oldValue, newValue in

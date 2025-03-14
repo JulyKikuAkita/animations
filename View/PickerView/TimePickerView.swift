@@ -3,6 +3,7 @@
 //  animation
 
 import SwiftUI
+
 struct TimePickerDemoView: View {
     @State private var hours: Int = 0
     @State private var minutes: Int = 30
@@ -32,9 +33,9 @@ struct TimePickerView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            CustomView("hours", 0...24, $hours)
-            CustomView("mins", 0...60, $minutes)
-            CustomView("seconds", 0...60, $seconds)
+            CustomView("hours", 0 ... 24, $hours)
+            CustomView("mins", 0 ... 60, $minutes)
+            CustomView("seconds", 0 ... 60, $seconds)
         }
         .offset(x: -25)
         .background {
@@ -47,7 +48,7 @@ struct TimePickerView: View {
     @ViewBuilder
     private func CustomView(_ title: String, _ range: ClosedRange<Int>, _ selection: Binding<Int>) -> some View {
         PickerViewWithoutIndicator(selection: selection) {
-            ForEach(range, id:\.self) { value in
+            ForEach(range, id: \.self) { value in
                 Text("\(value)")
                     .frame(width: 35, alignment: .trailing)
                     .tag(value)
@@ -66,6 +67,7 @@ struct TimePickerView: View {
 #Preview {
     TimePickerDemoView()
 }
+
 /// Helpers
 struct PickerViewWithoutIndicator<Content: View, Selection: Hashable>: View {
     @Binding var selection: Selection
@@ -86,9 +88,9 @@ struct PickerViewWithoutIndicator<Content: View, Selection: Hashable>: View {
     }
 }
 
-fileprivate struct RemovePickerIndicator: UIViewRepresentable {
-    var result: () -> ()
-    func makeUIView(context: Context) -> UIView {
+private struct RemovePickerIndicator: UIViewRepresentable {
+    var result: () -> Void
+    func makeUIView(context _: Context) -> UIView {
         let view = UIView()
         view.backgroundColor = .clear
         DispatchQueue.main.async {
@@ -102,10 +104,10 @@ fileprivate struct RemovePickerIndicator: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {}
+    func updateUIView(_: UIView, context _: Context) {}
 }
 
-fileprivate extension UIView {
+private extension UIView {
     var pickerView: UIPickerView? {
         if let view = superview as? UIPickerView {
             return view

@@ -9,9 +9,9 @@ import SwiftUI
 import VisionKit
 
 struct ScannerView: UIViewControllerRepresentable {
-    var didFinishWithError: (Error) -> ()
-    var didCancel: () -> ()
-    var didFinish: (VNDocumentCameraScan) -> ()
+    var didFinishWithError: (Error) -> Void
+    var didCancel: () -> Void
+    var didFinish: (VNDocumentCameraScan) -> Void
 
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
@@ -23,9 +23,7 @@ struct ScannerView: UIViewControllerRepresentable {
         return controller
     }
 
-    func updateUIViewController(_ uiViewController: VNDocumentCameraViewController, context: Context) {
-
-    }
+    func updateUIViewController(_: VNDocumentCameraViewController, context _: Context) {}
 
     class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
         var parent: ScannerView
@@ -34,17 +32,17 @@ struct ScannerView: UIViewControllerRepresentable {
         }
 
         func documentCameraViewController(
-            _ controller: VNDocumentCameraViewController,
+            _: VNDocumentCameraViewController,
             didFinishWith scan: VNDocumentCameraScan
         ) {
             parent.didFinish(scan)
         }
 
-        func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        func documentCameraViewControllerDidCancel(_: VNDocumentCameraViewController) {
             parent.didCancel()
         }
 
-        func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: any Error) {
+        func documentCameraViewController(_: VNDocumentCameraViewController, didFailWithError error: any Error) {
             parent.didFinishWithError(error)
         }
     }

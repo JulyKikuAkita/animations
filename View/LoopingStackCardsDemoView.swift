@@ -2,8 +2,8 @@
 //  LoopingStackCardsDemoView.swift
 //  animation
 
-
 import SwiftUI
+
 struct LoopingStackCardsDemoView: View {
     var body: some View {
         NavigationStack {
@@ -76,13 +76,13 @@ struct LoopingStack<Content: View>: View {
                         count: count,
                         visibleCardsCount: visibleCardsCount,
                         maxTranslationWidth: maxTranslationWidth,
-                        rotation: $rotation) {
+                        rotation: $rotation
+                    ) {
                         view
                     }
                     .zIndex(zIndex)
                 }
             }
-
         }
     }
 }
@@ -147,7 +147,8 @@ struct LoopingStackCardView<Content: View>: View {
     /// 2. apply rotation effect: update zIndex and reset offset to 0
     private func pushToNextCard() {
         withAnimation(.smooth(duration: 0.25, extraBounce: 0).logicallyComplete(after: 0.15),
-            completionCriteria: .logicallyComplete) {
+                      completionCriteria: .logicallyComplete)
+        {
             offset = -viewSize.width /// step 1
         } completion: {
             rotation += 1
@@ -164,7 +165,7 @@ extension SubviewsCollection {
     func rotateFromLeft(by: Int) -> [SubviewsCollection.Element] {
         guard !isEmpty else { return [] }
         let moveIndex = by % count
-        let rotatedElements = Array(self[moveIndex...]) + Array(self[0..<moveIndex])
+        let rotatedElements = Array(self[moveIndex...]) + Array(self[0 ..< moveIndex])
         return rotatedElements
     }
 }

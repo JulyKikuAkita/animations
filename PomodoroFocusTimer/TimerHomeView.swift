@@ -4,8 +4,8 @@
 // https://pomofocus.io/ -> or Tomato Timer
 // https://www.youtube.com/watch?v=FG6nYxhpAEk
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct TimerHomeView: View {
     /// Customization Properties
@@ -48,17 +48,15 @@ struct TimerHomeView: View {
             .padding(15)
             .environment(\.colorScheme, .light)
             .background(.white, in: .rect(cornerRadius: 10))
-            .onChange(of: pickerTime) { oldValue, newValue in
+            .onChange(of: pickerTime) { _, newValue in
                 flipClockTime = newValue
             }
             .disableWithOpacity(startTimer)
-
 
             TimerButton()
 
             RecentsView()
                 .disableWithOpacity(startTimer)
-
         }
         .padding(15)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -75,18 +73,16 @@ struct TimerHomeView: View {
             } else {
                 timer.upstream.connect().cancel() // cancel due to auto-connect enabled
             }
-
         }
     }
 
     func updateFlipClock() {
         let hours = (timeCountdown / 3600) % 24
         let minutes = (timeCountdown / 60) % 60
-        let seconds = (timeCountdown) % 60
+        let seconds = timeCountdown % 60
 
         flipClockTime = .init(hours: hours, minutes: minutes, seconds: seconds)
     }
-
 
     /// Start/Stop Timer button
     @ViewBuilder
@@ -196,7 +192,6 @@ struct TimerHomeView: View {
             }
             .scrollIndicators(.hidden)
             .padding(.leading, -10)
-
         }
         .padding(.top, 10)
     }
@@ -257,8 +252,7 @@ extension View {
     /// Disable view with opacity
     @ViewBuilder
     func disableWithOpacity(_ condition: Bool) -> some View {
-        self
-            .disabled(condition)
+        disabled(condition)
             .opacity(condition ? 0.5 : 1)
             .animation(.easeInOut(duration: 0.3), value: condition)
     }

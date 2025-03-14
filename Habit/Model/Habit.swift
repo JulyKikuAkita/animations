@@ -2,8 +2,8 @@
 //  Habit.swift
 //  Habit
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @Model
 class Habit {
@@ -21,7 +21,7 @@ class Habit {
 
     init(name: String, frequency: [HabitFrequency], notificationIDs: [String] = [], notificationTiming: Date? = nil) {
         self.name = name
-        self.frequencies = frequency
+        frequencies = frequency
         self.notificationIDs = notificationIDs
         self.notificationTiming = notificationTiming
     }

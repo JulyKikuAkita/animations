@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-//@main
+// @main
 struct DynamicSheetApp: App {
     var body: some Scene {
         WindowGroup {
@@ -12,7 +12,6 @@ struct DynamicSheetApp: App {
         }
     }
 }
-
 
 struct DynamicSheetDemoView: View {
     var body: some View {
@@ -56,85 +55,87 @@ struct DynamicSheetView: View {
             sheetSecondPageHeight = .zero
             sheetScrollProgress = .zero
         }, content: {
-                /// Sheet View
-                GeometryReader(content: { geometry in
-                    let size = geometry.size
-                    ScrollViewReader(content: { proxy in
-                        ScrollView(.horizontal) {
-                            HStack(alignment: .top, spacing: 0) {
-                                OnBoardingView(size)
-                                    .id("First Page")
+            /// Sheet View
+            GeometryReader(content: { geometry in
+                let size = geometry.size
+                ScrollViewReader(content: { proxy in
+                    ScrollView(.horizontal) {
+                        HStack(alignment: .top, spacing: 0) {
+                            OnBoardingView(size)
+                                .id("First Page")
 
-                                LoginView(size)
-                                    .id("Second Page")
-                            }
-                            /// required for paging scrollview
-                            .scrollTargetLayout()
+                            LoginView(size)
+                                .id("Second Page")
                         }
-                        .scrollTargetBehavior(.paging)
-                        .scrollIndicators(.hidden)
-                        /// Disabling scroll view when keyboard is active
-                        .scrollDisabled(isKeyboardShowing)
-                        .overlay(alignment: .topTrailing) {
-                            Button(action: {
-                                if sheetScrollProgress < 1 {
-                                    withAnimation(.snappy) {
-                                        proxy.scrollTo("Second Page", anchor: .leading)
-                                    }
-                                } else {
-                                    /// implementation for continue button
-    //                                withAnimation(.snappy) {
-    //                                    showSheet.toggle()
-    //                                }
+                        /// required for paging scrollview
+                        .scrollTargetLayout()
+                    }
+                    .scrollTargetBehavior(.paging)
+                    .scrollIndicators(.hidden)
+                    /// Disabling scroll view when keyboard is active
+                    .scrollDisabled(isKeyboardShowing)
+                    .overlay(alignment: .topTrailing) {
+                        Button(action: {
+                            if sheetScrollProgress < 1 {
+                                withAnimation(.snappy) {
+                                    proxy.scrollTo("Second Page", anchor: .leading)
                                 }
-                            }, label: {
-                                Text("Continue")
+                            } else {
+                                /// implementation for continue button
+                                //                                withAnimation(.snappy) {
+                                //                                    showSheet.toggle()
+                                //                                }
+                            }
+                        }, label: {
+                            Text("Continue")
+                                .fontWeight(.semibold)
+                                .opacity(1 - sheetScrollProgress)
+                                /// adding extra width for 2nd bottom sheet
+                                .frame(width: 120 + (sheetScrollProgress * (hasAccount ? -10 : 50)))
+                                .overlay(content: {
+                                    /// Next page text
+                                    HStack(spacing: 8) {
+                                        Text(hasAccount ? "Login" : "Get Started")
+
+                                        Image(systemName: "arrow.right")
+                                    }
                                     .fontWeight(.semibold)
-                                    .opacity(1 - sheetScrollProgress)
-                                    /// adding extra width for 2nd bottom sheet
-                                    .frame(width: 120 + (sheetScrollProgress * ( hasAccount ? -10 : 50)))
-                                    .overlay(content: {
-                                        /// Next page text
-                                        HStack(spacing: 8) {
-                                            Text(hasAccount ? "Login" : "Get Started")
+                                    .opacity(sheetScrollProgress)
+                                })
+                                .padding(.vertical, 12)
+                                .foregroundStyle(.white)
+                                .background(
+                                    .linearGradient(
+                                        colors: [.red, .orange],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ), in: .capsule
+                                )
+                        })
+                        .padding(15)
+                        .offset(y: sheetHeight - 100)
+                        /// Moving button near to the next view
+                        .offset(y: sheetScrollProgress * -120) /// Sec view height 220 - first view height 100
+                    }
+                })
 
-                                            Image(systemName: "arrow.right")
-                                        }
-                                        .fontWeight(.semibold)
-                                        .opacity(sheetScrollProgress)
-                                    })
-                                    .padding(.vertical, 12)
-                                    .foregroundStyle(.white)
-                                    .background(
-                                        .linearGradient(
-                                            colors: [.red, .orange],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing), in: .capsule)
-                            })
-                            .padding(15)
-                            .offset(y: sheetHeight - 100)
-                            /// Moving button near to the next view
-                            .offset(y: sheetScrollProgress * -120) /// Sec view height 220 - first view height 100
-                        }
-                    })
-
-                })
-                /// Custom Presentation update
-                .presentationCornerRadius(30)
-                .presentationDetents(
-                    sheetHeight == .zero ? [.medium] : [.height(sheetHeight)]
-                )
-                   /// disabling swipe to dismiss
-                .interactiveDismissDisabled()
-                .onReceive( NotificationCenter.default.publisher(for:
-                    UIResponder.keyboardWillShowNotification), perform: { _ in
-                        isKeyboardShowing = true
-                })
-                .onReceive( NotificationCenter.default.publisher(for:
-                    UIResponder.keyboardWillHideNotification), perform: { _ in
-                        isKeyboardShowing = false
-                })
             })
+            /// Custom Presentation update
+            .presentationCornerRadius(30)
+            .presentationDetents(
+                sheetHeight == .zero ? [.medium] : [.height(sheetHeight)]
+            )
+            /// disabling swipe to dismiss
+            .interactiveDismissDisabled()
+            .onReceive(NotificationCenter.default.publisher(for:
+                UIResponder.keyboardWillShowNotification), perform: { _ in
+                isKeyboardShowing = true
+            })
+            .onReceive(NotificationCenter.default.publisher(for:
+                UIResponder.keyboardWillHideNotification), perform: { _ in
+                isKeyboardShowing = false
+            })
+        })
     }
 
     /// First View for Sheet
@@ -190,7 +191,7 @@ struct DynamicSheetView: View {
                 icon: "lock",
                 isPasswordField: true
             )
-                .padding(.top, 20)
+            .padding(.top, 20)
         }
         .padding(15)
         .padding(.horizontal, 10)
@@ -232,9 +233,9 @@ struct DynamicSheetView: View {
                 if !hasAccount {
                     Text("By signing up, you're agreeing to out **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)**")
                         .font(.caption)
-                    /// Markup content will be red
+                        /// Markup content will be red
                         .tint(.red)
-                    /// Other text be gray
+                        /// Other text be gray
                         .foregroundStyle(.gray)
                         .transition(.offset(y: 100))
                 }

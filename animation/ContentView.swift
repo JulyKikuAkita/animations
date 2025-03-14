@@ -50,7 +50,7 @@ struct HorizontalSplashTransition: Transition {
         content
             .rotation3DEffect(
                 .init(degrees: phase.isIdentity ? 0 : isSplash ? -70 : 70),
-                axis: (x: 0, y: 1, z:0),
+                axis: (x: 0, y: 1, z: 0),
                 anchor: isSplash ? .trailing : .leading
             )
             .offset(x: phase.isIdentity ? 0 : isSplash ? -screenSize.width : screenSize.width)

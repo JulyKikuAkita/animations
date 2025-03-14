@@ -2,9 +2,10 @@
 //  Graphs.swift
 //  MyMint
 
-import SwiftUI
-import SwiftData
 import Charts
+import SwiftData
+import SwiftUI
+
 // https://www.youtube.com/watch?v=qQ3NGkv8O8c&list=PLimqJDzPI-H88PbxlOtNPkD0n0n-q-__z&index=8
 // TODO: widget: 13:31
 struct Graphs: View {
@@ -37,8 +38,6 @@ struct Graphs: View {
                         .padding(10)
                         .padding(.top, 10)
                         .background(.background, in: .rect(cornerRadius: 10))
-
-
 
                     ForEach(chartGroups) { group in
                         VStack(alignment: .leading, spacing: 10) {
@@ -122,32 +121,32 @@ struct Graphs: View {
             let chartGroups = sortedGroup.compactMap { dict -> ChartGroup? in
                 let date = calendar.date(from: dict.key) ?? .init()
                 /// category
-                let income = dict.value.filter({ $0.category == MintCategory.income.rawValue})
-                let expense = dict.value.filter({ $0.category == MintCategory.expense.rawValue})
+                let income = dict.value.filter { $0.category == MintCategory.income.rawValue }
+                let expense = dict.value.filter { $0.category == MintCategory.expense.rawValue }
 
                 let incomeTotalValue = total(income, category: .income)
                 let expenseTotalValue = total(expense, category: .expense)
 
                 /// rule
-                let need = dict.value.filter({ $0.rule == MintRule.need.rawValue})
-                let want = dict.value.filter({ $0.rule == MintRule.want.rawValue})
-                let save = dict.value.filter({ $0.rule == MintRule.save.rawValue})
+                let need = dict.value.filter { $0.rule == MintRule.need.rawValue }
+                let want = dict.value.filter { $0.rule == MintRule.want.rawValue }
+                let save = dict.value.filter { $0.rule == MintRule.save.rawValue }
 
-                let  totalNeed = total(need, rule: .need)
-                let  totalWant = total(want, rule: .want)
-                let  totalSave = total(save, rule: .save)
+                let totalNeed = total(need, rule: .need)
+                let totalWant = total(want, rule: .want)
+                let totalSave = total(save, rule: .save)
                 return .init(
                     date: date,
                     categories: [
                         .init(totalValue: incomeTotalValue, category: .income),
-                        .init(totalValue: expenseTotalValue, category: .expense)
+                        .init(totalValue: expenseTotalValue, category: .expense),
                     ],
                     totalIncome: incomeTotalValue,
                     totalExpense: expenseTotalValue,
                     rule: [
                         .init(totalValue: totalNeed, rule: .need),
                         .init(totalValue: totalWant, rule: .want),
-                        .init(totalValue: totalSave, rule: .save)
+                        .init(totalValue: totalSave, rule: .save),
                     ],
                     totalNeed: totalNeed,
                     totalWant: totalWant,
@@ -174,13 +173,13 @@ struct Graphs: View {
         Chart {
             ForEach(chartGroups) { group in
                 ForEach(group.categories) { rule in
-                        SectorMark(
-                            angle: .value(rule.category.rawValue, rule.totalValue),
-                            innerRadius: .ratio(0),
-                            outerRadius: .ratio(1.0)
-                        )
-                        .foregroundStyle(by: .value("Category", colorBarMark(for: group, ruleValue: rule.totalValue)))
-                    }
+                    SectorMark(
+                        angle: .value(rule.category.rawValue, rule.totalValue),
+                        innerRadius: .ratio(0),
+                        outerRadius: .ratio(1.0)
+                    )
+                    .foregroundStyle(by: .value("Category", colorBarMark(for: group, ruleValue: rule.totalValue)))
+                }
             }
         }
         /// Marking chart scrollable
@@ -191,18 +190,18 @@ struct Graphs: View {
             Color.orange.gradient,
             Color.blue.gradient,
             Color.brown.gradient,
-            Color.pink.gradient])
+            Color.pink.gradient,
+        ])
     }
 
     func colorBarMark(for data: ChartGroup, ruleValue: Double) -> Double {
         let categoryTotal = data.totalExpense + data.totalIncome
         let ruleTotal = data.totalNeed + data.totalWant + data.totalSave
-        guard categoryTotal ==  ruleTotal else { return 0.0 }
+        guard categoryTotal == ruleTotal else { return 0.0 }
         let proportion = ruleValue / ruleTotal
         return proportion
     }
 }
-
 
 struct ListOfExpenses: View {
     var month: Date
@@ -252,6 +251,7 @@ struct ListOfExpenses: View {
         .navigationTitle(format(date: month, format: "MMM yy"))
     }
 }
+
 #Preview {
     Graphs()
 }

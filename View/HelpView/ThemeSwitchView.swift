@@ -10,7 +10,7 @@ struct ThemeSwitchDemoView: View {
 
     var body: some View {
         NavigationStack {
-            List{
+            List {
                 Section("Appearance") {
                     Button("Change Theme") {
                         changeTheme.toggle()
@@ -27,6 +27,7 @@ struct ThemeSwitchDemoView: View {
         })
     }
 }
+
 struct ThemeSwitchView: View {
     // @Environment(\.colorScheme) private var scheme // didn't work in sheet
     var scheme: ColorScheme
@@ -40,11 +41,12 @@ struct ThemeSwitchView: View {
     ) {
         self.scheme = scheme
         let isDark = scheme == .dark
-        self._circleOffset = .init(
+        _circleOffset = .init(
             initialValue: CGSize(width: isDark ? 30 : 150,
-                                 height: isDark ? -25: -150)
+                                 height: isDark ? -25 : -150)
         )
     }
+
     var body: some View {
         VStack(spacing: 15) {
             Circle()
@@ -71,7 +73,7 @@ struct ThemeSwitchView: View {
 
             /// Segment picker
             HStack(spacing: 0) {
-                ForEach(Theme.allCases, id:\.rawValue) { theme in
+                ForEach(Theme.allCases, id: \.rawValue) { theme in
                     Text(theme.rawValue)
                         .padding(.vertical, 15)
                         .frame(width: 100)
@@ -104,8 +106,8 @@ struct ThemeSwitchView: View {
         .onChange(of: scheme, initial: false) { _, newValue in
             let isDark = newValue == .dark
             withAnimation(.bouncy) {
-                circleOffset =  CGSize(width: isDark ? 30 : 150,
-                                       height: isDark ? -25: -150)
+                circleOffset = CGSize(width: isDark ? 30 : 150,
+                                      height: isDark ? -25 : -150)
             }
         }
     }
@@ -123,33 +125,33 @@ enum Theme: String, CaseIterable {
     func color(_ scheme: ColorScheme) -> Color {
         switch self {
         case .systemDefault:
-            return scheme == .dark ? .purple : .orange
+            scheme == .dark ? .purple : .orange
         case .light:
-            return .orange
+            .orange
         case .dark:
-            return .purple
+            .purple
         }
     }
 
     func backgroundColor(_ scheme: ColorScheme) -> Color {
         switch self {
         case .systemDefault:
-            return scheme == .dark ? .gray.opacity(0.7) : .gray.opacity(0.1)
+            scheme == .dark ? .gray.opacity(0.7) : .gray.opacity(0.1)
         case .light:
-            return .white
+            .white
         case .dark:
-            return .brown
+            .brown
         }
     }
 
     var colorScheme: ColorScheme? {
         switch self {
         case .systemDefault:
-            return nil
+            nil
         case .light:
-            return .light
+            .light
         case .dark:
-            return .dark
+            .dark
         }
     }
 }

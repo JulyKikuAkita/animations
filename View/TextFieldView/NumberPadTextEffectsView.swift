@@ -18,7 +18,7 @@ struct KeypadValue {
 
     mutating func append(_ number: Int) {
         /// do not start with number 0 first or not exceed max number length
-        guard !isExceedMaxLength && ( number == 0 ? !stringValue.isEmpty : true) else { return }
+        guard !isExceedMaxLength, number == 0 ? !stringValue.isEmpty : true else { return }
         stringValue.append(String(number))
         stackViews.append(.init(value: String(number)))
         updateCommas()
@@ -61,7 +61,6 @@ struct KeypadValue {
             }
         }
     }
-
 
     var isEmpty: Bool {
         stringValue.isEmpty
@@ -116,6 +115,7 @@ struct NumberPadTextEffectsViewDemoView: View {
         .padding(15)
         .preferredColorScheme(.dark)
     }
+
     @ViewBuilder
     func AnimatedNumberTextView() -> some View {
         HStack(spacing: 2) {
@@ -146,7 +146,7 @@ struct NumberPadTextEffectsViewDemoView: View {
     @ViewBuilder
     func CustomNumberKeypad() -> some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3)) {
-            ForEach(1...9, id: \.self) { index in
+            ForEach(1 ... 9, id: \.self) { index in
                 Button {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         value.append(index)
@@ -157,7 +157,6 @@ struct NumberPadTextEffectsViewDemoView: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 70)
                         .contentShape(.rect)
-
                 }
             }
 
@@ -204,7 +203,7 @@ struct KeypadButtonStyle: ButtonStyle {
             .background {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(.gray.opacity(0.2))
-                    .opacity(configuration.isPressed ? 1: 0)
+                    .opacity(configuration.isPressed ? 1 : 0)
                     .padding(.horizontal, 5)
             }
             .animation(.easeInOut(duration: 0.25), value: configuration.isPressed)

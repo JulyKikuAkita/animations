@@ -8,7 +8,7 @@
 //
 import SwiftUI
 
-//@main
+// @main
 struct APNSDemoAPNSDemoView: App {
     @UIApplicationDelegateAdaptor(AppData.self) private var appData
     var body: some Scene {
@@ -29,17 +29,17 @@ struct APNSDemoAPNSDemoView: App {
 class AppData: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var mainPageNavigationPath: [String] = []
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         UNUserNotificationCenter.current().delegate = self
         return true
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+    func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification) async -> UNNotificationPresentationOptions {
         /// showing alert even when app is active
-        return [.sound, .banner]
+        [.sound, .banner]
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+    func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         if let pageLink = response.notification.request.content.userInfo["pageLink"] as? String {
             /// Use navigation link to route notification link
 //            if mainPageNavigationPath.last != pageLink {
@@ -51,7 +51,6 @@ class AppData: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate
             /// Use deep link  to route notification link
             guard let url = URL(string: pageLink) else { return }
             UIApplication.shared.open(url, options: [:]) { _ in
-
             }
         }
     }
@@ -69,13 +68,13 @@ struct APNSDemoView: View {
             }
             .navigationTitle("Notification Deep Link")
             .navigationDestination(for: String.self) { value in
-                    Text("Hello from \(value)")
-                        .navigationTitle(value)
+                Text("Hello from \(value)")
+                    .navigationTitle(value)
             }
         }
         .task {
             /// Notification Permission
-            let _ = try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
+            _ = try? await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
         }
     }
 }

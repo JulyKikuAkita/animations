@@ -30,7 +30,7 @@ struct InfiniteScrollHelper: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIViewType, context: Context) {
+    func updateUIView(_: UIViewType, context: Context) {
         context.coordinator.declarationRate = declarationRate
         context.coordinator.contentSize = contentSize
     }
@@ -42,7 +42,6 @@ struct InfiniteScrollHelper: UIViewRepresentable {
         init(declarationRate: UIScrollView.DecelerationRate, contentSize: CGSize) {
             self.contentSize = contentSize
             self.declarationRate = declarationRate
-
         }
 
         /// Storing Default SwiftUI Delegate

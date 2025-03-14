@@ -10,7 +10,7 @@ import SwiftUI
 struct MiniPlayerView: View {
     var size: CGSize
     @Binding var config: PlayerConfig
-    var close: () -> ()
+    var close: () -> Void
     /// Player configuration
     let playerHeight: CGFloat = 200
     let miniPlayerHeight: CGFloat = 50
@@ -22,85 +22,83 @@ struct MiniPlayerView: View {
         /// resize after drag to 0.7 position
         let progress = config.progress > 0.7 ? (config.progress - 0.7) / 0.3 : 0
 
-            VStack(spacing: 0) {
-                ZStack(alignment: .top) {
-                    GeometryReader {
-                        let size = $0.size
-                        let width = size.width - 120
-                        let height = size.height
+        VStack(spacing: 0) {
+            ZStack(alignment: .top) {
+                GeometryReader {
+                    let size = $0.size
+                    let width = size.width - 120
+                    let height = size.height
 
-                        VideoPlayerView()
-                            .frame( // 120 is mini-player width
-                                width: 120 + (width - (width * progress)),
-                                height: height
-                            )
-
-                    }
-                    .zIndex(1)
-
-                    PlayerMinifiedContentView()
-                        .padding(.leading, 130)
-                        .padding(.trailing, 15)
-                        .foregroundStyle(Color.primary)
-                        .opacity(progress)
+                    VideoPlayerView()
+                        .frame( // 120 is mini-player width
+                            width: 120 + (width - (width * progress)),
+                            height: height
+                        )
                 }
-                .frame(minHeight: miniPlayerHeight, maxHeight: playerHeight)
                 .zIndex(1)
 
-                ScrollView(.vertical) {
-                    if let playerItem = config.selectedPlayerItem {
-                        PlayerExpandedContentView(playerItem)
-                    }
-                }
-                .opacity(1.0 - (config.progress * 1.6)) // faster fade-out when drag down
+                PlayerMinifiedContentView()
+                    .padding(.leading, 130)
+                    .padding(.trailing, 15)
+                    .foregroundStyle(Color.primary)
+                    .opacity(progress)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .background()
-            .clipped()
-            .contentShape(.rect)
-            .offset(y: config.progress * -tabBarHeight)
-            .frame(height: size.height + 25 - config.position, alignment: .top) // 20 is the curved tab bar height
-            .frame(maxHeight: .infinity, alignment: .bottom)
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        let start = value.startLocation.y
-                        // set scroll range for the expanded player view
-                        guard start < playerHeight || start > (size.height - (tabBarHeight + miniPlayerHeight)) else { return }
+            .frame(minHeight: miniPlayerHeight, maxHeight: playerHeight)
+            .zIndex(1)
 
-                        let height = config.lastPosition + value.translation.height
-                        // stop animation when miniplayer view at miniPlayerHeight
-                        config.position = min(height, (size.height - miniPlayerHeight))
-                        generateProgress()
-                    }.onEnded { value in
-                        let start = value.startLocation.y
-                        // set scroll range for the expanded player view
-                        guard start < playerHeight || start > (size.height - (tabBarHeight + miniPlayerHeight)) else { return }
+            ScrollView(.vertical) {
+                if let playerItem = config.selectedPlayerItem {
+                    PlayerExpandedContentView(playerItem)
+                }
+            }
+            .opacity(1.0 - (config.progress * 1.6)) // faster fade-out when drag down
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background()
+        .clipped()
+        .contentShape(.rect)
+        .offset(y: config.progress * -tabBarHeight)
+        .frame(height: size.height + 25 - config.position, alignment: .top) // 20 is the curved tab bar height
+        .frame(maxHeight: .infinity, alignment: .bottom)
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    let start = value.startLocation.y
+                    // set scroll range for the expanded player view
+                    guard start < playerHeight || start > (size.height - (tabBarHeight + miniPlayerHeight)) else { return }
 
-                        let velocity = value.velocity.height * 5
-                        withAnimation(.smooth(duration: 0.3)) {
-                            if (config.position + velocity) > (size.height * 0.65) {
-                                config.position = (size.height - miniPlayerHeight)
-                                config.lastPosition = config.position
-                                config.progress = 1
-                            } else {
-                                config.resetPosition()
-                            }
+                    let height = config.lastPosition + value.translation.height
+                    // stop animation when miniplayer view at miniPlayerHeight
+                    config.position = min(height, size.height - miniPlayerHeight)
+                    generateProgress()
+                }.onEnded { value in
+                    let start = value.startLocation.y
+                    // set scroll range for the expanded player view
+                    guard start < playerHeight || start > (size.height - (tabBarHeight + miniPlayerHeight)) else { return }
 
-                        }
-                    }.simultaneously(with: TapGesture().onEnded { _ in
-                        withAnimation(.smooth(duration: 0.3)) {
+                    let velocity = value.velocity.height * 5
+                    withAnimation(.smooth(duration: 0.3)) {
+                        if (config.position + velocity) > (size.height * 0.65) {
+                            config.position = (size.height - miniPlayerHeight)
+                            config.lastPosition = config.position
+                            config.progress = 1
+                        } else {
                             config.resetPosition()
                         }
-                    })
-            )
-            /// miniplayer Sliding In/Out
-            .transition(.offset(y: config.progress == 1 ? tabBarHeight :  size.height))
-            .onChange(of: config.selectedPlayerItem, initial: false) { oldValue, newValue in
-                withAnimation(.smooth(duration: 0.3)) {
-                    config.resetPosition()
-                }
+                    }
+                }.simultaneously(with: TapGesture().onEnded { _ in
+                    withAnimation(.smooth(duration: 0.3)) {
+                        config.resetPosition()
+                    }
+                })
+        )
+        /// miniplayer Sliding In/Out
+        .transition(.offset(y: config.progress == 1 ? tabBarHeight : size.height))
+        .onChange(of: config.selectedPlayerItem, initial: false) { _, _ in
+            withAnimation(.smooth(duration: 0.3)) {
+                config.resetPosition()
             }
+        }
     }
 
     /// Video Player View
@@ -180,8 +178,6 @@ struct MiniPlayerView: View {
         let progress = max(min(config.position / (size.height - miniPlayerHeight), 1.0), .zero)
         config.progress = progress
     }
-
-
 }
 
 #Preview {

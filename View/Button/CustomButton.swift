@@ -129,7 +129,7 @@ struct OpacityLessButtonStyle: ButtonStyle {
 }
 
 /// Wiggle Extension
- extension View {
+extension View {
     @ViewBuilder
     func wiggle(_ animate: Bool) -> some View {
         keyframeAnimator(initialValue: CGFloat.zero, trigger: animate) { view, value in
@@ -148,8 +148,7 @@ struct OpacityLessButtonStyle: ButtonStyle {
             }
         }
     }
- }
-
+}
 
 #Preview {
     DemoButtonView()

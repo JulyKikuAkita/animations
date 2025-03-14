@@ -12,8 +12,8 @@ struct TitleTextRenderer: TextRenderer, Animatable {
     }
 
     func draw(layout: Text.Layout, in ctx: inout GraphicsContext) {
-        let allLines = layout.flatMap({ $0 })
-        let allChars = allLines.flatMap({ $0 }) /// get all chars in the line
+        let allLines = layout.flatMap(\.self)
+        let allChars = allLines.flatMap(\.self) /// get all chars in the line
 
         for (index, char) in allChars.enumerated() {
             let sliceProcessIndex = CGFloat(allChars.count) * progress

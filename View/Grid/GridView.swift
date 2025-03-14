@@ -18,40 +18,38 @@ struct GridView: View {
                 LazyVGrid(columns: columns, spacing: 10, content: {
                     ForEach(colors, id: \.self) { color in
                         GeometryReader {
-                            let _ = $0.size
+                            _ = $0.size
 
                             RoundedRectangle(cornerRadius: 10)
-                            .fill(color.gradient)
-
-                            /// Drag
-                            .draggable(color) { // any object conforms to Transferable protocol (DATA, string, image)
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(.ultraThinMaterial)
-                                    .frame(width: 1, height: 1)
-                                    .onAppear {
-                                        /// set source view item
-                                        draggingItem = color
-                                    }
-                            }
-                            /// Drop
-                            .dropDestination(for: Color.self) { items, location in
-                                draggingItem = nil
-                                return false
-                            } isTargeted: { status in
-                                if let draggingItem, status, draggingItem != color {
-                                    if let sourceIndex = colors.firstIndex(of: draggingItem),
-                                    let destinationIndex = colors.firstIndex(of: color) {
-                                        withAnimation(.bouncy) {
-                                            let sourceItem = colors.remove(at: sourceIndex)
-                                            colors.insert(sourceItem, at: destinationIndex)
+                                .fill(color.gradient)
+                                /// Drag
+                                .draggable(color) { // any object conforms to Transferable protocol (DATA, string, image)
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(.ultraThinMaterial)
+                                        .frame(width: 1, height: 1)
+                                        .onAppear {
+                                            /// set source view item
+                                            draggingItem = color
+                                        }
+                                }
+                                /// Drop
+                                .dropDestination(for: Color.self) { _, _ in
+                                    draggingItem = nil
+                                    return false
+                                } isTargeted: { status in
+                                    if let draggingItem, status, draggingItem != color {
+                                        if let sourceIndex = colors.firstIndex(of: draggingItem),
+                                           let destinationIndex = colors.firstIndex(of: color)
+                                        {
+                                            withAnimation(.bouncy) {
+                                                let sourceItem = colors.remove(at: sourceIndex)
+                                                colors.insert(sourceItem, at: destinationIndex)
+                                            }
                                         }
                                     }
                                 }
-                            }
-
                         }
                         .frame(height: 100)
-
                     }
                 })
                 .padding(15)

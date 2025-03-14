@@ -15,11 +15,11 @@ struct PSHeaderView: View {
             Group {
                 if #available(iOS 18, *) {
                     TabView(selection: $activeTab) {
-                        SwiftUI.Tab.init(value: .chat) {
+                        SwiftUI.Tab(value: .chat) {
                             Text("Chat")
                         }
 
-                        SwiftUI.Tab.init(value: .friends) {
+                        SwiftUI.Tab(value: .friends) {
                             Text("Friends")
                         }
                     }

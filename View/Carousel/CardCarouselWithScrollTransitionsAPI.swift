@@ -60,9 +60,8 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
                         .scrollTransition(.interactive, axis: .horizontal) { content, phase in
                             content
                                 .blur(radius: phase == .identity ? 0 : 2, opaque: false)
-                                .scaleEffect(phase == .identity ? 1: 0.9, anchor: .bottom)
+                                .scaleEffect(phase == .identity ? 1 : 0.9, anchor: .bottom)
                         }
-
                 }
             }
             .scrollTargetLayout()
@@ -88,18 +87,17 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
                         .scrollTransition(.interactive, axis: .horizontal) { content, phase in
                             content
                                 .blur(radius: phase == .identity ? 0 : 2, opaque: false)
-                                .scaleEffect(phase == .identity ? 1: 0.9, anchor: .bottom)
+                                .scaleEffect(phase == .identity ? 1 : 0.9, anchor: .bottom)
                                 .offset(y: phase == .identity ? 0 : 35)
                                 .rotationEffect(.init(degrees: phase == .identity ? 0 : phase.value * 15), anchor: .bottom)
                         }
-
                 }
             }
             .scrollTargetLayout()
         }
         .scrollClipDisabled()
         .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
-        .safeAreaPadding(.horizontal, (size.width - 220) / 2 )
+        .safeAreaPadding(.horizontal, (size.width - 220) / 2)
         .scrollIndicators(.hidden)
     }
 }
@@ -131,7 +129,7 @@ struct StackCardCarouselView: View {
                                     .scrollTransition(.interactive, axis: .horizontal) { content, phase in
                                         content
                                             .blur(radius: phase == .identity ? 0 : 2, opaque: false)
-                                            .scaleEffect(phase == .identity ? 1: 0.9, anchor: .bottom)
+                                            .scaleEffect(phase == .identity ? 1 : 0.9, anchor: .bottom)
                                             .offset(y: phase == .identity ? 0 : -10)
                                             .rotationEffect(.init(degrees: phase == .identity ? 0 : phase.value * 5), anchor: .bottomTrailing)
                                             .offset(x: minX < 0 ? minX / 2 : -minX)

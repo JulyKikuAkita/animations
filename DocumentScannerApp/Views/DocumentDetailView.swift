@@ -2,9 +2,9 @@
 //  DocumentDetailView.swift
 //  DocumentScannerApp
 
-import SwiftUI
-import PDFKit
 import LocalAuthentication
+import PDFKit
+import SwiftUI
 
 struct DocumentDetailView: View {
     /// View Properties
@@ -26,7 +26,6 @@ struct DocumentDetailView: View {
     var body: some View {
         if let pages = document.pages?.sorted(by: { $0.pageIndex < $1.pageIndex }) {
             VStack(spacing: 10) {
-
                 HeaderView()
                     .padding([.horizontal, .top], 15)
 
@@ -51,7 +50,7 @@ struct DocumentDetailView: View {
                 LockView()
             }
             .fileMover(isPresented: $showFileMover, file: fileURL) { result in
-                if case .failure(let failure) = result {
+                if case let .failure(failure) = result {
                     /// Removing the temporary file
                     guard let fileURL else { return }
                     try? FileManager.default.removeItem(at: fileURL)
@@ -67,8 +66,8 @@ struct DocumentDetailView: View {
                 let context = LAContext()
                 isLockAvailable = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
             }
-            .onChange(of: scene) { oldValue, newValue in
-                if newValue != .active && document.isLocked {
+            .onChange(of: scene) { _, newValue in
+                if newValue != .active, document.isLocked {
                     isUnlocked = false
                 }
             }
@@ -165,7 +164,7 @@ struct DocumentDetailView: View {
             let pdfDocument = PDFDocument()
             for index in pages.indices {
                 if let pageImage = UIImage(data: pages[index].pageData),
-                    let pdfPage = PDFPage(image: pageImage)
+                   let pdfPage = PDFPage(image: pageImage)
                 {
                     pdfDocument.insert(pdfPage, at: index)
                 }
@@ -186,13 +185,12 @@ struct DocumentDetailView: View {
         }
     }
 
-
     private func authenticateUser() {
         let context = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Locked document") { status, _ in
                 DispatchQueue.main.async {
-                    self.isUnlocked = status
+                    isUnlocked = status
                 }
             }
         } else {

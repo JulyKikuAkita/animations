@@ -2,9 +2,9 @@
 //  SwiftDataEncryptionDemoView.swift
 //  MyMint
 
-import SwiftUI
-import SwiftData
 import CryptoKit
+import SwiftData
+import SwiftUI
 
 struct SwiftDataEncryptionDemoView: View {
     @Query(
@@ -85,31 +85,33 @@ struct SwiftDataEncryptionDemoView: View {
             isPresented: $showFileExporter,
             item: exportItem,
             contentTypes: [.data],
-            defaultFilename: "Transactions") { result in
-                switch result {
-                case .success(_):
-                    print("Success")
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-
-                exportItem = nil
-            } onCancellation: {
-                exportItem = nil
-        }
-            .fileImporter(
-                isPresented: $showFileImporter,
-                allowedContentTypes: [.data]
-            ) { result in
-                switch result {
-                case .success(let url):
-                    importedURL = url
-                    showAlertTF.toggle()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            defaultFilename: "Transactions"
+        ) { result in
+            switch result {
+            case .success:
+                print("Success")
+            case let .failure(error):
+                print(error.localizedDescription)
             }
+
+            exportItem = nil
+        } onCancellation: {
+            exportItem = nil
+        }
+        .fileImporter(
+            isPresented: $showFileImporter,
+            allowedContentTypes: [.data]
+        ) { result in
+            switch result {
+            case let .success(url):
+                importedURL = url
+                showAlertTF.toggle()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
+
     func importData() {
         guard let url = importedURL else { return }
         Task.detached(priority: .background) {
@@ -152,7 +154,7 @@ struct SwiftDataEncryptionDemoView: View {
                 // use a separate model container to fetch all associated objects
 
                 let descriptor = FetchDescriptor(sortBy: [
-                    .init(\TransactionDemo.transactionDate, order: .reverse)
+                    .init(\TransactionDemo.transactionDate, order: .reverse),
                 ])
 
                 let allObjects = try context.fetch(descriptor)
@@ -230,9 +232,10 @@ struct TransactionTransferable: Transferable {
         DataRepresentation(exportedContentType: .data) {
             let data = try JSONEncoder().encode($0.transactions) // Do not pass the complete item, only the transactions' property; otherwise the encryption key will be exported with the file
             guard let encryptedData = try AES.GCM.seal(
-                data, using: .key($0.key)).combined else {
-                    throw EncryptionError.encryptionFailed
-                }
+                data, using: .key($0.key)
+            ).combined else {
+                throw EncryptionError.encryptionFailed
+            }
             return encryptedData
         }
     }
@@ -250,6 +253,7 @@ extension SymmetricKey {
         return .init(data: sha256)
     }
 }
+
 enum TransactionCategory: String, Codable {
     case income = "Income"
     case expense = "Expense"

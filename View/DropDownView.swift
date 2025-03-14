@@ -24,7 +24,7 @@ struct DropDownView: View {
             let size = $0.size
 
             VStack(spacing: 0) {
-                if showOptions && anchor == .top{
+                if showOptions, anchor == .top {
                     OptionsView()
                 }
 
@@ -54,7 +54,7 @@ struct DropDownView: View {
                 }
                 .zIndex(10)
 
-                if showOptions && anchor == .bottom{
+                if showOptions, anchor == .bottom {
                     OptionsView()
                 }
             }
@@ -73,7 +73,7 @@ struct DropDownView: View {
     @ViewBuilder
     func OptionsView() -> some View {
         VStack(spacing: 10) {
-            ForEach(options, id:\.self) { option in
+            ForEach(options, id: \.self) { option in
                 HStack(spacing: 0) {
                     Text(option)
                         .lineLimit(1)
@@ -82,7 +82,7 @@ struct DropDownView: View {
 
                     Image(systemName: "checkmark")
                         .font(.caption)
-                        .opacity(selection == option ? 1: 0)
+                        .opacity(selection == option ? 1 : 0)
                 }
                 .foregroundStyle(selection == option ? Color.primary : Color.gray)
                 .animation(.none, value: selection)

@@ -23,10 +23,10 @@ struct MorphingSymbolDemoView: View {
                 MorphingSymbolView(
                     symbol: activePage.rawValue,
                     config: .init(
-                       font: .system(size: 150, weight: .bold),
-                       frame: CGSize(width: 250, height: 200),
-                       radius: 30,
-                       foregroundColor: .white
+                        font: .system(size: 150, weight: .bold),
+                        frame: CGSize(width: 250, height: 200),
+                        radius: 30,
+                        foregroundColor: .white
                     )
                 )
 
@@ -52,7 +52,7 @@ struct MorphingSymbolDemoView: View {
 
     @ViewBuilder
     func HeaderView() -> some View {
-        HStack() {
+        HStack {
             Button {
                 activePage = activePage.previousPage
             } label: {
@@ -61,7 +61,7 @@ struct MorphingSymbolDemoView: View {
                     .fontWeight(.semibold)
                     .contentShape(.rect)
             }
-            .opacity(activePage != .page1 ? 1: 0)
+            .opacity(activePage != .page1 ? 1 : 0)
 
             Spacer(minLength: 0)
 
@@ -69,7 +69,7 @@ struct MorphingSymbolDemoView: View {
                 activePage = .page4
             }
             .fontWeight(.semibold)
-            .opacity(activePage != .page4 ? 1: 0)
+            .opacity(activePage != .page4 ? 1 : 0)
         }
         .foregroundStyle(.white)
         .animation(.snappy(duration: 0.35, extraBounce: 0), value: activePage)
@@ -82,7 +82,7 @@ struct MorphingSymbolDemoView: View {
             ForEach(Page.allCases, id: \.rawValue) { page in
                 Capsule()
                     .fill(.white.opacity(activePage == page ? 1 : 0.4))
-                    .frame(width: activePage == page ? 25: 8, height: 8 )
+                    .frame(width: activePage == page ? 25 : 8, height: 8)
             }
         }
         .animation(.smooth(duration: 0.5, extraBounce: 0), value: activePage)
@@ -98,7 +98,7 @@ struct MorphingSymbolDemoView: View {
                         .lineLimit(1)
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .kerning(1.1) //spacing between chars, 0 is deauflt
+                        .kerning(1.1) // spacing between chars, 0 is deauflt
                         .frame(width: size.width)
                 }
             }
@@ -127,7 +127,7 @@ struct MorphingSymbolDemoView: View {
     func ContinueButton() -> some View {
         Button {
             activePage = activePage.nextPage
-        } label : {
+        } label: {
             Text(activePage == .page4 ? "Start playing" : "Continue")
                 .contentTransition(.identity)
                 .foregroundStyle(.black)
@@ -139,7 +139,6 @@ struct MorphingSymbolDemoView: View {
         .animation(.smooth(duration: 0.5, extraBounce: 0), value: activePage)
     }
 }
-
 
 #Preview {
     LandingView()

@@ -2,8 +2,8 @@
 //  HabitHome.swift
 //  Habit
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct HabitHome: View {
     @AppStorage("username") private var username: String = ""
@@ -30,7 +30,7 @@ struct HabitHome: View {
                 if habits.isEmpty {
                     ContentUnavailableView("Start tracking your habit", systemImage: "checkmark.circle.fill")
                         .fixedSize(horizontal: false, vertical: true)
-                        .visualEffect{ content, proxy in
+                        .visualEffect { content, proxy in
                             content
                                 .offset(y: ((proxy.bounds(of: .scrollView)?.height ?? 0) - 50) / 2)
                         }
@@ -103,7 +103,7 @@ struct HabitHome: View {
                             .white.opacity(0),
                             .white.opacity(0.5),
                             .white,
-                            .white
+                            .white,
                         ], startPoint: .top, endPoint: .bottom))
                 }
                 .ignoresSafeArea()

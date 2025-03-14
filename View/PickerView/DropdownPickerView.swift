@@ -14,7 +14,6 @@ struct DropdownPickerDemoView: View {
                     .listRowInsets(
                         .init(top: 0, leading: 0, bottom: 0, trailing: 0)
                     )
-
             }
             .navigationTitle("Dropdown")
         }
@@ -22,7 +21,7 @@ struct DropdownPickerDemoView: View {
     }
 }
 
-fileprivate struct DropdownView: View {
+private struct DropdownView: View {
     var values: [String]
     @Binding var config: DropdownConfig
     /// View Properties
@@ -74,7 +73,6 @@ fileprivate struct DropdownView: View {
                         RoundedRectangle(cornerRadius: config.cornerRadius)
                             .frame(width: config.anchor.width, height: 200)
                             .offset(x: config.anchor.minX, y: config.anchor.minY)
-
                     }
                     .transition(.opacity)
                     .onTapGesture {
@@ -121,15 +119,14 @@ fileprivate struct DropdownView: View {
 /// Reverse masking
 private extension View {
     @ViewBuilder
-    func reverseMask<Content: View>(_ alignment: Alignment, @ViewBuilder content: @escaping () -> Content) -> some View {
-        self
-            .mask {
-                Rectangle()
-                    .overlay(alignment: alignment) {
-                        content()
-                            .blendMode(.destinationOut)
-                    }
-            }
+    func reverseMask(_ alignment: Alignment, @ViewBuilder content: @escaping () -> some View) -> some View {
+        mask {
+            Rectangle()
+                .overlay(alignment: alignment) {
+                    content()
+                        .blendMode(.destinationOut)
+                }
+        }
     }
 }
 
@@ -137,13 +134,12 @@ private extension View {
 private extension View {
     @ViewBuilder
     func dropdownOverlay(_ config: Binding<DropdownConfig>, values: [String]) -> some View {
-        self
-            .overlay {
-                if config.wrappedValue.show {
-                    DropdownView(values: values, config: config)
-                        .transition(.identity)
-                }
+        overlay {
+            if config.wrappedValue.show {
+                DropdownView(values: values, config: config)
+                    .transition(.identity)
             }
+        }
     }
 }
 
@@ -175,7 +171,6 @@ struct DropdownPickerView: View {
             config.anchor = newValue
         }
     }
-
 }
 
 struct DropdownConfig {

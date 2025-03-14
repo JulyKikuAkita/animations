@@ -3,7 +3,6 @@
 //  animation
 import SwiftUI
 
-
 struct PageIndicatorView: View {
     var activeTint: Color = .primary
     var inactiveTint: Color = .primary.opacity(0.15)
@@ -38,13 +37,13 @@ struct PageIndicatorView: View {
                 let nextPageWidth = indicatorProgress * 18
 
                 HStack(spacing: 10) {
-                    ForEach(0..<totalPages, id: \.self) { index in
+                    ForEach(0 ..< totalPages, id: \.self) { index in
                         Capsule()
                             .fill(.clear)
                             .frame(
                                 width: 8 + (
                                     activeIndex == index ? currentPageWidth
-                                    : nextIndex == index ? nextPageWidth : 0),
+                                        : nextIndex == index ? nextPageWidth : 0),
                                 height: 8
                             )
                             .overlay {
@@ -54,9 +53,8 @@ struct PageIndicatorView: View {
 
                                     Capsule()
                                         .fill(activeTint)
-                                        .opacity(opacityEffect ? activeIndex == index ? 1 -  indicatorProgress
-                                                 : nextIndex == index ? indicatorProgress : 0 : 1)
-
+                                        .opacity(opacityEffect ? activeIndex == index ? 1 - indicatorProgress
+                                            : nextIndex == index ? indicatorProgress : 0 : 1)
                                 }
                             }
                     }

@@ -5,12 +5,13 @@
 //
 
 import SwiftUI
+
 struct CustomHeroAnimationView: View {
     /// Color Scheme
     @Environment(\.colorScheme) private var scheme
     @Environment(WindowSharedModel.self) private var windowShareModel
     var body: some View {
-        GeometryReader(content: { geometry in
+        GeometryReader(content: { _ in
             VStack {
                 let sourceRect = windowShareModel.sourceRect
                 if let selectedProfile = windowShareModel.selectedProfile, windowShareModel.hideNativeView {
@@ -27,14 +28,13 @@ struct CustomHeroAnimationView: View {
                                 color.opacity(0.1),
                                 color.opacity(0.5),
                                 color.opacity(0.9),
-                                color
+                                color,
                             ], startPoint: .top, endPoint: .bottom)
-                            .opacity(windowShareModel.showGradient ? 1 : 0)
+                                .opacity(windowShareModel.showGradient ? 1 : 0)
                         }
                         .clipShape(.rect(cornerRadius: windowShareModel.cornerRadius))
                         .offset(x: sourceRect.minX, y: sourceRect.minY)
                         .animation(.snappy(duration: 0.3, extraBounce: 0), value: windowShareModel.showGradient)
-
                 }
             }
             /// animating frame changes

@@ -25,7 +25,7 @@ struct MintCardView: View {
                 .padding(.bottom, 25)
 
                 HStack(spacing: 0) {
-                    ForEach(MintCategory.allCases, id:\.rawValue) { category in
+                    ForEach(MintCategory.allCases, id: \.rawValue) { category in
                         let symbolImage = category == .income ? "arrow.up" : "arrow.down"
                         let tint = category == .income ? Color.green : Color.red
 

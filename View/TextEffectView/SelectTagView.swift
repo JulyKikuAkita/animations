@@ -7,8 +7,8 @@ import SwiftUI
 struct SelectTagViewDemo: View {
     /// View properties
     /// Sample tags
-    @State private var tags:[String] = [
-        "Berserk", "Hunter", "One Piece", "Chainsaw Man", "Tokyo Ghoul", "Solo Leveling", "Naruto", "Monster",  "Vagabond", "SpyFamily", "One Punch-Man", "Hero Academia", "Jujutsu Kaisen", "Fullmetal Alchemist", "Pandora Hearts", "Bleach", "Gantz", "Frieren"
+    @State private var tags: [String] = [
+        "Berserk", "Hunter", "One Piece", "Chainsaw Man", "Tokyo Ghoul", "Solo Leveling", "Naruto", "Monster", "Vagabond", "SpyFamily", "One Punch-Man", "Hero Academia", "Jujutsu Kaisen", "Fullmetal Alchemist", "Pandora Hearts", "Bleach", "Gantz", "Frieren",
     ]
 
     /// Selection
@@ -107,7 +107,6 @@ struct SelectTagViewDemo: View {
         }
     }
 }
-
 
 #Preview {
     SelectTagViewDemo()

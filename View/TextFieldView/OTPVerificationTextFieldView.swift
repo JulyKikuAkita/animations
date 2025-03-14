@@ -10,13 +10,13 @@ struct OTPVerificationTextFieldDemoView: View {
     @State private var codeSix: String = ""
     var body: some View {
         VStack(spacing: 25) {
-            VerificationTextField(type: .four, style: .underlined, value: $codeFour ) { result in
+            VerificationTextField(type: .four, style: .underlined, value: $codeFour) { result in
                 if result.count < 6 {
-                    return .typing
+                    .typing
                 } else if result == "1234" {
-                    return .valid
+                    .valid
                 } else {
-                    return .invalid
+                    .invalid
                 }
             }
 
@@ -24,11 +24,11 @@ struct OTPVerificationTextFieldDemoView: View {
 
             VerificationTextField(type: .six, style: .roundedBorder, value: $codeSix) { result in
                 if result.count < 6 {
-                    return .typing
+                    .typing
                 } else if result == "12345" {
-                    return .valid
+                    .valid
                 } else {
-                    return .invalid
+                    .invalid
                 }
             }
 
@@ -67,7 +67,7 @@ struct VerificationTextField: View {
     @FocusState private var isActive: Bool
     var body: some View {
         HStack(spacing: style == .roundedBorder ? 6 : 10) {
-            ForEach(0..<type.rawValue, id: \.self) { index in
+            ForEach(0 ..< type.rawValue, id: \.self) { index in
                 CharacterView(index)
             }
         }
@@ -79,7 +79,7 @@ struct VerificationTextField: View {
             content
                 .offset(x: offset)
         }, animation: { _ in
-                .linear(duration: 0.09)
+            .linear(duration: 0.09)
         })
         .background {
             /// non interactive text field view, activate by focus state
@@ -98,7 +98,7 @@ struct VerificationTextField: View {
         .onTapGesture {
             isActive = true
         }
-        .onChange(of: value) { oldValue, newValue in
+        .onChange(of: value) { _, newValue in
             /// Limiting text length
             value = String(newValue.prefix(type.rawValue))
             Task { @MainActor in
@@ -133,7 +133,7 @@ struct VerificationTextField: View {
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
-        .frame(width: style == .roundedBorder ? 50 :40, height: 50)
+        .frame(width: style == .roundedBorder ? 50 : 40, height: 50)
         .overlay {
             /// Showing Characters
             let stringValue = string(index)
@@ -160,10 +160,10 @@ struct VerificationTextField: View {
 
     func borderColor(_ index: Int) -> Color {
         switch state {
-            /// Highlight active field when keyboard is active
-            case .typing: value.count == index && isActive ? Color.primary : .gray
-            case .valid: .green
-            case .invalid: .red
+        /// Highlight active field when keyboard is active
+        case .typing: value.count == index && isActive ? Color.primary : .gray
+        case .valid: .green
+        case .invalid: .red
         }
     }
 }

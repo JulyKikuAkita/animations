@@ -1,5 +1,27 @@
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
+# Pre-commit Configuration Guide
+# --------------------------------
+# This file defines pre-commit hooks that automatically check and format
+# non-Swift files before commits. Ensure pre-commit is installed and set up in your project.
+#
+# Installation:
+#   1. Install pre-commit: `brew install pre-commit`
+#   2. Install hooks: `pre-commit install`
+#   3. Run `pre-commit --help` for more options.
+#
+# Manually Trigger Hooks:
+#   1. Run checks on all files: `pre-commit run --all-files`
+#   2. Run checks only on staged files: `pre-commit run`
+#   3. Run specific checks on specific files: `pre-commit run rubocop --files fastlane/Fastfile`
+#   4. Run specific checks on all files: `pre-commit run check-json --all-files`
+#
+# Notes:
+# - See https://pre-commit.com for more details.
+# - Browse more hooks: https://pre-commit.com/hooks.html
+# - Do not add this file to .gitignore.
+# - If you need a local-only version of this file (without committing changes):
+#   Use `git update-index --assume-unchanged .pre-commit-config.yaml`
+#
+# Each section below defines a repository with pre-commit hooks.
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0  # Use the ref you want to point at
@@ -8,3 +30,61 @@ repos:
       -   id: check-yaml
       -   id: end-of-file-fixer
       -   id: trailing-whitespace
+
+  # Prettier for JavaScript formatting
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8 # Update with the latest version
+    hooks:
+      - id: prettier
+        files: "\\.js$" # Runs only on .js files
+        additional_dependencies:
+          - prettier@2.1.2
+          - "@prettier/plugin-xml@0.12.0"
+
+  # Rubocop for Ruby formatting
+  # Alternatively, use `bundle exec rubocop fastlane/Fastfile`
+  - repo: https://github.com/rubocop/rubocop
+    rev: v1.74.0
+    hooks:
+      - id: rubocop
+        name: rubocop
+        description: Enforce the community Ruby Style Guide with RuboCop
+        entry: rubocop
+        language: ruby
+        types: ["ruby"]
+        args: ["--autocorrect", "--force-exclusion"]
+        files: "^fastlane/Fastfile$" # Matches fastlane/Fastfile only
+
+  # Shell script checks
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        files: "\\.(sh|zsh)$"
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.11.0-1
+    hooks:
+      - id: shfmt
+        args: ["-i", "2", "-ci", "-s"]
+        files: "\\.(sh|zsh)$"
+
+  - repo: https://github.com/nicklockwood/SwiftFormat/
+    rev: 0.55.5
+    hooks:
+      - id: swiftformat
+        name: SwiftFormat
+        description: "Check swift files for formatting issues with SwiftFormat"
+        entry: swiftformat
+        language: swift
+        types: [swift]
+
+  - repo: https://github.com/realm/SwiftLint
+    rev: 0.58.2
+    hooks:
+      - id: swiftlint
+        name: SwiftLint
+        description: "Check Swift files for issues with SwiftLint"
+        entry: swiftlint --fix
+        language: swift
+        types: [swift]

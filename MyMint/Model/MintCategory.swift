@@ -1,13 +1,12 @@
 //
-//  Category.swift
+//  MintCategory.swift
 //  MyMint
-
 
 import SwiftUI
 
 enum MintCategory: String, CaseIterable {
-   case income = "Income"
-   case expense = "Expense"
+    case income = "Income"
+    case expense = "Expense"
 }
 
 enum MintRule: String, CaseIterable {

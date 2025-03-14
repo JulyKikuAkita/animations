@@ -32,7 +32,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
         /// calculate offset of header for gradient background to cover the top area
         .onScrollGeometryChange(for: ScrollGeometry.self) {
             $0
-        } action: { oldValue, newValue in
+        } action: { _, newValue in
             /// 100: height of the header view + space (using geometryReader, minY value)
             topInset = newValue.contentInsets.top + 100
             scrollOffsetY = newValue.contentOffset.y + newValue.contentInsets.top
@@ -98,7 +98,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
             let width = $0.containerSize.width + spacing
 
             return offsetX / width
-        } action: { oldValue, newValue in
+        } action: { _, newValue in
             let maxValue = CGFloat(images.count - 1)
             scrollProgressX = min(max(newValue, 0), maxValue)
         }
@@ -135,7 +135,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
                         .black,
                         .black,
                         .black.opacity(0.5),
-                        .clear
+                        .clear,
                     ], startPoint: .top, endPoint: .bottom))
             }
         }

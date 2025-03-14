@@ -3,13 +3,13 @@
 //  animation
 //  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
 //  Use AnimationApp2 to test, preview crash with sceneDelegate
-import SwiftUI
 import MapKit
+import SwiftUI
 
 extension MKCoordinateRegion {
     /// Apple Park Location Coordinates
     static var applePark: MKCoordinateRegion {
-        return .init(
+        .init(
             center: .init(
                 latitude: 37.3346,
                 longitude: -122.0090
@@ -19,6 +19,7 @@ extension MKCoordinateRegion {
         )
     }
 }
+
 struct TabbarOverSheetView: View {
     @Environment(WindowSharedModelTabbar.self) private var windowSharedModel // need to use bindable within view not @Binding property
 //     @Environment(SceneDelegate.self) private var sceneDelegate // crash preview
@@ -74,9 +75,7 @@ struct TabbarOverSheetView: View {
 
                     if windowSharedModel.activeTab == .apps {
                         ToolbarItem(placement: .topBarLeading) {
-                            Button(action: {
-
-                            }, label: {
+                            Button(action: {}, label: {
                                 Image(systemName: "plus")
                             })
                         }
@@ -122,9 +121,7 @@ struct CustomTabBar: View {
 
             HStack(spacing: 0) {
                 ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
-                    Button {
-
-                    } label: {
+                    Button {} label: {
                         VStack {
                             Image(systemName: tab.rawValue)
                                 .font(.title2)
@@ -134,7 +131,7 @@ struct CustomTabBar: View {
                         }
                         .foregroundStyle(
                             windowSharedModel.activeTab == tab ? Color.accentColor
-                            : .gray)
+                                : .gray)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .contentShape(.rect)
                     }

@@ -148,8 +148,6 @@ struct VolumeSliderWithIssue: View {
     }
 }
 
-
-
 #Preview {
     SliderWorkaroundScrollDemoView()
 }

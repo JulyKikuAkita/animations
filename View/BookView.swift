@@ -12,14 +12,14 @@ struct BookView: View {
         VStack {
             OpenableBookView(config: .init(progress: progress)) { size in
                 FrontView(size, profile.profilePicture)
-            } insideLeft: { size in
+            } insideLeft: { _ in
                 LeftView()
-            } insideRight: { size in
+            } insideRight: { _ in
                 RightView()
             }
             .onTapGesture {
                 withAnimation(.snappy(duration: 1.0)) {
-                    progress = ( progress == 1.0 ? 0.2 : 1.0)
+                    progress = (progress == 1.0 ? 0.2 : 1.0)
                 }
             }
 
@@ -37,7 +37,6 @@ struct BookView: View {
             .padding()
 //            .background(.background, in: .rect(cornerRadius: 10))
 //            .padding(.top, 50)
-
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -59,7 +58,7 @@ struct BookView: View {
             Image("fox")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 100   , height: 100)
+                .frame(width: 100, height: 100)
                 .clipShape(.circle)
                 .shadow(color: .black.opacity(0.15), radius: 5, x: 5, y: 5)
 
@@ -86,7 +85,6 @@ struct BookView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.background)
     }
-
 }
 
 /// Interactive Book Card View
@@ -97,7 +95,7 @@ struct OpenableBookView<Front: View, InsideLeft: View, InsideRight: View>: View,
     @ViewBuilder var insideRight: (CGSize) -> InsideRight
 
     var animatableData: CGFloat {
-        get { return config.progress }
+        get { config.progress }
         set { config.progress = newValue }
     }
 
@@ -106,7 +104,7 @@ struct OpenableBookView<Front: View, InsideLeft: View, InsideRight: View>: View,
             let size = $0.size
 
             /// limiting progress between 1 and 0
-            let progress = max(min(config.progress, 1),0)
+            let progress = max(min(config.progress, 1), 0)
             let rotation = progress * -180
             let cornerRadius = config.cornerRadius
             let shadowColor = config.shadowColor
@@ -150,10 +148,9 @@ struct OpenableBookView<Front: View, InsideLeft: View, InsideRight: View>: View,
                     .shadow(color: shadowColor.opacity(0.1), radius: 5, x: 5, y: 0)
                     .rotation3DEffect(
                         .init(degrees: rotation),
-                        axis:(x: 0.0, y: 1.0, z: 0.0),
+                        axis: (x: 0.0, y: 1.0, z: 0.0),
                         anchor: .leading,
                         perspective: 0.3 // avoid stretching image
-
                     )
             }
             .offset(x: (config.width / 2) * progress) // center the book when opened

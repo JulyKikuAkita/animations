@@ -47,7 +47,7 @@ struct ParticleEffectsView: View {
     }
 
     @ViewBuilder
-    func CustomButton(systemImage: String, status: Bool, activeTint: Color, inActiveTint: Color, drop: Bool = true, useKeyFrame: Bool = false, onTap: @escaping () -> ()) -> some View {
+    func CustomButton(systemImage: String, status: Bool, activeTint: Color, inActiveTint: Color, drop: Bool = true, useKeyFrame: Bool = false, onTap: @escaping () -> Void) -> some View {
         Button(action: onTap) {
             Image(systemName: systemImage)
                 .font(.title2)
@@ -87,8 +87,8 @@ struct ParticleEffectsView: View {
                                 /// Definitng key frames
                                 KeyframeTrack(\.offset) {
                                     LinearKeyframe(CGSize(width: 0, height: -30), duration: 0.2)
-                                    LinearKeyframe(CGSize(width: .random(in: -2...2), height: -70), duration: 0.2)
-                                    LinearKeyframe(CGSize(width: .random(in: -2...2), height: -110), duration: 0.4)
+                                    LinearKeyframe(CGSize(width: .random(in: -2 ... 2), height: -70), duration: 0.2)
+                                    LinearKeyframe(CGSize(width: .random(in: -2 ... 2), height: -110), duration: 0.4)
                                 }
 
                                 KeyframeTrack(\.opacity) {
@@ -97,7 +97,6 @@ struct ParticleEffectsView: View {
                                     LinearKeyframe(0.7, duration: 0.2)
                                     LinearKeyframe(0, duration: 0.2)
                                 }
-
                             }
                         }
                     }
@@ -105,14 +104,14 @@ struct ParticleEffectsView: View {
         }
     }
 
-    func toggleAnimation(_ id: UUID, _ increment: Bool = true) {
+    func toggleAnimation(_ id: UUID, _: Bool = true) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { // we need the delay for keyFrame animation to show up
             if let index = buttonFrames2.firstIndex(where: { $0.id == id }) {
                 /// triggering keyframe animation
                 buttonFrames2[index].triggerKeyFrame = true
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { /// keyframe animation takes about 0.8, use the same delay to remove frame to decrease memory usage
-                    buttonFrames2.removeAll(where: { $0.id  == id })
+                    buttonFrames2.removeAll(where: { $0.id == id })
                 }
             }
         }
@@ -161,8 +160,8 @@ struct CustomNumberKeyFrameView: View {
                             /// Definitng key frames
                             KeyframeTrack(\.offset) {
                                 LinearKeyframe(CGSize(width: 0, height: -20), duration: 0.2)
-                                LinearKeyframe(CGSize(width: .random(in: -2...2), height: -40), duration: 0.2)
-                                LinearKeyframe(CGSize(width: .random(in: -2...2), height: -90), duration: 0.4)
+                                LinearKeyframe(CGSize(width: .random(in: -2 ... 2), height: -40), duration: 0.2)
+                                LinearKeyframe(CGSize(width: .random(in: -2 ... 2), height: -90), duration: 0.4)
                             }
 
                             KeyframeTrack(\.opacity) {
@@ -171,7 +170,6 @@ struct CustomNumberKeyFrameView: View {
                                 LinearKeyframe(0.7, duration: 0.2)
                                 LinearKeyframe(0, duration: 0.2)
                             }
-
                         }
                     }
                 }
@@ -187,7 +185,8 @@ struct CustomNumberKeyFrameView: View {
             .buttonRepeatBehavior(.enabled)
         }
         .fontWeight(.bold)
-        }
+    }
+
     func toggleAnimation(_ id: UUID, _ increment: Bool = true) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { // we need the delay for keyFrame animation to showup
             if let index = buttonFrames.firstIndex(where: { $0.id == id }) {
@@ -207,7 +206,7 @@ struct CustomNumberKeyFrameView: View {
 
     func removeFrame(_ id: UUID) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { /// keyframe animation takes about 0.8, use the same delay to remove frame to decrease memory usage
-            buttonFrames.removeAll(where: { $0.id  == id })
+            buttonFrames.removeAll(where: { $0.id == id })
         }
     }
 }

@@ -2,8 +2,8 @@
 //  GridTransitionView+SearchQuery.swift
 //  animation
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct SearchQueryView<Content: View>: View {
     init(searchText: String, @ViewBuilder content: @escaping ([Note]) -> Content) {

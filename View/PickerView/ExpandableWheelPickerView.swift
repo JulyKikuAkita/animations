@@ -46,7 +46,6 @@ struct ExpandableWheelPickerDemoView: View {
         }
         .customWheelPicker($config, items: pickerValues)
         .customWheelPicker($config1, items: pickerValues1)
-
     }
 }
 
@@ -65,7 +64,7 @@ struct ExpandableWheelPickerView: View {
     }
 }
 
-fileprivate struct CustomWheelPickerView: View {
+private struct CustomWheelPickerView: View {
     var texts: [String]
     @Binding var config: PickerConfig
     /// View Properties
@@ -80,7 +79,7 @@ fileprivate struct CustomWheelPickerView: View {
 
             Rectangle()
                 .fill(.ultraThinMaterial)
-                .opacity(showContents ? 1: 0)
+                .opacity(showContents ? 1 : 0)
                 .ignoresSafeArea()
 
             ScrollView(.vertical) {
@@ -94,7 +93,7 @@ fileprivate struct CustomWheelPickerView: View {
             }
             /// pin the view to the mid up 20 CGPoint at the screen
             .safeAreaPadding(.top, (size.height * 0.5) - 20) /// -20 to position start point above center
-            .safeAreaPadding(.bottom, (size.height * 0.5))
+            .safeAreaPadding(.bottom, size.height * 0.5)
             .scrollPosition(id: $activeText, anchor: .center) /// anchor needs to be at center position because above
             .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
             .scrollIndicators(.hidden)
@@ -103,7 +102,7 @@ fileprivate struct CustomWheelPickerView: View {
 
             let offset: CGSize = .init(
                 width: showContents ? size.width * -0.3 : config.sourceFrame.minX,
-                height: showContents ?  -10 : config.sourceFrame.minY // y: place at center of vi
+                height: showContents ? -10 : config.sourceFrame.minY // y: place at center of vi
             )
 
             /// the position is in global space so the view position must from the top leading and ignore safe area
@@ -113,7 +112,7 @@ fileprivate struct CustomWheelPickerView: View {
                 .frame(height: 20)
                 .frame(
                     maxWidth: .infinity,
-                    maxHeight:  .infinity,
+                    maxHeight: .infinity,
                     alignment: showContents ? .trailing : .topLeading
                 )
                 .offset(offset)
@@ -137,7 +136,7 @@ fileprivate struct CustomWheelPickerView: View {
                 expandItems = true
             }
         }
-        .onChange(of: activeText) { oldValue, newValue in
+        .onChange(of: activeText) { _, newValue in
             if let newValue {
                 config.text = newValue
             }
@@ -261,12 +260,12 @@ fileprivate struct CustomWheelPickerView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    @Previewable
 //    @State var config = PickerConfig(text: "SwiftUI")
 //    let texts = ["SwiftUI", "UIKIT", "SwiftTest", "iOS", "macOS", "Xcode", "WWDC"]
 //    CustomWheelPickerView(texts: texts, config: $config)
-//}
+// }
 
 #Preview {
     ExpandableWheelPickerDemoView()
@@ -275,13 +274,12 @@ fileprivate struct CustomWheelPickerView: View {
 extension View {
     @ViewBuilder
     func customWheelPicker(_ config: Binding<PickerConfig>, items: [String]) -> some View {
-        self
-            .overlay {
-                if config.wrappedValue.show {
-                    CustomWheelPickerView(texts: items, config: config)
-                        .transition(.identity)
-                }
+        overlay {
+            if config.wrappedValue.show {
+                CustomWheelPickerView(texts: items, config: config)
+                    .transition(.identity)
             }
+        }
     }
 }
 
@@ -290,6 +288,7 @@ struct PickerConfig {
     init(text: String) {
         self.text = text
     }
+
     var show: Bool = false
     /// for custom Matched Geometry Effect
     var sourceFrame: CGRect = .zero

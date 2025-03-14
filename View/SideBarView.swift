@@ -6,7 +6,7 @@ import SwiftUI
 
 struct SideBarView: View {
     @Binding var path: NavigationPath
-    var toggleSideBar: () -> ()
+    var toggleSideBar: () -> Void
     var body: some View {
         GeometryReader {
             let safeArea = $0.safeAreaInsets
@@ -74,12 +74,11 @@ struct SideBarView: View {
                     }
                     .ignoresSafeArea()
             }
-
         }
     }
 
     @ViewBuilder
-    func SideBarActionButton(value: SideBarActions, action: @escaping () -> ()) -> some View {
+    func SideBarActionButton(value: SideBarActions, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 12) {
                 Image(systemName: value.symbolImage)

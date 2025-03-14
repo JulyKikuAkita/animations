@@ -59,6 +59,7 @@ struct FlipClockTextEffectDemoView: View {
         })
     }
 }
+
 struct FlipClockTextEffectView: View {
     @Binding var value: Int
     /// Config
@@ -160,7 +161,7 @@ struct FlipClockTextEffectView: View {
     }
 
     @ViewBuilder
-    func TextView(_ value: Int) -> some View  {
+    func TextView(_ value: Int) -> some View {
         Text(value.inTimeFormat)
             .font(.system(size: fontSize).bold())
             .foregroundStyle(foreground)
@@ -171,7 +172,7 @@ struct FlipClockTextEffectView: View {
 /// when rotate > 90 degrees, the text content needs to updated to the next value
 /// since default swiftUI behavior is the end value will be directly reflected rather than progression
 /// we need to use animatableData to progressively update the value from start to end
-fileprivate struct RotationModifier: ViewModifier, Animatable {
+private struct RotationModifier: ViewModifier, Animatable {
     var rotation: CGFloat
     var currentValue: Int
     var nextValue: Int
@@ -206,7 +207,6 @@ fileprivate struct RotationModifier: ViewModifier, Animatable {
                 .drawingGroup()
             }
     }
-
 }
 
 #Preview {
@@ -215,6 +215,6 @@ fileprivate struct RotationModifier: ViewModifier, Animatable {
 
 extension Int {
     var inTimeFormat: String {
-        return self < 10 ? "0\(self)" : "\(self)"
+        self < 10 ? "0\(self)" : "\(self)"
     }
 }

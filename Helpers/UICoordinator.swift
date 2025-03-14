@@ -7,9 +7,9 @@ import SwiftUI
 
 @Observable
 class UICoordinator {
-    var items: [PhotoItem] = sampleItems.compactMap({
+    var items: [PhotoItem] = sampleItems.compactMap {
         PhotoItem(title: $0.title, image: $0.image, previewImage: $0.image)
-    })
+    }
 
     /// Animation properties
     var selectedItem: PhotoItem?
@@ -50,8 +50,8 @@ class UICoordinator {
                 self.showDetailView = true
             }
         } else {
-            self.showDetailView = false
-            withAnimation(.easeInOut(duration: 0.2), completionCriteria: .removed){
+            showDetailView = false
+            withAnimation(.easeInOut(duration: 0.2), completionCriteria: .removed) {
                 animateView = false
                 offset = .zero
             } completion: {

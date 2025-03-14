@@ -12,11 +12,11 @@ import SwiftUI
 extension AnyTransition {
     static func ripple(location: CGPoint) -> AnyTransition {
         .asymmetric(
-            insertion: .modifier (
+            insertion: .modifier(
                 active: Ripple(location: location, isIdentity: false),
                 identity: Ripple(location: location, isIdentity: true)
             ),
-            removal: .modifier (
+            removal: .modifier(
                 // view will be remove immediately if set the value to 1
                 active: IdentityTransition(opacity: 0.99),
                 identity: IdentityTransition(opacity: 1)
@@ -25,21 +25,22 @@ extension AnyTransition {
     }
 
     static func reverseRipple(location: CGPoint) -> AnyTransition {
-        .modifier (
+        .modifier(
             active: Ripple(location: location, isIdentity: false),
             identity: Ripple(location: location, isIdentity: true)
         )
     }
 }
 
-fileprivate struct IdentityTransition: ViewModifier {
+private struct IdentityTransition: ViewModifier {
     var opacity: Double = 0
     func body(content: Content) -> some View {
         content
             .opacity(opacity)
     }
 }
-fileprivate struct Ripple: ViewModifier {
+
+private struct Ripple: ViewModifier {
     var location: CGPoint
     var isIdentity: Bool
 
@@ -82,7 +83,6 @@ fileprivate struct Ripple: ViewModifier {
             .compositingGroup()
             .scaleEffect(defaultScale + (fillCircleScale * progress), anchor: .center)
             .offset(x: location.x - circleRadius, y: location.y - circleRadius)
-
         }
     }
 }

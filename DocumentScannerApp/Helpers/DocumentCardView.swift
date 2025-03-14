@@ -32,7 +32,7 @@ struct DocumentCardView: View {
                                 guard let image = UIImage(data: firstPage.pageData) else { return }
                                 let aspectSize = image.size.aspectFit(.init(width: 150, height: 150))
                                 let renderer = UIGraphicsImageRenderer(size: aspectSize)
-                                let resizedImage = renderer.image { context in
+                                let resizedImage = renderer.image { _ in
                                     image.draw(in: .init(origin: .zero, size: aspectSize))
                                 }
 

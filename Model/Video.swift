@@ -22,6 +22,6 @@ let files = [
     URL(filePath: Bundle.main.path(forResource: "Reel10", ofType: "mp4") ?? ""),
     URL(filePath: Bundle.main.path(forResource: "Reel11", ofType: "mp4") ?? ""),
     URL(filePath: Bundle.main.path(forResource: "Reel12", ofType: "mp4") ?? ""),
-    URL(filePath: Bundle.main.path(forResource: "Reel13", ofType: "mp4") ?? "")
+    URL(filePath: Bundle.main.path(forResource: "Reel13", ofType: "mp4") ?? ""),
 
-].compactMap({ Video(fileURL: $0) })
+].compactMap { Video(fileURL: $0) }
