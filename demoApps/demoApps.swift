@@ -10,8 +10,8 @@ import SwiftUI
 /// AppleMusicHomeView()
 /// ApplePhotoHomeView()
 /// PinchZoomDemoView()
-// @main
-struct demoApps: App {
+@main
+struct DemoApps: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -19,7 +19,7 @@ struct demoApps: App {
     }
 }
 
-/// a demo app for Timer: https://pomofocus.io/
+// a demo app for Timer: https://pomofocus.io/
 // struct Pomodoro_TimerApp: App {
 //    var body: some Scene {
 //        WindowGroup {

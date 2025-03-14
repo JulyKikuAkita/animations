@@ -170,6 +170,7 @@
 		965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E039F2BCB2C4A00E8A400 /* BookView.swift */; };
 		965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */; };
 		965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E573B2BC5097C00E172B3 /* DropDownView.swift */; };
+		965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
 		96601FEF2C7807DD002C91FB /* SchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FEE2C7807DD002C91FB /* SchemePicker.swift */; };
 		96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */; };
 		9662EF122C3B51E900508B80 /* PicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF112C3B51E900508B80 /* PicItem.swift */; };
@@ -2104,6 +2105,7 @@
 				9621DDBC2BF48B3000183CB7 /* View+Extension.swift in Sources */,
 				9682B6D02CB1D355003D917F /* ColorItem.swift in Sources */,
 				96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */,
+				965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */,
 				9662EF2B2C3E012800508B80 /* Video.swift in Sources */,
 				963B87DC2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */,

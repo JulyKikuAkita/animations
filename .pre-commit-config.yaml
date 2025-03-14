@@ -85,6 +85,6 @@ repos:
       - id: swiftlint
         name: SwiftLint
         description: "Check Swift files for issues with SwiftLint"
-        entry: swiftlint --fix
+        entry: swiftlint --quiet
         language: swift
         types: [swift]
