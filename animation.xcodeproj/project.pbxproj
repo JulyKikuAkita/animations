@@ -171,6 +171,7 @@
 		965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */; };
 		965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E573B2BC5097C00E172B3 /* DropDownView.swift */; };
 		965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
+		965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */; };
 		96601FEF2C7807DD002C91FB /* SchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FEE2C7807DD002C91FB /* SchemePicker.swift */; };
 		96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */; };
 		9662EF122C3B51E900508B80 /* PicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF112C3B51E900508B80 /* PicItem.swift */; };
@@ -479,6 +480,7 @@
 		965E039F2BCB2C4A00E8A400 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectsView.swift; sourceTree = "<group>"; };
 		965E573B2BC5097C00E172B3 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionProMenuBarView.swift; sourceTree = "<group>"; };
 		96601FEE2C7807DD002C91FB /* SchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemePicker.swift; sourceTree = "<group>"; };
 		96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcherView.swift; sourceTree = "<group>"; };
 		9662EF112C3B51E900508B80 /* PicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicItem.swift; sourceTree = "<group>"; };
@@ -851,6 +853,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				965F26FC2D86361B00300420 /* CustomMenu */,
 				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
 				963B862B2CE94F9400C3FB0D /* Slider */,
 				963B85B22CD4369F00C3FB0D /* Snapshot */,
@@ -1141,6 +1144,14 @@
 				9682B7F12CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift */,
 			);
 			path = Carousel;
+			sourceTree = "<group>";
+		};
+		965F26FC2D86361B00300420 /* CustomMenu */ = {
+			isa = PBXGroup;
+			children = (
+				965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */,
+			);
+			path = CustomMenu;
 			sourceTree = "<group>";
 		};
 		9662EF102C3B51D600508B80 /* Model */ = {
@@ -1877,6 +1888,7 @@
 				963B9CFD2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
+				965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */,
 				96F9D1712D5C61C200CD134B /* InfiniteScrollHelper.swift in Sources */,
 				96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
