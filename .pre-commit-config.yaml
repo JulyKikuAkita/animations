@@ -5,7 +5,7 @@
 #
 # Installation:
 #   1. Install pre-commit: `brew install pre-commit`
-#   2. Install hooks: `pre-commit install`
+#   2. Install hooks: `pre-commit install --allow-missing-config`
 #   3. Run `pre-commit --help` for more options.
 #
 # Manually Trigger Hooks:
