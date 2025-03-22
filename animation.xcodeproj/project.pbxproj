@@ -317,6 +317,8 @@
 		96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */; };
 		96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */; };
 		96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7CEE32BE32C5C00F24910 /* TabShape.swift */; };
+		96E948F22D8B8A5000B257B4 /* AnimatedSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E948F12D8B8A5000B257B4 /* AnimatedSpinnerView.swift */; };
+		96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */; };
 		96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */; };
 		96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */; };
@@ -599,6 +601,8 @@
 		96E70B0E2B8EBF3100F23A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96E70B282B8F10CB00F23A51 /* TabStateScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabStateScrollView.swift; sourceTree = "<group>"; };
 		96E7CEE32BE32C5C00F24910 /* TabShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabShape.swift; sourceTree = "<group>"; };
+		96E948F12D8B8A5000B257B4 /* AnimatedSpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedSpinnerView.swift; sourceTree = "<group>"; };
+		96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerButton.swift; sourceTree = "<group>"; };
 		96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAlert.swift; sourceTree = "<group>"; };
 		96EBF5E02BD793B400FDD20D /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
 		96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -853,6 +857,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96E948F02D8B8A3700B257B4 /* Spinner */,
 				965F26FC2D86361B00300420 /* CustomMenu */,
 				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
 				963B862B2CE94F9400C3FB0D /* Slider */,
@@ -1395,10 +1400,19 @@
 			path = Shape;
 			sourceTree = "<group>";
 		};
+		96E948F02D8B8A3700B257B4 /* Spinner */ = {
+			isa = PBXGroup;
+			children = (
+				96E948F12D8B8A5000B257B4 /* AnimatedSpinnerView.swift */,
+			);
+			path = Spinner;
+			sourceTree = "<group>";
+		};
 		96F9A6EB2B9FACC900FD6900 /* Button */ = {
 			isa = PBXGroup;
 			children = (
 				96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */,
+				96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -1905,6 +1919,7 @@
 				962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				963B87DA2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
+				96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */,
 				96E4E5FD2D1788830020261F /* AsyncImageViewer.swift in Sources */,
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */,
@@ -1985,6 +2000,7 @@
 				96B884EA2BDD82B000196125 /* Interpolation.swift in Sources */,
 				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
 				9621D9632BE5F7D100183CB7 /* Tag.swift in Sources */,
+				96E948F22D8B8A5000B257B4 /* AnimatedSpinnerView.swift in Sources */,
 				9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */,
 				962B047A2C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift in Sources */,
 				AB40B84C2C9F60A700BC7747 /* GridTransitionView.swift in Sources */,
