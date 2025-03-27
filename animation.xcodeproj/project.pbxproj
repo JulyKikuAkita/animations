@@ -250,6 +250,7 @@
 		9692220E2D7ACF5800326523 /* KeyPadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692220B2D7ACF5800326523 /* KeyPadModel.swift */; };
 		9692220F2D7ACF5800326523 /* KeyPadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692220B2D7ACF5800326523 /* KeyPadModel.swift */; };
 		969222112D7AD29C00326523 /* View+Extension+Tray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969222102D7AD29C00326523 /* View+Extension+Tray.swift */; };
+		9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */; };
 		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		96976CEE2D50349100643821 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976CED2D50349100643821 /* View+Alert.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
@@ -548,6 +549,7 @@
 		969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFloatingSheetsiOS18View.swift; sourceTree = "<group>"; };
 		9692220B2D7ACF5800326523 /* KeyPadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadModel.swift; sourceTree = "<group>"; };
 		969222102D7AD29C00326523 /* View+Extension+Tray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension+Tray.swift"; sourceTree = "<group>"; };
+		9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaggeredAnimationView.swift; sourceTree = "<group>"; };
 		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
 		96976CED2D50349100643821 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
@@ -903,6 +905,7 @@
 				96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */,
 				96E4E6082D178F510020261F /* AsyncImageViewerViewDemo.swift */,
 				96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */,
+				9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1865,6 +1868,7 @@
 				96E4E35A2D0D72950020261F /* Platform+View+Extension.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
 				96E4DD142CFFDE1F0020261F /* SportItem.swift in Sources */,
+				9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
 				96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */,
 				963B85B42CD436B100C3FB0D /* SnapshotDemoView.swift in Sources */,
