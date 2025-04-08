@@ -208,6 +208,7 @@
 		9662F0312C58BCCF00508B80 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0302C58BCCF00508B80 /* CustomShape.swift */; };
 		9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0302C58BCCF00508B80 /* CustomShape.swift */; };
 		9662F0332C58BCCF00508B80 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0302C58BCCF00508B80 /* CustomShape.swift */; };
+		9666E3D92DA4CD8000244184 /* MicroInteractionSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */; };
 		967049292CC4BDDA0056269C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967049282CC4BDDA0056269C /* ToastView.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
@@ -513,6 +514,7 @@
 		9662F02C2C58482200508B80 /* MetaballAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaballAnimationView.swift; sourceTree = "<group>"; };
 		9662F02E2C58BBBB00508B80 /* MorphingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphingView.swift; sourceTree = "<group>"; };
 		9662F0302C58BCCF00508B80 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
+		9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicroInteractionSlider.swift; sourceTree = "<group>"; };
 		967049282CC4BDDA0056269C /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
@@ -1102,6 +1104,7 @@
 			children = (
 				963B862C2CE94FAD00C3FB0D /* ExpandableSlideriOS18View.swift */,
 				963B862E2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift */,
+				9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */,
 			);
 			path = Slider;
 			sourceTree = "<group>";
@@ -1894,6 +1897,7 @@
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
 				963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */,
 				968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */,
+				9666E3D92DA4CD8000244184 /* MicroInteractionSlider.swift in Sources */,
 				969222112D7AD29C00326523 /* View+Extension+Tray.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */,
