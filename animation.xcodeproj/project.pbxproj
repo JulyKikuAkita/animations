@@ -330,6 +330,7 @@
 		96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */; };
 		96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */; };
 		96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9FB862BB3F17B00C35779 /* SegmentControl.swift */; };
+		96FCA64E2DA8D9CA00774FB7 /* PopOutMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */; };
 		96FF50972B92FE1700B36142 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50962B92FE1700B36142 /* GridView.swift */; };
 		96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50982B94427000B36142 /* PlayerAnimationView.swift */; };
 		96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509A2B94465700B36142 /* PlayerItem.swift */; };
@@ -618,6 +619,7 @@
 		96F9D1732D5C6AB200CD134B /* TitleTextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextRenderer.swift; sourceTree = "<group>"; };
 		96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealRenderer.swift; sourceTree = "<group>"; };
 		96F9FB862BB3F17B00C35779 /* SegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControl.swift; sourceTree = "<group>"; };
+		96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOutMenuView.swift; sourceTree = "<group>"; };
 		96FF50962B92FE1700B36142 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		96FF50982B94427000B36142 /* PlayerAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnimationView.swift; sourceTree = "<group>"; };
 		96FF509A2B94465700B36142 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
@@ -1163,6 +1165,7 @@
 			isa = PBXGroup;
 			children = (
 				965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */,
+				96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */,
 			);
 			path = CustomMenu;
 			sourceTree = "<group>";
@@ -1876,6 +1879,7 @@
 				96E4DD142CFFDE1F0020261F /* SportItem.swift in Sources */,
 				9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
+				96FCA64E2DA8D9CA00774FB7 /* PopOutMenuView.swift in Sources */,
 				96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */,
 				963B85B42CD436B100C3FB0D /* SnapshotDemoView.swift in Sources */,
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
