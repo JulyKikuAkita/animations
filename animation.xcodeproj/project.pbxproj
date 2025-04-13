@@ -334,6 +334,8 @@
 		96FCA7572DAC49A100774FB7 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7562DAC49A100774FB7 /* SkeletonView.swift */; };
 		96FCA7592DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */; };
 		96FCA75A2DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */; };
+		96FCA7D22DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7D12DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift */; };
+		96FCA7D42DAC641200774FB7 /* SkeletonViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7D32DAC641200774FB7 /* SkeletonViewModifier.swift */; };
 		96FF50972B92FE1700B36142 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50962B92FE1700B36142 /* GridView.swift */; };
 		96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50982B94427000B36142 /* PlayerAnimationView.swift */; };
 		96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509A2B94465700B36142 /* PlayerItem.swift */; };
@@ -625,6 +627,8 @@
 		96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOutMenuView.swift; sourceTree = "<group>"; };
 		96FCA7562DAC49A100774FB7 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncImageViewerView+SkeletonviewDemo.swift"; sourceTree = "<group>"; };
+		96FCA7D12DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkeletonView+RedacttDemo.swift"; sourceTree = "<group>"; };
+		96FCA7D32DAC641200774FB7 /* SkeletonViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonViewModifier.swift; sourceTree = "<group>"; };
 		96FF50962B92FE1700B36142 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		96FF50982B94427000B36142 /* PlayerAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnimationView.swift; sourceTree = "<group>"; };
 		96FF509A2B94465700B36142 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
@@ -919,6 +923,8 @@
 				96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */,
 				9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */,
 				96FCA7562DAC49A100774FB7 /* SkeletonView.swift */,
+				96FCA7D32DAC641200774FB7 /* SkeletonViewModifier.swift */,
+				96FCA7D12DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1862,6 +1868,7 @@
 				96F9D16F2D5C41E000CD134B /* InfiniteScrollView.swift in Sources */,
 				9682B6D12CB1D355003D917F /* ColorItem.swift in Sources */,
 				963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */,
+				96FCA7D22DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift in Sources */,
 				961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */,
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
@@ -1928,6 +1935,7 @@
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
 				965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */,
 				96F9D1712D5C61C200CD134B /* InfiniteScrollHelper.swift in Sources */,
+				96FCA7D42DAC641200774FB7 /* SkeletonViewModifier.swift in Sources */,
 				96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
