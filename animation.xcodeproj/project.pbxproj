@@ -331,6 +331,9 @@
 		96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */; };
 		96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9FB862BB3F17B00C35779 /* SegmentControl.swift */; };
 		96FCA64E2DA8D9CA00774FB7 /* PopOutMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */; };
+		96FCA7572DAC49A100774FB7 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7562DAC49A100774FB7 /* SkeletonView.swift */; };
+		96FCA7592DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */; };
+		96FCA75A2DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */; };
 		96FF50972B92FE1700B36142 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50962B92FE1700B36142 /* GridView.swift */; };
 		96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF50982B94427000B36142 /* PlayerAnimationView.swift */; };
 		96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509A2B94465700B36142 /* PlayerItem.swift */; };
@@ -620,6 +623,8 @@
 		96F9D1752D5C6ADA00CD134B /* RevealRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealRenderer.swift; sourceTree = "<group>"; };
 		96F9FB862BB3F17B00C35779 /* SegmentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControl.swift; sourceTree = "<group>"; };
 		96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOutMenuView.swift; sourceTree = "<group>"; };
+		96FCA7562DAC49A100774FB7 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
+		96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncImageViewerView+SkeletonviewDemo.swift"; sourceTree = "<group>"; };
 		96FF50962B92FE1700B36142 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		96FF50982B94427000B36142 /* PlayerAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnimationView.swift; sourceTree = "<group>"; };
 		96FF509A2B94465700B36142 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
@@ -910,8 +915,10 @@
 				96E4DEAC2D06619D0020261F /* GesturesView.swift */,
 				96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */,
 				96E4E6082D178F510020261F /* AsyncImageViewerViewDemo.swift */,
+				96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */,
 				96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */,
 				9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */,
+				96FCA7562DAC49A100774FB7 /* SkeletonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1907,6 +1914,7 @@
 				963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
 				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
+				96FCA7592DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */,
 				9621DC812BEF461400183CB7 /* PhotoItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
 				9692220A2D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift in Sources */,
@@ -1943,6 +1951,7 @@
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
 				963B862D2CE94FAD00C3FB0D /* ExpandableSlideriOS18View.swift in Sources */,
+				96FCA7572DAC49A100774FB7 /* SkeletonView.swift in Sources */,
 				96601FEF2C7807DD002C91FB /* SchemePicker.swift in Sources */,
 				9684833D2BCF62C50023FE2B /* Particle.swift in Sources */,
 				963B846E2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlaer.swift in Sources */,
@@ -2032,6 +2041,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96FCA75A2DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */,
 				963B84732CCC5A1D00C3FB0D /* PanGesture.swift in Sources */,
 				9662EFF22C4B579C00508B80 /* OtherContents.swift in Sources */,
 				96AC81002C84FFF900ABBE78 /* Control.swift in Sources */,

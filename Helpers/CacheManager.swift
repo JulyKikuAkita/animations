@@ -11,8 +11,7 @@
 import SwiftData
 import SwiftUI
 
-// @main
-struct CahceManagerTestApp: App {
+struct CacheManagerTestApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

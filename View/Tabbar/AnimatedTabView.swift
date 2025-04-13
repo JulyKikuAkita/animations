@@ -4,7 +4,6 @@
 
 import SwiftUI
 
-// @main
 struct TabbarAnimationApp: App {
     var body: some Scene {
         WindowGroup {
@@ -108,13 +107,13 @@ struct AnimatedTabView: View {
             .padding(.horizontal, 15)
             .padding(.bottom, 20)
 
-            CustomTabBar()
+            customTabBar()
         }
     }
 
     /// Custom Tab Bar
     @ViewBuilder
-    func CustomTabBar() -> some View {
+    func customTabBar() -> some View {
         HStack(spacing: 0) {
             ForEach($allTabs) { $animatedTab in
                 let tab = animatedTab.tab

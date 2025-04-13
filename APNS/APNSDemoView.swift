@@ -4,11 +4,11 @@
 //
 // route notification link
 // 1. use navigation link
-// 2. Use deep link to route notification is not limited to navigation path, we can route to any pages, sheets, alerts, dialogs, etc.
+// 2. Use deep link to route notification is not limited to navigation path,
+// we can route to any pages, sheets, alerts, dialogs, etc.
 //
 import SwiftUI
 
-// @main
 struct APNSDemoAPNSDemoView: App {
     @UIApplicationDelegateAdaptor(AppData.self) private var appData
     var body: some Scene {
@@ -29,19 +29,24 @@ struct APNSDemoAPNSDemoView: App {
 class AppData: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var mainPageNavigationPath: [String] = []
 
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(
+        _: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
         UNUserNotificationCenter.current().delegate = self
         return true
     }
 
-    func userNotificationCenter(_: UNUserNotificationCenter, willPresent _: UNNotification) async -> UNNotificationPresentationOptions {
+    func userNotificationCenter(
+        _: UNUserNotificationCenter,
+        willPresent _: UNNotification
+    ) async -> UNNotificationPresentationOptions {
         /// showing alert even when app is active
         [.sound, .banner]
     }
 
+    /// Use navigation link to route notification link
     func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         if let pageLink = response.notification.request.content.userInfo["pageLink"] as? String {
-            /// Use navigation link to route notification link
 //            if mainPageNavigationPath.last != pageLink {
 //                /// optional: mainPageNavigationPath = [] if want to remove all previous pages
 //               /// push new page
