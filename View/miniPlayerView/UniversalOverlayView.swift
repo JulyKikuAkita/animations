@@ -5,8 +5,6 @@
 import AVKit
 import SwiftUI
 
-// example
-// @main
 struct UniversalViewApp: App {
     var body: some Scene {
         WindowGroup {
@@ -65,7 +63,7 @@ struct FloatingVideoPlayerView: View {
             let size = $0.size
 
             Group {
-                if let videoURL {
+                if videoURL != nil {
                     VideoPlayer(player: player)
                         .background(.black)
                         .clipShape(.rect(cornerRadius: 25))
@@ -230,6 +228,7 @@ struct RootView<Content: View>: View {
             .onAppear {
                 if let windowScene = (UIApplication.shared.connectedScenes.first as? UIWindowScene),
                    properties.window == nil
+                // swiftlint:disable:next opening_brace
                 {
                     let window = PassthroughWindow(windowScene: windowScene) // for interacting with overlay view
                     window.isHidden = false

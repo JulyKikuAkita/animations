@@ -4,7 +4,6 @@
 
 import SwiftUI
 
-// @main
 struct DynamicSheetApp: App {
     var body: some Scene {
         WindowGroup {
@@ -61,10 +60,10 @@ struct DynamicSheetView: View {
                 ScrollViewReader(content: { proxy in
                     ScrollView(.horizontal) {
                         HStack(alignment: .top, spacing: 0) {
-                            OnBoardingView(size)
+                            onBoardingView(size)
                                 .id("First Page")
 
-                            LoginView(size)
+                            loginView(size)
                                 .id("Second Page")
                         }
                         /// required for paging scrollview
@@ -82,9 +81,9 @@ struct DynamicSheetView: View {
                                 }
                             } else {
                                 /// implementation for continue button
-                                //                                withAnimation(.snappy) {
-                                //                                    showSheet.toggle()
-                                //                                }
+                                withAnimation(.snappy) {
+                                    showSheet.toggle()
+                                }
                             }
                         }, label: {
                             Text("Continue")
@@ -140,7 +139,7 @@ struct DynamicSheetView: View {
 
     /// First View for Sheet
     @ViewBuilder
-    func OnBoardingView(_ size: CGSize) -> some View {
+    func onBoardingView(_ size: CGSize) -> some View {
         VStack(alignment: .leading, spacing: 12, content: {
             Text("Know Everything\nabout the Abyss")
                 .font(.largeTitle.bold())
@@ -176,7 +175,8 @@ struct DynamicSheetView: View {
 
     /// Second View for Sheet
     @ViewBuilder
-    func LoginView(_ size: CGSize) -> some View {
+    // swiftlint:disable:next function_body_length
+    func loginView(_ size: CGSize) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Descend to the Abyss")
                 .minimumScaleFactor(0.9)
@@ -231,13 +231,16 @@ struct DynamicSheetView: View {
                 .padding(.bottom, hasAccount ? 0 : 15)
 
                 if !hasAccount {
-                    Text("By signing up, you're agreeing to out **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)**")
-                        .font(.caption)
-                        /// Markup content will be red
-                        .tint(.red)
-                        /// Other text be gray
-                        .foregroundStyle(.gray)
-                        .transition(.offset(y: 100))
+                    Text("""
+                    By signing up, you're agreeing to out
+                    **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)***
+                    """)
+                    .font(.caption)
+                    /// Markup content will be red
+                    .tint(.red)
+                    /// Other text be gray
+                    .foregroundStyle(.gray)
+                    .transition(.offset(y: 100))
                 }
                 // testing
 //                Text("\(sheetScrollProgress)")

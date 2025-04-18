@@ -5,7 +5,6 @@
 import SwiftData
 import SwiftUI
 
-// @main
 struct ColorNotes: App {
     var body: some Scene {
         WindowGroup {
@@ -31,19 +30,16 @@ struct GridTransitionView: View {
     @FocusState private var isKeyboardActive: Bool
     @State private var titleNoteSize: CGSize = .zero
 
-    /// Swift data
-//    @Query(sort: [.init(\Note.dateCreated, order: .reverse)], animation: .snappy)
-//    private var notes: [Note] /// no need for state object as swift data model directly update to the object
     @Environment(\.modelContext) private var context
     var body: some View {
         SearchQueryView(searchText: searchText) { notes in
             ScrollView(.vertical) {
                 VStack(spacing: 20) {
-                    SearchBar()
+                    searchBar()
 
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2)) {
                         ForEach(notes) { note in
-                            CardView(note)
+                            cardView(note)
                                 .frame(height: 160)
                                 .onTapGesture {
                                     guard selectedNote == nil else { return }
@@ -63,7 +59,9 @@ struct GridTransitionView: View {
             .overlay {
                 GeometryReader { proxy in
                     let size = proxy.size
-                    // need forEach to make sure selectNote == nil while transition won't confuse geoMatched animation (seeing prev card transition is still in progress then the next selected card transition start and overlapped)
+                    // need forEach to make sure selectNote == nil while transition won't confuse geoMatched animation
+                    // (seeing prev card transition is still in progress then
+                    // the next selected card transition start and overlapped)
                     ForEach(notes) { note in
                         if note.id == selectedNote?.id, animateView {
                             DetailView(size: size, titleNoteSize: titleNoteSize, animation: animation, note: note)
@@ -73,14 +71,14 @@ struct GridTransitionView: View {
                 }
             }
             .safeAreaInset(edge: .bottom, spacing: 0) {
-                BottomBar()
+                bottomBar()
             }
             .focused($isKeyboardActive) // this modifier applies to detailView which has text field too
         }
     }
 
     @ViewBuilder
-    func SearchBar() -> some View {
+    func searchBar() -> some View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
 
@@ -94,7 +92,7 @@ struct GridTransitionView: View {
     /// matchedGeometry effect must be presented only one  in a view
     ///  thus when we show destination view, we must also hide the source view without it's modifying size/position
     @ViewBuilder
-    func CardView(_ note: Note) -> some View {
+    func cardView(_ note: Note) -> some View {
         ZStack {
             /// expanded
             if selectedNote?.id == note.id, animateView {
@@ -118,7 +116,8 @@ struct GridTransitionView: View {
     }
 
     @ViewBuilder
-    func BottomBar() -> some View {
+    // swiftlint:disable:next function_body_length
+    func bottomBar() -> some View {
         HStack(spacing: 15) {
             Group {
                 if !isKeyboardActive {
@@ -129,7 +128,8 @@ struct GridTransitionView: View {
                             selectedNote?.allowsHitTesting = false
                             deleteNote = selectedNote
                             withAnimation(
-                                noteAnimation.logicallyComplete(after: 0.1), /// noteAnimation is spring based thus need some delay
+                                /// noteAnimation is spring based thus need some delay
+                                noteAnimation.logicallyComplete(after: 0.1),
                                 completionCriteria: .logicallyComplete
                             ) {
                                 selectedNote = nil
@@ -161,20 +161,18 @@ struct GridTransitionView: View {
 
                 if selectedNote != nil, !isKeyboardActive {
                     Button {
-                        // no more need this when using swift data as it's reflecting to object direclty
-                        //                    if let index = notes.firstIndex(where: { $0.id == selectedNote?.id }) {
-                        //                        notes[index].allowsHitTesting = false
-                        //                    }
                         selectedNote?.allowsHitTesting = false
 
                         if let selectedNote,
                            selectedNote.title.isEmpty, selectedNote.content.isEmpty
+                        // swiftlint:disable:next opening_brace
                         {
                             deleteNote = selectedNote
                         }
 
                         withAnimation(
-                            noteAnimation.logicallyComplete(after: 0.1), /// noteAnimation is spring based thus need some delay
+                            /// noteAnimation is spring based thus need some delay
+                            noteAnimation.logicallyComplete(after: 0.1),
                             completionCriteria: .logicallyComplete
                         ) {
                             selectedNote = nil
@@ -200,19 +198,20 @@ struct GridTransitionView: View {
         }
         .overlay {
             if selectedNote != nil, !isKeyboardActive {
-                CardColorPicker()
+                cardColorPicker()
                     .transition(.blurReplace)
             }
         }
         .padding(.horizontal, 15)
         .padding(.vertical, isKeyboardActive ? 8 : 15)
         .background(.bar)
-        .animation(noteAnimation, value: selectedNote != nil) /// limited trigger of animation only when selectedNote is nil or not nil
+        /// limited trigger of animation only when selectedNote is nil or not nil
+        .animation(noteAnimation, value: selectedNote != nil)
         .animation(noteAnimation, value: isKeyboardActive)
     }
 
     @ViewBuilder
-    func CardColorPicker() -> some View {
+    func cardColorPicker() -> some View {
         let colorString = ["AI_grn", "AI_pink"]
         HStack(spacing: 10) {
             ForEach(1 ... colorString.count, id: \.self) { index in
@@ -296,7 +295,7 @@ struct DetailView: View {
                     .opacity(animateLayers ? 0 : 1)
             }
             .overlay {
-                NotesContent()
+                notesContent()
             }
             .clipShape(.rect(cornerRadius: animateLayers ? 0 : 10))
             .matchedGeometryEffect(id: note.id, in: animation)
@@ -310,7 +309,7 @@ struct DetailView: View {
     }
 
     @ViewBuilder
-    func NotesContent() -> some View {
+    func notesContent() -> some View {
         GeometryReader {
             let currentSize: CGSize = $0.size
             // let safeArea = $0.safeAreaInsets // not always work, use UIKit way below
@@ -336,7 +335,8 @@ struct DetailView: View {
             .tint(.black)
             .padding(15)
             .padding(.top, safeArea.top)
-            .frame(width: size.width, height: size.height) // align the size at top to avoid text wrapping during view expanding
+            // align the size at top to avoid text wrapping during view expanding
+            .frame(width: size.width, height: size.height)
             .frame(
                 width: currentSize.width,
                 height: currentSize.height,

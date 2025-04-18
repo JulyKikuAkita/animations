@@ -5,7 +5,6 @@
 
 import SwiftUI
 
-// @main
 struct FloatingTabBarApp: App {
     var body: some Scene {
         WindowGroup {
@@ -43,7 +42,7 @@ struct FloatingTabBarDemoView: View {
                                 .toolbarVisibility(.hidden, for: .tabBar)
                         }
                     }
-                } else { // switch tab bar at iOS17.3/4 has some glitch (https://www.youtube.com/watch?v=JOZv3C1yj7w at 3:15)
+                } else {
                     // Thus need to use UITabbarController to hide the tab bar
                     // Instead of just modifier .toolbar(.hidden, for: .tabBar)
                     TabView(selection: $activeTab) {

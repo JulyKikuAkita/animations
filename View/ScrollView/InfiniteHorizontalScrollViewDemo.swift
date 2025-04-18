@@ -3,7 +3,6 @@
 //  animation
 import SwiftUI
 
-@main
 struct InfiniteHorizontalScrollApp: App {
     var body: some Scene {
         WindowGroup {
@@ -31,13 +30,13 @@ struct InfiniteHorizontalScrollView: View {
 
     var body: some View {
         ZStack {
-            AmbientBackground()
+            ambientBackground()
                 .animation(.easeInOut(duration: 1), value: activeCard)
 
             VStack(spacing: 40) {
                 InfiniteScrollView {
                     ForEach(firstSetCards) { card in
-                        CarouselCardView(card)
+                        carouselCardView(card)
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -77,11 +76,15 @@ struct InfiniteHorizontalScrollView: View {
                         .textRenderer(TitleTextRenderer(progress: titleProgress))
                         .padding(.bottom, 12)
 
-                    Text("Create beautiful invitations for all your events.\nAnyone can receive invitations. Sending included\n with iCloud+.")
-                        .font(.callout)
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(.white.secondary)
-                        .blurOpacityEffect(initialAnimation)
+                    Text("""
+                    Create beautiful invitations for all your events.
+                    Anyone can receive invitations.
+                    Sending included\n with iCloud+.
+                    """)
+                    .font(.callout)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.white.secondary)
+                    .blurOpacityEffect(initialAnimation)
                 }
 
                 Button {
@@ -117,7 +120,7 @@ struct InfiniteHorizontalScrollView: View {
     }
 
     @ViewBuilder
-    private func AmbientBackground() -> some View {
+    private func ambientBackground() -> some View {
         GeometryReader {
             let size = $0.size
 
@@ -141,7 +144,7 @@ struct InfiniteHorizontalScrollView: View {
     }
 
     @ViewBuilder
-    private func CarouselCardView(_ card: Card) -> some View {
+    private func carouselCardView(_ card: Card) -> some View {
         GeometryReader {
             let size = $0.size
 
