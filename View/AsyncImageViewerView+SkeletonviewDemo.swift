@@ -4,7 +4,7 @@
 //
 import SwiftUI
 
-@main
+// @main
 struct AsyncImageSkeletonViewDemo: App {
     var body: some Scene {
         WindowGroup {
