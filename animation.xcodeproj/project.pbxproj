@@ -10,6 +10,7 @@
 		9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600DE502BA17D1800205DE9 /* CustomToast.swift */; };
 		9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9F82B8AB73400F91C21 /* BasicProfileAnimationView.swift */; };
 		9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */; };
+		9609D93B2DB4B54900A76F95 /* LocationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609D93A2DB4B54900A76F95 /* LocationPicker.swift */; };
 		9613D7202C7BE43E007FF2E7 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
 		9613D7212C7BE445007FF2E7 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0242C583FB600508B80 /* LandingView.swift */; };
 		9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */; };
@@ -378,6 +379,7 @@
 		9600DE502BA17D1800205DE9 /* CustomToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToast.swift; sourceTree = "<group>"; };
 		9603C9F82B8AB73400F91C21 /* BasicProfileAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicProfileAnimationView.swift; sourceTree = "<group>"; };
 		9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroItemView.swift; sourceTree = "<group>"; };
+		9609D93A2DB4B54900A76F95 /* LocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPicker.swift; sourceTree = "<group>"; };
 		9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayStationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961868B72BC7A78700552748 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
@@ -736,9 +738,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9609D9392DB4B53200A76F95 /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				9609D93A2DB4B54900A76F95 /* LocationPicker.swift */,
+			);
+			path = CoreLocation;
+			sourceTree = "<group>";
+		};
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9609D9392DB4B53200A76F95 /* CoreLocation */,
 				96E36A452DB217F900A8EFBA /* Monitor */,
 				9680C91D2D6AFAB7005FC80D /* Transition */,
 				96F9D1722D5C6A9600CD134B /* TextRender */,
@@ -2021,6 +2032,7 @@
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
 				962B04762C215176008E1E5D /* Pixellate.metal in Sources */,
+				9609D93B2DB4B54900A76F95 /* LocationPicker.swift in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				961BD7692CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift in Sources */,
@@ -2440,6 +2452,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = animation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Request permission to location access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2469,6 +2482,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = animation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Request permission to location access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
