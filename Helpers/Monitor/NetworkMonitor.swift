@@ -6,7 +6,7 @@ import Network
 import SwiftUI
 
 // need to pass the environment to the entry point
-@main
+// @main
 struct NetworkMonitorDemoApp: App {
     @StateObject private var networkMonitor = NetworkMonitor()
     var body: some Scene {

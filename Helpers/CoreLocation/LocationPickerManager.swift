@@ -26,7 +26,7 @@ struct LocationPickerView: View {
                         searchResultView()
 
                         mapView()
-                            .safeAreaInset(edge: .top, spacing: 0) {
+                            .safeAreaInset(edge: .bottom, spacing: 0) {
                                 selectLocationButton()
                             }
                             .opacity(manager.showSearchResults ? 0 : 1)
@@ -53,7 +53,7 @@ struct LocationPickerView: View {
     func searchCardView(_ mark: MKPlacemark) -> some View {
         VStack(spacing: 10) {
             HStack(spacing: 10) {
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text(mark.name ?? "")
                     Text(mark.title ?? mark.subtitle ?? "")
                         .font(.caption)
@@ -72,6 +72,7 @@ struct LocationPickerView: View {
         }
         .contentShape(.rect)
         .onTapGesture {
+            isKeyboardActive = false
             manager.updateMapPosition(to: mark)
         }
     }
@@ -83,13 +84,17 @@ struct LocationPickerView: View {
                     searchCardView(mark)
                 }
             }
+            .padding(15)
         }
         .frame(maxWidth: .infinity)
         .background(.background)
     }
 
     func selectLocationButton() -> some View {
-        Button {} label: {
+        Button {
+            isPresented = false
+            coordinate(selectedCoordinates)
+        } label: {
             Text("Select Location")
                 .fontWeight(.semibold)
                 .foregroundStyle(.primary)
@@ -108,7 +113,12 @@ struct LocationPickerView: View {
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .leading) {
                     Button {
-                        isPresented = false
+                        if manager.showSearchResults {
+                            manager.clearSearchResults()
+                            manager.showSearchResults = false
+                        } else {
+                            isPresented = false
+                        }
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.title3)
@@ -129,7 +139,6 @@ struct LocationPickerView: View {
                     .onSubmit {
                         /// close the view if search text is empty
                         if manager.searchText.isEmpty {
-                            isKeyboardActive = false
                             manager.clearSearchResults()
                         } else {
                             manager.searchForPlaces()
@@ -143,9 +152,8 @@ struct LocationPickerView: View {
                     .contentShape(.rect)
 
                 if manager.showSearchResults {
-                    /// clear search result and close search result view
+                    /// clear button at end of search textfield
                     Button {
-                        isKeyboardActive = false
                         manager.clearSearchResults()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
@@ -168,10 +176,10 @@ struct LocationPickerView: View {
 
     func mapView() -> some View {
         Map(position: $manager.position) {
-            /// For testing
-            if let selectedCoordinates {
-                Marker("selected", coordinate: selectedCoordinates)
-            }
+            /// testing, mark on coordinate
+//            if let selectedCoordinates {
+//                Marker("selected", coordinate: selectedCoordinates)
+//            }
             UserAnnotation()
         }
         .mapControls {
@@ -181,11 +189,12 @@ struct LocationPickerView: View {
         }
         .overlay {
             // draw a pin on search result placemark
-            Image(systemName: "pin.fill")
+            Image(systemName: "mappin.and.ellipse")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 35, height: 35)
-                .foregroundStyle(.bar)
+                .foregroundStyle(.red.gradient)
+                .shadow(radius: 4)
                 /// centering the pin
                 .offset(y: -17)
                 .allowsHitTesting(false)
@@ -277,7 +286,7 @@ private class LocationManager: NSObject, ObservableObject, CLLocationManagerDele
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinates = locations.first?.coordinate else { return }
 
         /// Updating user coordinates and map camera position
@@ -317,12 +326,11 @@ private class LocationManager: NSObject, ObservableObject, CLLocationManagerDele
     func clearSearchResults() {
         searchText = ""
         searchResultsPlaceMarks = []
-        showSearchResults = false
     }
 
     func updateMapPosition(to placemark: MKPlacemark) {
         let coordinates = placemark.coordinate
-        let region = MKCoordinateRegion(center: coordinates, latitudinalMeters: 100, longitudinalMeters: 100)
+        let region = MKCoordinateRegion(center: coordinates, latitudinalMeters: 700, longitudinalMeters: 700)
         position = .region(region)
         selectedPlaceMark = placemark
         showSearchResults = false

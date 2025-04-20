@@ -8,13 +8,21 @@ import SwiftUI
 
 struct LocationPickerDemoView: View {
     @State private var showPicker: Bool = false
+    @State private var selectedLocation: CLLocationCoordinate2D?
     var body: some View {
         NavigationStack {
             List {
                 Button("Pick a Location") {
                     showPicker.toggle()
                 }
-                .locationPicker(isPresented: $showPicker) { _ in
+                .locationPicker(isPresented: $showPicker) { coordinate in
+                    if let coordinate {
+                        selectedLocation = coordinate
+                    }
+                }
+
+                if let selectedLocation {
+                    Text("Selected Location: \(selectedLocation)")
                 }
             }
             .navigationTitle("Custom Location Picker")
