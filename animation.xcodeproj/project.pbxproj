@@ -12,6 +12,7 @@
 		9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */; };
 		9609D93B2DB4B54900A76F95 /* LocationPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609D93A2DB4B54900A76F95 /* LocationPickerManager.swift */; };
 		9609D93E2DB591F800A76F95 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609D93D2DB591F800A76F95 /* LocationPickerView.swift */; };
+		9609DB192DBB2D1400A76F95 /* InlineToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609DB182DBB2D1400A76F95 /* InlineToastView.swift */; };
 		9613D7202C7BE43E007FF2E7 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
 		9613D7212C7BE445007FF2E7 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0242C583FB600508B80 /* LandingView.swift */; };
 		9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */; };
@@ -382,6 +383,7 @@
 		9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroItemView.swift; sourceTree = "<group>"; };
 		9609D93A2DB4B54900A76F95 /* LocationPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerManager.swift; sourceTree = "<group>"; };
 		9609D93D2DB591F800A76F95 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
+		9609DB182DBB2D1400A76F95 /* InlineToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineToastView.swift; sourceTree = "<group>"; };
 		9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayStationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961868B72BC7A78700552748 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
@@ -756,6 +758,15 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		9609DB172DBB2CC300A76F95 /* ToastView */ = {
+			isa = PBXGroup;
+			children = (
+				967049282CC4BDDA0056269C /* ToastView.swift */,
+				9609DB182DBB2D1400A76F95 /* InlineToastView.swift */,
+			);
+			path = ToastView;
+			sourceTree = "<group>";
+		};
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -897,6 +908,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9609DB172DBB2CC300A76F95 /* ToastView */,
 				9609D93C2DB591DB00A76F95 /* Map */,
 				96E948F02D8B8A3700B257B4 /* Spinner */,
 				965F26FC2D86361B00300420 /* CustomMenu */,
@@ -936,7 +948,6 @@
 				96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */,
 				96AC82F12C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift */,
 				96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */,
-				967049282CC4BDDA0056269C /* ToastView.swift */,
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
 				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
 				96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */,
@@ -1905,6 +1916,7 @@
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
+				9609DB192DBB2D1400A76F95 /* InlineToastView.swift in Sources */,
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
 				963B862A2CE9495900C3FB0D /* EffectViewModifier.swift in Sources */,
 				9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */,

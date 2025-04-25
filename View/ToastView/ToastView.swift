@@ -27,14 +27,14 @@ struct ToastDemoView: View {
     func showToast() {
         withAnimation(.bouncy) {
             let toast = ToastContentView { id in
-                ToastView(id)
+                toastView(id)
             }
             toasts.append(toast)
         }
     }
 
     @ViewBuilder
-    func ToastView(_ id: String) -> some View {
+    func toastView(_ id: String) -> some View {
         HStack(spacing: 12) {
             Image(systemName: "square.and.arrow.up.fill")
 
