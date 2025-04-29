@@ -162,9 +162,9 @@ struct LoopingStackCardView<Content: View>: View {
 extension SubviewsCollection {
     /// e.g., given array = [1, 2, 3, 4, 5], rotate by 2 steps
     /// the result is [3, 4, 5, 1, 2]
-    func rotateFromLeft(by: Int) -> [SubviewsCollection.Element] {
+    func rotateFromLeft(by amount: Int) -> [SubviewsCollection.Element] {
         guard !isEmpty else { return [] }
-        let moveIndex = by % count
+        let moveIndex = amount % count
         let rotatedElements = Array(self[moveIndex...]) + Array(self[0 ..< moveIndex])
         return rotatedElements
     }

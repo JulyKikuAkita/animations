@@ -14,9 +14,9 @@ struct ImageWithAmbientBackgroundDemoView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 15) {
-                HeaderView()
+                headerView()
 
-                CarouselView()
+                carouselView()
                     /// placing at the lowest level of all views
                     .zIndex(-1)
             }
@@ -39,8 +39,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
         }
     }
 
-    @ViewBuilder
-    func HeaderView() -> some View {
+    func headerView() -> some View {
         HStack {
             Image(systemName: "xbox.logo")
                 .font(.system(size: 35))
@@ -71,8 +70,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
         .padding(.bottom, 15)
     }
 
-    @ViewBuilder
-    func CarouselView() -> some View {
+    func carouselView() -> some View {
         let spacing: CGFloat = 10
         ScrollView(.horizontal) {
             LazyHStack(spacing: spacing) {
@@ -89,7 +87,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
             .scrollTargetLayout()
         }
         .frame(height: 380)
-        .background(BackdropCarouselView())
+        .background(backdropCarouselView())
         .scrollIndicators(.hidden)
         .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
         /// match background image with the current scroll image
@@ -105,7 +103,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
     }
 
     @ViewBuilder
-    func BackdropCarouselView() -> some View {
+    func backdropCarouselView() -> some View {
         GeometryReader {
             let size = $0.size
 
@@ -129,14 +127,16 @@ struct ImageWithAmbientBackgroundDemoView: View {
             }
             .mask {
                 Rectangle()
-                    .fill(.linearGradient(colors: [
-                        .black,
-                        .black,
-                        .black,
-                        .black,
-                        .black.opacity(0.5),
-                        .clear,
-                    ], startPoint: .top, endPoint: .bottom))
+                    .fill(.linearGradient(
+                        colors: [
+                            .black,
+                            .black,
+                            .black,
+                            .black,
+                            .black.opacity(0.5),
+                            .clear,
+                        ], startPoint: .top, endPoint: .bottom
+                    ))
             }
         }
         /// so that the view can occupies the full available width

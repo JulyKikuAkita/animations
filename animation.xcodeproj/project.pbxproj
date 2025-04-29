@@ -952,10 +952,8 @@
 				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
 				96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */,
 				96E4DEAC2D06619D0020261F /* GesturesView.swift */,
-				96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */,
 				96E4E6082D178F510020261F /* AsyncImageViewerViewDemo.swift */,
 				96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */,
-				96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */,
 				9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */,
 				96FCA7562DAC49A100774FB7 /* SkeletonView.swift */,
 				96FCA7D32DAC641200774FB7 /* SkeletonViewModifier.swift */,
@@ -1205,6 +1203,8 @@
 				9662F0102C50854400508B80 /* ImageCarouselView.swift */,
 				9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */,
 				9682B7F12CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift */,
+				96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */,
+				96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */,
 			);
 			path = Carousel;
 			sourceTree = "<group>";
