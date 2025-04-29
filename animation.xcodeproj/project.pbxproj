@@ -126,6 +126,7 @@
 		96352D542C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */; };
 		96352D552C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */; };
 		96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */; };
+		9636EE9A2DC16E4F00A0E5A0 /* MarqueeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636EE992DC16E4E00A0E5A0 /* MarqueeTextView.swift */; };
 		963B846E2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlaer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B846D2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlaer.swift */; };
 		963B84712CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B84702CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift */; };
 		963B84732CCC5A1D00C3FB0D /* PanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B84722CCC5A1D00C3FB0D /* PanGesture.swift */; };
@@ -456,6 +457,7 @@
 		96352D4E2C0ED814001AD2FD /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCircularCarouselView.swift; sourceTree = "<group>"; };
 		96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlitchTextEffectView.swift; sourceTree = "<group>"; };
+		9636EE992DC16E4E00A0E5A0 /* MarqueeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeTextView.swift; sourceTree = "<group>"; };
 		963B846D2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlaer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniversalOverlayView+AppleMusicMiniPlaer.swift"; sourceTree = "<group>"; };
 		963B84702CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMusicPlayerView.swift; sourceTree = "<group>"; };
 		963B84722CCC5A1D00C3FB0D /* PanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGesture.swift; sourceTree = "<group>"; };
@@ -1323,6 +1325,7 @@
 				96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */,
 				962B04722C214C03008E1E5D /* PixellateTextView.swift */,
 				962B04752C215176008E1E5D /* Pixellate.metal */,
+				9636EE992DC16E4E00A0E5A0 /* MarqueeTextView.swift */,
 			);
 			path = TextEffectView;
 			sourceTree = "<group>";
@@ -1996,6 +1999,7 @@
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */,
 				96E4E6092D178F510020261F /* AsyncImageViewerViewDemo.swift in Sources */,
+				9636EE9A2DC16E4F00A0E5A0 /* MarqueeTextView.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
 				963B862D2CE94FAD00C3FB0D /* ExpandableSlideriOS18View.swift in Sources */,

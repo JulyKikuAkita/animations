@@ -72,7 +72,7 @@ struct ImageWithAmbientBackgroundDemoView: View {
 
     func carouselView() -> some View {
         let spacing: CGFloat = 10
-        ScrollView(.horizontal) {
+        return ScrollView(.horizontal) {
             LazyHStack(spacing: spacing) {
                 ForEach(images) { model in
                     Image(model.image)
