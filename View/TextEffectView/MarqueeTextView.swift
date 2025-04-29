@@ -2,11 +2,30 @@
 //  MarqueeTextView.swift
 //  animation
 //
-// Implement MarqueeText effect using the KeyFrame API
-// Appending the original text with gap at the end of the current animation to achieve marquee effect
-// Marquee texts: scroll a long text with animation
-// use a horizontal scrollView, disabled scroll interactions,
-// implement a condition modifier to show repeating text by comparing the text width exceed view size  and parent view width
+// Implements a MarqueeText effect using the Keyframe API.
+// The marquee scrolls long text horizontally by animating a repeating offset.
+// To achieve the looping (marquee) effect, the original text is duplicated with a gap and appended,
+// creating a seamless scroll as the animation loops.
+
+// Key implementation details:
+// - Uses a horizontal ScrollView with scrolling interactions disabled.
+// - Measures the text width and compares it to the container width.
+//   If the text exceeds the view width, the marquee animation is triggered.
+// - Uses Keyframe-based animation to define specific value changes over time (e.g., offset or opacity).
+// - Keyframes allow chaining value transitions, such as holding a value, then animating it smoothly.
+
+// Keyframe example:
+// A Keyframe defines a specific moment during an animation where a value is set or transitions.
+//
+// In animations, keyframes control how a property (like position, opacity, or scale) changes over time.
+//    •    A keyframe specifies:
+//    •    Value: the target value at that point (e.g., opacity = 1.0)
+//    •    Duration: how long to hold or transition to the next value
+//    •    By chaining multiple keyframes together, you can create complex animations, such as pauses, smooth transitions, or looping behaviors
+// LinearKeyframe(0, duration: holdTime)
+// LinearKeyframe(1, duration: scrollTime)
+// This sequence holds the value at 0, then animates to 1 over time.
+
 import SwiftUI
 
 struct MarqueeTextViewDemo: View {
