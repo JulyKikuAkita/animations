@@ -38,7 +38,7 @@ struct PhaseAnimationViewDemo: View {
                                             .font(.largeTitle)
                                             .fontWeight(.semibold)
                                             .fontDesign(.rounded)
-                                            .transition(.push(from: .top))
+                                            .transition(.push(from: .bottom))
                                     }
                                 }
                             }

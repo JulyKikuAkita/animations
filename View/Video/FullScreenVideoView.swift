@@ -79,5 +79,5 @@ struct VideoView: View {
 }
 
 #Preview {
-    ContentView()
+    FullScreenVideoView()
 }
