@@ -94,7 +94,3 @@ struct LimitedTextFieldIView: View {
         var width: CGFloat = 0.8
     }
 }
-
-#Preview {
-    ContentView()
-}

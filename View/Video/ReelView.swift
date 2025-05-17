@@ -25,7 +25,7 @@ struct ReelView: View {
                     playPause(value)
                 })
                 .overlay(alignment: .bottom, content: {
-                    ReelDetailsView()
+                    reelDetailsView()
                 })
                 /// Double tap like animation
                 .onTapGesture(count: 2, perform: { position in
@@ -80,8 +80,7 @@ struct ReelView: View {
     }
 
     /// Reel details & controls
-    @ViewBuilder
-    func ReelDetailsView() -> some View {
+    func reelDetailsView() -> some View {
         HStack(alignment: .bottom, spacing: 10) {
             VStack(alignment: .leading, spacing: 8, content: {
                 HStack(spacing: 10) {
@@ -142,7 +141,3 @@ struct ReelView: View {
 //        uiViewController.player = player
 //    }
 // }
-
-#Preview {
-    ContentView()
-}

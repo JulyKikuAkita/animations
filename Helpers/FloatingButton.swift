@@ -10,7 +10,10 @@ struct FloatingButton<Label: View>: View {
     /// Actions
     var actions: [FloatingAction]
     var label: (Bool) -> Label
-    init(buttonSize: CGFloat = 50, @FloatingActionBuilder actions: @escaping () -> [FloatingAction], @ViewBuilder label: @escaping (Bool) -> Label) {
+    init(buttonSize: CGFloat = 50,
+         @FloatingActionBuilder actions: @escaping () -> [FloatingAction],
+         @ViewBuilder label: @escaping (Bool) -> Label)
+    {
         self.buttonSize = buttonSize
         self.actions = actions()
         self.label = label
@@ -52,7 +55,7 @@ struct FloatingButton<Label: View>: View {
         )
         .background {
             ForEach(actions) { action in
-                ActionView(action)
+                actionView(action)
             }
         }
         .coordinateSpace(.named("FLOATING VIEW"))
@@ -60,8 +63,7 @@ struct FloatingButton<Label: View>: View {
     }
 
     /// Action view
-    @ViewBuilder
-    func ActionView(_ action: FloatingAction) -> some View {
+    func actionView(_ action: FloatingAction) -> some View {
         Button {
             action.action()
             isExpanded = false
@@ -157,8 +159,4 @@ struct FloatingActionBuilder {
     static func buildBlock(_ components: FloatingAction...) -> [FloatingAction] {
         components.compactMap(\.self)
     }
-}
-
-#Preview {
-    ContentView()
 }

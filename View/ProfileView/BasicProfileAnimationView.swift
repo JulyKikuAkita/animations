@@ -4,8 +4,9 @@
 //
 //  how to build the custom matched geometry effect is with the help of the anchor preference API in SwiftUI.
 // 1. know the source view anchor frame
-// 2. when the detail view is pushed, add an overlay to the navigaton stack that will start from the source view and move to the destination view with the destination view anchor frame.
-// 3. by animating the size and destination anchor, we can achieve a custom geomtry animation effect
+// 2. when the detail view is pushed, add an overlay to the navigation stack
+// that will start from the source view and move to the destination view with the destination view anchor frame.
+// 3. by animating the size and destination anchor, we can achieve a custom geometry animation effect
 // source: https://www.youtube.com/watch?v=cyVQJ31AYKs&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=22
 
 import SwiftUI
@@ -212,8 +213,4 @@ struct ImageView: View {
             /// make sourcce circle shape and destination rect shape
             .clipShape(.rect(cornerRadius: size.width > 60 ? 0 : 30)) // source size is 60
     }
-}
-
-#Preview {
-    ContentView()
 }

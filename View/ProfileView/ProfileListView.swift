@@ -15,8 +15,10 @@ struct ProfileListView: View {
     @State private var showHeroView: Bool = true
 
     /// View properties - dark mode animation
-    @AppStorage("toggleDarkMode") private var toggleDarkMode: Bool = false // persisted with app storage
-    @AppStorage("activeDarkMode") private var activeDarkMode: Bool = false // persisted with app storage
+
+    @AppStorage("toggleDarkMode") private var toggleDarkMode: Bool = false
+    // persisted with app storage
+    @AppStorage("activeDarkMode") private var activeDarkMode: Bool = false
     @State private var buttonRect: CGRect = .zero
     /// current & previous state snapshot images
     @State private var currentImage: UIImage?
@@ -35,9 +37,11 @@ struct ProfileListView: View {
                         .frame(width: 50, height: 50)
                         .clipShape(.circle)
                         .opacity(selectedProfile?.id == profile.id ? 0 : 1)
-                        .anchorPreference(key: AnchorKey.self, value: .bounds, transform: { anchor in
-                            [profile.id.uuidString: anchor]
-                        })
+                        .anchorPreference(key: AnchorKey.self,
+                                          value: .bounds,
+                                          transform: { anchor in
+                                              [profile.id.uuidString: anchor]
+                                          })
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text(profile.username)
@@ -53,7 +57,9 @@ struct ProfileListView: View {
                     selectedProfile = profile
                     showDetail = true
 
-                    withAnimation(.snappy(duration: 0.35, extraBounce: 0), completionCriteria: .logicallyComplete) {
+                    withAnimation(.snappy(duration: 0.35, extraBounce: 0),
+                                  completionCriteria: .logicallyComplete)
+                    {
                         heroProgress = 1.0
                     } completion: {
                         Task {
@@ -95,6 +101,7 @@ struct ProfileListView: View {
                         y: destinationRect.minY - sourceRect.minY
                     )
 
+                    // swiftlint:disable:next todo
                     // TODO: put hero view here
                     Image(selectedProfile.profilePicture)
                         .resizable()
@@ -139,7 +146,9 @@ struct ProfileListView: View {
                             .frame(width: size.width, height: size.height)
                             .mask(alignment: .topLeading) {
                                 Circle() /// the start point of transition animation
-                                    .frame(width: buttonRect.width * (maskAnimation ? 80 : 1), height: buttonRect.height * (maskAnimation ? 80 : 1), alignment: .bottomLeading)
+                                    .frame(width: buttonRect.width * (maskAnimation ? 80 : 1),
+                                           height: buttonRect.height * (maskAnimation ? 80 : 1),
+                                           alignment: .bottomLeading)
                                     .frame(width: buttonRect.width, height: buttonRect.height)
                                     .offset(x: buttonRect.midX, y: buttonRect.minY)
                                     .ignoresSafeArea()
@@ -225,13 +234,15 @@ struct DetailedView: View {
                         }
                         .frame(height: 400)
                         /// Destination Anchor Frame
-                        .anchorPreference(key: AnchorKey.self, value: .bounds, transform: {
-                            anchor in
-                            ["DESTINATION": anchor]
-                        })
+                        .anchorPreference(key: AnchorKey.self,
+                                          value: .bounds,
+                                          transform: { anchor in
+                                              ["DESTINATION": anchor]
+                                          })
                         .visualEffect { content, geometryProxy in
                             content // add drag down offset
-                                .offset(y: geometryProxy.frame(in: .scrollView).minY > 0 ? -geometryProxy.frame(in: .scrollView).minY : 0)
+                                .offset(y: geometryProxy.frame(in: .scrollView).minY > 0
+                                    ? -geometryProxy.frame(in: .scrollView).minY : 0)
                         }
                 }
                 .scrollIndicators(.hidden)
@@ -302,7 +313,9 @@ struct DetailedView: View {
 
                                     if (offset + velocity) > (size.width * 0.8) {
                                         /// Close view
-                                        withAnimation(.snappy(duration: 0.35, extraBounce: 0), completionCriteria: .logicallyComplete) {
+                                        withAnimation(.snappy(duration: 0.35, extraBounce: 0),
+                                                      completionCriteria: .logicallyComplete)
+                                        {
                                             heroProgress = .zero
                                         } completion: {
                                             offset = .zero
@@ -312,7 +325,10 @@ struct DetailedView: View {
                                         }
                                     } else {
                                         /// Reset
-                                        withAnimation(.snappy(duration: 0.35, extraBounce: 0), completionCriteria: .logicallyComplete) {
+                                        withAnimation(.snappy(duration: 0.35, extraBounce: 0),
+
+                                                      completionCriteria: .logicallyComplete)
+                                        {
                                             heroProgress = 1.0
                                             offset = .zero
                                         } completion: {
@@ -328,5 +344,5 @@ struct DetailedView: View {
 }
 
 #Preview {
-    ContentView()
+    ProfileListView()
 }

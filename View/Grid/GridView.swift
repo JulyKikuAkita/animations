@@ -20,8 +20,9 @@ struct GridView: View {
                         GeometryReader { _ in
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(color.gradient)
-                                /// Drag
-                                .draggable(color) { // any object conforms to Transferable protocol (DATA, string, image)
+                                /// any object conforms to Transferable protocol
+                                /// (DATA, string, image)
+                                .draggable(color) {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(.ultraThinMaterial)
                                         .frame(width: 1, height: 1)
@@ -30,7 +31,6 @@ struct GridView: View {
                                             draggingItem = color
                                         }
                                 }
-                                /// Drop
                                 .dropDestination(for: Color.self) { _, _ in
                                     draggingItem = nil
                                     return false
@@ -58,5 +58,5 @@ struct GridView: View {
 }
 
 #Preview {
-    ContentView()
+    GridView()
 }

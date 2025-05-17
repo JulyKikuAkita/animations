@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ProfileList_SheetView: View {
+struct ProfileListSheetView: View {
     var body: some View {
         NavigationStack {
             ProfileSheetAnimationView()
@@ -38,7 +38,11 @@ struct ProfileSheetAnimationView: View {
                                 .frame(width: rect.width, height: rect.height)
                                 .clipShape(.circle)
                                 .contentShape(.circle)
-                                .opacity(windowSharedModel.selectedProfile?.id == profile.id ? (windowSharedModel.hideNativeView || showProfileView ? 1 : 0) : 1)
+                                .opacity(
+                                    windowSharedModel.selectedProfile?.id == profile.id ?
+                                        (windowSharedModel.hideNativeView || showProfileView ? 1 : 0)
+                                        : 1
+                                )
                                 .onTapGesture {
                                     Task {
                                         /// Opening profile
@@ -187,8 +191,4 @@ struct RectKey: PreferenceKey {
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
         value = nextValue()
     }
-}
-
-#Preview {
-    ContentView()
 }

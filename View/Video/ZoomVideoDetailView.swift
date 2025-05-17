@@ -85,7 +85,3 @@ struct VideoPlayerView: View {
             }
     }
 }
-
-#Preview {
-    ZoomTransitionDemoView()
-}
