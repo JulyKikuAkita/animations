@@ -173,6 +173,7 @@
 		964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
 		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
+		965836AB2DD2DA440062F372 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
 		9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965999192BE0BCD6000133FA /* View+Extension.swift */; };
@@ -500,6 +501,7 @@
 		96513EA52D3DCB190004C7C8 /* deeplinkMSG2.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG2.apns; sourceTree = "<group>"; };
 		96513EA62D3DCB200004C7C8 /* deeplinkMSG3.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG3.apns; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
+		9658369E2DD2BB250062F372 /* storeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = storeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
 		965999192BE0BCD6000133FA /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -674,6 +676,7 @@
 		962240B62D379C1B0013FFA9 /* DocumentScannerApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DocumentScannerApp; sourceTree = "<group>"; };
 		9627062A2D46049100DC0161 /* Orientation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orientation; sourceTree = "<group>"; };
 		963B86922CEABA5F00C3FB0D /* Profiles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Profiles; sourceTree = "<group>"; };
+		9658369F2DD2BB250062F372 /* StoreKitDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = StoreKitDemo; sourceTree = "<group>"; };
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
 		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		96E36A452DB217F900A8EFBA /* Monitor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Monitor; sourceTree = "<group>"; };
@@ -730,6 +733,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		963B868E2CEABA5F00C3FB0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9658369B2DD2BB250062F372 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -839,6 +849,7 @@
 				967958452D2DD24B009E74CA /* Habit */,
 				962240B62D379C1B0013FFA9 /* DocumentScannerApp */,
 				9627062A2D46049100DC0161 /* Orientation */,
+				9658369F2DD2BB250062F372 /* StoreKitDemo */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -856,6 +867,7 @@
 				967958442D2DD24B009E74CA /* Habit.app */,
 				962240B52D379C1B0013FFA9 /* DocumentScannerApp.app */,
 				962706292D46049100DC0161 /* Orientation.app */,
+				9658369E2DD2BB250062F372 /* storeKitDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1685,6 +1697,28 @@
 			productReference = 963B86912CEABA5F00C3FB0D /* Profiles.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9658369D2DD2BB250062F372 /* storeKitDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 965836A82DD2BB260062F372 /* Build configuration list for PBXNativeTarget "storeKitDemo" */;
+			buildPhases = (
+				9658369A2DD2BB250062F372 /* Sources */,
+				9658369B2DD2BB250062F372 /* Frameworks */,
+				9658369C2DD2BB250062F372 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9658369F2DD2BB250062F372 /* StoreKitDemo */,
+			);
+			name = storeKitDemo;
+			packageProductDependencies = (
+			);
+			productName = storeKitDemo;
+			productReference = 9658369E2DD2BB250062F372 /* storeKitDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		967958432D2DD24B009E74CA /* Habit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9679586B2D2DD24C009E74CA /* Build configuration list for PBXNativeTarget "Habit" */;
@@ -1731,7 +1765,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					9613D7112C7BE42A007FF2E7 = {
@@ -1757,6 +1791,9 @@
 					};
 					963B86902CEABA5F00C3FB0D = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					9658369D2DD2BB250062F372 = {
+						CreatedOnToolsVersion = 16.3;
 					};
 					967958432D2DD24B009E74CA = {
 						CreatedOnToolsVersion = 16.0;
@@ -1789,6 +1826,7 @@
 				967958432D2DD24B009E74CA /* Habit */,
 				962240B42D379C1B0013FFA9 /* DocumentScannerApp */,
 				962706282D46049100DC0161 /* Orientation */,
+				9658369D2DD2BB250062F372 /* storeKitDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -1878,6 +1916,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		963B868F2CEABA5F00C3FB0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9658369C2DD2BB250062F372 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2289,6 +2334,14 @@
 				963B86F42CEBF76D00C3FB0D /* Message.swift in Sources */,
 				963B869F2CEABAC000C3FB0D /* HeroItemView.swift in Sources */,
 				963B86A92CEABD0600C3FB0D /* AnchorKey.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9658369A2DD2BB250062F372 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				965836AB2DD2DA440062F372 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2916,6 +2969,64 @@
 			};
 			name = Release;
 		};
+		965836A62DD2BB260062F372 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.storeKitDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		965836A72DD2BB260062F372 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.storeKitDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		967958652D2DD24C009E74CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3112,6 +3223,15 @@
 			buildConfigurations = (
 				963B869C2CEABA6000C3FB0D /* Debug */,
 				963B869D2CEABA6000C3FB0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		965836A82DD2BB260062F372 /* Build configuration list for PBXNativeTarget "storeKitDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				965836A62DD2BB260062F372 /* Debug */,
+				965836A72DD2BB260062F372 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
