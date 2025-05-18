@@ -128,10 +128,6 @@ struct SegmentControlView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
-
 enum SegmentedTab: String, CaseIterable {
     case home = "house.fill"
     case favorites = "suit.heart.fill"

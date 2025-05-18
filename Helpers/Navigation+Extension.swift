@@ -63,12 +63,8 @@ private extension UIView {
     }
 }
 
-struct Navigation_Extension: View {
+struct NavigationExtension: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
-}
-
-#Preview {
-    ContentView()
 }
