@@ -389,10 +389,30 @@
 		ABFC3FF12C9F6C7A00E2E60E /* Reel3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FCD2C9F6C7A00E2E60E /* Reel3.mp4 */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9604D1C22DE3A62F0087AB24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 961F3B832B8818240055D79B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9604D1B42DE3A62E0087AB24;
+			remoteInfo = PokemonPlay;
+		};
+		9604D1CC2DE3A62F0087AB24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 961F3B832B8818240055D79B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9604D1B42DE3A62E0087AB24;
+			remoteInfo = PokemonPlay;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		9600DE502BA17D1800205DE9 /* CustomToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToast.swift; sourceTree = "<group>"; };
 		9603C9F82B8AB73400F91C21 /* BasicProfileAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicProfileAnimationView.swift; sourceTree = "<group>"; };
 		9603C9FA2B8AB79200F91C21 /* HeroItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroItemView.swift; sourceTree = "<group>"; };
+		9604D1B52DE3A62E0087AB24 /* PokemonPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9604D1C12DE3A62F0087AB24 /* PokemonPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9604D1CB2DE3A62F0087AB24 /* PokemonPlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonPlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		960663282DD950430084B468 /* ResizableHeaderScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableHeaderScrollView.swift; sourceTree = "<group>"; };
 		9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderPageScrollTabiOS18View.swift; sourceTree = "<group>"; };
 		9609D93A2DB4B54900A76F95 /* LocationPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerManager.swift; sourceTree = "<group>"; };
@@ -680,6 +700,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		9604D1B62DE3A62E0087AB24 /* PokemonPlay */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PokemonPlay; sourceTree = "<group>"; };
+		9604D1C42DE3A62F0087AB24 /* PokemonPlayTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PokemonPlayTests; sourceTree = "<group>"; };
+		9604D1CE2DE3A62F0087AB24 /* PokemonPlayUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PokemonPlayUITests; sourceTree = "<group>"; };
 		9613D7132C7BE42A007FF2E7 /* PlayStationApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PlayStationApp; sourceTree = "<group>"; };
 		962240B62D379C1B0013FFA9 /* DocumentScannerApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DocumentScannerApp; sourceTree = "<group>"; };
 		9627062A2D46049100DC0161 /* Orientation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orientation; sourceTree = "<group>"; };
@@ -691,6 +714,27 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9604D1B22DE3A62E0087AB24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9604D1BE2DE3A62F0087AB24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9604D1C82DE3A62F0087AB24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9613D70F2C7BE42A007FF2E7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -942,6 +986,9 @@
 				962240B62D379C1B0013FFA9 /* DocumentScannerApp */,
 				9627062A2D46049100DC0161 /* Orientation */,
 				9658369F2DD2BB250062F372 /* StoreKitDemo */,
+				9604D1B62DE3A62E0087AB24 /* PokemonPlay */,
+				9604D1C42DE3A62F0087AB24 /* PokemonPlayTests */,
+				9604D1CE2DE3A62F0087AB24 /* PokemonPlayUITests */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -960,6 +1007,9 @@
 				962240B52D379C1B0013FFA9 /* DocumentScannerApp.app */,
 				962706292D46049100DC0161 /* Orientation.app */,
 				9658369E2DD2BB250062F372 /* storeKitDemo.app */,
+				9604D1B52DE3A62E0087AB24 /* PokemonPlay.app */,
+				9604D1C12DE3A62F0087AB24 /* PokemonPlayTests.xctest */,
+				9604D1CB2DE3A62F0087AB24 /* PokemonPlayUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1619,6 +1669,74 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9604D1B42DE3A62E0087AB24 /* PokemonPlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9604D1D92DE3A62F0087AB24 /* Build configuration list for PBXNativeTarget "PokemonPlay" */;
+			buildPhases = (
+				9604D1B12DE3A62E0087AB24 /* Sources */,
+				9604D1B22DE3A62E0087AB24 /* Frameworks */,
+				9604D1B32DE3A62E0087AB24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9604D1B62DE3A62E0087AB24 /* PokemonPlay */,
+			);
+			name = PokemonPlay;
+			packageProductDependencies = (
+			);
+			productName = PokemonPlay;
+			productReference = 9604D1B52DE3A62E0087AB24 /* PokemonPlay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9604D1C02DE3A62F0087AB24 /* PokemonPlayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9604D1DA2DE3A62F0087AB24 /* Build configuration list for PBXNativeTarget "PokemonPlayTests" */;
+			buildPhases = (
+				9604D1BD2DE3A62F0087AB24 /* Sources */,
+				9604D1BE2DE3A62F0087AB24 /* Frameworks */,
+				9604D1BF2DE3A62F0087AB24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9604D1C32DE3A62F0087AB24 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9604D1C42DE3A62F0087AB24 /* PokemonPlayTests */,
+			);
+			name = PokemonPlayTests;
+			packageProductDependencies = (
+			);
+			productName = PokemonPlayTests;
+			productReference = 9604D1C12DE3A62F0087AB24 /* PokemonPlayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9604D1CA2DE3A62F0087AB24 /* PokemonPlayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9604D1DB2DE3A62F0087AB24 /* Build configuration list for PBXNativeTarget "PokemonPlayUITests" */;
+			buildPhases = (
+				9604D1C72DE3A62F0087AB24 /* Sources */,
+				9604D1C82DE3A62F0087AB24 /* Frameworks */,
+				9604D1C92DE3A62F0087AB24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9604D1CD2DE3A62F0087AB24 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9604D1CE2DE3A62F0087AB24 /* PokemonPlayUITests */,
+			);
+			name = PokemonPlayUITests;
+			packageProductDependencies = (
+			);
+			productName = PokemonPlayUITests;
+			productReference = 9604D1CB2DE3A62F0087AB24 /* PokemonPlayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		9613D7112C7BE42A007FF2E7 /* PlayStationApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9613D71F2C7BE42B007FF2E7 /* Build configuration list for PBXNativeTarget "PlayStationApp" */;
@@ -1852,6 +1970,17 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
+					9604D1B42DE3A62E0087AB24 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					9604D1C02DE3A62F0087AB24 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 9604D1B42DE3A62E0087AB24;
+					};
+					9604D1CA2DE3A62F0087AB24 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 9604D1B42DE3A62E0087AB24;
+					};
 					9613D7112C7BE42A007FF2E7 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -1911,11 +2040,35 @@
 				962240B42D379C1B0013FFA9 /* DocumentScannerApp */,
 				962706282D46049100DC0161 /* Orientation */,
 				9658369D2DD2BB250062F372 /* storeKitDemo */,
+				9604D1B42DE3A62E0087AB24 /* PokemonPlay */,
+				9604D1C02DE3A62F0087AB24 /* PokemonPlayTests */,
+				9604D1CA2DE3A62F0087AB24 /* PokemonPlayUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9604D1B32DE3A62E0087AB24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9604D1BF2DE3A62F0087AB24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9604D1C92DE3A62F0087AB24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9613D7102C7BE42A007FF2E7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2032,6 +2185,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9604D1B12DE3A62E0087AB24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9604D1BD2DE3A62F0087AB24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9604D1C72DE3A62F0087AB24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9613D70E2C7BE42A007FF2E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2455,7 +2629,152 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9604D1C32DE3A62F0087AB24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9604D1B42DE3A62E0087AB24 /* PokemonPlay */;
+			targetProxy = 9604D1C22DE3A62F0087AB24 /* PBXContainerItemProxy */;
+		};
+		9604D1CD2DE3A62F0087AB24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9604D1B42DE3A62E0087AB24 /* PokemonPlay */;
+			targetProxy = 9604D1CC2DE3A62F0087AB24 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9604D1D32DE3A62F0087AB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PokemonPlay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9604D1D42DE3A62F0087AB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PokemonPlay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9604D1D52DE3A62F0087AB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PokemonPlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PokemonPlay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PokemonPlay";
+			};
+			name = Debug;
+		};
+		9604D1D62DE3A62F0087AB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PokemonPlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PokemonPlay.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PokemonPlay";
+			};
+			name = Release;
+		};
+		9604D1D72DE3A62F0087AB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PokemonPlayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PokemonPlay;
+			};
+			name = Debug;
+		};
+		9604D1D82DE3A62F0087AB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5RJ99BFF2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.PokemonPlayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PokemonPlay;
+			};
+			name = Release;
+		};
 		9613D71D2C7BE42B007FF2E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3234,6 +3553,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9604D1D92DE3A62F0087AB24 /* Build configuration list for PBXNativeTarget "PokemonPlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9604D1D32DE3A62F0087AB24 /* Debug */,
+				9604D1D42DE3A62F0087AB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9604D1DA2DE3A62F0087AB24 /* Build configuration list for PBXNativeTarget "PokemonPlayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9604D1D52DE3A62F0087AB24 /* Debug */,
+				9604D1D62DE3A62F0087AB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9604D1DB2DE3A62F0087AB24 /* Build configuration list for PBXNativeTarget "PokemonPlayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9604D1D72DE3A62F0087AB24 /* Debug */,
+				9604D1D82DE3A62F0087AB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9613D71F2C7BE42B007FF2E7 /* Build configuration list for PBXNativeTarget "PlayStationApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
