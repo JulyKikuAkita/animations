@@ -41,14 +41,7 @@ struct ContentView: View {
                 }
 
                 if !pokemonNodes.isEmpty {
-                    List(pokemonNodes) { node in
-                        NavigationLink(destination: JSONTreeView(rootNode: node)
-                            .navigationTitle(node.key.capitalized))
-                        {
-                            Text(node.key.capitalized)
-                                .font(.headline)
-                        }
-                    }
+                    ImageListView(nodes: pokemonNodes)
                 } else if let error {
                     Text("Error: \(error)")
                         .foregroundColor(.red)

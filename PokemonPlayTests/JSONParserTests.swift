@@ -51,4 +51,23 @@ final class JSONParserTests: XCTestCase {
         XCTAssertEqual(testNode["a"] as? Int, 1)
         XCTAssertEqual(testNode["b"] as? Int, 2)
     }
+
+    func testExtractSpriteURLFromJSONObject() {
+        // Given
+        let expectedURLString = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+        let node = JSONNode(
+            key: "pikachu",
+            value: .object([
+                "sprites": .object([
+                    "front_default": .string(expectedURLString),
+                ]),
+            ])
+        )
+
+        // When
+        let url = extractSpriteURL(from: node)
+
+        // Then
+        XCTAssertEqual(url?.absoluteString, expectedURLString)
+    }
 }

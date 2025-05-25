@@ -6,14 +6,17 @@
 
 import Foundation
 
-func fetchPokemonData(name: String, completion: @escaping (Result<[String: Any], Error>) -> Void) {
+func fetchPokemonData(name: String,
+                      session: URLSession = .shared, // injecting mock
+                      completion: @escaping (Result<[String: Any], Error>) -> Void)
+{
     let urlString = "https://pokeapi.co/api/v2/pokemon/\(name.lowercased())"
     guard let url = URL(string: urlString) else {
         completion(.failure(URLError(.badURL)))
         return
     }
 
-    URLSession.shared.dataTask(with: url) { data, _, error in
+    session.dataTask(with: url) { data, _, error in
         if let error {
             completion(.failure(error))
             return
