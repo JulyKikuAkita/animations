@@ -76,4 +76,33 @@ final class NetworkingTests: XCTestCase {
 
         wait(for: [expectation], timeout: 1.0)
     }
+
+    // async await
+    func testAsyncPokemonData_returnsDecodedJSON() async throws {
+        // Given
+        let mockJSON: [String: Any] = ["name": "pikachu"]
+        let data = try JSONSerialization.data(withJSONObject: mockJSON, options: [])
+        MockURLProtocol.stubResponseData = data
+        let session = makeMockSession()
+
+        // When
+        let result = try await fetchPokemonDataAsync(name: "pikachu", session: session)
+
+        // Then
+        XCTAssertEqual(result["name"] as? String, "pikachu")
+    }
+
+    func testAsyncPokemonData_returnsError() async {
+        // Given
+        MockURLProtocol.stubResponseData = nil
+        let session = makeMockSession()
+
+        do {
+            _ = try await fetchPokemonDataAsync(name: "pikachu", session: session)
+            XCTFail("Expected an error, but got success")
+        } catch {
+            // Then
+            XCTAssertNotNil(error)
+        }
+    }
 }

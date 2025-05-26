@@ -8,6 +8,7 @@ struct ContentView: View {
     @State private var pokemonNodes: [JSONNode] = []
     @State private var error: String?
     @State private var pokemonName: String = ""
+    @State private var isLoading: Bool = false
 
     private let suggestedNames = ["pikachu", "charizard", "bulbasaur", "mewtwo", "snorlax"]
 
@@ -22,15 +23,22 @@ struct ContentView: View {
                             .disableAutocorrection(true)
 
                         Button("Fetch") {
-                            loadPokemon(name: pokemonName)
+                            Task {
+                                isLoading = true
+                                defer { isLoading = false }
+                                await loadPokemonAsync(name: pokemonName)
+                            }
                         }
+                        .disabled(isLoading)
                     }
                     .padding(.horizontal)
 
                     // Suggested Pills
                     PillsListView(names: suggestedNames) { selectedName in
                         pokemonName = selectedName
-                        loadPokemon(name: selectedName)
+                        Task {
+                            await loadPokemonAsync(name: selectedName)
+                        }
                     }
                 }
 
@@ -55,11 +63,51 @@ struct ContentView: View {
             }
             .navigationTitle("Pokémon Statistics")
         }
-        .onAppear {
-            loadPokemon(name: "charizard", isDefault: true)
+        .task { /// This task runs every time the view enters the hierarchy.
+            guard pokemonNodes.isEmpty else { return }
+            await loadPokemonAsync(name: "charizard", isDefault: true)
         }
     }
 
+    /// Swift Concurrency, support for iOS 15 +
+    @MainActor
+    private func loadPokemonAsync(name: String, isDefault: Bool = false) async {
+        do {
+            let wrapped = try await fetchAndWrapPokemonAsync(name: name)
+            let jsonValue = convertToJSONValue(wrapped)
+
+            if case let .object(dict) = jsonValue,
+               let domain = dict["domain"],
+               let config = domain.children?.first(where: { $0.key == "config" }),
+               let pokemonNode = config.value.children?.first(where: { $0.key == name })
+            {
+                if isDefault {
+                    pokemonNodes.append(pokemonNode)
+                } else {
+                    pokemonNodes.insert(pokemonNode, at: 0)
+                }
+                error = nil
+            } else {
+                error = "Invalid structure: missing domain/config/\(name)"
+            }
+
+        } catch {
+            self.error = error.localizedDescription
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+}
+
+extension ContentView {
+    /// use Completion Handlers and sync update json, support for iOS 13
+    ///  best with
+    ///   .onAppear {
+    ///     loadPokemon(name: "charizard", isDefault: true)
+    /// }
+    ///
     private func loadPokemon(name: String, isDefault: Bool = false) {
         fetchAndWrapPokemon(name: name) { result in
             DispatchQueue.main.async {
@@ -86,8 +134,4 @@ struct ContentView: View {
             }
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

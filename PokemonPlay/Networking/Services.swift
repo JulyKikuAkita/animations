@@ -1,15 +1,17 @@
 //
-//  Networking.swift
+//  Services.swift
 //  PokemonPlay
 //
 //  Created on 5/25/25.
 
 import Foundation
 
-func fetchPokemonData(name: String,
-                      session: URLSession = .shared, // injecting mock
-                      completion: @escaping (Result<[String: Any], Error>) -> Void)
-{
+/// Use Completion Handlers, iOS 13
+func fetchPokemonData(
+    name: String,
+    session: URLSession = .shared, // injecting mock
+    completion: @escaping (Result<[String: Any], Error>) -> Void
+) {
     let urlString = "https://pokeapi.co/api/v2/pokemon/\(name.lowercased())"
     guard let url = URL(string: urlString) else {
         completion(.failure(URLError(.badURL)))
@@ -59,4 +61,30 @@ func fetchAndWrapPokemon(name: String, completion: @escaping (Result<[String: An
             completion(.failure(error))
         }
     }
+}
+
+/// use swift concurrency, iOS 15+
+func fetchPokemonDataAsync(
+    name: String,
+    session: URLSession = .shared
+) async throws -> [String: Any] {
+    let urlString = "https://pokeapi.co/api/v2/pokemon/\(name.lowercased())"
+    guard let url = URL(string: urlString) else {
+        throw URLError(.badURL)
+    }
+
+    let (data, _) = try await session.data(from: url)
+
+    let jsonObject = try JSONSerialization.jsonObject(with: data)
+    guard let json = jsonObject as? [String: Any] else {
+        throw URLError(.cannotParseResponse)
+    }
+
+    return json
+}
+
+func fetchAndWrapPokemonAsync(name: String) async throws -> [String: Any] {
+    let rawData = try await fetchPokemonDataAsync(name: name)
+    let wrapped = wrapAsDomainConfig(name: name, original: rawData)
+    return wrapped
 }
