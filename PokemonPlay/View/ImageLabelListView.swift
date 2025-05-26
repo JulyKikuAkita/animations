@@ -4,6 +4,8 @@
 //
 //  Created on 5/25/25.
 
+import SDWebImage
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct ImageListView: View {
@@ -15,14 +17,38 @@ struct ImageListView: View {
                 NavigationLink(destination: JSONTreeView(rootNode: node)
                     .navigationTitle(node.key.capitalized))
                 {
-//                    imageView(node)
                     CodedImageView(node: node)
                 }
             }
         }
     }
+}
 
-    func imageView(_ node: JSONNode) -> some View {
+/// Use web image
+///  https://github.com/SDWebImage/SDWebImageSwiftUI
+struct CodedImageView: View {
+    let node: JSONNode
+    var body: some View {
+        HStack(spacing: 12) {
+            if let url = extractSpriteURL(from: node) {
+                WebImage(url: url) { image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .indicator(.activity)
+                .transition(.fade(duration: 0.5))
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+            }
+            Text(node.key.capitalized)
+        }
+    }
+}
+
+struct AsyncImageView: View {
+    let node: JSONNode
+    var body: some View {
         HStack(spacing: 12) {
             if let url = extractSpriteURL(from: node) {
                 AsyncImage(url: url) { image in
@@ -38,25 +64,6 @@ struct ImageListView: View {
                 .font(.headline)
         }
         .padding(.vertical, 4)
-    }
-}
-
-struct CodedImageView: View {
-    let node: JSONNode
-    var body: some View {
-        HStack(spacing: 12) {
-            if let data: PokemonSpriteData =
-                decodePokemon(PokemonSpriteData.self, from: node),
-                let url = data.sprites?.frontDefault
-            {
-                AsyncImage(url: url) { image in
-                    image.resizable().frame(width: 40, height: 40)
-                } placeholder: {
-                    ProgressView().frame(width: 40, height: 40)
-                }
-            }
-            Text(node.key.capitalized)
-        }
     }
 }
 
