@@ -15,23 +15,47 @@ struct ImageListView: View {
                 NavigationLink(destination: JSONTreeView(rootNode: node)
                     .navigationTitle(node.key.capitalized))
                 {
-                    HStack(spacing: 12) {
-                        if let url = extractSpriteURL(from: node) {
-                            AsyncImage(url: url) { image in
-                                image.resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: 40, height: 40)
-                            }
-                        }
-                        Text(node.key.capitalized)
-                            .font(.headline)
-                    }
-                    .padding(.vertical, 4)
+//                    imageView(node)
+                    CodedImageView(node: node)
                 }
             }
+        }
+    }
+
+    func imageView(_ node: JSONNode) -> some View {
+        HStack(spacing: 12) {
+            if let url = extractSpriteURL(from: node) {
+                AsyncImage(url: url) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: 40, height: 40)
+                }
+            }
+            Text(node.key.capitalized)
+                .font(.headline)
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+struct CodedImageView: View {
+    let node: JSONNode
+    var body: some View {
+        HStack(spacing: 12) {
+            if let data: PokemonSpriteData =
+                decodePokemon(PokemonSpriteData.self, from: node),
+                let url = data.sprites?.frontDefault
+            {
+                AsyncImage(url: url) { image in
+                    image.resizable().frame(width: 40, height: 40)
+                } placeholder: {
+                    ProgressView().frame(width: 40, height: 40)
+                }
+            }
+            Text(node.key.capitalized)
         }
     }
 }

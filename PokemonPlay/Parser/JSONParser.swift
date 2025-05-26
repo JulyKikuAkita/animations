@@ -24,3 +24,19 @@ func convertToJSONValue(_ any: Any) -> JSONValue {
         return .null
     }
 }
+
+// Use decoder
+func decodePokemon<T: Decodable>(_: T.Type, from node: JSONNode) -> T? {
+    guard case let .object(dict) = node.value else { return nil }
+
+    let anyValue = dict.mapValues { $0.rawValue() }
+
+    guard JSONSerialization.isValidJSONObject(anyValue),
+          let data = try? JSONSerialization.data(withJSONObject: anyValue),
+          let decoded = try? JSONDecoder().decode(T.self, from: data)
+    else {
+        return nil
+    }
+
+    return decoded
+}

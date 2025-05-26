@@ -699,14 +699,50 @@
 		ABFC3FD72C9F6C7A00E2E60E /* Reel13.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel13.mp4; path = resources/Videos/Reel13.mp4; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9650A1C82DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				ContentView.swift,
+				Networking/Services.swift,
+				Networking/URLParsing.swift,
+				Parser/JSONParser.swift,
+				Parser/JSONValue.swift,
+				PokemonPlayApp.swift,
+				View/ImageLabelListView.swift,
+				View/JSONTreeView.swift,
+				View/Pills.swift,
+			);
+			target = 962240B42D379C1B0013FFA9 /* DocumentScannerApp */;
+		};
+		9650A1C92DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				ContentView.swift,
+				Data/PokemonSpriteData.swift,
+				Networking/Services.swift,
+				Networking/URLParsing.swift,
+				Parser/JSONParser.swift,
+				Parser/JSONValue.swift,
+				PokemonPlayApp.swift,
+				View/ImageLabelListView.swift,
+				View/JSONTreeView.swift,
+				View/Pills.swift,
+			);
+			target = 9604D1B42DE3A62E0087AB24 /* PokemonPlay */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9604D1B62DE3A62E0087AB24 /* PokemonPlay */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PokemonPlay; sourceTree = "<group>"; };
 		9604D1C42DE3A62F0087AB24 /* PokemonPlayTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PokemonPlayTests; sourceTree = "<group>"; };
 		9604D1CE2DE3A62F0087AB24 /* PokemonPlayUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PokemonPlayUITests; sourceTree = "<group>"; };
 		9613D7132C7BE42A007FF2E7 /* PlayStationApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PlayStationApp; sourceTree = "<group>"; };
 		962240B62D379C1B0013FFA9 /* DocumentScannerApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DocumentScannerApp; sourceTree = "<group>"; };
 		9627062A2D46049100DC0161 /* Orientation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orientation; sourceTree = "<group>"; };
 		963B86922CEABA5F00C3FB0D /* Profiles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Profiles; sourceTree = "<group>"; };
+		9650A1BD2DE4388700D2D67C /* PokemonPlay */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (9650A1C82DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 9650A1C92DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PokemonPlay; sourceTree = "<group>"; };
 		9658369F2DD2BB250062F372 /* StoreKitDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = StoreKitDemo; sourceTree = "<group>"; };
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
 		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
@@ -986,7 +1022,7 @@
 				962240B62D379C1B0013FFA9 /* DocumentScannerApp */,
 				9627062A2D46049100DC0161 /* Orientation */,
 				9658369F2DD2BB250062F372 /* StoreKitDemo */,
-				9604D1B62DE3A62E0087AB24 /* PokemonPlay */,
+				9650A1BD2DE4388700D2D67C /* PokemonPlay */,
 				9604D1C42DE3A62F0087AB24 /* PokemonPlayTests */,
 				9604D1CE2DE3A62F0087AB24 /* PokemonPlayUITests */,
 				961F3B8C2B8818240055D79B /* Products */,
@@ -1681,9 +1717,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				9604D1B62DE3A62E0087AB24 /* PokemonPlay */,
-			);
 			name = PokemonPlay;
 			packageProductDependencies = (
 			);
@@ -1847,6 +1880,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				962240B62D379C1B0013FFA9 /* DocumentScannerApp */,
+				9650A1BD2DE4388700D2D67C /* PokemonPlay */,
 			);
 			name = DocumentScannerApp;
 			packageProductDependencies = (

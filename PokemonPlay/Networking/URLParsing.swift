@@ -9,6 +9,7 @@ import Foundation
 /// get Pokemon images
 /// sprites.front_default = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
 ///  for more details at https://github.com/PokeAPI/sprites
+///
 func extractSpriteURL(from node: JSONNode) -> URL? {
     if case let .object(object) = node.value,
        let sprites = object["sprites"],

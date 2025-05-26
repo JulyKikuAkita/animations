@@ -59,3 +59,17 @@ struct JSONNode: Identifiable {
     let key: String
     let value: JSONValue
 }
+
+/// for codable
+extension JSONValue {
+    func rawValue() -> Any {
+        switch self {
+        case let .string(str): str
+        case let .number(num): num
+        case let .bool(bool): bool
+        case .null: NSNull()
+        case let .array(arr): arr.map { $0.rawValue() }
+        case let .object(dict): dict.mapValues { $0.rawValue() }
+        }
+    }
+}
