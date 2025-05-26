@@ -32,11 +32,13 @@ func decodePokemon<T: Decodable>(_: T.Type, from node: JSONNode) -> T? {
     let anyValue = dict.mapValues { $0.rawValue() }
 
     guard JSONSerialization.isValidJSONObject(anyValue),
-          let data = try? JSONSerialization.data(withJSONObject: anyValue),
-          let decoded = try? JSONDecoder().decode(T.self, from: data)
+          let data = try? JSONSerialization.data(withJSONObject: anyValue)
     else {
         return nil
     }
 
-    return decoded
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase // swift use Camel but raw json is snake cae
+
+    return try? decoder.decode(T.self, from: data)
 }

@@ -9,9 +9,6 @@ import Foundation
 struct PokemonSpriteData: Codable {
     struct Sprites: Codable {
         let frontDefault: URL?
-        enum CodingKeys: String, CodingKey {
-            case frontDefault = "front_default"
-        }
     }
 
     let name: String?
