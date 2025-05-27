@@ -728,6 +728,7 @@
 				Parser/JSONParser.swift,
 				Parser/JSONValue.swift,
 				PokemonPlayApp.swift,
+				"View/Helper/View+Extension.swift",
 				View/ImageLabelListView.swift,
 				View/JSONTreeView.swift,
 				View/Pills.swift,

@@ -53,7 +53,7 @@ struct AsyncImageView: View {
             if let url = extractSpriteURL(from: node) {
                 AsyncImage(url: url) { image in
                     image.resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
                 } placeholder: {
                     ProgressView()

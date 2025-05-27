@@ -63,7 +63,7 @@ struct ContentView: View {
             }
             .navigationTitle("Pokémon Statistics")
         }
-        .task { /// This task runs every time the view enters the hierarchy.
+        .onFirstAppearAsync { /// This task runs every time the view enters the hierarchy.
             guard pokemonNodes.isEmpty else { return }
             await loadPokemonAsync(name: "charizard", isDefault: true)
         }
