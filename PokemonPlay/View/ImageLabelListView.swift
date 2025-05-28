@@ -14,7 +14,7 @@ struct ImageListView: View {
     var body: some View {
         List {
             ForEach(nodes) { node in
-                NavigationLink(destination: JSONTreeView(rootNode: node)
+                NavigationLink(destination: PokemonDetailsView(node: node)
                     .navigationTitle(node.key.capitalized))
                 {
                     CodedImageView(node: node)

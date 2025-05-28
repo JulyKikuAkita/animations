@@ -714,6 +714,8 @@
 				View/ImageLabelListView.swift,
 				View/JSONTreeView.swift,
 				View/Pills.swift,
+				View/PokemonDetailsView.swift,
+				View/StatsCard.swift,
 			);
 			target = 962240B42D379C1B0013FFA9 /* DocumentScannerApp */;
 		};
@@ -722,6 +724,7 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				ContentView.swift,
+				Data/PokemonBasicStats.swift,
 				Data/PokemonSpriteData.swift,
 				Networking/Services.swift,
 				Networking/URLParsing.swift,
@@ -732,6 +735,8 @@
 				View/ImageLabelListView.swift,
 				View/JSONTreeView.swift,
 				View/Pills.swift,
+				View/PokemonDetailsView.swift,
+				View/StatsCard.swift,
 			);
 			target = 9604D1B42DE3A62E0087AB24 /* PokemonPlay */;
 		};
