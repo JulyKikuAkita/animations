@@ -10,7 +10,8 @@ struct StatsCardView: View {
     let stats: PokemonBasicStats
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            ForEach(Array(stats.statValues), id: \.key) { key, val in
+            let sortedStats = stats.statValues.sorted { $0.key < $1.key }
+            ForEach(Array(sortedStats), id: \.key) { key, val in
                 HStack {
                     Text(key.capitalized)
                     Spacer()

@@ -725,6 +725,7 @@
 				Assets.xcassets,
 				ContentView.swift,
 				Data/PokemonBasicStats.swift,
+				Data/PokemonEvolutionChain.swift,
 				Data/PokemonSpriteData.swift,
 				Networking/Services.swift,
 				Networking/URLParsing.swift,

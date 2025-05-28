@@ -88,3 +88,24 @@ func fetchAndWrapPokemonAsync(name: String) async throws -> [String: Any] {
     let wrapped = wrapAsDomainConfig(name: name, original: rawData)
     return wrapped
 }
+
+func fetchEvolutionCahin(
+    for pokemonID: String,
+    session: URLSession = .shared
+) async throws -> [String: Any] {
+    let urlString = "https://pokeapi.co/api/v2/evolution-chain/\(pokemonID)"
+    guard let url = URL(string: urlString) else {
+        throw URLError(.badURL)
+    }
+
+    let (data, _) = try await session.data(from: url)
+//    let decoder = JSONDecoder()
+//    decoder.keyDecodingStrategy = .convertFromSnakeCase
+//    return try decoder.decode(PokemonEvolutionChain.self, from: data)
+
+    let jsonObj = try JSONSerialization.jsonObject(with: data)
+    guard let json = jsonObj as? [String: Any] else {
+        throw URLError(.badServerResponse)
+    }
+    return json
+}

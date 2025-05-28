@@ -8,6 +8,8 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     let node: JSONNode
+    @State private var showEvolutionChain: Bool = false
+    @State private var evolutionNodes: [JSONNode] = []
 
     var body: some View {
         ScrollView {
