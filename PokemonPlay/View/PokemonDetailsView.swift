@@ -8,8 +8,8 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     let node: JSONNode
-    @State private var showEvolutionChain: Bool = false
-    @State private var evolutionNodes: [JSONNode] = []
+    @State private var isLoading: Bool = false
+    @State private var evolutionChain: EvolutionNode? = nil
 
     var body: some View {
         ScrollView {
@@ -21,8 +21,27 @@ struct PokemonDetailsView: View {
                         .foregroundColor(.red)
                 }
 
+                if let chain = evolutionChain {
+                    if isLoading {
+                        ProgressView()
+                    } else {
+                        EvolutionGraphView(node: chain)
+                            .padding()
+                    }
+                }
+
                 JSONTreeView(rootNode: node)
             }
+        }
+        .task {
+            isLoading = true
+            guard evolutionChain == nil else { return }
+            do {
+                evolutionChain = try await fetchEvolutionChain(for: node.key)
+            } catch {
+                print("Failed to load evolution chain: \(error)")
+            }
+            isLoading = false
         }
     }
 }

@@ -7,11 +7,22 @@
 import Foundation
 
 struct PokemonEvolutionChain: Codable {
-    struct EvolutionNode: Identifiable, Codable {
-        let id: Int // Pokemon ID
-        let name: String
-        let evolvesTo: [EvolutionNode]
-    }
+    let chain: EvolutionNode
+}
 
-    var root: EvolutionNode
+struct EvolutionNode: Codable {
+    let isBaby: Bool
+    let species: NamedAPIResource
+    let evolvesTo: [EvolutionNode]
+}
+
+struct NamedAPIResource: Codable {
+    let name: String
+    let url: String
+}
+
+extension PokemonEvolutionChain {
+    func flatEvolutionNames(from node: EvolutionNode) -> [String] {
+        [node.species.name] + node.evolvesTo.flatMap { flatEvolutionNames(from: $0) }
+    }
 }

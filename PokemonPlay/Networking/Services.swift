@@ -63,17 +63,21 @@ func fetchAndWrapPokemon(name: String, completion: @escaping (Result<[String: An
     }
 }
 
+func fetchData(from urlString: String, session: URLSession = .shared) async throws -> Data {
+    guard let url = URL(string: urlString) else {
+        throw URLError(.badURL)
+    }
+    let (data, _) = try await session.data(from: url)
+    return data
+}
+
 /// use swift concurrency, iOS 15+
 func fetchPokemonDataAsync(
     name: String,
     session: URLSession = .shared
 ) async throws -> [String: Any] {
     let urlString = "https://pokeapi.co/api/v2/pokemon/\(name.lowercased())"
-    guard let url = URL(string: urlString) else {
-        throw URLError(.badURL)
-    }
-
-    let (data, _) = try await session.data(from: url)
+    let data = try await fetchData(from: urlString, session: session)
 
     let jsonObject = try JSONSerialization.jsonObject(with: data)
     guard let json = jsonObject as? [String: Any] else {
@@ -89,23 +93,22 @@ func fetchAndWrapPokemonAsync(name: String) async throws -> [String: Any] {
     return wrapped
 }
 
-func fetchEvolutionCahin(
-    for pokemonID: String,
+func fetchEvolutionChain(
+    for pokemon: String,
     session: URLSession = .shared
-) async throws -> [String: Any] {
-    let urlString = "https://pokeapi.co/api/v2/evolution-chain/\(pokemonID)"
-    guard let url = URL(string: urlString) else {
+) async throws -> EvolutionNode {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+    let speciesURLString = "https://pokeapi.co/api/v2/pokemon-species/\(pokemon)"
+    let speciesData = try await fetchData(from: speciesURLString, session: session)
+    let species = try decoder.decode(PokemonSpecies.self, from: speciesData)
+
+    guard let id = extractEvolutionChainID(from: species.evolutionChain.url) else {
         throw URLError(.badURL)
     }
-
-    let (data, _) = try await session.data(from: url)
-//    let decoder = JSONDecoder()
-//    decoder.keyDecodingStrategy = .convertFromSnakeCase
-//    return try decoder.decode(PokemonEvolutionChain.self, from: data)
-
-    let jsonObj = try JSONSerialization.jsonObject(with: data)
-    guard let json = jsonObj as? [String: Any] else {
-        throw URLError(.badServerResponse)
-    }
-    return json
+    let evolutionURLString = "https://pokeapi.co/api/v2/evolution-chain/\(id)"
+    let evolutionData = try await fetchData(from: evolutionURLString, session: session)
+    let evolution = try decoder.decode(PokemonEvolutionChain.self, from: evolutionData)
+    return evolution.chain
 }

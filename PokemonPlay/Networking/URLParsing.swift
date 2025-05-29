@@ -21,3 +21,14 @@ func extractSpriteURL(from node: JSONNode) -> URL? {
     }
     return nil
 }
+
+// use https://pokeapi.co/api/v2/pokemon-species/pikachu
+// to get
+// {
+//  "evolution_chain": {
+//    "url": "https://pokeapi.co/api/v2/evolution-chain/10/"
+//  }
+// }
+func extractEvolutionChainID(from url: String) -> String? {
+    URL(string: url)?.lastPathComponent
+}
