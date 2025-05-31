@@ -27,7 +27,7 @@ struct ScrollToHideHeaderView: View {
                 Text("\(naturalScrollOffset) \(headerHeight)") // debug
             })
             .safeAreaInset(edge: .top, spacing: 0) {
-                HeaderView()
+                headerView()
                     .padding(.bottom, 15)
                     .frame(height: headerHeight, alignment: .bottom)
                     .background(.background)
@@ -69,8 +69,7 @@ struct ScrollToHideHeaderView: View {
         }
     }
 
-    @ViewBuilder
-    func HeaderView() -> some View {
+    func headerView() -> some View {
         HStack(spacing: 20) {
             Image("fox")
                 .resizable()
@@ -88,37 +87,6 @@ struct ScrollToHideHeaderView: View {
         .font(.title2)
         .foregroundStyle(Color.primary)
         .padding(.horizontal, 15)
-    }
-
-    @ViewBuilder
-    func DummyCardView() -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            RoundedRectangle(cornerRadius: 6)
-                .frame(minHeight: 220)
-
-            HStack(spacing: 10) {
-                Circle()
-                    .frame(width: 45, height: 45)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Rectangle()
-                        .frame(height: 10)
-
-                    HStack(spacing: 10) {
-                        Rectangle()
-                            .frame(width: 100)
-
-                        Rectangle()
-                            .frame(width: 80)
-
-                        Rectangle()
-                            .frame(width: 60)
-                    }
-                    .frame(height: 10)
-                }
-            }
-        }
-        .foregroundStyle(.tertiary)
     }
 }
 

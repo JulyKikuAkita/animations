@@ -23,11 +23,11 @@ struct ExpandableNavigationSearchBarView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 15) {
-                DummyMessagesView()
+                DummyMessagesView(count: 20)
             }
             .safeAreaPadding(15)
             .safeAreaInset(edge: .top, spacing: 0) {
-                ExpandableNavigationBar()
+                expandableNavigationBar()
             }
             .animation(
                 .snappy(duration: 0.3, extraBounce: 0),
@@ -40,8 +40,7 @@ struct ExpandableNavigationSearchBarView: View {
     }
 
     /// Expandable Navigation Bar
-    @ViewBuilder
-    func ExpandableNavigationBar(_ title: String = "Messages") -> some View {
+    func expandableNavigationBar(_ title: String = "Messages") -> some View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
             let scrollViewHeight = proxy.bounds(
@@ -136,30 +135,6 @@ struct ExpandableNavigationSearchBarView: View {
         .frame(height: 190) // fixed heights: sum of all navigation bar component
         .padding(.bottom, 10)
         .padding(.bottom, isSearching ? -65 : 0)
-    }
-
-    /// Dummy messages View
-    @ViewBuilder
-    func DummyMessagesView() -> some View {
-        ForEach(0 ..< 20, id: \.self) { _ in
-            HStack(spacing: 12) {
-                Circle()
-                    .frame(width: 55, height: 55)
-
-                VStack(alignment: .leading, spacing: 6, content: {
-                    Rectangle()
-                        .frame(width: 140, height: 8)
-
-                    Rectangle()
-                        .frame(height: 8)
-
-                    Rectangle()
-                        .frame(width: 80, height: 8)
-                })
-            }
-            .foregroundStyle(.gray.opacity(0.4))
-            .padding(.horizontal, 15)
-        }
     }
 }
 
