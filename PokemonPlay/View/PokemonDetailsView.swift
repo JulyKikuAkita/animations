@@ -8,21 +8,13 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     let node: JSONNode
-    let evolutionChain: EvolutionNode?
+//    @Binding var evolutionChain: EvolutionNode?
     @State private var isLoading: Bool = false
-    @State private var evolutoinNames: [String] = []
-    var pokemonName: String {
-        node.key
-    }
 
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
                 StatsSectionView(node: node)
-
-                if let chain = evolutionChain {
-                    EvolutionSectionView(chain: chain)
-                }
 
                 JSONTreeView(rootNode: node)
             }
@@ -39,18 +31,6 @@ struct StatsSectionView: View {
         } else {
             Text("Stats unavailable")
                 .foregroundStyle(.red)
-        }
-    }
-}
-
-struct EvolutionSectionView: View {
-    let chain: EvolutionNode
-
-    var body: some View {
-        Section("Evolution Chain") {
-            EvolutionGraphView(node: chain)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(12)
         }
     }
 }
@@ -74,13 +54,13 @@ struct EvolutionSectionView: View {
     )
     let third = EvolutionNode(
         isBaby: false,
-        species: NamedAPIResource(name: "venusaur", url: "https://pokeapi.co/api/v2/pokemon-species/3/"),
+        species: NamedAPIResource(name: "pikachu", url: "https://pokeapi.co/api/v2/pokemon-species/3/"),
         evolvesTo: []
     )
     let evolutionNode = EvolutionNode(
         isBaby: false,
-        species: NamedAPIResource(name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon-species/1/"),
+        species: NamedAPIResource(name: "nanachu", url: "https://pokeapi.co/api/v2/pokemon-species/1/"),
         evolvesTo: [third]
     )
-    PokemonDetailsView(node: sample, evolutionChain: evolutionNode)
+    PokemonDetailsView(node: sample)
 }

@@ -24,6 +24,29 @@ struct EvolutionGraphView: View {
     }
 }
 
+struct EvolutionSectionView: View {
+    let names: [String]
+
+    var body: some View {
+        VStack {
+            Text("Evolution chain")
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack(alignment: .center, spacing: 2) {
+                    ForEach(names.indices, id: \.self) { index in
+                        Text(names[index].capitalized)
+                            .font(.headline)
+
+                        if index < names.count - 1 {
+                            Image(systemName: "arrow.right")
+                        }
+                    }
+                }
+                .padding(.horizontal, 8)
+            }
+        }
+    }
+}
+
 #Preview {
     let third = EvolutionNode(
         isBaby: false,

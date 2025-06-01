@@ -10,7 +10,7 @@ struct ContentView: View {
     @State private var pokemonName: String = ""
     @State private var isLoading: Bool = false
     @State private var evolutionChain: EvolutionNode? = nil
-    @State private var evolutoinNames: [String] = []
+    @State private var evolutionNames: [String] = []
     @State private var suggestedNames = ["pikachu", "charizard", "bulbasaur", "farfetchd", "snorlax"]
 
     var body: some View {
@@ -47,11 +47,19 @@ struct ContentView: View {
                 }
 
                 if !pokemonNodes.isEmpty {
-                    List(pokemonNodes) { node in
-                        NavigationLink(destination: PokemonDetailsView(node: node, evolutionChain: evolutionChain)
-                            .navigationTitle(node.key.capitalized))
-                        {
-                            CodedImageView(node: node)
+                    Section {
+                        List(pokemonNodes) { node in
+                            NavigationLink(destination: PokemonDetailsView(node: node)
+                                .navigationTitle(node.key.capitalized))
+                            {
+                                CodedImageView(node: node)
+                            }
+                        }
+                    }
+                    Section {
+                        if !evolutionNames.isEmpty {
+                            Spacer(minLength: 0)
+                            EvolutionSectionView(names: evolutionNames)
                         }
                     }
                 } else if let error {
@@ -75,7 +83,7 @@ struct ContentView: View {
             Task {
                 let chain = try await fetchEvolutionChain(for: pokemonName)
                 evolutionChain = chain
-                evolutoinNames = extractEvolutionNames(from: chain)
+                evolutionNames = extractEvolutionNames(from: chain)
                 updateSuggestedNames()
             }
         }
@@ -94,7 +102,12 @@ struct ContentView: View {
                let pokemonNode = config.value.children?.first(where: { $0.key == name })
             {
                 if isDefault {
+                    pokemonName = "charizard"
                     pokemonNodes.append(pokemonNode)
+                    let chain = try await fetchEvolutionChain(for: pokemonName)
+                    evolutionChain = chain
+                    evolutionNames = extractEvolutionNames(from: chain)
+                    updateSuggestedNames()
                 } else {
                     pokemonNodes.insert(pokemonNode, at: 0)
                 }
@@ -109,8 +122,7 @@ struct ContentView: View {
     }
 
     private func updateSuggestedNames() {
-        guard !evolutoinNames.isEmpty else { return }
-        let uniqueNames = Array(Set(suggestedNames + evolutoinNames))
+        let uniqueNames = Array(Set(suggestedNames + evolutionNames))
         suggestedNames = uniqueNames
     }
 }

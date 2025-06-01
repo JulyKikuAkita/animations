@@ -10,25 +10,31 @@ struct PillsListView: View {
     let names: [String]
     let onSelect: (String) -> Void
 
+    private let columns: [GridItem] = [
+        GridItem(.adaptive(minimum: 80), spacing: 8),
+    ]
+
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 8) {
-                ForEach(names, id: \.self) { name in
-                    Button(action: {
-                        onSelect(name)
-                    }) {
-                        Text(name.capitalized)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Color.blue.opacity(0.2))
-                            .foregroundColor(.blue)
-                            .clipShape(Capsule())
-                    }
+        LazyVGrid(columns: columns, spacing: 8) {
+            ForEach(names, id: \.self) { name in
+                Button(action: {
+                    onSelect(name)
+                }) {
+                    Text(name.capitalized)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 6)
+//                        .background(Color.blue.opacity(0.2))
+                        .overlay {
+                            Capsule().stroke(.indigo, lineWidth: 1)
+                        }
+                        .foregroundColor(.blue)
+                        .clipShape(Capsule())
+                        .truncationMode(.tail)
+                        .fixedSize(horizontal: true, vertical: false) // prevent text wrapping
                 }
             }
-            .padding(.horizontal)
         }
-        .frame(height: 44)
+        .padding(.horizontal)
     }
 }
 
