@@ -32,3 +32,9 @@ func extractSpriteURL(from node: JSONNode) -> URL? {
 func extractEvolutionChainID(from url: String) -> String? {
     URL(string: url)?.lastPathComponent
 }
+
+func extractEvolutionNames(from node: EvolutionNode) -> [String] {
+    [node.species.name] + node.evolvesTo.flatMap {
+        extractEvolutionNames(from: $0)
+    }
+}

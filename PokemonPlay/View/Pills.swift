@@ -12,7 +12,7 @@ struct PillsListView: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            LazyHStack(spacing: 8) {
                 ForEach(names, id: \.self) { name in
                     Button(action: {
                         onSelect(name)
@@ -28,6 +28,7 @@ struct PillsListView: View {
             }
             .padding(.horizontal)
         }
+        .frame(height: 44)
     }
 }
 

@@ -9,8 +9,9 @@ struct ContentView: View {
     @State private var error: String?
     @State private var pokemonName: String = ""
     @State private var isLoading: Bool = false
-
-    private let suggestedNames = ["pikachu", "charizard", "bulbasaur", "mewtwo", "snorlax"]
+    @State private var evolutionChain: EvolutionNode? = nil
+    @State private var evolutoinNames: [String] = []
+    @State private var suggestedNames = ["pikachu", "charizard", "bulbasaur", "mewtwo", "snorlax"]
 
     var body: some View {
         NavigationView {
@@ -36,9 +37,6 @@ struct ContentView: View {
                     // Suggested Pills
                     PillsListView(names: suggestedNames) { selectedName in
                         pokemonName = selectedName
-                        Task {
-                            await loadPokemonAsync(name: selectedName)
-                        }
                     }
                 }
 
@@ -67,6 +65,13 @@ struct ContentView: View {
             guard pokemonNodes.isEmpty else { return }
             await loadPokemonAsync(name: "charizard", isDefault: true)
         }
+        .onChange(of: pokemonName) {
+            Task {
+                let chain = try await fetchEvolutionChain(for: pokemonName)
+                evolutoinNames = extractEvolutionNames(from: chain)
+                updateSuggestedNames()
+            }
+        }
     }
 
     /// Swift Concurrency, support for iOS 15 +
@@ -94,6 +99,12 @@ struct ContentView: View {
         } catch {
             self.error = error.localizedDescription
         }
+    }
+
+    private func updateSuggestedNames() {
+        guard !evolutoinNames.isEmpty else { return }
+        let uniqueNames = Array(Set(suggestedNames + evolutoinNames))
+        suggestedNames = uniqueNames
     }
 }
 

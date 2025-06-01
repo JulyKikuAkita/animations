@@ -10,24 +10,18 @@ struct PokemonDetailsView: View {
     let node: JSONNode
     @State private var isLoading: Bool = false
     @State private var evolutionChain: EvolutionNode? = nil
+    @State private var evolutoinNames: [String] = []
+    var pokemonName: String {
+        node.key
+    }
 
     var body: some View {
         ScrollView {
             VStack(spacing: 12) {
-                if let basicStats: PokemonBasicStats = decodePokemon(PokemonBasicStats.self, from: node) {
-                    StatsCardView(stats: basicStats)
-                } else {
-                    Text("Decoding failed")
-                        .foregroundColor(.red)
-                }
+                StatsSectionView(node: node)
 
                 if let chain = evolutionChain {
-                    if isLoading {
-                        ProgressView()
-                    } else {
-                        EvolutionGraphView(node: chain)
-                            .padding()
-                    }
+                    EvolutionSectionView(chain: chain)
                 }
 
                 JSONTreeView(rootNode: node)
@@ -37,11 +31,38 @@ struct PokemonDetailsView: View {
             isLoading = true
             guard evolutionChain == nil else { return }
             do {
-                evolutionChain = try await fetchEvolutionChain(for: node.key)
+                let chain = try await fetchEvolutionChain(for: pokemonName)
+                evolutionChain = chain
+                evolutoinNames = extractEvolutionNames(from: chain)
             } catch {
                 print("Failed to load evolution chain: \(error)")
             }
             isLoading = false
+        }
+    }
+}
+
+struct StatsSectionView: View {
+    let node: JSONNode
+
+    var body: some View {
+        if let stats: PokemonBasicStats = decodePokemon(PokemonBasicStats.self, from: node) {
+            StatsCardView(stats: stats)
+        } else {
+            Text("Stats unavailable")
+                .foregroundStyle(.red)
+        }
+    }
+}
+
+struct EvolutionSectionView: View {
+    let chain: EvolutionNode
+
+    var body: some View {
+        Section("Evolution Chain") {
+            EvolutionGraphView(node: chain)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(12)
         }
     }
 }
