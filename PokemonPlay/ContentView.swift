@@ -11,7 +11,7 @@ struct ContentView: View {
     @State private var isLoading: Bool = false
     @State private var evolutionChain: EvolutionNode? = nil
     @State private var evolutoinNames: [String] = []
-    @State private var suggestedNames = ["pikachu", "charizard", "bulbasaur", "mewtwo", "snorlax"]
+    @State private var suggestedNames = ["pikachu", "charizard", "bulbasaur", "farfetchd", "snorlax"]
 
     var body: some View {
         NavigationView {
@@ -47,7 +47,13 @@ struct ContentView: View {
                 }
 
                 if !pokemonNodes.isEmpty {
-                    ImageListView(nodes: pokemonNodes)
+                    List(pokemonNodes) { node in
+                        NavigationLink(destination: PokemonDetailsView(node: node, evolutionChain: evolutionChain)
+                            .navigationTitle(node.key.capitalized))
+                        {
+                            CodedImageView(node: node)
+                        }
+                    }
                 } else if let error {
                     Text("Error: \(error)")
                         .foregroundColor(.red)
@@ -68,6 +74,7 @@ struct ContentView: View {
         .onChange(of: pokemonName) {
             Task {
                 let chain = try await fetchEvolutionChain(for: pokemonName)
+                evolutionChain = chain
                 evolutoinNames = extractEvolutionNames(from: chain)
                 updateSuggestedNames()
             }

@@ -8,22 +8,6 @@ import SDWebImage
 import SDWebImageSwiftUI
 import SwiftUI
 
-struct ImageListView: View {
-    let nodes: [JSONNode]
-
-    var body: some View {
-        List {
-            ForEach(nodes) { node in
-                NavigationLink(destination: PokemonDetailsView(node: node)
-                    .navigationTitle(node.key.capitalized))
-                {
-                    CodedImageView(node: node)
-                }
-            }
-        }
-    }
-}
-
 /// Use web image
 ///  https://github.com/SDWebImage/SDWebImageSwiftUI
 struct CodedImageView: View {
@@ -76,5 +60,5 @@ struct AsyncImageView: View {
             ]),
         ])
     )
-    return ImageListView(nodes: [sample])
+    CodedImageView(node: sample)
 }

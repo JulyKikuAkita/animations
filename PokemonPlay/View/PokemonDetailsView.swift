@@ -8,8 +8,8 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     let node: JSONNode
+    let evolutionChain: EvolutionNode?
     @State private var isLoading: Bool = false
-    @State private var evolutionChain: EvolutionNode? = nil
     @State private var evolutoinNames: [String] = []
     var pokemonName: String {
         node.key
@@ -26,18 +26,6 @@ struct PokemonDetailsView: View {
 
                 JSONTreeView(rootNode: node)
             }
-        }
-        .task {
-            isLoading = true
-            guard evolutionChain == nil else { return }
-            do {
-                let chain = try await fetchEvolutionChain(for: pokemonName)
-                evolutionChain = chain
-                evolutoinNames = extractEvolutionNames(from: chain)
-            } catch {
-                print("Failed to load evolution chain: \(error)")
-            }
-            isLoading = false
         }
     }
 }
@@ -84,5 +72,15 @@ struct EvolutionSectionView: View {
             ]),
         ])
     )
-    PokemonDetailsView(node: sample)
+    let third = EvolutionNode(
+        isBaby: false,
+        species: NamedAPIResource(name: "venusaur", url: "https://pokeapi.co/api/v2/pokemon-species/3/"),
+        evolvesTo: []
+    )
+    let evolutionNode = EvolutionNode(
+        isBaby: false,
+        species: NamedAPIResource(name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon-species/1/"),
+        evolvesTo: [third]
+    )
+    PokemonDetailsView(node: sample, evolutionChain: evolutionNode)
 }
