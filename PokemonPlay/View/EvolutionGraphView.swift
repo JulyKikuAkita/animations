@@ -30,8 +30,8 @@ struct EvolutionSectionView: View {
     var body: some View {
         VStack {
             Text("Evolution chain")
-            ScrollView(.horizontal, showsIndicators: true) {
-                HStack(alignment: .center, spacing: 2) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center, spacing: 4) {
                     ForEach(names.indices, id: \.self) { index in
                         Text(names[index].capitalized)
                             .font(.headline)
@@ -41,7 +41,7 @@ struct EvolutionSectionView: View {
                         }
                     }
                 }
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 12)
             }
         }
     }

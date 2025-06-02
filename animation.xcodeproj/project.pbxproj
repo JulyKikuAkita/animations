@@ -706,6 +706,7 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				ContentView.swift,
+				"Networking/OldServices+callback.swift",
 				Networking/Services.swift,
 				Networking/URLParsing.swift,
 				Parser/JSONParser.swift,
@@ -725,10 +726,13 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				ContentView.swift,
+				Data/DataStore/PokemonDataStore.swift,
+				Data/DataStore/PokemonError.swift,
 				Data/PokemonBasicStats.swift,
 				Data/PokemonEvolutionChain.swift,
 				Data/PokemonSpecies.swift,
 				Data/PokemonSpriteData.swift,
+				"Networking/OldServices+callback.swift",
 				Networking/Services.swift,
 				Networking/URLParsing.swift,
 				Parser/JSONParser.swift,

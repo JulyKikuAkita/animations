@@ -5,12 +5,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var pokemonNodes: [JSONNode] = []
-    @State private var error: String?
+    @StateObject private var viewModel = PokemonViewModel()
     @State private var pokemonName: String = ""
     @State private var isLoading: Bool = false
-    @State private var evolutionChain: EvolutionNode? = nil
-    @State private var evolutionNames: [String] = []
     @State private var suggestedNames = ["pikachu", "charizard", "bulbasaur", "farfetchd", "snorlax"]
 
     var body: some View {
@@ -27,7 +24,7 @@ struct ContentView: View {
                             Task {
                                 isLoading = true
                                 defer { isLoading = false }
-                                await loadPokemonAsync(name: pokemonName)
+                                await viewModel.loadPokemon(name: pokemonName)
                             }
                         }
                         .disabled(isLoading)
@@ -40,30 +37,37 @@ struct ContentView: View {
                     }
                 }
 
-                if let error {
+                if viewModel.isLoading {
+                    ProgressView()
+                }
+
+                if let error = viewModel.error {
                     Text("Error: \(error)")
                         .foregroundColor(.red)
                         .padding(.horizontal)
                 }
 
-                if !pokemonNodes.isEmpty {
-                    Section {
-                        List(pokemonNodes) { node in
-                            NavigationLink(destination: PokemonDetailsView(node: node)
-                                .navigationTitle(node.key.capitalized))
-                            {
-                                CodedImageView(node: node)
+                if !viewModel.pokemonNodes.isEmpty {
+                    List(viewModel.pokemonNodes) { node in
+                        NavigationLink {
+                            PokemonDetailsView(node: node)
+                                .navigationTitle(node.key.capitalized)
+                        } label: {
+                            CodedImageView(node: node)
+                        }
+                        .onTapGesture {
+                            // Load evolutions when tapping a Pokémon
+                            Task {
+                                await viewModel.loadEvolutions(for: node.key)
                             }
                         }
                     }
-                    Section {
-                        if !evolutionNames.isEmpty {
-                            Spacer(minLength: 0)
-                            EvolutionSectionView(names: evolutionNames)
-                        }
+
+                    if !viewModel.evolutionNames.isEmpty {
+                        EvolutionSectionView(names: viewModel.evolutionNames)
                     }
-                } else if let error {
-                    Text("Error: \(error)")
+                } else if viewModel.error != nil {
+                    Text("Error: \(viewModel.error!)")
                         .foregroundColor(.red)
                         .padding()
                 } else {
@@ -76,92 +80,18 @@ struct ContentView: View {
             .navigationTitle("Pokémon Statistics")
         }
         .onFirstAppearAsync { /// This task runs every time the view enters the hierarchy.
-            guard pokemonNodes.isEmpty else { return }
-            await loadPokemonAsync(name: "charizard", isDefault: true)
+            guard viewModel.pokemonNodes.isEmpty else { return }
+            await viewModel.loadPokemon(name: "charizard")
         }
-        .onChange(of: pokemonName) {
-            Task {
-                let chain = try await fetchEvolutionChain(for: pokemonName)
-                evolutionChain = chain
-                evolutionNames = extractEvolutionNames(from: chain)
-                updateSuggestedNames()
+        .onChange(of: viewModel.evolutionNames) {
+            Task { @MainActor in
+                let uniqueNames = Array(Set(suggestedNames + viewModel.evolutionNames))
+                suggestedNames = uniqueNames
             }
         }
-    }
-
-    /// Swift Concurrency, support for iOS 15 +
-    @MainActor
-    private func loadPokemonAsync(name: String, isDefault: Bool = false) async {
-        do {
-            let wrapped = try await fetchAndWrapPokemonAsync(name: name)
-            let jsonValue = convertToJSONValue(wrapped)
-
-            if case let .object(dict) = jsonValue,
-               let domain = dict["domain"],
-               let config = domain.children?.first(where: { $0.key == "config" }),
-               let pokemonNode = config.value.children?.first(where: { $0.key == name })
-            {
-                if isDefault {
-                    pokemonName = "charizard"
-                    pokemonNodes.append(pokemonNode)
-                    let chain = try await fetchEvolutionChain(for: pokemonName)
-                    evolutionChain = chain
-                    evolutionNames = extractEvolutionNames(from: chain)
-                    updateSuggestedNames()
-                } else {
-                    pokemonNodes.insert(pokemonNode, at: 0)
-                }
-                error = nil
-            } else {
-                error = "Invalid structure: missing domain/config/\(name)"
-            }
-
-        } catch {
-            self.error = error.localizedDescription
-        }
-    }
-
-    private func updateSuggestedNames() {
-        let uniqueNames = Array(Set(suggestedNames + evolutionNames))
-        suggestedNames = uniqueNames
     }
 }
 
 #Preview {
     ContentView()
-}
-
-extension ContentView {
-    /// use Completion Handlers and sync update json, support for iOS 13
-    ///  best with
-    ///   .onAppear {
-    ///     loadPokemon(name: "charizard", isDefault: true)
-    /// }
-    ///
-    private func loadPokemon(name: String, isDefault: Bool = false) {
-        fetchAndWrapPokemon(name: name) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(wrapped):
-                    let jsonValue = convertToJSONValue(wrapped)
-                    if case let .object(dict) = jsonValue,
-                       let domain = dict["domain"],
-                       let config = domain.children?.first(where: { $0.key == "config" }),
-                       let pokemonNode = config.value.children?.first(where: { $0.key == name })
-                    {
-                        if isDefault {
-                            pokemonNodes.append(pokemonNode)
-                        } else {
-                            pokemonNodes.insert(pokemonNode, at: 0)
-                        }
-                        error = nil
-                    } else {
-                        error = "Invalid structure: missing domain/config/\(name)"
-                    }
-                case let .failure(err):
-                    error = err.localizedDescription
-                }
-            }
-        }
-    }
 }
