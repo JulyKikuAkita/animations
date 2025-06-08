@@ -53,10 +53,19 @@ class PokemonDataStore {
 class PokemonViewModel: ObservableObject {
     @Published private(set) var pokemonNodes: [JSONNode] = []
     @Published private(set) var evolutionNames: [String] = []
+    @Published private(set) var pinnedNames: [String] = ["pikachu", "charizard", "bulbasaur", "farfetchd", "snorlax"]
     @Published private(set) var error: String?
     @Published private(set) var isLoading = false
 
     private let dataStore = PokemonDataStore()
+    private var searchCounts: [String: Int] = [:]
+
+    var suggestedNames: [String] {
+        Array(Set(pinnedNames + evolutionNames)).sorted { lh, rh in
+            // most searched first
+            searchCounts[lh, default: 0] > searchCounts[rh, default: 0]
+        }
+    }
 
     func loadPokemon(name: String) async {
         guard !isLoading else { return }
@@ -67,6 +76,7 @@ class PokemonViewModel: ObservableObject {
         do {
             let node = try await dataStore.getPokemon(name: name)
             pokemonNodes.insert(node, at: 0)
+            searchCounts[name, default: 0] += 1
         } catch {
             self.error = error.localizedDescription
         }

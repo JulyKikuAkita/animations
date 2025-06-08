@@ -8,34 +8,16 @@ struct ContentView: View {
     @StateObject private var viewModel = PokemonViewModel()
     @State private var pokemonName: String = ""
     @State private var isLoading: Bool = false
-    @State private var suggestedNames = ["pikachu", "charizard", "bulbasaur", "farfetchd", "snorlax"]
 
     var body: some View {
         NavigationView {
             VStack(spacing: 12) {
-                VStack(spacing: 6) {
-                    HStack {
-                        TextField("Enter Pokémon name", text: $pokemonName)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .autocapitalization(.none)
-                            .disableAutocorrection(true)
-
-                        Button("Fetch") {
-                            Task {
-                                isLoading = true
-                                defer { isLoading = false }
-                                await viewModel.loadPokemon(name: pokemonName)
-                            }
-                        }
-                        .disabled(isLoading)
-                    }
-                    .padding(.horizontal)
-
-                    // Suggested Pills
-                    PillsListView(names: suggestedNames) { selectedName in
-                        pokemonName = selectedName
-                    }
-                }
+                SearchBarSectionView(
+                    pokemonName: $pokemonName,
+                    isLoading: $isLoading,
+                    suggestions: viewModel.suggestedNames,
+                    onSearch: performSearch
+                )
 
                 if viewModel.isLoading {
                     ProgressView()
@@ -54,12 +36,6 @@ struct ContentView: View {
                                 .navigationTitle(node.key.capitalized)
                         } label: {
                             CodedImageView(node: node)
-                        }
-                        .onTapGesture {
-                            // Load evolutions when tapping a Pokémon
-                            Task {
-                                await viewModel.loadEvolutions(for: node.key)
-                            }
                         }
                     }
 
@@ -83,15 +59,62 @@ struct ContentView: View {
             guard viewModel.pokemonNodes.isEmpty else { return }
             await viewModel.loadPokemon(name: "charizard")
         }
-        .onChange(of: viewModel.evolutionNames) {
-            Task { @MainActor in
-                let uniqueNames = Array(Set(suggestedNames + viewModel.evolutionNames))
-                suggestedNames = uniqueNames
-            }
+    }
+
+    func performSearch(_ pokemonName: String) {
+        guard !pokemonName.isEmpty else { return }
+        Task {
+            isLoading = true
+            defer { isLoading = false }
+            await viewModel.loadPokemon(name: pokemonName)
+            await viewModel.loadEvolutions(for: pokemonName)
         }
     }
 }
 
 #Preview {
     ContentView()
+}
+
+struct SearchBarSectionView: View {
+    @Binding var pokemonName: String
+    @Binding var isLoading: Bool
+    let suggestions: [String]
+    let onSearch: (String) -> Void
+
+    @FocusState private var isSearchFocused: Bool
+
+    var body: some View {
+        VStack(spacing: 6) {
+            HStack {
+                TextField("Enter Pokémon name", text: $pokemonName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .submitLabel(.search)
+                    .focused($isSearchFocused)
+                    .onSubmit { onSearch(pokemonName) }
+
+                Button {
+                    isSearchFocused = false
+                    onSearch(pokemonName)
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .padding(.horizontal, 2)
+                }
+                .disabled(isLoading)
+            }
+            .padding(.horizontal)
+
+            // Suggested Pills
+            PillsListView(names: suggestions) { selectedName in
+                pokemonName = selectedName
+                isSearchFocused = false
+                onSearch(pokemonName)
+            }
+        }
+        .onTapGesture {
+            isSearchFocused = false
+        }
+    }
 }

@@ -12,21 +12,30 @@ import SwiftUI
 ///  https://github.com/SDWebImage/SDWebImageSwiftUI
 struct CodedImageView: View {
     let node: JSONNode
+    @State private var loaded = false
     var body: some View {
         HStack(spacing: 12) {
             if let url = extractSpriteURL(from: node) {
                 WebImage(url: url) { image in
-                    image.resizable()
+                    image.resizable().scaledToFit()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(.circle)
+                        .animation(.spring(response: 0.4, dampingFraction: 0.6), value: loaded)
+                        .frame(width: 40, height: 40)
+
                 } placeholder: {
                     ProgressView()
                 }
+                .onSuccess { _, _, _ in
+                    loaded = true
+                }
                 .indicator(.activity)
                 .transition(.fade(duration: 0.5))
-                .scaledToFit()
-                .frame(width: 40, height: 40)
             }
             Text(node.key.capitalized)
+                .font(.headline)
         }
+        .frame(height: 60, alignment: .center) // fix row height for predictable layout size
     }
 }
 
@@ -36,18 +45,18 @@ struct AsyncImageView: View {
         HStack(spacing: 12) {
             if let url = extractSpriteURL(from: node) {
                 AsyncImage(url: url) { image in
-                    image.resizable()
+                    image.resizable().scaledToFit()
                         .aspectRatio(contentMode: .fill)
+                        .clipShape(.circle)
                         .frame(width: 40, height: 40)
                 } placeholder: {
                     ProgressView()
-                        .frame(width: 40, height: 40)
                 }
             }
             Text(node.key.capitalized)
                 .font(.headline)
         }
-        .padding(.vertical, 4)
+        .frame(height: 60, alignment: .center)
     }
 }
 
@@ -60,5 +69,10 @@ struct AsyncImageView: View {
             ]),
         ])
     )
-    CodedImageView(node: sample)
+    Section("WebImage") {
+        CodedImageView(node: sample)
+    }
+    Section("AsyncImage") {
+        AsyncImageView(node: sample)
+    }
 }

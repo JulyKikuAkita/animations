@@ -23,15 +23,17 @@ struct PillsListView: View {
                     Text(name.capitalized)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 6)
-//                        .background(Color.blue.opacity(0.2))
-                        .overlay {
-                            Capsule().stroke(.indigo, lineWidth: 1)
-                        }
                         .foregroundColor(.blue)
-                        .clipShape(Capsule())
+//                        .background(Color.blue.opacity(0.2))
                         .truncationMode(.tail)
                         .fixedSize(horizontal: true, vertical: false) // prevent text wrapping
                 }
+                .buttonStyle(.plain) // Prevents default tap animation
+                .overlay {
+                    Capsule().stroke(.indigo, lineWidth: 1)
+                }
+                .clipShape(Capsule())
+                .contentShape(.capsule) // Ensures tap area matches shape
             }
         }
         .padding(.horizontal)
