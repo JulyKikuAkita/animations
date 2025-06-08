@@ -112,6 +112,7 @@ struct SearchBarSectionView: View {
                 isSearchFocused = false
                 onSearch(pokemonName)
             }
+            .animation(.easeInOut(duration: 0.25), value: suggestions)
         }
         .onTapGesture {
             isSearchFocused = false

@@ -18,10 +18,11 @@ struct CodedImageView: View {
             if let url = extractSpriteURL(from: node) {
                 WebImage(url: url) { image in
                     image.resizable().scaledToFit()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(.circle)
+                        .aspectRatio(contentMode: .fit)
+                        .clipped()
+//                        .clipShape(.circle)
                         .animation(.spring(response: 0.4, dampingFraction: 0.6), value: loaded)
-                        .frame(width: 40, height: 40)
+//                        .frame(width: 40, height: 40)
 
                 } placeholder: {
                     ProgressView()

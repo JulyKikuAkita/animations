@@ -8,7 +8,6 @@ import SwiftUI
 
 struct PokemonDetailsView: View {
     let node: JSONNode
-//    @Binding var evolutionChain: EvolutionNode?
     @State private var isLoading: Bool = false
 
     var body: some View {
@@ -35,10 +34,19 @@ struct StatsSectionView: View {
     }
 }
 
-#Preview {
-    let sample = JSONNode(
+#Preview("Stats Section with Type") {
+    let mockNode = JSONNode(
         key: "pikachu",
         value: .object([
+            "weight": .number(6),
+            "height": .number(14),
+            "types": .array([
+                .object([
+                    "type": .object([
+                        "name": .string("electric"),
+                    ]),
+                ]),
+            ]),
             "sprites": .object([
                 "front_default": .string("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"),
             ]),
@@ -52,15 +60,5 @@ struct StatsSectionView: View {
             ]),
         ])
     )
-    let third = EvolutionNode(
-        isBaby: false,
-        species: NamedAPIResource(name: "pikachu", url: "https://pokeapi.co/api/v2/pokemon-species/3/"),
-        evolvesTo: []
-    )
-    let evolutionNode = EvolutionNode(
-        isBaby: false,
-        species: NamedAPIResource(name: "nanachu", url: "https://pokeapi.co/api/v2/pokemon-species/1/"),
-        evolvesTo: [third]
-    )
-    PokemonDetailsView(node: sample)
+    StatsSectionView(node: mockNode)
 }
