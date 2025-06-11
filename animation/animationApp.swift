@@ -4,7 +4,6 @@
 
 import SwiftUI
 
-// @main
 struct AnimationApp: App { // with colorTransformer context
     init() {
         ColorTransformer.register()
