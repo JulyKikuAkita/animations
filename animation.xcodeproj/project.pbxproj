@@ -387,6 +387,7 @@
 		AB8747C22D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
 		AB8747C32D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
 		AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */; };
+		AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
 		ABFC3FD82C9F6C7A00E2E60E /* Reel6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD02C9F6C7A00E2E60E /* Reel6.mp4 */; };
 		ABFC3FD92C9F6C7A00E2E60E /* Reel9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD32C9F6C7A00E2E60E /* Reel9.mp4 */; };
@@ -724,6 +725,7 @@
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
 		AB8747C12D8F557F00507C55 /* audio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio.wav; sourceTree = "<group>"; };
 		AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormRectangleShape.swift; sourceTree = "<group>"; };
+		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel1.mp4; path = resources/Videos/Reel1.mp4; sourceTree = SOURCE_ROOT; };
 		ABFC3FCC2C9F6C7A00E2E60E /* Reel2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel2.mp4; path = resources/Videos/Reel2.mp4; sourceTree = SOURCE_ROOT; };
@@ -1057,6 +1059,7 @@
 		961F3B822B8818240055D79B = {
 			isa = PBXGroup;
 			children = (
+				AB5C89912DFD4664009CF684 /* FoundationModels */,
 				96513E9E2D3DC6500004C7C8 /* APNS */,
 				96726B152C2FA88D007A4E34 /* PomodoroFocusTimer */,
 				96352D212C0BD499001AD2FD /* PinterestGrid */,
@@ -1796,6 +1799,14 @@
 			path = Scrubber;
 			sourceTree = "<group>";
 		};
+		AB5C89912DFD4664009CF684 /* FoundationModels */ = {
+			isa = PBXGroup;
+			children = (
+				AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */,
+			);
+			path = FoundationModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2389,6 +2400,7 @@
 				AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */,
 				963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
+				AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */,
 				964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
 				9606653C2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift in Sources */,
 				9636EF932DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift in Sources */,
