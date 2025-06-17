@@ -370,6 +370,10 @@
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B84C2C9F60A700BC7747 /* GridTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */; };
+		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
+		AB8747C22D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
+		AB8747C32D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
+		AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
 		ABFC3FD82C9F6C7A00E2E60E /* Reel6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD02C9F6C7A00E2E60E /* Reel6.mp4 */; };
 		ABFC3FD92C9F6C7A00E2E60E /* Reel9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD32C9F6C7A00E2E60E /* Reel9.mp4 */; };
@@ -698,6 +702,9 @@
 		AB0EA1792DEBBB5100C62391 /* DummyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViews.swift; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
+		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
+		AB8747C12D8F557F00507C55 /* audio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio.wav; sourceTree = "<group>"; };
+		AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormRectangleShape.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel1.mp4; path = resources/Videos/Reel1.mp4; sourceTree = SOURCE_ROOT; };
 		ABFC3FCC2C9F6C7A00E2E60E /* Reel2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel2.mp4; path = resources/Videos/Reel2.mp4; sourceTree = SOURCE_ROOT; };
@@ -1149,6 +1156,7 @@
 				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
 				9609DB172DBB2CC300A76F95 /* ToastView */,
 				9609D93C2DB591DB00A76F95 /* Map */,
+				AB8747BD2D8F4D8200507C55 /* Scrubber */,
 				96E948F02D8B8A3700B257B4 /* Spinner */,
 				965F26FC2D86361B00300420 /* CustomMenu */,
 				963B862B2CE94F9400C3FB0D /* Slider */,
@@ -1383,6 +1391,7 @@
 		963DB14C2BBBD39F00AAF347 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				AB8747C12D8F557F00507C55 /* audio.wav */,
 				ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */,
 				ABFC3FCC2C9F6C7A00E2E60E /* Reel2.mp4 */,
 				ABFC3FCD2C9F6C7A00E2E60E /* Reel3.mp4 */,
@@ -1693,6 +1702,7 @@
 			isa = PBXGroup;
 			children = (
 				96E7CEE32BE32C5C00F24910 /* TabShape.swift */,
+				AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */,
 			);
 			path = Shape;
 			sourceTree = "<group>";
@@ -1735,6 +1745,14 @@
 				968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */,
 			);
 			path = Grid;
+			sourceTree = "<group>";
+		};
+		AB8747BD2D8F4D8200507C55 /* Scrubber */ = {
+			isa = PBXGroup;
+			children = (
+				AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */,
+			);
+			path = Scrubber;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2160,6 +2178,7 @@
 				ABFC3FE82C9F6C7A00E2E60E /* Reel4.mp4 in Resources */,
 				ABFC3FE92C9F6C7A00E2E60E /* Reel5.mp4 in Resources */,
 				ABFC3FEA2C9F6C7A00E2E60E /* Reel7.mp4 in Resources */,
+				AB8747C32D8F557F00507C55 /* audio.wav in Resources */,
 				ABFC3FEB2C9F6C7A00E2E60E /* Reel8.mp4 in Resources */,
 				ABFC3FEC2C9F6C7A00E2E60E /* Reel11.mp4 in Resources */,
 				ABFC3FED2C9F6C7A00E2E60E /* Reel12.mp4 in Resources */,
@@ -2182,6 +2201,7 @@
 				ABFC3FDA2C9F6C7A00E2E60E /* Reel10.mp4 in Resources */,
 				ABFC3FDB2C9F6C7A00E2E60E /* Reel4.mp4 in Resources */,
 				ABFC3FDC2C9F6C7A00E2E60E /* Reel5.mp4 in Resources */,
+				AB8747C22D8F557F00507C55 /* audio.wav in Resources */,
 				ABFC3FDD2C9F6C7A00E2E60E /* Reel7.mp4 in Resources */,
 				96921D162D74401300326523 /* Preview Assets.xcassets in Resources */,
 				ABFC3FDE2C9F6C7A00E2E60E /* Reel8.mp4 in Resources */,
@@ -2323,6 +2343,7 @@
 				9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */,
 				968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */,
 				964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */,
+				AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */,
 				963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
@@ -2444,6 +2465,7 @@
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
 				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
+				AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
 				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
