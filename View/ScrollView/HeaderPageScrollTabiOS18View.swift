@@ -282,7 +282,7 @@ struct HeaderPageScrollTabiOS18View<Header: View, Pages: View>: View {
     HeaderPageScrollTabiOS18DemoView()
 }
 
-extension ScrollGeometry {
+private extension ScrollGeometry {
     init() {
         self.init(
             contentOffset: .zero,

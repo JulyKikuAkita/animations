@@ -270,6 +270,19 @@
 		969222112D7AD29C00326523 /* View+Extension+Tray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969222102D7AD29C00326523 /* View+Extension+Tray.swift */; };
 		9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */; };
 		9693DB342D9B4F9100A29727 /* DrawerButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9693DB332D9B4F9100A29727 /* DrawerButtonView.swift */; };
+		969219DC2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
+		969219DD2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
+		969219DE2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
+		969219E12D6DA2CC00326523 /* ContactScrollDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */; };
+		96921AEA2D6EE40C00326523 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
+		96921AEB2D6EE40C00326523 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
+		96921AEC2D6EE40C00326523 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
+		96921AF12D6EF14900326523 /* BookCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AEF2D6EF14800326523 /* BookCardView.swift */; };
+		96921AF42D6EF1E700326523 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AF22D6EF1E700326523 /* SearchView.swift */; };
+		96921B892D6FBB2300326523 /* TransparentBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921B882D6FBB2300326523 /* TransparentBlurView.swift */; };
+		96921B8B2D6FC19000326523 /* BookCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AEF2D6EF14800326523 /* BookCardView.swift */; };
+		96921B8C2D6FC1BA00326523 /* TransparentBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921B882D6FBB2300326523 /* TransparentBlurView.swift */; };
+		96921B8D2D6FC33500326523 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AF22D6EF1E700326523 /* SearchView.swift */; };
 		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		96976CEE2D50349100643821 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976CED2D50349100643821 /* View+Alert.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
@@ -622,6 +635,12 @@
 		969222102D7AD29C00326523 /* View+Extension+Tray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension+Tray.swift"; sourceTree = "<group>"; };
 		9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaggeredAnimationView.swift; sourceTree = "<group>"; };
 		9693DB332D9B4F9100A29727 /* DrawerButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerButtonView.swift; sourceTree = "<group>"; };
+		969219DB2D6D9EE300326523 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScrollDemoView.swift; sourceTree = "<group>"; };
+		96921AE92D6EE40C00326523 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		96921AEF2D6EF14800326523 /* BookCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCardView.swift; sourceTree = "<group>"; };
+		96921AF22D6EF1E700326523 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		96921B882D6FBB2300326523 /* TransparentBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentBlurView.swift; sourceTree = "<group>"; };
 		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
 		96976CED2D50349100643821 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
@@ -1048,6 +1067,7 @@
 				961F3B8D2B8818240055D79B /* animation */,
 				9621DB142BEDDD6100183CB7 /* Gesture */,
 				96845DA32BD3346500B7D8B2 /* AppleMusic */,
+				96921AED2D6EF10C00326523 /* AppleBooks */,
 				9621DC872BEF4B2200183CB7 /* ApplePhoto */,
 				9621DC262BEF3CF800183CB7 /* demoApps */,
 				9621DC4B2BEF3E5E00183CB7 /* Alert */,
@@ -1112,6 +1132,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0EA1752DEBBAB000C62391 /* Dummies.swift */,
+				969219DB2D6D9EE300326523 /* Contact.swift */,
 				9621DC902BF1EDB100183CB7 /* ActionModel.swift */,
 				968D2D782B8C34CB00007734 /* WindowSharedModel.swift */,
 				96C0C2D62B905DDE00F56FF5 /* Card.swift */,
@@ -1141,6 +1162,7 @@
 				96E4E5F82D175FAB0020261F /* ImageLinkModel.swift */,
 				963B9CF82D5492B200453320 /* SwipeActionModel.swift */,
 				9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */,
+				96921AE92D6EE40C00326523 /* Book.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1574,6 +1596,24 @@
 			path = AppShortcuts;
 			sourceTree = "<group>";
 		};
+		96921AED2D6EF10C00326523 /* AppleBooks */ = {
+			isa = PBXGroup;
+			children = (
+				96921AEE2D6EF13900326523 /* View */,
+			);
+			path = AppleBooks;
+			sourceTree = "<group>";
+		};
+		96921AEE2D6EF13900326523 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96921AEF2D6EF14800326523 /* BookCardView.swift */,
+				96921AF22D6EF1E700326523 /* SearchView.swift */,
+				96921B882D6FBB2300326523 /* TransparentBlurView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		96976CEC2D50347D00643821 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1605,6 +1645,7 @@
 				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
 				960663282DD950430084B468 /* ResizableHeaderScrollView.swift */,
 				9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */,
+				969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -2329,6 +2370,7 @@
 				963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */,
 				96FCA7D22DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift in Sources */,
 				961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */,
+				969219E12D6DA2CC00326523 /* ContactScrollDemoView.swift in Sources */,
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
@@ -2336,6 +2378,7 @@
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
+				96921B8B2D6FC19000326523 /* BookCardView.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
 				9609DB192DBB2D1400A76F95 /* InlineToastView.swift in Sources */,
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
@@ -2367,8 +2410,10 @@
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
 				96BCDFDD2CC8C05B00A7CBFF /* UniversalOverlayView.swift in Sources */,
 				96AC82F42C8BAC2000ABBE78 /* SideBarView.swift in Sources */,
+				96921B8C2D6FC1BA00326523 /* TransparentBlurView.swift in Sources */,
 				9682B6CE2CB1D070003D917F /* Grid+PanGestureView.swift in Sources */,
 				9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */,
+				96921B8D2D6FC33500326523 /* SearchView.swift in Sources */,
 				96E4E5F92D175FAB0020261F /* ImageLinkModel.swift in Sources */,
 				9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */,
 				961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */,
@@ -2411,6 +2456,7 @@
 				9662F0252C583FB600508B80 /* LandingView.swift in Sources */,
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
+				969219DD2D6D9EEA00326523 /* Contact.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
 				96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */,
 				AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */,
@@ -2475,6 +2521,7 @@
 				963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */,
 				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				963B87D82CEC0DF000C3FB0D /* mailSearchInboxiOS18.swift in Sources */,
+				96921AEC2D6EE40C00326523 /* Book.swift in Sources */,
 				963B9CF72D5491EF00453320 /* CustomSwipeActions.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
@@ -2538,6 +2585,7 @@
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
 				963B87DB2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
+				96921AF42D6EF1E700326523 /* SearchView.swift in Sources */,
 				9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */,
 				9662EFEF2C4B4FA200508B80 /* PhotosScrollView.swift in Sources */,
 				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
@@ -2558,6 +2606,7 @@
 				96921D172D74423100326523 /* UIImage+Color.swift in Sources */,
 				9621DC3D2BEF3D7A00183CB7 /* Tag.swift in Sources */,
 				9662EF2A2C3E012800508B80 /* Video.swift in Sources */,
+				969219DE2D6D9EEA00326523 /* Contact.swift in Sources */,
 				9621DC3E2BEF3D7A00183CB7 /* OffsetReader.swift in Sources */,
 				9662EFF52C4B597400508B80 /* SharedData.swift in Sources */,
 				96352D252C0BD6E8001AD2FD /* UICoordinatorPinterestGrid.swift in Sources */,
@@ -2576,11 +2625,15 @@
 				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
 				96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
+				9621DC5A2BEF3EBF00183CB7 /* demoApp.swift in Sources */,
+				96921AF12D6EF14900326523 /* BookCardView.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
 				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
+				96921AEB2D6EE40C00326523 /* Book.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
 				9621DC392BEF3D7300183CB7 /* Tab_iOS17.swift in Sources */,
 				96726B192C2FCECB007A4E34 /* TimeModel.swift in Sources */,
+				96921B892D6FBB2300326523 /* TransparentBlurView.swift in Sources */,
 				96E4E60A2D178F510020261F /* AsyncImageViewerViewDemo.swift in Sources */,
 				96921D132D7439C700326523 /* AppIntentView.swift in Sources */,
 				AB0EA1762DEBBAB000C62391 /* Dummies.swift in Sources */,
@@ -2655,6 +2708,7 @@
 				9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */,
 				96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */,
 				96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */,
+				969219DC2D6D9EEA00326523 /* Contact.swift in Sources */,
 				9621DDAF2BF487BB00183CB7 /* Transaction.swift in Sources */,
 				9662EFDB2C47A8AE00508B80 /* Message.swift in Sources */,
 				96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */,
@@ -2672,6 +2726,7 @@
 				9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */,
 				9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */,
 				9621DDA92BF4813100183CB7 /* Constants.swift in Sources */,
+				96921AEA2D6EE40C00326523 /* Book.swift in Sources */,
 				9662F0212C58348100508B80 /* Page.swift in Sources */,
 				96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D552C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
