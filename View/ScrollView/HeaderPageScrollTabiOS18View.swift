@@ -23,23 +23,11 @@ struct HeaderPageScrollTabiOS18DemoView: View {
             PageLabel(title: "Tagged", symbolImage: "person.square.rectangle")
         } pages: {
             /// assuming each is individual tab view
-            dummyView(.green, count: 5)
+            DummyRectangles(color: .green, count: 5)
 
             Text("Reels")
-
-            dummyView(.orange, count: 45)
+            DummyRectangles(color: .orange, count: 45)
         } onRefresh: {}
-    }
-
-    func dummyView(_ color: Color, count: Int) -> some View {
-        LazyVStack(spacing: 12) {
-            ForEach(0 ..< count, id: \.self) { _ in
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(color.gradient)
-                    .frame(height: 45)
-            }
-        }
-        .padding(15)
     }
 }
 
@@ -140,6 +128,7 @@ struct HeaderPageScrollTabiOS18View<Header: View, Pages: View>: View {
         }
     }
 
+    // swiftlint:disable:next function_body_length
     func pageScrollView(label: PageLabel, size: CGSize, collection: SubviewsCollection) -> some View {
         let index = labels.firstIndex(where: { $0.title == label.title }) ?? 0
         return ScrollView(.vertical) {
