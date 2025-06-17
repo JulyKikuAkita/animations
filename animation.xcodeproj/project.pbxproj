@@ -111,6 +111,7 @@
 		962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04772C22A162008E1E5D /* MeshGradientView.swift */; };
 		962B047A2C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */; };
 		96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */; };
+		9633FB382DF947B10036CF8C /* SimpleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9633FB372DF947B10036CF8C /* SimpleTextField.swift */; };
 		96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
 		96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352CE02C09A416001AD2FD /* AnchorKey.swift */; };
@@ -489,6 +490,7 @@
 		962B04772C22A162008E1E5D /* MeshGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshGradientView.swift; sourceTree = "<group>"; };
 		962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableNavigationSearchBarView.swift; sourceTree = "<group>"; };
 		96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSelectionAPIView.swift; sourceTree = "<group>"; };
+		9633FB372DF947B10036CF8C /* SimpleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextField.swift; sourceTree = "<group>"; };
 		96352CE02C09A416001AD2FD /* AnchorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorKey.swift; sourceTree = "<group>"; };
 		96352CE52C09AC6E001AD2FD /* StackedCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedCards.swift; sourceTree = "<group>"; };
 		96352D222C0BD4C2001AD2FD /* GridImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImageView.swift; sourceTree = "<group>"; };
@@ -1326,6 +1328,7 @@
 				965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */,
 				963B882E2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift */,
 				96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */,
+				9633FB372DF947B10036CF8C /* SimpleTextField.swift */,
 			);
 			path = TextFieldView;
 			sourceTree = "<group>";
@@ -2430,6 +2433,7 @@
 				96E4E6042D178F350020261F /* DropdownPickerView.swift in Sources */,
 				96E4E6052D178F350020261F /* ExpandableWheelPickerView.swift in Sources */,
 				96E4E6062D178F350020261F /* ImagePicker.swift in Sources */,
+				9633FB382DF947B10036CF8C /* SimpleTextField.swift in Sources */,
 				96E4E6072D178F350020261F /* TimePickerView.swift in Sources */,
 				AB0EA1782DEBBAB000C62391 /* Dummies.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
