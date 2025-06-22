@@ -391,6 +391,7 @@
 		AB5C93302E03E28F009CF684 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5C932F2E03E28F009CF684 /* WidgetKit.framework */; };
 		AB5C93322E03E28F009CF684 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5C93312E03E28F009CF684 /* SwiftUI.framework */; };
 		AB5C933F2E03E291009CF684 /* alarmKitCountdownDemoExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */; };
 		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
 		AB8747C22D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
 		AB8747C32D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
@@ -759,6 +760,7 @@
 		AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = alarmKitCountdownDemoExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB5C932F2E03E28F009CF684 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AB5C93312E03E28F009CF684 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlassSearchableTabbar.swift; sourceTree = "<group>"; };
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
 		AB8747C12D8F557F00507C55 /* audio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio.wav; sourceTree = "<group>"; };
 		AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormRectangleShape.swift; sourceTree = "<group>"; };
@@ -1807,6 +1809,7 @@
 				96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */,
 				963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */,
 				9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */,
+				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
 			);
 			path = "Tabbar+Navigaion";
 			sourceTree = "<group>";
@@ -2686,6 +2689,7 @@
 				9684833D2BCF62C50023FE2B /* Particle.swift in Sources */,
 				AB5C92322E013724009CF684 /* OrderManager.swift in Sources */,
 				963B846E2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlaer.swift in Sources */,
+				AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */,
 				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
@@ -3373,6 +3377,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nanachi.animation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3403,6 +3408,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nanachi.animation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
