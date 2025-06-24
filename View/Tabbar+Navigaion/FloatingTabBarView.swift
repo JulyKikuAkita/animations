@@ -15,7 +15,7 @@ struct FloatingTabBarApp: App {
 
 struct FloatingTabBarDemoView: View {
     /// View Properties
-    @State private var activeTab: Tab_iOS17 = .apps
+    @State private var activeTab: TabiOS17 = .apps
     @State private var isTabBarHidden: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -47,7 +47,7 @@ struct FloatingTabBarDemoView: View {
                     // Instead of just modifier .toolbar(.hidden, for: .tabBar)
                     TabView(selection: $activeTab) {
                         FloatingTabBarView()
-                            .tag(Tab_iOS17.apps)
+                            .tag(TabiOS17.apps)
                             //                    .toolbar(.hidden, for: .tabBar) // glitch
                             .background {
                                 if !isTabBarHidden {
@@ -58,15 +58,15 @@ struct FloatingTabBarDemoView: View {
                             }
 
                         Text("Photos")
-                            .tag(Tab_iOS17.photos)
+                            .tag(TabiOS17.photos)
 //                            .toolbar(.hidden, for: .tabBar)
 
                         Text("Chat")
-                            .tag(Tab_iOS17.chat)
+                            .tag(TabiOS17.chat)
 //                            .toolbar(.hidden, for: .tabBar)
 
                         Text("Profile")
-                            .tag(Tab_iOS17.profile)
+                            .tag(TabiOS17.profile)
 //                            .toolbar(.hidden, for: .tabBar)
                     }
                 }

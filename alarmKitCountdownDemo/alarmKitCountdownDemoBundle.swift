@@ -10,6 +10,6 @@ import WidgetKit
 @main
 struct AlarmKitCountdownDemoBundle: WidgetBundle {
     var body: some Widget {
-        alarmKitCountdownDemoLiveActivity()
+        AlarmKitCountdownDemoLiveActivity()
     }
 }

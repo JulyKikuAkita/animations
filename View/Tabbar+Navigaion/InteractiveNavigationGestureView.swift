@@ -87,12 +87,12 @@ struct InteractiveNavigationGestureDemoView: View {
 
 struct CustomBottomBar: View {
     @Environment(NavigationHelper.self) private var navigationHelper
-    @State private var selectedTab: Tab_iOS17 = .chat
+    @State private var selectedTab: TabiOS17 = .chat
     var body: some View {
         HStack(spacing: 0) {
             let blur = (1 - navigationHelper.popProgress) * 3
             let scale = (1 - navigationHelper.popProgress) * 0.1
-            ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+            ForEach(TabiOS17.allCases, id: \.rawValue) { tab in
                 Button {
                     if tab == .apps {
                     } else {
