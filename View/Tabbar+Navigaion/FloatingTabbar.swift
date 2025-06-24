@@ -7,7 +7,7 @@ import SwiftUI
 struct FloatingTabbar: View {
     var activeForeground: Color = .white
     var activeBackground: Color = .blue
-    @Binding var activeTab: Tab_iOS17
+    @Binding var activeTab: TabiOS17
     @Namespace private var animation /// matched geometry effect
     /// View Properties
     @State private var tabLocation: CGRect = .zero
@@ -16,7 +16,7 @@ struct FloatingTabbar: View {
 
         HStack(spacing: !status ? 0 : 12) {
             HStack(spacing: 0) {
-                ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+                ForEach(TabiOS17.allCases, id: \.rawValue) { tab in
                     Button {
                         activeTab = tab
                     } label: {

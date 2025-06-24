@@ -14,11 +14,11 @@ struct TabbarAnimationApp: App {
 
 struct AnimatedTabView: View {
     /// View properties
-    @State private var activeTab: Tab_iOS17 = .photos
+    @State private var activeTab: TabiOS17 = .photos
     @State private var tabState: Visibility = .visible
 
     /// All tabs
-    @State private var allTabs: [AnimatedTab] = Tab_iOS17.allCases.compactMap { tab -> AnimatedTab? in
+    @State private var allTabs: [AnimatedTab] = TabiOS17.allCases.compactMap { tab -> AnimatedTab? in
         return .init(tab: tab)
     }
 
@@ -44,55 +44,55 @@ struct AnimatedTabView: View {
                             }
                         }
                     }
-                    .navigationTitle(Tab_iOS17.photos.title)
+                    .navigationTitle(TabiOS17.photos.title)
                 }
 
 //                .setupTab(.photos, tabState)
                 .toolbar(tabState, for: .tabBar)
                 .animation(.easeInOut(duration: 0.3), value: tabState)
                 .tabItem {
-                    Image(systemName: Tab_iOS17.photos.rawValue)
-                    Text(Tab_iOS17.photos.title)
+                    Image(systemName: TabiOS17.photos.rawValue)
+                    Text(TabiOS17.photos.title)
                 }
 
                 NavigationStack {
                     VStack {}
-                        .navigationTitle(Tab_iOS17.chat.title)
+                        .navigationTitle(TabiOS17.chat.title)
                 }
                 .setupTab(.chat)
                 .tabItem {
-                    Image(systemName: Tab_iOS17.chat.rawValue)
-                    Text(Tab_iOS17.chat.title)
+                    Image(systemName: TabiOS17.chat.rawValue)
+                    Text(TabiOS17.chat.title)
                 }
 
                 NavigationStack {
                     VStack {}
-                        .navigationTitle(Tab_iOS17.apps.title)
+                        .navigationTitle(TabiOS17.apps.title)
                 }
                 .setupTab(.apps)
                 .tabItem {
-                    Image(systemName: Tab_iOS17.apps.rawValue)
-                    Text(Tab_iOS17.apps.title)
+                    Image(systemName: TabiOS17.apps.rawValue)
+                    Text(TabiOS17.apps.title)
                 }
 
                 NavigationStack {
                     VStack {}
-                        .navigationTitle(Tab_iOS17.notifications.title)
+                        .navigationTitle(TabiOS17.notifications.title)
                 }
                 .setupTab(.notifications)
                 .tabItem {
-                    Image(systemName: Tab_iOS17.notifications.rawValue)
-                    Text(Tab_iOS17.notifications.title)
+                    Image(systemName: TabiOS17.notifications.rawValue)
+                    Text(TabiOS17.notifications.title)
                 }
 
                 NavigationStack {
                     VStack {}
-                        .navigationTitle(Tab_iOS17.profile.title)
+                        .navigationTitle(TabiOS17.profile.title)
                 }
-                .setupTab(Tab_iOS17.profile)
+                .setupTab(TabiOS17.profile)
                 .tabItem {
-                    Image(systemName: Tab_iOS17.profile.rawValue)
-                    Text(Tab_iOS17.profile.title)
+                    Image(systemName: TabiOS17.profile.rawValue)
+                    Text(TabiOS17.profile.title)
                 }
             }
 
@@ -155,7 +155,7 @@ struct AnimatedTabView: View {
 
 extension View {
     @ViewBuilder
-    func setupTab(_ tab: Tab_iOS17) -> some View {
+    func setupTab(_ tab: TabiOS17) -> some View {
         frame(maxWidth: .infinity, maxHeight: .infinity)
             .tag(tab)
     }

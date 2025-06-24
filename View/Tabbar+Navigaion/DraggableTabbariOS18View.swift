@@ -6,12 +6,12 @@
 import SwiftUI
 
 struct DraggableTabBariOS18DemoView: View {
-    @State private var activeTab: Tab_iOS17 = .apps
+    @State private var activeTab: TabiOS17 = .apps
     var body: some View {
         ZStack(alignment: .bottom) {
             if #available(iOS 18, *) {
                 TabView(selection: $activeTab) {
-                    ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+                    ForEach(TabiOS17.allCases, id: \.rawValue) { tab in
                         Tab(value: tab) {
                             // must hide the native tab bar
                             Text(tab.title)
@@ -21,7 +21,7 @@ struct DraggableTabBariOS18DemoView: View {
                 }
             } else {
                 TabView(selection: $activeTab) {
-                    ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+                    ForEach(TabiOS17.allCases, id: \.rawValue) { tab in
                         Text(tab.title)
                             .tag(tab)
                             // must hide the native tab bar
@@ -38,16 +38,16 @@ struct DraggableTabBariOS18DemoView: View {
 }
 
 struct FloatingInteractiveTabBar: View {
-    @Binding var activeTab: Tab_iOS17
+    @Binding var activeTab: TabiOS17
     /// View Properties
     @Namespace private var animation
     /// storing the locations of the tab buttons to identify the currently dragging tab
-    @State private var tabButtonsLocations: [CGRect] = Array(repeating: .zero, count: Tab_iOS17.allCases.count)
+    @State private var tabButtonsLocations: [CGRect] = Array(repeating: .zero, count: TabiOS17.allCases.count)
     /// using this property to animate the changes in the tab bar itself but not the whole tab bar view
-    @State private var activeDraggingTab: Tab_iOS17?
+    @State private var activeDraggingTab: TabiOS17?
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+            ForEach(TabiOS17.allCases, id: \.rawValue) { tab in
                 tabButton(tab)
             }
         }
@@ -61,7 +61,7 @@ struct FloatingInteractiveTabBar: View {
         .padding(.bottom, 10)
     }
 
-    func tabButton(_ tab: Tab_iOS17) -> some View {
+    func tabButton(_ tab: TabiOS17) -> some View {
         let isActive = (activeDraggingTab ?? activeTab) == tab
 
         return VStack(spacing: 6) {
@@ -95,7 +95,7 @@ struct FloatingInteractiveTabBar: View {
                     /// map location to the proper tab index
                     if let index = tabButtonsLocations.firstIndex(where: { $0.contains(location) }) {
                         withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
-                            activeDraggingTab = Tab_iOS17.allCases[index]
+                            activeDraggingTab = TabiOS17.allCases[index]
                         }
                     }
                 }.onEnded { _ in
@@ -112,16 +112,16 @@ struct FloatingInteractiveTabBar: View {
 }
 
 struct DraggableTabBariOS18: View {
-    @Binding var activeTab: Tab_iOS17
+    @Binding var activeTab: TabiOS17
     /// View Properties
     @Namespace private var animation
     /// storing the locations of the tab buttons to identify the currently dragging tab
-    @State private var tabButtonsLocations: [CGRect] = Array(repeating: .zero, count: Tab_iOS17.allCases.count)
+    @State private var tabButtonsLocations: [CGRect] = Array(repeating: .zero, count: TabiOS17.allCases.count)
     /// using this property to animate the changes in the tab bar itself but not the whole tab bar view
-    @State private var activeDraggingTab: Tab_iOS17?
+    @State private var activeDraggingTab: TabiOS17?
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(Tab_iOS17.allCases, id: \.rawValue) { tab in
+            ForEach(TabiOS17.allCases, id: \.rawValue) { tab in
                 tabButton(tab)
             }
         }
@@ -137,7 +137,7 @@ struct DraggableTabBariOS18: View {
         .coordinateSpace(.named("TABBAR"))
     }
 
-    func tabButton(_ tab: Tab_iOS17) -> some View {
+    func tabButton(_ tab: TabiOS17) -> some View {
         let isActive = (activeDraggingTab ?? activeTab) == tab
 
         return VStack(spacing: 6) {
@@ -179,7 +179,7 @@ struct DraggableTabBariOS18: View {
                     /// map location to the proper tab index
                     if let index = tabButtonsLocations.firstIndex(where: { $0.contains(location) }) {
                         withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
-                            activeDraggingTab = Tab_iOS17.allCases[index]
+                            activeDraggingTab = TabiOS17.allCases[index]
                         }
                     }
                 }.onEnded { _ in

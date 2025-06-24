@@ -20,7 +20,7 @@
 		9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */; };
 		9613D7232C7BE463007FF2E7 /* FloatingTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */; };
 		9613D72E2C7BEB67007FF2E7 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */; };
-		9613D72F2C7BEB88007FF2E7 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
+		9613D72F2C7BEB88007FF2E7 /* TabiOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* TabiOS17.swift */; };
 		961868B82BC7A78700552748 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961868B72BC7A78700552748 /* FloatingButton.swift */; };
 		961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
 		961BD7692CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7682CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift */; };
@@ -42,7 +42,7 @@
 		9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */; };
 		9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BBE2B897A310055D79B /* Profile.swift */; };
 		9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
-		9621DC392BEF3D7300183CB7 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
+		9621DC392BEF3D7300183CB7 /* TabiOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* TabiOS17.swift */; };
 		9621DC3A2BEF3D7600183CB7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
 		9621DC3B2BEF3D7A00183CB7 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509C2B944D1B00B36142 /* PlayerConfig.swift */; };
@@ -89,7 +89,7 @@
 		9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3BBE2B897A310055D79B /* Profile.swift */; };
 		9621DD9E2BF47FDA00183CB7 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
 		9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884E92BDD82B000196125 /* Interpolation.swift */; };
-		9621DDA02BF47FDA00183CB7 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
+		9621DDA02BF47FDA00183CB7 /* TabiOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* TabiOS17.swift */; };
 		9621DDA12BF47FDA00183CB7 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FF509A2B94465700B36142 /* PlayerItem.swift */; };
 		9621DDA22BF47FDA00183CB7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D62B905DDE00F56FF5 /* Card.swift */; };
 		9621DDA62BF4800500183CB7 /* IntroScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DDA52BF4800400183CB7 /* IntroScreen.swift */; };
@@ -254,7 +254,7 @@
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
-		968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
+		968D2E9E2B8EB56500007734 /* TabiOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* TabiOS17.swift */; };
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
 		968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */; };
 		968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */; };
@@ -306,7 +306,7 @@
 		96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
 		96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
 		96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */; };
-		96ACBF102C39CBD3004F3070 /* Tab_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */; };
+		96ACBF102C39CBD3004F3070 /* TabiOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* TabiOS17.swift */; };
 		96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18F92C01BEB40015155A /* HackerTextView.swift */; };
 		96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */; };
 		96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */; };
@@ -392,6 +392,7 @@
 		AB5C93322E03E28F009CF684 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5C93312E03E28F009CF684 /* SwiftUI.framework */; };
 		AB5C933F2E03E291009CF684 /* alarmKitCountdownDemoExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */; };
+		AB5C9A592E0A608C009CF684 /* iOS26-tabbarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */; };
 		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
 		AB8747C22D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
 		AB8747C32D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
@@ -654,7 +655,7 @@
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
-		968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab_iOS17.swift; sourceTree = "<group>"; };
+		968D2E9D2B8EB56500007734 /* TabiOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabiOS17.swift; sourceTree = "<group>"; };
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
 		968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBottomSheetsView.swift; sourceTree = "<group>"; };
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
@@ -761,6 +762,7 @@
 		AB5C932F2E03E28F009CF684 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AB5C93312E03E28F009CF684 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlassSearchableTabbar.swift; sourceTree = "<group>"; };
+		AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-tabbarSheet.swift"; sourceTree = "<group>"; };
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
 		AB8747C12D8F557F00507C55 /* audio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio.wav; sourceTree = "<group>"; };
 		AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormRectangleShape.swift; sourceTree = "<group>"; };
@@ -1226,7 +1228,7 @@
 				96352D4E2C0ED814001AD2FD /* CreditCard.swift */,
 				96ACBEF22C33B79E004F3070 /* Expense.swift */,
 				96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */,
-				968D2E9D2B8EB56500007734 /* Tab_iOS17.swift */,
+				968D2E9D2B8EB56500007734 /* TabiOS17.swift */,
 				9621D9622BE5F7D100183CB7 /* Tag.swift */,
 				961F3BBE2B897A310055D79B /* Profile.swift */,
 				96FF509A2B94465700B36142 /* PlayerItem.swift */,
@@ -1810,6 +1812,7 @@
 				963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */,
 				9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */,
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
+				AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */,
 			);
 			path = "Tabbar+Navigaion";
 			sourceTree = "<group>";
@@ -2554,7 +2557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9613D7212C7BE445007FF2E7 /* LandingView.swift in Sources */,
-				9613D72F2C7BEB88007FF2E7 /* Tab_iOS17.swift in Sources */,
+				9613D72F2C7BEB88007FF2E7 /* TabiOS17.swift in Sources */,
 				9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */,
 				963DC1282D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,
 				964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
@@ -2597,6 +2600,7 @@
 				964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */,
 				AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */,
 				963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */,
+				AB5C9A592E0A608C009CF684 /* iOS26-tabbarSheet.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */,
 				964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
@@ -2707,7 +2711,7 @@
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
 				963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,
-				968D2E9E2B8EB56500007734 /* Tab_iOS17.swift in Sources */,
+				968D2E9E2B8EB56500007734 /* TabiOS17.swift in Sources */,
 				963B84742CCC5A1D00C3FB0D /* PanGesture.swift in Sources */,
 				9662F01F2C58348100508B80 /* Page.swift in Sources */,
 				96E4E6042D178F350020261F /* DropdownPickerView.swift in Sources */,
@@ -2845,7 +2849,7 @@
 				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
 				96921AEB2D6EE40C00326523 /* Book.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
-				9621DC392BEF3D7300183CB7 /* Tab_iOS17.swift in Sources */,
+				9621DC392BEF3D7300183CB7 /* TabiOS17.swift in Sources */,
 				96726B192C2FCECB007A4E34 /* TimeModel.swift in Sources */,
 				96921B892D6FBB2300326523 /* TransparentBlurView.swift in Sources */,
 				96E4E60A2D178F510020261F /* AsyncImageViewerViewDemo.swift in Sources */,
@@ -2872,7 +2876,7 @@
 				9621DC7B2BEF41A000183CB7 /* Profile.swift in Sources */,
 				9621DC4F2BEF3E5F00183CB7 /* ContentView.swift in Sources */,
 				9621DC7A2BEF419200183CB7 /* WindowSharedModel.swift in Sources */,
-				96ACBF102C39CBD3004F3070 /* Tab_iOS17.swift in Sources */,
+				96ACBF102C39CBD3004F3070 /* TabiOS17.swift in Sources */,
 				9621DC7D2BEF423500183CB7 /* AppDelegate.swift in Sources */,
 				96976CEE2D50349100643821 /* View+Alert.swift in Sources */,
 				9621DC932BF1EDB100183CB7 /* ActionModel.swift in Sources */,
@@ -2934,7 +2938,7 @@
 				9662F0332C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */,
 				96352D512C0ED814001AD2FD /* CreditCard.swift in Sources */,
-				9621DDA02BF47FDA00183CB7 /* Tab_iOS17.swift in Sources */,
+				9621DDA02BF47FDA00183CB7 /* TabiOS17.swift in Sources */,
 				9621DDA12BF47FDA00183CB7 /* PlayerItem.swift in Sources */,
 				9621DDB62BF489B800183CB7 /* Search.swift in Sources */,
 				9621DDBE2BF4904C00183CB7 /* Date+Extension.swift in Sources */,
