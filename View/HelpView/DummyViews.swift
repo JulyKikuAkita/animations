@@ -12,6 +12,9 @@ struct DummyViews: View {
             DummySection(title: "Dymmy Section")
 
             Section {
+                DummyMenuView()
+            }
+            Section {
                 DummyTaskRow()
             }
             Section {
@@ -159,6 +162,46 @@ struct DummyCardView: View {
             }
         }
         .foregroundStyle(.tertiary)
+    }
+}
+
+struct DummyMenuView: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            DummyMenuRow(image: "paperplane", title: "Send")
+            DummyMenuRow(image: "arrow.trianglehead.2.counterclockwise", title: "Swap")
+            DummyMenuRow(image: "arrow.down", title: "Receive")
+        }
+        .padding(.horizontal, 5)
+        .padding(.vertical, 10)
+    }
+}
+
+struct DummyMenuRow: View {
+    var image: String
+    var title: String
+    var body: some View {
+        HStack(spacing: 18) {
+            Image(systemName: image)
+                .font(.title2)
+                .frame(width: 45, height: 45)
+                .background(.background, in: .circle)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title)
+                    .font(.title3)
+                    .foregroundStyle(.background)
+                    .fontWeight(.semibold)
+
+                Text(dummyDescription)
+                    .font(.callout)
+                    .foregroundStyle(.gray)
+                    .lineLimit(2)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(10)
+        .contentShape(.rect)
     }
 }
 
