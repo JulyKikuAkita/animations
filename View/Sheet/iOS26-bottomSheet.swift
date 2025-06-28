@@ -20,6 +20,7 @@ struct BottomSheetiOS2618Demo: View {
     var body: some View {
         Map(initialPosition: .region(.applePark))
             .sheet(isPresented: $showBottomSheet) {
+                let safeInset = safeAreaBottomInset
                 DummyBottomSheetView(sheetDent: $sheetDent)
                     // allow user to change sheet height between [80, 350]
                     .presentationDetents(
@@ -28,13 +29,13 @@ struct BottomSheetiOS2618Demo: View {
                     )
                     .presentationBackgroundInteraction(.enabled)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .onGeometryChange(for: CGFloat.self) {
-                        max(min($0.size.height, 400 + safeAreaBottomInset), 0)
+                    .onGeometryChange(for: CGFloat.self) { geometry in
+                        max(min(geometry.size.height, 400 + safeInset), 0)
                     } action: { oldValue, newValue in
-                        sheetHeight = min(newValue, 350 + safeAreaBottomInset)
+                        sheetHeight = min(newValue, 350 + safeInset)
 
                         /// apply to opacity, limit offset to 300 so opacity won't be 0
-                        let progress = max(min((newValue - (350 + safeAreaBottomInset)) / 50, 1), 0)
+                        let progress = max(min((newValue - (350 + safeInset)) / 50, 1), 0)
                         toolbarOpacity = 1 - progress
 
                         /// calculating animation duration
@@ -58,25 +59,32 @@ struct BottomSheetiOS2618Demo: View {
     }
 
     func bottomFloatingToolBar() -> some View {
-        VStack(spacing: 35) {
-            Button {} label: {
-                Image(systemName: "car.fill")
-            }
+        var toolBarView: some View {
+            VStack(spacing: 35) {
+                Button {} label: {
+                    Image(systemName: "car.fill")
+                }
 
-            Button {} label: {
-                Image(systemName: "location")
+                Button {} label: {
+                    Image(systemName: "location")
+                }
             }
+            .font(.title3)
+            .foregroundStyle(.primary)
+            .padding(.vertical, 20)
+            .padding(.horizontal, 10)
+            .background(.gray.opacity(0.7), in: .capsule)
+            .clipShape(.capsule)
+            .opacity(toolbarOpacity)
+            .offset(y: -sheetHeight)
+            .animation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0), value: sheetHeight)
         }
-        .font(.title3)
-        .foregroundStyle(.primary)
-        .padding(.vertical, 20)
-        .padding(.horizontal, 10)
-        .background(.gray.opacity(0.7), in: .capsule)
-        .clipShape(.capsule)
-        .opacity(toolbarOpacity)
-        // .glassEffect(.regular, in: .capsule)
-        .offset(y: -sheetHeight)
-        .animation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0), value: sheetHeight)
+        if #available(iOS 26.0, *) {
+            return toolBarView
+                .glassEffect(in: .circle)
+        } else {
+            return toolBarView
+        }
     }
 }
 
@@ -102,14 +110,12 @@ struct DummyBottomSheetView: View {
                     } label: {
                         ZStack {
                             if isFocused {
-                                Image(systemName: "xmark")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .foregroundStyle(.primary)
-                                    .frame(width: 48, height: 48)
-                                    // .glassEffect(.in: .circle)
-                                    .transition(.blurReplace)
-
+                                if #available(iOS 26.0, *) {
+                                    closeIcon
+                                        .glassEffect(in: .circle)
+                                } else {
+                                    closeIcon
+                                }
                             } else {
                                 Text("T")
                                     .font(.title2.bold())
@@ -130,6 +136,15 @@ struct DummyBottomSheetView: View {
                     sheetDent = newValue ? .large : .height(350)
                 }
             }
+    }
+
+    var closeIcon: some View {
+        Image(systemName: "xmark")
+            .font(.title2)
+            .fontWeight(.semibold)
+            .foregroundStyle(.primary)
+            .frame(width: 48, height: 48)
+            .transition(.blurReplace)
     }
 }
 
