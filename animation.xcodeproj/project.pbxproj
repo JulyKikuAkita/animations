@@ -398,6 +398,7 @@
 		AB8747C22D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
 		AB8747C32D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
 		AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */; };
+		AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
 		ABFC3FD82C9F6C7A00E2E60E /* Reel6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD02C9F6C7A00E2E60E /* Reel6.mp4 */; };
 		ABFC3FD92C9F6C7A00E2E60E /* Reel9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD32C9F6C7A00E2E60E /* Reel9.mp4 */; };
@@ -768,6 +769,7 @@
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
 		AB8747C12D8F557F00507C55 /* audio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio.wav; sourceTree = "<group>"; };
 		AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormRectangleShape.swift; sourceTree = "<group>"; };
+		AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphActionButtoniOS26.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel1.mp4; path = resources/Videos/Reel1.mp4; sourceTree = SOURCE_ROOT; };
 		ABFC3FCC2C9F6C7A00E2E60E /* Reel2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel2.mp4; path = resources/Videos/Reel2.mp4; sourceTree = SOURCE_ROOT; };
@@ -1559,6 +1561,7 @@
 				965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */,
 				96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */,
 				AB0E9D9F2DE2655600C62391 /* MorphCustomMenuDemoView.swift */,
+				AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */,
 			);
 			path = CustomMenu;
 			sourceTree = "<group>";
@@ -2754,6 +2757,7 @@
 				965D1DD62C9D4E3A004161B1 /* DynamicTagWidthView.swift in Sources */,
 				9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
+				AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
 				96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
