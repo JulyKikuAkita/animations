@@ -318,6 +318,7 @@
 		96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D04B302C09A1960062520D /* StackedScrollView.swift */; };
+		96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */; };
 		96D495812BBD0E140011D5AA /* ReelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D495802BBD0E140011D5AA /* ReelView.swift */; };
 		96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -698,6 +699,7 @@
 		96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelXCardView.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96D04B302C09A1960062520D /* StackedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedScrollView.swift; sourceTree = "<group>"; };
+		96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-bottomSheet.swift"; sourceTree = "<group>"; };
 		96D495802BBD0E140011D5AA /* ReelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelView.swift; sourceTree = "<group>"; };
 		96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCarouselSliderView.swift; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -1259,39 +1261,39 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96F9A6EB2B9FACC900FD6900 /* Button */,
+				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
+				965E573A2BC5086000E172B3 /* Carousel */,
 				960663272DD934DA0084B468 /* Crash_Previews */,
-				960663222DD9306E0084B468 /* PhotosView */,
-				960663212DD92EF10084B468 /* SkeletonView */,
-				960663202DD92EC80084B468 /* ThemeSwitcher */,
-				9636EE9B2DC1785A00A0E5A0 /* PhaseAnimationAPI */,
-				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
-				9609DB172DBB2CC300A76F95 /* ToastView */,
-				9609D93C2DB591DB00A76F95 /* Map */,
-				AB8747BD2D8F4D8200507C55 /* Scrubber */,
-				96E948F02D8B8A3700B257B4 /* Spinner */,
 				965F26FC2D86361B00300420 /* CustomMenu */,
-				963B862B2CE94F9400C3FB0D /* Slider */,
+				AB40B84A2C9F607800BC7747 /* Grid */,
+				9662EFC92C460E8600508B80 /* HelpView */,
+				960663232DD930B50084B468 /* LandingPages */,
+				960663242DD931430084B468 /* ListRowsInteraction */,
+				9609D93C2DB591DB00A76F95 /* Map */,
 				963B846F2CCC4F2700C3FB0D /* miniPlayerView */,
 				960663262DD934AD0084B468 /* OverlayView */,
-				AB40B84A2C9F607800BC7747 /* Grid */,
-				96AC80FB2C84F89300ABBE78 /* ScrollView */,
-				9697B73F2C6D9EF60092D07A /* SearchBar */,
-				9662EFC92C460E8600508B80 /* HelpView */,
-				96DF8A882C39D7F90063A931 /* Sheet */,
+				9636EE9B2DC1785A00A0E5A0 /* PhaseAnimationAPI */,
+				960663222DD9306E0084B468 /* PhotosView */,
 				96E4E6032D178F350020261F /* PickerView */,
-				96301B322C2A5FAB00775407 /* TextFieldView */,
-				968A17D22C0704F20072A0BA /* TextEffectView */,
-				96E7CEE22BE32C4900F24910 /* Shape */,
-				965E573A2BC5086000E172B3 /* Carousel */,
-				96D495832BBD25160011D5AA /* Video */,
-				960663242DD931430084B468 /* ListRowsInteraction */,
-				96F9A6EB2B9FACC900FD6900 /* Button */,
 				96E70B102B8EC21200F23A51 /* ProfileView */,
-				960663232DD930B50084B468 /* LandingPages */,
-				96E70B0D2B8EBF0000F23A51 /* Tabbar+Navigaion */,
+				96AC80FB2C84F89300ABBE78 /* ScrollView */,
+				AB8747BD2D8F4D8200507C55 /* Scrubber */,
+				9697B73F2C6D9EF60092D07A /* SearchBar */,
+				96E7CEE22BE32C4900F24910 /* Shape */,
+				96DF8A882C39D7F90063A931 /* Sheet */,
+				960663212DD92EF10084B468 /* SkeletonView */,
+				963B862B2CE94F9400C3FB0D /* Slider */,
 				960663252DD933230084B468 /* SpecialAnimationEffects */,
-				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
+				96E948F02D8B8A3700B257B4 /* Spinner */,
 				9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */,
+				96E70B0D2B8EBF0000F23A51 /* Tabbar+Navigaion */,
+				968A17D22C0704F20072A0BA /* TextEffectView */,
+				96301B322C2A5FAB00775407 /* TextFieldView */,
+				960663202DD92EC80084B468 /* ThemeSwitcher */,
+				9609DB172DBB2CC300A76F95 /* ToastView */,
+				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
+				96D495832BBD25160011D5AA /* Video */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1755,8 +1757,9 @@
 			isa = PBXGroup;
 			children = (
 				96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */,
-				968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */,
 				969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */,
+				968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */,
+				96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -2752,6 +2755,7 @@
 				9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
+				96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
 				962B04762C215176008E1E5D /* Pixellate.metal in Sources */,
 				9609D93B2DB4B54900A76F95 /* LocationPickerManager.swift in Sources */,

@@ -8,76 +8,79 @@
 import AppIntents
 import SwiftUI
 
-@available(iOS 26.0, *)
-struct InteractiveOrderIntent: AppIntent {
-    static var title: LocalizedStringResource = "Purchase"
-    @Dependency var manager: IntentOrderManager
+#if canImport(FoundationModels)
 
-    func perform() async throws -> some IntentResult & ShowsSnippetView {
-        manager.choice = try await requestChoice(
-            between: Self.choices,
-            dialog: .init("Select Product")
-        ).title
+    @available(iOS 26.0, *)
+    struct InteractiveOrderIntent: AppIntent {
+        static var title: LocalizedStringResource = "Purchase"
+        @Dependency var manager: IntentOrderManager
 
-        try await requestConfirmation(actionName: .set, snippetIntent: InteractiveOrderConfirmationIntent())
-        try await requestConfirmation(actionName: .order, snippetIntent: InteractiveOrderStep2ConfirmationIntent())
-        try await manager.mockPlaceOrder()
+        func perform() async throws -> some IntentResult & ShowsSnippetView {
+            manager.choice = try await requestChoice(
+                between: Self.choices,
+                dialog: .init("Select Product")
+            ).title
 
-        return .result(
-            view: OrderView(
-                choice: manager.choice,
-                count: manager.count,
-                commision: manager.commision,
-                step: .step3
+            try await requestConfirmation(actionName: .set, snippetIntent: InteractiveOrderConfirmationIntent())
+            try await requestConfirmation(actionName: .order, snippetIntent: InteractiveOrderStep2ConfirmationIntent())
+            try await manager.mockPlaceOrder()
+
+            return .result(
+                view: OrderView(
+                    choice: manager.choice,
+                    count: manager.count,
+                    commision: manager.commision,
+                    step: .step3
+                )
+                .padding(.horizontal, 15)
             )
-            .padding(.horizontal, 15)
-        )
+        }
+
+        static var choices: [IntentChoiceOption] {
+            [
+                .init(title: "Bitcoin"),
+                .init(title: "Shiba Inu"),
+                .init(title: "Doge"),
+            ]
+        }
     }
 
-    static var choices: [IntentChoiceOption] {
-        [
-            .init(title: "Bitcoin"),
-            .init(title: "Shiba Inu"),
-            .init(title: "Doge"),
-        ]
-    }
-}
+    /// Setup interactive snippet with SnippetIntent prptocol && request confirmation API
+    /// to make the view interactiable, similiar to LiveActivities controls
+    ///  the implementation is similar to App Intent
+    @available(iOS 26.0, *)
+    struct InteractiveOrderConfirmationIntent: SnippetIntent {
+        static var title: LocalizedStringResource = "Step 1"
 
-/// Setup interactive snippet with SnippetIntent prptocol && request confirmation API
-/// to make the view interactiable, similiar to LiveActivities controls
-///  the implementation is similar to App Intent
-@available(iOS 26.0, *)
-struct InteractiveOrderConfirmationIntent: SnippetIntent {
-    static var title: LocalizedStringResource = "Step 1"
+        @Dependency var manager: IntentOrderManager
 
-    @Dependency var manager: IntentOrderManager
-
-    func perform() async throws -> some IntentResult & ShowsSnippetView {
-        .result(
-            view: OrderView(
-                choice: manager.choice,
-                count: manager.count,
-                commision: manager.commision,
-                step: .step1
+        func perform() async throws -> some IntentResult & ShowsSnippetView {
+            .result(
+                view: OrderView(
+                    choice: manager.choice,
+                    count: manager.count,
+                    commision: manager.commision,
+                    step: .step1
+                )
             )
-        )
+        }
     }
-}
 
-@available(iOS 26.0, *)
-struct InteractiveOrderStep2ConfirmationIntent: SnippetIntent {
-    static var title: LocalizedStringResource = "Step 2"
+    @available(iOS 26.0, *)
+    struct InteractiveOrderStep2ConfirmationIntent: SnippetIntent {
+        static var title: LocalizedStringResource = "Step 2"
 
-    @Dependency var manager: IntentOrderManager
+        @Dependency var manager: IntentOrderManager
 
-    func perform() async throws -> some IntentResult & ShowsSnippetView {
-        .result(
-            view: OrderView(
-                choice: manager.choice,
-                count: manager.count,
-                commision: manager.commision,
-                step: .step2
+        func perform() async throws -> some IntentResult & ShowsSnippetView {
+            .result(
+                view: OrderView(
+                    choice: manager.choice,
+                    count: manager.count,
+                    commision: manager.commision,
+                    step: .step2
+                )
             )
-        )
+        }
     }
-}
+#endif
