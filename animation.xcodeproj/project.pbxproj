@@ -399,6 +399,7 @@
 		AB8747C32D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
 		AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */; };
 		AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */; };
+		AB8C5A942E134DB70003926E /* iOS26SegmentedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
 		ABFC3FD82C9F6C7A00E2E60E /* Reel6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD02C9F6C7A00E2E60E /* Reel6.mp4 */; };
 		ABFC3FD92C9F6C7A00E2E60E /* Reel9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD32C9F6C7A00E2E60E /* Reel9.mp4 */; };
@@ -770,6 +771,7 @@
 		AB8747C12D8F557F00507C55 /* audio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio.wav; sourceTree = "<group>"; };
 		AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormRectangleShape.swift; sourceTree = "<group>"; };
 		AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphActionButtoniOS26.swift; sourceTree = "<group>"; };
+		AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26SegmentedTabBar.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel1.mp4; path = resources/Videos/Reel1.mp4; sourceTree = SOURCE_ROOT; };
 		ABFC3FCC2C9F6C7A00E2E60E /* Reel2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel2.mp4; path = resources/Videos/Reel2.mp4; sourceTree = SOURCE_ROOT; };
@@ -1819,6 +1821,7 @@
 				9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */,
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
 				AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */,
+				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
 			);
 			path = "Tabbar+Navigaion";
 			sourceTree = "<group>";
@@ -2769,6 +2772,7 @@
 				965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */,
 				9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */,
 				9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */,
+				AB8C5A942E134DB70003926E /* iOS26SegmentedTabBar.swift in Sources */,
 				AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */,
 				9662F0112C50854400508B80 /* ImageCarouselView.swift in Sources */,
 				9682B7F22CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift in Sources */,
