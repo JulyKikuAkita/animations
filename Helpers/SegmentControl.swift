@@ -6,8 +6,8 @@ import SwiftUI
 
 /// Custom View
 struct SegmentControl<Indicator: View>: View {
-    var tabs: [SegmentedTab]
-    @Binding var activeTab: SegmentedTab
+    fileprivate var tabs: [SegmentedTab]
+    @Binding fileprivate var activeTab: SegmentedTab
     var height: CGFloat = 45
     /// Customized  properties
     var displayAsText: Bool = false
@@ -128,7 +128,7 @@ struct SegmentControlView: View {
     }
 }
 
-enum SegmentedTab: String, CaseIterable {
+private enum SegmentedTab: String, CaseIterable {
     case home = "house.fill"
     case favorites = "suit.heart.fill"
     case notifications = "bell.fill"
