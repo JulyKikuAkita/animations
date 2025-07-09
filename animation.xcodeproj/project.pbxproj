@@ -423,6 +423,10 @@
 		ABE1AE742E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
 		ABE1AE752E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
 		ABE1AE772E34B08B0090A2F0 /* PermissionSheetDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */; };
+		ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */; };
+		ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
+		ABA102242E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
+		ABA102252E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
 		ABFC3FD82C9F6C7A00E2E60E /* Reel6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD02C9F6C7A00E2E60E /* Reel6.mp4 */; };
 		ABFC3FD92C9F6C7A00E2E60E /* Reel9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD32C9F6C7A00E2E60E /* Reel9.mp4 */; };
 		ABFC3FDA2C9F6C7A00E2E60E /* Reel10.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FD42C9F6C7A00E2E60E /* Reel10.mp4 */; };
@@ -811,6 +815,8 @@
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
 		ABE1AE722E34AE660090A2F0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheetDemo.swift; sourceTree = "<group>"; };
+		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
+		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
 		ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel1.mp4; path = resources/Videos/Reel1.mp4; sourceTree = SOURCE_ROOT; };
 		ABFC3FCC2C9F6C7A00E2E60E /* Reel2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel2.mp4; path = resources/Videos/Reel2.mp4; sourceTree = SOURCE_ROOT; };
 		ABFC3FCD2C9F6C7A00E2E60E /* Reel3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel3.mp4; path = resources/Videos/Reel3.mp4; sourceTree = SOURCE_ROOT; };
@@ -1295,6 +1301,21 @@
 				9662EF282C3E012800508B80 /* Video.swift */,
 				9662EF322C3E067100508B80 /* VideoSharedModel.swift */,
 				968D2D782B8C34CB00007734 /* WindowSharedModel.swift */,
+				9662EFDA2C47A8AE00508B80 /* Message.swift */,
+				963DB14A2BBBD21400AAF347 /* Reel.swift */,
+				9662F01E2C58348100508B80 /* Page.swift */,
+				9692220B2D7ACF5800326523 /* KeyPadModel.swift */,
+				9662F0302C58BCCF00508B80 /* CustomShape.swift */,
+				96AC80FE2C84FFF900ABBE78 /* Control.swift */,
+				AB40B8462C9F5F9A00BC7747 /* Note.swift */,
+				9682B6CF2CB1D355003D917F /* ColorItem.swift */,
+				963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */,
+				96E4DD112CFFDE1F0020261F /* SportItem.swift */,
+				96E4E5F82D175FAB0020261F /* ImageLinkModel.swift */,
+				963B9CF82D5492B200453320 /* SwipeActionModel.swift */,
+				9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */,
+				96921AE92D6EE40C00326523 /* Book.swift */,
+				ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1824,6 +1845,7 @@
 				968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */,
 				96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */,
 				ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */,
+				ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -2728,6 +2750,7 @@
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
+				ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				96921B8B2D6FC19000326523 /* BookCardView.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
@@ -2844,6 +2867,7 @@
 				AB17E55F2E61214300C50B18 /* View+Versions.swift in Sources */,
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
+				ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
 				963B85772CD35BBA00C3FB0D /* Snapshot.swift in Sources */,
@@ -2992,6 +3016,7 @@
 				9621DC8D2BF0121E00183CB7 /* HeroLayer.swift in Sources */,
 				96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */,
+				ABA102242E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */,
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
 				96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */,
@@ -3075,6 +3100,7 @@
 				9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */,
 				9621DDAD2BF486C800183CB7 /* MintCategory.swift in Sources */,
 				9621DDAB2BF4849F00183CB7 /* MintTabs.swift in Sources */,
+				ABA102252E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				9621DDBC2BF48B3000183CB7 /* View+Extension.swift in Sources */,
 				9682B6D02CB1D355003D917F /* ColorItem.swift in Sources */,
 				96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */,
