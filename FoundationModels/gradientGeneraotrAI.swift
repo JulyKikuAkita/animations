@@ -9,7 +9,7 @@ import SwiftUI
 #if canImport(FoundationModels)
     import FoundationModels
 
-    @main
+    // @main
     @available(iOS 26.0, *)
     struct DeviceAIApp: App {
         var body: some Scene {

@@ -163,3 +163,28 @@ extension View {
         }
     }
 }
+
+public extension View {
+    @ViewBuilder
+    func customOnChange<T: Equatable>(value: T, perform: @escaping (T) -> Void) -> some View {
+        // SwiftUI's `onChange` has two overloads: one for iOS 17+ with `(oldValue, newValue)`
+        // and one for earlier versions with just `(newValue)`.
+        //
+        // These overloads return different underlying view types, so using them in an
+        // `if #available` block without `@ViewBuilder` causes a type mismatch under `some View`.
+        //
+        // `@ViewBuilder` allows Swift to reconcile both branches and avoid the compile error.
+        //  Alternatively
+        //  wrapped the return to AnyView
+        if #available(iOS 17, *) {
+            self
+                .onChange(of: value) { _, newValue in
+                    perform(newValue)
+                }
+        } else {
+            onChange(of: value) { newValue in
+                perform(newValue)
+            }
+        }
+    }
+}
