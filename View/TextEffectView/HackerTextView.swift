@@ -133,22 +133,6 @@ struct HackerTextView: View {
     }
 }
 
-private extension View {
-    @ViewBuilder
-    func customOnChange<T: Equatable>(value: T, result: @escaping (T) -> Void) -> some View {
-        if #available(iOS 17, *) {
-            self
-                .onChange(of: value) { _, newValue in
-                    result(newValue)
-                }
-        } else {
-            onChange(of: value, perform: { value in
-                result(value)
-            })
-        }
-    }
-}
-
 #Preview {
 //    HackerTextView(text: "HackerTextView", trigger: true)
     HackerTextDemoView()

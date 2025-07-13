@@ -207,22 +207,6 @@ private struct HeroInfo: Identifiable {
     }
 }
 
-private extension View {
-    @ViewBuilder
-    func customOnChange<Value: Equatable>(value: Value, completion: @escaping (Value) -> Void) -> some View {
-        if #available(iOS 17, *) {
-            self
-                .onChange(of: value) { _, newValue in
-                    completion(newValue)
-                }
-        } else {
-            onChange(of: value, perform: { value in
-                completion(value)
-            })
-        }
-    }
-}
-
 private struct HeroLayerView: View {
     @EnvironmentObject private var model: HeroModel
     var body: some View {

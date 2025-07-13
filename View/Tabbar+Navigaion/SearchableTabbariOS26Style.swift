@@ -21,7 +21,7 @@ struct SearchableTabbariOS26StyleDemoView: View {
             Rectangle()
                 .foregroundStyle(.clear)
 
-            SearchableTabBariOS26Style(activeTab: $activeTab) { _ in
+            SearchableTabBariOS26Style(showSearchBar: true, activeTab: $activeTab) { _ in
 
             } onSearchTextChanged: { _ in
             }
@@ -40,6 +40,12 @@ struct SearchableTabBariOS26Style: View {
     @State private var isInitialOffsetSet: Bool = false
     @State private var dragOffset: CGFloat = 0
     @State private var lastDragOffset: CGFloat?
+
+    /// Search bar properties
+    @State private var isSearchExpanded: Bool = false
+    @State private var searchText: String = ""
+    @FocusState private var isKeyboardActive: Bool
+
     var body: some View {
         GeometryReader { proxy in
             let size = proxy.size
@@ -51,29 +57,61 @@ struct SearchableTabBariOS26Style: View {
 
             ZStack {
                 if isInitialOffsetSet {
-                    HStack(spacing: 0) {
-                        ForEach(tabs, id: \.rawValue) { tab in
-                            tabItemView(tab, width: tabItemWidth, height: tabItemHeight)
+                    let mainLayout = isKeyboardActive ? AnyLayout(ZStackLayout(alignment: .leading)) : AnyLayout(
+                        HStackLayout(spacing: 12)
+                    )
+                    mainLayout {
+                        /// Use AnyLayout for search expandable view
+                        /// do not use if else
+                        let tabLayout = isSearchExpanded ? AnyLayout(ZStackLayout()) : AnyLayout(HStackLayout(spacing: 0))
+                        tabLayout {
+                            ForEach(tabs, id: \.rawValue) { tab in
+                                tabItemView(tab,
+                                            width: isSearchExpanded ? 45 : tabItemWidth,
+                                            height: isSearchExpanded ? 45 : tabItemHeight)
+                                    .opacity(isSearchExpanded ? (activeTab == tab ? 1 : 0) : 1)
+                            }
                         }
-                    }
-                    /// draggable active tab
-                    .background(alignment: .leading) {
-                        ZStack {
-                            Capsule(style: .continuous)
-                                .stroke(.gray.opacity(0.25), lineWidth: 3)
-                                .opacity(isActive ? 1 : 0)
+                        /// draggable active tab
+                        .background(alignment: .leading) {
+                            ZStack {
+                                Capsule(style: .continuous)
+                                    .stroke(.gray.opacity(0.25), lineWidth: 3)
+                                    .opacity(isActive ? 1 : 0)
 
-                            Capsule(style: .continuous)
-                                .fill(.background)
+                                Capsule(style: .continuous)
+                                    .fill(.background)
+                            }
+                            .compositingGroup()
+                            .frame(width: tabItemWidth,
+                                   height: tabItemHeight)
+                            /// Scaling when drag gesture becomes active
+                            .scaleEffect(isActive ? 1.3 : 1)
+                            .offset(x: isSearchExpanded ? 0 : dragOffset)
+                            .opacity(isSearchExpanded ? 0 : 1)
                         }
-                        .compositingGroup()
-                        .frame(width: tabItemWidth, height: tabItemHeight)
-                        /// Scaling when drag gesture becomes active
-                        .scaleEffect(isActive ? 1.3 : 1)
-                        .offset(x: dragOffset)
+                        .padding(3)
+                        .background(tabBarBackground())
+                        .overlay {
+                            if isSearchExpanded {
+                                Capsule()
+                                    .foregroundStyle(.clear)
+                                    .contentShape(.capsule)
+                                    .onTapGesture {
+                                        withAnimation(.bouncy) {
+                                            isSearchExpanded = false
+                                        }
+                                    }
+                            }
+                        }
+                        /// hiding the tab icon when keyboard active
+                        .opacity(isKeyboardActive ? 0 : 1)
+
+                        if showSearchBar {
+                            expandableSearchBar(height: isSearchExpanded ? 45 : tabItemHeight)
+                        }
                     }
-                    .padding(3)
-                    .background(tabBarBackground())
+                    .optionalGeometryGroup()
                 }
             }
             /// center tab bar
@@ -86,10 +124,18 @@ struct SearchableTabBariOS26Style: View {
         }
         .frame(height: 56)
         .padding(.horizontal, 25)
+        .padding(.bottom, isKeyboardActive ? 10 : 0)
         // TODO: custom animatons
         .animation(.bouncy, value: dragOffset)
         .animation(.bouncy, value: isActive)
         .animation(.smooth, value: activeTab)
+        .animation(.easeInOut(duration: 0.25), value: isKeyboardActive)
+        .customOnChange(value: isKeyboardActive) {
+            onSearchBarExpanded($0)
+        }
+        .customOnChange(value: searchText) {
+            onSearchTextChanged($0)
+        }
     }
 
     func tabItemView(_ tab: VideoTab, width: CGFloat, height: CGFloat) -> some View {
@@ -100,13 +146,16 @@ struct SearchableTabBariOS26Style: View {
                 .font(.title2)
                 .symbolVariant(.fill)
 
-            Text(tab.rawValue)
-                .font(.caption2)
-                .lineLimit(1)
+            if !isSearchExpanded {
+                Text(tab.rawValue)
+                    .font(.caption2)
+                    .lineLimit(1)
+            }
         }
         .foregroundStyle(activeTab == tab ? accentColor : .primary)
         .frame(width: width, height: height)
         .contentShape(.capsule)
+        //  allow both tap and drag gestures to be recognized at the same time
         .simultaneousGesture(
             DragGesture(minimumDistance: 0)
                 .updating($isActive, body: { _, out, _ in
@@ -132,6 +181,7 @@ struct SearchableTabBariOS26Style: View {
                     }
                 }
         )
+        // allows instant selection of a tab with a tap
         .simultaneousGesture(
             TapGesture()
                 .onEnded { _ in
@@ -139,6 +189,50 @@ struct SearchableTabBariOS26Style: View {
                     dragOffset = CGFloat(tab.index) * width
                 }
         )
+        .optionalGeometryGroup() // support iOS 16.4+
+    }
+
+    private func expandableSearchBar(height: CGFloat) -> some View {
+        let searchLayout = isKeyboardActive ? AnyLayout(HStackLayout(spacing: 12)) : AnyLayout(
+            ZStackLayout(alignment: .trailing)
+        )
+        return searchLayout {
+            HStack(spacing: 12) {
+                Image(systemName: "magnifyingglass")
+                    .font(isSearchExpanded ? .body : .title2)
+                    .foregroundStyle(isSearchExpanded ? .gray : .primary)
+                    .frame(width: isSearchExpanded ? nil : height, height: height)
+                    .onTapGesture {
+                        withAnimation(.bouncy) {
+                            isSearchExpanded = true
+                        }
+                    }
+                    .allowsHitTesting(!isSearchExpanded)
+
+                if isSearchExpanded {
+                    TextField("Search...", text: $searchText)
+                        .focused($isKeyboardActive)
+                }
+            }
+            .padding(.horizontal, isSearchExpanded ? 15 : 0)
+            .background(tabBarBackground())
+            .optionalGeometryGroup()
+            .zIndex(1)
+
+            /// toggle focus state
+            Button {
+                isKeyboardActive = false
+                searchText = ""
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.title2)
+                    .foregroundStyle(.primary)
+                    .frame(width: height, height: height)
+                    .background(tabBarBackground())
+            }
+            .opacity(isKeyboardActive ? 1 : 0)
+        }
+        .optionalGeometryGroup()
     }
 
     private func tabBarBackground() -> some View {
@@ -162,8 +256,13 @@ struct SearchableTabBariOS26Style: View {
 
 private extension View {
     @ViewBuilder
-    func modifiers(@ViewBuilder content: @escaping (Self) -> some View) -> some View {
-        content(self)
+    func optionalGeometryGroup() -> some View {
+        if #available(iOS 17, *) {
+            self
+                .geometryGroup()
+        } else {
+            self
+        }
     }
 }
 
