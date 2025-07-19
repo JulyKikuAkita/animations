@@ -380,6 +380,7 @@
 		AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0EA1792DEBBB5100C62391 /* DummyViews.swift */; };
 		AB0EA17B2DEBBB5100C62391 /* DummyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0EA1792DEBBB5100C62391 /* DummyViews.swift */; };
 		AB0EA17C2DEBBB5100C62391 /* DummyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0EA1792DEBBB5100C62391 /* DummyViews.swift */; };
+		AB0FFC382E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0FFC372E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -755,6 +756,7 @@
 		AB0EA0F12DEBA80E00C62391 /* PullToSearchTextfieldDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToSearchTextfieldDemoView.swift; sourceTree = "<group>"; };
 		AB0EA1752DEBBAB000C62391 /* Dummies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummies.swift; sourceTree = "<group>"; };
 		AB0EA1792DEBBB5100C62391 /* DummyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViews.swift; sourceTree = "<group>"; };
+		AB0FFC372E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawBasedSymbolsEffects-iOS26.swift"; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
 		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
@@ -1057,6 +1059,7 @@
 				9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */,
 				962B04772C22A162008E1E5D /* MeshGradientView.swift */,
 				963B86292CE9495900C3FB0D /* EffectViewModifier.swift */,
+				AB0FFC372E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift */,
 			);
 			path = SpecialAnimationEffects;
 			sourceTree = "<group>";
@@ -2780,6 +2783,7 @@
 				9682B7F22CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift in Sources */,
 				968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */,
 				96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */,
+				AB0FFC382E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift in Sources */,
 				AB0E9DA02DE2655600C62391 /* MorphCustomMenuDemoView.swift in Sources */,
 				963B84712CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift in Sources */,
 				9621D9672BE8409A00183CB7 /* TagLayout.swift in Sources */,
