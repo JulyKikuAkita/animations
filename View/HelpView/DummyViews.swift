@@ -26,6 +26,9 @@ struct DummyViews: View {
             Section {
                 DummyRectangles(color: .indigo, count: 3)
             }
+            Section {
+                DummyGridView(rowCount: 2, gridCount: 8, tint: .orange)
+            }
         }
     }
 }
@@ -202,6 +205,40 @@ struct DummyMenuRow: View {
         }
         .padding(10)
         .contentShape(.rect)
+    }
+}
+
+struct DummyGridView: View {
+    var rowCount: Int = 2
+    var gridCount: Int = 20
+    var tint: Color = .red
+    var body: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(), count: rowCount)) {
+            ForEach(1 ... gridCount, id: \.self) { _ in
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(tint.gradient)
+                    .frame(height: 160)
+                    .overlay(alignment: .topLeading) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Circle()
+                                .fill(.bar)
+                                .frame(width: 45, height: 45)
+                                .padding(.bottom, 5)
+
+                            Capsule()
+                                .fill(.bar).frame(width: 100, height: 5)
+
+                            Capsule()
+                                .fill(.bar).frame(width: 80, height: 5)
+
+                            Capsule()
+                                .fill(.bar).frame(width: 40, height: 5)
+                        }
+                        .padding(15)
+                    }
+            }
+        }
+        .padding(15)
     }
 }
 

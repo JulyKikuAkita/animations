@@ -381,6 +381,7 @@
 		AB0EA17B2DEBBB5100C62391 /* DummyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0EA1792DEBBB5100C62391 /* DummyViews.swift */; };
 		AB0EA17C2DEBBB5100C62391 /* DummyViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0EA1792DEBBB5100C62391 /* DummyViews.swift */; };
 		AB0FFC382E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0FFC372E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift */; };
+		AB0FFD212E2D863700E6DCBE /* PullEffectScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -757,6 +758,7 @@
 		AB0EA1752DEBBAB000C62391 /* Dummies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummies.swift; sourceTree = "<group>"; };
 		AB0EA1792DEBBB5100C62391 /* DummyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViews.swift; sourceTree = "<group>"; };
 		AB0FFC372E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawBasedSymbolsEffects-iOS26.swift"; sourceTree = "<group>"; };
+		AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullEffectScrollView.swift; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
 		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
@@ -1746,6 +1748,7 @@
 				960663282DD950430084B468 /* ResizableHeaderScrollView.swift */,
 				9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */,
 				969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */,
+				AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -2685,6 +2688,7 @@
 				96E70B292B8F10CB00F23A51 /* TabStateScrollView.swift in Sources */,
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
 				969219DD2D6D9EEA00326523 /* Contact.swift in Sources */,
+				AB0FFD212E2D863700E6DCBE /* PullEffectScrollView.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
 				96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */,
 				AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */,
