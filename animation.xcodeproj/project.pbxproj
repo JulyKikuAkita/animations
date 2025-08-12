@@ -397,6 +397,7 @@
 		AB5C933F2E03E291009CF684 /* alarmKitCountdownDemoExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */; };
 		AB5C9A592E0A608C009CF684 /* iOS26-tabbarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */; };
+		AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */; };
 		AB7CC2A92E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */; };
 		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
 		AB8747C22D8F557F00507C55 /* audio.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB8747C12D8F557F00507C55 /* audio.wav */; };
@@ -780,6 +781,7 @@
 		AB5C93312E03E28F009CF684 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlassSearchableTabbar.swift; sourceTree = "<group>"; };
 		AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-tabbarSheet.swift"; sourceTree = "<group>"; };
+		AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularWheelPicker.swift; sourceTree = "<group>"; };
 		AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectMenuiOS26.swift; sourceTree = "<group>"; };
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
 		AB8747C12D8F557F00507C55 /* audio.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = audio.wav; sourceTree = "<group>"; };
@@ -1823,6 +1825,7 @@
 				96E4E6012D178F350020261F /* ImagePicker.swift */,
 				96E4E6022D178F350020261F /* TimePickerView.swift */,
 				96E4DEAC2D06619D0020261F /* PickerStylesGesturesView.swift */,
+				AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */,
 			);
 			path = PickerView;
 			sourceTree = "<group>";
@@ -2710,6 +2713,7 @@
 				AB0FFD212E2D863700E6DCBE /* PullEffectScrollView.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
 				96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */,
+				AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */,
 				AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */,
 				962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
