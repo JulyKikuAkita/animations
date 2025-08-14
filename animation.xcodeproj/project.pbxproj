@@ -768,6 +768,7 @@
 		AB0EA1792DEBBB5100C62391 /* DummyViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViews.swift; sourceTree = "<group>"; };
 		AB0FFC372E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawBasedSymbolsEffects-iOS26.swift"; sourceTree = "<group>"; };
 		AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullEffectScrollView.swift; sourceTree = "<group>"; };
+		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
 		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
@@ -891,6 +892,7 @@
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
 		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		96E36A452DB217F900A8EFBA /* Monitor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Monitor; sourceTree = "<group>"; };
+		AB35A6D72E4DB3DE00573A3D /* onBoarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = onBoarding; sourceTree = "<group>"; };
 		AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93252E03D5A0009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AB5C93462E03E447009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitDemoApp; sourceTree = "<group>"; };
 		AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93432E03E291009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitCountdownDemo; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -989,6 +991,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		96DF8A8E2C3A68290063A931 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB35A6D32E4DB3DE00573A3D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1194,6 +1203,7 @@
 				9604D1CE2DE3A62F0087AB24 /* PokemonPlayUITests */,
 				AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */,
 				AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */,
+				AB35A6D72E4DB3DE00573A3D /* onBoarding */,
 				AB5C932E2E03E28F009CF684 /* Frameworks */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
@@ -1218,6 +1228,7 @@
 				9604D1CB2DE3A62F0087AB24 /* PokemonPlayUITests.xctest */,
 				AB5C93182E03CF9F009CF684 /* alarmKitDemoApp.app */,
 				AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */,
+				AB35A6D62E4DB3DE00573A3D /* onBoarding.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2269,6 +2280,28 @@
 			productReference = 96DF8A912C3A68290063A931 /* ThreadApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AB35A6D52E4DB3DE00573A3D /* onBoarding */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB35A6E02E4DB3DF00573A3D /* Build configuration list for PBXNativeTarget "onBoarding" */;
+			buildPhases = (
+				AB35A6D22E4DB3DE00573A3D /* Sources */,
+				AB35A6D32E4DB3DE00573A3D /* Frameworks */,
+				AB35A6D42E4DB3DE00573A3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AB35A6D72E4DB3DE00573A3D /* onBoarding */,
+			);
+			name = onBoarding;
+			packageProductDependencies = (
+			);
+			productName = onBoarding;
+			productReference = AB35A6D62E4DB3DE00573A3D /* onBoarding.app */;
+			productType = "com.apple.product-type.application";
+		};
 		AB5C93172E03CF9F009CF684 /* alarmKitDemoApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB5C93202E03CF9F009CF684 /* Build configuration list for PBXNativeTarget "alarmKitDemoApp" */;
@@ -2369,6 +2402,9 @@
 					96DF8A902C3A68290063A931 = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					AB35A6D52E4DB3DE00573A3D = {
+						CreatedOnToolsVersion = 26.0;
+					};
 					AB5C93172E03CF9F009CF684 = {
 						CreatedOnToolsVersion = 26.0;
 					};
@@ -2410,6 +2446,7 @@
 				9604D1CA2DE3A62F0087AB24 /* PokemonPlayUITests */,
 				AB5C93172E03CF9F009CF684 /* alarmKitDemoApp */,
 				AB5C932C2E03E28F009CF684 /* alarmKitCountdownDemoExtension */,
+				AB35A6D52E4DB3DE00573A3D /* onBoarding */,
 			);
 		};
 /* End PBXProject section */
@@ -2548,6 +2585,13 @@
 			files = (
 				96DF8A9B2C3A682A0063A931 /* Preview Assets.xcassets in Resources */,
 				96DF8A982C3A682A0063A931 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB35A6D42E4DB3DE00573A3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3052,6 +3096,13 @@
 				96DF8A942C3A68290063A931 /* ThreadAppApp.swift in Sources */,
 				96DF8ABC2C3A687B0063A931 /* SynchronizedScrollView.swift in Sources */,
 				9662EF122C3B51E900508B80 /* PicItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB35A6D22E4DB3DE00573A3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4005,6 +4056,70 @@
 			};
 			name = Release;
 		};
+		AB35A6DE2E4DB3DF00573A3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = julykikuakita.onBoarding;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB35A6DF2E4DB3DF00573A3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = julykikuakita.onBoarding;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		AB5C93212E03CF9F009CF684 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4261,6 +4376,15 @@
 			buildConfigurations = (
 				96DF8AB22C3A682A0063A931 /* Debug */,
 				96DF8AB32C3A682A0063A931 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB35A6E02E4DB3DF00573A3D /* Build configuration list for PBXNativeTarget "onBoarding" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB35A6DE2E4DB3DF00573A3D /* Debug */,
+				AB35A6DF2E4DB3DF00573A3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
