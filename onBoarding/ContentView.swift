@@ -17,17 +17,23 @@ struct ContentView: View {
                     Text("Hello, world!")
                 }
                 .padding()
-                .onBoarding(1) {}
+                .onBoarding(1) {
+                    dummyTextView()
+                }
 
                 Button("Donwload") {}
                     .padding(15)
-                    .onBoarding(2) {}
+                    .onBoarding(2) {
+                        dummyTextView()
+                    }
             }
-        } beginOnboarding: {
-            <#code#>
-        } onBoardingFinished: {
-            <#code#>
-        }
+        } beginOnboarding: {} onBoardingFinished: {}
+    }
+
+    func dummyTextView() -> some View {
+        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.")
+            .font(.caption)
+            .multilineTextAlignment(.center)
     }
 }
 
