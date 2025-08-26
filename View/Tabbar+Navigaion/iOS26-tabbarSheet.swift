@@ -8,7 +8,7 @@ import MapKit
 import SwiftUI
 
 #if canImport(FoundationModels)
-    extension View {
+    public extension View {
         var isiOS26OrLater: Bool {
             if #available(iOS 26, *) {
                 true
