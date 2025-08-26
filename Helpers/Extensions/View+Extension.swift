@@ -199,3 +199,31 @@ public extension View {
         }
     }
 }
+
+// iOS 26 related helper
+public extension View {
+    var isiOS26OrLater: Bool {
+        if #available(iOS 26, *) {
+            true
+        } else {
+            false
+        }
+    }
+
+    @ViewBuilder
+    func tryGlassEffect() -> some View {
+        if #available(iOS 26.0, tvOS 26.0, *) {
+            self.glassEffect()
+        } else {
+            self
+        }
+    }
+
+    /// Shape-only
+    @ViewBuilder
+    func tryGlassEffect(in shape: some Shape) -> some View {
+        if #available(iOS 26.0, tvOS 26.0, *) {
+            self.glassEffect(in: shape)
+        } else { self }
+    }
+}
