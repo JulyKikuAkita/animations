@@ -189,5 +189,5 @@ struct WheelPickerView<Label: View>: View {
 }
 
 #Preview {
-    circularWheelPickerDemoView()
+    CircularWheelPickerDemoView()
 }
