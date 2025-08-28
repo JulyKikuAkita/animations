@@ -3,6 +3,7 @@
 //  animation
 //
 
+import FirebaseAuth
 import SwiftUI
 
 struct LoginKit<Content: View>: View {
@@ -17,10 +18,17 @@ struct LoginKit<Content: View>: View {
     var body: some View {
         ZStack {
             if !isLoggedIn {
-                /// Login view
                 content
             } else {
-                /// Register view
+                /// Login flow
+                LoginView {
+                    isLoggedIn = true
+                }
+            }
+        }
+        .task {
+            if let user = Auth.auth().currentUser, !user.isEmailVerified {
+                try? Auth.auth().signOut()
             }
         }
     }
