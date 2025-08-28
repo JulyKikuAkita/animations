@@ -3,3 +3,5 @@
 xcuserdata/
 **/animation.xcodeproj/xcuserdata
 resources/**
+# Firebase config
+GoogleService-Info.plistGoogleService-Info.plist

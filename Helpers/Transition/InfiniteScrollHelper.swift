@@ -65,7 +65,8 @@ struct InfiniteScrollHelper: UIViewRepresentable {
             defaultDelegate?.scrollViewDidScroll?(scrollView)
         }
 
-        /// Other default callbacks to ensure SwiftUI's onScrollGeometry, onScrollPhaseChange, ScrollTransition modifiers works properly
+        /// Other default callbacks to ensure SwiftUI's onScrollGeometry,
+        /// onScrollPhaseChange, ScrollTransition modifiers works properly
         func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
             defaultDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
         }

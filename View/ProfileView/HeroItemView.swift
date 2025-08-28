@@ -25,7 +25,7 @@ struct CardView: View {
     var body: some View {
         HStack(spacing: 12) {
             SourceView(id: item.id.uuidString) {
-                ImageView()
+                imageView()
             }
 
             Text(item.title)
@@ -38,7 +38,7 @@ struct CardView: View {
 
         .sheet(isPresented: $expandSheet, content: {
             DestinationView(id: item.id.uuidString) {
-                ImageView()
+                imageView()
                     .onTapGesture {
                         expandSheet.toggle()
                     }
@@ -49,13 +49,13 @@ struct CardView: View {
         .heroLayer(id: item.id.uuidString,
                    animate: $expandSheet)
         {
-            ImageView()
+            imageView()
         } completion: { _ in
         }
     }
 
     @ViewBuilder
-    func ImageView() -> some View {
+    func imageView() -> some View {
         Image(systemName: item.symbol)
             .font(.title2)
             .foregroundStyle(.white)
@@ -64,7 +64,7 @@ struct CardView: View {
     }
 }
 
-struct DemoView: View {
+struct HeroItemDemoView: View {
     @State private var showView: Bool = false
     var body: some View {
         NavigationStack {

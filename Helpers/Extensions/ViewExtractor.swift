@@ -8,14 +8,16 @@ import SwiftUI
 // Add this to the view we want to tract (not after the modifier otherwise we get result as modifier)
 extension View {
     @ViewBuilder
-    func ViewExtractor(result: @escaping (UIView) -> Void) -> some View {
+    func viewExtractor(result: @escaping (UIView) -> Void) -> some View {
         background(ViewExtractHelper(result: result))
             .compositingGroup()
     }
 }
 
-// the view was compose of 2 super views and swiftUI view is at the top of the group, it's the last subview property
-// each swiftUI view serves as a wrapper around a UIKit view and the initial view will be a wrapper and within it the associated UIKit View
+// the view was compose of 2 super views and swiftUI view is at the top of the group,
+// it's the last subview property
+// each swiftUI view serves as a wrapper around a UIKit view and the initial view
+// will be a wrapper and within it the associated UIKit View
 /// Similar to below hierarchy
 ///  - grouped view (superView.superView)
 ///  - extractor view (background)
@@ -44,20 +46,20 @@ private struct ViewExtractHelper: UIViewRepresentable {
 
 /// Demo for how to use view extractor
 ///  UIViewController type - navigation stack, tabview etc, use next property to extract the controllers
-struct demoViewExtractorControllerView: View {
+struct DemoViewExtractorControllerView: View {
     var body: some View {
         NavigationStack {
             List {}
                 .navigationTitle("Home")
         }
-        .ViewExtractor { view in
+        .viewExtractor { view in
             if let navController = view.next as? UINavigationController {
                 print(navController)
             }
         }
 
         TabView {}
-            .ViewExtractor { view in
+            .viewExtractor { view in
                 if let tabController = view.next as? UITabBarController {
                     tabController.tabBar.isHidden = true
                     print(tabController)
@@ -67,7 +69,7 @@ struct demoViewExtractorControllerView: View {
 }
 
 /// SwiftUi views
-struct demoViewExtractorView: View {
+struct DemoViewExtractorView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -76,20 +78,20 @@ struct demoViewExtractorView: View {
 
             /// native SwiftUI view
             Text("Native SwiftUI View which has no UIKit view")
-                .ViewExtractor { view in
+                .viewExtractor { view in
                     print(view)
                 }
 
             /// UIKit View wrapped with SwiftUI Wrapper: textfield, slider, list etc
             TextField("UIKit View wrapped", text: .constant(""))
-                .ViewExtractor { view in
+                .viewExtractor { view in
                     if let textField = view as? UITextField {
                         print(textField)
                     }
                 }
 
             Slider(value: .constant(0.2))
-                .ViewExtractor { view in
+                .viewExtractor { view in
                     if let slider = view as? UISlider {
                         slider.tintColor = .red
                         slider.thumbTintColor = .systemBlue
@@ -101,7 +103,7 @@ struct demoViewExtractorView: View {
                 List {
                     Text("List in SwiftUI is UICollectionView")
                 }
-                .ViewExtractor { view in
+                .viewExtractor { view in
                     if let list = view as? UICollectionView {
                         print(list)
                     }
@@ -110,7 +112,7 @@ struct demoViewExtractorView: View {
                 ScrollView {
                     Text("ScrollView in SwiftUI is UIScrollView")
                 }
-                .ViewExtractor { view in
+                .viewExtractor { view in
                     if let scrollView = view as? UIScrollView {
                         scrollView.bounces = false
                         print(scrollView)
@@ -123,5 +125,5 @@ struct demoViewExtractorView: View {
 }
 
 #Preview {
-    demoViewExtractorView()
+    DemoViewExtractorView()
 }

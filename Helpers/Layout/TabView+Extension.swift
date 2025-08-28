@@ -7,7 +7,10 @@ import SwiftUI
 // Custom TabView modifier
 extension TabView {
     @ViewBuilder
-    func tabSheet(initialHeight: CGFloat = 100, sheetCornerRadius: CGFloat = 15, @ViewBuilder content: @escaping () -> some View) -> some View {
+    func tabSheet(initialHeight: CGFloat = 100,
+                  sheetCornerRadius: CGFloat = 15,
+                  @ViewBuilder content: @escaping () -> some View) -> some View
+    {
         modifier(
             BottomSheetModifier(
                 initialHeight: initialHeight,
@@ -40,7 +43,9 @@ private struct BottomSheetModifier<SheetContent: View>: ViewModifier {
                         .fill(.clear)
                         .frame(height: 55) // tab bar height
                 }
-                .presentationDetents([.height(initialHeight), .medium, .fraction(0.99)]) // if use .large,instead of .fraction root view will scale
+                .presentationDetents([.height(initialHeight),
+                                      .medium,
+                                      .fraction(0.99)]) // if use .large,instead of .fraction root view will scale
                 .presentationCornerRadius(sheetCornerRadius)
                 .presentationBackgroundInteraction(.enabled(upThrough: .medium))
                 .presentationBackground(.clear)

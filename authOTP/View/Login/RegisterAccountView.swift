@@ -3,13 +3,21 @@
 //  animation
 //
 
+import FirebaseAuth
 import SwiftUI
 
 struct RegisterAccountView: View {
+    var onSuccessLogin: () -> Void = {}
+
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var passwordConfirmation: String = ""
     @State private var isPerforming: Bool = false
+    @State private var alert: AlertModal = .init(message: "")
+    @State private var userVerificationModal: Bool = false
+    @Environment(\.dismiss) var dismiss
+    @FocusState private var isFocused: Bool
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 8) {
@@ -54,9 +62,46 @@ struct RegisterAccountView: View {
         .padding(.bottom, isiOS26OrLater ? 0 : 10)
         .allowsHitTesting(!isPerforming)
         .opacity(isPerforming ? 0.8 : 1)
+        .focused($isFocused)
+        .customAlert($alert)
+        .sheetAlert(
+            isPresented: $userVerificationModal,
+            prominentSymbol: "envelop.badge",
+            title: "Email Verification",
+            message: "We have sent a verification email to\nyour address. Please check your inbox.",
+            primaryButtonTitle: "Verified",
+            primaryButtonAction: {
+                if let user = Auth.auth().currentUser {
+                    try? await user.reload()
+                    if user.isEmailVerified {
+                        debugPrint("User email verified")
+                        dismiss()
+                        onSuccessLogin()
+                    }
+                }
+            }
+        )
+        /// Disabling interactive dismiss when keybaord is active/ isPerforming action
+        .interactiveDismissDisabled(isFocused || isPerforming)
     }
 
     var isCreateAccountButtonEnabled: Bool {
         !email.isEmpty && !password.isEmpty && !passwordConfirmation.isEmpty
+    }
+
+    private func createNewAccount() async {
+        do {
+            let auth = Auth.auth()
+            let result = try await auth.createUser(
+                withEmail: email,
+                password: password
+            )
+            try await result.user.sendEmailVerification()
+            userVerificationModal = true
+        } catch {
+            // TBD: double check if user is created but email failed to send, need to clean up user
+            alert.message = error.localizedDescription
+            alert.show = true
+        }
     }
 }

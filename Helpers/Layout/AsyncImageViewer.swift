@@ -22,7 +22,9 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
     var body: some View {
         Group(subviews: content) { collection in
             /// iOS 18 subviews api to retrieve SubView collection from the given view content
-            LazyVGrid(columns: Array(repeating: GridItem(spacing: config.spacing), count: 2), spacing: config.spacing) {
+            LazyVGrid(columns: Array(repeating: GridItem(spacing: config.spacing),
+                                     count: 2), spacing: config.spacing)
+            {
                 /// Display the first 4 images only, and the remaining showing a plus sign and count (e.g., +2)
                 let remainingCount = max(collection.count - 4, 0)
                 ForEach(collection.prefix(4)) { item in
@@ -84,7 +86,8 @@ struct AsyncImageViewer<Content: View, Overlay: View>: View {
                 .toolbarVisibility(.hidden, for: .navigationBar)
             }
             /// update transitionSource when tab item updated
-            /// pin to index 3 to make sure match transition - zoom transition animation effect works for image not in display (index > 3), aka indexes > 3 will always have a transition id of 3
+            /// pin to index 3 to make sure match transition - zoom transition animation effect works for image
+            /// not in display (index > 3), aka indexes > 3 will always have a transition id of 3
             .onChange(of: activeTabID) { _, newValue in
                 transitionSource = min(collection.index(newValue), 3)
                 sendUpdate(collection, id: newValue)
@@ -114,7 +117,8 @@ private extension SubviewsCollection {
     }
 }
 
-/// To retrieve the current active ID, we can utilize container values to pass the ID to the view and the extract it from the subview
+/// To retrieve the current active ID, we can utilize container values to pass the ID
+/// to the view and the extract it from the subview
 extension ContainerValues {
     @Entry var activeViewID: AnyHashable?
 }
