@@ -7,11 +7,14 @@ import SwiftUI
 extension TextField {
     /// showSuggestions: Bool = true -> change to binding for dynamic updates
     @ViewBuilder
-    func menu(showSuggestions: Bool = true, @TextFieldActionBuilder actions: @escaping () -> [TextFieldAction]) -> some View {
+    func menu(showSuggestions: Bool = true,
+              @TextFieldActionBuilder actions: @escaping () -> [TextFieldAction]) -> some View
+    {
         background(
             TextFieldActionHelper(showSuggestions: showSuggestions, actions: actions())
         )
-        .compositingGroup() /// group background + textfield in one view, help us to find associated textfield when traverse superview
+        /// group background + textfield in one view, help us to find associated textfield when traverse superview
+        .compositingGroup()
     }
 }
 
@@ -63,7 +66,10 @@ private struct TextFieldActionHelper: UIViewRepresentable {
             originalDelegate?.textFieldDidChangeSelection?(textField)
         }
 
-        func textField(_ textField: UITextField, editMenuForCharactersIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
+        func textField(_ textField: UITextField,
+                       editMenuForCharactersIn range: NSRange,
+                       suggestedActions: [UIMenuElement]) -> UIMenu?
+        {
             var actions: [UIMenuElement] = []
             var customActions = parent.actions.compactMap { item in
                 let action = UIAction(title: item.title) { _ in

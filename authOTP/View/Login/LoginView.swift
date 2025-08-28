@@ -1,4 +1,6 @@
 //
+import FirebaseAuth
+
 //  LoginKit.swift
 //  animation
 //
@@ -7,6 +9,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    var onSuccessLogin: () -> Void = {}
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var createAccount: Bool = false
@@ -41,9 +44,7 @@ struct LoginView: View {
 
             TaskButton(title: "Sign in") {
                 isFocused = false
-                try? await Task.sleep(for: .seconds(5))
-                alert.message = "Email is not registered."
-                alert.show.toggle()
+                await login()
             } onStatusChange: { isLoading in
                 isPerforming = isLoading
             }
@@ -82,7 +83,7 @@ struct LoginView: View {
         .allowsHitTesting(!isPerforming)
         .opacity(isPerforming ? 0.8 : 1)
         .sheet(isPresented: $createAccount) {
-            RegisterAccountView()
+            RegisterAccountView(onSuccessLogin: onSuccessLogin)
                 .presentationDetents([.height(400)])
                 .presentationBackground(.background)
                 /// iOS 26 auto-adopt cornerRadius as devices
@@ -101,7 +102,16 @@ struct LoginView: View {
             title: "Email Verification",
             message: "We have sent a verification email to\nyour address. Please check your inbox.",
             primaryButtonTitle: "Verified",
-            primaryButtonAction: {}
+            primaryButtonAction: {
+                if let user = Auth.auth().currentUser {
+                    try? await user.reload()
+                    if user.isEmailVerified {
+                        debugPrint("User email verified")
+                        userNotVerified = false
+                        onSuccessLogin()
+                    }
+                }
+            }
         )
         .customAlert($alert)
         .focused($isFocused)
@@ -110,5 +120,26 @@ struct LoginView: View {
 
     var isSignInButtonEnabled: Bool {
         !email.isEmpty && !password.isEmpty
+    }
+
+    private func login() async {
+        do {
+            let auth = Auth.auth()
+            let result = try await auth.signIn(
+                withEmail: email,
+                password: password
+            )
+            if result.user.isEmailVerified {
+                /// success login
+                onSuccessLogin()
+            } else {
+                /// in case email is lost
+                try await result.user.sendEmailVerification()
+                userNotVerified = true
+            }
+        } catch {
+            alert.message = error.localizedDescription
+            alert.show = true
+        }
     }
 }

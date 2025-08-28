@@ -8,16 +8,6 @@ import MapKit
 import SwiftUI
 
 #if canImport(FoundationModels)
-    public extension View {
-        var isiOS26OrLater: Bool {
-            if #available(iOS 26, *) {
-                true
-            } else {
-                false
-            }
-        }
-    }
-
     struct TabbarSheetDemoiOS26: View {
         var body: some View {
             TabbarSheetiOS26()

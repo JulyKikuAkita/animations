@@ -121,7 +121,11 @@ extension View {
             message: modal.wrappedValue.message,
             primaryButtonTitle: "Done"
         ) {
-            modal.wrappedValue.show = false
+            if let action = modal.wrappedValue.action {
+                action()
+            } else {
+                modal.wrappedValue.show = false
+            }
         }
     }
 }
@@ -131,4 +135,5 @@ struct AlertModal {
     var title: String = "Something went wrong."
     var message: String
     var show: Bool = false
+    var action: (() -> Void)?
 }
