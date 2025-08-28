@@ -40,7 +40,7 @@ struct ForgotPasswordView: View {
         .padding(.top, 25)
         .allowsHitTesting(!isPerforming)
         .opacity(isPerforming ? 0.7 : 1)
-        .focused(isFocused)
+        .focused($isFocused)
         .customAlert($alert)
         /// Disabling interactive dismiss when keybaord is active/ isPerforming action
         .interactiveDismissDisabled(isFocused || isPerforming)

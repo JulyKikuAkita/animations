@@ -7,9 +7,21 @@ import SwiftUI
 /// Custom view modifier
 extension View {
     @ViewBuilder
-    func particleEffect(systemImage: String, font: Font, status: Bool, activeTint: Color, inActiveTint: Color, drop: Bool) -> some View {
+    // swiftlint:disable:next function_parameter_count
+    func particleEffect(systemImage: String,
+                        font: Font,
+                        status: Bool,
+                        activeTint: Color,
+                        inActiveTint: Color,
+                        drop: Bool) -> some View
+    {
         modifier(
-            ParticleModifier(systemImage: systemImage, font: font, status: status, activeTint: activeTint, inActiveTint: inActiveTint, drop: drop)
+            ParticleModifier(systemImage: systemImage,
+                             font: font,
+                             status: status,
+                             activeTint: activeTint,
+                             inActiveTint: inActiveTint,
+                             drop: drop)
         )
     }
 }
@@ -23,6 +35,7 @@ private struct ParticleModifier: ViewModifier {
     var drop: Bool = true
     @State private var particles: [Particle] = []
 
+    // swiftlint:disable:next function_body_length
     func body(content: Content) -> some View {
         content
             .overlay(alignment: .top) {
@@ -72,7 +85,8 @@ private struct ParticleModifier: ViewModifier {
                             /// max scale: 1
                             let randomScale: CGFloat = .random(in: 0.35 ... 1)
                             withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
-                                let spreadRandomX: CGFloat = (progress < 0.5 ? .random(in: 0 ... 10) : .random(in: -10 ... 0))
+                                let spreadRandomX: CGFloat =
+                                    (progress < 0.5 ? .random(in: 0 ... 10) : .random(in: -10 ... 0))
                                 let spreadRandomY: CGFloat = .random(in: 0 ... 30)
                                 particles[index].randomX = randomX + spreadRandomX
                                 particles[index].randomY = -randomY - spreadRandomY

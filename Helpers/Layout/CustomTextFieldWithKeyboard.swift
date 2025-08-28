@@ -34,7 +34,10 @@ struct CustomTextFieldWithKeyboard<TextField: View, Keyboard: View>: UIViewContr
     func updateUIViewController(_: UIHostingController<TextField>, context _: Context) {}
 
     /// ensure view wrapper takes up only the necessary space, rather than the entire available space
-    func sizeThatFits(_: ProposedViewSize, uiViewController: UIHostingController<TextField>, context _: Context) -> CGSize? {
+    func sizeThatFits(_: ProposedViewSize,
+                      uiViewController: UIHostingController<TextField>,
+                      context _: Context) -> CGSize?
+    {
         uiViewController.view.intrinsicContentSize
     }
 }

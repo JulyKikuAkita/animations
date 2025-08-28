@@ -153,10 +153,10 @@ struct SchemePickerView: View {
             GeometryReader { _ in
                 HStack(spacing: 0) {
                     ForEach(previews) { preview in
-                        SchemeCardView([preview])
+                        schemeCardView([preview])
                     }
 
-                    SchemeCardView(previews)
+                    schemeCardView(previews)
                 }
             }
         }
@@ -186,7 +186,7 @@ struct SchemePickerView: View {
     }
 
     @ViewBuilder
-    fileprivate func SchemeCardView(_ preview: [SchemePreview]) -> some View {
+    fileprivate func schemeCardView(_ preview: [SchemePreview]) -> some View {
         VStack(spacing: 6) {
             if let image = preview.first?.image {
                 Image(uiImage: image)

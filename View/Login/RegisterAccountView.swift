@@ -74,7 +74,7 @@ struct RegisterAccountView: View {
                 if let user = Auth.auth().currentUser {
                     try? await user.reload()
                     if user.isEmailVerified {
-                        logger.debug("User email verified")
+                        debugPrint("User email verified")
                         dismiss()
                         onSuccessLogin()
                     }

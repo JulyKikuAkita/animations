@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-/// Root view for creating overlay window
+// Root view for creating overlay window
 // struct RootView<Content:View>: View {
 //    @ViewBuilder var content: Content
 //    /// View Properties
@@ -14,7 +14,8 @@ import SwiftUI
 //    var body: some View {
 //        content
 //            .onAppear {
-//                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, overlayWindow == nil {
+//                if let windowScene = UIApplication.shared.connectedScenes.first as?
+//                          UIWindowScene, overlayWindow == nil {
 //                    let window = PassthroughWindow(windowScene: windowScene)
 //                    window.backgroundColor = .clear
 //                    /// View Controller
@@ -47,9 +48,18 @@ class Toast {
     static let shared = Toast()
     fileprivate var toasts: [ToastItem] = []
 
-    func present(title: String, symbol: String?, tint: Color = .primary, isUserInteractionEnabled: Bool = false, timing: ToastTime = .medium) {
+    func present(title: String,
+                 symbol: String?,
+                 tint: Color = .primary,
+                 isUserInteractionEnabled: Bool = false,
+                 timing: ToastTime = .medium)
+    {
         withAnimation(.snappy) {
-            toasts.append(.init(title: title, symbol: symbol, tint: tint, isUserInteractionEnabled: isUserInteractionEnabled, timing: timing))
+            toasts.append(.init(title: title,
+                                symbol: symbol,
+                                tint: tint,
+                                isUserInteractionEnabled: isUserInteractionEnabled,
+                                timing: timing))
         }
     }
 }
@@ -89,7 +99,7 @@ private struct ToastGroup: View {
                         .scaleEffect(scale(toast))
                         .offset(y: offsetY(toast))
                         .zIndex(Double(model.toasts.firstIndex(where: { $0.id == toast.id }) ?? 0))
-                    /// below animation seems not working
+                    // below animation seems not working
 //                        .animation(.easeInOut) { view in
 //                            view
 //                                .offset(y: offsetY(toast))
@@ -121,8 +131,6 @@ private struct ToastViewiOS17: View {
     var size: CGSize
     var item: ToastItem
 
-    /// View Properties
-    ///  for state style animation
 //    @State private var animateIn: Bool = false
 //    @State private var animateOut: Bool = false
     @State private var delayTask: DispatchWorkItem?
@@ -199,7 +207,7 @@ private struct ToastViewiOS17: View {
         }
     }
 
-    /// use state change for animation -> animation has delay when item is removed
+    // use state change for animation -> animation has delay when item is removed
 //    func removeToast() {
 //        guard !animateOut else { return }
 //        withAnimation(.snappy, completionCriteria: .logicallyComplete) {

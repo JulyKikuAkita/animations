@@ -15,7 +15,7 @@ struct AuthOTPApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OTPLoginView {}
         }
     }
 }

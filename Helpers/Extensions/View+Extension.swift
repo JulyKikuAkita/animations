@@ -22,10 +22,16 @@ extension View {
     }
 
     @ViewBuilder
-    func createImages(toggleDarkMode: Bool, currentImage: Binding<UIImage?>, previousImage: Binding<UIImage?>, activeDarkMode: Binding<Bool>) -> some View {
+    func createImages(toggleDarkMode: Bool,
+                      currentImage: Binding<UIImage?>,
+                      previousImage: Binding<UIImage?>,
+                      activeDarkMode: Binding<Bool>) -> some View
+    {
         onChange(of: toggleDarkMode) { _, newValue in
             Task { @MainActor in
-                if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first(where: { $0.isKeyWindow }) {
+                if let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+                    .windows.first(where: { $0.isKeyWindow })
+                {
                     /// creating a dummy image to hide flicking transition
                     let imageView = UIImageView()
                     imageView.frame = window.frame
@@ -100,7 +106,10 @@ extension UIView {
 /// For Pinterest Grid Animation
 extension View {
     var safeAreaPinterest: UIEdgeInsets {
-        if let safeArea = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.safeAreaInsets {
+        if let safeArea =
+            (UIApplication.shared.connectedScenes.first as? UIWindowScene)?
+                .keyWindow?.safeAreaInsets
+        {
             return safeArea
         }
         return .zero
@@ -112,7 +121,8 @@ extension View {
             GeometryReader(content: { geometry in
                 let minY = geometry.frame(in: .scrollView(axis: .vertical)).minY
                 Color.clear
-                    .preference(key: CGFloatKey.self, value: minY) /// Preference Key is defined in AnchorKey file
+                    /// Preference Key is defined in AnchorKey file
+                    .preference(key: CGFloatKey.self, value: minY)
                     .onPreferenceChange(CGFloatKey.self, perform: { value in
                         result(value)
                     })
@@ -154,7 +164,8 @@ extension View {
             GeometryReader(content: { geometry in
                 let minX = geometry.frame(in: .scrollView).minX
                 Color.clear
-                    .preference(key: CGFloatKey.self, value: minX) /// Preference Key is defined in AnchorKey file
+                    /// Preference Key is defined in AnchorKey file
+                    .preference(key: CGFloatKey.self, value: minX)
                     .onPreferenceChange(CGFloatKey.self, perform: { value in
                         completion(value)
                     })

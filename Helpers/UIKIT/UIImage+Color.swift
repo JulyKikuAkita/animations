@@ -48,10 +48,12 @@ extension UIImage {
 
         let pixelData = data.bindMemory(to: UInt8.self, capacity: 4)
 
+        // swiftlint:disable identifier_name
         let r = CGFloat(pixelData[0]) / 255.0
         let g = CGFloat(pixelData[1]) / 255.0
         let b = CGFloat(pixelData[2]) / 255.0
         let a = CGFloat(pixelData[3]) / 255.0
+        // swiftlint:enable identifier_name
 
         return UIColor(red: r, green: g, blue: b, alpha: a)
     }

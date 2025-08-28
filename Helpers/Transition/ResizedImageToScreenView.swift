@@ -95,6 +95,7 @@ struct ResizedImageToScreenView<Content: View>: View {
 
 /// return a new size based on the given aspect ratio
 extension CGSize {
+    // swiftlint:disable:next identifier_name
     func aspectFit(_ to: CGSize) -> CGSize {
         let scaleX = to.width / width
         let scaleY = to.height / height
