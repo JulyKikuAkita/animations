@@ -354,6 +354,11 @@
 		96E948F22D8B8A5000B257B4 /* AnimatedSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E948F12D8B8A5000B257B4 /* AnimatedSpinnerView.swift */; };
 		96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */; };
 		96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
+		96F406632E5D32E6002F140F /* LoginKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F406622E5D32E6002F140F /* LoginKit.swift */; };
+		96F406662E5D848A002F140F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F406652E5D848A002F140F /* LoginView.swift */; };
+		96F406682E5D84AF002F140F /* RegisterAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F406672E5D84AF002F140F /* RegisterAccountView.swift */; };
+		96F4066A2E5D84E8002F140F /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F406692E5D84E8002F140F /* ForgotPasswordView.swift */; };
+		96F4066C2E5D85C7002F140F /* LoginView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F4066B2E5D85C7002F140F /* LoginView+helpers.swift */; };
 		96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */; };
 		96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */; };
 		96F9D16F2D5C41E000CD134B /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */; };
@@ -744,6 +749,11 @@
 		96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerButton.swift; sourceTree = "<group>"; };
 		96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAlert.swift; sourceTree = "<group>"; };
 		96EBF5E02BD793B400FDD20D /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		96F406622E5D32E6002F140F /* LoginKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginKit.swift; sourceTree = "<group>"; };
+		96F406652E5D848A002F140F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		96F406672E5D84AF002F140F /* RegisterAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAccountView.swift; sourceTree = "<group>"; };
+		96F406692E5D84E8002F140F /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		96F4066B2E5D85C7002F140F /* LoginView+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView+helpers.swift"; sourceTree = "<group>"; };
 		96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteHorizontalScrollViewDemo.swift; sourceTree = "<group>"; };
 		96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
@@ -1125,6 +1135,7 @@
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				96F406612E5D32D6002F140F /* Firebase */,
 				9609D9392DB4B53200A76F95 /* CoreLocation */,
 				96E36A452DB217F900A8EFBA /* Monitor */,
 				9680C91D2D6AFAB7005FC80D /* Transition */,
@@ -1286,6 +1297,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96F406642E5D8477002F140F /* Login */,
 				96F9A6EB2B9FACC900FD6900 /* Button */,
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
 				965E573A2BC5086000E172B3 /* Carousel */,
@@ -1882,6 +1894,25 @@
 				96E948F12D8B8A5000B257B4 /* AnimatedSpinnerView.swift */,
 			);
 			path = Spinner;
+			sourceTree = "<group>";
+		};
+		96F406612E5D32D6002F140F /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				96F406622E5D32E6002F140F /* LoginKit.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		96F406642E5D8477002F140F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				96F406652E5D848A002F140F /* LoginView.swift */,
+				96F4066B2E5D85C7002F140F /* LoginView+helpers.swift */,
+				96F406672E5D84AF002F140F /* RegisterAccountView.swift */,
+				96F406692E5D84E8002F140F /* ForgotPasswordView.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		96F9A6EB2B9FACC900FD6900 /* Button */ = {
@@ -2682,6 +2713,7 @@
 				963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
 				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
+				96F4066A2E5D84E8002F140F /* ForgotPasswordView.swift in Sources */,
 				96FCA7592DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */,
 				9621DC812BEF461400183CB7 /* PhotoItem.swift in Sources */,
 				961F3B912B8818240055D79B /* ContentView.swift in Sources */,
@@ -2757,6 +2789,7 @@
 				9662F01F2C58348100508B80 /* Page.swift in Sources */,
 				96E4E6042D178F350020261F /* DropdownPickerView.swift in Sources */,
 				96E4E6052D178F350020261F /* ExpandableWheelPickerView.swift in Sources */,
+				96F4066C2E5D85C7002F140F /* LoginView+helpers.swift in Sources */,
 				96E4E6062D178F350020261F /* ImagePicker.swift in Sources */,
 				9633FB382DF947B10036CF8C /* SimpleTextField.swift in Sources */,
 				96E4E6072D178F350020261F /* TimePickerView.swift in Sources */,
@@ -2819,6 +2852,8 @@
 				9662F0232C5838CB00508B80 /* MorphingSymbolView.swift in Sources */,
 				96B884EA2BDD82B000196125 /* Interpolation.swift in Sources */,
 				AB7CC2A92E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift in Sources */,
+				96F406682E5D84AF002F140F /* RegisterAccountView.swift in Sources */,
+				96F406632E5D32E6002F140F /* LoginKit.swift in Sources */,
 				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
 				9621D9632BE5F7D100183CB7 /* Tag.swift in Sources */,
 				96E948F22D8B8A5000B257B4 /* AnimatedSpinnerView.swift in Sources */,
@@ -2831,6 +2866,7 @@
 				96352D532C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
 				968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */,
 				9663BB542DDE992700037CF1 /* Date+Extensions.swift in Sources */,
+				96F406662E5D848A002F140F /* LoginView.swift in Sources */,
 				96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
