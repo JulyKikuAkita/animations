@@ -400,6 +400,7 @@
 		AB17E55D2E611E4500C50B18 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E5552E61183500C50B18 /* Country.swift */; };
 		AB17E55F2E61214300C50B18 /* View+Versions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E55E2E61213D00C50B18 /* View+Versions.swift */; };
 		AB17E5602E61215700C50B18 /* View+Versions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E55E2E61213D00C50B18 /* View+Versions.swift */; };
+		AB17E6672E61655F00C50B18 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -890,6 +891,13 @@
 			);
 			target = 961F3B8A2B8818240055D79B /* animation */;
 		};
+		AB17E6692E61759500C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AB17E52D2E60FAA700C50B18 /* authOTP */;
+		};
 		AB5C93252E03D5A0009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -926,7 +934,7 @@
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
 		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		96E36A452DB217F900A8EFBA /* Monitor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Monitor; sourceTree = "<group>"; };
-		AB17E52F2E60FAA700C50B18 /* authOTP */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB17E54A2E610F5F00C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = authOTP; sourceTree = "<group>"; };
+		AB17E52F2E60FAA700C50B18 /* authOTP */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB17E54A2E610F5F00C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AB17E6692E61759500C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = authOTP; sourceTree = "<group>"; };
 		AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93252E03D5A0009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AB5C93462E03E447009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitDemoApp; sourceTree = "<group>"; };
 		AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93432E03E291009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitCountdownDemo; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -3193,6 +3201,7 @@
 				AB17E5602E61215700C50B18 /* View+Versions.swift in Sources */,
 				AB17E55C2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */,
 				AB17E55D2E611E4500C50B18 /* Country.swift in Sources */,
+				AB17E6672E61655F00C50B18 /* OTPVerificationTextFieldView.swift in Sources */,
 				AB17E5402E6104D300C50B18 /* LoginView+helpers.swift in Sources */,
 				AB17E5412E6104D900C50B18 /* RegisterAccountView.swift in Sources */,
 				AB17E53F2E6104CE00C50B18 /* LoginView.swift in Sources */,
@@ -4158,6 +4167,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = authOTP/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -4190,6 +4200,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = authOTP/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

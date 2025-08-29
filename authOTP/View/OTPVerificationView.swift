@@ -4,13 +4,22 @@
 //
 //  Created on 8/28/25.
 
+import FirebaseAuth
 import SwiftUI
 
 struct OTPVerificationView: View {
     var fullNumber: String
+    var onComplete: () -> Void
     @Environment(\.dismiss) var dismiss
     /// View properties
     @State private var isOTPSent: Bool = false
+    @State private var isOTPTaskTrigger: Bool = false
+    @State private var otpCode: String = ""
+    @State private var alertMessage: String = ""
+    @State private var showAlert: Bool = false
+    @State private var authID: String = ""
+    @FocusState private var isFocused: Bool
+
     var body: some View {
         ZStack {
             if isOTPSent {
@@ -31,7 +40,38 @@ struct OTPVerificationView: View {
                             .offset(x: 10, y: -15)
                     }
                     .padding(.top, 10)
+
+                    /// Firebase send 6 digit code
+                    VerificationTextField(
+                        type: .six,
+                        showsToolbar: false,
+                        value: $otpCode,
+                        onChange: { code in
+                            if code.count == 6 {
+                                isFocused = false
+                                do {
+                                    let credential = PhoneAuthProvider.provider().credential(
+                                        withVerificationID: authID,
+                                        verificationCode: code
+                                    )
+                                    let result = try await Auth.auth().signIn(with: credential)
+                                    debugPrint("Sign in with credential: \(result)")
+                                    dismiss()
+                                    try? await Task.sleep(for: .seconds(0.25)) /// wait for sheet animaiton
+                                    onComplete()
+                                    return .valid
+                                } catch {
+                                    isFocused = true
+                                    return .invalid
+                                }
+                            }
+                            return .typing
+                        }
+                    )
+                    .allowsHitTesting(false)
+                    .padding(.top, 12)
                 }
+                .padding(20)
                 .geometryGroup()
                 .transition(.blurReplace)
             } else {
@@ -61,17 +101,38 @@ struct OTPVerificationView: View {
         .presentationCornerRadius(isiOS26OrLater ? nil : 30)
         .interactiveDismissDisabled()
         .task {
-            guard !isOTPSent else { return }
+            guard !isOTPTaskTrigger else { return }
+            isOTPTaskTrigger = true
             do {
+                try await sendOTP() // comment out this line for preview
                 isOTPSent = true
+                isFocused = true
             } catch {
                 debugPrint(error.localizedDescription)
+                alertMessage = error.localizedDescription
+                showAlert = true
             }
         }
         .animation(.snappy(duration: 0.25, extraBounce: 0), value: isOTPSent)
+        .focused($isFocused)
+        .alert("Something Went Wrong", isPresented: $showAlert) {
+            Button("Dismiss", role: .cancel) {
+                /// Closing the verification sheet
+                dismiss()
+            }
+        } message: {
+            Text(alertMessage)
+        }
+    }
+
+    // will crash preview
+    private func sendOTP() async throws {
+        let provider = PhoneAuthProvider.provider()
+        let authID = try await provider.verifyPhoneNumber(fullNumber)
+        self.authID = authID
     }
 }
 
 #Preview {
-    OTPVerificationView(fullNumber: "123")
+    OTPVerificationView(fullNumber: "123", onComplete: {})
 }

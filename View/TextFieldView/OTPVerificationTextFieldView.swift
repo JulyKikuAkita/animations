@@ -10,7 +10,11 @@ struct OTPVerificationTextFieldDemoView: View {
     @State private var codeSix: String = ""
     var body: some View {
         VStack(spacing: 25) {
-            VerificationTextField(type: .four, style: .underlined, value: $codeFour) { result in
+            VerificationTextField(type: .four,
+                                  style: .underlined,
+                                  showsToolbar: true,
+                                  value: $codeFour)
+            { result in
                 if result.count < 6 {
                     .typing
                 } else if result == "1234" {
@@ -22,7 +26,11 @@ struct OTPVerificationTextFieldDemoView: View {
 
             Spacer(minLength: 0)
 
-            VerificationTextField(type: .six, style: .roundedBorder, value: $codeSix) { result in
+            VerificationTextField(type: .six,
+                                  style: .roundedBorder,
+                                  showsToolbar: false,
+                                  value: $codeSix)
+            { result in
                 if result.count < 6 {
                     .typing
                 } else if result == "12345" {
@@ -58,6 +66,7 @@ enum TextFieldStyle: String, CaseIterable {
 struct VerificationTextField: View {
     var type: OTPLength
     var style: TextFieldStyle = .roundedBorder
+    var showsToolbar: Bool = true
     @Binding var value: String
     /// Validate code while typing
     var onChange: (String) async -> TypingState
@@ -68,7 +77,7 @@ struct VerificationTextField: View {
     var body: some View {
         HStack(spacing: style == .roundedBorder ? 6 : 10) {
             ForEach(0 ..< type.rawValue, id: \.self) { index in
-                CharacterView(index)
+                characterView(index)
             }
         }
         .animation(.easeInOut(duration: 0.2), value: value)
@@ -109,23 +118,34 @@ struct VerificationTextField: View {
                 }
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .keyboard) {
-                Button("Done") {
-                    isActive = false
+        .modifier(OptionalToolbarModifier(isActive: $isActive, enabled: showsToolbar))
+    }
+
+    private struct OptionalToolbarModifier: ViewModifier {
+        var isActive: FocusState<Bool>.Binding
+        var enabled: Bool
+
+        func body(content: Content) -> some View {
+            if enabled {
+                content.toolbar {
+                    ToolbarItem(placement: .keyboard) {
+                        Button("Done") { isActive.wrappedValue = false }
+                            .tint(Color.primary)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
                 }
-                .tint(Color.primary)
-                .frame(maxWidth: .infinity, alignment: .trailing)
+            } else {
+                content
             }
         }
     }
 
     @ViewBuilder
-    func CharacterView(_ index: Int) -> some View {
+    func characterView(_ index: Int) -> some View {
         Group {
             if style == .roundedBorder {
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(borderColor(index), lineWidth: 1.2)
+                    .stroke(borderColor(index), lineWidth: 2)
             } else {
                 Rectangle()
                     .fill(borderColor(index))
@@ -145,6 +165,7 @@ struct VerificationTextField: View {
                     .transition(.blurReplace)
             }
         }
+        .frame(maxWidth: .infinity)
     }
 
     func string(_ index: Int) -> String {

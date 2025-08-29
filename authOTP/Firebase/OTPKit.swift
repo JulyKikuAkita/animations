@@ -3,7 +3,6 @@
 //  animation
 //
 
-import FirebaseAuth
 import SwiftUI
 
 struct OTPKit<Content: View>: View {
@@ -16,6 +15,12 @@ struct OTPKit<Content: View>: View {
     private var content: Content
     @AppStorage private var isLoggedIn: Bool
     var body: some View {
-        ZStack {}
+        ZStack {
+            if isLoggedIn {
+                content
+            } else {
+                OTPLoginView(onComplete: { isLoggedIn = true })
+            }
+        }
     }
 }

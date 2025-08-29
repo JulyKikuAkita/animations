@@ -12,6 +12,7 @@ struct OTPLoginView: View {
     @State private var mobileNumber: String = ""
     @State private var countryCode: Country?
     @State private var showVerificationView: Bool = false
+    @FocusState private var isFocused: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 8) {
@@ -76,8 +77,16 @@ struct OTPLoginView: View {
         .padding([.horizontal, .top], 20)
         .padding(.bottom, 10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background {
+            Color.clear
+                .contentShape(.rect)
+                .onTapGesture {
+                    isFocused = false
+                }
+        }
+        .focused($isFocused)
         .sheet(isPresented: $showVerificationView) {
-            OTPVerificationView(fullNumber: fullMobileNumber)
+            OTPVerificationView(fullNumber: fullMobileNumber, onComplete: onComplete)
         }
     }
 
