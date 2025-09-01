@@ -44,6 +44,15 @@ private struct RemoveSheetShadow: UIViewRepresentable {
         view.backgroundColor = .clear
 
         DispatchQueue.main.async {
+            /// Removes Sheet Background for iOS 26+ devices
+            if #available(iOS 26, *),
+               let superView = view.parentViewController?.sheetPresentationController
+            {
+                for view in superView.containerView?.subviews ?? [] {
+                    view.backgroundColor = .clear
+                }
+            }
+
             if let uiSheetView = view.dropShadowView {
                 uiSheetView.layer.shadowColor = UIColor.clear.cgColor
             }
@@ -58,5 +67,12 @@ extension UIView {
             return superview
         }
         return superview?.dropShadowView
+    }
+
+    /// Extracts Parent UIViewController from the given UIView
+    var parentViewController: UIViewController? {
+        sequence(first: self) { $0.next }
+            .compactMap { $0 as? UIViewController }
+            .first
     }
 }
