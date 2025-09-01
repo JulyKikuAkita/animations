@@ -411,6 +411,7 @@
 		AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */; };
 		AB8C5A942E134DB70003926E /* iOS26SegmentedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
+		ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */; };
 		ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */; };
 		ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
 		ABE1AE742E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
@@ -799,6 +800,7 @@
 		AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphActionButtoniOS26.swift; sourceTree = "<group>"; };
 		AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26SegmentedTabBar.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
+		ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightSheetViewiOS26.swift; sourceTree = "<group>"; };
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
 		ABE1AE722E34AE660090A2F0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheetDemo.swift; sourceTree = "<group>"; };
@@ -1799,6 +1801,7 @@
 			isa = PBXGroup;
 			children = (
 				96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */,
+				ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */,
 				969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */,
 				968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */,
 				96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */,
@@ -2827,6 +2830,7 @@
 				9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
 				AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */,
+				ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
 				96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */,
 				96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */,

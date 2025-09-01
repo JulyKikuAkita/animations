@@ -11,53 +11,60 @@ enum CurrentView {
 }
 
 struct DynamicFloatingSheetsiOS18ViewDemo: View {
-    /// View Properties
     @State private var show: Bool = false
-    @State private var currentView: CurrentView = .actions
-    @State private var selectedPeriod: Period?
-    @State private var selectedKeypadAction: KeyPadAction?
-    @State private var duration: String = ""
-
     var body: some View {
         Button("Show Style1") {
             show.toggle()
         }
         .systemTrayView($show) {
-            VStack(spacing: 20) {
-                ZStack {
-                    switch currentView {
-                    case .actions: View1()
-                        .transition(.blurReplace)
-
-                    case .period: View2()
-                        .transition(.blurReplace)
-
-                    case .keypad: View3()
-                        .transition(.blurReplace)
-                    }
-                }
-                .compositingGroup()
-
-                Button {
-                    withAnimation(.bouncy) {
-                        currentView = .period
-                    }
-                } label: {
-                    Text("Continue")
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .foregroundStyle(.white)
-                        .background(Color.blue, in: .capsule)
-                }
-                .padding(.top, 15)
-            }
-            .padding(20)
+            DynamicFloatingSheetsiOS18View()
         }
+    }
+}
+
+struct DynamicFloatingSheetsiOS18View: View {
+    /// View Properties
+    @State private var currentView: CurrentView = .actions
+    @State private var selectedPeriod: Period?
+    @State private var selectedKeypadAction: KeyPadAction?
+    @State private var duration: String = ""
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        VStack(spacing: 20) {
+            ZStack {
+                switch currentView {
+                case .actions: view1()
+                    .transition(.blurReplace)
+
+                case .period: view2()
+                    .transition(.blurReplace)
+
+                case .keypad: view3()
+                    .transition(.blurReplace)
+                }
+            }
+            .compositingGroup()
+
+            Button {
+                withAnimation(.bouncy) {
+                    currentView = .period
+                }
+            } label: {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .foregroundStyle(.white)
+                    .background(Color.blue, in: .capsule)
+            }
+            .padding(.top, 15)
+        }
+        .padding(20)
     }
 
     @ViewBuilder
-    func View1() -> some View {
+    func view1() -> some View {
         VStack(spacing: 12) {
             HStack {
                 Text("Choose Subscription")
@@ -68,7 +75,7 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
 
                 Button {
                     /// dismiss sheet
-                    show = false
+                    dismiss()
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .font(.title)
@@ -108,7 +115,7 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
 
     /// Grid Box view
     @ViewBuilder
-    func View2() -> some View {
+    func view2() -> some View {
         VStack(spacing: 12) {
             HStack {
                 Text("Choose Period")
@@ -174,7 +181,7 @@ struct DynamicFloatingSheetsiOS18ViewDemo: View {
 
     /// Custom Keypad value view
     @ViewBuilder
-    func View3() -> some View {
+    func view3() -> some View {
         VStack(spacing: 12) {
             HStack {
                 Text("Choose Duration")
