@@ -73,7 +73,7 @@ struct InteractiveNavigationGestureDemoView: View {
                     .toolbarVisibility(.hidden, for: .navigationBar)
                 }
             }
-            .ViewExtractor {
+            .viewExtractor {
                 if let navController = $0.next as? UINavigationController {
                     navigationHelper.addPopGestureListener(navController)
                 }

@@ -10,7 +10,9 @@ struct TabStateScrollView<Content: View>: View {
     var showsIndicator: Bool
     @Binding var tabState: Visibility
     var content: Content
-    init(axis: Axis.Set, showsIndicator: Bool, tabState: Binding<Visibility>, @ViewBuilder content: @escaping () -> Content) {
+    init(axis: Axis.Set, showsIndicator: Bool, tabState: Binding<Visibility>,
+         @ViewBuilder content: @escaping () -> Content)
+    {
         self.axis = axis
         self.showsIndicator = showsIndicator
         _tabState = tabState
@@ -78,9 +80,14 @@ private struct CustomGesture: UIViewRepresentable {
         DispatchQueue.main.async {
             // uiview.(background{}).sourceView
             if let superView = uiView.superview?.superview,
-               !(superView.gestureRecognizers?.contains(where: { $0.name == gestureID }) ?? false)
+               !(superView.gestureRecognizers?.contains(where: {
+                   $0.name == gestureID
+               }) ?? false)
             {
-                let gesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.gestureChange(gesture:)))
+                let gesture = UIPanGestureRecognizer(
+                    target: context.coordinator,
+                    action: #selector(context.coordinator.gestureChange(gesture:))
+                )
                 gesture.name = gestureID // otherwise mutiple gestures will be added
                 gesture.delegate = context.coordinator // otherwise gesture won't work
                 /// Adding gesture to the super view
@@ -103,7 +110,9 @@ private struct CustomGesture: UIViewRepresentable {
         }
 
         /// enable this for gesture to work simultaneously with other gestures (such as scrollview)
-        func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
+        func gestureRecognizer(_: UIGestureRecognizer,
+                               shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool
+        {
             true
         }
     }

@@ -4,8 +4,7 @@
 //
 import SwiftUI
 
-/// Swipe Action Builder
-/// Accepts a set of SwipeActionModel without any return or commas and returns it in an array format
+/// Swipe Action Builder Accepts a set of SwipeActionModel without any return or commas and returns it in an array format
 @resultBuilder
 struct SwipeActionBuilder {
     static func buildBlock(_ components: SwipeActionModel...) -> [SwipeActionModel] {
@@ -30,7 +29,9 @@ final class SwipeActionSharedData {
 
 extension View {
     @ViewBuilder
-    func swipeActions(config: SwipeActionConfig = .init(), @SwipeActionBuilder actions: () -> [SwipeActionModel]) -> some View {
+    func swipeActions(config: SwipeActionConfig = .init(),
+                      @SwipeActionBuilder actions: () -> [SwipeActionModel]) -> some View
+    {
         modifier(CustomSwipeActionModifier(config: config, actions: actions()))
     }
 }
@@ -57,7 +58,7 @@ private struct CustomSwipeActionModifier: ViewModifier {
                     .foregroundStyle(.clear)
                     .containerRelativeFrame(config.occupiesFullWidth ? .horizontal : .init())
                     .overlay(alignment: .trailing) {
-                        ActionsView()
+                        actionsView()
                     }
             }
             .compositingGroup()
@@ -94,7 +95,7 @@ private struct CustomSwipeActionModifier: ViewModifier {
     }
 
     @ViewBuilder
-    func ActionsView() -> some View {
+    func actionsView() -> some View {
         ZStack {
             ForEach(actions.indices, id: \.self) { index in
                 let action = actions[index]

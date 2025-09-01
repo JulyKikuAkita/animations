@@ -1,11 +1,11 @@
 //
-//  LoginKit.swift
+//  OTPKit.swift
 //  animation
 //
 
 import SwiftUI
 
-struct LoginKit<Content: View>: View {
+struct OTPKit<Content: View>: View {
     init(_ appStorageID: String, @ViewBuilder content: @escaping () -> Content) {
         _isLoggedIn = .init(wrappedValue: false, appStorageID)
         /// content after login
@@ -16,11 +16,10 @@ struct LoginKit<Content: View>: View {
     @AppStorage private var isLoggedIn: Bool
     var body: some View {
         ZStack {
-            if !isLoggedIn {
-                /// Login view
+            if isLoggedIn {
                 content
             } else {
-                /// Register view
+                OTPLoginView(onComplete: { isLoggedIn = true })
             }
         }
     }

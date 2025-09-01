@@ -4,7 +4,7 @@
 //
 import SwiftUI
 
-struct demoView: View {
+struct DemoView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -24,7 +24,7 @@ struct demoView: View {
 }
 
 #Preview {
-    demoView()
+    DemoView()
 }
 
 enum PlatformType {
