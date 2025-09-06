@@ -8,6 +8,7 @@ import SwiftUI
 
 struct DummyViews: View {
     var body: some View {
+        DummyStatusBar()
         List {
             DummySection(title: "Dymmy Section")
 
@@ -28,6 +29,7 @@ struct DummyViews: View {
             }
             Section {
                 DummyGridView(rowCount: 2, gridCount: 8, tint: .orange)
+                DummyWidgetGridView()
             }
         }
     }
@@ -243,6 +245,63 @@ struct DummyGridView: View {
             }
         }
         .padding(15)
+    }
+}
+
+// Mock widget grids
+struct DummyWidgetGridView: View {
+    var totalItems: Int = 12
+    var backgroundColor: Color = .black
+    var showFrame: Bool = true
+    var body: some View {
+        VStack(spacing: 15) {
+            HStack(spacing: 15) {
+                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 20)
+            }
+            .frame(height: 130)
+
+            LazyVGrid(columns: Array(repeating: GridItem(spacing: 15), count: 4),
+                      spacing: 15)
+            {
+                ForEach(1 ... totalItems, id: \.self) { _ in
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(height: 55)
+                }
+            }
+        }
+        .padding(20)
+        .padding(.top, 20)
+        .foregroundStyle(backgroundColor.opacity(0.1))
+        .overlay {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(backgroundColor.opacity(0.06))
+
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.gray.opacity(0.5), lineWidth: 1.5)
+            }
+            .opacity(showFrame ? 1 : 0)
+        }
+    }
+}
+
+/// Mock status bar
+struct DummyStatusBar: View {
+    var body: some View {
+        var time = "7:22"
+        HStack(spacing: 4) {
+            Text(time)
+                .fontWeight(.bold)
+            Spacer()
+
+            Image(systemName: "cellularbars")
+            Image(systemName: "wifi")
+            Image(systemName: "battery.50percent")
+        }
+        .font(.caption2)
+        .padding(.horizontal, 20)
+        .padding(.top, 15)
     }
 }
 

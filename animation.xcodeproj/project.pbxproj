@@ -420,6 +420,7 @@
 		ABA102242E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
 		ABA102252E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
 		ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */; };
+		ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */; };
 		ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */; };
 		ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
 		ABE1AE742E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
@@ -812,6 +813,7 @@
 		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
 		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
 		ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightSheetViewiOS26.swift; sourceTree = "<group>"; };
+		ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNotificationsView.swift; sourceTree = "<group>"; };
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
 		ABE1AE722E34AE660090A2F0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheetDemo.swift; sourceTree = "<group>"; };
@@ -1317,6 +1319,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ABB222982E6CDE66008CFE21 /* Notofications */,
 				96F9A6EB2B9FACC900FD6900 /* Button */,
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
 				965E573A2BC5086000E172B3 /* Carousel */,
@@ -1327,7 +1330,7 @@
 				960663232DD930B50084B468 /* LandingPages */,
 				960663242DD931430084B468 /* ListRowsInteraction */,
 				9609D93C2DB591DB00A76F95 /* Map */,
-				963B846F2CCC4F2700C3FB0D /* miniPlayerView */,
+				963B846F2CCC4F2700C3FB0D /* MiniPlayerView */,
 				960663262DD934AD0084B468 /* OverlayView */,
 				9636EE9B2DC1785A00A0E5A0 /* PhaseAnimationAPI */,
 				960663222DD9306E0084B468 /* PhotosView */,
@@ -1543,13 +1546,13 @@
 			path = PhaseAnimationAPI;
 			sourceTree = "<group>";
 		};
-		963B846F2CCC4F2700C3FB0D /* miniPlayerView */ = {
+		963B846F2CCC4F2700C3FB0D /* MiniPlayerView */ = {
 			isa = PBXGroup;
 			children = (
 				963B84702CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift */,
 				96FF509E2B944E7300B36142 /* MiniPlayerView.swift */,
 			);
-			path = miniPlayerView;
+			path = MiniPlayerView;
 			sourceTree = "<group>";
 		};
 		963B85B22CD4369F00C3FB0D /* Snapshot */ = {
@@ -2056,6 +2059,14 @@
 				AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */,
 			);
 			path = Scrubber;
+			sourceTree = "<group>";
+		};
+		ABB222982E6CDE66008CFE21 /* Notofications */ = {
+			isa = PBXGroup;
+			children = (
+				ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */,
+			);
+			path = Notofications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2902,6 +2913,7 @@
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
 				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
 				96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */,
+				ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
 				9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
