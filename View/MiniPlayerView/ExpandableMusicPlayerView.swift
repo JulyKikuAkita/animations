@@ -40,10 +40,10 @@ struct ExpandableMusicPlayerView: View {
                 .shadow(color: .primary.opacity(0.06), radius: 5, x: 5, y: 5)
                 .shadow(color: .primary.opacity(0.05), radius: 5, x: -5, y: -5)
 
-                MiniPlayer()
+                miniPlayer()
                     .opacity(expandPlayer ? 0 : 1)
 
-                ExpandedPlayer(size, safeArea)
+                expandedPlayer(size, safeArea)
                     .opacity(expandPlayer ? 1 : 0)
             }
             .frame(height: expandPlayer ? nil : 55, alignment: .top)
@@ -91,7 +91,7 @@ struct ExpandableMusicPlayerView: View {
     }
 
     @ViewBuilder
-    func MiniPlayer() -> some View {
+    func miniPlayer() -> some View {
         HStack(spacing: 12) {
             ZStack {
                 if !expandPlayer {
@@ -132,7 +132,7 @@ struct ExpandableMusicPlayerView: View {
     }
 
     @ViewBuilder
-    func ExpandedPlayer(_: CGSize, _ safeArea: EdgeInsets) -> some View {
+    func expandedPlayer(_: CGSize, _ safeArea: EdgeInsets) -> some View {
         VStack(spacing: 12) {
             Capsule()
                 .fill(.white.secondary)
