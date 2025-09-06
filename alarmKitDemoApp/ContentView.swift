@@ -21,7 +21,7 @@ struct ContentView: View {
                     Text("Allow alrams in Settings to proceed")
                         .multilineTextAlignment(.center)
                         .padding(10)
-                        .glassEffect()
+                        .tryGlassEffect()
                 }
             }
             .navigationTitle("AlarmKit Demo")
@@ -214,5 +214,12 @@ struct OpenAppIntent: LiveActivityIntent {
             print(alarmID)
         }
         return .result()
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func tryGlassEffect() -> some View {
+        if #available(iOS 26.0, tvOS 26.0, *) { self.glassEffect() } else { self }
     }
 }

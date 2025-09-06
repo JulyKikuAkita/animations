@@ -147,7 +147,7 @@ import SwiftUI
                 .disableWithOpacity(userPrompt.isEmpty)
             }
             .safeAreaPadding(15)
-            /// optinoal glass background
+            /// optional glass background
             .glassEffect(.regular, in: .rect(cornerRadius: 20, style: .continuous))
         }
 
@@ -156,7 +156,7 @@ import SwiftUI
                 do {
                     isGenerating = true
 
-                    /// instructions is higest priority as primary directive > user prompt
+                    /// instructions is highest priority as primary directive > user prompt
                     let instructions = """
                     Generate a smooth gradient color palette based on the user's prompt. The
                     gradient should transition between two or more colors relevant to
