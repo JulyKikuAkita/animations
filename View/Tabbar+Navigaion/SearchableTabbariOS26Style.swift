@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-@main
+// @main
 struct SearchableTabbariOS26StyleDemo: App {
     var body: some Scene {
         WindowGroup {
