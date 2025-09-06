@@ -391,8 +391,6 @@
 		AB17E55B2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E55A2E611A3500C50B18 /* CountryCodePickerView.swift */; };
 		AB17E55C2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E55A2E611A3500C50B18 /* CountryCodePickerView.swift */; };
 		AB17E55D2E611E4500C50B18 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E5552E61183500C50B18 /* Country.swift */; };
-		AB17E55F2E61214300C50B18 /* View+Versions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E55E2E61213D00C50B18 /* View+Versions.swift */; };
-		AB17E5602E61215700C50B18 /* View+Versions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E55E2E61213D00C50B18 /* View+Versions.swift */; };
 		AB17E6672E61655F00C50B18 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -417,6 +415,10 @@
 		AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */; };
 		AB8C5A942E134DB70003926E /* iOS26SegmentedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
+		ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */; };
+		ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
+		ABA102242E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
+		ABA102252E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
 		ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */; };
 		ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */; };
 		ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
@@ -785,7 +787,6 @@
 		AB17E5522E61180C00C50B18 /* CountryCodes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CountryCodes.json; sourceTree = "<group>"; };
 		AB17E5552E61183500C50B18 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		AB17E55A2E611A3500C50B18 /* CountryCodePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerView.swift; sourceTree = "<group>"; };
-		AB17E55E2E61213D00C50B18 /* View+Versions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Versions.swift"; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
 		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
@@ -807,6 +808,8 @@
 		AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphActionButtoniOS26.swift; sourceTree = "<group>"; };
 		AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26SegmentedTabBar.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
+		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
+		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
 		ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightSheetViewiOS26.swift; sourceTree = "<group>"; };
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
 		ABE1AE722E34AE660090A2F0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
@@ -1262,39 +1265,40 @@
 			isa = PBXGroup;
 			children = (
 				9621DC902BF1EDB100183CB7 /* ActionModel.swift */,
-				96921AE92D6EE40C00326523 /* Book.swift */,
 				96C0C2D62B905DDE00F56FF5 /* Card.swift */,
 				AB17E5552E61183500C50B18 /* Country.swift */,
-				9682B6CF2CB1D355003D917F /* ColorItem.swift */,
 				969219DB2D6D9EE300326523 /* Contact.swift */,
-				96AC80FE2C84FFF900ABBE78 /* Control.swift */,
 				96352D4E2C0ED814001AD2FD /* CreditCard.swift */,
-				9662F0302C58BCCF00508B80 /* CustomShape.swift */,
 				AB0EA1752DEBBAB000C62391 /* Dummies.swift */,
 				96ACBEF22C33B79E004F3070 /* Expense.swift */,
 				96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */,
-				96E4E5F82D175FAB0020261F /* ImageLinkModel.swift */,
-				963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */,
 				96B884E92BDD82B000196125 /* Interpolation.swift */,
-				9692220B2D7ACF5800326523 /* KeyPadModel.swift */,
-				9662EFDA2C47A8AE00508B80 /* Message.swift */,
-				AB40B8462C9F5F9A00BC7747 /* Note.swift */,
-				9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */,
-				9662F01E2C58348100508B80 /* Page.swift */,
 				9684833C2BCF62C50023FE2B /* Particle.swift */,
 				9621DC7F2BEF461000183CB7 /* PhotoItem.swift */,
 				96FF509C2B944D1B00B36142 /* PlayerConfig.swift */,
 				ABE1AE722E34AE660090A2F0 /* Permission.swift */,
 				96FF509A2B94465700B36142 /* PlayerItem.swift */,
 				961F3BBE2B897A310055D79B /* Profile.swift */,
-				963DB14A2BBBD21400AAF347 /* Reel.swift */,
-				96E4DD112CFFDE1F0020261F /* SportItem.swift */,
-				963B9CF82D5492B200453320 /* SwipeActionModel.swift */,
 				968D2E9D2B8EB56500007734 /* TabiOS17.swift */,
 				9621D9622BE5F7D100183CB7 /* Tag.swift */,
 				9662EF282C3E012800508B80 /* Video.swift */,
 				9662EF322C3E067100508B80 /* VideoSharedModel.swift */,
 				968D2D782B8C34CB00007734 /* WindowSharedModel.swift */,
+				9662EFDA2C47A8AE00508B80 /* Message.swift */,
+				963DB14A2BBBD21400AAF347 /* Reel.swift */,
+				9662F01E2C58348100508B80 /* Page.swift */,
+				9692220B2D7ACF5800326523 /* KeyPadModel.swift */,
+				9662F0302C58BCCF00508B80 /* CustomShape.swift */,
+				96AC80FE2C84FFF900ABBE78 /* Control.swift */,
+				AB40B8462C9F5F9A00BC7747 /* Note.swift */,
+				9682B6CF2CB1D355003D917F /* ColorItem.swift */,
+				963B87D92CEC0F3B00C3FB0D /* InboxTabModel.swift */,
+				96E4DD112CFFDE1F0020261F /* SportItem.swift */,
+				96E4E5F82D175FAB0020261F /* ImageLinkModel.swift */,
+				963B9CF82D5492B200453320 /* SwipeActionModel.swift */,
+				9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */,
+				96921AE92D6EE40C00326523 /* Book.swift */,
+				ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1824,6 +1828,7 @@
 				968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */,
 				96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */,
 				ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */,
+				ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -1952,7 +1957,6 @@
 		AB17E5612E61216D00C50B18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AB17E55E2E61213D00C50B18 /* View+Versions.swift */,
 				9663BB532DDE992200037CF1 /* Date+Extensions.swift */,
 				965999192BE0BCD6000133FA /* View+Extension.swift */,
 				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
@@ -2728,6 +2732,7 @@
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
+				ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				96921B8B2D6FC19000326523 /* BookCardView.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
@@ -2841,9 +2846,9 @@
 				963B846E2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlaer.swift in Sources */,
 				AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */,
 				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
-				AB17E55F2E61214300C50B18 /* View+Versions.swift in Sources */,
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
+				ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
 				963B85772CD35BBA00C3FB0D /* Snapshot.swift in Sources */,
@@ -2992,6 +2997,7 @@
 				9621DC8D2BF0121E00183CB7 /* HeroLayer.swift in Sources */,
 				96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				9621DC372BEF3D6D00183CB7 /* Profile.swift in Sources */,
+				ABA102242E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */,
 				9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */,
 				96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */,
@@ -3075,6 +3081,7 @@
 				9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */,
 				9621DDAD2BF486C800183CB7 /* MintCategory.swift in Sources */,
 				9621DDAB2BF4849F00183CB7 /* MintTabs.swift in Sources */,
+				ABA102252E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				9621DDBC2BF48B3000183CB7 /* View+Extension.swift in Sources */,
 				9682B6D02CB1D355003D917F /* ColorItem.swift in Sources */,
 				96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */,
@@ -3168,7 +3175,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB17E5602E61215700C50B18 /* View+Versions.swift in Sources */,
 				AB17E55C2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */,
 				AB17E55D2E611E4500C50B18 /* Country.swift in Sources */,
 				AB17E6672E61655F00C50B18 /* OTPVerificationTextFieldView.swift in Sources */,
