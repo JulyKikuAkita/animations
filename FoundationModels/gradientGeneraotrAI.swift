@@ -175,7 +175,7 @@ import SwiftUI
 
                     for try await partialResult in response {
                         /// Extracting palettes Info
-                        let palettes = partialResult.content.compactMap {
+                        let palettes = partialResult.compactMap {
                             if let id = $0.id,
                                let name = $0.name,
                                let colors = $0.colors?.compactMap(\.self),
