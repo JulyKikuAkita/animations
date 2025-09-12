@@ -420,6 +420,7 @@
 		ABA102242E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
 		ABA102252E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
 		ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */; };
+		ABAA1BA22E73BCD4003535CF /* CustomList+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAA1BA12E73BCD4003535CF /* CustomList+iOS26.swift */; };
 		ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */; };
 		ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */; };
 		ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
@@ -813,6 +814,7 @@
 		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
 		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
 		ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightSheetViewiOS26.swift; sourceTree = "<group>"; };
+		ABAA1BA12E73BCD4003535CF /* CustomList+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomList+iOS26.swift"; sourceTree = "<group>"; };
 		ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNotificationsView.swift; sourceTree = "<group>"; };
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
 		ABE1AE722E34AE660090A2F0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
@@ -1328,7 +1330,6 @@
 				AB40B84A2C9F607800BC7747 /* Grid */,
 				9662EFC92C460E8600508B80 /* HelpView */,
 				960663232DD930B50084B468 /* LandingPages */,
-				960663242DD931430084B468 /* ListRowsInteraction */,
 				9609D93C2DB591DB00A76F95 /* Map */,
 				963B846F2CCC4F2700C3FB0D /* MiniPlayerView */,
 				960663262DD934AD0084B468 /* OverlayView */,
@@ -1806,6 +1807,8 @@
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				ABAA1BA02E73BC7F003535CF /* CustomListView */,
+				960663242DD931430084B468 /* ListRowsInteraction */,
 				9663BB552DDE9AD100037CF1 /* Calendar */,
 				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
 				96D04B302C09A1960062520D /* StackedScrollView.swift */,
@@ -2059,6 +2062,14 @@
 				AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */,
 			);
 			path = Scrubber;
+			sourceTree = "<group>";
+		};
+		ABAA1BA02E73BC7F003535CF /* CustomListView */ = {
+			isa = PBXGroup;
+			children = (
+				ABAA1BA12E73BCD4003535CF /* CustomList+iOS26.swift */,
+			);
+			path = CustomListView;
 			sourceTree = "<group>";
 		};
 		ABB222982E6CDE66008CFE21 /* Notofications */ = {
@@ -2790,6 +2801,7 @@
 				ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				96921B8B2D6FC19000326523 /* BookCardView.swift in Sources */,
+				ABAA1BA22E73BCD4003535CF /* CustomList+iOS26.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
 				9609DB192DBB2D1400A76F95 /* InlineToastView.swift in Sources */,
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
