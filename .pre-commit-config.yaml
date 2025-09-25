@@ -49,7 +49,7 @@ repos:
       - id: rubocop
         name: rubocop
         description: Enforce the community Ruby Style Guide with RuboCop
-        entry: rubocop
+        entry: bundle exec rubocop
         language: ruby
         types: ["ruby"]
         args: ["--autocorrect", "--force-exclusion"]
