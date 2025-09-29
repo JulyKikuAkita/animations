@@ -793,6 +793,7 @@
 		AB17E5552E61183500C50B18 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		AB17E55A2E611A3500C50B18 /* CountryCodePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerView.swift; sourceTree = "<group>"; };
 		AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbariOS26.swift; sourceTree = "<group>"; };
+		AB333A4F2E85E6A200368EB8 /* PDFMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
@@ -930,6 +931,7 @@
 		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		96E36A452DB217F900A8EFBA /* Monitor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Monitor; sourceTree = "<group>"; };
 		AB17E52F2E60FAA700C50B18 /* authOTP */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB17E6692E61759500C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = authOTP; sourceTree = "<group>"; };
+		AB333A502E85E6A200368EB8 /* PDFMaker */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PDFMaker; sourceTree = "<group>"; };
 		AB35A6D72E4DB3DE00573A3D /* onBoarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = onBoarding; sourceTree = "<group>"; };
 		AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93252E03D5A0009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AB5C93462E03E447009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitDemoApp; sourceTree = "<group>"; };
 		AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93432E03E291009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitCountdownDemo; sourceTree = "<group>"; };
@@ -1040,6 +1042,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB17E53B2E60FC9600C50B18 /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB333A4C2E85E6A200368EB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1229,6 +1238,7 @@
 				AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */,
 				AB17E52F2E60FAA700C50B18 /* authOTP */,
 				AB35A6D72E4DB3DE00573A3D /* onBoarding */,
+				AB333A502E85E6A200368EB8 /* PDFMaker */,
 				AB5C932E2E03E28F009CF684 /* Frameworks */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
@@ -1255,6 +1265,7 @@
 				AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */,
 				AB17E52E2E60FAA700C50B18 /* authOTP.app */,
 				AB35A6D62E4DB3DE00573A3D /* onBoarding.app */,
+				AB333A4F2E85E6A200368EB8 /* PDFMaker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2402,6 +2413,28 @@
 			productReference = AB17E52E2E60FAA700C50B18 /* authOTP.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AB333A4E2E85E6A200368EB8 /* PDFMaker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB333A592E85E6A300368EB8 /* Build configuration list for PBXNativeTarget "PDFMaker" */;
+			buildPhases = (
+				AB333A4B2E85E6A200368EB8 /* Sources */,
+				AB333A4C2E85E6A200368EB8 /* Frameworks */,
+				AB333A4D2E85E6A200368EB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AB333A502E85E6A200368EB8 /* PDFMaker */,
+			);
+			name = PDFMaker;
+			packageProductDependencies = (
+			);
+			productName = PDFMaker;
+			productReference = AB333A4F2E85E6A200368EB8 /* PDFMaker.app */;
+			productType = "com.apple.product-type.application";
+		};
 		AB35A6D52E4DB3DE00573A3D /* onBoarding */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB35A6E02E4DB3DF00573A3D /* Build configuration list for PBXNativeTarget "onBoarding" */;
@@ -2527,6 +2560,9 @@
 					AB17E52D2E60FAA700C50B18 = {
 						CreatedOnToolsVersion = 26.0;
 					};
+					AB333A4E2E85E6A200368EB8 = {
+						CreatedOnToolsVersion = 26.0;
+					};
 					AB35A6D52E4DB3DE00573A3D = {
 						CreatedOnToolsVersion = 26.0;
 					};
@@ -2574,6 +2610,7 @@
 				AB5C932C2E03E28F009CF684 /* alarmKitCountdownDemoExtension */,
 				AB17E52D2E60FAA700C50B18 /* authOTP */,
 				AB35A6D52E4DB3DE00573A3D /* onBoarding */,
+				AB333A4E2E85E6A200368EB8 /* PDFMaker */,
 			);
 		};
 /* End PBXProject section */
@@ -2721,6 +2758,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB17E5542E61182800C50B18 /* CountryCodes.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB333A4D2E85E6A200368EB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3254,6 +3298,13 @@
 				AB17E55C2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */,
 				AB17E55D2E611E4500C50B18 /* Country.swift in Sources */,
 				AB17E6672E61655F00C50B18 /* OTPVerificationTextFieldView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB333A4B2E85E6A200368EB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4280,6 +4331,70 @@
 			};
 			name = Release;
 		};
+		AB333A572E85E6A300368EB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = julykikuakita.PDFMaker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB333A582E85E6A300368EB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = julykikuakita.PDFMaker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		AB35A6DE2E4DB3DF00573A3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4609,6 +4724,15 @@
 			buildConfigurations = (
 				AB17E5372E60FAA800C50B18 /* Debug */,
 				AB17E5382E60FAA800C50B18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB333A592E85E6A300368EB8 /* Build configuration list for PBXNativeTarget "PDFMaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB333A572E85E6A300368EB8 /* Debug */,
+				AB333A582E85E6A300368EB8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
