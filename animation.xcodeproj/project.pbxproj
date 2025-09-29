@@ -394,6 +394,11 @@
 		AB17E55D2E611E4500C50B18 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E5552E61183500C50B18 /* Country.swift */; };
 		AB17E6672E61655F00C50B18 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		AB22B73A2E7A88B900F2DDDE /* CustomTabbariOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */; };
+		AB333B812E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
+		AB333B822E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
+		AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
+		AB333B862E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */; };
+		AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -794,6 +799,9 @@
 		AB17E55A2E611A3500C50B18 /* CountryCodePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerView.swift; sourceTree = "<group>"; };
 		AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbariOS26.swift; sourceTree = "<group>"; };
 		AB333A4F2E85E6A200368EB8 /* PDFMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabiOS26.swift; sourceTree = "<group>"; };
+		AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarUIToolKitiOS26.swift; sourceTree = "<group>"; };
+		AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26View+Extension.swift"; sourceTree = "<group>"; };
 		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
@@ -1329,6 +1337,7 @@
 				9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */,
 				96921AE92D6EE40C00326523 /* Book.swift */,
 				ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */,
+				AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1905,11 +1914,10 @@
 		96E70B0D2B8EBF0000F23A51 /* Tabbar+Navigaion */ = {
 			isa = PBXGroup;
 			children = (
+				AB333B842E8B0EDD00368EB8 /* iOS26 */,
 				96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */,
 				96AC82F12C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift */,
 				9682B8A42CBDC00D003D917F /* AnimatedTabBariOS18.swift */,
-				96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */,
-				AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */,
 				968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */,
 				96B884CF2BDCE0DB00196125 /* HorizontalTabView.swift */,
 				96AE18FB2C045AE30015155A /* ScrollablePageTabsColorView.swift */,
@@ -1920,9 +1928,6 @@
 				96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */,
 				963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */,
 				9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */,
-				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
-				AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */,
-				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
 			);
 			path = "Tabbar+Navigaion";
 			sourceTree = "<group>";
@@ -1997,6 +2002,7 @@
 				9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */,
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
 				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
+				AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2007,6 +2013,19 @@
 				961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */,
 			);
 			path = UIKIT;
+			sourceTree = "<group>";
+		};
+		AB333B842E8B0EDD00368EB8 /* iOS26 */ = {
+			isa = PBXGroup;
+			children = (
+				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
+				AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */,
+				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
+				AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */,
+				96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */,
+				AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */,
+			);
+			path = iOS26;
 			sourceTree = "<group>";
 		};
 		AB40B84A2C9F607800BC7747 /* Grid */ = {
@@ -2901,6 +2920,7 @@
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				AB0B61712E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift in Sources */,
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
+				AB333B862E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift in Sources */,
 				963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */,
 				968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */,
 				9666E3D92DA4CD8000244184 /* MicroInteractionSlider.swift in Sources */,
@@ -2927,6 +2947,7 @@
 				96FCA7D42DAC641200774FB7 /* SkeletonViewModifier.swift in Sources */,
 				9609D93E2DB591F800A76F95 /* LocationPickerView.swift in Sources */,
 				96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */,
+				AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
@@ -3025,6 +3046,7 @@
 				965D1DD62C9D4E3A004161B1 /* DynamicTagWidthView.swift in Sources */,
 				9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
+				AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */,
 				AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */,
 				ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
@@ -3087,6 +3109,7 @@
 				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
 				96921AF42D6EF1E700326523 /* SearchView.swift in Sources */,
 				9621DC382BEF3D7100183CB7 /* WindowSharedModel.swift in Sources */,
+				AB333B812E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */,
 				9662EFEF2C4B4FA200508B80 /* PhotosScrollView.swift in Sources */,
 				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
 				AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */,
@@ -3207,6 +3230,7 @@
 				96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */,
 				965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */,
 				9662EF2B2C3E012800508B80 /* Video.swift in Sources */,
+				AB333B822E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */,
 				963B87DC2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				9621DD9D2BF47FDA00183CB7 /* Profile.swift in Sources */,
 				96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */,
