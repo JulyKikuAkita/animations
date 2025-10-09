@@ -188,13 +188,6 @@ private extension View {
     }
 }
 
-extension View {
-    func blurFade(_ status: Bool) -> some View {
-        blur(radius: status ? 0 : 5)
-            .opacity(status ? 1 : 0)
-    }
-}
-
 @available(iOS 26.0, *)
 struct ScaleModifier: ViewModifier, Animatable {
     var bounce: CGFloat
