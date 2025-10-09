@@ -27,12 +27,12 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 Group {
                     if smallerPhone {
-                        SubscriptionStoreView(productIDs: Self.productIDs, marketingContent: {
+                        SubscriptionStoreView(productIDs: PaywallModels.productIDs, marketingContent: {
                             marketingView()
                         })
                         .subscriptionStoreControlStyle(.compactPicker, placement: .bottomBar)
                     } else {
-                        SubscriptionStoreView(productIDs: Self.productIDs, marketingContent: {
+                        SubscriptionStoreView(productIDs: PaywallModels.productIDs, marketingContent: {
                             marketingView()
                         })
                         .subscriptionStoreControlStyle(.pagedProminentPicker, placement: .bottomBar)
@@ -89,22 +89,14 @@ struct ContentView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.35), value: isLoadingCompleted)
-            .storeProductsTask(for: Self.productIDs) { @MainActor collection in
-                if let products = collection.products, products.count == Self.productIDs.count {
+            .storeProductsTask(for: PaywallModels.productIDs) { @MainActor collection in
+                if let products = collection.products, products.count == PaywallModels.productIDs.count {
                     try? await Task.sleep(for: .seconds(0.1))
                     loadingStatus.0 = true
                 }
             }
             .environment(\.colorScheme, .light)
         }
-    }
-
-    static var productIDs: [String] {
-        [
-            "paywall_weekly",
-            "paywall_monthly",
-            "paywall_yearly",
-        ]
     }
 
     var isLoadingCompleted: Bool {
