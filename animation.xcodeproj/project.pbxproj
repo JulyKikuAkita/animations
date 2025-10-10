@@ -422,6 +422,9 @@
 		AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */; };
 		AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */; };
 		AB8C5A942E134DB70003926E /* iOS26SegmentedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */; };
+		AB8CBCB32E9884E000A288E4 /* FullScreenCoverDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBCB22E9884E000A288E4 /* FullScreenCoverDemoView.swift */; };
+		AB8CBCB62E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */; };
+		AB8CBCB72E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
 		ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */; };
 		ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
@@ -824,6 +827,8 @@
 		AB8747C42D8F63C200507C55 /* WaveFormRectangleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormRectangleShape.swift; sourceTree = "<group>"; };
 		AB8C58C32E0B94CA0003926E /* MorphActionButtoniOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphActionButtoniOS26.swift; sourceTree = "<group>"; };
 		AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26SegmentedTabBar.swift; sourceTree = "<group>"; };
+		AB8CBCB22E9884E000A288E4 /* FullScreenCoverDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCoverDemoView.swift; sourceTree = "<group>"; };
+		AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePanGesture.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
 		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
@@ -1419,6 +1424,7 @@
 				96ACBF022C350BFA004F3070 /* CustomGesture.swift */,
 				963B84722CCC5A1D00C3FB0D /* PanGesture.swift */,
 				963B9CFC2D549D3500453320 /* HorizontalPanGesture.swift */,
+				AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */,
 			);
 			path = Gesture;
 			sourceTree = "<group>";
@@ -1880,6 +1886,7 @@
 				96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */,
 				ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */,
 				ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */,
+				AB8CBCB22E9884E000A288E4 /* FullScreenCoverDemoView.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -2928,6 +2935,7 @@
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				AB0B61712E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift in Sources */,
+				AB8CBCB32E9884E000A288E4 /* FullScreenCoverDemoView.swift in Sources */,
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
 				AB333B862E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift in Sources */,
 				963B88312CED4BB500C3FB0D /* TextFieldActions.swift in Sources */,
@@ -3062,6 +3070,7 @@
 				96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */,
 				96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
+				AB8CBCB72E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */,
 				962B04762C215176008E1E5D /* Pixellate.metal in Sources */,
 				9609D93B2DB4B54900A76F95 /* LocationPickerManager.swift in Sources */,
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
@@ -3137,6 +3146,7 @@
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
 				96921D172D74423100326523 /* UIImage+Color.swift in Sources */,
 				9621DC3D2BEF3D7A00183CB7 /* Tag.swift in Sources */,
+				AB8CBCB62E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */,
 				9662EF2A2C3E012800508B80 /* Video.swift in Sources */,
 				969219DE2D6D9EEA00326523 /* Contact.swift in Sources */,
 				9621DC3E2BEF3D7A00183CB7 /* OffsetReader.swift in Sources */,

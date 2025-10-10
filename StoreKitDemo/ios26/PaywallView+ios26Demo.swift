@@ -221,5 +221,5 @@ private struct CustomSubscriptionStyle<Links: View>: SubscriptionStoreControlSty
 }
 
 #Preview {
-    PaywallView_ios26Demo()
+    PaywallViewiOS26Demo()
 }
