@@ -425,6 +425,8 @@
 		AB8CBCB32E9884E000A288E4 /* FullScreenCoverDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBCB22E9884E000A288E4 /* FullScreenCoverDemoView.swift */; };
 		AB8CBCB62E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */; };
 		AB8CBCB72E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */; };
+		AB8CBDDD2E9AFE0800A288E4 /* VersionCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBDDC2E9AFE0800A288E4 /* VersionCheckManager.swift */; };
+		AB8CBDE02E9B02BE00A288E4 /* AppUpdateDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
 		ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */; };
 		ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
@@ -829,6 +831,8 @@
 		AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26SegmentedTabBar.swift; sourceTree = "<group>"; };
 		AB8CBCB22E9884E000A288E4 /* FullScreenCoverDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCoverDemoView.swift; sourceTree = "<group>"; };
 		AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePanGesture.swift; sourceTree = "<group>"; };
+		AB8CBDDC2E9AFE0800A288E4 /* VersionCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckManager.swift; sourceTree = "<group>"; };
+		AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateDemoView.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
 		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
@@ -1211,6 +1215,7 @@
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				AB8CBDDB2E9AFDE900A288E4 /* Managers */,
 				AB17E5622E6121B700C50B18 /* UIKIT */,
 				AB17E5612E61216D00C50B18 /* Extensions */,
 				9609D9392DB4B53200A76F95 /* CoreLocation */,
@@ -1220,7 +1225,6 @@
 				9621D9682BE8409E00183CB7 /* Layout */,
 				96352CE02C09A416001AD2FD /* AnchorKey.swift */,
 				96EBF5E02BD793B400FDD20D /* ColorModel.swift */,
-				963DC1FC2D270D1E00C97334 /* CacheManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1359,6 +1363,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB8CBDDE2E9B028100A288E4 /* AppUpdateView */,
 				ABB222982E6CDE66008CFE21 /* Notofications */,
 				96F9A6EB2B9FACC900FD6900 /* Button */,
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
@@ -2114,6 +2119,23 @@
 				AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */,
 			);
 			path = Scrubber;
+			sourceTree = "<group>";
+		};
+		AB8CBDDB2E9AFDE900A288E4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				963DC1FC2D270D1E00C97334 /* CacheManager.swift */,
+				AB8CBDDC2E9AFE0800A288E4 /* VersionCheckManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		AB8CBDDE2E9B028100A288E4 /* AppUpdateView */ = {
+			isa = PBXGroup;
+			children = (
+				AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */,
+			);
+			path = AppUpdateView;
 			sourceTree = "<group>";
 		};
 		ABAA1BA02E73BC7F003535CF /* CustomListView */ = {
@@ -2968,6 +2990,7 @@
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
+				AB8CBDDD2E9AFE0800A288E4 /* VersionCheckManager.swift in Sources */,
 				9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */,
 				ABE1AE772E34B08B0090A2F0 /* PermissionSheetDemo.swift in Sources */,
 				965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */,
@@ -2990,6 +3013,7 @@
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */,
 				96E4E6092D178F510020261F /* AsyncImageViewerViewDemo.swift in Sources */,
+				AB8CBDE02E9B02BE00A288E4 /* AppUpdateDemoView.swift in Sources */,
 				9636EE9A2DC16E4F00A0E5A0 /* MarqueeTextView.swift in Sources */,
 				961F3B9D2B8818820055D79B /* HeroWrapperItem.swift in Sources */,
 				96FF50972B92FE1700B36142 /* GridView.swift in Sources */,
