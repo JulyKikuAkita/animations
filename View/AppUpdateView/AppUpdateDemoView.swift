@@ -8,17 +8,26 @@ import SwiftUI
 
 struct AppUpdateDemoView: View {
     @State private var updateAppInfo: VersionCheckManager.ReturnResult?
-    @State private var forcedAppUpdate: Bool = false
     var body: some View {
         NavigationStack {
             List {}
                 .navigationTitle("App Update")
         }
         .sheet(item: $updateAppInfo, content: { info in
+            let forcedAppUpdate: Bool = {
+                if let notes = info.releaseNotes, !notes.isEmpty {
+                    if notes.contains("critical fix") {
+                        return true
+                    }
+                }
+                return false
+            }()
             AppUpdateView(appInfo: info, forcedUpdate: forcedAppUpdate)
         })
         .task {
-            if let result = await VersionCheckManager.shared.checkIfAppUpdateAvailable() {
+            if let result = await VersionCheckManager.shared.mockcheckIfAppUpdateAvailable(
+                forceUpdate: false
+            ) {
                 updateAppInfo = result
             } else {
                 print("No Updates Available!")
@@ -38,6 +47,29 @@ struct AppUpdateView: View {
             Image(.appUpdate)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .overlay {
+                    GeometryReader {
+                        let size = $0.size
+                        let actualImageSize = CGSize(width: 399, height: 727)
+                        let ratio = min(
+                            size.width / actualImageSize.width,
+                            size.height / actualImageSize.height
+                        )
+                        let logoSize = CGSize(width: 100 * ratio, height: 100 * ratio)
+                        let logoPlacement = CGSize(width: 173 * ratio, height: 365 * ratio)
+
+                        if let appLogo = URL(string: appInfo.appLogo) {
+                            AsyncImage(url: appLogo) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: logoSize.width, height: logoSize.height)
+                                    .clipShape(.rect(cornerRadius: 30 * ratio))
+                                    .offset(logoPlacement)
+                            } placeholder: {}
+                        }
+                    }
+                }
 
             VStack(spacing: 8) {
                 Text("App Update Available")
@@ -96,3 +128,17 @@ struct AppUpdateView: View {
 #Preview {
     AppUpdateDemoView()
 }
+
+#if DEBUG
+    extension VersionCheckManager {
+        func mockcheckIfAppUpdateAvailable(forceUpdate: Bool = false) async -> ReturnResult? {
+            .init(
+                currentVersion: "1.1.1",
+                availableVersion: "10.1.1",
+                releaseNotes: forceUpdate ? "This is a critical fix." : "Enjoy the new version with improved features!",
+                appLogo: "https://github.com/accounts/favicon.ico",
+                appURL: "https://www.google.com"
+            )
+        }
+    }
+#endif

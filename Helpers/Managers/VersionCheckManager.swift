@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 
 class VersionCheckManager {
-    let itunesLookupURLString = "https://ituners.apple.com/lookup?bundleID"
+    let itunesLookupURLString = "https://itunes.apple.com/lookup?bundleID"
     @MainActor static let shared = VersionCheckManager()
 
     var bundleID: String? {
