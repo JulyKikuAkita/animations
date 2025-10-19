@@ -435,6 +435,7 @@
 		ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */; };
 		ABAA1BA22E73BCD4003535CF /* CustomList+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAA1BA12E73BCD4003535CF /* CustomList+iOS26.swift */; };
 		ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */; };
+		ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */; };
 		ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */; };
 		ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
 		ABE1AE742E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
@@ -840,6 +841,7 @@
 		ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightSheetViewiOS26.swift; sourceTree = "<group>"; };
 		ABAA1BA12E73BCD4003535CF /* CustomList+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomList+iOS26.swift"; sourceTree = "<group>"; };
 		ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNotificationsView.swift; sourceTree = "<group>"; };
+		ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRatingDemoView.swift; sourceTree = "<group>"; };
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
 		ABE1AE722E34AE660090A2F0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheetDemo.swift; sourceTree = "<group>"; };
@@ -2145,6 +2147,7 @@
 			isa = PBXGroup;
 			children = (
 				AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */,
+				ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */,
 			);
 			path = AppUpdateView;
 			sourceTree = "<group>";
@@ -3135,6 +3138,7 @@
 				AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */,
 				ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
+				ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */,
 				96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */,
 				96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
