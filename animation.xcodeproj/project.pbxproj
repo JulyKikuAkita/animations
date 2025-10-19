@@ -833,6 +833,7 @@
 		AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePanGesture.swift; sourceTree = "<group>"; };
 		AB8CBDDC2E9AFE0800A288E4 /* VersionCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckManager.swift; sourceTree = "<group>"; };
 		AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateDemoView.swift; sourceTree = "<group>"; };
+		AB8CBF082E9E23F000A288E4 /* MyCanvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
 		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
@@ -961,6 +962,7 @@
 		AB35A6D72E4DB3DE00573A3D /* onBoarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = onBoarding; sourceTree = "<group>"; };
 		AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93252E03D5A0009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AB5C93462E03E447009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitDemoApp; sourceTree = "<group>"; };
 		AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93432E03E291009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitCountdownDemo; sourceTree = "<group>"; };
+		AB8CBF092E9E23F000A288E4 /* MyCanvas */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MyCanvas; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1098,6 +1100,13 @@
 			files = (
 				AB5C93322E03E28F009CF684 /* SwiftUI.framework in Frameworks */,
 				AB5C93302E03E28F009CF684 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB8CBF052E9E23F000A288E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1265,6 +1274,7 @@
 				AB17E52F2E60FAA700C50B18 /* authOTP */,
 				AB35A6D72E4DB3DE00573A3D /* onBoarding */,
 				AB333A502E85E6A200368EB8 /* PDFMaker */,
+				AB8CBF092E9E23F000A288E4 /* MyCanvas */,
 				AB5C932E2E03E28F009CF684 /* Frameworks */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
@@ -1292,6 +1302,7 @@
 				AB17E52E2E60FAA700C50B18 /* authOTP.app */,
 				AB35A6D62E4DB3DE00573A3D /* onBoarding.app */,
 				AB333A4F2E85E6A200368EB8 /* PDFMaker.app */,
+				AB8CBF082E9E23F000A288E4 /* MyCanvas.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2560,6 +2571,28 @@
 			productReference = AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		AB8CBF072E9E23F000A288E4 /* MyCanvas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB8CBF122E9E23F100A288E4 /* Build configuration list for PBXNativeTarget "MyCanvas" */;
+			buildPhases = (
+				AB8CBF042E9E23F000A288E4 /* Sources */,
+				AB8CBF052E9E23F000A288E4 /* Frameworks */,
+				AB8CBF062E9E23F000A288E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AB8CBF092E9E23F000A288E4 /* MyCanvas */,
+			);
+			name = MyCanvas;
+			packageProductDependencies = (
+			);
+			productName = MyCanvas;
+			productReference = AB8CBF082E9E23F000A288E4 /* MyCanvas.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2629,6 +2662,9 @@
 					AB5C932C2E03E28F009CF684 = {
 						CreatedOnToolsVersion = 26.0;
 					};
+					AB8CBF072E9E23F000A288E4 = {
+						CreatedOnToolsVersion = 26.0;
+					};
 				};
 			};
 			buildConfigurationList = 961F3B862B8818240055D79B /* Build configuration list for PBXProject "animation" */;
@@ -2668,6 +2704,7 @@
 				AB17E52D2E60FAA700C50B18 /* authOTP */,
 				AB35A6D52E4DB3DE00573A3D /* onBoarding */,
 				AB333A4E2E85E6A200368EB8 /* PDFMaker */,
+				AB8CBF072E9E23F000A288E4 /* MyCanvas */,
 			);
 		};
 /* End PBXProject section */
@@ -2840,6 +2877,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AB5C932B2E03E28F009CF684 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB8CBF062E9E23F000A288E4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3391,6 +3435,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AB5C93292E03E28F009CF684 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB8CBF042E9E23F000A288E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4649,6 +4700,74 @@
 			};
 			name = Release;
 		};
+		AB8CBF102E9E23F100A288E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GA8FE3RZ75;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = julykikuakita.MyCanvas;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB8CBF112E9E23F100A288E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GA8FE3RZ75;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = julykikuakita.MyCanvas;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4828,6 +4947,15 @@
 			buildConfigurations = (
 				AB5C93412E03E291009CF684 /* Debug */,
 				AB5C93422E03E291009CF684 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB8CBF122E9E23F100A288E4 /* Build configuration list for PBXNativeTarget "MyCanvas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB8CBF102E9E23F100A288E4 /* Debug */,
+				AB8CBF112E9E23F100A288E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
