@@ -129,6 +129,7 @@
 		96352D542C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */; };
 		96352D552C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */; };
 		96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */; };
+		96362C972EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96362C962EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift */; };
 		9636EE9A2DC16E4F00A0E5A0 /* MarqueeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636EE992DC16E4E00A0E5A0 /* MarqueeTextView.swift */; };
 		9636EE9D2DC1787E00A0E5A0 /* PhaseAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636EE9C2DC1787E00A0E5A0 /* PhaseAnimationView.swift */; };
 		9636EE9F2DC1797000A0E5A0 /* OSInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */; };
@@ -593,6 +594,7 @@
 		96352D4E2C0ED814001AD2FD /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		96352D522C0ED913001AD2FD /* VerticalCircularCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCircularCarouselView.swift; sourceTree = "<group>"; };
 		96352DB12C12E0E8001AD2FD /* GlitchTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlitchTextEffectView.swift; sourceTree = "<group>"; };
+		96362C962EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickeriMessageStyleDemoView.swift; sourceTree = "<group>"; };
 		9636EE992DC16E4E00A0E5A0 /* MarqueeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeTextView.swift; sourceTree = "<group>"; };
 		9636EE9C2DC1787E00A0E5A0 /* PhaseAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseAnimationView.swift; sourceTree = "<group>"; };
 		9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSInfo.swift; sourceTree = "<group>"; };
@@ -1944,6 +1946,7 @@
 				96E4DEAC2D06619D0020261F /* PickerStylesGesturesView.swift */,
 				AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */,
 				AB17E55A2E611A3500C50B18 /* CountryCodePickerView.swift */,
+				96362C962EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift */,
 			);
 			path = PickerView;
 			sourceTree = "<group>";
@@ -3082,6 +3085,7 @@
 				96B8F69D2E84882D00B87C56 /* PopMenuiOS26+DatePickerDemo.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
+				96362C972EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift in Sources */,
 				963B85772CD35BBA00C3FB0D /* Snapshot.swift in Sources */,
 				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
 				96E09EC72C74105300A0BE66 /* FloatingTabbar.swift in Sources */,
