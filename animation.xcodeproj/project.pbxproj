@@ -286,6 +286,8 @@
 		96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		96976CEE2D50349100643821 /* View+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976CED2D50349100643821 /* View+Alert.swift */; };
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
+		9697F7622EB039E6005C5C77 /* ProgressAlertDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */; };
+		9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -721,6 +723,8 @@
 		96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerificationTextFieldView.swift; sourceTree = "<group>"; };
 		96976CED2D50349100643821 /* View+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Alert.swift"; sourceTree = "<group>"; };
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
+		9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAlertDemoView.swift; sourceTree = "<group>"; };
+		9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1380,6 +1384,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9697F7602EB039D2005C5C77 /* Alert */,
 				AB8CBDDE2E9B028100A288E4 /* AppUpdateView */,
 				ABB222982E6CDE66008CFE21 /* Notofications */,
 				96F9A6EB2B9FACC900FD6900 /* Button */,
@@ -1866,6 +1871,14 @@
 			path = SearchBar;
 			sourceTree = "<group>";
 		};
+		9697F7602EB039D2005C5C77 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2043,6 +2056,7 @@
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
 				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
 				AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */,
+				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2957,6 +2971,7 @@
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
+				9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
 				ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
@@ -3090,6 +3105,7 @@
 				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
 				96E09EC72C74105300A0BE66 /* FloatingTabbar.swift in Sources */,
 				963B862F2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift in Sources */,
+				9697F7622EB039E6005C5C77 /* ProgressAlertDemoView.swift in Sources */,
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
 				ABC31E282EA4AB820068C41D /* iOS26StyleFloatingSheet.swift in Sources */,
 				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
