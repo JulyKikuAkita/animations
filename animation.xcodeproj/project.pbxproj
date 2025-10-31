@@ -288,6 +288,7 @@
 		9697B7412C6D9F190092D07A /* BlurEffectSearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */; };
 		9697F7622EB039E6005C5C77 /* ProgressAlertDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */; };
 		9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */; };
+		969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -725,6 +726,7 @@
 		9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectSearchBarView.swift; sourceTree = "<group>"; };
 		9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAlertDemoView.swift; sourceTree = "<group>"; };
 		9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+BottomSheetInteractionDemoView.swift"; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1895,6 +1897,7 @@
 				9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */,
 				969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */,
 				AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */,
+				969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -3137,6 +3140,7 @@
 				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
 				AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
+				969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */,
 				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
