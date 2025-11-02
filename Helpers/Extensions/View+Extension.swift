@@ -226,4 +226,14 @@ public extension View {
             self.glassEffect(in: shape)
         } else { self }
     }
+
+    /// Disable any animation
+    func noAnimation(_ content: @escaping () -> Void) {
+        var transaction = Transaction()
+        transaction.disablesAnimations = true
+
+        withTransaction(transaction) {
+            content()
+        }
+    }
 }
