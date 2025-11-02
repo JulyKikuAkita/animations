@@ -177,6 +177,7 @@
 		964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
 		9650AE092DE5133F00D2D67C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9650AE082DE5133F00D2D67C /* SDWebImageSwiftUI */; };
 		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
+		96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
 		965836AB2DD2DA440062F372 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
@@ -634,6 +635,7 @@
 		96513EA42D3DCAF30004C7C8 /* Message3.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message3.apns; sourceTree = "<group>"; };
 		96513EA52D3DCB190004C7C8 /* deeplinkMSG2.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG2.apns; sourceTree = "<group>"; };
 		96513EA62D3DCB200004C7C8 /* deeplinkMSG3.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG3.apns; sourceTree = "<group>"; };
+		96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedConfirmationButtonDemoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
 		9658369E2DD2BB250062F372 /* storeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = storeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
@@ -2025,6 +2027,7 @@
 				96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */,
 				9693DB332D9B4F9100A29727 /* DrawerButtonView.swift */,
 				965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */,
+				96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -3059,6 +3062,7 @@
 				96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */,
 				AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
+				96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
 				AB8CBDDD2E9AFE0800A288E4 /* VersionCheckManager.swift in Sources */,
