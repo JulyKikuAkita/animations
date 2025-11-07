@@ -12,9 +12,7 @@ struct ContentView: View {
                 SplashScreen()
                     .transition(VerticalSplashTransition(isSplash: true))
             } else {
-//                PlayerAnimationView()
-//                    .transition(HorizontalSplashTransition(isSplash: false))
-                CustomDragDropScrollDemoView()
+                AnimatedBottomSearchBarDemoView()
                     .transition(VerticalSplashTransition(isSplash: true))
             }
         }

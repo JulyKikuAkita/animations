@@ -8,7 +8,7 @@
 import SwiftUI
 import UserNotifications
 
-@main
+// @main
 struct NotificationDemo: App {
     var body: some Scene {
         WindowGroup {

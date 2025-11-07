@@ -362,6 +362,7 @@
 		96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */; };
 		96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96F0A6BA2E963F1D000B572E /* Dummies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0EA1752DEBBAB000C62391 /* Dummies.swift */; };
+		96F7CF892EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7CF882EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift */; };
 		96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */; };
 		96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */; };
 		96F9D16F2D5C41E000CD134B /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */; };
@@ -787,6 +788,7 @@
 		96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerButton.swift; sourceTree = "<group>"; };
 		96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAlert.swift; sourceTree = "<group>"; };
 		96EBF5E02BD793B400FDD20D /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		96F7CF882EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBottomSearchBarDemoView.swift; sourceTree = "<group>"; };
 		96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteHorizontalScrollViewDemo.swift; sourceTree = "<group>"; };
 		96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
@@ -1866,6 +1868,7 @@
 		9697B73F2C6D9EF60092D07A /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
+				96F7CF872EBE9D3D00C99DCD /* BottomBar */,
 				962B04792C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift */,
 				9697B7402C6D9F190092D07A /* BlurEffectSearchBarView.swift */,
 				96E09E792C6ED10C00A0BE66 /* ProgressiveBlurView.swift */,
@@ -2018,6 +2021,14 @@
 				96E948F12D8B8A5000B257B4 /* AnimatedSpinnerView.swift */,
 			);
 			path = Spinner;
+			sourceTree = "<group>";
+		};
+		96F7CF872EBE9D3D00C99DCD /* BottomBar */ = {
+			isa = PBXGroup;
+			children = (
+				96F7CF882EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift */,
+			);
+			path = BottomBar;
 			sourceTree = "<group>";
 		};
 		96F9A6EB2B9FACC900FD6900 /* Button */ = {
@@ -3041,6 +3052,7 @@
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
+				96F7CF892EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift in Sources */,
 				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
 				96FCA7592DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift in Sources */,
 				9621DC812BEF461400183CB7 /* PhotoItem.swift in Sources */,
