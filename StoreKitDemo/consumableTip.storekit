@@ -1,0 +1,134 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "6CCDFB12",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "39852152",
+      "localizations" : [
+        {
+          "description" : "Checking in",
+          "displayName" : "mini",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "animation.test.mini",
+      "referenceName" : "mini",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "F7C822E9",
+      "localizations" : [
+        {
+          "description" : "show my support",
+          "displayName" : "support",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "animation.test.support",
+      "referenceName" : "support",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "20239A5B",
+      "localizations" : [
+        {
+          "description" : "Show my love and support",
+          "displayName" : "Pro Support",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "animation.test.prosupport",
+      "referenceName" : "Pro Support",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "5.99",
+      "familyShareable" : false,
+      "internalID" : "12183F5C",
+      "localizations" : [
+        {
+          "description" : "Best Support yet!",
+          "displayName" : "Pro Max Support",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "animation.test.promaxsupport",
+      "referenceName" : "Pro Max Support",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}
