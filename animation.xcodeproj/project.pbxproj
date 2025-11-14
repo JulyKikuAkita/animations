@@ -925,7 +925,6 @@
 		96F0A6B62E963E7C000B572E /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"helpers/View+Extensions.swift",
 				"ios26/PaywallView+ios26Demo.swift",
 				ios26/TippingPaywallDemoView.swift,
 				PaywallModels.swift,
