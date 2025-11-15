@@ -291,6 +291,8 @@
 		9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */; };
 		969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */; };
 		969ECE482EC7EF590045601B /* LocationPermissionFullSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */; };
+		969ECE4B2EC86A410045601B /* PulseRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE4A2EC86A410045601B /* PulseRingView.swift */; };
+		969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -732,6 +734,8 @@
 		9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+BottomSheetInteractionDemoView.swift"; sourceTree = "<group>"; };
 		969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionFullSheetView.swift; sourceTree = "<group>"; };
+		969ECE4A2EC86A410045601B /* PulseRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseRingView.swift; sourceTree = "<group>"; };
+		969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerHelper.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1226,6 +1230,7 @@
 		9609D93C2DB591DB00A76F95 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				969ECF842EC90DF80045601B /* LocationManager */,
 				969ECE492EC7FD5F0045601B /* View */,
 				9609D93D2DB591F800A76F95 /* LocationPickerView.swift */,
 			);
@@ -1894,8 +1899,17 @@
 			isa = PBXGroup;
 			children = (
 				969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */,
+				969ECE4A2EC86A410045601B /* PulseRingView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		969ECF842EC90DF80045601B /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */,
+			);
+			path = LocationManager;
 			sourceTree = "<group>";
 		};
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
@@ -3107,9 +3121,11 @@
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
 				963B87DA2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */,
+				969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */,
 				96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */,
 				96E4E5FD2D1788830020261F /* AsyncImageViewer.swift in Sources */,
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
+				969ECE4B2EC86A410045601B /* PulseRingView.swift in Sources */,
 				968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */,
 				96E4E6092D178F510020261F /* AsyncImageViewerViewDemo.swift in Sources */,
 				AB8CBDE02E9B02BE00A288E4 /* AppUpdateDemoView.swift in Sources */,
