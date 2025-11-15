@@ -306,7 +306,7 @@ private struct OverlayWindowView: View {
 }
 
 extension View {
-    /// snopshot the screen
+    /// snapshot the screen
     fileprivate func snapshotScreen() -> UIImage? {
         if let screen = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.screen {
             let snapshotView: UIView = screen.snapshotView(afterScreenUpdates: true)
