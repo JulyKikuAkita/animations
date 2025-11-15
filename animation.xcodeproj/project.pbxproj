@@ -290,6 +290,7 @@
 		9697F7622EB039E6005C5C77 /* ProgressAlertDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */; };
 		9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */; };
 		969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */; };
+		969ECE482EC7EF590045601B /* LocationPermissionFullSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -730,6 +731,7 @@
 		9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAlertDemoView.swift; sourceTree = "<group>"; };
 		9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+BottomSheetInteractionDemoView.swift"; sourceTree = "<group>"; };
+		969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionFullSheetView.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1224,6 +1226,7 @@
 		9609D93C2DB591DB00A76F95 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				969ECE492EC7FD5F0045601B /* View */,
 				9609D93D2DB591F800A76F95 /* LocationPickerView.swift */,
 			);
 			path = Map;
@@ -1885,6 +1888,14 @@
 				9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		969ECE492EC7FD5F0045601B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
@@ -3222,6 +3233,7 @@
 				968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */,
 				9663BB542DDE992700037CF1 /* Date+Extensions.swift in Sources */,
 				96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */,
+				969ECE482EC7EF590045601B /* LocationPermissionFullSheetView.swift in Sources */,
 				AB17E5562E61183500C50B18 /* Country.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
