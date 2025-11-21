@@ -187,6 +187,8 @@
 		965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E039F2BCB2C4A00E8A400 /* BookView.swift */; };
 		965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */; };
 		965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E573B2BC5097C00E172B3 /* DropDownView.swift */; };
+		965E6F492ECFD64100E233ED /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E6F482ECFD64100E233ED /* UIFont+Extension.swift */; };
+		965E6F4B2ECFE00500E233ED /* GlassEffectTextDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */; };
 		965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
 		965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */; };
 		96601FEF2C7807DD002C91FB /* SchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FEE2C7807DD002C91FB /* SchemePicker.swift */; };
@@ -650,6 +652,8 @@
 		965E039F2BCB2C4A00E8A400 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectsView.swift; sourceTree = "<group>"; };
 		965E573B2BC5097C00E172B3 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		965E6F482ECFD64100E233ED /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassEffectTextDemoView.swift; sourceTree = "<group>"; };
 		965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionProMenuBarView.swift; sourceTree = "<group>"; };
 		96601FEE2C7807DD002C91FB /* SchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemePicker.swift; sourceTree = "<group>"; };
 		96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcherView.swift; sourceTree = "<group>"; };
@@ -1843,6 +1847,7 @@
 				962B04722C214C03008E1E5D /* PixellateTextView.swift */,
 				962B04752C215176008E1E5D /* Pixellate.metal */,
 				9636EE992DC16E4E00A0E5A0 /* MarqueeTextView.swift */,
+				965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */,
 			);
 			path = TextEffectView;
 			sourceTree = "<group>";
@@ -2107,6 +2112,7 @@
 				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
 				AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */,
 				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
+				965E6F482ECFD64100E233ED /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3012,6 +3018,7 @@
 				963B9C7F2D54912D00453320 /* CustomSwipeActionScrollViewiOS18DemoView.swift in Sources */,
 				96F9D16F2D5C41E000CD134B /* InfiniteScrollView.swift in Sources */,
 				9682B6D12CB1D355003D917F /* ColorItem.swift in Sources */,
+				965E6F492ECFD64100E233ED /* UIFont+Extension.swift in Sources */,
 				963DB14B2BBBD21400AAF347 /* Reel.swift in Sources */,
 				96FCA7D22DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift in Sources */,
 				961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */,
@@ -3162,6 +3169,7 @@
 				9697F7622EB039E6005C5C77 /* ProgressAlertDemoView.swift in Sources */,
 				9662EF342C3E067100508B80 /* VideoSharedModel.swift in Sources */,
 				ABC31E282EA4AB820068C41D /* iOS26StyleFloatingSheet.swift in Sources */,
+				965E6F4B2ECFE00500E233ED /* GlassEffectTextDemoView.swift in Sources */,
 				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
 				96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */,
 				ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */,
