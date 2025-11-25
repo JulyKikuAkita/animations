@@ -327,6 +327,7 @@
 		96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
 		96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
+		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
 		96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D04B302C09A1960062520D /* StackedScrollView.swift */; };
 		96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */; };
 		96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */; };
@@ -424,7 +425,7 @@
 		AB5C93322E03E28F009CF684 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB5C93312E03E28F009CF684 /* SwiftUI.framework */; };
 		AB5C933F2E03E291009CF684 /* alarmKitCountdownDemoExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */; };
-		AB5C9A592E0A608C009CF684 /* iOS26-tabbarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */; };
+		AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */; };
 		AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */; };
 		AB7CC2A92E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */; };
 		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
@@ -763,6 +764,7 @@
 		96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetReader.swift; sourceTree = "<group>"; };
 		96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelXCardView.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
+		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
 		96D04B302C09A1960062520D /* StackedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedScrollView.swift; sourceTree = "<group>"; };
 		96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-bottomSheet.swift"; sourceTree = "<group>"; };
 		96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableTabbariOS26Style.swift; sourceTree = "<group>"; };
@@ -845,7 +847,7 @@
 		AB5C932F2E03E28F009CF684 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AB5C93312E03E28F009CF684 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlassSearchableTabbar.swift; sourceTree = "<group>"; };
-		AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-tabbarSheet.swift"; sourceTree = "<group>"; };
+		AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+tabbarSheet.swift"; sourceTree = "<group>"; };
 		AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularWheelPicker.swift; sourceTree = "<group>"; };
 		AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectMenuiOS26.swift; sourceTree = "<group>"; };
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
@@ -2129,11 +2131,12 @@
 			isa = PBXGroup;
 			children = (
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
-				AB5C9A582E0A608C009CF684 /* iOS26-tabbarSheet.swift */,
+				AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */,
 				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
 				AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */,
 				96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */,
 				AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */,
+				96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */,
 			);
 			path = iOS26;
 			sourceTree = "<group>";
@@ -3044,7 +3047,7 @@
 				964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */,
 				AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */,
 				963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */,
-				AB5C9A592E0A608C009CF684 /* iOS26-tabbarSheet.swift in Sources */,
+				AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */,
 				964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
@@ -3159,6 +3162,7 @@
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
 				ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				96B8F69D2E84882D00B87C56 /* PopMenuiOS26+DatePickerDemo.swift in Sources */,
+				96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
 				96362C972EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift in Sources */,
