@@ -412,6 +412,7 @@
 		AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
 		AB333B862E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */; };
 		AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */; };
+		AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -835,6 +836,7 @@
 		AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarUIToolKitiOS26.swift; sourceTree = "<group>"; };
 		AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26View+Extension.swift"; sourceTree = "<group>"; };
 		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
 		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
@@ -996,6 +998,7 @@
 		AB17E52F2E60FAA700C50B18 /* authOTP */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB17E6692E61759500C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = authOTP; sourceTree = "<group>"; };
 		AB333A502E85E6A200368EB8 /* PDFMaker */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PDFMaker; sourceTree = "<group>"; };
 		AB35A6D72E4DB3DE00573A3D /* onBoarding */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (969ED0C82EC928040045601B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = onBoarding; sourceTree = "<group>"; };
+		AB38B0B02EDAE0AE00767C20 /* Map */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Map; sourceTree = "<group>"; };
 		AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93252E03D5A0009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AB5C93462E03E447009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitDemoApp; sourceTree = "<group>"; };
 		AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93432E03E291009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitCountdownDemo; sourceTree = "<group>"; };
 		AB8CBF092E9E23F000A288E4 /* MyCanvas */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MyCanvas; sourceTree = "<group>"; };
@@ -1369,6 +1372,7 @@
 		961F3BBD2B8979E70055D79B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AB38B0B02EDAE0AE00767C20 /* Map */,
 				9621DC902BF1EDB100183CB7 /* ActionModel.swift */,
 				96C0C2D62B905DDE00F56FF5 /* Card.swift */,
 				AB17E5552E61183500C50B18 /* Country.swift */,
@@ -1912,6 +1916,7 @@
 		969ECE492EC7FD5F0045601B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */,
 				969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */,
 				969ECE4A2EC86A410045601B /* PulseRingView.swift */,
 			);
@@ -2352,6 +2357,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				96E36A452DB217F900A8EFBA /* Monitor */,
+				AB38B0B02EDAE0AE00767C20 /* Map */,
 			);
 			name = animation;
 			productName = animation;
@@ -2369,6 +2375,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AB38B0B02EDAE0AE00767C20 /* Map */,
 			);
 			name = demoApps;
 			productName = demoApp;
@@ -2406,6 +2415,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AB38B0B02EDAE0AE00767C20 /* Map */,
 			);
 			name = MyMint;
 			productName = MyMint;
@@ -3217,6 +3229,7 @@
 				963B9CF72D5491EF00453320 /* CustomSwipeActions.swift in Sources */,
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
+				AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */,
 				96AC82F22C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift in Sources */,
 				960663292DD950430084B468 /* ResizableHeaderScrollView.swift in Sources */,
 				9662EFD32C471DB300508B80 /* ThemeSwitchView+ShapeAnimation.swift in Sources */,
