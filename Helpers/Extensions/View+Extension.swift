@@ -219,6 +219,25 @@ public extension View {
         }
     }
 
+    @ViewBuilder
+    func optionalGlassEffect(_ colorScheme: ColorScheme, cornerRadius: CGFloat = 30) -> some View {
+        let backgroundColor = colorScheme == .dark ? Color.black : Color.white
+        if #available(iOS 26.0, *) {
+            self.glassEffect(
+                .clear.tint(backgroundColor.opacity(0.75)).interactive(),
+                in: .rect(cornerRadius: cornerRadius, style: .continuous)
+            )
+        } else {
+            background {
+                RoundedRectangle(
+                    cornerRadius: cornerRadius,
+                    style: .continuous
+                )
+                .fill(backgroundColor)
+            }
+        }
+    }
+
     /// Shape-only
     @ViewBuilder
     func tryGlassEffect(in shape: some Shape) -> some View {
