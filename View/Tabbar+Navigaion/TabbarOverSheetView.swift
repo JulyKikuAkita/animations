@@ -6,20 +6,6 @@
 import MapKit
 import SwiftUI
 
-extension MKCoordinateRegion {
-    /// Apple Park Location Coordinates
-    static var applePark: MKCoordinateRegion {
-        .init(
-            center: .init(
-                latitude: 37.3346,
-                longitude: -122.0090
-            ),
-            latitudinalMeters: 1000,
-            longitudinalMeters: 1000
-        )
-    }
-}
-
 struct TabbarOverSheetView: View {
     // need to use bindable within view not @Binding property
     @Environment(WindowSharedModelTabbar.self) private var windowSharedModel
