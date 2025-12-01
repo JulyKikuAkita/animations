@@ -413,6 +413,7 @@
 		AB333B862E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */; };
 		AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */; };
 		AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */; };
+		AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -837,6 +838,7 @@
 		AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26View+Extension.swift"; sourceTree = "<group>"; };
 		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
+		AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomCarouselCardView.swift; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
 		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
@@ -1916,6 +1918,7 @@
 		969ECE492EC7FD5F0045601B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */,
 				AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */,
 				969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */,
 				969ECE4A2EC86A410045601B /* PulseRingView.swift */,
@@ -3068,6 +3071,7 @@
 				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
 				96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */,
 				96E4E35A2D0D72950020261F /* Platform+View+Extension.swift in Sources */,
+				AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
 				96E4DD142CFFDE1F0020261F /* SportItem.swift in Sources */,
 				9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */,

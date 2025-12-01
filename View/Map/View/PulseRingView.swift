@@ -25,24 +25,24 @@ struct PulseRingView: View {
                     ringView(index: 1)
                     ringView(index: 2)
                 }
-                .onAppear {
-                    for index in 0 ..< animate.count {
-                        let delay = Double(index) * 0.2
-                        withAnimation(.easeInOut(duration: 2)
-                            .repeatForever(autoreverses: false)
-                            .delay(delay)
-                        ) {
-                            animate[index] = true
-                        }
-                    }
-                }
-                .onDisappear {
-                    animate = [false, false, false]
-                }
             }
         }
         .onChange(of: phase, initial: true) { _, newValue in
+            /// hiding animation view when scene is not active
             showRings = newValue != .background
+            if showRings {
+                start()
+            } else {
+                reset()
+            }
+        }
+        .onAppear {
+            showRings = true
+            start()
+        }
+        .onDisappear {
+            reset()
+            showRings = false
         }
         .frame(width: size, height: size)
     }
@@ -53,6 +53,23 @@ struct PulseRingView: View {
             .fill(tint)
             .opacity(animate[index] ? 0 : 0.4)
             .scaleEffect(animate[index] ? 2 : 0)
+    }
+
+    /// stop animation when secene is not active
+    private func reset() {
+        animate = [false, false, false]
+    }
+
+    private func start() {
+        for index in 0 ..< animate.count {
+            let delay = Double(index) * 0.2
+            withAnimation(.easeInOut(duration: 2)
+                .repeatForever(autoreverses: false)
+                .delay(delay)
+            ) {
+                animate[index] = true
+            }
+        }
     }
 }
 

@@ -3,6 +3,7 @@
 //  animation
 //
 //  Created on 11/29/25.
+// support ios18+
 
 import MapKit
 import SwiftUI
@@ -21,7 +22,12 @@ struct CustomMapDemoView: View {
             .navigationTitle("Map Carousel")
         }
         .fullScreenCover(isPresented: $showView) {
-//            CustomMapView()
+            CustomMapView(
+                userRegion: .applePark250K,
+                userCoordinates: MKCoordinateRegion.applePark250K.center,
+                lookupText: "GameStop",
+                limit: 5
+            )
         }
     }
 }
@@ -48,51 +54,68 @@ struct CustomMapView: View {
     ///  For animated camera updates
     @State private var cameraPosition: MapCameraPosition
     @State private var places: [Place] = []
+    @State private var selectedPlaceID: UUID? = nil
+    @State private var expandedItem: Place?
+    @Namespace private var animationID
     /// Environment Properties
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         NavigationStack {
-            Map(position: $cameraPosition)
-                /// tmp background until place is fetched
-                .overlay {
-                    loadingOverlay()
+            Map(position: $cameraPosition) {
+                ForEach(places) { place in
+                    Annotation(place.name, coordinate: place.coordinates) {
+                        annotationView(place)
+                    }
                 }
-                /// buttomCarousel use safeAreaInset to let map legal link visible
-                .safeAreaInset(edge: .bottom, spacing: 0) {
-                    GeometryReader {
-                        let size = $0.size
-                        buttomCarousel(size)
+            }
+            /// tmp background until place is fetched
+            .overlay {
+                loadingOverlay()
+            }
+            /// buttomCarousel use safeAreaInset to let map legal link visible
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                GeometryReader {
+                    let size = $0.size
+                    buttomCarousel(size)
 
-                        /// a temp card until plces is full loaded
-                        if places.isEmpty {
-                            ButtomCarouselCardView()
-                                .padding(.horizontal, 15)
-                                .frame(width: size.width, height: size.height)
-                        }
-                    }
-                    .frame(height: 200)
-                }
-                .navigationTitle("Nearby Places")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        if #available(iOS 26.0, *) {
-                            Button(role: .cancel) {
-                                dismiss()
-                            }
-                        } else {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "xmark,circle.fill")
-                                    .font(.largeTitle)
-                                    .foregroundStyle(.primary)
-                            }
-                        }
+                    /// a temp card until plces is full loaded
+                    if places.isEmpty {
+                        ButtomCarouselCardView(
+                            place: nil,
+                            expandedItem: $expandedItem
+                        )
+                        .padding(15)
+                        .frame(width: size.width, height: size.height)
                     }
                 }
+                .frame(height: 200)
+            }
+            .navigationTitle("Nearby Places")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    if #available(iOS 26.0, *) {
+                        Button(role: .cancel) {
+                            dismiss()
+                        }
+                    } else {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark,circle.fill")
+                                .font(.largeTitle)
+                                .foregroundStyle(.primary)
+                        }
+                    }
+                }
+            }
+        }
+        .sheet(item: $expandedItem) { place in
+            DummySection(title: place.name)
+                .presentationDetents([.medium])
+                .navigationTransition(.zoom(sourceID: place.id, in: animationID))
         }
         .onAppear {
             guard places.isEmpty else { return }
@@ -100,11 +123,17 @@ struct CustomMapView: View {
         }
     }
 
-    private func buttomCarousel(_: CGSize) -> some View {
+    private func buttomCarousel(_ size: CGSize) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
                 ForEach(places) { place in
-                    ButtomCarouselCardView(place: place)
+                    ButtomCarouselCardView(
+                        place: place,
+                        expandedItem: $expandedItem
+                    )
+                    .padding(15)
+                    .frame(width: size.width, height: size.height)
+                    .matchedTransitionSource(id: place.id, in: animationID)
                 }
             }
             .scrollTargetLayout()
@@ -112,6 +141,13 @@ struct CustomMapView: View {
         .scrollIndicators(.hidden)
         .scrollClipDisabled(true)
         .scrollTargetBehavior(.paging)
+        .scrollPosition(id: $selectedPlaceID, anchor: .center)
+        .onChange(of: selectedPlaceID) { _, newValue in
+            guard let cooordinates = places.first(where: { $0.id == newValue })?.coordinates else { return }
+            withAnimation(animation) {
+                cameraPosition = .camera(.init(centerCoordinate: cooordinates, distance: 25000))
+            }
+        }
     }
 
     private func loadingOverlay() -> some View {
@@ -142,9 +178,35 @@ struct CustomMapView: View {
 
                 withAnimation(animation) {
                     self.places = places
+                    selectedPlaceID = places.first?.id
                 }
             }
         }
+    }
+
+    private func annotationView(_ place: Place) -> some View {
+        let isSelected: Bool = place.id == selectedPlaceID
+        return Image(.sloth)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: isSelected ? 50 : 20, height: isSelected ? 50 : 20)
+            .background {
+                Circle()
+                    .fill(.green)
+                    .padding(-1)
+            }
+            // do Not animate the pulse ring view
+            .animation(animation, value: isSelected)
+            .background {
+                if isSelected {
+                    PulseRingView(tint: colorScheme == .dark ? .white : .gray,
+                                  size: 80)
+                }
+            }
+            .contentShape(.rect)
+            .onTapGesture {
+                selectedPlaceID = place.id
+            }
     }
 
     var animation: Animation {
@@ -161,68 +223,6 @@ struct CustomMapView: View {
     )
 }
 
-struct ButtomCarouselCardView: View {
-    @Environment(\.colorScheme) private var colorScheme
-    var place: Place?
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let place {
-                Text(place.name)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Text(place.address)
-                    .lineLimit(2)
-
-                if let phoneNumber = place.phoneNumber,
-                   let url = URL(string: "tel: \(phoneNumber)")
-                {
-                    Link("Phone Number: **\(phoneNumber)**", destination: url)
-                        .font(.caption)
-                        .foregroundStyle(.gray)
-                }
-
-                Spacer(minLength: 0)
-
-                Button {} label: {
-                    Text("Learn More")
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 4)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.blue)
-                .buttonBorderShape(.capsule)
-
-            } else {
-                /// Dummy placeholder items
-                Group {
-                    Text("PLACEHOLDER NAME")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    Text("This is a placeholder address. Replace with actual address.")
-                        .lineLimit(2)
-
-                    Text("xxx-xxx-xxxx")
-                        .font(.caption)
-                        .foregroundStyle(.gray)
-
-                    Spacer(minLength: 0)
-
-                    Button {} label: {
-                        Text("Learn More")
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 4)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.blue)
-                    .buttonBorderShape(.capsule)
-                    .disabled(true)
-                }
-                .redacted(reason: .placeholder)
-            }
-        }
-        .padding(15)
-        .optionalGlassEffect(colorScheme)
-    }
+#Preview("Navigation") {
+    CustomMapDemoView()
 }
