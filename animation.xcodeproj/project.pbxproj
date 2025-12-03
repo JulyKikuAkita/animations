@@ -328,6 +328,7 @@
 		96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
+		96CE83852EDFFAAD009AC09D /* SFSymbolAnimatedTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE83842EDFFA9E009AC09D /* SFSymbolAnimatedTabBar.swift */; };
 		96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D04B302C09A1960062520D /* StackedScrollView.swift */; };
 		96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */; };
 		96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */; };
@@ -767,6 +768,7 @@
 		96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelXCardView.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
+		96CE83842EDFFA9E009AC09D /* SFSymbolAnimatedTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolAnimatedTabBar.swift; sourceTree = "<group>"; };
 		96D04B302C09A1960062520D /* StackedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedScrollView.swift; sourceTree = "<group>"; };
 		96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-bottomSheet.swift"; sourceTree = "<group>"; };
 		96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableTabbariOS26Style.swift; sourceTree = "<group>"; };
@@ -2138,6 +2140,7 @@
 		AB333B842E8B0EDD00368EB8 /* iOS26 */ = {
 			isa = PBXGroup;
 			children = (
+				96CE83842EDFFA9E009AC09D /* SFSymbolAnimatedTabBar.swift */,
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
 				AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */,
 				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
@@ -3177,6 +3180,7 @@
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
 				ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
+				96CE83852EDFFAAD009AC09D /* SFSymbolAnimatedTabBar.swift in Sources */,
 				96B8F69D2E84882D00B87C56 /* PopMenuiOS26+DatePickerDemo.swift in Sources */,
 				96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,

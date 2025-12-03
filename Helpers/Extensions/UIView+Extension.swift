@@ -14,4 +14,10 @@ extension UIView {
         }
         return result
     }
+
+    /// Extracting all subview with the given type
+    func subViews<T: UIView>(type: T.Type) -> [T] {
+        subviews.compactMap { $0 as? T } +
+            subviews.flatMap { $0.subViews(type: type) }
+    }
 }
