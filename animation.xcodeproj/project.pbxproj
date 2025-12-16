@@ -328,6 +328,9 @@
 		96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
+		96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */; };
+		96CE85322EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE85312EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift */; };
+		96CE85352EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */; };
 		96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D04B302C09A1960062520D /* StackedScrollView.swift */; };
 		96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */; };
 		96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */; };
@@ -767,6 +770,9 @@
 		96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelXCardView.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
+		96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarHeaderScrollEffectDemoView.swift; sourceTree = "<group>"; };
+		96CE85312EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26View+Modifier+Extension.swift"; sourceTree = "<group>"; };
+		96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26ToolbarButtonStyle.swift; sourceTree = "<group>"; };
 		96D04B302C09A1960062520D /* StackedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedScrollView.swift; sourceTree = "<group>"; };
 		96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-bottomSheet.swift"; sourceTree = "<group>"; };
 		96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableTabbariOS26Style.swift; sourceTree = "<group>"; };
@@ -1267,6 +1273,7 @@
 		960B2BA62B89DB5C002CD328 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				96CE85332EF0D9BB009AC09D /* ButtonStyle */,
 				AB8CBDDB2E9AFDE900A288E4 /* Managers */,
 				AB17E5622E6121B700C50B18 /* UIKIT */,
 				AB17E5612E61216D00C50B18 /* Extensions */,
@@ -1955,6 +1962,14 @@
 			path = ScrollView;
 			sourceTree = "<group>";
 		};
+		96CE85332EF0D9BB009AC09D /* ButtonStyle */ = {
+			isa = PBXGroup;
+			children = (
+				96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */,
+			);
+			path = ButtonStyle;
+			sourceTree = "<group>";
+		};
 		96D495832BBD25160011D5AA /* Video */ = {
 			isa = PBXGroup;
 			children = (
@@ -2123,6 +2138,7 @@
 				AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */,
 				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
 				965E6F482ECFD64100E233ED /* UIFont+Extension.swift */,
+				96CE85312EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2145,6 +2161,7 @@
 				96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */,
 				AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */,
 				96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */,
+				96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */,
 			);
 			path = iOS26;
 			sourceTree = "<group>";
@@ -3047,6 +3064,7 @@
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
 				9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */,
+				96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
 				ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
@@ -3065,6 +3083,7 @@
 				AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */,
+				96CE85322EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift in Sources */,
 				964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
 				9606653C2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift in Sources */,
 				9636EF932DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift in Sources */,
@@ -3241,6 +3260,7 @@
 				96352CE62C09AC6E001AD2FD /* StackedCards.swift in Sources */,
 				965D1DD62C9D4E3A004161B1 /* DynamicTagWidthView.swift in Sources */,
 				9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
+				96CE85352EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
 				AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */,
 				AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */,
