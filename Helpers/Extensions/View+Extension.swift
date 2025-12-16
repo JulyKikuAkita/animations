@@ -140,6 +140,18 @@ extension View {
     func hideNaviTabBar() -> some View {
         toolbar(.hidden, for: .tabBar)
     }
+
+    @ViewBuilder
+    func hideWitOffset(_ isHidden: Bool) -> some View {
+        offset(y: isHidden ? 10 : 0)
+            .opacity(isHidden ? 0 : 1)
+    }
+
+    @ViewBuilder
+    func hideWitScale(_ isHidden: Bool) -> some View {
+        scaleEffect(isHidden ? 0.5 : 1)
+            .opacity(isHidden ? 0 : 1)
+    }
 }
 
 /// For Dynamic Sheet Height - iOS 17 - ScrollView APIs
@@ -196,63 +208,6 @@ public extension View {
             onChange(of: value) { newValue in
                 perform(newValue)
             }
-        }
-    }
-}
-
-// iOS 26 related helper
-public extension View {
-    var isiOS26OrLater: Bool {
-        if #available(iOS 26, *) {
-            true
-        } else {
-            false
-        }
-    }
-
-    @ViewBuilder
-    func tryGlassEffect() -> some View {
-        if #available(iOS 26.0, tvOS 26.0, *) {
-            self.glassEffect()
-        } else {
-            self
-        }
-    }
-
-    @ViewBuilder
-    func optionalGlassEffect(_ colorScheme: ColorScheme, cornerRadius: CGFloat = 30) -> some View {
-        let backgroundColor = colorScheme == .dark ? Color.black : Color.white
-        if #available(iOS 26.0, *) {
-            self.glassEffect(
-                .clear.tint(backgroundColor.opacity(0.75)).interactive(),
-                in: .rect(cornerRadius: cornerRadius, style: .continuous)
-            )
-        } else {
-            background {
-                RoundedRectangle(
-                    cornerRadius: cornerRadius,
-                    style: .continuous
-                )
-                .fill(backgroundColor)
-            }
-        }
-    }
-
-    /// Shape-only
-    @ViewBuilder
-    func tryGlassEffect(in shape: some Shape) -> some View {
-        if #available(iOS 26.0, tvOS 26.0, *) {
-            self.glassEffect(in: shape)
-        } else { self }
-    }
-
-    /// Disable any animation
-    func noAnimation(_ content: @escaping () -> Void) {
-        var transaction = Transaction()
-        transaction.disablesAnimations = true
-
-        withTransaction(transaction) {
-            content()
         }
     }
 }
