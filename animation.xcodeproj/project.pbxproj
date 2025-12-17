@@ -191,6 +191,8 @@
 		965E6F4B2ECFE00500E233ED /* GlassEffectTextDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */; };
 		965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
 		965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */; };
+		965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FD2DA2EF2289F00989691 /* TruncatedTextEffect.swift */; };
+		965FD2DD2EF2299900989691 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FD2DC2EF2299900989691 /* Text+Extension.swift */; };
 		96601FEF2C7807DD002C91FB /* SchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FEE2C7807DD002C91FB /* SchemePicker.swift */; };
 		96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */; };
 		9662EF122C3B51E900508B80 /* PicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF112C3B51E900508B80 /* PicItem.swift */; };
@@ -661,6 +663,8 @@
 		965E6F482ECFD64100E233ED /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassEffectTextDemoView.swift; sourceTree = "<group>"; };
 		965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionProMenuBarView.swift; sourceTree = "<group>"; };
+		965FD2DA2EF2289F00989691 /* TruncatedTextEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruncatedTextEffect.swift; sourceTree = "<group>"; };
+		965FD2DC2EF2299900989691 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		96601FEE2C7807DD002C91FB /* SchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemePicker.swift; sourceTree = "<group>"; };
 		96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcherView.swift; sourceTree = "<group>"; };
 		9662EF112C3B51E900508B80 /* PicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicItem.swift; sourceTree = "<group>"; };
@@ -1863,6 +1867,7 @@
 				962B04752C215176008E1E5D /* Pixellate.metal */,
 				9636EE992DC16E4E00A0E5A0 /* MarqueeTextView.swift */,
 				965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */,
+				965FD2DA2EF2289F00989691 /* TruncatedTextEffect.swift */,
 			);
 			path = TextEffectView;
 			sourceTree = "<group>";
@@ -2139,6 +2144,7 @@
 				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
 				965E6F482ECFD64100E233ED /* UIFont+Extension.swift */,
 				96CE85312EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift */,
+				965FD2DC2EF2299900989691 /* Text+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3118,6 +3124,7 @@
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
+				965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				AB0B61712E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift in Sources */,
 				AB8CBCB32E9884E000A288E4 /* FullScreenCoverDemoView.swift in Sources */,
@@ -3217,6 +3224,7 @@
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
 				963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,
+				965FD2DD2EF2299900989691 /* Text+Extension.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* TabiOS17.swift in Sources */,
 				963B84742CCC5A1D00C3FB0D /* PanGesture.swift in Sources */,
 				9662F01F2C58348100508B80 /* Page.swift in Sources */,
