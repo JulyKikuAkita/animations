@@ -189,6 +189,7 @@
 		965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E573B2BC5097C00E172B3 /* DropDownView.swift */; };
 		965E6F492ECFD64100E233ED /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E6F482ECFD64100E233ED /* UIFont+Extension.swift */; };
 		965E6F4B2ECFE00500E233ED /* GlassEffectTextDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */; };
+		965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965EA1BF2EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift */; };
 		965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
 		965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */; };
 		965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965FD2DA2EF2289F00989691 /* TruncatedTextEffect.swift */; };
@@ -663,6 +664,7 @@
 		965E573B2BC5097C00E172B3 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		965E6F482ECFD64100E233ED /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		965E6F4A2ECFE00500E233ED /* GlassEffectTextDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassEffectTextDemoView.swift; sourceTree = "<group>"; };
+		965EA1BF2EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedScrollableSliderIOS26DemoView.swift; sourceTree = "<group>"; };
 		965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionProMenuBarView.swift; sourceTree = "<group>"; };
 		965FD2DA2EF2289F00989691 /* TruncatedTextEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruncatedTextEffect.swift; sourceTree = "<group>"; };
 		965FD2DC2EF2299900989691 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
@@ -1683,6 +1685,7 @@
 				963B862C2CE94FAD00C3FB0D /* ExpandableSlideriOS18View.swift */,
 				963B862E2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift */,
 				9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */,
+				965EA1BF2EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift */,
 			);
 			path = Slider;
 			sourceTree = "<group>";
@@ -3125,6 +3128,7 @@
 				AB17E55B2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */,
 				AB5C922D2E0131E3009CF684 /* OrderView.swift in Sources */,
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
+				965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */,
