@@ -340,6 +340,8 @@
 		96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */; };
 		96D495812BBD0E140011D5AA /* ReelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D495802BBD0E140011D5AA /* ReelView.swift */; };
 		96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */; };
+		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
+		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
 		96DF8A942C3A68290063A931 /* ThreadAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A932C3A68290063A931 /* ThreadAppApp.swift */; };
 		96DF8A962C3A68290063A931 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A952C3A68290063A931 /* ContentView.swift */; };
@@ -786,6 +788,8 @@
 		96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableTabbariOS26Style.swift; sourceTree = "<group>"; };
 		96D495802BBD0E140011D5AA /* ReelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelView.swift; sourceTree = "<group>"; };
 		96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCarouselSliderView.swift; sourceTree = "<group>"; };
+		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
+		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
 		96DF8A912C3A68290063A931 /* ThreadApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DF8A932C3A68290063A931 /* ThreadAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadAppApp.swift; sourceTree = "<group>"; };
@@ -1231,6 +1235,8 @@
 				963B86292CE9495900C3FB0D /* EffectViewModifier.swift */,
 				AB0FFC372E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift */,
 				9693DA472D9520B300A29727 /* StaggeredAnimationView.swift */,
+				96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */,
+				96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */,
 			);
 			path = SpecialAnimationEffects;
 			sourceTree = "<group>";
@@ -3075,6 +3081,7 @@
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
+				96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */,
 				9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */,
 				96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
@@ -3123,6 +3130,7 @@
 				9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */,
 				96921B8D2D6FC33500326523 /* SearchView.swift in Sources */,
 				96E4E5F92D175FAB0020261F /* ImageLinkModel.swift in Sources */,
+				96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */,
 				9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */,
 				961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */,
 				AB17E55B2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */,
