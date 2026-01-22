@@ -726,6 +726,7 @@
 		9684833A2BCF61D40023FE2B /* ParticleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffect.swift; sourceTree = "<group>"; };
 		9684833C2BCF62C50023FE2B /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockTextEffectView.swift; sourceTree = "<group>"; };
+		968B5E182F22071B003BCF16 /* CustomToastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomToastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -1013,6 +1014,7 @@
 		9650A1BD2DE4388700D2D67C /* PokemonPlay */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (9650A1C82DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 9650A1C92DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PokemonPlay; sourceTree = "<group>"; };
 		9658369F2DD2BB250062F372 /* StoreKitDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (96F0A6B62E963E7C000B572E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StoreKitDemo; sourceTree = "<group>"; };
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
+		968B5E192F22071B003BCF16 /* CustomToastApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CustomToastApp; sourceTree = "<group>"; };
 		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		96E36A452DB217F900A8EFBA /* Monitor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Monitor; sourceTree = "<group>"; };
 		AB17E52F2E60FAA700C50B18 /* authOTP */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB17E6692E61759500C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = authOTP; sourceTree = "<group>"; };
@@ -1111,6 +1113,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		967958412D2DD24B009E74CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		968B5E152F22071B003BCF16 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1340,6 +1349,7 @@
 				AB35A6D72E4DB3DE00573A3D /* onBoarding */,
 				AB333A502E85E6A200368EB8 /* PDFMaker */,
 				AB8CBF092E9E23F000A288E4 /* MyCanvas */,
+				968B5E192F22071B003BCF16 /* CustomToastApp */,
 				AB5C932E2E03E28F009CF684 /* Frameworks */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
@@ -1368,6 +1378,7 @@
 				AB35A6D62E4DB3DE00573A3D /* onBoarding.app */,
 				AB333A4F2E85E6A200368EB8 /* PDFMaker.app */,
 				AB8CBF082E9E23F000A288E4 /* MyCanvas.app */,
+				968B5E182F22071B003BCF16 /* CustomToastApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2573,6 +2584,28 @@
 			productReference = 967958442D2DD24B009E74CA /* Habit.app */;
 			productType = "com.apple.product-type.application";
 		};
+		968B5E172F22071B003BCF16 /* CustomToastApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 968B5E202F22071C003BCF16 /* Build configuration list for PBXNativeTarget "CustomToastApp" */;
+			buildPhases = (
+				968B5E142F22071B003BCF16 /* Sources */,
+				968B5E152F22071B003BCF16 /* Frameworks */,
+				968B5E162F22071B003BCF16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				968B5E192F22071B003BCF16 /* CustomToastApp */,
+			);
+			name = CustomToastApp;
+			packageProductDependencies = (
+			);
+			productName = CustomToastApp;
+			productReference = 968B5E182F22071B003BCF16 /* CustomToastApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		96DF8A902C3A68290063A931 /* ThreadApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96DF8AB82C3A682A0063A931 /* Build configuration list for PBXNativeTarget "ThreadApp" */;
@@ -2732,7 +2765,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					9604D1B42DE3A62E0087AB24 = {
@@ -2775,6 +2808,9 @@
 					};
 					967958432D2DD24B009E74CA = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					968B5E172F22071B003BCF16 = {
+						CreatedOnToolsVersion = 26.1;
 					};
 					96DF8A902C3A68290063A931 = {
 						CreatedOnToolsVersion = 16.0;
@@ -2820,6 +2856,7 @@
 				961F3B8A2B8818240055D79B /* animation */,
 				9621DC242BEF3CF700183CB7 /* demoApps */,
 				9621DC492BEF3E5E00183CB7 /* Alert */,
+				968B5E172F22071B003BCF16 /* CustomToastApp */,
 				9621DD862BF47FC800183CB7 /* MyMint */,
 				96DF8A902C3A68290063A931 /* ThreadApp */,
 				9613D7112C7BE42A007FF2E7 /* PlayStationApp */,
@@ -2964,6 +3001,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		967958422D2DD24B009E74CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		968B5E162F22071B003BCF16 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3545,6 +3589,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				967958702D2DD2EF009E74CA /* SportItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		968B5E142F22071B003BCF16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4483,6 +4534,72 @@
 			};
 			name = Release;
 		};
+		968B5E212F22071C003BCF16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8G38258K28;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.CustomToastApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		968B5E222F22071C003BCF16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8G38258K28;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.CustomToastApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		96DF8AB22C3A682A0063A931 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5050,6 +5167,15 @@
 			buildConfigurations = (
 				967958652D2DD24C009E74CA /* Debug */,
 				967958662D2DD24C009E74CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		968B5E202F22071C003BCF16 /* Build configuration list for PBXNativeTarget "CustomToastApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				968B5E212F22071C003BCF16 /* Debug */,
+				968B5E222F22071C003BCF16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
