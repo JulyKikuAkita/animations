@@ -258,6 +258,10 @@
 		9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833A2BCF61D40023FE2B /* ParticleEffect.swift */; };
 		9684833D2BCF62C50023FE2B /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9684833C2BCF62C50023FE2B /* Particle.swift */; };
 		968A17D42C07052F0072A0BA /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */; };
+		968B5F942F220A01003BCF16 /* LoopingScrollViewDemo+AppleStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */; };
+		968B5F962F220C13003BCF16 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F952F220C0F003BCF16 /* Stock.swift */; };
+		968B5F972F220C13003BCF16 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F952F220C0F003BCF16 /* Stock.swift */; };
+		968B5F982F220C13003BCF16 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F952F220C0F003BCF16 /* Stock.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -727,6 +731,8 @@
 		9684833C2BCF62C50023FE2B /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		968A17D32C07052F0072A0BA /* FlipClockTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockTextEffectView.swift; sourceTree = "<group>"; };
 		968B5E182F22071B003BCF16 /* CustomToastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomToastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoopingScrollViewDemo+AppleStock.swift"; sourceTree = "<group>"; };
+		968B5F952F220C0F003BCF16 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -1417,6 +1423,7 @@
 				96ACBEF22C33B79E004F3070 /* Expense.swift */,
 				96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */,
 				96B884E92BDD82B000196125 /* Interpolation.swift */,
+				968B5F952F220C0F003BCF16 /* Stock.swift */,
 				9684833C2BCF62C50023FE2B /* Particle.swift */,
 				9621DC7F2BEF461000183CB7 /* PhotoItem.swift */,
 				96FF509C2B944D1B00B36142 /* PlayerConfig.swift */,
@@ -1972,6 +1979,7 @@
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */,
 				ABAA1BA02E73BC7F003535CF /* CustomListView */,
 				960663242DD931430084B468 /* ListRowsInteraction */,
 				9663BB552DDE9AD100037CF1 /* Calendar */,
@@ -3120,6 +3128,7 @@
 				96FCA7D22DAC5EDD00774FB7 /* SkeletonView+RedacttDemo.swift in Sources */,
 				961F51D92BC11B5200F0D953 /* Navigation+Extension.swift in Sources */,
 				969219E12D6DA2CC00326523 /* ContactScrollDemoView.swift in Sources */,
+				968B5F962F220C13003BCF16 /* Stock.swift in Sources */,
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
@@ -3356,6 +3365,7 @@
 				AB0FFC382E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift in Sources */,
 				AB0E9DA02DE2655600C62391 /* MorphCustomMenuDemoView.swift in Sources */,
 				963B84712CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift in Sources */,
+				968B5F942F220A01003BCF16 /* LoopingScrollViewDemo+AppleStock.swift in Sources */,
 				9621D9672BE8409A00183CB7 /* TagLayout.swift in Sources */,
 				9662F0232C5838CB00508B80 /* MorphingSymbolView.swift in Sources */,
 				96B884EA2BDD82B000196125 /* Interpolation.swift in Sources */,
@@ -3390,6 +3400,7 @@
 				96E4E5FB2D175FAB0020261F /* ImageLinkModel.swift in Sources */,
 				96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */,
 				963B9CFA2D5492B200453320 /* SwipeActionModel.swift in Sources */,
+				968B5F972F220C13003BCF16 /* Stock.swift in Sources */,
 				9662F0312C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
 				963B87DB2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
@@ -3525,6 +3536,7 @@
 				96ACBEF32C33B79E004F3070 /* Expense.swift in Sources */,
 				969219DC2D6D9EEA00326523 /* Contact.swift in Sources */,
 				9621DDAF2BF487BB00183CB7 /* Transaction.swift in Sources */,
+				968B5F982F220C13003BCF16 /* Stock.swift in Sources */,
 				9662EFDB2C47A8AE00508B80 /* Message.swift in Sources */,
 				96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				AB0EA17C2DEBBB5100C62391 /* DummyViews.swift in Sources */,
