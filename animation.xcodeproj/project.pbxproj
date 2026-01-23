@@ -262,6 +262,9 @@
 		968B5F962F220C13003BCF16 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F952F220C0F003BCF16 /* Stock.swift */; };
 		968B5F972F220C13003BCF16 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F952F220C0F003BCF16 /* Stock.swift */; };
 		968B5F982F220C13003BCF16 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F952F220C0F003BCF16 /* Stock.swift */; };
+		968B5F9A2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
+		968B5F9B2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
+		968B5F9C2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -733,6 +736,7 @@
 		968B5E182F22071B003BCF16 /* CustomToastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomToastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoopingScrollViewDemo+AppleStock.swift"; sourceTree = "<group>"; };
 		968B5F952F220C0F003BCF16 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		968B5F992F22F69D003BCF16 /* DummyChartViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyChartViews.swift; sourceTree = "<group>"; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -1801,6 +1805,7 @@
 		9662EFC92C460E8600508B80 /* HelpView */ = {
 			isa = PBXGroup;
 			children = (
+				968B5F992F22F69D003BCF16 /* DummyChartViews.swift */,
 				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
 				AB0EA1792DEBBB5100C62391 /* DummyViews.swift */,
 			);
@@ -3153,6 +3158,7 @@
 				AB8747C52D8F63C200507C55 /* WaveFormRectangleShape.swift in Sources */,
 				963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */,
 				AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */,
+				968B5F9C2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */,
 				96CE85322EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift in Sources */,
@@ -3467,6 +3473,7 @@
 				9621DC922BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				96352D502C0ED814001AD2FD /* CreditCard.swift in Sources */,
 				9621DC5F2BEF3F1B00183CB7 /* DemoView.swift in Sources */,
+				968B5F9B2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */,
 				9621DC3A2BEF3D7600183CB7 /* Card.swift in Sources */,
 				9662EFED2C4B4D8400508B80 /* PhotoAppIOS18View.swift in Sources */,
 				9621DC342BEF3D5600183CB7 /* AppleMusicHomeView.swift in Sources */,
@@ -3512,6 +3519,7 @@
 				96AC81012C84FFF900ABBE78 /* Control.swift in Sources */,
 				96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */,
 				9621DD992BF47FDA00183CB7 /* Particle.swift in Sources */,
+				968B5F9A2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */,
 				9621DD9A2BF47FDA00183CB7 /* Tag.swift in Sources */,
 				9621DD9B2BF47FDA00183CB7 /* ActionModel.swift in Sources */,
 				96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */,
