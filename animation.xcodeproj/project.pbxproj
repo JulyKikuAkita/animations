@@ -265,6 +265,7 @@
 		968B5F9A2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
 		968B5F9B2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
 		968B5F9C2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
+		968B5F9E2F22FC84003BCF16 /* TextFieldMicroInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -737,6 +738,7 @@
 		968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoopingScrollViewDemo+AppleStock.swift"; sourceTree = "<group>"; };
 		968B5F952F220C0F003BCF16 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		968B5F992F22F69D003BCF16 /* DummyChartViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyChartViews.swift; sourceTree = "<group>"; };
+		968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldMicroInteractionView.swift; sourceTree = "<group>"; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -1660,6 +1662,7 @@
 		96301B322C2A5FAB00775407 /* TextFieldView */ = {
 			isa = PBXGroup;
 			children = (
+				968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */,
 				AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */,
 				96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */,
 				965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */,
@@ -3200,6 +3203,7 @@
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
+				968B5F9E2F22FC84003BCF16 /* TextFieldMicroInteractionView.swift in Sources */,
 				AB0B61712E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift in Sources */,
 				AB8CBCB32E9884E000A288E4 /* FullScreenCoverDemoView.swift in Sources */,
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
