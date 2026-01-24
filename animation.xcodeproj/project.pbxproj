@@ -266,6 +266,7 @@
 		968B5F9B2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
 		968B5F9C2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F992F22F69D003BCF16 /* DummyChartViews.swift */; };
 		968B5F9E2F22FC84003BCF16 /* TextFieldMicroInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */; };
+		968B61052F2442D8003BCF16 /* SlideToCancelText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B61042F2442CD003BCF16 /* SlideToCancelText.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -739,6 +740,7 @@
 		968B5F952F220C0F003BCF16 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		968B5F992F22F69D003BCF16 /* DummyChartViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyChartViews.swift; sourceTree = "<group>"; };
 		968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldMicroInteractionView.swift; sourceTree = "<group>"; };
+		968B61042F2442CD003BCF16 /* SlideToCancelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToCancelText.swift; sourceTree = "<group>"; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -1662,6 +1664,7 @@
 		96301B322C2A5FAB00775407 /* TextFieldView */ = {
 			isa = PBXGroup;
 			children = (
+				968B61042F2442CD003BCF16 /* SlideToCancelText.swift */,
 				968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */,
 				AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */,
 				96301B332C2A5FD300775407 /* TextFieldSelectionAPIView.swift */,
@@ -3356,6 +3359,7 @@
 				ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */,
 				96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */,
 				96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */,
+				968B61052F2442D8003BCF16 /* SlideToCancelText.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
 				AB8CBCB72E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */,
 				962B04762C215176008E1E5D /* Pixellate.metal in Sources */,
