@@ -27,6 +27,7 @@ extension [Month] {
                 let month = Month(name: name, date: date, weeks: weeks)
 
                 if isPast {
+                    /// Past month should be append in reversed order, 7 -> 6 -> 5 -> 4 for smooth scroll
                     newMonths.insert(month, at: 0)
                 } else {
                     newMonths.append(month)

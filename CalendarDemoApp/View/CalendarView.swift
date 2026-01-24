@@ -3,9 +3,13 @@
 //  animation
 //
 //  Created on 1/23/26.
+/// Create infinite scroll of calendar view by load 10 months (before, 5, after 5) of  the current date
+/// and set maximum buffer size 30 months in the array to guarantee scroll performance
 import SwiftUI
 
 let monthHeight: CGFloat = 400
+let monthLotSize: CGFloat = 10
+let monthBufferSize = 30
 
 struct CalendarView: View {
     @State private var months: [Month] = []
@@ -45,20 +49,27 @@ struct CalendarView: View {
 
             if offsetY > (contentHeight - frameHeight - threshold), !isLoadingBottom {
                 /// Loading future months
+                loadFutureMonths(info: newValue)
             }
 
             if offsetY < threshold, !isLoadingTop {
                 /// Loading past months
+                loadPastMonths(info: newValue)
             }
 
         })
+        .background(ScrollToTopDisable())
+        .compositingGroup()
         .safeAreaInset(edge: .top, spacing: 0) {
             symbolView()
         }
         .overlay(alignment: .bottom) {
             bottomBar()
         }
-        .onAppear(perform: loadInitialData)
+        .onAppear {
+            guard months.isEmpty else { return }
+            loadInitialData()
+        }
     }
 
     func symbolView() -> some View {
@@ -79,22 +90,55 @@ struct CalendarView: View {
         .background(.ultraThinMaterial)
     }
 
-    private func loadFutureMonths(info _: ScrollInfo) {
+    private func loadFutureMonths(info: ScrollInfo) {
         isLoadingBottom = true
         let futureMonths = months.createMonths(10, isPast: false)
         months.append(contentsOf: futureMonths)
 
-        if months.count > 30 { months.removeFirst(10) }
+        if months.count > monthBufferSize {
+            adjustScrollContentOffset(removeTop: true, info: info)
+        }
         /// Resetting status in dispatch queue ( avoid infinite creation)
         DispatchQueue.main.async {
             isLoadingBottom = false
         }
     }
 
-    private func loadPastMonths(info _: ScrollInfo) {}
+    private func loadPastMonths(info: ScrollInfo) {
+        isLoadingTop = true
+        let pastMonths = months.createMonths(10, isPast: true)
+        months.insert(contentsOf: pastMonths, at: 0)
+        adjustScrollContentOffset(removeTop: false, info: info)
+
+        /// Resetting status in dispatch queue ( avoid infinite creation)
+        DispatchQueue.main.async {
+            isLoadingTop = false
+        }
+    }
+
+    private func adjustScrollContentOffset(removeTop: Bool, info: ScrollInfo) {
+        let previousContentHeight = info.contentHeight
+        let previousOffset = info.offsetY
+        let adjustmentHeight: CGFloat = monthHeight * monthLotSize
+
+        if removeTop {
+            months.removeFirst(10)
+        } else {
+            if months.count > monthBufferSize { months.removeLast(10) }
+        }
+
+        let newContentHeight = previousContentHeight + (removeTop ? -adjustmentHeight : adjustmentHeight)
+        let newContentOffset = previousOffset + (newContentHeight - previousContentHeight)
+
+        /// use transaction scroll property  to avoid scroll stop on setting scroll position
+        var transaction = Transaction()
+        transaction.scrollPositionUpdatePreservesVelocity = true
+        withTransaction(transaction) {
+            scrollPosition.scrollTo(y: newContentOffset)
+        }
+    }
 
     func loadInitialData() {
-        guard months.isEmpty else { return }
         months = Date.now.initialLoadMonths
         ///  Centering scroll position
         let centerOffset = (CGFloat(months.count / 2) * monthHeight) - (monthHeight / 2)
@@ -104,7 +148,11 @@ struct CalendarView: View {
     func bottomBar() -> some View {
         HStack {
             Button {
+                isResetting = true
                 loadInitialData()
+                DispatchQueue.main.async {
+                    isResetting = false
+                }
             } label: {
                 Text("Today")
                     .fontWeight(.semibold)
@@ -148,6 +196,10 @@ struct CalendarView: View {
     }
 }
 
+/// Setting month Height to 350:
+///  title of the view: 50
+///  each week height 50, max 6 weeks in a month = 50 * 6
+/// Not using dynamic height here b.c use scroll content offset -> need to know the exact height of the content to be added/removed
 struct MonthView: View {
     var month: Month
     var body: some View {
@@ -155,6 +207,7 @@ struct MonthView: View {
             Text(month.name)
                 .font(.title2)
                 .fontWeight(.bold)
+                .frame(height: 50, alignment: .bottom)
 
             /// Weeks View
             VStack(spacing: 0) {
@@ -166,9 +219,15 @@ struct MonthView: View {
                         }
                     }
                     .frame(maxHeight: .infinity)
+                    .overlay(alignment: .bottom) {
+                        if !week.isLast {
+                            Divider()
+                        }
+                    }
                 }
             }
         }
+        .padding(.horizontal, 15)
     }
 }
 

@@ -977,6 +977,7 @@
 			membershipExceptions = (
 				"Extensions/Date+Extensions.swift",
 				"Extensions/Month+Extensions.swift",
+				Extensions/ScrollToTopDisable.swift,
 				Model/CalendarData.swift,
 				Model/ScrollInfo.swift,
 				View/CalendarView.swift,
