@@ -270,6 +270,7 @@
 		968B628C2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */; };
 		968B628D2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */; };
 		968B628E2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */; };
+		968B64222F26B89F003BCF16 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -746,6 +747,7 @@
 		968B61042F2442CD003BCF16 /* SlideToCancelText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideToCancelText.swift; sourceTree = "<group>"; };
 		968B62642F24819A003BCF16 /* CalendarDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotPreventingMaskView.swift; sourceTree = "<group>"; };
+		968B64082F257432003BCF16 /* BookDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -1047,6 +1049,7 @@
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
 		968B5E192F22071B003BCF16 /* CustomToastApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CustomToastApp; sourceTree = "<group>"; };
 		968B62652F24819A003BCF16 /* CalendarDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (968B62752F2481D3003BCF16 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = CalendarDemoApp; sourceTree = "<group>"; };
+		968B64092F257432003BCF16 /* BookDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BookDemoApp; sourceTree = "<group>"; };
 		96976CEB2D50347100643821 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		96E36A452DB217F900A8EFBA /* Monitor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Monitor; sourceTree = "<group>"; };
 		AB17E52F2E60FAA700C50B18 /* authOTP */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB17E6692E61759500C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = authOTP; sourceTree = "<group>"; };
@@ -1159,6 +1162,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		968B62612F24819A003BCF16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		968B64052F257432003BCF16 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1390,6 +1400,7 @@
 				AB8CBF092E9E23F000A288E4 /* MyCanvas */,
 				968B5E192F22071B003BCF16 /* CustomToastApp */,
 				968B62652F24819A003BCF16 /* CalendarDemoApp */,
+				968B64092F257432003BCF16 /* BookDemoApp */,
 				AB5C932E2E03E28F009CF684 /* Frameworks */,
 				961F3B8C2B8818240055D79B /* Products */,
 			);
@@ -1420,6 +1431,7 @@
 				AB8CBF082E9E23F000A288E4 /* MyCanvas.app */,
 				968B5E182F22071B003BCF16 /* CustomToastApp.app */,
 				968B62642F24819A003BCF16 /* CalendarDemoApp.app */,
+				968B64082F257432003BCF16 /* BookDemoApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2675,6 +2687,28 @@
 			productReference = 968B62642F24819A003BCF16 /* CalendarDemoApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		968B64072F257432003BCF16 /* BookDemoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 968B64122F257433003BCF16 /* Build configuration list for PBXNativeTarget "BookDemoApp" */;
+			buildPhases = (
+				968B64042F257432003BCF16 /* Sources */,
+				968B64052F257432003BCF16 /* Frameworks */,
+				968B64062F257432003BCF16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				968B64092F257432003BCF16 /* BookDemoApp */,
+			);
+			name = BookDemoApp;
+			packageProductDependencies = (
+			);
+			productName = BookDemoApp;
+			productReference = 968B64082F257432003BCF16 /* BookDemoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		96DF8A902C3A68290063A931 /* ThreadApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96DF8AB82C3A682A0063A931 /* Build configuration list for PBXNativeTarget "ThreadApp" */;
@@ -2884,6 +2918,9 @@
 					968B62632F24819A003BCF16 = {
 						CreatedOnToolsVersion = 26.1;
 					};
+					968B64072F257432003BCF16 = {
+						CreatedOnToolsVersion = 26.1;
+					};
 					96DF8A902C3A68290063A931 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -2947,6 +2984,7 @@
 				AB333A4E2E85E6A200368EB8 /* PDFMaker */,
 				AB8CBF072E9E23F000A288E4 /* MyCanvas */,
 				968B62632F24819A003BCF16 /* CalendarDemoApp */,
+				968B64072F257432003BCF16 /* BookDemoApp */,
 			);
 		};
 /* End PBXProject section */
@@ -3088,6 +3126,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		968B62622F24819A003BCF16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		968B64062F257432003BCF16 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3695,6 +3740,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		968B64042F257432003BCF16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				968B64222F26B89F003BCF16 /* Book.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4765,6 +4818,72 @@
 			};
 			name = Release;
 		};
+		968B64102F257433003BCF16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8G38258K28;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.BookDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		968B64112F257433003BCF16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8G38258K28;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nanachi.playground.BookDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		96DF8AB22C3A682A0063A931 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5350,6 +5469,15 @@
 			buildConfigurations = (
 				968B626C2F24819B003BCF16 /* Debug */,
 				968B626D2F24819B003BCF16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		968B64122F257433003BCF16 /* Build configuration list for PBXNativeTarget "BookDemoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				968B64102F257433003BCF16 /* Debug */,
+				968B64112F257433003BCF16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
