@@ -271,6 +271,7 @@
 		968B628D2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */; };
 		968B628E2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */; };
 		968B64222F26B89F003BCF16 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96921AE92D6EE40C00326523 /* Book.swift */; };
+		968B673B2F287545003BCF16 /* UndoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968B673A2F28753E003BCF16 /* UndoManager.swift */; };
 		968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */; };
 		968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D782B8C34CB00007734 /* WindowSharedModel.swift */; };
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
@@ -748,6 +749,7 @@
 		968B62642F24819A003BCF16 /* CalendarDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotPreventingMaskView.swift; sourceTree = "<group>"; };
 		968B64082F257432003BCF16 /* BookDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		968B673A2F28753E003BCF16 /* UndoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoManager.swift; sourceTree = "<group>"; };
 		968D2D762B8C2B3A00007734 /* ProfileList+SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileList+SheetView.swift"; sourceTree = "<group>"; };
 		968D2D782B8C34CB00007734 /* WindowSharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModel.swift; sourceTree = "<group>"; };
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
@@ -2329,6 +2331,7 @@
 		AB8CBDDB2E9AFDE900A288E4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				968B673A2F28753E003BCF16 /* UndoManager.swift */,
 				963DC1FC2D270D1E00C97334 /* CacheManager.swift */,
 				AB8CBDDC2E9AFE0800A288E4 /* VersionCheckManager.swift */,
 			);
@@ -3489,6 +3492,7 @@
 				968B5F942F220A01003BCF16 /* LoopingScrollViewDemo+AppleStock.swift in Sources */,
 				9621D9672BE8409A00183CB7 /* TagLayout.swift in Sources */,
 				9662F0232C5838CB00508B80 /* MorphingSymbolView.swift in Sources */,
+				968B673B2F287545003BCF16 /* UndoManager.swift in Sources */,
 				96B884EA2BDD82B000196125 /* Interpolation.swift in Sources */,
 				AB7CC2A92E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift in Sources */,
 				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
