@@ -6,20 +6,20 @@
 
 import SwiftUI
 
-struct Month: Identifiable {
+struct CalendarMonth: Identifiable {
     var id: String = UUID().uuidString
     var name: String
     var date: Date
-    var weeks: [Week]
+    var weeks: [CalendarWeek]
 }
 
-struct Week: Identifiable {
+struct CalendarWeek: Identifiable {
     var id: String = UUID().uuidString
-    var days: [Day]
+    var days: [CalendarDay]
     var isLast: Bool = false
 }
 
-struct Day: Identifiable {
+struct CalendarDay: Identifiable {
     var id: String = UUID().uuidString
     var value: Int?
     var date: Date?
