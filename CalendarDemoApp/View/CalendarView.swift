@@ -12,7 +12,7 @@ let monthLotSize: CGFloat = 10
 let monthBufferSize = 30
 
 struct CalendarView: View {
-    @State private var months: [Month] = []
+    @State private var months: [CalendarMonth] = []
     @State private var scrollPosition: ScrollPosition = .init()
     /// Infinite scroll properties
     @State private var isLoadingTop: Bool = false
@@ -201,7 +201,7 @@ struct CalendarView: View {
 ///  each week height 50, max 6 weeks in a month = 50 * 6
 /// Not using dynamic height here b.c use scroll content offset -> need to know the exact height of the content to be added/removed
 struct MonthView: View {
-    var month: Month
+    var month: CalendarMonth
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(month.name)
@@ -233,7 +233,7 @@ struct MonthView: View {
 
 /// Individual Day View
 struct DayView: View {
-    var day: Day
+    var day: CalendarDay
     var body: some View {
         if let dayValue = day.value, let date = day.date, !day.isPlaceholder {
             let isToday = Calendar.current.isDateInToday(date)
