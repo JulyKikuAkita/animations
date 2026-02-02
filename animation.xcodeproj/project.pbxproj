@@ -431,6 +431,7 @@
 		AB17E55D2E611E4500C50B18 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17E5552E61183500C50B18 /* Country.swift */; };
 		AB17E6672E61655F00C50B18 /* OTPVerificationTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96976C752D50245800643821 /* OTPVerificationTextFieldView.swift */; };
 		AB22B73A2E7A88B900F2DDDE /* CustomTabbariOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */; };
+		AB33103E2F307D2C00FC2FA5 /* DIRQScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB33103D2F307CFB00FC2FA5 /* DIRQScannerView.swift */; };
 		AB333B812E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
 		AB333B822E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
 		AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
@@ -876,6 +877,7 @@
 		AB17E5552E61183500C50B18 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		AB17E55A2E611A3500C50B18 /* CountryCodePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodePickerView.swift; sourceTree = "<group>"; };
 		AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbariOS26.swift; sourceTree = "<group>"; };
+		AB33103D2F307CFB00FC2FA5 /* DIRQScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIRQScannerView.swift; sourceTree = "<group>"; };
 		AB333A4F2E85E6A200368EB8 /* PDFMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabiOS26.swift; sourceTree = "<group>"; };
 		AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarUIToolKitiOS26.swift; sourceTree = "<group>"; };
@@ -1509,6 +1511,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AB33103C2F307CE800FC2FA5 /* QRCode */,
 				9697F7602EB039D2005C5C77 /* Alert */,
 				AB8CBDDE2E9B028100A288E4 /* AppUpdateView */,
 				ABB222982E6CDE66008CFE21 /* Notofications */,
@@ -2241,6 +2244,14 @@
 				961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */,
 			);
 			path = UIKIT;
+			sourceTree = "<group>";
+		};
+		AB33103C2F307CE800FC2FA5 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				AB33103D2F307CFB00FC2FA5 /* DIRQScannerView.swift */,
+			);
+			path = QRCode;
 			sourceTree = "<group>";
 		};
 		AB333B842E8B0EDD00368EB8 /* iOS26 */ = {
@@ -3372,6 +3383,7 @@
 				AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */,
 				962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
+				AB33103E2F307D2C00FC2FA5 /* DIRQScannerView.swift in Sources */,
 				963B87DA2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */,
 				969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */,
