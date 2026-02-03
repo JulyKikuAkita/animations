@@ -4,8 +4,10 @@
 //
 //  Created on 2/1/26.
 
+import AVFoundation
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct DIRQScannerDemoView: View {
     @State private var showScanner: Bool = false
     var body: some View {
@@ -22,6 +24,7 @@ struct DIRQScannerDemoView: View {
     }
 }
 
+@available(iOS 26.0, *)
 extension View {
     @ViewBuilder
     func qrscanner(isScanning: Binding<Bool>, onScan: @escaping (String) -> Void) -> some View {
@@ -29,6 +32,7 @@ extension View {
     }
 }
 
+@available(iOS 26.0, *)
 private struct QRScannerViewModifier: ViewModifier {
     @Binding var isScanning: Bool
     var onScan: (String) -> Void
@@ -38,6 +42,7 @@ private struct QRScannerViewModifier: ViewModifier {
         content
             .fullScreenCover(isPresented: $showFulllScreenCover) {
                 DIRQScannerView {
+                    isScanning = false
                     Task { @MainActor in
                         showFulllScreenCoverWithoutAnimation(false)
                     }
@@ -70,6 +75,8 @@ struct DIRQScannerView: View {
     @State private var isInitialized: Bool = false
     @State private var showContent: Bool = false
     @State private var isExpanding: Bool = false
+    @State private var camera: CameraProperties = .init()
+    @Environment(\.openURL) private var openURL
     var body: some View {
         GeometryReader {
             let size = $0.size
@@ -79,6 +86,7 @@ struct DIRQScannerView: View {
             let haveDynamicIsland: Bool = safeArea.top >= 59
             let dynamicIslandWidth: CGFloat = 120
             let dynamicIslandHeight: CGFloat = 36
+            let topOffset: CGFloat = haveDynamicIsland ? (11 + max(safeArea.top - 59, 0)) : (isExpanding ? (safeArea.top) : -50)
 
             let expandedWidth: CGFloat = size.width - 30
             let expandedHeight: CGFloat = expandedWidth
@@ -91,13 +99,51 @@ struct DIRQScannerView: View {
                         toggle(false)
                     }
                 /// Scanner Animated view
-                ConcentricRectangle(
-                    corners: .concentric(minimum: .fixed(30)),
-                    isUniform: true
-                )
-                .fill(.black)
-                .frame(width: isExpanding ? expandedWidth : dynamicIslandWidth,
-                       height: isExpanding ? expandedHeight : dynamicIslandHeight)
+                if showContent {
+                    ConcentricRectangle(
+                        corners: .concentric(minimum: .fixed(30)),
+                        isUniform: true
+                    )
+                    .fill(.black)
+                    .overlay {
+                        GeometryReader {
+                            let cameraSize = $0.size
+                            scannerView(cameraSize)
+                        }
+                        .overlay(alignment: .bottom) {
+                            Text("Scan your QR code")
+                                .font(.caption2)
+                                .foregroundStyle(.white.secondary)
+                                .lineLimit(1)
+                                .fixedSize()
+                                .offset(y: 25)
+                        }
+                        .padding(80)
+                        .compositingGroup()
+                        .blur(radius: isExpanding ? 0 : 20)
+                        .opacity(isExpanding ? 1 : 0)
+                        .geometryGroup()
+                        .offset(y: nonDynamicIslandHaveSpacing || haveDynamicIsland ? 0 : 10)
+                    }
+                    .frame(width: isExpanding ? expandedWidth : dynamicIslandWidth,
+                           height: isExpanding ? expandedHeight : dynamicIslandHeight)
+                    .offset(y: topOffset)
+                    .background {
+                        if isExpanding {
+                            Rectangle()
+                                .fill(.clear)
+                                .onDisappear {
+                                    /// triggered when the isExpanding animation completes
+                                    showContent = false
+                                }
+                        }
+                    }
+                    .transition(.identity)
+                    .onDisappear {
+                        /// when animation completed -> it calls on disappear and trigger onClose
+                        onClose()
+                    }
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .ignoresSafeArea()
@@ -107,8 +153,49 @@ struct DIRQScannerView: View {
                 showContent = true
                 try? await Task.sleep(for: .seconds(0.05))
                 toggle(true)
+                camera.permissionState = await CameraProperties.checkAndAskCameraPermission()
             }
         }
+        .statusBarHidden()
+    }
+
+    @ViewBuilder
+    private func scannerView(_ size: CGSize) -> some View {
+        let shape = RoundedRectangle(cornerRadius: size.width * 0.05, style: .continuous)
+
+        ZStack {
+            /// Camera AVSessionLayer View
+            if let permissionState = camera.permissionState {
+                if permissionState == .approved {}
+
+                if permissionState == .denied {
+                    /// link to settings url to update camera settings
+                    VStack(spacing: 4) {
+                        Image(systemName: "camera.viewfinder")
+                            .font(.system(size: size.width * 0.15))
+                            .foregroundStyle(.white)
+
+                        Text("Permission denied")
+                            .font(.caption)
+                            .foregroundStyle(.red)
+
+                        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                            Button("Go to Settings") {
+                                openURL(settingsURL)
+                            }
+                            .font(.caption)
+                            .foregroundStyle(.white)
+                            .underline()
+                        }
+                    }
+                    .fixedSize()
+                }
+            }
+            shape
+                .stroke(.white, lineWidth: 2)
+        }
+        .frame(width: size.width, height: size.height)
+        .clipShape(shape)
     }
 
     private func toggle(_ status: Bool) {
@@ -116,4 +203,13 @@ struct DIRQScannerView: View {
             isExpanding = status
         }
     }
+
+    var nonDynamicIslandHaveSpacing: Bool {
+        false
+    }
+}
+
+@available(iOS 26.0, *)
+#Preview {
+    DIRQScannerDemoView()
 }

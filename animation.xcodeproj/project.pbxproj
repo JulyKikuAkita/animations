@@ -176,6 +176,7 @@
 		964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
 		964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
 		964525772F2AE3F100E32278 /* SortableIOS26GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964525762F2AE3E400E32278 /* SortableIOS26GridView.swift */; };
+		9645273A2F31B89600E32278 /* CameraProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964527392F31B88E00E32278 /* CameraProperties.swift */; };
 		9650AE092DE5133F00D2D67C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9650AE082DE5133F00D2D67C /* SDWebImageSwiftUI */; };
 		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
 		96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */; };
@@ -663,6 +664,7 @@
 		9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteractiveNavigationGestureView.swift; path = "View/Tabbar+Navigaion/InteractiveNavigationGestureView.swift"; sourceTree = SOURCE_ROOT; };
 		9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtractor.swift; sourceTree = "<group>"; };
 		964525762F2AE3E400E32278 /* SortableIOS26GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableIOS26GridView.swift; sourceTree = "<group>"; };
+		964527392F31B88E00E32278 /* CameraProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraProperties.swift; sourceTree = "<group>"; };
 		96513E9F2D3DC6590004C7C8 /* Message1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message1.apns; sourceTree = "<group>"; };
 		96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSDemoView.swift; sourceTree = "<group>"; };
 		96513EA22D3DCA9E0004C7C8 /* deeplinkMSG1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG1.apns; sourceTree = "<group>"; };
@@ -2249,6 +2251,7 @@
 		AB33103C2F307CE800FC2FA5 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
+				964527392F31B88E00E32278 /* CameraProperties.swift */,
 				AB33103D2F307CFB00FC2FA5 /* DIRQScannerView.swift */,
 			);
 			path = QRCode;
@@ -3526,6 +3529,7 @@
 				96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */,
 				969ECE482EC7EF590045601B /* LocationPermissionFullSheetView.swift in Sources */,
 				AB17E5562E61183500C50B18 /* Country.swift in Sources */,
+				9645273A2F31B89600E32278 /* CameraProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4178,6 +4182,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = animation/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Scan QR code";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Request permission to location access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -4209,6 +4214,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = animation/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Scan QR code";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Request permission to location access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
