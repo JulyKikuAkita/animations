@@ -155,6 +155,12 @@ struct DIRQScannerView: View {
                 toggle(true)
                 camera.permissionState = await CameraProperties.checkAndAskCameraPermission()
             }
+            .onChange(of: camera.scannedCode) { _, newValue in
+                if let newValue {
+                    onScan(newValue)
+                    toggle(false)
+                }
+            }
         }
         .statusBarHidden()
     }
@@ -166,7 +172,12 @@ struct DIRQScannerView: View {
         ZStack {
             /// Camera AVSessionLayer View
             if let permissionState = camera.permissionState {
-                if permissionState == .approved {}
+                if permissionState == .approved {
+                    CameraLayeriOS26View(size: size, camera: $camera)
+                        .overlay(alignment: .top) {
+                            scannerAnimation(size.height)
+                        }
+                }
 
                 if permissionState == .denied {
                     /// link to settings url to update camera settings
@@ -198,14 +209,115 @@ struct DIRQScannerView: View {
         .clipShape(shape)
     }
 
+    private func scannerAnimation(_ height: CGFloat) -> some View {
+        Rectangle()
+            .fill(.white)
+            .frame(height: 2.5)
+            .phaseAnimator([false, true], content: { content, isScanning in
+                content
+                    .shadow(color: .black.opacity(0.8), radius: 8, x: 0, y: isScanning ? 15 : -15)
+                    .offset(y: isScanning ? height : 0)
+            }, animation: { _ in
+                .easeInOut(duration: 0.85).delay(0.1)
+            })
+    }
+
     private func toggle(_ status: Bool) {
         withAnimation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0)) {
             isExpanding = status
+        }
+
+        if !status {
+            // stop the session on a background queue to avoid blocking the UI thread
+            DispatchQueue.global(qos: .background).async {
+                camera.session.stopRunning()
+            }
         }
     }
 
     var nonDynamicIslandHaveSpacing: Bool {
         false
+    }
+}
+
+private struct CameraLayeriOS26View: UIViewRepresentable {
+    var size: CGSize
+    @Binding var camera: CameraProperties
+    func makeUIView(context _: Context) -> UIView {
+        let view = UIView(frame: .init(origin: .zero, size: size))
+        view.backgroundColor = .clear
+        return view
+    }
+
+    func updateUIView(_: UIView, context _: Context) {}
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
+
+    class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+        var parent: CameraLayeriOS26View
+        init(parent: CameraLayeriOS26View) {
+            self.parent = parent
+            super.init()
+            setupCamera()
+        }
+
+        func setupCamera() {
+            // run the heavy lifting in an async Task so we can hop to MainActor when we need to read/write camera
+            Task {
+                // read the camera properties on MainActor (because `parent.camera` is MainActor-isolated)
+                let (session, output): (AVCaptureSession, AVCaptureMetadataOutput) = await MainActor.run {
+                    (parent.camera.session, parent.camera.output)
+                }
+
+                // early exit if already running
+                guard !session.isRunning else { return }
+
+                // find device (this is fine off-main)
+                guard let device = AVCaptureDevice.DiscoverySession(
+                    deviceTypes: [.builtInWideAngleCamera],
+                    mediaType: .video,
+                    position: .back
+                ).devices.first else { return }
+
+                do {
+                    let input = try AVCaptureDeviceInput(device: device)
+
+                    guard session.canAddInput(input), session.canAddOutput(output) else { return }
+
+                    session.beginConfiguration()
+                    session.addInput(input)
+                    session.addOutput(output)
+
+                    // fully-qualified type so the compiler knows what `.qr` means
+                    output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+
+                    // fully-qualified queue reference so `.main` isn't ambiguous
+                    output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+
+                    session.commitConfiguration()
+
+                    // start the session on a background queue to avoid blocking the UI thread
+                    DispatchQueue.global(qos: .background).async {
+                        session.startRunning()
+                    }
+                } catch {
+                    // handle error if needed
+                    print(error.localizedDescription)
+                }
+            }
+        }
+
+        /// fetch QR code
+        func metadataOutput(_: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from _: AVCaptureConnection) {
+            if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
+               let code = object.stringValue
+            {
+                guard parent.camera.scannedCode == nil else { return }
+                parent.camera.scannedCode = code
+            }
+        }
     }
 }
 

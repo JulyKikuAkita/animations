@@ -8,7 +8,7 @@ import AVFoundation
 
 struct CameraProperties {
     var session: AVCaptureSession = .init()
-    var output: AVCaptureVideoDataOutput = .init()
+    var output: AVCaptureMetadataOutput = .init()
     var scannedCode: String?
     var permissionState: Permission?
 
