@@ -314,6 +314,7 @@
 		969ECE482EC7EF590045601B /* LocationPermissionFullSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */; };
 		969ECE4B2EC86A410045601B /* PulseRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE4A2EC86A410045601B /* PulseRingView.swift */; };
 		969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */; };
+		96A1D2E82F3463D000377C99 /* Paywall3DAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -784,6 +785,7 @@
 		969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionFullSheetView.swift; sourceTree = "<group>"; };
 		969ECE4A2EC86A410045601B /* PulseRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseRingView.swift; sourceTree = "<group>"; };
 		969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerHelper.swift; sourceTree = "<group>"; };
+		96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paywall3DAnimation.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1513,6 +1515,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96A1D2E62F3463BF00377C99 /* 3DAnimation */,
 				AB33103C2F307CE800FC2FA5 /* QRCode */,
 				9697F7602EB039D2005C5C77 /* Alert */,
 				AB8CBDDE2E9B028100A288E4 /* AppUpdateView */,
@@ -2034,6 +2037,14 @@
 				969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */,
 			);
 			path = LocationManager;
+			sourceTree = "<group>";
+		};
+		96A1D2E62F3463BF00377C99 /* 3DAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */,
+			);
+			path = 3DAnimation;
 			sourceTree = "<group>";
 		};
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
@@ -3499,6 +3510,7 @@
 				965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */,
 				9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */,
 				9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */,
+				96A1D2E82F3463D000377C99 /* Paywall3DAnimation.swift in Sources */,
 				AB8C5A942E134DB70003926E /* iOS26SegmentedTabBar.swift in Sources */,
 				AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */,
 				9662F0112C50854400508B80 /* ImageCarouselView.swift in Sources */,
