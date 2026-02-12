@@ -315,6 +315,10 @@
 		969ECE4B2EC86A410045601B /* PulseRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE4A2EC86A410045601B /* PulseRingView.swift */; };
 		969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */; };
 		96A1D2E82F3463D000377C99 /* Paywall3DAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */; };
+		96A1D4AE2F3DA35C00377C99 /* CustomToolBarIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */; };
+		96A1D4B02F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
+		96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
+		96A1D4B22F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -786,6 +790,8 @@
 		969ECE4A2EC86A410045601B /* PulseRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseRingView.swift; sourceTree = "<group>"; };
 		969ECF852EC90E1B0045601B /* LocationManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerHelper.swift; sourceTree = "<group>"; };
 		96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paywall3DAnimation.swift; sourceTree = "<group>"; };
+		96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBarIOS26.swift; sourceTree = "<group>"; };
+		96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyEventView.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1549,6 +1555,7 @@
 				96301B322C2A5FAB00775407 /* TextFieldView */,
 				960663202DD92EC80084B468 /* ThemeSwitcher */,
 				9609DB172DBB2CC300A76F95 /* ToastView */,
+				96A1D4AC2F3DA32E00377C99 /* Toolbar */,
 				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
 				96D495832BBD25160011D5AA /* Video */,
 			);
@@ -1866,6 +1873,7 @@
 				968B5F992F22F69D003BCF16 /* DummyChartViews.swift */,
 				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
 				AB0EA1792DEBBB5100C62391 /* DummyViews.swift */,
+				96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */,
 			);
 			path = HelpView;
 			sourceTree = "<group>";
@@ -2045,6 +2053,14 @@
 				96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */,
 			);
 			path = 3DAnimation;
+			sourceTree = "<group>";
+		};
+		96A1D4AC2F3DA32E00377C99 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */,
+			);
+			path = Toolbar;
 			sourceTree = "<group>";
 		};
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
@@ -3280,6 +3296,7 @@
 				96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */,
 				9621D9652BE5F85B00183CB7 /* TagFieldView.swift in Sources */,
 				96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */,
+				96A1D4B02F3DA9D400377C99 /* DummyEventView.swift in Sources */,
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
 				96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */,
@@ -3392,6 +3409,7 @@
 				969219DD2D6D9EEA00326523 /* Contact.swift in Sources */,
 				AB0FFD212E2D863700E6DCBE /* PullEffectScrollView.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
+				96A1D4AE2F3DA35C00377C99 /* CustomToolBarIOS26.swift in Sources */,
 				96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */,
 				AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */,
 				AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */,
@@ -3582,6 +3600,7 @@
 				96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
 				96921D172D74423100326523 /* UIImage+Color.swift in Sources */,
+				96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */,
 				9621DC3D2BEF3D7A00183CB7 /* Tag.swift in Sources */,
 				AB8CBCB62E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */,
 				9662EF2A2C3E012800508B80 /* Video.swift in Sources */,
@@ -3686,6 +3705,7 @@
 				ABA102252E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				9621DDBC2BF48B3000183CB7 /* View+Extension.swift in Sources */,
 				9682B6D02CB1D355003D917F /* ColorItem.swift in Sources */,
+				96A1D4B22F3DA9D400377C99 /* DummyEventView.swift in Sources */,
 				96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */,
 				965F26682D84BEA700300420 /* UIImage+Color.swift in Sources */,
 				9662EF2B2C3E012800508B80 /* Video.swift in Sources */,
