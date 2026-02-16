@@ -33,12 +33,59 @@ struct CustomMorphingTabBarIOS26DemoView: View {
                 .overlay {
                     Text(activeTab.rawValue)
                 }
-
-            MorphingTabBar(activeTab: $activeTab, isExpanded: $isExpanded) {}
-                .padding(.horizontal, 20)
-                .padding(.bottom, 25)
+            HStack(alignment: .bottom, spacing: 12) {
+                MorphingTabBar(activeTab: $activeTab, isExpanded: $isExpanded) {
+                    dummyExpandedContent()
+                }
+                Button {
+                    withAnimation(.bouncy(duration: 0.5, extraBounce: 0.05)) {
+                        isExpanded.toggle()
+                    }
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.system(size: 19, weight: .medium))
+                        .frame(width: 52, height: 52)
+                        .foregroundStyle(.primary)
+                }
+                .buttonStyle(PlanGlassButtonEffect(shape: .circle))
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 25)
         }
         .ignoresSafeArea(.all, edges: .bottom)
+    }
+
+    func dummyExpandedContent() -> some View {
+        GlassEffectContainer(spacing: 10) {
+            LazyVGrid(columns: Array(repeating: GridItem(spacing: 10), count: 4), spacing: 10) {
+                ForEach(iconActions) { action in
+                    VStack(spacing: 6) {
+                        Button {} label: {
+                            Image(systemName: action.icon)
+                                .font(.title3)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .foregroundStyle(.primary)
+                                .background(.gray.opacity(0.09), in: .rect(cornerRadius: 16))
+                        }
+                        .buttonStyle(PlanGlassButtonEffect(shape: .rect(cornerRadius: 16)))
+
+                        Text(action.title)
+                            .font(.system(size: 9))
+                    }
+                }
+            }
+        }
+        .padding(20)
+    }
+}
+
+@available(iOS 26.0, *)
+struct PlanGlassButtonEffect<S: Shape>: ButtonStyle {
+    var shape: S
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .glassEffect(.regular.interactive(), in: shape)
     }
 }
 
@@ -71,7 +118,9 @@ struct MorphingTabBar<Tab: MorphingTabProtocol, ExpandedContent: View>: View {
                     progress: progress,
                     labelSize: labelSize,
                     cornerRadius: cornerRadius
-                ) {} label: {
+                ) {
+                    expandedContent
+                } label: {
                     CustomMorphingTabBarIOS26(
                         symbols: symbols,
                         index: selectedIndex
@@ -157,3 +206,23 @@ private struct CustomMorphingTabBarIOS26: UIViewRepresentable {
 #Preview {
     CustomMorphingTabBarIOS26DemoView()
 }
+
+private struct IconAction: Identifiable {
+    let id = UUID()
+    let icon: String
+    let title: String
+}
+
+private let iconActions: [IconAction] = [
+    IconAction(icon: "scissors", title: "Trim"),
+    IconAction(icon: "crop", title: "Crop"),
+    IconAction(icon: "wand.and.stars", title: "Enhance"),
+    IconAction(icon: "textformat", title: "Text"),
+    IconAction(icon: "music.note", title: "Audio"),
+    IconAction(icon: "hare", title: "Speed"),
+    IconAction(icon: "square.on.square", title: "Duplicate"),
+    IconAction(icon: "arrow.uturn.backward", title: "Undo"),
+    IconAction(icon: "square.and.arrow.up", title: "Share"),
+    IconAction(icon: "bookmark", title: "Save"),
+    IconAction(icon: "trash", title: "Delete"),
+]
