@@ -472,6 +472,7 @@
 		AB8CBCB72E98DE8F00A288E4 /* SimplePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */; };
 		AB8CBDDD2E9AFE0800A288E4 /* VersionCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBDDC2E9AFE0800A288E4 /* VersionCheckManager.swift */; };
 		AB8CBDE02E9B02BE00A288E4 /* AppUpdateDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */; };
+		AB95E8972F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB95E8962F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift */; };
 		AB9CFC762D628BE90044F5AF /* NumberPadTextEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */; };
 		ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */; };
 		ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */; };
@@ -920,6 +921,7 @@
 		AB8CBDDC2E9AFE0800A288E4 /* VersionCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckManager.swift; sourceTree = "<group>"; };
 		AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateDemoView.swift; sourceTree = "<group>"; };
 		AB8CBF082E9E23F000A288E4 /* MyCanvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCanvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB95E8962F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMorphingTabBarIOS26.swift; sourceTree = "<group>"; };
 		AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadTextEffectsView.swift; sourceTree = "<group>"; };
 		ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26OnBoardingSheet.swift; sourceTree = "<group>"; };
 		ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCard.swift; sourceTree = "<group>"; };
@@ -1555,7 +1557,6 @@
 				96301B322C2A5FAB00775407 /* TextFieldView */,
 				960663202DD92EC80084B468 /* ThemeSwitcher */,
 				9609DB172DBB2CC300A76F95 /* ToastView */,
-				96A1D4AC2F3DA32E00377C99 /* Toolbar */,
 				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
 				96D495832BBD25160011D5AA /* Video */,
 			);
@@ -2055,14 +2056,6 @@
 			path = 3DAnimation;
 			sourceTree = "<group>";
 		};
-		96A1D4AC2F3DA32E00377C99 /* Toolbar */ = {
-			isa = PBXGroup;
-			children = (
-				96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */,
-			);
-			path = Toolbar;
-			sourceTree = "<group>";
-		};
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2287,6 +2280,8 @@
 		AB333B842E8B0EDD00368EB8 /* iOS26 */ = {
 			isa = PBXGroup;
 			children = (
+				96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */,
+				AB95E8962F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift */,
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
 				AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */,
 				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
@@ -3482,6 +3477,7 @@
 				96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */,
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
+				AB95E8972F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift in Sources */,
 				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
 				AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */,
 				964525772F2AE3F100E32278 /* SortableIOS26GridView.swift in Sources */,
