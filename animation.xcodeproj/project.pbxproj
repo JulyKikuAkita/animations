@@ -247,6 +247,7 @@
 		96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1D2C2FD354007A4E34 /* TimePickerView.swift */; };
 		96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B202C2FD9CA007A4E34 /* Recent.swift */; };
 		967958702D2DD2EF009E74CA /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
+		967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */; };
 		9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680C91E2D6AFAD2005FC80D /* RippleView.swift */; };
 		9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680C9212D6AFF68005FC80D /* RippleTransitionDemoView.swift */; };
 		9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */; };
@@ -737,6 +738,7 @@
 		96726B1D2C2FD354007A4E34 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		96726B202C2FD9CA007A4E34 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		967958442D2DD24B009E74CA /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingiOS26View.swift; sourceTree = "<group>"; };
 		9680C91E2D6AFAD2005FC80D /* RippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleView.swift; sourceTree = "<group>"; };
 		9680C9212D6AFF68005FC80D /* RippleTransitionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleTransitionDemoView.swift; sourceTree = "<group>"; };
 		9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCarouselView.swift; sourceTree = "<group>"; };
@@ -1280,6 +1282,7 @@
 		960663232DD930B50084B468 /* LandingPages */ = {
 			isa = PBXGroup;
 			children = (
+				967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */,
 				9662F0242C583FB600508B80 /* LandingView.swift */,
 				96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */,
 				96352CE52C09AC6E001AD2FD /* StackedCards.swift */,
@@ -3485,6 +3488,7 @@
 				969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */,
 				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
+				967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */,
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
 				96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */,
