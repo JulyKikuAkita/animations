@@ -352,6 +352,7 @@
 		96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */; };
 		96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
 		96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */; };
+		96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
 		96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */; };
@@ -818,6 +819,7 @@
 		96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCarouselView.swift; sourceTree = "<group>"; };
 		96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetReader.swift; sourceTree = "<group>"; };
 		96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelXCardView.swift; sourceTree = "<group>"; };
+		96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionOnboardingIOS26.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
 		96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarHeaderScrollEffectDemoView.swift; sourceTree = "<group>"; };
@@ -1282,6 +1284,7 @@
 		960663232DD930B50084B468 /* LandingPages */ = {
 			isa = PBXGroup;
 			children = (
+				96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */,
 				967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */,
 				9662F0242C583FB600508B80 /* LandingView.swift */,
 				96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */,
@@ -3356,6 +3359,7 @@
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
+				96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */,
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
