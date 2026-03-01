@@ -486,6 +486,7 @@
 		ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */; };
 		ABC31E282EA4AB820068C41D /* iOS26StyleFloatingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC31E272EA4AB820068C41D /* iOS26StyleFloatingSheet.swift */; };
 		ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */; };
+		ABD6B5172F5419540056990A /* iOS26+minimizedTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD6B5162F5419540056990A /* iOS26+minimizedTabbar.swift */; };
 		ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
 		ABE1AE742E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
 		ABE1AE752E34AE660090A2F0 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AE722E34AE660090A2F0 /* Permission.swift */; };
@@ -935,6 +936,7 @@
 		ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRatingDemoView.swift; sourceTree = "<group>"; };
 		ABC31E272EA4AB820068C41D /* iOS26StyleFloatingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26StyleFloatingSheet.swift; sourceTree = "<group>"; };
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
+		ABD6B5162F5419540056990A /* iOS26+minimizedTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+minimizedTabbar.swift"; sourceTree = "<group>"; };
 		ABE1AE722E34AE660090A2F0 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSheetDemo.swift; sourceTree = "<group>"; };
 		ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reel1.mp4; path = resources/Videos/Reel1.mp4; sourceTree = SOURCE_ROOT; };
@@ -2290,6 +2292,7 @@
 				AB95E8962F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift */,
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
 				AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */,
+				ABD6B5162F5419540056990A /* iOS26+minimizedTabbar.swift */,
 				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
 				AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */,
 				96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */,
@@ -3498,6 +3501,7 @@
 				96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */,
 				963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */,
+				ABD6B5172F5419540056990A /* iOS26+minimizedTabbar.swift in Sources */,
 				96301B342C2A5FD300775407 /* TextFieldSelectionAPIView.swift in Sources */,
 				963B87D82CEC0DF000C3FB0D /* mailSearchInboxiOS18.swift in Sources */,
 				96921AEC2D6EE40C00326523 /* Book.swift in Sources */,
