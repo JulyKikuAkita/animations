@@ -7,7 +7,7 @@ import SwiftUI
 
 @Observable
 class UICoordinator {
-    var items: [PhotoItem] = sampleItems.compactMap {
+    var items: [PhotoItem] = samplePhotoItems.compactMap {
         PhotoItem(title: $0.title, image: $0.image, previewImage: $0.image)
     }
 
@@ -42,7 +42,8 @@ class UICoordinator {
 
     func toggleView(show: Bool) {
         if show {
-            detailScrollPosition = selectedItem?.id // trigger the detail scrollView to scroll to the selected photo item
+            // trigger the detail scrollView to scroll to the selected photo item
+            detailScrollPosition = selectedItem?.id
             detailIndicatorPosition = selectedItem?.id // ensure bottom carousel starts with the selected item
             withAnimation(.easeInOut(duration: 0.2), completionCriteria: .removed) {
                 animateView = true
