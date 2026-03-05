@@ -363,6 +363,8 @@
 		96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */; };
 		96D495812BBD0E140011D5AA /* ReelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D495802BBD0E140011D5AA /* ReelView.swift */; };
 		96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */; };
+		96D5384E2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */; };
+		96D5384F2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */; };
 		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
 		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -831,6 +833,7 @@
 		96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableTabbariOS26Style.swift; sourceTree = "<group>"; };
 		96D495802BBD0E140011D5AA /* ReelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelView.swift; sourceTree = "<group>"; };
 		96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCarouselSliderView.swift; sourceTree = "<group>"; };
+		96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGridViewIos26+TransitionEffect.swift"; sourceTree = "<group>"; };
 		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
 		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -1276,6 +1279,7 @@
 		960663222DD9306E0084B468 /* PhotosView */ = {
 			isa = PBXGroup;
 			children = (
+				96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */,
 				96E4E6082D178F510020261F /* AsyncImageViewerViewDemo.swift */,
 				96FCA7582DAC52C600774FB7 /* AsyncImageViewerView+SkeletonviewDemo.swift */,
 				96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */,
@@ -3447,6 +3451,7 @@
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
 				96B89EA92EF4BFF9006F532F /* ExpandableMenuiOS26DemoView.swift in Sources */,
 				ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
+				96D5384E2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */,
 				96B8F69D2E84882D00B87C56 /* PopMenuiOS26+DatePickerDemo.swift in Sources */,
 				96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
@@ -3648,6 +3653,7 @@
 				AB0EA1762DEBBAB000C62391 /* Dummies.swift in Sources */,
 				96E4E5FE2D1788830020261F /* AsyncImageViewer.swift in Sources */,
 				96352D542C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
+				96D5384F2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */,
 				96726B172C2FA8AA007A4E34 /* TimerHomeView.swift in Sources */,
 				9621DC922BF1EDB100183CB7 /* ActionModel.swift in Sources */,
 				96352D502C0ED814001AD2FD /* CreditCard.swift in Sources */,

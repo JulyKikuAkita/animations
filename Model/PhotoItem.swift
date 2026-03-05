@@ -12,7 +12,7 @@ struct PhotoItem: Identifiable, Hashable {
     var appeared: Bool = false
 }
 
-var sampleItems: [PhotoItem] = [
+let samplePhotoItems: [PhotoItem] = [
     .init(title: "Kenting", image: UIImage(named: "IMG_0201")),
     .init(title: "Naxos", image: UIImage(named: "IMG_0202")),
     .init(title: "Santorini", image: UIImage(named: "IMG_0203")),

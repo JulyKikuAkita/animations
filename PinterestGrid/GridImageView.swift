@@ -16,7 +16,7 @@ struct GridImageDemoView: View {
 struct GridImageView: View {
     /// UI Properties
     var coordinator: UICoordinatorPinterestGrid = .init()
-    @State private var posts: [PhotoItem] = sampleItems
+    @State private var posts: [PhotoItem] = samplePhotoItems
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(alignment: .leading, spacing: 15) {
@@ -27,7 +27,7 @@ struct GridImageView: View {
                 /// Grid image view
                 LazyVGrid(columns: Array(repeating: GridItem(spacing: 10), count: 2), spacing: 10) {
                     ForEach(posts) { post in
-                        PostCardView(post)
+                        postCardView(post)
                     }
                 }
             }
@@ -49,7 +49,7 @@ struct GridImageView: View {
 
     /// Post card view
     @ViewBuilder
-    func PostCardView(_ post: PhotoItem) -> some View {
+    func postCardView(_ post: PhotoItem) -> some View {
         GeometryReader {
             let frame = $0.frame(in: .global)
 
