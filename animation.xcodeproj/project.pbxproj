@@ -170,6 +170,7 @@
 		963DC1282D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */; };
 		963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */; };
 		963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DC1FC2D270D1E00C97334 /* CacheManager.swift */; };
+		963FF2502F5F984C00FAB0CF /* iOS26ResizingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963FF24F2F5F984600FAB0CF /* iOS26ResizingSheet.swift */; };
 		964222E62CF3F13C00A69F8D /* DisintegrationEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */; };
 		9642236D2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
 		9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
@@ -671,6 +672,7 @@
 		963DC1262D1DFB9C00C97334 /* DraggableTabbariOS18View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbariOS18View.swift; sourceTree = "<group>"; };
 		963DC1932D23309200C97334 /* ResizedImageToScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizedImageToScreenView.swift; sourceTree = "<group>"; };
 		963DC1FC2D270D1E00C97334 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		963FF24F2F5F984600FAB0CF /* iOS26ResizingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26ResizingSheet.swift; sourceTree = "<group>"; };
 		964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisintegrationEffectView.swift; sourceTree = "<group>"; };
 		9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteractiveNavigationGestureView.swift; path = "View/Tabbar+Navigaion/InteractiveNavigationGestureView.swift"; sourceTree = SOURCE_ROOT; };
 		9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtractor.swift; sourceTree = "<group>"; };
@@ -2113,6 +2115,7 @@
 		96DF8A882C39D7F90063A931 /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
+				963FF24F2F5F984600FAB0CF /* iOS26ResizingSheet.swift */,
 				96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */,
 				ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */,
 				969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */,
@@ -3457,6 +3460,7 @@
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
 				96362C972EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift in Sources */,
+				963FF2502F5F984C00FAB0CF /* iOS26ResizingSheet.swift in Sources */,
 				963B85772CD35BBA00C3FB0D /* Snapshot.swift in Sources */,
 				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
 				96E09EC72C74105300A0BE66 /* FloatingTabbar.swift in Sources */,
