@@ -353,6 +353,11 @@
 		96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */; };
 		96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */; };
 		96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */; };
+		96C5BFCF2F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */; };
+		96C5BFD02F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */; };
+		96C5BFD12F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */; };
+		96C5BFD22F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */; };
+		96C5BFD42F65FEE900CDCFB0 /* AppleTVCarousel+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */; };
 		96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
@@ -824,6 +829,8 @@
 		96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCarouselView.swift; sourceTree = "<group>"; };
 		96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetReader.swift; sourceTree = "<group>"; };
 		96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelXCardView.swift; sourceTree = "<group>"; };
+		96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowModel.swift; sourceTree = "<group>"; };
+		96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppleTVCarousel+iOS26.swift"; sourceTree = "<group>"; };
 		96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionOnboardingIOS26.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
@@ -1528,6 +1535,7 @@
 				963B9CF82D5492B200453320 /* SwipeActionModel.swift */,
 				9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */,
 				96921AE92D6EE40C00326523 /* Book.swift */,
+				96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */,
 				ABA102222E1E2583007ECA07 /* OnBoardingCard.swift */,
 				AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */,
 			);
@@ -1835,6 +1843,7 @@
 		965E573A2BC5086000E172B3 /* Carousel */ = {
 			isa = PBXGroup;
 			children = (
+				96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */,
 				96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */,
 				96E1DD722E6A5557002B9F6C /* CardCarousel+Reflection+iOS26.swift */,
 				96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */,
@@ -3411,6 +3420,7 @@
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
 				AB8CBDDD2E9AFE0800A288E4 /* VersionCheckManager.swift in Sources */,
+				96C5BFD42F65FEE900CDCFB0 /* AppleTVCarousel+iOS26.swift in Sources */,
 				9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */,
 				ABE1AE772E34B08B0090A2F0 /* PermissionSheetDemo.swift in Sources */,
 				965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */,
@@ -3542,6 +3552,7 @@
 				9603C9FB2B8AB79200F91C21 /* HeroItemView.swift in Sources */,
 				961F3B8F2B8818240055D79B /* animationApp.swift in Sources */,
 				961BD7692CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift in Sources */,
+				96C5BFCF2F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */,
 				965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */,
 				9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */,
 				9684833B2BCF61D40023FE2B /* ParticleEffect.swift in Sources */,
@@ -3604,6 +3615,7 @@
 				96352D272C0BDB12001AD2FD /* GridImageDetailView.swift in Sources */,
 				AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */,
 				96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */,
+				96C5BFD02F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */,
 				9692220D2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				9662EFFA2C4B9E0500508B80 /* PhotoAppCustomGesture.swift in Sources */,
 				9621DC8A2BEF4BA000183CB7 /* ApplePhotoHomeView.swift in Sources */,
@@ -3742,6 +3754,7 @@
 				96E4E5FA2D175FAB0020261F /* ImageLinkModel.swift in Sources */,
 				968B628C2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */,
 				9621DD9E2BF47FDA00183CB7 /* OffsetReader.swift in Sources */,
+				96C5BFD12F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */,
 				9621DDB12BF4885200183CB7 /* TintColor.swift in Sources */,
 				9662F0332C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				9621DD9F2BF47FDA00183CB7 /* Interpolation.swift in Sources */,
@@ -3822,6 +3835,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				968B64222F26B89F003BCF16 /* Book.swift in Sources */,
+				96C5BFD22F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
