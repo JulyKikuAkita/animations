@@ -359,6 +359,7 @@
 		96C5BFD22F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */; };
 		96C5BFD42F65FEE900CDCFB0 /* AppleTVCarousel+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */; };
 		96C5C15C2F6A7E3900CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift */; };
+		96C5C2FB2F6D29E400CDCFB0 /* SwipeToDismiss+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */; };
 		96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
@@ -833,6 +834,7 @@
 		96C5BFCE2F65FD7E00CDCFB0 /* TVShowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowModel.swift; sourceTree = "<group>"; };
 		96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppleTVCarousel+iOS26.swift"; sourceTree = "<group>"; };
 		96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConcentricRectangle+BackPort+iOS28.swift"; sourceTree = "<group>"; };
+		96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwipeToDismiss+ScrollView.swift"; sourceTree = "<group>"; };
 		96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionOnboardingIOS26.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
@@ -2085,6 +2087,7 @@
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				96C5C2F92F6D29C100CDCFB0 /* ViewModifiers */,
 				968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */,
 				ABAA1BA02E73BC7F003535CF /* CustomListView */,
 				960663242DD931430084B468 /* ListRowsInteraction */,
@@ -2102,6 +2105,14 @@
 				969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */,
 			);
 			path = ScrollView;
+			sourceTree = "<group>";
+		};
+		96C5C2F92F6D29C100CDCFB0 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		96CE85332EF0D9BB009AC09D /* ButtonStyle */ = {
@@ -3323,6 +3334,7 @@
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
 				96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */,
+				96C5C2FB2F6D29E400CDCFB0 /* SwipeToDismiss+ScrollView.swift in Sources */,
 				9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */,
 				96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */,
 				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
