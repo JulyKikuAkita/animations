@@ -471,6 +471,7 @@
 		AB5C933F2E03E291009CF684 /* alarmKitCountdownDemoExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5C932D2E03E28F009CF684 /* alarmKitCountdownDemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */; };
 		AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */; };
+		AB658C342F70971F00377EBC /* ResizableHeaderIOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB658C332F7096C000377EBC /* ResizableHeaderIOS26View.swift */; };
 		AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */; };
 		AB7CC2A92E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */; };
 		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
@@ -930,6 +931,7 @@
 		AB5C93312E03E28F009CF684 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlassSearchableTabbar.swift; sourceTree = "<group>"; };
 		AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+tabbarSheet.swift"; sourceTree = "<group>"; };
+		AB658C332F7096C000377EBC /* ResizableHeaderIOS26View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableHeaderIOS26View.swift; sourceTree = "<group>"; };
 		AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularWheelPicker.swift; sourceTree = "<group>"; };
 		AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectMenuiOS26.swift; sourceTree = "<group>"; };
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
@@ -1556,7 +1558,7 @@
 				AB8CBDDE2E9B028100A288E4 /* AppUpdateView */,
 				ABB222982E6CDE66008CFE21 /* Notofications */,
 				96F9A6EB2B9FACC900FD6900 /* Button */,
-				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
+				AB658C312F70961800377EBC /* CameraInterface */,
 				965E573A2BC5086000E172B3 /* Carousel */,
 				960663272DD934DA0084B468 /* Crash_Previews */,
 				965F26FC2D86361B00300420 /* CustomMenu */,
@@ -2087,22 +2089,19 @@
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				AB658C322F70964A00377EBC /* CustomHeaderEffect */,
 				96C5C2F92F6D29C100CDCFB0 /* ViewModifiers */,
-				968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */,
 				ABAA1BA02E73BC7F003535CF /* CustomListView */,
 				960663242DD931430084B468 /* ListRowsInteraction */,
 				9663BB552DDE9AD100037CF1 /* Calendar */,
-				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
-				96D04B302C09A1960062520D /* StackedScrollView.swift */,
 				96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */,
-				96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */,
-				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
-				960663282DD950430084B468 /* ResizableHeaderScrollView.swift */,
-				AB0B61702E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift */,
-				9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */,
 				969219E02D6DA2CC00326523 /* ContactScrollDemoView.swift */,
-				AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */,
+				96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */,
+				96F9D16E2D5C41E000CD134B /* InfiniteScrollView.swift */,
+				968B5F932F2209F6003BCF16 /* LoopingScrollViewDemo+AppleStock.swift */,
 				969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */,
+				96D04B302C09A1960062520D /* StackedScrollView.swift */,
+				AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -2396,6 +2395,26 @@
 				AB5C93312E03E28F009CF684 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB658C312F70961800377EBC /* CameraInterface */ = {
+			isa = PBXGroup;
+			children = (
+				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
+			);
+			path = CameraInterface;
+			sourceTree = "<group>";
+		};
+		AB658C322F70964A00377EBC /* CustomHeaderEffect */ = {
+			isa = PBXGroup;
+			children = (
+				AB658C332F7096C000377EBC /* ResizableHeaderIOS26View.swift */,
+				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
+				960663282DD950430084B468 /* ResizableHeaderScrollView.swift */,
+				AB0B61702E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift */,
+				9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */,
+			);
+			path = CustomHeaderEffect;
 			sourceTree = "<group>";
 		};
 		AB8747BD2D8F4D8200507C55 /* Scrubber */ = {
@@ -3421,6 +3440,7 @@
 				96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
 				963B9CFD2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
+				AB658C342F70971F00377EBC /* ResizableHeaderIOS26View.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
 				AB22B73A2E7A88B900F2DDDE /* CustomTabbariOS26.swift in Sources */,
