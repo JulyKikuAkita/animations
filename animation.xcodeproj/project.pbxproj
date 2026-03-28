@@ -321,6 +321,7 @@
 		96A1D4B02F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B22F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
+		96A52EAF2F7727B200493D96 /* 2DSliderTonePickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -809,6 +810,7 @@
 		96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paywall3DAnimation.swift; sourceTree = "<group>"; };
 		96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBarIOS26.swift; sourceTree = "<group>"; };
 		96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyEventView.swift; sourceTree = "<group>"; };
+		96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2DSliderTonePickerDemoView.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1804,6 +1806,7 @@
 		963B862B2CE94F9400C3FB0D /* Slider */ = {
 			isa = PBXGroup;
 			children = (
+				96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */,
 				963B862C2CE94FAD00C3FB0D /* ExpandableSlideriOS18View.swift */,
 				963B862E2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift */,
 				9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */,
@@ -3547,6 +3550,7 @@
 				964525772F2AE3F100E32278 /* SortableIOS26GridView.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
 				969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */,
+				96A52EAF2F7727B200493D96 /* 2DSliderTonePickerDemoView.swift in Sources */,
 				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
 				967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */,
