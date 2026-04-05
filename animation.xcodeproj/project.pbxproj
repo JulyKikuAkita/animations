@@ -458,6 +458,7 @@
 		AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */; };
 		AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */; };
 		AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */; };
+		AB39CCAB2F8254D0001B9494 /* ImageGradientIOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39CCAA2F8254C3001B9494 /* ImageGradientIOS26View.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8492C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -920,6 +921,7 @@
 		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomCarouselCardView.swift; sourceTree = "<group>"; };
+		AB39CCAA2F8254C3001B9494 /* ImageGradientIOS26View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGradientIOS26View.swift; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
 		AB5C89922DFD46B8009CF684 /* gradientGeneraotrAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gradientGeneraotrAI.swift; sourceTree = "<group>"; };
@@ -1853,6 +1855,7 @@
 		965E573A2BC5086000E172B3 /* Carousel */ = {
 			isa = PBXGroup;
 			children = (
+				AB39CCAA2F8254C3001B9494 /* ImageGradientIOS26View.swift */,
 				96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */,
 				96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */,
 				96E1DD722E6A5557002B9F6C /* CardCarousel+Reflection+iOS26.swift */,
@@ -3524,6 +3527,7 @@
 				9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
+				AB39CCAB2F8254D0001B9494 /* ImageGradientIOS26View.swift in Sources */,
 				963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,
 				965FD2DD2EF2299900989691 /* Text+Extension.swift in Sources */,
 				968D2E9E2B8EB56500007734 /* TabiOS17.swift in Sources */,
