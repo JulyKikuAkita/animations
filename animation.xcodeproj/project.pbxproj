@@ -322,6 +322,7 @@
 		96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B22F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A52EAF2F7727B200493D96 /* 2DSliderTonePickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */; };
+		96A71C702F88D0DC005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -812,6 +813,7 @@
 		96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBarIOS26.swift; sourceTree = "<group>"; };
 		96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyEventView.swift; sourceTree = "<group>"; };
 		96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2DSliderTonePickerDemoView.swift; sourceTree = "<group>"; };
+		96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchExpandable+CustomTabbar+iOS26.swift"; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -2323,6 +2325,7 @@
 		AB333B842E8B0EDD00368EB8 /* iOS26 */ = {
 			isa = PBXGroup;
 			children = (
+				96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */,
 				96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */,
 				AB95E8962F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift */,
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
@@ -3482,6 +3485,7 @@
 				963B87DA2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */,
 				969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */,
+				96A71C702F88D0DC005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift in Sources */,
 				96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */,
 				96E4E5FD2D1788830020261F /* AsyncImageViewer.swift in Sources */,
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
