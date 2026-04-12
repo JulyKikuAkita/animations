@@ -59,8 +59,8 @@ struct SimplePanCustomGesture: UIGestureRecognizerRepresentable {
                 offset = sView.contentOffset.y + sView.adjustedContentInset.top
             }
 
-            let isElliglble = Int(offset) <= 1 && velocity > 0
-            return isElliglble
+            let isEligible = Int(offset) <= 1 && velocity > 0
+            return isEligible
         }
 
         /// check if zoom transition is enabled ? if so use the zoom transition (default) if not use the simple pan gesture
