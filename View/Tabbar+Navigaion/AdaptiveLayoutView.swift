@@ -86,7 +86,7 @@ struct AdaptiveLayoutView: View {
                     .offset(x: isLandscape ? 0 : offset)
                 }
                 .gesture(
-                    CustomGesture(isEnabled: !isLandscape) { gesture in
+                    ToggleablePanGesture(isEnabled: !isLandscape) { gesture in
                         /// UIGestureRepresentable doesn't update once the gesture has been created.
                         /// Thus, isEnabled will have no effect and need to enable it manually
                         if panGesture == nil { panGesture = gesture }
@@ -172,29 +172,6 @@ struct AdaptiveLayoutView: View {
 
 #Preview {
     AdaptiveLayoutView()
-}
-
-private struct CustomGesture: UIGestureRecognizerRepresentable {
-    var isEnabled: Bool
-    var handle: (UIPanGestureRecognizer) -> Void
-    func makeUIGestureRecognizer(context _: Context) -> UIPanGestureRecognizer {
-        let gesture = UIPanGestureRecognizer()
-        return gesture
-    }
-
-    func updateUIGestureRecognizer(
-        _ recognizer: UIPanGestureRecognizer,
-        context _: Context
-    ) {
-        recognizer.isEnabled = isEnabled
-    }
-
-    func handleUIGestureRecognizerAction(
-        _ recognizer: UIPanGestureRecognizer,
-        context _: Context
-    ) {
-        handle(recognizer)
-    }
 }
 
 struct AdaptiveView<Content: View>: View {

@@ -80,7 +80,7 @@ private struct FullScreenSheet<Content: View, Background: View>: View {
             .contentShape(.rect)
             .offset(y: offset)
             .gesture(
-                SimplePanCustomGesture { gesture in
+                ScrollAwarePanGesture { gesture in
                     let state = gesture.state
                     let halfHeight = windowSize.height / 2
                     let translation = min(

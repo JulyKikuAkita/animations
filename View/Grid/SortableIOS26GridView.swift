@@ -116,7 +116,7 @@ struct SortableIOS26GridView<Content: View, DraggingPreview: View, Data: RandomA
                         item.position = newValue
                     }
                     .gesture(
-                        CustomLongPressGesture(onChanged: { location, offset in
+                        SortableGridLongPressGesture(onChanged: { location, offset in
                             if draggingItem == nil {
                                 draggingItem = item
                                 draggingStartRect = item.position
@@ -169,8 +169,14 @@ struct SortableIOS26GridView<Content: View, DraggingPreview: View, Data: RandomA
     }
 }
 
-/// Not able to use SwiftUI's LongPressGesture() (break other gesture) thus implement using UIKit
-private struct CustomLongPressGesture: UIGestureRecognizerRepresentable {
+/// Private: uses UILongPressGestureRecognizer (not UIPanGestureRecognizer) with
+/// named coordinate space conversion specific to the sortable grid layout.
+/// Cannot be generalized because:
+/// - It wraps UILongPressGestureRecognizer, not a pan gesture
+/// - It tracks startLocation internally to compute translation from the press origin
+/// - It converts global coordinates to a named "SORTABLEGRID" coordinate space via context.converter
+/// SwiftUI's built-in LongPressGesture breaks other gestures in this context.
+private struct SortableGridLongPressGesture: UIGestureRecognizerRepresentable {
     var duration: CGFloat = 0.16
     var onChanged: (_ location: CGPoint, _ offset: CGSize) -> Void
     var onEnded: () -> Void

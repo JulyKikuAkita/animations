@@ -257,7 +257,7 @@ private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Over
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea()
         .contentShape(.rect)
-        .gesture(PhotoScrollPanGesture { gesture in
+        .gesture(PhotoDismissPanGesture { gesture in
             let state = gesture.state
             let translation = gesture.translation(in: gesture.view)
 
@@ -320,41 +320,23 @@ private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Over
     }
 }
 
-private extension View {
-    func withoutAnimation(_ result: @escaping () -> Void) {
-        var transaction = Transaction()
-        transaction.disablesAnimations = true
-        withTransaction(transaction) {
-            result()
-        }
-    }
-}
-
 #Preview {
     PhotoGridIOS26TransitionDemoView()
 }
 
-/// MARK: - Interactive Dismiss Pan Gesture
-///
-/// Instead of using SwiftUI `DragGesture`, we use `UIPanGestureRecognizer`
-/// for better flexibility. This allows us to explicitly fail the gesture
-/// under specific conditions.
+/// Private: vertical dismiss gesture with scroll view failure requirement.
+/// Cannot be generalized because:
+/// - Uses `shouldBeRequiredToFailBy` to force this gesture to fail when a scroll view
+///   has contentOffset.y > 0 (not at top), which is a different delegate method than
+///   the simultaneous recognition used by other dismiss gestures
+/// - Constrains to single-touch only (minimumNumberOfTouches/maximumNumberOfTouches = 1)
+///   to prevent conflicts with pinch-to-zoom in ZoomableScrollView
 ///
 /// The gesture activates only when:
-///
-/// 1. The swipe direction is from top to bottom.
-/// 2. If another gesture (such as a `UIScrollView` pan) is being recognized,
-///    we check whether the scroll view's `contentOffset.y == 0`
-///    (meaning it is scrolled to the top).
-///    - If YES → allow dismiss gesture to proceed.
-///    - If NO  → force this gesture to fail.
-///
-/// This design prevents gesture conflicts and keeps interactions smooth,
-/// especially if the detail view is later wrapped in a `ZoomableScrollView`
-/// or other scroll-based container.
-///
-private struct PhotoScrollPanGesture: UIGestureRecognizerRepresentable {
-    /// Grid+PanGestureView.swift
+/// 1. The swipe direction is vertical (top to bottom)
+/// 2. If a UIScrollView is involved, it must be scrolled to the top (contentOffset.y <= 0)
+///    otherwise this gesture is forced to fail, letting the scroll view handle it
+private struct PhotoDismissPanGesture: UIGestureRecognizerRepresentable {
     var handle: (UIPanGestureRecognizer) -> Void
 
     func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {

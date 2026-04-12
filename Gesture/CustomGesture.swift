@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct CustomiOS18Gesture: UIGestureRecognizerRepresentable {
+struct DraggablePanGesture: UIGestureRecognizerRepresentable {
     @Binding var isEnabled: Bool
     /// Only Receives Start and End updates
     var trigger: (Bool) -> Void
