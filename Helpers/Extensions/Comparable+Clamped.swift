@@ -4,14 +4,13 @@
 //
 
 import Foundation
-import SwiftUI
 
-public extension CGFloat {
-    /// Constrains the value to a closed range.
+extension BinaryFloatingPoint {
+    /// Clamps the value to a closed range.
     ///
     /// Usage:
-    ///   let progress = (translation / height).constrained(to: 0...1)
-    func constrained(to range: ClosedRange<Self>) -> Self {
+    ///   let progress = (translation / height).clamped(to: 0...1)
+    func clamped(to range: ClosedRange<Self>) -> Self {
         Swift.min(Swift.max(self, range.lowerBound), range.upperBound)
     }
 }

@@ -130,7 +130,7 @@ struct AppleTVCarousel<Content: View>: View {
                             .visualEffect { [movement] content, proxy in
                                 let minX = proxy.frame(in: .scrollView(axis: .horizontal)).minX
                                 /// Converting minX to progress [-1, 1] for offset value
-                                let movementProgress = (minX / size.width).constrained(to: -1 ... 1)
+                                let movementProgress = (minX / size.width).clamped(to: -1 ... 1)
                                 return content
                                     .offset(x: -minX)
                                     .offset(x: movement * movementProgress)
@@ -155,14 +155,4 @@ struct AppleTVCarousel<Content: View>: View {
 @available(iOS 26.0, *)
 #Preview {
     AppleTVCarouselDemoView()
-}
-
-public extension CGFloat {
-    /// Constrains the value to a closed range.
-    ///
-    /// Usage:
-    ///   let progress = (translation / height).constrained(to: 0...1)
-    func constrained(to range: ClosedRange<Self>) -> Self {
-        Swift.min(Swift.max(self, range.lowerBound), range.upperBound)
-    }
 }
