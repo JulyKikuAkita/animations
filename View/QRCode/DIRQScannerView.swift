@@ -36,15 +36,15 @@ extension View {
 private struct QRScannerViewModifier: ViewModifier {
     @Binding var isScanning: Bool
     var onScan: (String) -> Void
-    /// Modifer Properties
-    @State private var showFulllScreenCover: Bool = false
+    /// Modifier Properties
+    @State private var showFullScreenCover: Bool = false
     func body(content: Content) -> some View {
         content
-            .fullScreenCover(isPresented: $showFulllScreenCover) {
+            .fullScreenCover(isPresented: $showFullScreenCover) {
                 DIRQScannerView {
                     isScanning = false
                     Task { @MainActor in
-                        showFulllScreenCoverWithoutAnimation(false)
+                        showFullScreenCoverWithoutAnimation(false)
                     }
                 } onScan: { code in
                     onScan(code)
@@ -53,16 +53,16 @@ private struct QRScannerViewModifier: ViewModifier {
             }
             .onChange(of: isScanning) { _, newValue in
                 if newValue {
-                    showFulllScreenCoverWithoutAnimation(true)
+                    showFullScreenCoverWithoutAnimation(true)
                 }
             }
     }
 
-    private func showFulllScreenCoverWithoutAnimation(_ status: Bool) {
+    private func showFullScreenCoverWithoutAnimation(_ status: Bool) {
         var transaction = Transaction()
         transaction.disablesAnimations = true
         withTransaction(transaction) {
-            showFulllScreenCover = status
+            showFullScreenCover = status
         }
     }
 }

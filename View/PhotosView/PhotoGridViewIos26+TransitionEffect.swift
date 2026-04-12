@@ -320,16 +320,6 @@ private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Over
     }
 }
 
-private extension View {
-    func withoutAnimation(_ result: @escaping () -> Void) {
-        var transaction = Transaction()
-        transaction.disablesAnimations = true
-        withTransaction(transaction) {
-            result()
-        }
-    }
-}
-
 #Preview {
     PhotoGridIOS26TransitionDemoView()
 }
