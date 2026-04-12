@@ -77,6 +77,10 @@ struct SharedElementTransitionHeroAnimation<Hero: View, Content: View>: View {
                 }
                 .clipShape(.rect(cornerRadius: config.cardCornerRadius))
                 .contentShape(.rect(cornerRadius: config.cardCornerRadius))
+                /// Track the button's current frame to compute buttonScale.
+                /// When the button animates a press-down (via keyframe), its frame shrinks,
+                /// so buttonScale < 1. The full-screen cover applies this same scale
+                /// so it appears to emerge from the pressed-down card seamlessly.
                 .onGeometryChange(for: CGRect.self, of: {
                     $0.frame(in: .global)
                 }, action: { newValue in
@@ -123,21 +127,35 @@ private struct TransitionFullScreenCover<Hero: View, Content: View>: View {
                     .overlay {
                         hero(animateContent, dismiss)
                     }
+                    /// Inner frame: sets the hero's own size.
+                    /// - Collapsed: matches the source card's exact size on screen.
+                    /// - Expanded: width = nil (fills parent), height = detailCardHeight.
                     .frame(
                         width: animateContent ? nil : sourceRect.width,
                         height: animateContent ? config.detailCardHeight : sourceRect.height,
-                    ).offset(
+                    )
+                    /// Offset positions the hero at the source card's screen coordinates when collapsed,
+                    /// and at the natural origin (0,0) when expanded.
+                    .offset(
                         x: animateContent ? 0 : sourceRect.minX,
                         y: animateContent ? 0 : sourceRect.minY,
                     )
+                    /// Outer frame: creates a full-screen container aligned to topLeading.
+                    /// This gives the inner frame + offset a coordinate space to work in:
+                    /// the hero is placed relative to the top-left corner of the screen,
+                    /// so sourceRect.minX/minY produce pixel-perfect positioning over the original card.
+                    /// When animating to expanded, the hero grows to fill this full-screen container.
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    /// Sticky header effect: keeps the hero pinned at the top while scrolling.
                     .visualEffect { [animateContent] content, proxy in
                         let minY = proxy.frame(in: .scrollView).minY
+                        /// Only apply sticky behavior when expanded; height acts as the "pin threshold".
                         let height = animateContent ? (proxy.size.height + 10) : 0
 
                         return content
+                            /// Pin the hero when scrolled past its height (sticky header).
                             .offset(y: -minY > height ? -(minY + height) : 0)
-                            /// removing bouncing
+                            /// Prevent overscroll bounce from pulling the hero downward.
                             .offset(y: minY > 0 ? -minY : 0)
                     }
                     .zIndex(1000)
@@ -146,6 +164,10 @@ private struct TransitionFullScreenCover<Hero: View, Content: View>: View {
             }
         }
         .background(.background)
+        /// Mask clips the entire scroll view to the card shape when collapsed,
+        /// then expands to full screen when animateContent is true.
+        /// Uses the same inner-frame + offset + outer-alignment pattern as the hero
+        /// so the visible region exactly matches the card's position during the transition.
         .mask(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .frame(
@@ -156,6 +178,9 @@ private struct TransitionFullScreenCover<Hero: View, Content: View>: View {
                     y: animateContent ? 0 : sourceRect.minY,
                 )
         }
+        /// Dismiss button overlay: positioned to track the hero area.
+        /// Uses the same frame+offset pattern so the button stays anchored
+        /// to the top-trailing corner of the hero during the transition.
         .overlay(alignment: .topLeading) {
             dismissButton()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
@@ -167,6 +192,10 @@ private struct TransitionFullScreenCover<Hero: View, Content: View>: View {
                     y: animateContent ? safeArea.top : sourceRect.minY,
                 )
         }
+        /// Two independent scale effects layered together:
+        /// - dragScale: shrinks the view during a dismiss drag gesture (interactive feedback).
+        /// - buttonScale: matches the press-down animation of the source button,
+        ///   so the cover appears at the same scale the button was when tapped.
         .scaleEffect(dragScale)
         .scaleEffect(buttonScale)
         .ignoresSafeArea()
@@ -206,9 +235,15 @@ private struct TransitionFullScreenCover<Hero: View, Content: View>: View {
         .animation(.linear(duration: 0.15)) {
             $0.opacity(animateContent ? 1 : 0)
         }
+        /// Fade out the dismiss button proportionally as the drag progresses.
+        /// dragScale ranges from 1.0 (no drag) to ~0.8 (full drag).
+        /// This maps dragScale 1.0 -> opacity 1.0, dragScale 0.95 -> opacity 0.0.
         .opacity((dragScale - 0.95) / 0.05)
     }
 
+    /// Animate the detail view back to the card position, then dismiss the cover.
+    /// completionCriteria: .removed ensures the completion fires after the view
+    /// finishes its removal transition (not just when the animation ends).
     private func dismiss() {
         withAnimation(config.animation, completionCriteria: .removed) {
             dragScale = 1
