@@ -314,6 +314,12 @@
 		9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */; };
 		969B778E2F8C59110081EE29 /* Comparable+Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */; };
 		969B778F2F8C59110081EE29 /* Comparable+Clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */; };
+		969B77932F8C63A00081EE29 /* ToggleablePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77912F8C63A00081EE29 /* ToggleablePanGesture.swift */; };
+		969B77942F8C63A00081EE29 /* VerticalPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77922F8C63A00081EE29 /* VerticalPanGesture.swift */; };
+		969B77952F8C63A00081EE29 /* SimultaneousPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77902F8C63A00081EE29 /* SimultaneousPanGesture.swift */; };
+		969B77962F8C63A00081EE29 /* ToggleablePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77912F8C63A00081EE29 /* ToggleablePanGesture.swift */; };
+		969B77972F8C63A00081EE29 /* VerticalPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77922F8C63A00081EE29 /* VerticalPanGesture.swift */; };
+		969B77982F8C63A00081EE29 /* SimultaneousPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77902F8C63A00081EE29 /* SimultaneousPanGesture.swift */; };
 		969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */; };
 		969ECE482EC7EF590045601B /* LocationPermissionFullSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */; };
 		969ECE4B2EC86A410045601B /* PulseRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE4A2EC86A410045601B /* PulseRingView.swift */; };
@@ -809,6 +815,9 @@
 		9697F7612EB039E6005C5C77 /* ProgressAlertDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAlertDemoView.swift; sourceTree = "<group>"; };
 		9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Clamped.swift"; sourceTree = "<group>"; };
+		969B77902F8C63A00081EE29 /* SimultaneousPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimultaneousPanGesture.swift; sourceTree = "<group>"; };
+		969B77912F8C63A00081EE29 /* ToggleablePanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleablePanGesture.swift; sourceTree = "<group>"; };
+		969B77922F8C63A00081EE29 /* VerticalPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPanGesture.swift; sourceTree = "<group>"; };
 		969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+BottomSheetInteractionDemoView.swift"; sourceTree = "<group>"; };
 		969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionFullSheetView.swift; sourceTree = "<group>"; };
 		969ECE4A2EC86A410045601B /* PulseRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseRingView.swift; sourceTree = "<group>"; };
@@ -1627,6 +1636,9 @@
 		9621DB142BEDDD6100183CB7 /* Gesture */ = {
 			isa = PBXGroup;
 			children = (
+				969B77902F8C63A00081EE29 /* SimultaneousPanGesture.swift */,
+				969B77912F8C63A00081EE29 /* ToggleablePanGesture.swift */,
+				969B77922F8C63A00081EE29 /* VerticalPanGesture.swift */,
 				9621DB152BEDDD7400183CB7 /* PinchZoom.swift */,
 				96ACBF022C350BFA004F3070 /* CustomGesture.swift */,
 				963B84722CCC5A1D00C3FB0D /* PanGesture.swift */,
@@ -3552,6 +3564,9 @@
 				96E4E6062D178F350020261F /* ImagePicker.swift in Sources */,
 				9633FB382DF947B10036CF8C /* SimpleTextField.swift in Sources */,
 				96E4E6072D178F350020261F /* TimePickerView.swift in Sources */,
+				969B77932F8C63A00081EE29 /* ToggleablePanGesture.swift in Sources */,
+				969B77942F8C63A00081EE29 /* VerticalPanGesture.swift in Sources */,
+				969B77952F8C63A00081EE29 /* SimultaneousPanGesture.swift in Sources */,
 				AB5C92352E013D07009CF684 /* OrderActionIntent.swift in Sources */,
 				AB0EA1782DEBBAB000C62391 /* Dummies.swift in Sources */,
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
@@ -3717,6 +3732,9 @@
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
 				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
 				96921AEB2D6EE40C00326523 /* Book.swift in Sources */,
+				969B77962F8C63A00081EE29 /* ToggleablePanGesture.swift in Sources */,
+				969B77972F8C63A00081EE29 /* VerticalPanGesture.swift in Sources */,
+				969B77982F8C63A00081EE29 /* SimultaneousPanGesture.swift in Sources */,
 				9621DC892BEF4B6F00183CB7 /* DetailView.swift in Sources */,
 				9621DC392BEF3D7300183CB7 /* TabiOS17.swift in Sources */,
 				96726B192C2FCECB007A4E34 /* TimeModel.swift in Sources */,

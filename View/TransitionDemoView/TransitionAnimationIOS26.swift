@@ -200,7 +200,7 @@ private struct TransitionFullScreenCover<Hero: View, Content: View>: View {
         .scaleEffect(buttonScale)
         .ignoresSafeArea()
         .gesture(
-            BasedTransitionGesture {
+            TransitionDismissPanGesture {
                 handleGesture($0)
             }
         )
@@ -298,7 +298,12 @@ private struct SharedElementTransitionButtonStyle: ButtonStyle {
     }
 }
 
-private struct BasedTransitionGesture: UIGestureRecognizerRepresentable {
+/// Private: combines three specialized delegate behaviors for the shared element transition dismiss:
+/// Cannot be generalized because:
+/// 1. shouldRecognizeSimultaneouslyWith: only allows gesture when scroll view is at top (contentOffset <= 1)
+/// 2. gestureRecognizerShouldBegin: activates on vertical swipe down OR left-edge swipe (x < 30pt)
+/// The left-edge swipe + scroll-top detection combo is specific to this Apple Store card transition.
+private struct TransitionDismissPanGesture: UIGestureRecognizerRepresentable {
     var handle: (UIPanGestureRecognizer) -> Void
 
     func makeCoordinator(converter _: CoordinateSpaceConverter) -> Coordinator {
@@ -323,29 +328,26 @@ private struct BasedTransitionGesture: UIGestureRecognizerRepresentable {
         handle(recognizer)
     }
 
-    /// We need to check if the gesture is to for scroll view
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        /// Only recognize simultaneously when the scroll view is at the top,
+        /// so scrolling content takes priority over the dismiss gesture.
         func gestureRecognizer(
             _: UIGestureRecognizer,
             shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
         ) -> Bool {
-            /// disable scroll from top and only allow pan gesture to dismiss action
             if let scrollView = otherGestureRecognizer.view as? UIScrollView {
                 let contentOffset = scrollView.contentOffset.y.rounded()
-
-                /// safe value = 1, instead of 0
                 return contentOffset <= 1
             }
             return false
         }
 
-        /// check if zoom transition is enabled ? if so use the zoom transition (default) if not use the simple pan gesture
+        /// Activate for vertical swipe down OR left-edge slide (< 30pt from left).
         func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
             guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
                 return false
             }
             let velocity = panGesture.velocity(in: panGesture.view)
-            /// optional slide gesture to dismiss the view
             let locationX = panGesture.location(in: panGesture.view).x
             return (velocity.y > abs(velocity.x)) || (locationX < 30)
         }

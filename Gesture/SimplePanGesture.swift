@@ -12,7 +12,7 @@
 
 import SwiftUI
 
-struct SimplePanCustomGesture: UIGestureRecognizerRepresentable {
+struct ScrollAwarePanGesture: UIGestureRecognizerRepresentable {
     var handle: (UIPanGestureRecognizer) -> Void
 
     func makeCoordinator(converter _: CoordinateSpaceConverter) -> Coordinator {

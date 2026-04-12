@@ -150,7 +150,7 @@ struct TabBarButton: View {
                         .foregroundStyle(.clear)
                         .contentShape(.rect)
                         .gesture(
-                            CustomiOS18Gesture(
+                            DraggablePanGesture(
                                 isEnabled: $binding.editMode,
                                 trigger: { status in
                                     if status {

@@ -129,7 +129,7 @@ struct CustomScrollView<ScrollContent: View, SheetContent: View, BottomBar: View
                 }
                 .scrollClipDisabled()
                 .contentShape(.rect)
-                .gesture(CustomGesture {
+                .gesture(SimultaneousPanGesture {
                     handleMainGesture($0)
                 })
                 .scaleEffect(scale, anchor: .bottom)
@@ -168,7 +168,7 @@ struct CustomScrollView<ScrollContent: View, SheetContent: View, BottomBar: View
                         .frame(width: 35, height: 6)
                         .frame(height: 25, alignment: .bottom)
                         .contentShape(.rect)
-                        .gesture(CustomGesture {
+                        .gesture(SimultaneousPanGesture {
                             let state = $0.state
                             if state == .began || state == .changed { isSheetScrollDisabled = true }
                             else { isSheetScrollDisabled = false }
@@ -177,7 +177,7 @@ struct CustomScrollView<ScrollContent: View, SheetContent: View, BottomBar: View
                 .contentShape(.rect)
                 .offset(y: size.height - sheetHeight)
                 .offset(y: sheetOffset)
-                .gesture(CustomGesture {
+                .gesture(SimultaneousPanGesture {
                     handleSheetGesture($0, size: size)
                 })
                 /// disable gesture to drag the sheet on bottom bar
@@ -298,29 +298,4 @@ struct CustomScrollView<ScrollContent: View, SheetContent: View, BottomBar: View
 
 #Preview {
     ScrollViewBottomSheetInteractionDemoView()
-}
-
-private struct CustomGesture: UIGestureRecognizerRepresentable {
-    var handle: (UIPanGestureRecognizer) -> Void
-    func makeCoordinator(converter _: CoordinateSpaceConverter) -> Coordinator {
-        Coordinator()
-    }
-
-    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
-        let gesture = UIPanGestureRecognizer()
-        gesture.delegate = context.coordinator
-        return gesture
-    }
-
-    func handleUIGestureRecognizerAction(_ recognizer: UIPanGestureRecognizer, context _: Context) {
-        handle(recognizer)
-    }
-
-    class Coordinator: NSObject, UIGestureRecognizerDelegate {
-        func gestureRecognizer(_: UIGestureRecognizer,
-                               shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool
-        {
-            true
-        }
-    }
 }
