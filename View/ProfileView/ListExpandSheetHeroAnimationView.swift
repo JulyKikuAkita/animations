@@ -1,8 +1,132 @@
 //
-//  HeroWrapperItem.swift
+//  ListExpandSheetHeroAnimationView.swift
 //  animation
 //
+//  Hero animation using overlay window + anchor preferences.
+//  SourceView: wraps the origin view.
+//  DestinationView: wraps the target view.
+//  HeroWrapper: creates an overlay window for smooth cross-hierarchy animation.
+//  Use .heroLayer() modifier to connect source and destination.
+//
 import SwiftUI
+
+// MARK: - Demo: Sheet-based Hero Animation
+
+struct ListExpandSheetHeroAnimationView: View {
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(heroDemoItems) { item in
+                    HeroDemoCardView(item: item)
+                }
+            }
+            .navigationTitle("Hero Effect")
+        }
+    }
+}
+
+private struct HeroDemoCardView: View {
+    var item: HeroDemoItem
+    @State private var expandSheet: Bool = false
+    var body: some View {
+        HStack(spacing: 12) {
+            SourceView(id: item.id.uuidString) {
+                iconView()
+            }
+
+            Text(item.title)
+            Spacer(minLength: 0)
+        }
+        .contentShape(.rect)
+        .onTapGesture {
+            expandSheet.toggle()
+        }
+
+        .sheet(isPresented: $expandSheet, content: {
+            DestinationView(id: item.id.uuidString) {
+                iconView()
+                    .onTapGesture {
+                        expandSheet.toggle()
+                    }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding()
+        })
+        .heroLayer(id: item.id.uuidString,
+                   animate: $expandSheet)
+        {
+            iconView()
+        } completion: { _ in
+        }
+    }
+
+    @ViewBuilder
+    func iconView() -> some View {
+        Image(systemName: item.symbol)
+            .font(.title2)
+            .foregroundStyle(.white)
+            .frame(width: 40, height: 40)
+            .background(item.color.gradient, in: .circle)
+    }
+}
+
+// MARK: - Demo: Navigation-based Hero Animation
+
+struct NavigationPushHeroAnimationView: View {
+    @State private var showView: Bool = false
+    var body: some View {
+        NavigationStack {
+            VStack {
+                SourceView(id: "View 1") {
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 50, height: 50)
+                        .onTapGesture {
+                            showView.toggle()
+                        }
+                }
+            }
+            .padding()
+            .navigationTitle("Navigation Style")
+            .navigationDestination(isPresented: $showView) {
+                DestinationView(id: "View 1") {
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 150, height: 150)
+                        .onTapGesture {
+                            showView.toggle()
+                        }
+                }
+                .padding(15)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                .navigationBarBackButtonHidden() // animation effect requires to disable interaction such as go back
+                .navigationTitle("Detail View")
+            }
+        }
+        .heroLayer(id: "View 1", animate: $showView) {
+            Circle()
+                .fill(.red)
+        } completion: { _ in
+        }
+    }
+}
+
+// MARK: - Demo Model
+
+private struct HeroDemoItem: Identifiable {
+    var id: UUID = .init()
+    var title: String
+    var color: Color
+    var symbol: String
+}
+
+private var heroDemoItems: [HeroDemoItem] = [
+    .init(title: "Book Icon", color: .red, symbol: "book.fill"),
+    .init(title: "Stack Icon", color: .blue, symbol: "square.stack.3d.up"),
+    .init(title: "Rectangle Icon", color: .orange, symbol: "rectangle.portrait"),
+]
+
+// MARK: - Hero Animation Infrastructure
 
 struct HeroWrapper<Content: View>: View {
     @ViewBuilder var content: Content
@@ -140,6 +264,8 @@ extension View {
     }
 }
 
+// MARK: - Private Infrastructure
+
 // access HeroModel environment object for passing details to source and destination views
 private struct HeroLayerViewModifier<Layer: View>: ViewModifier {
     let id: String
@@ -268,5 +394,19 @@ private class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard let view = super.hitTest(point, with: event) else { return nil }
         return rootViewController?.view == view ? view : nil
+    }
+}
+
+// MARK: - Preview
+
+#Preview("Sheet Hero") {
+    HeroWrapper {
+        ListExpandSheetHeroAnimationView()
+    }
+}
+
+#Preview("Navigation Hero") {
+    HeroWrapper {
+        NavigationPushHeroAnimationView()
     }
 }
