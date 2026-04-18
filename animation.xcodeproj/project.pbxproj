@@ -234,7 +234,7 @@
 		9663BB542DDE992700037CF1 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9663BB532DDE992200037CF1 /* Date+Extensions.swift */; };
 		9663BB572DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9663BB562DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift */; };
 		9666E3D92DA4CD8000244184 /* MicroInteractionSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */; };
-		967049292CC4BDDA0056269C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967049282CC4BDDA0056269C /* ToastView.swift */; };
+		967049292CC4BDDA0056269C /* ToastView+IOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967049282CC4BDDA0056269C /* ToastView+IOS18.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
 		96725BB22BF57F05003DBD45 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96725BB42BF59904003DBD45 /* MintDateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BB32BF59904003DBD45 /* MintDateFilterView.swift */; };
@@ -318,6 +318,7 @@
 		969B77962F8C63A00081EE29 /* ToggleablePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77912F8C63A00081EE29 /* ToggleablePanGesture.swift */; };
 		969B77972F8C63A00081EE29 /* VerticalPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77922F8C63A00081EE29 /* VerticalPanGesture.swift */; };
 		969B77982F8C63A00081EE29 /* SimultaneousPanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B77902F8C63A00081EE29 /* SimultaneousPanGesture.swift */; };
+		969B8D0F2F9427ED0081EE29 /* LiquidGlassToastView+IOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969B8D0E2F9427E30081EE29 /* LiquidGlassToastView+IOS26.swift */; };
 		969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */; };
 		969ECE482EC7EF590045601B /* LocationPermissionFullSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */; };
 		969ECE4B2EC86A410045601B /* PulseRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969ECE4A2EC86A410045601B /* PulseRingView.swift */; };
@@ -750,7 +751,7 @@
 		9663BB532DDE992200037CF1 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		9663BB562DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithMultipleSCrollView.swift; sourceTree = "<group>"; };
 		9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicroInteractionSlider.swift; sourceTree = "<group>"; };
-		967049282CC4BDDA0056269C /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		967049282CC4BDDA0056269C /* ToastView+IOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToastView+IOS18.swift"; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
 		96725BB32BF59904003DBD45 /* MintDateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintDateFilterView.swift; sourceTree = "<group>"; };
 		96725BB52BF5B762003DBD45 /* MintExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintExpenseView.swift; sourceTree = "<group>"; };
@@ -815,6 +816,7 @@
 		969B77902F8C63A00081EE29 /* SimultaneousPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimultaneousPanGesture.swift; sourceTree = "<group>"; };
 		969B77912F8C63A00081EE29 /* ToggleablePanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleablePanGesture.swift; sourceTree = "<group>"; };
 		969B77922F8C63A00081EE29 /* VerticalPanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPanGesture.swift; sourceTree = "<group>"; };
+		969B8D0E2F9427E30081EE29 /* LiquidGlassToastView+IOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiquidGlassToastView+IOS26.swift"; sourceTree = "<group>"; };
 		969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+BottomSheetInteractionDemoView.swift"; sourceTree = "<group>"; };
 		969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionFullSheetView.swift; sourceTree = "<group>"; };
 		969ECE4A2EC86A410045601B /* PulseRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseRingView.swift; sourceTree = "<group>"; };
@@ -1391,8 +1393,9 @@
 		9609DB172DBB2CC300A76F95 /* ToastView */ = {
 			isa = PBXGroup;
 			children = (
+				969B8D0E2F9427E30081EE29 /* LiquidGlassToastView+IOS26.swift */,
 				96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift */,
-				967049282CC4BDDA0056269C /* ToastView.swift */,
+				967049282CC4BDDA0056269C /* ToastView+IOS18.swift */,
 				9609DB182DBB2D1400A76F95 /* InlineToastView.swift */,
 			);
 			path = ToastView;
@@ -3372,7 +3375,7 @@
 				96C5C2FB2F6D29E400CDCFB0 /* SwipeToDismiss+ScrollView.swift in Sources */,
 				9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */,
 				96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */,
-				967049292CC4BDDA0056269C /* ToastView.swift in Sources */,
+				967049292CC4BDDA0056269C /* ToastView+IOS18.swift in Sources */,
 				ABA102212E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift in Sources */,
 				968B628E2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
@@ -3390,6 +3393,7 @@
 				963DC1FD2D270D1E00C97334 /* CacheManager.swift in Sources */,
 				AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */,
 				968B5F9C2F22F6A3003BCF16 /* DummyChartViews.swift in Sources */,
+				969B8D0F2F9427ED0081EE29 /* LiquidGlassToastView+IOS26.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */,
 				96CE85322EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift in Sources */,
