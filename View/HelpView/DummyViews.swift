@@ -320,7 +320,7 @@ struct DummyWidgetGridView: View {
 /// Mock status bar
 struct DummyStatusBar: View {
     var body: some View {
-        var time = "7:22"
+        let time = "7:22"
         HStack(spacing: 4) {
             Text(time)
                 .fontWeight(.bold)
