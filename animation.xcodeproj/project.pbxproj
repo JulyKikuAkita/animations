@@ -370,6 +370,7 @@
 		96C5BFD42F65FEE900CDCFB0 /* AppleTVCarousel+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */; };
 		96C5C15C2F6A7E3900CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift */; };
 		96C5C2FB2F6D29E400CDCFB0 /* SwipeToDismiss+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */; };
+		96C8D2AE2FA32742008C57D5 /* WalletCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D2AD2FA32730008C57D5 /* WalletCardAnimation.swift */; };
 		96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
@@ -854,6 +855,7 @@
 		96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppleTVCarousel+iOS26.swift"; sourceTree = "<group>"; };
 		96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConcentricRectangle+BackPort+iOS28.swift"; sourceTree = "<group>"; };
 		96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwipeToDismiss+ScrollView.swift"; sourceTree = "<group>"; };
+		96C8D2AD2FA32730008C57D5 /* WalletCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardAnimation.swift; sourceTree = "<group>"; };
 		96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionOnboardingIOS26.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
@@ -1565,6 +1567,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96C8D2AC2FA32726008C57D5 /* Wallet */,
 				96A1D2E62F3463BF00377C99 /* 3DAnimation */,
 				AB33103C2F307CE800FC2FA5 /* QRCode */,
 				9697F7602EB039D2005C5C77 /* Alert */,
@@ -2132,6 +2135,14 @@
 				96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */,
 			);
 			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		96C8D2AC2FA32726008C57D5 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				96C8D2AD2FA32730008C57D5 /* WalletCardAnimation.swift */,
+			);
+			path = Wallet;
 			sourceTree = "<group>";
 		};
 		96CE85332EF0D9BB009AC09D /* ButtonStyle */ = {
@@ -3463,6 +3474,7 @@
 				96E09E7A2C6ED10C00A0BE66 /* ProgressiveBlurView.swift in Sources */,
 				96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
+				96C8D2AE2FA32742008C57D5 /* WalletCardAnimation.swift in Sources */,
 				963B9CFD2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
 				AB658C342F70971F00377EBC /* ResizableHeaderIOS26View.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
