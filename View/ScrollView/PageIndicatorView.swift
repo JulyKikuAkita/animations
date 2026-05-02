@@ -3,6 +3,10 @@
 //  animation
 import SwiftUI
 
+/// A capsule-style page indicator that animates between pages as a horizontal scroll view moves.
+///
+/// The active indicator expands and contracts based on scroll progress, with optional opacity
+/// interpolation and edge clipping during overscroll.
 struct PageIndicatorView: View {
     var activeTint: Color = .primary
     var inactiveTint: Color = .primary.opacity(0.15)
@@ -65,4 +69,8 @@ struct PageIndicatorView: View {
         }
         .frame(height: 30)
     }
+}
+
+#Preview {
+    PageIndicatorView()
 }

@@ -371,6 +371,9 @@
 		96C5C15C2F6A7E3900CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift */; };
 		96C5C2FB2F6D29E400CDCFB0 /* SwipeToDismiss+ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */; };
 		96C8D2AE2FA32742008C57D5 /* WalletCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D2AD2FA32730008C57D5 /* WalletCardAnimation.swift */; };
+		96C8D5EC2FA68849008C57D5 /* BorderBeamTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5EB2FA68839008C57D5 /* BorderBeamTextFieldView.swift */; };
+		96C8D5EE2FA69018008C57D5 /* Shape+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */; };
+		96C8D5F12FA691B2008C57D5 /* BorderBeamEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F02FA691A9008C57D5 /* BorderBeamEffect.swift */; };
 		96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
@@ -856,6 +859,9 @@
 		96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS28.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConcentricRectangle+BackPort+iOS28.swift"; sourceTree = "<group>"; };
 		96C5C2FA2F6D29CA00CDCFB0 /* SwipeToDismiss+ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwipeToDismiss+ScrollView.swift"; sourceTree = "<group>"; };
 		96C8D2AD2FA32730008C57D5 /* WalletCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardAnimation.swift; sourceTree = "<group>"; };
+		96C8D5EB2FA68839008C57D5 /* BorderBeamTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderBeamTextFieldView.swift; sourceTree = "<group>"; };
+		96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+Extensions.swift"; sourceTree = "<group>"; };
+		96C8D5F02FA691A9008C57D5 /* BorderBeamEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderBeamEffect.swift; sourceTree = "<group>"; };
 		96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionOnboardingIOS26.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
@@ -1567,6 +1573,7 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96C8D5EF2FA69125008C57D5 /* FullPageEffect */,
 				96C8D2AC2FA32726008C57D5 /* Wallet */,
 				96A1D2E62F3463BF00377C99 /* 3DAnimation */,
 				AB33103C2F307CE800FC2FA5 /* QRCode */,
@@ -1772,6 +1779,7 @@
 		96301B322C2A5FAB00775407 /* TextFieldView */ = {
 			isa = PBXGroup;
 			children = (
+				96C8D5EB2FA68839008C57D5 /* BorderBeamTextFieldView.swift */,
 				968B61042F2442CD003BCF16 /* SlideToCancelText.swift */,
 				968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */,
 				AB9CFC752D628BC10044F5AF /* NumberPadTextEffectsView.swift */,
@@ -1922,9 +1930,7 @@
 		9662EFC92C460E8600508B80 /* HelpView */ = {
 			isa = PBXGroup;
 			children = (
-				968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */,
 				968B5F992F22F69D003BCF16 /* DummyChartViews.swift */,
-				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
 				AB0EA1792DEBBB5100C62391 /* DummyViews.swift */,
 				96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */,
 			);
@@ -2012,6 +2018,7 @@
 		968A17D22C0704F20072A0BA /* TextEffectView */ = {
 			isa = PBXGroup;
 			children = (
+				96C8D5F02FA691A9008C57D5 /* BorderBeamEffect.swift */,
 				96AE18F92C01BEB40015155A /* HackerTextView.swift */,
 				9621D9642BE5F85B00183CB7 /* TagFieldView.swift */,
 				9621D9692BE84B8300183CB7 /* SelectTagView.swift */,
@@ -2125,6 +2132,7 @@
 				969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */,
 				96D04B302C09A1960062520D /* StackedScrollView.swift */,
 				AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */,
+				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -2143,6 +2151,14 @@
 				96C8D2AD2FA32730008C57D5 /* WalletCardAnimation.swift */,
 			);
 			path = Wallet;
+			sourceTree = "<group>";
+		};
+		96C8D5EF2FA69125008C57D5 /* FullPageEffect */ = {
+			isa = PBXGroup;
+			children = (
+				968B628B2F256E23003BCF16 /* ScreenshotPreventingMaskView.swift */,
+			);
+			path = FullPageEffect;
 			sourceTree = "<group>";
 		};
 		96CE85332EF0D9BB009AC09D /* ButtonStyle */ = {
@@ -2312,6 +2328,7 @@
 		AB17E5612E61216D00C50B18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */,
 				969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */,
 				9663BB532DDE992200037CF1 /* Date+Extensions.swift */,
 				965999192BE0BCD6000133FA /* View+Extension.swift */,
@@ -3416,6 +3433,7 @@
 				9636EF932DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift in Sources */,
 				962B04782C22A162008E1E5D /* MeshGradientView.swift in Sources */,
 				96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */,
+				96C8D5F12FA691B2008C57D5 /* BorderBeamEffect.swift in Sources */,
 				96E4E35A2D0D72950020261F /* Platform+View+Extension.swift in Sources */,
 				AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
@@ -3478,6 +3496,7 @@
 				963B9CFD2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
 				AB658C342F70971F00377EBC /* ResizableHeaderIOS26View.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
+				96C8D5EC2FA68849008C57D5 /* BorderBeamTextFieldView.swift in Sources */,
 				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
 				AB22B73A2E7A88B900F2DDDE /* CustomTabbariOS26.swift in Sources */,
 				965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */,
@@ -3551,6 +3570,7 @@
 				ABC31E282EA4AB820068C41D /* iOS26StyleFloatingSheet.swift in Sources */,
 				965E6F4B2ECFE00500E233ED /* GlassEffectTextDemoView.swift in Sources */,
 				9662F02D2C58482200508B80 /* MetaballAnimationView.swift in Sources */,
+				96C8D5EE2FA69018008C57D5 /* Shape+Extensions.swift in Sources */,
 				96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */,
 				ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
