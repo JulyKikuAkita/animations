@@ -11,7 +11,11 @@ struct AlertConfig {
     var transitionType: TransitionType = .slide
     var slideEdge: Edge = .bottom
     /// Properties for animation
-    var show: Bool = true
+    /// Must default to `false`. `AlertModifer` uses
+    /// `.onChange(of: show, initial: false)` to trigger presentation, so if
+    /// `show` starts out `true`, the first `present()` is a true→true no-op
+    /// and the alert never appears.
+    var show: Bool = false
     var showView: Bool = false
 
     init(enabledBackgroundBlur: Bool = true,

@@ -229,6 +229,7 @@ private struct OverlayWindowView: View {
         }
     }
 
+    // swiftlint:disable:next function_body_length
     private func bottomView(_ safeArea: EdgeInsets) -> some View {
         VStack(spacing: 10) {
             /// switching between the onboarding items view!

@@ -2,6 +2,16 @@
 //  Platform+View+Extension.swift
 //  animation
 //
+// Purpose: platform-conditional view composition (iOS/macOS/tvOS/watchOS/visionOS).
+//
+// What belongs here:
+//   - The `.platform(_:content:)` modifier and its `PlatformType` enum.
+//   - Any future helper that uses `#if os(...)` to branch on build target.
+//
+// What does NOT belong here:
+//   - Runtime OS-version gating (iOS 17 vs 26 etc.) — that's View+Compat.swift.
+//     Rule of thumb: `#if os(...)` → here; `if #available(...)` → Compat.
+//
 import SwiftUI
 
 struct DemoView: View {

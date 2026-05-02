@@ -1,11 +1,25 @@
 //
-//  iOS26View+Modifier+Extension.swift
+//  View+AppStoreToolBar.swift
 //  animation
 //
 //  Created on 12/15/25.
-// Created an effect as Apple Store that
-// Whenever the scroll offset exceeds the trigger offset, the normal toolbar items fade out
-// and the `after` content toolbar type becomes visible
+//
+// Purpose: the App Store–style swap-on-scroll toolbar modifier.
+// When the scroll offset exceeds a trigger threshold, the "before" toolbar
+// items fade out and the "after" variants fade in.
+//
+// File shape:
+//   - One public `View` extension entry point (`appStoreStyleToolBar(...)`).
+//   - A private `ViewModifier` implementation and its backport helper.
+//
+// Why no "iOS26" prefix?
+//   Version gating is an implementation detail (see `backportedSharedVisibility`
+//   below). File names describe *what* a helper does, not *when* it shipped —
+//   otherwise the folder grows a new prefix every OS cycle.
+//
+// Rule for future additions:
+//   One feature-specific modifier = one file, named `View+<FeatureName>.swift`.
+//   Don't stack unrelated modifiers into a single file.
 //
 
 import SwiftUI

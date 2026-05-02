@@ -10,7 +10,7 @@ import SwiftUI
 struct BookDemoAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BookContentView()
         }
     }
 }

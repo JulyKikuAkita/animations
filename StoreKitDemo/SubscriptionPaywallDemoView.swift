@@ -1,8 +1,10 @@
 //
-//  ContentView.swift
+//  SubscriptionPaywallDemoView.swift
 //  StoreKitDemo
 //
-// play with subscription. product, store
+// Auto-renewable subscription paywall. Uses `SubscriptionStoreView` bound to
+// `Subscription.storekit` (weekly / monthly / yearly tiers). See the file
+// header in `storeKitDemoApp.swift` for how this relates to the tipping demo.
 import StoreKit
 import SwiftUI
 
@@ -16,7 +18,7 @@ struct DefaultStoreKitView: View {
     }
 }
 
-struct ContentView: View {
+struct SubscriptionPaywallDemoView: View {
     @State private var loadingStatus: (Bool, Bool) = (false, false)
 
     var body: some View {
@@ -144,8 +146,8 @@ struct ContentView: View {
                     .white,
                     .white.opacity(0.9),
                     .white.opacity(0.7),
-                    .white.opacity(0.4),
-                    .clear,
+                    .white.opacity(0.4)
+                        .clear,
                 ], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                     .padding(.bottom, -40)
@@ -194,5 +196,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    SubscriptionPaywallDemoView()
 }
