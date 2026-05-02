@@ -1,6 +1,39 @@
 //
 //  PinchZoom.swift
 //  animation
+//
+// Demo — Instagram-style pinch-to-zoom that floats above the tab bar.
+// The feed layout is scaffolding; the real subject is the `.pinchZoom()`
+// modifier applied to the image in CardView (line ~46).
+//
+// Learning points
+// ───────────────────────────────────────────────────────────────────────
+// 1. Hoisting UI out of its layout tree.
+//    `ZoomContainer` wraps the entire scaffold (TabView + NavigationStack)
+//    and holds a top-level ZStack. When a pinch begins, the zoomed image
+//    is rendered into that ZStack instead of its original spot, so it
+//    scales ABOVE the tab bar and nav bar — which SwiftUI's built-in
+//    `.scaleEffect` can't do (it clips at the tab bar).
+//
+// 2. Sharing state between container and leaves.
+//    `ZoomContainerData` (`@Observable`) is injected via `.environment(...)`.
+//    Card views write to it when a gesture begins/changes; the container
+//    reads from it to position and scale the overlay.
+//
+// 3. Source/overlay pattern.
+//    We don't scale the original image. We snapshot it into an AnyView,
+//    hide the original (`opacity(0)`), and render the snapshot in the
+//    overlay ZStack. On release we animate back and restore the original.
+//    Same pattern used by Apple Photos' hero transitions.
+//
+// 4. Hybrid SwiftUI + UIKit gestures.
+//    `GestureOverlay` is a `UIViewRepresentable` that attaches a
+//    `UIPinchGestureRecognizer` and a `UIPanGestureRecognizer` with
+//    `minimumNumberOfTouches = 2`, and sets a delegate so they run
+//    simultaneously. SwiftUI's `MagnifyGesture` + `DragGesture` can't
+//    express "two-finger pan *while* pinching" cleanly — so we drop to
+//    UIKit for the gesture layer and let SwiftUI handle the rest.
+// ───────────────────────────────────────────────────────────────────────
 
 import SwiftUI
 
@@ -12,7 +45,7 @@ struct PinchZoomDemoView: View {
                     ScrollView {
                         VStack(spacing: 15) {
                             ForEach(profiles) { profile in
-                                CardView(profile)
+                                cardView(profile)
                             }
                         }
                         .padding(15)
@@ -34,7 +67,7 @@ struct PinchZoomDemoView: View {
     }
 
     @ViewBuilder
-    func CardView(_ profile: Profile) -> some View {
+    func cardView(_ profile: Profile) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             GeometryReader {
                 let size = $0.size
@@ -43,6 +76,8 @@ struct PinchZoomDemoView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: size.width, height: size.height)
                     .clipShape(.rect(cornerRadius: 10))
+                    // ← The demo's actual subject. Two-finger pinch on this
+                    //   image to see it zoom above the tab bar.
                     .pinchZoom()
             }
             .frame(height: 240)
@@ -61,6 +96,7 @@ struct PinchZoomDemoView: View {
 
                 Spacer(minLength: 0)
 
+                // swiftlint:disable:next line_length
                 if let link = URL(string: "https://www.youtube.com/watch?v=Z1_49kXP5U0&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=91") {
                     Link("Visit", destination: link)
                         .font(.caption)
@@ -151,7 +187,9 @@ private struct PinchZoomHelper<Content: View>: View {
                     let rect = $0.frame(in: .global)
 
                     Color.clear
-                        .onChange(of: config.isGestureActive) { _, newValue in
+                        .onChange(of: config.isGestureActive) {
+                            _,
+                                newValue in
                             if newValue {
                                 guard !containerData.isResetting else { return }
                                 /// Showing view on zoom container
@@ -164,7 +202,13 @@ private struct PinchZoomHelper<Content: View>: View {
                             } else {
                                 /// Resetting to it's initial position with animation
                                 containerData.isResetting = true
-                                withAnimation(.snappy(duration: 0.3, extraBounce: 0), completionCriteria: .logicallyComplete) {
+                                withAnimation(
+                                    .snappy(
+                                        duration: 0.3,
+                                        extraBounce: 0
+                                    ),
+                                    completionCriteria: .logicallyComplete
+                                ) {
                                     containerData.dragOffset = .zero
                                     containerData.zoom = 1
                                 } completion: {
@@ -255,7 +299,10 @@ private struct GestureOverlay: UIViewRepresentable {
         }
 
         /// make both pan and pinch gesture work simultaneously
-        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        func gestureRecognizer(
+            _ gestureRecognizer: UIGestureRecognizer,
+            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+        ) -> Bool {
             if gestureRecognizer.name == "PINCHPANGESTURE", otherGestureRecognizer.name == "PINCHZOOMGESTURE" {
                 return true
             }

@@ -6,7 +6,11 @@ import SwiftUI
 
 /// App Delegate
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    func application(
+        _: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options _: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
         let config = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
         /// Connecting scene delegate
         config.delegateClass = SceneDelegate.self
@@ -15,8 +19,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 /// Scene Delegate
+///
+/// NOTE: under SwiftUI's `App` lifecycle, `scene.delegate` points at
+/// `SwiftUI.AppSceneDelegate` — NOT at an instance of this class — even when
+/// `config.delegateClass = SceneDelegate.self` is set in the AppDelegate.
+/// UIKit still creates our instance and fires `scene(_:willConnectTo:)` on
+/// it, so we publish `self` to `SceneDelegate.current` there, and SwiftUI
+/// views look it up from that static instead of `scene.delegate`.
 @Observable
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    /// The instance UIKit created for the active scene. Set in
+    /// `scene(_:willConnectTo:)` — read from SwiftUI views.
+    weak static var current: SceneDelegate?
+
     /// Current scene
     weak var windowScene: UIWindowScene?
 
@@ -24,10 +39,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var overlayWindow: UIWindow?
     var tag = 0 // ID for alert view
     var alerts: [UIView] = []
-
-//    func windowScene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//            windowScene = scene as? UIWindowScene
-//    }
 }
 
 /// Adding scene delegate to the universal alert
@@ -35,6 +46,7 @@ extension SceneDelegate {
     func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         windowScene = scene as? UIWindowScene
         setupOverlayWindow()
+        SceneDelegate.current = self
     }
 
     /// Adding hero window to the scene
@@ -47,8 +59,23 @@ extension SceneDelegate {
         print("window added")
     }
 
-    /// viewTag closure will return the appropriate tag for the added alert view to let us remove the alert in some complex view hierarchy
-    func alert(config: Binding<AlertConfig>, @ViewBuilder content: @escaping () -> some View, viewTag: @escaping (Int) -> Void) {
+    /// viewTag closure returns the tag for the added alert view so we can
+    /// remove it later in complex view hierarchies.
+    ///
+    /// Queueing note: if an alert is already on screen, additional alerts
+    /// are appended to `alerts[]` and their `_UIHostingView`s are attached
+    /// as subviews of the current rootViewController's view when dismissed
+    /// one after another. UIKit logs "Adding ... as a subview of
+    /// UIHostingController.view is not supported" for each queued alert;
+    /// the warning is expected here and the demo tolerates it in exchange
+    /// for showing four alerts from four edges on a single tap.
+    func alert(
+        config: Binding<AlertConfig>,
+        @ViewBuilder content: @escaping () -> some View,
+        viewTag: @escaping (
+            Int
+        ) -> Void
+    ) {
         guard let alertWindow = overlayWindow else { return }
 
         let viewController = UIHostingController(rootView:

@@ -1,15 +1,13 @@
 //
 //  demoApps.swift
 //  demoApp
+//
+// App entry point for the `demoApps` target. The actual demo roster lives
+// in `ContentView` (see DemoView.swift) — a launcher list that lets you
+// pick between demos at runtime instead of swapping `@main` bodies.
 
 import SwiftUI
 
-/// Switch @main to build the demo app
-
-/// demo apps for
-/// AppleMusicHomeView()
-/// ApplePhotoHomeView()
-/// PinchZoomDemoView()
 @main
 struct DemoApps: App {
     var body: some Scene {
@@ -18,14 +16,3 @@ struct DemoApps: App {
         }
     }
 }
-
-// a demo app for Timer: https://pomofocus.io/
-// struct Pomodoro_TimerApp: App {
-//    var body: some Scene {
-//        WindowGroup {
-//            TimerHomeView()
-//            /// Injecting  Model
-//                .modelContainer(for: Recent.self)
-//        }
-//    }
-// }

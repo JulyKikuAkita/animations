@@ -52,7 +52,6 @@
 		9621DC412BEF3D7A00183CB7 /* Reel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963DB14A2BBBD21400AAF347 /* Reel.swift */; };
 		9621DC432BEF3D8B00183CB7 /* PinchZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DB152BEDDD7400183CB7 /* PinchZoom.swift */; };
 		9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DB152BEDDD7400183CB7 /* PinchZoom.swift */; };
-		9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965999192BE0BCD6000133FA /* View+Extension.swift */; };
 		9621DC4D2BEF3E5E00183CB7 /* AlertApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC4C2BEF3E5E00183CB7 /* AlertApp.swift */; };
 		9621DC4F2BEF3E5F00183CB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DC4E2BEF3E5E00183CB7 /* ContentView.swift */; };
 		9621DC542BEF3E5F00183CB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9621DC532BEF3E5F00183CB7 /* Preview Assets.xcassets */; };
@@ -176,6 +175,8 @@
 		964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
 		964525772F2AE3F100E32278 /* SortableIOS26GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964525762F2AE3E400E32278 /* SortableIOS26GridView.swift */; };
 		9645273A2F31B89600E32278 /* CameraProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964527392F31B88E00E32278 /* CameraProperties.swift */; };
+		964629F22FA6ADDB00C7AFFB /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7562DAC49A100774FB7 /* SkeletonView.swift */; };
+		964629F32FA6ADF800C7AFFB /* View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */; };
 		9650AE092DE5133F00D2D67C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9650AE082DE5133F00D2D67C /* SDWebImageSwiftUI */; };
 		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
 		96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */; };
@@ -183,7 +184,6 @@
 		965836AB2DD2DA440062F372 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
-		9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965999192BE0BCD6000133FA /* View+Extension.swift */; };
 		965D1DD62C9D4E3A004161B1 /* DynamicTagWidthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965D1DD52C9D4E3A004161B1 /* DynamicTagWidthView.swift */; };
 		965E03A02BCB2C4A00E8A400 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E039F2BCB2C4A00E8A400 /* BookView.swift */; };
 		965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965E03A12BCD059F00E8A400 /* ParticleEffectsView.swift */; };
@@ -374,11 +374,19 @@
 		96C8D5EC2FA68849008C57D5 /* BorderBeamTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5EB2FA68839008C57D5 /* BorderBeamTextFieldView.swift */; };
 		96C8D5EE2FA69018008C57D5 /* Shape+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */; };
 		96C8D5F12FA691B2008C57D5 /* BorderBeamEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F02FA691A9008C57D5 /* BorderBeamEffect.swift */; };
+		96C8D5F82FA69EAB008C57D5 /* View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */; };
+		96C8D5F92FA69EAB008C57D5 /* View+FeatureHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */; };
+		96C8D5FA2FA69EAB008C57D5 /* View+Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F62FA69EAB008C57D5 /* View+Geometry.swift */; };
+		96C8D5FB2FA69EAB008C57D5 /* View+AppStoreToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F32FA69EAB008C57D5 /* View+AppStoreToolBar.swift */; };
+		96C8D5FC2FA69EAB008C57D5 /* View+Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */; };
+		96C8D5FD2FA69EAB008C57D5 /* View+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F72FA69EAB008C57D5 /* View+Visibility.swift */; };
+		96C8EB6E2FA6A03C008C57D5 /* View+Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */; };
+		96C8EB6F2FA6A049008C57D5 /* View+Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */; };
+		96C8EB702FA6A0F7008C57D5 /* View+FeatureHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */; };
 		96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
 		96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */; };
-		96CE85322EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE85312EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift */; };
 		96CE85352EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */; };
 		96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D04B302C09A1960062520D /* StackedScrollView.swift */; };
 		96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */; };
@@ -468,7 +476,6 @@
 		AB333B822E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
 		AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
 		AB333B862E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */; };
-		AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */; };
 		AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */; };
 		AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */; };
 		AB39CCAB2F8254D0001B9494 /* ImageGradientIOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39CCAA2F8254C3001B9494 /* ImageGradientIOS26View.swift */; };
@@ -543,6 +550,7 @@
 		ABFC3FEF2C9F6C7A00E2E60E /* Reel1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FCB2C9F6C7A00E2E60E /* Reel1.mp4 */; };
 		ABFC3FF02C9F6C7A00E2E60E /* Reel2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FCC2C9F6C7A00E2E60E /* Reel2.mp4 */; };
 		ABFC3FF12C9F6C7A00E2E60E /* Reel3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = ABFC3FCD2C9F6C7A00E2E60E /* Reel3.mp4 */; };
+		BB00000000000000000000D1 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -712,7 +720,6 @@
 		9658369E2DD2BB250062F372 /* storeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = storeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
-		965999192BE0BCD6000133FA /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		965D1CC52C9A40A2004161B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		965D1DD52C9D4E3A004161B1 /* DynamicTagWidthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTagWidthView.swift; sourceTree = "<group>"; };
 		965E039F2BCB2C4A00E8A400 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
@@ -862,11 +869,16 @@
 		96C8D5EB2FA68839008C57D5 /* BorderBeamTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderBeamTextFieldView.swift; sourceTree = "<group>"; };
 		96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shape+Extensions.swift"; sourceTree = "<group>"; };
 		96C8D5F02FA691A9008C57D5 /* BorderBeamEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderBeamEffect.swift; sourceTree = "<group>"; };
+		96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Animation.swift"; sourceTree = "<group>"; };
+		96C8D5F32FA69EAB008C57D5 /* View+AppStoreToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+AppStoreToolBar.swift"; sourceTree = "<group>"; };
+		96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Compat.swift"; sourceTree = "<group>"; };
+		96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+FeatureHelpers.swift"; sourceTree = "<group>"; };
+		96C8D5F62FA69EAB008C57D5 /* View+Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Geometry.swift"; sourceTree = "<group>"; };
+		96C8D5F72FA69EAB008C57D5 /* View+Visibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Visibility.swift"; sourceTree = "<group>"; };
 		96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionOnboardingIOS26.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
 		96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarHeaderScrollEffectDemoView.swift; sourceTree = "<group>"; };
-		96CE85312EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26View+Modifier+Extension.swift"; sourceTree = "<group>"; };
 		96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26ToolbarButtonStyle.swift; sourceTree = "<group>"; };
 		96D04B302C09A1960062520D /* StackedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedScrollView.swift; sourceTree = "<group>"; };
 		96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-bottomSheet.swift"; sourceTree = "<group>"; };
@@ -940,7 +952,6 @@
 		AB333A4F2E85E6A200368EB8 /* PDFMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDFMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabiOS26.swift; sourceTree = "<group>"; };
 		AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarUIToolKitiOS26.swift; sourceTree = "<group>"; };
-		AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26View+Extension.swift"; sourceTree = "<group>"; };
 		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomCarouselCardView.swift; sourceTree = "<group>"; };
@@ -1124,7 +1135,7 @@
 		96E36A452DB217F900A8EFBA /* Monitor */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Monitor; sourceTree = "<group>"; };
 		AB17E52F2E60FAA700C50B18 /* authOTP */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB17E6692E61759500C50B18 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = authOTP; sourceTree = "<group>"; };
 		AB333A502E85E6A200368EB8 /* PDFMaker */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PDFMaker; sourceTree = "<group>"; };
-		AB35A6D72E4DB3DE00573A3D /* onBoarding */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (969ED0C82EC928040045601B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = onBoarding; sourceTree = "<group>"; };
+		AB35A6D72E4DB3DE00573A3D /* OnBoarding */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (969ED0C82EC928040045601B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = OnBoarding; sourceTree = "<group>"; };
 		AB38B0B02EDAE0AE00767C20 /* Map */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Map; sourceTree = "<group>"; };
 		AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93252E03D5A0009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, AB5C93462E03E447009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitDemoApp; sourceTree = "<group>"; };
 		AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AB5C93432E03E291009CF684 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = alarmKitCountdownDemo; sourceTree = "<group>"; };
@@ -1462,7 +1473,7 @@
 				AB5C93192E03CF9F009CF684 /* alarmKitDemoApp */,
 				AB5C93332E03E28F009CF684 /* alarmKitCountdownDemo */,
 				AB17E52F2E60FAA700C50B18 /* authOTP */,
-				AB35A6D72E4DB3DE00573A3D /* onBoarding */,
+				AB35A6D72E4DB3DE00573A3D /* OnBoarding */,
 				AB333A502E85E6A200368EB8 /* PDFMaker */,
 				AB8CBF092E9E23F000A288E4 /* MyCanvas */,
 				968B5E192F22071B003BCF16 /* CustomToastApp */,
@@ -2328,18 +2339,21 @@
 		AB17E5612E61216D00C50B18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */,
+				96C8D5F32FA69EAB008C57D5 /* View+AppStoreToolBar.swift */,
+				96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */,
+				96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */,
+				96C8D5F62FA69EAB008C57D5 /* View+Geometry.swift */,
+				96C8D5F72FA69EAB008C57D5 /* View+Visibility.swift */,
 				96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */,
 				969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */,
 				9663BB532DDE992200037CF1 /* Date+Extensions.swift */,
-				965999192BE0BCD6000133FA /* View+Extension.swift */,
 				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
 				9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */,
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
 				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
-				AB333B872E8B1AAB00368EB8 /* iOS26View+Extension.swift */,
 				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
 				965E6F482ECFD64100E233ED /* UIFont+Extension.swift */,
-				96CE85312EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift */,
 				965FD2DC2EF2299900989691 /* Text+Extension.swift */,
 			);
 			path = Extensions;
@@ -2934,7 +2948,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AB35A6D72E4DB3DE00573A3D /* onBoarding */,
+				AB35A6D72E4DB3DE00573A3D /* OnBoarding */,
 			);
 			name = onBoarding;
 			packageProductDependencies = (
@@ -3427,7 +3441,6 @@
 				969B8D0F2F9427ED0081EE29 /* LiquidGlassToastView+IOS26.swift in Sources */,
 				96601FF12C78085A002C91FB /* ThemeSwitcherView.swift in Sources */,
 				AB5C89932DFD46B8009CF684 /* gradientGeneraotrAI.swift in Sources */,
-				96CE85322EF0CD4B009AC09D /* iOS26View+Modifier+Extension.swift in Sources */,
 				964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */,
 				9606653C2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift in Sources */,
 				9636EF932DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift in Sources */,
@@ -3505,6 +3518,12 @@
 				9609D93E2DB591F800A76F95 /* LocationPickerView.swift in Sources */,
 				96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */,
 				AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */,
+				96C8D5F82FA69EAB008C57D5 /* View+Animation.swift in Sources */,
+				96C8D5F92FA69EAB008C57D5 /* View+FeatureHelpers.swift in Sources */,
+				96C8D5FA2FA69EAB008C57D5 /* View+Geometry.swift in Sources */,
+				96C8D5FB2FA69EAB008C57D5 /* View+AppStoreToolBar.swift in Sources */,
+				96C8D5FC2FA69EAB008C57D5 /* View+Compat.swift in Sources */,
+				96C8D5FD2FA69EAB008C57D5 /* View+Visibility.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
@@ -3549,7 +3568,6 @@
 				AB5C92322E013724009CF684 /* OrderManager.swift in Sources */,
 				963B846E2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlaer.swift in Sources */,
 				AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */,
-				9659991A2BE0BCD6000133FA /* View+Extension.swift in Sources */,
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
 				96B89EA92EF4BFF9006F532F /* ExpandableMenuiOS26DemoView.swift in Sources */,
@@ -3634,7 +3652,6 @@
 				9692220C2D7ACF5800326523 /* KeyPadModel.swift in Sources */,
 				96CE85352EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
-				AB333B882E8B1AAB00368EB8 /* iOS26View+Extension.swift in Sources */,
 				AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */,
 				ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
@@ -3697,13 +3714,13 @@
 				AB0EA17B2DEBBB5100C62391 /* DummyViews.swift in Sources */,
 				963B84732CCC5A1D00C3FB0D /* PanGesture.swift in Sources */,
 				9662EFF22C4B579C00508B80 /* OtherContents.swift in Sources */,
+				964629F22FA6ADDB00C7AFFB /* SkeletonView.swift in Sources */,
 				96AC81002C84FFF900ABBE78 /* Control.swift in Sources */,
 				96E4E5FB2D175FAB0020261F /* ImageLinkModel.swift in Sources */,
 				96ACBEF52C33B79E004F3070 /* Expense.swift in Sources */,
 				963B9CFA2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				968B5F972F220C13003BCF16 /* Stock.swift in Sources */,
 				9662F0312C58BCCF00508B80 /* CustomShape.swift in Sources */,
-				9621DC452BEF3D9300183CB7 /* View+Extension.swift in Sources */,
 				963B87DB2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				9621DC832BEF478500183CB7 /* UICoordinator.swift in Sources */,
 				96921AF42D6EF1E700326523 /* SearchView.swift in Sources */,
@@ -3754,7 +3771,10 @@
 				96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
+				96C8EB702FA6A0F7008C57D5 /* View+FeatureHelpers.swift in Sources */,
+				BB00000000000000000000D1 /* UIView+Extension.swift in Sources */,
 				96921AF12D6EF14900326523 /* BookCardView.swift in Sources */,
+				964629F32FA6ADF800C7AFFB /* View+Animation.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
 				96352D2B2C0D07BB001AD2FD /* GridImageDetailContentView.swift in Sources */,
 				96921AEB2D6EE40C00326523 /* Book.swift in Sources */,
@@ -3780,6 +3800,7 @@
 				9621DC3A2BEF3D7600183CB7 /* Card.swift in Sources */,
 				9662EFED2C4B4D8400508B80 /* PhotoAppIOS18View.swift in Sources */,
 				9621DC342BEF3D5600183CB7 /* AppleMusicHomeView.swift in Sources */,
+				96C8EB6F2FA6A049008C57D5 /* View+Compat.swift in Sources */,
 				9621DC802BEF461000183CB7 /* PhotoItem.swift in Sources */,
 				96E4DD122CFFDE1F0020261F /* SportItem.swift in Sources */,
 			);
@@ -3894,6 +3915,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				963B86A42CEABAF300C3FB0D /* Profile.swift in Sources */,
+				96C8EB6E2FA6A03C008C57D5 /* View+Compat.swift in Sources */,
 				963B86F42CEBF76D00C3FB0D /* Message.swift in Sources */,
 				963B869F2CEABAC000C3FB0D /* ListExpandSheetHeroAnimationView.swift in Sources */,
 				963B86A92CEABD0600C3FB0D /* AnchorKey.swift in Sources */,
