@@ -142,9 +142,71 @@
 //   Splitting them means only Mask 2 needs to redraw per frame; Mask 1
 //   is cacheable. Same "separate what moves from what doesn't" principle
 //   as the source/overlay pattern in PinchZoom.swift.
+//
+// Do you actually need both masks?
+//   No. The two-mask version buys you *radial falloff* — the glow fades
+//   softly inward from the edge (the Siri / Raycast halo look). If you
+//   just want a crisp colorful beam sliding around the border, simpler
+//   forms work:
+//
+//     (a) one mask, stroke instead of fill
+//         RoundedRectangle(cornerRadius: cornerRadius)
+//             .stroke(beamGradient, lineWidth: 3)
+//             .mask {
+//                 RoundedRectangle(cornerRadius: cornerRadius)
+//                     .stroke(borderGradient, lineWidth: 3)
+//             }
+//             .blur(radius: beamBlur / 3)
+//
+//     (b) zero masks — bake the arc into the stroke's gradient
+//         let rotating = AngularGradient(
+//             colors: [.clear, .indigo, .blue, .red, .yellow, .clear],
+//             center: .center,
+//             startAngle: .degrees(rotation),
+//             endAngle: .degrees(rotation + 120))
+//         RoundedRectangle(cornerRadius: cornerRadius)
+//             .stroke(rotating, lineWidth: 3)
+//             .blur(radius: beamBlur / 2)
+//             .clipShape(RoundedRectangle(cornerRadius: cornerRadius)) // cut blur ouside
+//
+//   Trade-off: (a) and (b) give you a band of fixed thickness instead of
+//   a halo that dissolves inward. If you don't need the halo, reach for
+//   (b) — it's the form I'd write from scratch. The current two-mask
+//   version is only "load-bearing" when the halo falloff *is* the look
+//   you're after.
 // ───────────────────────────────────────────────────────────────────────
 
 import SwiftUI
+
+// Four rendering techniques, increasing in complexity and aesthetic cost.
+// See the "Deep dive — the two-mask technique" section in this file's
+// header for the full comparison + trade-offs.
+enum BorderBeamStyle: String, CaseIterable {
+    /// Zero masks. Beam colours baked directly into a rotating
+    /// `AngularGradient` stroke, clipped to the rounded rect so the blur
+    /// stays inside. Simplest. No halo falloff.
+    case simple
+    /// Same as `.simple` but without the clip — the blur bleeds outward
+    /// past the shape. Shown for visual comparison against `.simple`.
+    case simpleUnclipped
+    /// One mask. Rainbow `LinearGradient` stroke, masked by a rotating
+    /// angular-gradient stroke that reveals only the current arc.
+    /// Colourful beam, no inward halo.
+    case singleMask
+    /// Two masks (fill + inverse-border-mask + rotating-arc-mask).
+    /// Heaviest aesthetic: rainbow ambient halo that fades inward from
+    /// the edge, with the arc acting as a moving spotlight on top.
+    case masks
+}
+
+private extension View {
+    /// Apply `clipShape` only when the condition is true. Used to toggle
+    /// whether an effect's blur stays confined to the shape.
+    @ViewBuilder
+    func clipShapeIf(_ condition: Bool, _ shape: some Shape) -> some View {
+        if condition { clipShape(shape) } else { self }
+    }
+}
 
 extension View {
     @ViewBuilder
@@ -154,7 +216,8 @@ extension View {
         beam: [Color],
         beamBlur: CGFloat,
         cornerRadius: CGFloat,
-        isEnabled: Bool = true
+        isEnabled: Bool = true,
+        style: BorderBeamStyle = .simple
     ) -> some View {
         modifier(
             BorderBeamEffect(
@@ -163,7 +226,8 @@ extension View {
                 beam: beam,
                 beamBlur: beamBlur,
                 cornerRadius: cornerRadius,
-                isEnabled: isEnabled
+                isEnabled: isEnabled,
+                style: style
             )
         )
     }
@@ -177,66 +241,154 @@ struct BorderBeamEffect: ViewModifier {
     var beamBlur: CGFloat
     var cornerRadius: CGFloat
     var isEnabled: Bool
+    var style: BorderBeamStyle
     func body(content: Content) -> some View {
         content
             .background {
                 if isEnabled {
-                    borderBeamView()
+                    switch style {
+                    case .simple:
+                        borderBeamView(clipped: true)
+                    case .simpleUnclipped:
+                        borderBeamView(clipped: false)
+                    case .singleMask:
+                        borderBeamSingleMaskView()
+                    case .masks:
+                        borderBeamMasksView()
+                    }
                 }
             }
     }
 
-    private func borderBeamView() -> some View {
+    /// Shared scaffold for every style: faded outline (optional) + a
+    /// repeating `KeyframeAnimator` that hands the current rotation (0-360°)
+    /// to each variant's drawing closure.
+    ///
+    /// Each `borderBeam*View` function below supplies *only* its unique
+    /// beam-drawing logic; ZStack, fade border, animator and padding live
+    /// in one place so swapping timing or outline affects all styles at
+    /// once.
+    private func borderBeamScaffold(
+        @ViewBuilder draw: @escaping (_ rotation: Double) -> some View
+    ) -> some View {
         ZStack {
             if !hideFadeBorder {
-                /// faded border
+                /// faded static outline
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(border.tertiary, lineWidth: 0.6)
             }
 
             KeyframeAnimator(initialValue: 0.0, repeating: true) { value in
-                let rotation = value * 360
-                let borderGradient = AngularGradient(
-                    colors: [.clear, border, .clear],
-                    center: .center,
-                    startAngle: .degrees(140 + rotation),
-                    endAngle: .degrees(270 + rotation)
-                )
-                let beamGradient = LinearGradient(
-                    colors: beam,
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-
-                /// bream gradient
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(beamGradient)
-                    /// inverse masking to show only limited amount of beam gradient
-                    .mask {
-                        Rectangle()
-                            .overlay {
-                                RoundedRectangle(cornerRadius: cornerRadius)
-                                    /// using blur instead of padding to get smooth ending
-                                    .blur(radius: beamBlur)
-                                    .blendMode(.destinationOut)
-                            }
-                    }
-                    .mask {
-                        /// 2nd mask to sync with border effect
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .fill(borderGradient)
-                            .blur(radius: beamBlur / 1.5)
-                            .padding(-beamBlur * 2)
-                    }
-
-                /// border gradient
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(borderGradient, lineWidth: 0.6)
+                draw(value * 360)
             } keyframes: { _ in
                 LinearKeyframe(1, duration: 2.5)
             }
         }
         .padding(0.5)
+    }
+
+    /// Zero-mask variant: rainbow arc baked into the rotating
+    /// `AngularGradient`. `clipped` controls whether the blur stays inside
+    /// the rounded rect (`.simple`) or bleeds outward (`.simpleUnclipped`).
+    private func borderBeamView(clipped: Bool = true) -> some View {
+        borderBeamScaffold { rotation in
+            let borderGradient = AngularGradient(
+                colors: [.clear] + beam + [.clear],
+                center: .center,
+                startAngle: .degrees(140 + rotation),
+                endAngle: .degrees(270 + rotation)
+            )
+
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .stroke(borderGradient, lineWidth: 2)
+                .blur(radius: beamBlur / 2)
+                // Only visible difference between `.simple` and `.simpleUnclipped`.
+                .clipShapeIf(clipped, RoundedRectangle(cornerRadius: cornerRadius))
+
+            /// thin static outline at current arc
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .stroke(borderGradient, lineWidth: 0.6)
+        }
+    }
+
+    /// One-mask variant: a rainbow stroke made visible only where the
+    /// rotating angular-gradient arc is opaque. Intermediate between
+    /// `simple` (no masks) and `masks` (two masks + radial halo).
+    private func borderBeamSingleMaskView() -> some View {
+        borderBeamScaffold { rotation in
+            let borderGradient = AngularGradient(
+                colors: [.clear, border, .clear],
+                center: .center,
+                startAngle: .degrees(140 + rotation),
+                endAngle: .degrees(270 + rotation)
+            )
+            let beamGradient = LinearGradient(
+                colors: beam,
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
+            /// Full colourful stroke, masked to show only where the
+            /// rotating arc mask is opaque.
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .stroke(beamGradient, lineWidth: 2)
+                .mask {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(borderGradient, lineWidth: 2)
+                        .blur(radius: beamBlur / 1.5)
+                        .padding(-beamBlur * 2)
+                }
+                .blur(radius: beamBlur / 3)
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+
+            /// thin arc outline
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .stroke(borderGradient, lineWidth: 0.6)
+        }
+    }
+
+    /// Two-mask variant: rainbow fill + inverse-border mask (radial halo)
+    /// + rotating-arc mask (spotlight). See the deep dive in the file
+    /// header for the full walkthrough.
+    private func borderBeamMasksView() -> some View {
+        borderBeamScaffold { rotation in
+            let borderGradient = AngularGradient(
+                colors: [.clear, border, .clear],
+                center: .center,
+                startAngle: .degrees(140 + rotation),
+                endAngle: .degrees(270 + rotation)
+            )
+            let beamGradient = LinearGradient(
+                colors: beam,
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
+            /// beam gradient
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(beamGradient)
+                /// inverse masking to show only limited amount of beam gradient
+                .mask {
+                    Rectangle()
+                        .overlay {
+                            RoundedRectangle(cornerRadius: cornerRadius)
+                                /// using blur instead of padding to get smooth ending
+                                .blur(radius: beamBlur)
+                                .blendMode(.destinationOut)
+                        }
+                }
+                .mask {
+                    /// 2nd mask to sync with border effect
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(borderGradient)
+                        .blur(radius: beamBlur / 1.5)
+                        .padding(-beamBlur * 2)
+                }
+
+            /// thin arc outline
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .stroke(borderGradient, lineWidth: 0.6)
+        }
     }
 }
 

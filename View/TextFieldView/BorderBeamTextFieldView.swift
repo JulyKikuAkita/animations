@@ -36,8 +36,18 @@ struct BorderBeamTextFieldDemoView: View {
     let beamColor: [Color] = [.indigo, .blue, .red, .yellow, .orange, .pink]
     let buttonBeamColor: [Color] = [.gray, .brown]
     @State private var enableBeamEffect: Bool = false
+    @State private var beamStyle: BorderBeamStyle = .simple
     var body: some View {
         VStack {
+            VStack(spacing: 16) {
+                ForEach(BorderBeamStyle.allCases, id: \.self) { style in
+                    Text(style.rawValue.capitalized)
+                        .frame(width: 180, height: 50)
+                        .showBeamStyle(style)
+                }
+            }
+            Spacer(minLength: 0)
+
             VStack(alignment: .leading, spacing: 25) {
                 TextField("Ask Anything...", text: .constant(""))
                     .padding(.top, 8)
@@ -55,7 +65,12 @@ struct BorderBeamTextFieldDemoView: View {
                     Spacer(minLength: 0)
 
                     Group {
-                        Button {} label: {
+                        Button {
+                            // Cycle through styles: simple → singleMask → masks → simple …
+                            let all = BorderBeamStyle.allCases
+                            let next = (all.firstIndex(of: beamStyle) ?? 0) + 1
+                            beamStyle = all[next % all.count]
+                        } label: {
                             Image(systemName: "plus")
                         }
 
@@ -76,8 +91,9 @@ struct BorderBeamTextFieldDemoView: View {
                                     border: .primary,
                                     beam: buttonBeamColor,
                                     beamBlur: 15,
-                                    cornerRadius: 20,
-                                    isEnabled: enableBeamEffect
+                                    cornerRadius: 40,
+                                    isEnabled: enableBeamEffect,
+                                    style: beamStyle
                                 )
                                 .background(.background, in: .circle)
                         }
@@ -90,12 +106,35 @@ struct BorderBeamTextFieldDemoView: View {
             .borderBeam(
                 border: .primary,
                 beam: beamColor,
-                beamBlur: 15,
+                beamBlur: 25,
                 cornerRadius: 20,
-                isEnabled: enableBeamEffect
+                isEnabled: enableBeamEffect,
+                style: beamStyle
             )
         }
         .padding()
+    }
+}
+
+// Palette hoisted to file scope so both `BorderBeamTextFieldDemoView.beamColor`
+// and the `showBeamStyle` helper can reference one source of truth.
+private let demoBeamPalette: [Color] = [.indigo, .blue, .red, .yellow, .orange, .pink]
+
+private extension View {
+    func showBeamStyle(
+        _ style: BorderBeamStyle = .simple
+    ) -> some View {
+        modifier(
+            BorderBeamEffect(
+                border: .primary,
+                hideFadeBorder: false,
+                beam: demoBeamPalette,
+                beamBlur: 15,
+                cornerRadius: 20,
+                isEnabled: true,
+                style: style
+            )
+        )
     }
 }
 
