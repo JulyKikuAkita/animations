@@ -395,6 +395,8 @@
 		96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */; };
 		96D5384E2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */; };
 		96D5384F2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */; };
+		96D54D262FAABCCF00FB070A /* iPodCarousel+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D54D252FAABCCF00FB070A /* iPodCarousel+iOS26.swift */; };
+		96D54D282FAAC6A100FB070A /* iPodCarouselReflection.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */; };
 		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
 		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -886,6 +888,8 @@
 		96D495802BBD0E140011D5AA /* ReelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelView.swift; sourceTree = "<group>"; };
 		96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCarouselSliderView.swift; sourceTree = "<group>"; };
 		96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGridViewIos26+TransitionEffect.swift"; sourceTree = "<group>"; };
+		96D54D252FAABCCF00FB070A /* iPodCarousel+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iPodCarousel+iOS26.swift"; sourceTree = "<group>"; };
+		96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = iPodCarouselReflection.metal; sourceTree = "<group>"; };
 		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
 		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -1892,6 +1896,7 @@
 			children = (
 				AB39CCAA2F8254C3001B9494 /* ImageGradientIOS26View.swift */,
 				96C5BFD32F65FED700CDCFB0 /* AppleTVCarousel+iOS26.swift */,
+				96D54D252FAABCCF00FB070A /* iPodCarousel+iOS26.swift */,
 				96C0C2D82B905E3500F56FF5 /* CardCarouselView.swift */,
 				96E1DD722E6A5557002B9F6C /* CardCarousel+Reflection+iOS26.swift */,
 				96C0C2DC2B906BA500F56FF5 /* ParallelXCardView.swift */,
@@ -1903,6 +1908,7 @@
 				9682B4FA2CA7C852003D917F /* InfiniteCarouselView.swift */,
 				9682B7F12CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift */,
 				96E4E4BF2D122E220020261F /* LoopingStackCardsDemoView.swift */,
+				96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */,
 			);
 			path = Carousel;
 			sourceTree = "<group>";
@@ -3632,6 +3638,7 @@
 				967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */,
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
+				96D54D262FAABCCF00FB070A /* iPodCarousel+iOS26.swift in Sources */,
 				96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */,
 				963B882F2CED403F00C3FB0D /* CustomTextFieldMenuActionsView.swift in Sources */,
@@ -3680,6 +3687,7 @@
 				AB0FFC382E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift in Sources */,
 				AB0E9DA02DE2655600C62391 /* MorphCustomMenuDemoView.swift in Sources */,
 				963B84712CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift in Sources */,
+				96D54D282FAAC6A100FB070A /* iPodCarouselReflection.metal in Sources */,
 				968B5F942F220A01003BCF16 /* LoopingScrollViewDemo+AppleStock.swift in Sources */,
 				9621D9672BE8409A00183CB7 /* TagLayout.swift in Sources */,
 				9662F0232C5838CB00508B80 /* MorphingSymbolView.swift in Sources */,
