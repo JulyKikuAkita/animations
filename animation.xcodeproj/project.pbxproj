@@ -518,6 +518,7 @@
 		ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */; };
 		ABAA1BA22E73BCD4003535CF /* CustomList+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAA1BA12E73BCD4003535CF /* CustomList+iOS26.swift */; };
 		ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */; };
+		ABB8F0082FAFFE7E00FB4A84 /* CustomSideMenu+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB8F0072FAFFE6F00FB4A84 /* CustomSideMenu+iOS26.swift */; };
 		ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */; };
 		ABC31E282EA4AB820068C41D /* iOS26StyleFloatingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC31E272EA4AB820068C41D /* iOS26StyleFloatingSheet.swift */; };
 		ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */; };
@@ -993,6 +994,7 @@
 		ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightSheetViewiOS26.swift; sourceTree = "<group>"; };
 		ABAA1BA12E73BCD4003535CF /* CustomList+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomList+iOS26.swift"; sourceTree = "<group>"; };
 		ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNotificationsView.swift; sourceTree = "<group>"; };
+		ABB8F0072FAFFE6F00FB4A84 /* CustomSideMenu+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomSideMenu+iOS26.swift"; sourceTree = "<group>"; };
 		ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRatingDemoView.swift; sourceTree = "<group>"; };
 		ABC31E272EA4AB820068C41D /* iOS26StyleFloatingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26StyleFloatingSheet.swift; sourceTree = "<group>"; };
 		ABC5C9982E36D393009D7EDC /* GlassMorphEffectiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectiOS26.swift; sourceTree = "<group>"; };
@@ -1916,6 +1918,7 @@
 		965F26FC2D86361B00300420 /* CustomMenu */ = {
 			isa = PBXGroup;
 			children = (
+				ABB8F0072FAFFE6F00FB4A84 /* CustomSideMenu+iOS26.swift */,
 				965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */,
 				96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */,
 				AB0E9D9F2DE2655600C62391 /* MorphCustomMenuDemoView.swift */,
@@ -3623,6 +3626,7 @@
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
 				9663BB572DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift in Sources */,
+				ABB8F0082FAFFE7E00FB4A84 /* CustomSideMenu+iOS26.swift in Sources */,
 				96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */,
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
