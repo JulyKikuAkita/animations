@@ -32,6 +32,9 @@ struct DummyViews: View {
                 DummyGridView(rowCount: 2, gridCount: 8, tint: .orange)
                 DummyWidgetGridView()
             }
+            Section {
+                DummySideBar()
+            }
         }
     }
 }
@@ -333,6 +336,33 @@ struct DummyStatusBar: View {
         .font(.caption2)
         .padding(.horizontal, 20)
         .padding(.top, 15)
+    }
+}
+
+struct DummySideBar: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Circle()
+                .fill(.fill)
+                .frame(width: 60, height: 60)
+                .padding(.bottom, 10)
+
+            Text("Mr. Fox")
+                .font(.title3)
+                .fontWeight(.semibold)
+
+            Text("@Mr. Fox")
+                .foregroundStyle(.gray)
+            HStack(spacing: 10) {
+                Text("1.1K Following")
+                Text("1.5M Followers")
+            }
+            .font(.callout)
+            .fontWeight(.medium)
+
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
