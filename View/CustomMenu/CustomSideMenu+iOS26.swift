@@ -257,9 +257,9 @@ struct CustomIOS26SideMenu<MenuContent: View, Content: View>: View {
     // bezel. On older OSes we fall back to a fixed radius.
     var backgroundShape: some Shape {
         if #available(iOS 26, *) {
-            ConcentricRectangle(corners: .concentric, isUniform: true)
+            AnyShape(ConcentricRectangle(corners: .concentric, isUniform: true))
         } else {
-            RoundedRectangle(cornerRadius: 45)
+            AnyShape(RoundedRectangle(cornerRadius: 45))
         }
     }
 

@@ -397,6 +397,7 @@
 		96D5384F2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */; };
 		96D54D262FAABCCF00FB070A /* iPodCarousel+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D54D252FAABCCF00FB070A /* iPodCarousel+iOS26.swift */; };
 		96D54D282FAAC6A100FB070A /* iPodCarouselReflection.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */; };
+		96D5521F2FB5170B00FB070A /* LoopingKeyframeAnimation+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */; };
 		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
 		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -891,6 +892,7 @@
 		96D5384D2F58C31C00EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoGridViewIos26+TransitionEffect.swift"; sourceTree = "<group>"; };
 		96D54D252FAABCCF00FB070A /* iPodCarousel+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iPodCarousel+iOS26.swift"; sourceTree = "<group>"; };
 		96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = iPodCarouselReflection.metal; sourceTree = "<group>"; };
+		96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoopingKeyframeAnimation+iOS26.swift"; sourceTree = "<group>"; };
 		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
 		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -1350,6 +1352,7 @@
 		960663232DD930B50084B468 /* LandingPages */ = {
 			isa = PBXGroup;
 			children = (
+				96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */,
 				96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */,
 				967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */,
 				9662F0242C583FB600508B80 /* LandingView.swift */,
@@ -3459,6 +3462,7 @@
 				96E4E35A2D0D72950020261F /* Platform+View+Extension.swift in Sources */,
 				AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
+				96D5521F2FB5170B00FB070A /* LoopingKeyframeAnimation+iOS26.swift in Sources */,
 				96E4DD142CFFDE1F0020261F /* SportItem.swift in Sources */,
 				9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
