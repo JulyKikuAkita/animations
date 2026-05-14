@@ -43,11 +43,25 @@ struct LoopOnBoarding: View {
     @State private var startDate: Date = .now
     var body: some View {
         ZStack {
+            // Guard the divisor: `phaseUpdateAfter` is user-supplied and 0 would
+            // crash both `.periodic(by:)` and the integer division below.
             let safePhaseUpdateAfter = max(config.phaseUpdateAfter, 1)
-            /// Each phase animation ceiling is 3s
+            // 3-SECOND PHASE BUDGET — knob #1 of 2.
+            // The literal `3.0` is the per-phase ceiling. Pairs with the keyframe
+            // sum below; both must equal each other or the icon bounce will drift
+            // out of sync with the symbol swap on each TimelineView tick.
+            // `phaseUpdateAfter` is a *multiplier*, not raw seconds: setting it to
+            // 2 stretches dwell time to 6s, during which the 3s keyframe loop
+            // simply runs twice — letting you slow phases without re-authoring
+            // keyframes.
             let timelineDuration = CGFloat(safePhaseUpdateAfter) * 3.0
 
+            // KEY PATTERN — time-driven phase cycling.
+            // `.periodic` re-renders the closure every `timelineDuration` seconds.
+            // Deriving `index` from `ctx.date` (not @State) means there's no
+            // Timer, no mutation, and the view stays a pure function of time.
             TimelineView(.periodic(from: startDate, by: timelineDuration)) { ctx in
+                // elapsed seconds → completed phase count → wrap to phases.count
                 let diff = Int(startDate.distance(to: ctx.date)) / (safePhaseUpdateAfter * 3)
                 let index = diff % phases.count
 
@@ -55,14 +69,31 @@ struct LoopOnBoarding: View {
                     Image(systemName: phases[index].symbol)
                         .font(.system(size: config.iconSize - 20))
                         .foregroundStyle(config.tint.gradient)
+                        // `contentTransition` animates the SF Symbol swap when
+                        // `systemName` changes. Without it the symbol pops instantly.
                         .contentTransition(.symbolEffect(.replace.downUp))
                         .frame(width: config.iconSize, height: config.iconSize)
+                        // `.keyframeAnimator` modifier — animates an existing view's
+                        // value (here: scale). `repeating: true` loops forever.
+                        // Contrast with `KeyframeAnimator` (the View) used in pulseRing.
                         .keyframeAnimator(initialValue: 1.0, repeating: true) { content, scale in
                             content
                                 .scaleEffect(scale)
                         } keyframes: { _ in
                             let scale = config.iconScale
 
+                            // Keyframe types:
+                            //   MoveKeyframe   — instant set, no interpolation
+                            //   SpringKeyframe — bouncy, physics-based
+                            //   CubicKeyframe  — smooth ease curve
+                            //
+                            // 3-SECOND PHASE BUDGET — knob #2 of 2.
+                            // Durations sum to exactly 3.0 so the keyframe loop
+                            // aligns with the TimelineView tick:
+                            //   7 × 0.25 (bounce) + 1.25 (hold) = 3.0
+                            // `keyframeAnimator(repeating:)` loops independently
+                            // of TimelineView, so a mismatched sum would visibly
+                            // desync the bounce from the symbol swap.
                             MoveKeyframe(1)
                             /// Bounce effect, total duration 3.0
                             SpringKeyframe(1, duration: 0.25)
@@ -76,10 +107,17 @@ struct LoopOnBoarding: View {
                         }
                         .padding(.bottom, 130)
 
+                    // Only one phase view exists at a time; the `if` toggles
+                    // identity so SwiftUI runs insertion/removal transitions.
                     ZStack {
                         ForEach(phases.indices, id: \.self) { phaseIndex in
                             if phaseIndex == index {
                                 textContent(phase: phases[phaseIndex])
+                                    // Both `.push(from:)` and `.blurReplace` are
+                                    // iOS 17+ `Transition`-protocol values, so
+                                    // `.combined(with:)` resolves directly.
+                                    // Mixing with old `AnyTransition` (e.g. `.asymmetric`)
+                                    // requires `AnyTransition(...)` to bridge the two systems.
                                     .transition(
                                         .push(from: .bottom)
                                             .combined(with: .blurReplace)
@@ -89,6 +127,9 @@ struct LoopOnBoarding: View {
                     }
                     .padding(.horizontal, 15)
                     .padding(.bottom, config.showButtons ? 75 : 10)
+                    // Transitions only animate when an ancestor attaches
+                    // `.animation(_:value:)` and that value changes. `index`
+                    // flips on each TimelineView tick → push+blur fires.
                     .animation(.bouncy(duration: 0.8), value: index)
                     .frame(maxHeight: .infinity, alignment: .bottom)
                 }
@@ -125,6 +166,10 @@ struct LoopOnBoarding: View {
         .background {
             Circle()
                 .fill(config.tint.gradient)
+                // `visualEffect` reads geometry (proxy) and applies effects
+                // without invalidating layout — cheaper than wrapping in a
+                // GeometryReader + `.offset`. Used here to push the glow
+                // partly off-screen relative to the circle's own size.
                 .visualEffect { content, proxy in
                     content
                         .offset(y: proxy.size.height * 1.2)
@@ -152,6 +197,10 @@ struct LoopOnBoarding: View {
 
     private func pulseRing(delay: CGFloat, wait: CGFloat) -> some View {
         let size = config.iconSize / 2
+        // `KeyframeAnimator` (capital K — a View) animates a custom value
+        // type and yields it to the builder. Use this when there's no
+        // existing view to attach `.keyframeAnimator` to, or when you want
+        // to animate multiple properties via one struct (see `Pulse` below).
         return KeyframeAnimator(initialValue: Pulse(), repeating: true) { pulse in
             Circle()
                 .stroke(config.pulseTint, lineWidth: config.pulseWidth)
@@ -167,6 +216,10 @@ struct LoopOnBoarding: View {
         }
     }
 
+    // `@Animatable` (iOS 18+) auto-synthesizes `AnimatableData` from the
+    // struct's stored properties so SwiftUI can interpolate between two
+    // `Pulse` values. Pre-iOS 18 you'd implement `Animatable` by hand and
+    // expose an `AnimatablePair<CGFloat, CGFloat>`.
     @Animatable
     struct Pulse: Hashable {
         var scale: CGFloat = 1
