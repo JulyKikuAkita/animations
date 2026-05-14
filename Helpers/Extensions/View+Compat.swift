@@ -87,4 +87,14 @@ public extension View {
             }
         }
     }
+
+    @ViewBuilder
+    func optionalGlassButtonStyle() -> some View {
+        if #available(iOS 26, *) {
+            self
+                .buttonStyle(.glassProminent)
+        } else {
+            buttonStyle(.borderedProminent)
+        }
+    }
 }

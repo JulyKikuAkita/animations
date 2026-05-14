@@ -119,7 +119,8 @@ struct TippingView<Header: View, Icon: View, Footer: View>: View {
             }
             .fixedSize(horizontal: false, vertical: true)
             .productViewStyle(.compact)
-            .customGlassButtonStyle()
+            .optionalGlassButtonStyle()
+            .buttonBorderShape(.capsule)
             /// disabling dismiss button
             .storeButton(.hidden, for: .cancellation)
 
@@ -138,7 +139,8 @@ struct TippingView<Header: View, Icon: View, Footer: View>: View {
                             .opacity(isLoading ? 1 : 0)
                     }
             }
-            .customGlassButtonStyle()
+            .optionalGlassButtonStyle()
+            .buttonBorderShape(.capsule)
             .tint(.red)
             .padding(.horizontal, 15)
             .padding(.bottom, 12)
@@ -198,18 +200,6 @@ struct TippingView<Header: View, Icon: View, Footer: View>: View {
 }
 
 private extension View {
-    @ViewBuilder
-    func customGlassButtonStyle() -> some View {
-        if #available(iOS 26, *) {
-            self
-                .buttonStyle(.glassProminent)
-                .buttonBorderShape(.capsule)
-        } else {
-            buttonStyle(.borderedProminent)
-                .buttonBorderShape(.capsule)
-        }
-    }
-
     @ViewBuilder
     func customGlassBackground(shape: some Shape, glassTint: Color = .clear) -> some View {
         if #available(iOS 26, *) {
