@@ -42,12 +42,14 @@ struct DummyViews: View {
 struct DummyRectangles: View {
     let color: Color
     let count: Int
+    var height: CGFloat = 45
     var body: some View {
         LazyVStack(spacing: 12) {
             ForEach(0 ..< count, id: \.self) { _ in
                 RoundedRectangle(cornerRadius: 12)
                     .fill(color.gradient)
-                    .frame(height: 45)
+//                    .aspectRatio(1, contentMode: .fit)
+                    .frame(height: height)
             }
         }
         .padding(15)
