@@ -398,6 +398,7 @@
 		96D54D262FAABCCF00FB070A /* iPodCarousel+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D54D252FAABCCF00FB070A /* iPodCarousel+iOS26.swift */; };
 		96D54D282FAAC6A100FB070A /* iPodCarouselReflection.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */; };
 		96D5521F2FB5170B00FB070A /* LoopingKeyframeAnimation+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */; };
+		96D556C92FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */; };
 		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
 		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -893,6 +894,7 @@
 		96D54D252FAABCCF00FB070A /* iPodCarousel+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iPodCarousel+iOS26.swift"; sourceTree = "<group>"; };
 		96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = iPodCarouselReflection.metal; sourceTree = "<group>"; };
 		96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoopingKeyframeAnimation+iOS26.swift"; sourceTree = "<group>"; };
+		96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomMorphingTab+BottomBar+IOS26.swift"; sourceTree = "<group>"; };
 		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
 		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -2394,6 +2396,7 @@
 				96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */,
 				96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */,
 				AB95E8962F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift */,
+				96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */,
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
 				AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */,
 				ABD6B5162F5419540056990A /* iOS26+minimizedTabbar.swift */,
@@ -3542,6 +3545,7 @@
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
 				AB8CBDDD2E9AFE0800A288E4 /* VersionCheckManager.swift in Sources */,
+				96D556C92FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift in Sources */,
 				96C5BFD42F65FEE900CDCFB0 /* AppleTVCarousel+iOS26.swift in Sources */,
 				9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */,
 				ABE1AE772E34B08B0090A2F0 /* PermissionSheetDemo.swift in Sources */,

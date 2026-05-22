@@ -49,7 +49,10 @@ class ColorTransformer: ValueTransformer {
     }
 
     static func register() {
-        ValueTransformer.setValueTransformer(ColorTransformer(), forName: .init("ColorTransformer")) // the name need to be exactly match the class name
+        ValueTransformer.setValueTransformer(
+            ColorTransformer(),
+            forName: .init("ColorTransformer")
+        ) // the name need to be exactly match the class name
     }
 }
 
@@ -99,3 +102,5 @@ enum DummyColors: String, CaseIterable {
         }
     }
 }
+
+let dummyBeamColors: [Color] = [.indigo, .blue, .red, .yellow, .orange, .pink]
