@@ -15,13 +15,14 @@ struct CustomGlassSegmentControlDemoView: View {
     ]
     var body: some View {
         VStack {
-            CustomGlassSegmentControl(selection: $activeIndex, tabs: $tabs)
+            CustomGlassSegmentControl(
+                // override default liquid lense  value
+                // config: .init(refractionAmount: 5, refractionDepth: 20),
+                selection: $activeIndex,
+                tabs: $tabs
+            )
 
-            Text("\(activeIndex)")
-
-            Button("Go to mid") {
-                activeIndex = 3
-            }
+            Text("Tab Index \(activeIndex)")
         }
         .padding()
     }
@@ -35,6 +36,7 @@ struct CustomGlassSegmentControl: View {
     /// View Properties
     @State private var activeIndex: Int?
     @State private var scrollPosition: ScrollPosition = .init()
+    @State private var scrollPhase: ScrollPhase = .idle
     var body: some View {
         GeometryReader {
             let containerSize = $0.size
@@ -52,8 +54,71 @@ struct CustomGlassSegmentControl: View {
                             } action: { newValue in
                                 tab.viewSize = newValue
                             }
+                            .contentShape(.rect)
+                            .onTapGesture {
+                                if let index = tabs.firstIndex(where: { $0.id == tab.id }) {
+                                    selection = index
+                                }
+                            }
                     }
                 }
+                /// add highlight color
+                .overlay {
+                    HStack(spacing: 0) {
+                        ForEach($tabs) { $tab in
+                            Text(tab.title)
+                                .font(.system(size: 18))
+                                .foregroundStyle(config.tint)
+                                .padding(.horizontal, config.refractionDepth + 3)
+                                .frame(height: containerSize.height)
+                        }
+                    }
+                    .mask(alignment: .leading) {
+                        Capsule()
+                            .frame(width: activeSize.width, height: activeSize.height)
+                            .visualEffect { content, proxy in
+                                let midX = proxy.frame(in: .scrollView).midX
+                                return content.offset(x: -midX)
+                            }
+                    }
+                    .allowsHitTesting(false)
+                }
+                /// apply liquid lens metal effect
+                .visualEffect { content, proxy in
+                    let rect = proxy.frame(in: .scrollView)
+                    let minX = rect.minX + (activeSize.width / 2)
+
+                    return content.layerEffect(
+                        ShaderLibrary.liquidLens(
+                            .float2(activeSize),
+                            /// center pill
+                            .float(-minX),
+                            .float(config.refractionAmount),
+                            .float(config.refractionDepth)
+                        ),
+                        maxSampleOffset: .init(width: 200, height: 100)
+                    )
+                }
+                /// add capsule shape outline
+                .background(alignment: .leading) {
+                    ZStack {
+                        if #available(iOS 26, *) {
+                            Capsule()
+                                .fill(.clear)
+                                .frame(width: activeSize.width, height: activeSize.height)
+                                .glassEffect(.regular, in: .capsule)
+                        } else {
+                            Capsule()
+                                .fill(.ultraThinMaterial)
+                                .frame(width: activeSize.width, height: activeSize.height)
+                        }
+                    }
+                    .visualEffect { content, proxy in
+                        let midX = proxy.frame(in: .scrollView).midX
+                        return content.offset(x: -midX)
+                    }
+                }
+                .animation(.interactiveSpring(response: 0.35, dampingFraction: 0.3, blendDuration: 0.4), value: activeIndex)
             }
             .scrollIndicators(.hidden)
             /// start & end at the center
@@ -65,11 +130,17 @@ struct CustomGlassSegmentControl: View {
             } action: { _, newValue in
                 if let index = tabs.closetSnapPointIndex(newValue), activeIndex != nil {
                     activeIndex = index
-                    selection = index
+                    if scrollPhase != .animating {
+                        selection = index
+                    }
                 }
+            }
+            .onScrollPhaseChange { _, newPhase in
+                scrollPhase = newPhase
             }
         }
         .frame(height: 50)
+        .allowsHitTesting(scrollPhase != .animating)
         .task {
             if activeIndex == nil {
                 let cappedIndex = max(min(selection, tabs.count - 1), 0)
@@ -81,7 +152,9 @@ struct CustomGlassSegmentControl: View {
         }.onChange(of: selection) { _, newValue in
             if activeIndex != newValue {
                 let cappedIndex = max(min(selection, tabs.count - 1), 0)
-                scrollPosition.scrollTo(x: tabs.snapPoints[cappedIndex])
+                withAnimation(.snappy) {
+                    scrollPosition.scrollTo(x: tabs.snapPoints[cappedIndex])
+                }
             }
         }
     }

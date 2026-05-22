@@ -400,6 +400,7 @@
 		96D5521F2FB5170B00FB070A /* LoopingKeyframeAnimation+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */; };
 		96D556C92FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */; };
 		96D558512FC0247C00FB070A /* GlassSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */; };
+		96D558542FC0DA2300FB070A /* LiquidLens.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D558532FC0DA2300FB070A /* LiquidLens.metal */; };
 		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
 		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -897,6 +898,7 @@
 		96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoopingKeyframeAnimation+iOS26.swift"; sourceTree = "<group>"; };
 		96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomMorphingTab+BottomBar+IOS26.swift"; sourceTree = "<group>"; };
 		96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassSegmentedControlView.swift; sourceTree = "<group>"; };
+		96D558532FC0DA2300FB070A /* LiquidLens.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LiquidLens.metal; sourceTree = "<group>"; };
 		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
 		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -2213,6 +2215,7 @@
 			isa = PBXGroup;
 			children = (
 				96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */,
+				96D558532FC0DA2300FB070A /* LiquidLens.metal */,
 			);
 			path = SegmentControl;
 			sourceTree = "<group>";
@@ -3568,6 +3571,7 @@
 				969219DD2D6D9EEA00326523 /* Contact.swift in Sources */,
 				AB0FFD212E2D863700E6DCBE /* PullEffectScrollView.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
+				96D558542FC0DA2300FB070A /* LiquidLens.metal in Sources */,
 				96A1D4AE2F3DA35C00377C99 /* CustomToolBarIOS26.swift in Sources */,
 				96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */,
 				AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */,
