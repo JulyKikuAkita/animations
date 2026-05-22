@@ -399,6 +399,7 @@
 		96D54D282FAAC6A100FB070A /* iPodCarouselReflection.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */; };
 		96D5521F2FB5170B00FB070A /* LoopingKeyframeAnimation+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */; };
 		96D556C92FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */; };
+		96D558512FC0247C00FB070A /* GlassSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */; };
 		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
 		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -895,6 +896,7 @@
 		96D54D272FAAC6A100FB070A /* iPodCarouselReflection.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = iPodCarouselReflection.metal; sourceTree = "<group>"; };
 		96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoopingKeyframeAnimation+iOS26.swift"; sourceTree = "<group>"; };
 		96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomMorphingTab+BottomBar+IOS26.swift"; sourceTree = "<group>"; };
+		96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassSegmentedControlView.swift; sourceTree = "<group>"; };
 		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
 		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -1617,6 +1619,7 @@
 				960663222DD9306E0084B468 /* PhotosView */,
 				96E4E6032D178F350020261F /* PickerView */,
 				96E70B102B8EC21200F23A51 /* ProfileView */,
+				96D558522FC0248100FB070A /* SegmentControl */,
 				96AC80FB2C84F89300ABBE78 /* ScrollView */,
 				AB8747BD2D8F4D8200507C55 /* Scrubber */,
 				9697B73F2C6D9EF60092D07A /* SearchBar */,
@@ -2204,6 +2207,14 @@
 				9662EF382C3E430B00508B80 /* CustomVideoPlayer.swift */,
 			);
 			path = Video;
+			sourceTree = "<group>";
+		};
+		96D558522FC0248100FB070A /* SegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */,
+			);
+			path = SegmentControl;
 			sourceTree = "<group>";
 		};
 		96DF8A882C39D7F90063A931 /* Sheet */ = {
@@ -3609,6 +3620,7 @@
 				96F9D1762D5C6ADA00CD134B /* RevealRenderer.swift in Sources */,
 				ABB222972E6CDE60008CFE21 /* CustomNotificationsView.swift in Sources */,
 				96C0C2D92B905E3500F56FF5 /* CardCarouselView.swift in Sources */,
+				96D558512FC0247C00FB070A /* GlassSegmentedControlView.swift in Sources */,
 				9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,

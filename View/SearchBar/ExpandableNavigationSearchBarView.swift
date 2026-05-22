@@ -138,7 +138,7 @@ struct ExpandableNavigationSearchBarView: View {
     }
 }
 
-struct CustomScrollTargetBehavior: ScrollTargetBehavior {
+private struct CustomScrollTargetBehavior: ScrollTargetBehavior {
     /// auto reset scroll animation to either finish or origin state
     /// otherwise the scroll will be state in the half transition view
     func updateTarget(_ target: inout ScrollTarget, context _: TargetContext) {

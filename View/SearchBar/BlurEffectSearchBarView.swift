@@ -27,7 +27,7 @@ struct BlurEffectSearchBarView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 15) {
                 ForEach(firstSetCards) { item in
-                    CardView(item)
+                    cardView(item)
                 }
             }
             .padding(15)
@@ -35,7 +35,7 @@ struct BlurEffectSearchBarView: View {
             .padding(.bottom, 75) // address 2.1
             .animation(.snappy(duration: 0.3, extraBounce: 0), value: isFocused)
             .safeAreaInset(edge: .top, spacing: 0) {
-                ResizableHeader()
+                resizableHeader()
             }
             .scrollTargetLayout()
         }
@@ -49,7 +49,7 @@ struct BlurEffectSearchBarView: View {
     }
 
     @ViewBuilder
-    func ResizableHeader() -> some View {
+    func resizableHeader() -> some View {
         let progress = isFocused ? 1 : progress
         VStack(spacing: 0) {
             HStack {
@@ -128,7 +128,7 @@ struct BlurEffectSearchBarView: View {
     }
 
     @ViewBuilder
-    func CardView(_ item: Card) -> some View {
+    func cardView(_ item: Card) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             GeometryReader {
                 let size = $0.size
@@ -148,7 +148,7 @@ struct BlurEffectSearchBarView: View {
     }
 }
 
-struct CustomScrollTarget: ScrollTargetBehavior {
+private struct CustomScrollTarget: ScrollTargetBehavior {
     func updateTarget(_ target: inout ScrollTarget, context _: TargetContext) {
         let endPoint = target.rect.minY
 
