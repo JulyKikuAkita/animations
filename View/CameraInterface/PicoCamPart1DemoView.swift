@@ -7,7 +7,6 @@ import SwiftUI
 
 private enum PicoFlowState {
     case gallery
-    case movingToIsland
     case generationMode
     case flash
     case ejectingCard
@@ -19,26 +18,15 @@ struct PicoCamPart1DemoView: View {
     @State private var cards = firstSetCards
     @State private var selectedCard: Card?
     @State private var flowState: PicoFlowState = .gallery
-    @Namespace private var imageNamespace
 
     var body: some View {
         GeometryReader { proxy in
-            let safeArea = proxy.safeAreaInsets
-            let islandTop = safeArea.top + 12
-
             ZStack(alignment: .top) {
-                Color.picoRed
-                    .ignoresSafeArea()
-
                 VStack(spacing: 0) {
-                    DummyStatusBar()
-                        .foregroundStyle(.white)
-
                     PicoGalleryGrid(
                         cards: cards,
                         selectedCard: selectedCard,
                         flowState: flowState,
-                        namespace: imageNamespace,
                         onSelect: selectCard
                     )
                     .padding(.top, 58)
@@ -50,23 +38,30 @@ struct PicoCamPart1DemoView: View {
                     isVisible: flowState == .generationMode,
                     onShutterTap: runCaptureAnimation
                 )
-                .padding(.top, safeArea.top)
+                .padding(.top, proxy.safeAreaInsets.top)
                 .zIndex(5)
 
+                // snap effect
                 if let selectedCard, showsInstantCard {
                     PicoInstantCardView(card: selectedCard, flowState: flowState)
                         .frame(width: 190, height: 240)
-                        .offset(y: islandTop + instantCardOffset)
-                        .zIndex(8)
+                        .offset(y: PicoHardwareIslandMetrics.printFrameTop + instantCardOffset)
+                        .zIndex(instantCardZIndex)
                 }
 
-                PicoIslandSlot(
+                PicoIslandPrintFrame(
                     card: selectedCard,
-                    flowState: flowState,
-                    namespace: imageNamespace
+                    flowState: flowState
                 )
-                .frame(width: 158, height: 46)
-                .padding(.top, islandTop)
+                .frame(
+                    width: PicoHardwareIslandMetrics.slotSize.width,
+                    height: PicoHardwareIslandMetrics.slotSize.height
+                )
+                .position(
+                    x: proxy.size.width / 2,
+                    y: PicoHardwareIslandMetrics.printFrameTop +
+                        (PicoHardwareIslandMetrics.slotSize.height / 2)
+                )
                 .zIndex(12)
 
                 if flowState == .flash {
@@ -82,10 +77,10 @@ struct PicoCamPart1DemoView: View {
 
     private var galleryOpacity: Double {
         switch flowState {
-        case .gallery, .movingToIsland, .retreatingCard:
+        case .gallery:
             1
-        case .generationMode, .flash, .ejectingCard, .previewingCard:
-            0.18
+        case .generationMode, .flash, .ejectingCard, .previewingCard, .retreatingCard:
+            0.12
         }
     }
 
@@ -98,13 +93,26 @@ struct PicoCamPart1DemoView: View {
     private var instantCardOffset: CGFloat {
         switch flowState {
         case .ejectingCard:
-            92
+            PicoHardwareIslandMetrics.dynamicIslandHeight - 2
         case .previewingCard:
-            148
+            130
         case .retreatingCard:
-            6
+            PicoHardwareIslandMetrics.dynamicIslandHeight - 8
         default:
             0
+        }
+    }
+
+    private var instantCardZIndex: Double {
+        switch flowState {
+        case .ejectingCard:
+            13
+        case .previewingCard:
+            14
+        case .retreatingCard:
+            9
+        default:
+            8
         }
     }
 
@@ -112,15 +120,8 @@ struct PicoCamPart1DemoView: View {
         guard flowState == .gallery else { return }
         selectedCard = card
 
-        withAnimation(.spring(response: 0.48, dampingFraction: 0.84)) {
-            flowState = .movingToIsland
-        }
-
-        Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 520_000_000)
-            withAnimation(.easeInOut(duration: 0.24)) {
-                flowState = .generationMode
-            }
+        withAnimation(.easeInOut(duration: 0.28)) {
+            flowState = .generationMode
         }
     }
 
@@ -173,7 +174,6 @@ private struct PicoGalleryGrid: View {
     let cards: [Card]
     let selectedCard: Card?
     let flowState: PicoFlowState
-    let namespace: Namespace.ID
     let onSelect: (Card) -> Void
 
     private let columns = [
@@ -184,16 +184,28 @@ private struct PicoGalleryGrid: View {
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: columns, spacing: 12) {
-                ForEach(cards) { card in
-                    PicoGalleryCell(
-                        card: card,
-                        isSelected: selectedCard?.id == card.id,
-                        flowState: flowState,
-                        namespace: namespace
-                    )
-                    .onTapGesture {
-                        onSelect(card)
+            VStack(spacing: 12) {
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(generatedCards.prefix(3)) { card in
+                        PicoGalleryCell(
+                            card: card,
+                            isSelected: false,
+                            flowState: flowState
+                        )
+                    }
+                }
+                .frame(height: 142, alignment: .top)
+
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(sourceCards) { card in
+                        PicoGalleryCell(
+                            card: card,
+                            isSelected: selectedCard?.id == card.id,
+                            flowState: flowState
+                        )
+                        .onTapGesture {
+                            onSelect(card)
+                        }
                     }
                 }
             }
@@ -201,13 +213,37 @@ private struct PicoGalleryGrid: View {
             .padding(.bottom, 32)
         }
     }
+
+    private var generatedCards: [Card] {
+        cards.filter(\.isPicoGeneratedInstantCard)
+    }
+
+    private var sourceCards: [Card] {
+        cards.filter { !$0.isPicoGeneratedInstantCard }
+    }
 }
 
 private struct PicoGalleryCell: View {
     let card: Card
     let isSelected: Bool
     let flowState: PicoFlowState
-    let namespace: Namespace.ID
+
+    var body: some View {
+        Group {
+            if card.isPicoGeneratedInstantCard {
+                PicoGalleryInstantCardCell(card: card)
+            } else {
+                PicoSourceImageCell(card: card)
+            }
+        }
+        .opacity(isSelected && flowState != .gallery ? 0 : 1)
+        .shadow(color: .black.opacity(0.16), radius: 10, y: 6)
+        .contentShape(.rect(cornerRadius: 14))
+    }
+}
+
+private struct PicoSourceImageCell: View {
+    let card: Card
 
     var body: some View {
         Image(card.image)
@@ -215,74 +251,145 @@ private struct PicoGalleryCell: View {
             .scaledToFill()
             .frame(height: 142)
             .clipShape(.rect(cornerRadius: 14))
-            .matchedGeometryEffect(id: card.id, in: namespace)
             .overlay(alignment: .bottomLeading) {
-                Text(card.title)
-                    .font(.caption.bold())
-                    .foregroundStyle(.white)
-                    .lineLimit(1)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 5)
-                    .background(.black.opacity(0.28), in: .capsule)
-                    .padding(8)
+                PicoGalleryTitlePill(title: card.title)
             }
-            .opacity(isSelected && flowState != .gallery ? 0.08 : 1)
-            .shadow(color: .black.opacity(0.16), radius: 10, y: 6)
-            .contentShape(.rect(cornerRadius: 14))
     }
 }
 
-private struct PicoIslandSlot: View {
-    let card: Card?
-    let flowState: PicoFlowState
-    let namespace: Namespace.ID
+private struct PicoGalleryInstantCardCell: View {
+    let card: Card
 
     var body: some View {
-        ZStack {
-            Capsule()
-                .fill(.black)
-                .shadow(color: .black.opacity(0.35), radius: 16, y: 8)
+        VStack(spacing: 7) {
+            Image(card.image)
+                .resizable()
+                .scaledToFill()
+                .frame(height: 96)
+                .clipShape(.rect(cornerRadius: 6))
 
             Capsule()
-                .fill(.white.opacity(0.09))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 9)
+                .fill(.black.opacity(0.16))
+                .frame(width: 58, height: 4)
 
+            Capsule()
+                .fill(.black.opacity(0.1))
+                .frame(width: 34, height: 3)
+        }
+        .padding(8)
+        .frame(height: 142)
+        .background(.white, in: .rect(cornerRadius: 10))
+    }
+}
+
+private struct PicoGalleryTitlePill: View {
+    let title: String
+
+    var body: some View {
+        Text(title)
+            .font(.caption.bold())
+            .foregroundStyle(.white)
+            .lineLimit(1)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
+            .background(.black.opacity(0.28), in: .capsule)
+            .padding(8)
+    }
+}
+
+private struct PicoIslandPrintFrame: View {
+    let card: Card?
+    let flowState: PicoFlowState
+
+    var body: some View {
+        ZStack(alignment: .top) {
             if let card {
                 Image(card.image)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: previewWidth, height: 30)
-                    .clipShape(.capsule)
-                    .matchedGeometryEffect(id: card.id, in: namespace, isSource: false)
-                    .opacity(flowState == .gallery ? 0 : 1)
+                    .frame(
+                        width: PicoHardwareIslandMetrics.dynamicIslandWidth -
+                            (PicoHardwareIslandMetrics.frameEdgeThickness * 2),
+                        height: PicoHardwareIslandMetrics.printFrameHeight +
+                            PicoHardwareIslandMetrics.dynamicIslandOverlap -
+                            PicoHardwareIslandMetrics.frameEdgeThickness
+                    )
+                    .clipShape(.rect(cornerRadius: 3))
+                    .offset(y: -PicoHardwareIslandMetrics.dynamicIslandOverlap)
+                    .opacity(imageOpacity)
+                    .blur(radius: imageBlur)
             }
 
-            Capsule()
-                .stroke(.white.opacity(0.18), lineWidth: 1)
-
-            VStack(spacing: 0) {
-                Capsule()
-                    .fill(.white.opacity(0.16))
-                    .frame(height: 2)
-                    .padding(.horizontal, 26)
-                    .padding(.top, 7)
+            HStack(alignment: .bottom, spacing: 0) {
+                frameSide
 
                 Spacer(minLength: 0)
+
+                frameSide
             }
+
+            RoundedRectangle(cornerRadius: 25)
+                .fill(frameColor)
+                .frame(height: PicoHardwareIslandMetrics.frameEdgeThickness)
+                .offset(
+                    y: PicoHardwareIslandMetrics.printFrameHeight -
+                        PicoHardwareIslandMetrics.frameEdgeThickness
+                )
         }
         .scaleEffect(flowState == .flash ? 1.08 : 1)
+        .opacity(frameOpacity)
         .animation(.spring(response: 0.24, dampingFraction: 0.72), value: flowState)
     }
 
-    private var previewWidth: CGFloat {
+    private var frameSide: some View {
+        RoundedRectangle(cornerRadius: 25)
+            .fill(frameColor)
+            .frame(
+                width: PicoHardwareIslandMetrics.frameEdgeThickness,
+                height: PicoHardwareIslandMetrics.printFrameHeight +
+                    PicoHardwareIslandMetrics.dynamicIslandOverlap
+            )
+            .offset(y: -PicoHardwareIslandMetrics.dynamicIslandOverlap)
+    }
+
+    private var frameColor: Color {
+        .black
+    }
+
+    private var imageOpacity: Double {
         switch flowState {
-        case .movingToIsland:
-            106
-        case .generationMode, .flash, .ejectingCard, .previewingCard, .retreatingCard:
-            122
         case .gallery:
-            96
+            0
+        case .generationMode, .flash:
+            0.86
+        case .ejectingCard:
+            0.28
+        case .previewingCard:
+            0
+        case .retreatingCard:
+            0.18
+        }
+    }
+
+    private var imageBlur: CGFloat {
+        switch flowState {
+        case .generationMode, .flash:
+            0
+        case .ejectingCard, .retreatingCard:
+            2
+        case .gallery, .previewingCard:
+            0
+        }
+    }
+
+    private var frameOpacity: Double {
+        switch flowState {
+        case .gallery:
+            0
+        case .generationMode:
+            1
+        case .flash, .ejectingCard, .previewingCard, .retreatingCard:
+            0
         }
     }
 }
@@ -322,44 +429,51 @@ private struct PicoInstantCardView: View {
     let flowState: PicoFlowState
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 0) {
             Image(card.image)
                 .resizable()
                 .scaledToFill()
-                .frame(height: 154)
+                .frame(height: imageHeight, alignment: .bottomLeading)
                 .clipShape(.rect(cornerRadius: 6))
-                .overlay {
-                    Rectangle()
-                        .fill(.white.opacity(flowState == .previewingCard ? 0.04 : 0.12))
-                }
-
-            VStack(spacing: 3) {
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(.black.opacity(0.18))
-                    .frame(width: 76, height: 5)
-
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(.black.opacity(0.1))
-                    .frame(width: 44, height: 4)
-            }
-            .padding(.bottom, 4)
         }
-        .padding(12)
+        .padding(cardPadding)
         .background(.white, in: .rect(cornerRadius: 10))
         .shadow(color: .black.opacity(0.3), radius: 20, y: 14)
         .rotationEffect(.degrees(rotation))
-        .scaleEffect(scale)
+        .scaleEffect(scale, anchor: .top)
         .opacity(opacity)
+    }
+
+    private var imageHeight: CGFloat {
+        switch flowState {
+        case .ejectingCard:
+            126
+        case .previewingCard:
+            128
+        case .retreatingCard:
+            118
+        default:
+            126
+        }
+    }
+
+    private var cardPadding: CGFloat {
+        switch flowState {
+        case .ejectingCard, .retreatingCard:
+            10
+        default:
+            12
+        }
     }
 
     private var rotation: Double {
         switch flowState {
         case .ejectingCard:
-            -2
+            -10
         case .previewingCard:
-            1.5
+            4
         case .retreatingCard:
-            0
+            -3
         default:
             0
         }
@@ -368,23 +482,42 @@ private struct PicoInstantCardView: View {
     private var scale: CGFloat {
         switch flowState {
         case .ejectingCard:
-            0.92
+            0.56
         case .previewingCard:
             1
         case .retreatingCard:
-            0.74
+            0.5
         default:
-            0.72
+            0.5
         }
     }
 
     private var opacity: Double {
-        flowState == .retreatingCard ? 0.82 : 1
+        flowState == .retreatingCard ? 0.72 : 1
     }
 }
 
 private extension Color {
     static let picoRed = Color(red: 0.9, green: 0.04, blue: 0.05)
+}
+
+private extension Card {
+    var isPicoGeneratedInstantCard: Bool {
+        title == "Instant Print"
+    }
+}
+
+private enum PicoHardwareIslandMetrics {
+    static let dynamicIslandWidth: CGFloat = 128
+    static let dynamicIslandHeight: CGFloat = 34
+    static let frameEdgeThickness: CGFloat = 16
+    static let dynamicIslandOverlap: CGFloat = 23
+    static let printFrameHeight: CGFloat = 112
+    static let printFrameTop: CGFloat = -12
+    static let slotSize = CGSize(
+        width: dynamicIslandWidth,
+        height: printFrameHeight
+    )
 }
 
 #Preview {
