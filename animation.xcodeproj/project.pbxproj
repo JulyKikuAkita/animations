@@ -500,6 +500,7 @@
 		AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */; };
 		AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */; };
 		AB658C342F70971F00377EBC /* ResizableHeaderIOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB658C332F7096C000377EBC /* ResizableHeaderIOS26View.swift */; };
+		AB658C372F70A00100377EBC /* PicoCamPart1DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB658C362F70A00000377EBC /* PicoCamPart1DemoView.swift */; };
 		AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */; };
 		AB7CC2A92E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */; };
 		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
@@ -787,6 +788,7 @@
 		9682B6CD2CB1D070003D917F /* Grid+PanGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Grid+PanGestureView.swift"; sourceTree = "<group>"; };
 		9682B6CF2CB1D355003D917F /* ColorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorItem.swift; sourceTree = "<group>"; };
 		9682B7282CB5DD9E003D917F /* CameraControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControlView.swift; sourceTree = "<group>"; };
+		AB658C362F70A00000377EBC /* PicoCamPart1DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoCamPart1DemoView.swift; sourceTree = "<group>"; };
 		9682B7F12CB9EEE2003D917F /* CardCarouselWithScrollTransitionsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCarouselWithScrollTransitionsAPI.swift; sourceTree = "<group>"; };
 		9682B8A42CBDC00D003D917F /* AnimatedTabBariOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabBariOS18.swift; sourceTree = "<group>"; };
 		96845DA42BD3347F00B7D8B2 /* AppleMusicHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicHomeView.swift; sourceTree = "<group>"; };
@@ -2493,6 +2495,7 @@
 			isa = PBXGroup;
 			children = (
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
+				AB658C362F70A00000377EBC /* PicoCamPart1DemoView.swift */,
 			);
 			path = CameraInterface;
 			sourceTree = "<group>";
@@ -3489,6 +3492,7 @@
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
 				9693DB342D9B4F9100A29727 /* DrawerButtonView.swift in Sources */,
 				9682B7292CB5DD9E003D917F /* CameraControlView.swift in Sources */,
+				AB658C372F70A00100377EBC /* PicoCamPart1DemoView.swift in Sources */,
 				9636EEA02DC1797000A0E5A0 /* OSInfo.swift in Sources */,
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
