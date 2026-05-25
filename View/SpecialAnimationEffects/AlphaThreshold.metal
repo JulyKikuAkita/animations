@@ -1,0 +1,46 @@
+//
+//  AlphaThreshold.metal
+//  animation
+//
+//  Created on 5/25/26.
+//
+//  The "threshold" half of the metaball / gooey morph effect.
+//  Pair this shader with a SwiftUI `.blur(radius:)` applied to a
+//  `compositingGroup()` — the blur smears alpha into soft gradients, and
+//  this shader snaps those gradients back to a hard edge, fusing any two
+//  overlapping shapes into a single blob with one curved outline.
+//
+//  When to use:
+//  - Gooey transitions between icons / badges (see MetaballMorpthingView).
+//  - Liquid loaders where multiple drops should merge as they touch.
+//  - Anywhere you want "shapes that flow together" instead of two layered
+//    transparencies.
+//
+//  Why threshold-after-blur works: blurring the alpha channel of two
+//  nearby shapes creates a region where their faded edges sum to >= the
+//  threshold. The shader treats that combined region as opaque, so the
+//  shapes look connected. Pull them apart and the sum drops below the
+//  threshold — they snap back into separate shapes. That snap is the
+//  metaball look.
+//
+//  Tuning:
+//  - `thresholdValue` (currently 0.5) — raise toward 1.0 for tighter,
+//    smaller blobs (shapes merge later, separate sooner). Lower toward
+//    0.0 for puffier, eagerly-merging blobs.
+//  - The blur radius on the SwiftUI side is the bigger lever; this
+//    shader just decides where to cut.
+//
+//  Note on `color.rgb / color.a`: SwiftUI delivers premultiplied-alpha
+//  pixels. After a blur, alpha is partially attenuated, so dividing by
+//  alpha "unpremultiplies" the color before re-emitting it at full
+//  opacity — otherwise the blob's interior would look washed out.
+
+#include <metal_stdlib>
+#include <SwiftUI/SwiftUI.h>
+using namespace metal;
+
+[[stitchable]] half4 alphaThreshold(float2 position, SwiftUI::Layer layer) {
+    float thresholdValue = 0.5;
+    half4 color = layer.sample(position);
+    return color.a >= thresholdValue ? half4(color.rgb / color.a, 1.0) : half4(0.0);
+}
