@@ -401,6 +401,8 @@
 		96D556C92FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */; };
 		96D558512FC0247C00FB070A /* GlassSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */; };
 		96D558542FC0DA2300FB070A /* LiquidLens.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D558532FC0DA2300FB070A /* LiquidLens.metal */; };
+		96D55B782FC50F1A00FB070A /* MetaballAnimation_iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D55B772FC50F1A00FB070A /* MetaballAnimation_iOS26.swift */; };
+		96D55E862FC51A3A00FB070A /* AlphaThreshold.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D55E852FC51A2C00FB070A /* AlphaThreshold.metal */; };
 		96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */; };
 		96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */; };
 		96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */; };
@@ -500,6 +502,7 @@
 		AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */; };
 		AB5C9A592E0A608C009CF684 /* iOS26+tabbarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */; };
 		AB658C342F70971F00377EBC /* ResizableHeaderIOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB658C332F7096C000377EBC /* ResizableHeaderIOS26View.swift */; };
+		AB658C372F70A00100377EBC /* PicoCamPart1DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB658C362F70A00000377EBC /* PicoCamPart1DemoView.swift */; };
 		AB6C41DF2E4AFDD3002549A7 /* CircularWheelPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */; };
 		AB7CC2A92E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */; };
 		AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */; };
@@ -899,6 +902,8 @@
 		96D556C82FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomMorphingTab+BottomBar+IOS26.swift"; sourceTree = "<group>"; };
 		96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassSegmentedControlView.swift; sourceTree = "<group>"; };
 		96D558532FC0DA2300FB070A /* LiquidLens.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LiquidLens.metal; sourceTree = "<group>"; };
+		96D55B772FC50F1A00FB070A /* MetaballAnimation_iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaballAnimation_iOS26.swift; sourceTree = "<group>"; };
+		96D55E852FC51A2C00FB070A /* AlphaThreshold.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AlphaThreshold.metal; sourceTree = "<group>"; };
 		96D580B02EFDE0030011B986 /* PageCurlCarouselDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCurlCarouselDemoView.swift; sourceTree = "<group>"; };
 		96D580B22EFDF8F60011B986 /* PageCurlEffect.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PageCurlEffect.metal; sourceTree = "<group>"; };
 		96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetView.swift; sourceTree = "<group>"; };
@@ -983,6 +988,7 @@
 		AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlassSearchableTabbar.swift; sourceTree = "<group>"; };
 		AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+tabbarSheet.swift"; sourceTree = "<group>"; };
 		AB658C332F7096C000377EBC /* ResizableHeaderIOS26View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableHeaderIOS26View.swift; sourceTree = "<group>"; };
+		AB658C362F70A00000377EBC /* PicoCamPart1DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicoCamPart1DemoView.swift; sourceTree = "<group>"; };
 		AB6C41DE2E4AFDD3002549A7 /* CircularWheelPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularWheelPicker.swift; sourceTree = "<group>"; };
 		AB7CC2A82E3AC6C300A30B66 /* GlassMorphEffectMenuiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassMorphEffectMenuiOS26.swift; sourceTree = "<group>"; };
 		AB8747BE2D8F4DA200507C55 /* WaveformsScrubberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformsScrubberView.swift; sourceTree = "<group>"; };
@@ -1382,8 +1388,10 @@
 		960663252DD933230084B468 /* SpecialAnimationEffects */ = {
 			isa = PBXGroup;
 			children = (
+				96D55E852FC51A2C00FB070A /* AlphaThreshold.metal */,
 				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
 				9662F02C2C58482200508B80 /* MetaballAnimationView.swift */,
+				96D55B772FC50F1A00FB070A /* MetaballAnimation_iOS26.swift */,
 				9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */,
 				9662F02E2C58BBBB00508B80 /* MorphingView.swift */,
 				965E039F2BCB2C4A00E8A400 /* BookView.swift */,
@@ -2493,6 +2501,7 @@
 			isa = PBXGroup;
 			children = (
 				9682B7282CB5DD9E003D917F /* CameraControlView.swift */,
+				AB658C362F70A00000377EBC /* PicoCamPart1DemoView.swift */,
 			);
 			path = CameraInterface;
 			sourceTree = "<group>";
@@ -3489,6 +3498,7 @@
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
 				9693DB342D9B4F9100A29727 /* DrawerButtonView.swift in Sources */,
 				9682B7292CB5DD9E003D917F /* CameraControlView.swift in Sources */,
+				AB658C372F70A00100377EBC /* PicoCamPart1DemoView.swift in Sources */,
 				9636EEA02DC1797000A0E5A0 /* OSInfo.swift in Sources */,
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
@@ -3503,6 +3513,7 @@
 				9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */,
 				961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */,
 				AB17E55B2E611A3500C50B18 /* CountryCodePickerView.swift in Sources */,
+				96D55B782FC50F1A00FB070A /* MetaballAnimation_iOS26.swift in Sources */,
 				AB5C922D2E0131E3009CF684 /* OrderView.swift in Sources */,
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */,
@@ -3627,6 +3638,7 @@
 				96D558512FC0247C00FB070A /* GlassSegmentedControlView.swift in Sources */,
 				9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */,
 				96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */,
+				96D55E862FC51A3A00FB070A /* AlphaThreshold.metal in Sources */,
 				96352DB22C12E0E8001AD2FD /* GlitchTextEffectView.swift in Sources */,
 				AB39CCAB2F8254D0001B9494 /* ImageGradientIOS26View.swift in Sources */,
 				963DC1272D1DFB9C00C97334 /* DraggableTabbariOS18View.swift in Sources */,

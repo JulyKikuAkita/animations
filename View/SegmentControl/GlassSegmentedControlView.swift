@@ -3,9 +3,33 @@
 //  animation
 //
 //  Created on 5/21/26.
+//
+//  When to use this over `Picker(selection:) { ... }.pickerStyle(.segmented)`:
+//  - You need more tabs than fit on screen (this control is horizontally scrollable
+//    with snap-to-center behavior; the system segmented picker truncates).
+//  - You want the iOS 26 "liquid glass" look — a translucent capsule that
+//    refracts the labels behind it as the selection moves.
+//  - You want a custom tint color applied only to the label under the pill,
+//    achieved via an overlay + capsule mask (system picker doesn't expose this).
+//
+//  SwiftUI techniques demonstrated (good study material):
+//  - `ScrollView` + `scrollTargetBehavior` for custom snap points.
+//  - `onGeometryChange` to measure each tab's rendered size, so the pill can
+//    size itself to the active label.
+//  - `visualEffect { ... }` for layout-driven offsets that don't trigger
+//    re-layout (cheaper than reading GeometryProxy into @State).
+//  - `.layerEffect(ShaderLibrary.<name>(...))` to apply a Metal shader
+//    (see LiquidLens.metal) — used here for the glass refraction.
+//  - iOS 26 `.glassEffect(.regular, in: .capsule)` with a graceful
+//    `.ultraThinMaterial` fallback for older OS versions.
+//
+//  Tweak `Config.refractionAmount` / `refractionDepth` to dial the lens
+//  distortion; set `refractionAmount: 0` to compare against a flat capsule.
 
 import SwiftUI
 
+/// Demo host. Replace `tabs` with your own labels; bind `activeIndex` to
+/// drive whatever content view should change with the selection.
 struct CustomGlassSegmentControlDemoView: View {
     /// View Properties
     @State private var activeIndex: Int = 0
