@@ -125,6 +125,36 @@ struct PicoCamPart1DemoView: View {
         }
     }
 
+    // TODO: Make the card visually eject *from* the dynamic island, not just
+    // appear below it. Today the card materializes at `offset = 32` (already
+    // past the island's bottom edge) at zIndex 13, in front of the island
+    // (zIndex 12), so there's no "printing through a slot" feel.
+    //
+    // Suggested approach (changes are coupled — do them together):
+    //   1. Include `.flash` in `showsInstantCard` so the card is in the
+    //      hierarchy *before* the eject begins, positioned at `offset = 0`
+    //      (centered on the island) with `instantCardZIndex < 12` so the
+    //      island visually contains it.
+    //   2. Add a mask/clip on the card whose top edge is the island's bottom
+    //      edge (`printFrameTop + dynamicIslandHeight`). Only the portion of
+    //      the card past that line is visible — as `instantCardOffset`
+    //      animates 0 → 32 inside the existing spring, the card appears to
+    //      slide out through the island's bottom.
+    //   3. Drop the `flash` opacity *before* (or with a much shorter duration
+    //      than) the 0.45s spring. The current shared spring hides the first
+    //      ~150ms of the slide behind the white flash.
+    //
+    // TODO: Grow `dynamicIslandWidth` to match the printed card's width
+    // during `.flash`/`.ejectingCard`/`.previewingCard` so the slot looks
+    // wide enough to print a 190pt card. Today it's a static 128.
+    //   - Convert `PicoHardwareIslandMetrics.dynamicIslandWidth` (and
+    //     `slotSize`) from `static let` constants into a flowState-driven
+    //     value (e.g., 128 in `.gallery`/`.generationMode`/`.retreatingCard`,
+    //     ~210 in the printing states to fit the 190 card + side frames).
+    //   - Pass that width into `PicoIslandPrintFrame.frame(width:)` and the
+    //     `.position(x:)` calc in `body` (both currently read the enum).
+    //   - Apply the width change inside the same `withAnimation(.spring(...))`
+    //     that drives `.ejectingCard` so it interpolates with the eject.
     private func runCaptureAnimation() {
         guard flowState == .generationMode, let selectedCard else { return }
 
@@ -297,6 +327,36 @@ private struct PicoGalleryTitlePill: View {
     }
 }
 
+// TODO: Make tcan ch-resizable while in the snap view
+// (i.e., `flowState == .generationMode`, after the user taps a thumbnail).
+//
+// Desired behavior:
+//   - Add a `MagnifyGesture` (or `simultaneousGesture` with the existing
+//     shutter tap) to this frame so the user can pinch to scale the photo
+//     and its surrounding U-shaped frame together.
+//   - The frame's TOP edge stays pinned to the bottom of the dynamic island
+//     — the island itself acts as the top bar of the frame, so the rendered
+//     U-shape only draws the two sides + bottom. Anchor scaling at the top
+//     center (`.scaleEffect(_, anchor: .top)`) so the bottom grows downward
+//     while the top stays glued to the island.
+//   - Width clamping:
+//       * Min width = `PicoHardwareIslandMetrics.dynamicIslandWidth` —
+//         pinching smaller than the island is a no-op.
+//       * No fixed max — let the user pinch larger (the camera "zooms").
+//   - When the pinched width exceeds the dynamic island width, draw two
+//     additional black rectangles flanking the island at its top y-range
+//     (height = `dynamicIslandHeight`, width = `(pinchedWidth - islandWidth) / 2`
+//     on each side) so the frame's top bar visually extends out past the
+//     island and the whole thing reads as one continuous frame around the
+//     photo. Inside the island's own width, draw nothing on top — the real
+//     island is the top bar.
+//   - Persist the pinched size as `@State private var pinchedSize: CGSize`
+//     on `PicoCamPart1DemoView` (or via a `GestureState` while pinching +
+//     committed `@State` on end). Reset to the default when returning to
+//     `.gallery`.
+//   - Reuse the same width when ejecting: this dovetails with the
+//     `dynamicIslandWidth` TODO above — the eject animation should expand
+//     the slot to match whatever width the user pinched to.
 private struct PicoIslandPrintFrame: View {
     let card: Card?
     let flowState: PicoFlowState
