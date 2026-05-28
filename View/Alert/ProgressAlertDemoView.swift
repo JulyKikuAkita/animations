@@ -113,7 +113,7 @@ private struct AttachProgressWithAlert: UIViewRepresentable {
         var offset = config.fallbackOffset
         /// align progress view based on the current view location
         if !config.forceFallback {
-            if let contentView = controller.view.allSubViews().first(where: {
+            if let contentView = controller.view.allDescendants().first(where: {
                 String(describing: type(of: $0)).contains("GroupHeaderScrollView")
             }) {
                 offset = contentView.frame.height - (isiOS26OrLater ? 8 : 20)

@@ -181,6 +181,7 @@
 		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
 		96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
+		9656A1842FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */; };
 		965836AB2DD2DA440062F372 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
@@ -727,6 +728,7 @@
 		96513EA62D3DCB200004C7C8 /* deeplinkMSG3.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG3.apns; sourceTree = "<group>"; };
 		96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedConfirmationButtonDemoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
+		9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+customSearch+FAB+Tabbar.swift"; sourceTree = "<group>"; };
 		9658369E2DD2BB250062F372 /* storeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = storeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
@@ -2422,6 +2424,7 @@
 				AB5C97A02E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift */,
 				AB5C9A582E0A608C009CF684 /* iOS26+tabbarSheet.swift */,
 				ABD6B5162F5419540056990A /* iOS26+minimizedTabbar.swift */,
+				9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */,
 				AB8C5A932E134DB70003926E /* iOS26SegmentedTabBar.swift */,
 				AB22B7392E7A88B900F2DDDE /* CustomTabbariOS26.swift */,
 				96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */,
@@ -3502,6 +3505,7 @@
 				9636EEA02DC1797000A0E5A0 /* OSInfo.swift in Sources */,
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
+				9656A1842FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift in Sources */,
 				96BCDFDD2CC8C05B00A7CBFF /* UniversalOverlayView.swift in Sources */,
 				96AC82F42C8BAC2000ABBE78 /* SideBarView.swift in Sources */,
 				96921B8C2D6FC1BA00326523 /* TransparentBlurView.swift in Sources */,

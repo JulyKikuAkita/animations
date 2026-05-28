@@ -17,13 +17,14 @@
 import UIKit
 
 extension UIView {
-    /// Flattens all descendants into a single array (depth-first).
-    func allSubViews() -> [UIView] {
-        var result: [UIView] = subviews.compactMap(\.self)
-        for subview in subviews {
-            result.append(contentsOf: subview.allSubViews())
-        }
-        return result
+    /// All descendants in the view tree (depth-first).
+    func allDescendants() -> [UIView] {
+        descendants(ofType: UIView.self)
+    }
+
+    /// All descendants matching the given type (depth-first).
+    func descendants<T: UIView>(ofType type: T.Type) -> [T] {
+        subviews.compactMap { $0 as? T } + subviews.flatMap { $0.descendants(ofType: type) }
     }
 
     /// Renders this view into a UIImage at the given size.
