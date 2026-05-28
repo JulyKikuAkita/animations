@@ -15,7 +15,7 @@ struct CustomTextFieldWithKeyboard<TextField: View, Keyboard: View>: UIViewContr
         controller.view.backgroundColor = .clear
 
         DispatchQueue.main.async {
-            if let textField = controller.view.allSubviews.first(where: { $0 is UITextField
+            if let textField = controller.view.allDescendants().first(where: { $0 is UITextField
             }) as? UITextField, textField.inputView == nil { /// ensure only add input view to the textfield once
                 let inputController = UIHostingController(rootView: keyboard)
                 inputController.view.backgroundColor = .clear
@@ -39,12 +39,5 @@ struct CustomTextFieldWithKeyboard<TextField: View, Keyboard: View>: UIViewContr
                       context _: Context) -> CGSize?
     {
         uiViewController.view.intrinsicContentSize
-    }
-}
-
-/// Finding UITextField from the UIHosting Controller
-private extension UIView {
-    var allSubviews: [UIView] {
-        subviews.flatMap { [$0] + $0.allSubviews }
     }
 }
