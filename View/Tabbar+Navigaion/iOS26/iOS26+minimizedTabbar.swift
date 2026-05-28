@@ -5,7 +5,7 @@
 //  Created on 6/23/25.
 // iOS 26 has native modifier of .tabBarMinimizeBehavior(.onScrollDown) for tabViewBottomAccessory content that minimize tabbar during scroll and
 // reveal when at the top end of scroll
-// The customized implemmntaion using onScrollGeomtryChange hides the tab bar when scroll and reveals after certain scroll distance
+// The customized implementation using onScrollGeomtryChange hides the tab bar when scroll and reveals after certain scroll distance
 import SwiftUI
 
 @available(iOS 26.0, *)
