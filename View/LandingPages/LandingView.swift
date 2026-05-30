@@ -1,7 +1,57 @@
 //
 //  LandingView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Onboarding carousel with a MORPHING SF Symbol at the top: as the
+//  user advances through pages, the hero symbol smoothly transitions
+//  to the next icon (e.g. `globe.americas` → `airplane.departure`)
+//  while title/subtitle slide horizontally. Page advance is
+//  BUTTON-driven, not swipe — every transition is intentional.
+//
+//  The morphing symbol uses `MorphingSymbolView` (project helper),
+//  which renders SF Symbols via `Image(systemName:)` with
+//  `.contentTransition(.symbolEffect(.replace))` plus a hand-tuned
+//  fade that hides SwiftUI's default "swap glyph in place" jump.
+//
+//  Slide mechanics
+//  ───────────────
+//  Single horizontal `HStack` of N pages, sized to N×screen-width.
+//  An `.offset(x: -CGFloat(activePage.index) * size.width)` shifts
+//  the whole stack left to put the active page on screen, animated
+//  with `.smooth(duration: 0.6, extraBounce: 0.1)`. No ScrollView —
+//  cleaner than fighting `.tabViewStyle(.page)`'s scroll gestures.
+//
+//  Key APIs
+//  ────────
+//  • `MorphingSymbolView` — project helper for animated symbol
+//    transitions. Where the magic lives.
+//  • `.smooth(duration:extraBounce:)` — the unifying animation curve;
+//    `extraBounce` makes it feel less mechanical without the
+//    overshoot of `.bouncy`.
+//  • `.contentTransition(.identity)` on the title — opt OUT of
+//    SwiftUI's default text content-transition so our custom slide
+//    is the only motion.
+//  • Manual page-indicator dots, sized via `scale` derived from
+//    distance to active index.
+//
+//  How to apply
+//  ────────────
+//  Use as a template for any "tap-through" onboarding (vs.
+//  swipe-through). For permission-specific onboarding, see
+//  [[PermissionOnboardingIOS26]]. For an in-bezel app-preview
+//  onboarding, see [[OnBoardingiOS26View]].
+//
+//  See also
+//  ────────
+//  • OnBoardingiOS26View.swift — sibling, iOS 26-styled onboarding
+//    with simulator-bezel mockup.
+//  • PermissionOnboardingIOS26.swift — sibling focused on permission
+//    request flow.
+//
 import SwiftUI
 
 struct LandingView: View {
@@ -95,7 +145,7 @@ struct MorphingSymbolDemoView: View {
                         .lineLimit(1)
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .kerning(1.1) // spacing between chars, 0 is deauflt
+                        .kerning(1.1) // spacing between chars, 0 is default
                         .frame(width: size.width)
                 }
             }

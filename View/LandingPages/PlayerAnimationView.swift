@@ -4,7 +4,76 @@
 //
 //  Created by IFang Lee on 3/2/24.
 //
-
+//  Standalone demo, run via `#Preview` (the project's primary
+//  workflow). Like every other demo in this repo, it's not invoked
+//  from a target's `@main` body — the `demoApps` target has its own
+//  launcher list at `demoApps/DemoView.swift`, and the `animation`
+//  target deliberately keeps a trivial `ContentView`.
+//
+//  Functions as the canonical "tabbed demo hub" reference: callers
+//  like [[CardCarouselView]], [[BasicProfileAnimationView]],
+//  [[ParticleEffectsView]], and [[ProfileListView]] are EMBEDDED in
+//  this view's tab bodies, which is why their headers cross-link
+//  back here.
+//
+//  Learning point
+//  ──────────────
+//  YouTube-style demo browser: a custom-drawn curved tab bar, a
+//  mini-player that drags up into a fullscreen player, a floating
+//  action button, and N tab destinations that each host a different
+//  sub-demo from this folder or others. Reading this file teaches
+//  three reusable patterns:
+//
+//    1. CUSTOM TAB BAR via `Animatable` `Path` shape.
+//       `TabShape` conforms to `Shape` AND `Animatable`, so the
+//       indicator's curved cutout (a half-circle) animates as the
+//       active tab changes. Combined with `matchedGeometryEffect`
+//       on the tab item icons, the effect is the indicator
+//       "pouring" between tabs.
+//    2. SwiftData WIRING for the mini-player's recently-played
+//       list. `@Query` fetches `MusicVideo` items;
+//       `@Environment(\.modelContext)` writes inserts and deletes.
+//       Useful as a small reference implementation alongside the
+//       larger one in [[GridTransitionView]].
+//    3. CUSTOM `viewPosition()` extension — file-local
+//       `GeometryReader`-based modifier that publishes a view's
+//       on-screen frame via a preference key. Used by the curved
+//       tab bar to align with the tab item rects.
+//
+//  The Tab destinations in the body bind together demos from
+//  multiple folders — that's why so many other headers point
+//  back here.
+//
+//  Key APIs
+//  ────────
+//  • Custom `Shape` + `Animatable` (`TabShape`) — the curved tab
+//    bar indicator. Animates via `path(in:)` rebuilding from
+//    interpolated `progress`.
+//  • `matchedGeometryEffect(id:in:)` + `@Namespace` — moves the
+//    active-tab pill between tab items.
+//  • `SwiftData` (`@Query`, `@Environment(\.modelContext)`) —
+//    persists recently-played items.
+//  • `.interactiveSpring()` — the unifying animation curve, tuned
+//    to feel "physical" without overshoot.
+//  • Custom `viewPosition()` extension at the bottom of the file —
+//    publishes a view's frame via `PreferenceKey`.
+//
+//  How to apply
+//  ────────────
+//  Use as a reference implementation when building any "demo
+//  browser" or settings-style root view that hosts disparate
+//  child views in tabs. The custom-tab-bar pattern is the most
+//  copy-pasteable piece; lift `TabShape` and the curve math.
+//
+//  See also
+//  ────────
+//  • View/Carousel/CardCarouselView.swift — tab-3 of this view.
+//  • View/ProfileView/BasicProfileAnimationView.swift — referenced
+//    from this file as a destination.
+//  • View/Button/ParticleEffectsView.swift — also embedded here.
+//  • LandingView.swift — sibling demo-browser-style file in this
+//    folder; simpler, no SwiftData, no custom tab-bar shape.
+//
 import SwiftData
 import SwiftUI
 

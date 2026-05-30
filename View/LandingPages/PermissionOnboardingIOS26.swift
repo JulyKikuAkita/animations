@@ -3,7 +3,72 @@
 //  animation
 //
 //  Created on 2/25/26.
-// Animation Using SwiftUI | KeyFrames
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  Dual-target: works on iOS 18+ with a stroke fallback; the
+//  `.glassEffect` path is gated `if #available(iOS 26, *)`.
+//
+//  Learning point
+//  ──────────────
+//  Permission-prompt onboarding rendered inside a simulator-bezel
+//  mockup: the bezel shows a fake home screen, a system-style
+//  permission alert pops in over it, and a bouncy "tap-the-allow-
+//  button" demo loops to teach the user what to do. Built around
+//  ONE `@Animatable Frame` struct that bundles three values
+//  (`opacity`, `scale`, `tapScale`) so the alert + button-press
+//  animation read as one unified motion driven by `KeyframeAnimator`.
+//
+//  Mechanics
+//  ─────────
+//    1. `KeyframeAnimator(initialValue: Frame(), repeating: true)`
+//       runs an infinite keyframe sequence on a single
+//       `Frame` value.
+//    2. Three `KeyframeTrack`s (one per property) interleave their
+//       timelines:
+//         • opacity 0→1 (alert appears)
+//         • scale  0.7→1.0 (alert pops up with overshoot)
+//         • tapScale 1.0→0.95→1.0 (the "Allow" button presses)
+//    3. The body reads `frame.opacity / scale / tapScale` and
+//       applies them via `.opacity` + `.scaleEffect(_, anchor:)`.
+//
+//  iOS 18 ↔ iOS 26 split
+//  ─────────────────────
+//  The bottom panel uses `.glassEffect` on iOS 26 and falls back
+//  to a `RoundedRectangle.stroke(.thinMaterial)` outline pre-iOS 26.
+//  The `if #available(iOS 26, *)` branch ONLY changes the chrome —
+//  the keyframe animation runs identically on both paths.
+//
+//  Key APIs
+//  ────────
+//  • `KeyframeAnimator(initialValue:repeating:)` (iOS 17+) — the
+//    looping driver.
+//  • `@Animatable` (iOS 18+) on `Frame` — auto-synthesises
+//    `AnimatableData` for the three CGFloats.
+//  • `SpringKeyframe` + `LinearKeyframe` mixed — spring for the
+//    "pop-in" feel, linear for the dwell phases.
+//  • `AnyLayout(...)` — toggles VStack ↔ HStack as the bezel
+//    rotates (portrait vs. landscape).
+//  • `.glassEffect(_, in:)` (iOS 26) inside an `if #available` —
+//    the version-conditional chrome.
+//  • `.visualEffect` — drives the `tapScale` on the Allow button.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when an onboarding step needs to TEACH a system
+//  permission flow ("when you see this alert, tap Allow"). The
+//  `Frame` + `KeyframeAnimator` pattern generalises to any
+//  multi-property looping animation — copy it for any "explain the
+//  UI" demo.
+//
+//  See also
+//  ────────
+//  • OnBoardingiOS26View.swift — sibling iOS 26 onboarding;
+//    app-preview-zoom flavor instead of permission-prompt flavor.
+//    Read both for iOS 26 onboarding patterns.
+//  • LandingView.swift — simplest onboarding flavor in this folder.
+//  • View/Notifications/CustomNotificationsView.swift — notification
+//    permission flow with a similar arrow-points-at-system-alert
+//    teaching pattern.
+//
 import SwiftUI
 
 struct PermissionOnboarding: View {
