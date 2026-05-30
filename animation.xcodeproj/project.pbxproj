@@ -1611,8 +1611,6 @@
 		961F3BC02B897D1C0055D79B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				96C8D5EF2FA69125008C57D5 /* FullPageEffect */,
-				96C8D2AC2FA32726008C57D5 /* Wallet */,
 				96A1D2E62F3463BF00377C99 /* 3DAnimation */,
 				9697F7602EB039D2005C5C77 /* Alert */,
 				AB8CBDDE2E9B028100A288E4 /* AppUpdateView */,
@@ -1621,6 +1619,7 @@
 				AB658C312F70961800377EBC /* CameraInterface */,
 				965E573A2BC5086000E172B3 /* Carousel */,
 				965F26FC2D86361B00300420 /* CustomMenu */,
+				96C8D5EF2FA69125008C57D5 /* FullPageEffect */,
 				AB40B84A2C9F607800BC7747 /* Grid */,
 				9662EFC92C460E8600508B80 /* HelpView */,
 				969B8EB82F999A640081EE29 /* Keyboard */,
@@ -1651,6 +1650,7 @@
 				9609DB172DBB2CC300A76F95 /* ToastView */,
 				9680C9202D6AFF48005FC80D /* TransitionDemoView */,
 				96D495832BBD25160011D5AA /* Video */,
+				96C8D2AC2FA32726008C57D5 /* Wallet */,
 			);
 			path = View;
 			sourceTree = "<group>";
