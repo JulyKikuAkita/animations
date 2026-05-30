@@ -2,18 +2,65 @@
 //  ContactScrollDemoView.swift
 //  animation
 //
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17+ — `onScrollGeometryChange`, `onScrollPhaseChange`,
+//  `coordinateSpace(.named(...))`.
+//
+//  Learning point
+//  ──────────────
+//  iOS Contacts–style alphabetic scroll index: a vertical contact
+//  list with sticky letter headers, plus a draggable indicator
+//  capsule on the trailing edge that lets the user fast-jump to any
+//  letter section.
+//
+//  Three pieces working together:
+//    1. Vertical `ScrollView` with `pinnedViews: [.sectionHeaders]`
+//       so the letter headers stick to the top as the user scrolls
+//       past their section.
+//    2. `CustomScrollIndicator` — the draggable trailing capsule.
+//       Computes its y-position from `contentOffset.y / contentHeight`;
+//       lets the user drag it directly to scrub the entire list.
+//    3. Two-way binding: `onScrollGeometryChange` drives indicator
+//       from scroll, `DragGesture` drives scroll from indicator.
+//       Bidirectional binding is the load-bearing UX bit — if
+//       either direction fights the other the index "judders."
+//
+//  Key APIs
+//  ────────
+//  • `onScrollGeometryChange(for: ScrollGeometry.self)` — drives
+//    the indicator position from scroll state. The file extends
+//    `ScrollGeometry` with `scrollOffsetY` / `contentHeight` helpers.
+//  • `onScrollPhaseChange` — settle detection; the indicator fades
+//    out when scrolling stops.
+//  • `coordinateSpace(.named(...))` + `containerRelativeFrame` —
+//    named coordinate space lets the indicator compute its
+//    position correctly across scroll bounds.
+//  • `DragGesture` on the indicator — translates raw gesture into
+//    a scroll offset.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when a long alphabetised list (contacts, music
+//  library, countries) needs faster navigation than scroll-by-flick.
+//  The custom indicator beats native scrollbars for branded UIs
+//  because it can carry a letter label.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/CustomHeaderEffect/* — sticky-header siblings.
+//
 import SwiftUI
 
 struct ContactSection: Identifiable {
     var id: String
     var contacts: [Contact]
-    
+
     static func generateData() -> [ContactSection] {
         Dictionary(grouping: dummyContacts) {
             String($0.name.first ?? "A")
         }.compactMap {
             .init(id: $0.key, contacts: $0.value)
-        }.sorted { $0.id < $1.id}
+        }.sorted { $0.id < $1.id }
     }
 }
 
@@ -33,11 +80,11 @@ struct ContactScrollView: View {
         containerSize: .zero
     )
     @State private var activeID: String = "A"
-    
+
     /// scroll state - active, idle, animating, decelerating etc
     @State private var scrollPhase: ScrollPhase = .idle
     @State private var scrollPosition: ScrollPosition = .init()
-    
+
     /// Gesture properties
     @State private var previousScrollProgress: CGFloat?
     @GestureState private var isGestureActive: Bool = false
@@ -47,7 +94,7 @@ struct ContactScrollView: View {
             ScrollView(.vertical) {
                 VStack(spacing: 12) {
                     ForEach(sections) { section in
-                        SectionView(section)
+                        sectionView(section)
                     }
                 }
                 .padding(20)
@@ -58,29 +105,29 @@ struct ContactScrollView: View {
             .scrollIndicators(.hidden)
             .onScrollGeometryChange(for: ScrollGeometry.self) {
                 $0
-            } action: { oldValue, newValue in
+            } action: { _, newValue in
                 scrollProperties = newValue
             }
-            .onScrollPhaseChange { oldPhase, newPhase in
+            .onScrollPhaseChange { _, newPhase in
                 scrollPhase = newPhase
             }
             .scrollPosition($scrollPosition)
         }
         .overlay(alignment: .trailing) {
-            CustomScrollIndicator()
+            customScrollIndicator()
         }
     }
-    
-    func SectionView(_ section: ContactSection) -> some View {
+
+    func sectionView(_ section: ContactSection) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(section.id)
                 .font(.largeTitle.bold())
-            
+
             VStack(alignment: .leading, spacing: 15) {
                 ForEach(section.contacts) { contact in
                     Text(contact.name)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    
+
                     /// Skip divider for the last item
                     if contact.id != section.contacts.last?.id {
                         Divider()
@@ -94,13 +141,14 @@ struct ContactScrollView: View {
             $0.frame(in: .scrollView(axis: .vertical))
         } action: { newValue in
             /// At top
-            if newValue.minY >= 0 && newValue.minY < 150 {
+            if newValue.minY >= 0, newValue.minY < 150 {
                 activeID = section.id
             }
         }
     }
-    
-    func CustomScrollIndicator() -> some View {
+
+    // swiftlint:disable:next function_body_length
+    func customScrollIndicator() -> some View {
         GeometryReader { geometry in
             let indicatorHeight: CGFloat = 40
             /// Calculating Progress
@@ -109,12 +157,12 @@ struct ContactScrollView: View {
             ///  Since the offset starts from the top
             let indicatorOffset = (geometry.size.height - indicatorHeight) * scrollProgress
             let showPopup = scrollPhase != .idle || isGestureActive
-            
+
             ZStack(alignment: .top) {
                 Capsule()
                     .fill(.background.shadow(.drop(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)))
                     .padding(.trailing, 5)
-                
+
                 Capsule()
                     .fill(.blue.gradient)
                     .frame(height: indicatorHeight)
@@ -129,20 +177,19 @@ struct ContactScrollView: View {
                                 if previousScrollProgress == nil {
                                     previousScrollProgress = scrollProgress
                                 }
-                                
+
                                 guard let previousScrollProgress else { return }
                                 /// calculating drag progress
                                 let dragProgress = value.translation.height / (geometry.size.height - indicatorHeight)
                                 let endProgress = max(min(previousScrollProgress + dragProgress, 1), 0)
-                                
+
                                 /// Scrolling Content
                                 scrollPosition.scrollTo(y: endProgress * scrollProperties.contentHeight)
-                                
                             }
                     )
                     .offset(y: indicatorOffset)
-                    .onChange(of: isGestureActive) { oldValue, newValue in
-                            if !newValue {
+                    .onChange(of: isGestureActive) { _, newValue in
+                        if !newValue {
                             previousScrollProgress = nil
                         }
                     }
@@ -181,7 +228,6 @@ struct ContactScrollView: View {
     }
 }
 
-
 #Preview {
     ContactScrollDemoView()
 }
@@ -190,7 +236,7 @@ extension ScrollGeometry {
     var scrollOffsetY: CGFloat {
         contentOffset.y + contentInsets.top
     }
-    
+
     var contentHeight: CGFloat {
         contentSize.height - containerSize.height
     }

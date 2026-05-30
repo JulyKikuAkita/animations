@@ -3,12 +3,68 @@
 //  animation
 //
 //  Created on 1/21/26.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17+ — `scrollPosition`, `onScrollGeometryChange`,
+//  `scrollPositionUpdatePreservesVelocity` are the gating APIs.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Stocks–style horizontal stock-card carousel that
+//  AUTO-LOOPS forward at a fixed cadence and lets the user grab
+//  a card to inspect a chart in a presentation detent. Two ideas
+//  worth taking away:
+//
+//    1. **Auto-advance via `Timer.publish` on `.common` runloop
+//       mode.** Lets the timer keep firing while the user is
+//       interacting with a sheet (`.tracking` mode would pause
+//       under user gestures). Without `.common`, the auto-loop
+//       freezes whenever the presentation detent is being dragged.
+//    2. **`.scrollPositionUpdatePreservesVelocity` (iOS 17+) inside
+//       `withTransaction`.** When the timer programmatically advances
+//       the scroll, this transaction key tells SwiftUI to KEEP the
+//       user's in-flight scroll velocity instead of snapping to a
+//       dead stop. The carousel feels continuous rather than
+//       stuttering on each tick.
+//
+//  Sheet integration
+//  ─────────────────
+//  Tapping a card opens a `.presentationDetents` sheet with a
+//  `Charts` line chart. The header above the chart updates as
+//  the user changes detent height — read via `onScrollGeometryChange`
+//  on the SHEET'S scroll content. That's the "header swap on
+//  detent" trick.
+//
+//  Key APIs
+//  ────────
+//  • `Timer.publish(every:on:in:).autoconnect()` with `.common`
+//    runloop mode — the auto-advance.
+//  • `withTransaction { var t = Transaction(); t[\.scrollPositionUpdatePreservesVelocity] = true }`
+//    — the velocity-preserving programmatic scroll.
+//  • `Charts` framework — `Chart { LineMark(...) }` for the price
+//    chart inside the detail sheet.
+//  • `.presentationDetents` + `onScrollGeometryChange` reading
+//    the sheet's scroll height — drives the in-sheet header swap.
+//
+//  How to apply
+//  ────────────
+//  Use as the template for any "auto-rotating hero list with
+//  per-item detail sheet" — investing apps, news apps, sports
+//  scoreboards. The velocity-preservation transaction is the
+//  load-bearing detail; copy that wholesale.
+//
+//  See also
+//  ────────
+//  • View/Carousel/InfiniteCarouselView.swift,
+//    View/Carousel/InfiniteLoopingScrollView.swift,
+//    View/ScrollView/InfiniteScrollView.swift — three different
+//    looping techniques. Pick by per-cell cost / UIKit reach-through
+//    appetite.
+//
 import Charts
 import Combine
 import SwiftUI
 
-struct LoppingScrollDemoView: View {
+struct LoopingScrollDemoView: View {
     @State private var showSheet: Bool = true
     @State private var currentDetent: PresentationDetent = .height(150)
     var body: some View {
@@ -179,5 +235,5 @@ struct LoopingScrolliOS26View<Data: RandomAccessCollection, Content: View>: View
 }
 
 #Preview {
-    LoppingScrollDemoView()
+    LoopingScrollDemoView()
 }

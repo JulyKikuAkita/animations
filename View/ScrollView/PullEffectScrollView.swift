@@ -3,7 +3,39 @@
 //  animation
 //
 //  Created on 7/20/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17+.
+//
+//  Learning point
+//  ──────────────
+//  Pull-down gesture that progressively reveals action buttons
+//  above the scroll content, with the active button morphing into
+//  a confirmation pill once the pull crosses a threshold. The
+//  pattern generalises for "swipe down to choose an action" UX —
+//  Twitter-style reaction bars, mail row actions, etc.
+//
+//  Key APIs
+//  ────────
+//  • `onScrollGeometryChange(for: CGFloat.self)` — drives the
+//    pull progress.
+//  • `matchedGeometryEffect(id:in:)` — morphs the active button
+//    into the confirmation pill.
+//  • `sensoryFeedback(.selection, trigger:)` — per-action haptic.
+//  • `.scrollClipDisabled(true)` — lets the buttons render above
+//    the scroll's frame as the user pulls.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when the gesture itself should COMMIT to an
+//  action (vs. a tap-to-confirm flow). The progress-driven multi-
+//  button reveal is the reusable nugget; the rest is product styling.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/ViewModifiers/SwipeToDismiss+ScrollView.swift
+//    — sibling pull-gesture pattern, applied to sheet dismissal
+//    instead of action selection.
+//
 import SwiftUI
 
 struct PullEffectScrollViewDemo: View {

@@ -234,7 +234,7 @@
 		9662F0322C58BCCF00508B80 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0302C58BCCF00508B80 /* CustomShape.swift */; };
 		9662F0332C58BCCF00508B80 /* CustomShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0302C58BCCF00508B80 /* CustomShape.swift */; };
 		9663BB542DDE992700037CF1 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9663BB532DDE992200037CF1 /* Date+Extensions.swift */; };
-		9663BB572DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9663BB562DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift */; };
+		9663BB572DDE9AF400037CF1 /* CalendarWithMultipleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9663BB562DDE9AF400037CF1 /* CalendarWithMultipleScrollView.swift */; };
 		9666E3D92DA4CD8000244184 /* MicroInteractionSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */; };
 		967049292CC4BDDA0056269C /* ToastView+IOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967049282CC4BDDA0056269C /* ToastView+IOS18.swift */; };
 		96725BAF2BF57ABC003DBD45 /* MintTransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */; };
@@ -774,7 +774,7 @@
 		9662F02E2C58BBBB00508B80 /* MorphingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphingView.swift; sourceTree = "<group>"; };
 		9662F0302C58BCCF00508B80 /* CustomShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShape.swift; sourceTree = "<group>"; };
 		9663BB532DDE992200037CF1 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		9663BB562DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithMultipleSCrollView.swift; sourceTree = "<group>"; };
+		9663BB562DDE9AF400037CF1 /* CalendarWithMultipleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWithMultipleScrollView.swift; sourceTree = "<group>"; };
 		9666E3D82DA4CD8000244184 /* MicroInteractionSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicroInteractionSlider.swift; sourceTree = "<group>"; };
 		967049282CC4BDDA0056269C /* ToastView+IOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToastView+IOS18.swift"; sourceTree = "<group>"; };
 		96725BAE2BF57ABC003DBD45 /* MintTransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintTransactionCardView.swift; sourceTree = "<group>"; };
@@ -2011,7 +2011,7 @@
 		9663BB552DDE9AD100037CF1 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				9663BB562DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift */,
+				9663BB562DDE9AF400037CF1 /* CalendarWithMultipleScrollView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -3668,7 +3668,7 @@
 				96C0C2DB2B9063CF00F56FF5 /* OffsetReader.swift in Sources */,
 				96FF509D2B944D1B00B36142 /* PlayerConfig.swift in Sources */,
 				96ACBEF42C33B79E004F3070 /* Expense.swift in Sources */,
-				9663BB572DDE9AF400037CF1 /* CalendarWithMultipleSCrollView.swift in Sources */,
+				9663BB572DDE9AF400037CF1 /* CalendarWithMultipleScrollView.swift in Sources */,
 				ABB8F0082FAFFE7E00FB4A84 /* CustomSideMenu+iOS26.swift in Sources */,
 				96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */,
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,

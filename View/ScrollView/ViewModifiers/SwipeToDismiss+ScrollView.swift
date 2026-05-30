@@ -3,7 +3,65 @@
 //  animation
 //
 //  Created on 3/20/26.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ — depends on simultaneous DragGesture-with-ScrollView
+//  recognition. Comment in the file (line ~58) notes "From iOS 18+
+//  Simultaneous Gesture works with scroll view". No `@available`
+//  gate currently; consider adding one.
+//
+//  Learning point
+//  ──────────────
+//  ViewModifier that adds a "pull-down-to-dismiss" gesture to ANY
+//  `ScrollView`, with an animated progress indicator (a circle
+//  with an arrow) appearing at the top as the user pulls. Crosses
+//  a threshold and the dismiss action fires; falls short and it
+//  springs back with a `keyframeAnimator` bounce.
+//
+//  Why a ViewModifier?
+//  ───────────────────
+//  Letting any ScrollView opt-in via a one-liner extension means
+//  the dismiss UX is uniform across all sheets/cover surfaces in
+//  the app:
+//    `ScrollView { ... }.swipeToDismiss { dismissAction() }`
+//
+//  Mechanics
+//  ─────────
+//    1. `onScrollGeometryChange` reads vertical content offset.
+//    2. When the scroll has reached its TOP and continues to drag
+//       further (negative offset), the modifier interprets that
+//       overscroll as "pull progress" and shows the indicator.
+//    3. Past a threshold + sufficient velocity, fires the dismiss
+//       handler. Otherwise `keyframeAnimator` runs a small bounce
+//       on the indicator and resets.
+//    4. `sensoryFeedback(.selection)` haptic at threshold crossing.
+//
+//  Key APIs
+//  ────────
+//  • `ViewModifier` — exposes the pattern as `.swipeToDismiss { }`.
+//  • `onScrollGeometryChange(for: CGFloat.self)` — overscroll math.
+//  • `keyframeAnimator(initialValue:trigger:keyframes:)` (iOS 17+)
+//    — the bounce-back animation when the threshold isn't reached.
+//  • `sensoryFeedback(.selection, trigger:)` — threshold-crossing
+//    haptic.
+//  • Simultaneous DragGesture + ScrollView (iOS 18+ behaviour) —
+//    same load-bearing piece as
+//    [[ResizableHeaderScrollView]].
+//
+//  How to apply
+//  ────────────
+//  Drop on any ScrollView that should support pull-down-to-dismiss
+//  (sheets, fullScreenCover, custom presentation surfaces). For
+//  ACTION-revealing pull (multiple buttons under the lip), see
+//  [[PullEffectScrollView]] — same overscroll detection, different
+//  product UX.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/PullEffectScrollView.swift — sibling pull-
+//    gesture pattern; reveals actions instead of dismissing.
+//  • View/ScrollView/CustomHeaderEffect/ResizableHeaderScrollView.swift
+//    — same iOS 18 simultaneous-gesture-with-scroll dependency.
+//
 import SwiftUI
 
 private struct DemoSwipeToMissWithScrollView: View {

@@ -1,7 +1,56 @@
 //
 //  CustomDragDropScrollView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Long-press-then-drag to reorder a 2-column grid, with auto-scroll
+//  when the drag finger nears the top or bottom edge. Two pieces:
+//
+//    1. `LongPressGesture.sequenced(before: DragGesture())` — the
+//       canonical "press first, then drag" combo. The long-press
+//       arms the cell as draggable; the drag itself moves it.
+//       Without the sequencing, vertical drags would always be
+//       interpreted as scroll.
+//    2. Auto-scroll edge zones: when the drag's global y enters the
+//       top or bottom 60pt of the scroll bounds, a `Timer` ticks
+//       the `scrollPosition` upward / downward at a steady rate
+//       until the finger leaves the zone. Same pattern as
+//       [[Grid+PanGestureView]] for lasso-select.
+//
+//  Reorder-on-overlap: each cell publishes its own
+//  `frame(in: .global)` via `GeometryReader`; the dragged cell's
+//  current location is hit-tested against those frames to decide
+//  the swap target.
+//
+//  Key APIs
+//  ────────
+//  • `LongPressGesture.sequenced(before: DragGesture())` — the
+//    "press to lift, drag to move" gesture chain.
+//  • `onScrollGeometryChange` + `Timer.scheduledTimer` — the
+//    edge-zone auto-scroll loop.
+//  • `GeometryReader { proxy.frame(in: .global) }` per cell — for
+//    overlap hit-testing.
+//  • `.scrollPosition` + `.scrollTargetLayout` — for the auto-scroll
+//    to settle on a stable cell after the drag ends.
+//
+//  How to apply
+//  ────────────
+//  Use for any "rearrange this list" UX where native `.draggable` /
+//  `.dropDestination` (see [[View/Grid/GridView]]) feels too
+//  lightweight. For the lasso-select multi-pick variant, see
+//  [[View/Grid/Grid+PanGestureView]].
+//
+//  See also
+//  ────────
+//  • View/Grid/GridView.swift — simplest reorder, native drag-drop.
+//  • View/Grid/Grid+PanGestureView.swift — lasso multi-select with
+//    same edge-zone auto-scroll pattern.
+//  • View/Grid/SortableIOS26GridView.swift — long-press reorder
+//    with live-preview-follows-finger.
+//
 import SwiftUI
 
 struct CustomDragDropScrollDemoView: View {
@@ -67,7 +116,6 @@ struct CustomDragDropScrollView: View {
             $0.contentOffset.y + $0.contentInsets.top
         }, action: { _, newValue in
             currentScrollOffset = newValue
-//            print(newValue, maximumScrollSize)
         })
         .onScrollGeometryChange(for: CGFloat.self, of: {
             $0.contentSize.height + $0.contentSize.height
@@ -135,7 +183,6 @@ struct CustomDragDropScrollView: View {
                                 selectedControlScale = 1.05
                             }
                         }
-                        print("Long press Completed", value?.translation.height ?? 0)
                     }
 
                     if let value {

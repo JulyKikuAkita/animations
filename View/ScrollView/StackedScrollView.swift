@@ -1,7 +1,44 @@
 //
 //  StackedScrollView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  Composes [[View/LandingPages/StackedCards]] (a reusable generic)
+//  to render a notification-centre-style stacked card scroll.
+//
+//  Learning point
+//  ──────────────
+//  Thin wrapper that demonstrates the project's `StackedCards`
+//  helper in a real ScrollView context. Where `StackedCards` is
+//  the engine (per-card scale/opacity/offset driven by scroll-
+//  space minY via `visualEffect`), this file shows how to feed it
+//  actual data with appropriate styling — `.dark` environment for
+//  the iOS Notifications-style dim look, sample `Profile` data,
+//  padding/spacing tuned for the stacked feel.
+//
+//  Reading order: read `View/LandingPages/StackedCards.swift` FIRST
+//  for the mechanics; this file is then easy to follow as a consumer.
+//
+//  Key APIs
+//  ────────
+//  • `StackedCards<Content, Data>` (consumer-facing helper from
+//    LandingPages) — the actual engine.
+//  • `.environment(\.colorScheme, .dark)` — pins the dark
+//    Notifications-style look regardless of system setting.
+//  • Sample-data `Profile` from `Model/Profile.swift`.
+//
+//  How to apply
+//  ────────────
+//  Use as a guide for feeding your own Identifiable model into
+//  `StackedCards`. For the actual stack mechanic, lift the engine
+//  from LandingPages.
+//
+//  See also
+//  ────────
+//  • View/LandingPages/StackedCards.swift — the engine.
+//  • View/Carousel/LoopingStackCardsDemoView.swift — different
+//    "stack" pattern (drag-to-advance, iOS 18 Group(subviews:)).
+//
 import SwiftUI
 
 struct StackedScrollDemoView: View {
@@ -29,17 +66,17 @@ struct StackedScrollView: View {
                 opacityDisplayCount: 0,
                 itemHeight: 70
             ) { item in
-                StackCardView(item)
+                stackCardView(item)
             }
             .padding(.bottom, 20)
 
-            BottomActionBar()
+            bottomActionBar()
         }
         .padding(20)
     }
 
     @ViewBuilder
-    func StackCardView(_ item: Profile) -> some View {
+    func stackCardView(_ item: Profile) -> some View {
         if item.username.isEmpty {
             Rectangle()
                 .fill(.clear)
@@ -70,7 +107,7 @@ struct StackedScrollView: View {
     }
 
     @ViewBuilder
-    func BottomActionBar() -> some View {
+    func bottomActionBar() -> some View {
         HStack {
             Button(action: {}, label: {
                 Image(systemName: "flashlight.off.fill")

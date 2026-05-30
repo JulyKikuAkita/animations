@@ -1,7 +1,72 @@
 //
 //  SwipeActionDemoView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17+ — `scrollTargetBehavior`, `containerRelativeFrame`,
+//  `@resultBuilder`-based DSL.
+//
+//  Learning point
+//  ──────────────
+//  Bespoke swipe-to-reveal row actions WITHOUT relying on iOS's
+//  native `.swipeActions` modifier — built from a horizontal
+//  `ScrollView` per row, with `.scrollTargetBehavior(.viewAligned)`
+//  snapping between three states (left actions / row content /
+//  right actions). The reveal is a custom mask transition that
+//  grows action buttons from the trailing/leading edge as the row
+//  scrolls horizontally.
+//
+//  Why build instead of using `.swipeActions`?
+//  ───────────────────────────────────────────
+//  Three things native `.swipeActions` can't do:
+//    1. Custom transitions (mask-based reveal vs. translate-in).
+//    2. Embed in non-`List` containers prior to iOS 18.
+//    3. Result-builder DSL for stacked actions:
+//       ```
+//       SwipeAction(...) {
+//           Action(icon: "...") { ... }
+//           Action(icon: "...") { ... }
+//       }
+//       ```
+//
+//  Architecture
+//  ────────────
+//    1. `SwipeAction<Content>` (generic reusable wrapper) — owns
+//       the per-row horizontal ScrollView.
+//    2. `ActionBuilder` (`@resultBuilder`) — the DSL that turns
+//       a trailing closure of `Action`s into an array.
+//    3. `CustomTransition` — mask-based reveal that grows actions
+//       from the row's edge.
+//    4. `visualEffect` clamps the row's horizontal scroll so it
+//       can't overshoot past the action panel.
+//
+//  Key APIs
+//  ────────
+//  • `@resultBuilder ActionBuilder` — the DSL primitive; required
+//    Swift feature. Worth reading if you've never built one.
+//  • `.scrollTargetBehavior(.viewAligned)` + `scrollTargetLayout`
+//    — three-state snap (left / centre / right).
+//  • `.containerRelativeFrame(.horizontal)` — sizes each "page"
+//    (row content, leading actions, trailing actions) to one
+//    container width.
+//  • `CustomTransition` (file-local) — the reveal animation.
+//  • `.visualEffect` — clamping the scroll's overshoot.
+//
+//  How to apply
+//  ────────────
+//  Use when you need swipe actions in a non-`List` context, OR
+//  custom reveal transitions, OR a fluent DSL for declaring
+//  actions. For standard iOS-feeling actions inside a List, use
+//  the much-simpler [[CustomSwipeActionScrollViewiOS18DemoView]].
+//
+//  See also
+//  ────────
+//  • CustomSwipeActionScrollViewiOS18DemoView.swift — the native
+//    `.swipeActions` flavour for comparison.
+//  • Gesture/HorizontalPanGesture.swift — referenced as the
+//    UIKit-bridge gesture pattern this file would use if it
+//    needed to interop with parent vertical scrolls.
+//
 import SwiftUI
 
 struct SwipeActionDemoView: View {
