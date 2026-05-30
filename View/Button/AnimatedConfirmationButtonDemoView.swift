@@ -3,7 +3,67 @@
 //  animation
 //
 //  Created on 11/1/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup
+//        Typo in type name: `AnimatedButtonCorderRadius` should be
+//        `AnimatedButtonCornerRadius`. Used in 3 spots (line ~41
+//        declaration + lines ~55 and ~105 properties). Project-wide
+//        rename when convenient.
+//
+//  Learning point
+//  ──────────────
+//  Confirm-then-act button: tap a small trash icon, the icon's
+//  rendered image ZOOMS up to fill the screen as the entry point of
+//  a `fullScreenCover`, exposing a "Are you sure?" warning panel
+//  with cancel/delete buttons. Dismissing reverses the animation —
+//  the panel collapses back into the source icon. Trick is making
+//  the source icon and the cover entry point look like the SAME
+//  pixels morphing scale + position, no matched-geometry namespace
+//  involved.
+//
+//  Mechanics:
+//    1. `ImageRenderer` snapshots the button's label off-screen so
+//       we have a UIImage we can scale freely without re-laying out
+//       the source button.
+//    2. `onGeometryChange(for: CGRect.self)` records the source
+//       button's frame on screen.
+//    3. The `fullScreenCover` content overlays an Image of the
+//       snapshot, positioned at the source frame, then animates its
+//       frame/scale to fullscreen via `visualEffect`.
+//    4. A `mask { }` on the morphing layer keeps animation edges
+//       crisp during the zoom.
+//
+//  Key APIs
+//  ────────
+//  • `ImageRenderer(content:)` — synchronous snapshot of a SwiftUI
+//    view to UIImage. Re-rendered on each open since the label can
+//    contain dynamic content.
+//  • `onGeometryChange(for:of:action:)` — iOS 18+. Cleaner than
+//    `GeometryReader` for one-shot frame capture.
+//  • `visualEffect { content, proxy in ... }` — drives the morph
+//    by reading the cover's container size against the captured
+//    source frame.
+//  • `withAnimation(_:completionCriteria:.logicallyComplete) { } completion: { }`
+//    — fire the dismiss state mutation only AFTER the visible
+//    animation finishes.
+//  • `.interpolatingSpring(duration:)` — the unifying curve.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when a confirm dialog should feel CONTINUOUS with
+//  the originating control (delete buttons, destructive toolbar
+//  actions). The ImageRenderer snapshot path makes it work for any
+//  label content — text, multi-icon stacks, custom shapes — without
+//  requiring matched-geometry compatible identity.
+//
+//  See also
+//  ────────
+//  • DrawerButtonView.swift — alternative confirm pattern: button
+//    expands UPWARD into a drawer instead of zooming fullscreen.
+//  • CustomButton.swift — async-action button that morphs in place
+//    (no modal). Compare and pick by interaction model.
+//
 import SwiftUI
 
 struct AnimatedConfirmationButtonDemoView: View {

@@ -1,9 +1,81 @@
 //
 //  ParticleEffectsView.swift
 //  animation
-// https://www.youtube.com/watch?v=sLdQdOtpf7A
-// Key frame animation: 8:01
-// https://www.youtube.com/watch?v=HDZdM-YW2iM&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=20
+//
+//  ⚠️  TRANSITIVELY WIRED INTO THE APP: `ParticleEffectsView` is
+//      embedded by `View/Carousel/CardCarouselView.swift:115`,
+//      which is in turn referenced from
+//      `View/LandingPages/PlayerAnimationView.swift:43`. Don't
+//      rename or delete without updating both call sites.
+//
+//  Sources (kept verbatim from the original header):
+//    • https://www.youtube.com/watch?v=sLdQdOtpf7A (keyframe at 8:01)
+//    • https://www.youtube.com/watch?v=HDZdM-YW2iM (index 20)
+//
+//  TODO: Cleanup
+//        1. The `toggleAnimation` + `removeFrame(...)` pattern is
+//           duplicated between `ParticleEffectsView` (lines ~134–146)
+//           and `CustomNumberKeyFrameView` (lines ~219–241). Same
+//           shape, same 0.8s settle, two slightly different state
+//           bags. Extract to a shared helper or a `@Observable`
+//           `ParticleEmitterController` that both views own.
+//        2. `imageName` / `imageName2` `@State` properties (around
+//           lines 18–19 and 42–43) are declared but never mutated;
+//           they should either drive an icon swap or be `let`s.
+//        3. Magic number `0.8s` in the cleanup `asyncAfter` MUST stay
+//           in sync with the `KeyframeTrack` total duration —
+//           extract a single `particleLifetime` constant.
+//
+//  Learning point
+//  ──────────────
+//  Particle-emit-on-tap effect: each tap of the like/star/firework
+//  buttons spawns a short-lived sprite at the button's frame, which
+//  drifts upward and fades out. Plus a number-counter sub-demo that
+//  fires text particles on +/− tap, demonstrating the same emitter
+//  on text content via the project's `.particleEffect(...)` modifier.
+//
+//  Emitter mechanics:
+//    1. On tap, append a new particle frame (id + start point) to a
+//       `[ParticleFrame]` `@State` array.
+//    2. The frame renders an Image overlay at the captured rect.
+//    3. A `KeyframeAnimator` tracks `offsetY` (0 → -160 ease-out)
+//       and `opacity` (1 → 0) over ~0.8s.
+//    4. After 0.8s, an `asyncAfter` removes the frame from the array,
+//       so the array doesn't grow without bound.
+//
+//  The hold-to-spam case is handled via `.buttonRepeatBehavior(.enabled)`
+//  on each button — each repeat fires a fresh particle.
+//
+//  Key APIs
+//  ────────
+//  • `KeyframeAnimator(initialValue:trigger:keyframes:)` — iOS 17.
+//    Driven by an explicit `trigger` so each tap restarts the
+//    keyframe sequence.
+//  • `KeyframeTrack(\.offsetY) { CubicKeyframe(...) }` — the
+//    upward-drift curve; pair with a separate track on `\.opacity`
+//    for the fade.
+//  • `.particleEffect(...)` — project helper at
+//    `Helpers/TextRender/ParticleEffect.swift`. Wraps the keyframe
+//    machinery for text glyphs specifically.
+//  • `.buttonRepeatBehavior(.enabled)` — iOS 17+. Lets a press fire
+//    repeated actions while held, ideal for emit-spam.
+//  • `DispatchQueue.main.asyncAfter(deadline: .now() + 0.8)` —
+//    cleanup timer; MUST match the keyframe track length.
+//
+//  How to apply
+//  ────────────
+//  Drop in any "delight" tap (favorite, react, score-up). The
+//  emitter pattern is reusable; just swap the keyframe curve for a
+//  different drift trajectory. Watch the cleanup timer / keyframe
+//  duration — they're coupled (see TODO above).
+//
+//  See also
+//  ────────
+//  • Helpers/TextRender/ParticleEffect.swift — the `.particleEffect`
+//    modifier this file uses for the text-particle counter.
+//  • View/Carousel/CardCarouselView.swift — the consumer demo that
+//    embeds this view.
+//
 import SwiftUI
 
 struct ParticleEffectsView: View {

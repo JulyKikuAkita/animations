@@ -68,7 +68,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
     }
 
     @ViewBuilder
-    func p(size: CGSize) -> some View {
+    func parallaxCarousel18View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 10) {
                 ForEach(firstSetCards) { card in

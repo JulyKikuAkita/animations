@@ -157,7 +157,7 @@ struct TravelCardView: View {
                             .frame(width: proxy.size.width * 2.5) // or use scaling -> .scaleEffect(1.25)
                             .frame(width: cardSize.width, height: cardSize.height)
                             .overlay {
-                                OverlayView(card)
+                                overlayView(card)
                                 //  Text("\(minX)")
                                 //  .font(.largeTitle)
                                 //   .foregroundStyle(.white)

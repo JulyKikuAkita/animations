@@ -2,8 +2,65 @@
 //  DrawerButtonView.swift
 //  animation
 //
-// each button apply to specific DrawerConfig
-// do not apply multiple buttons to the same config
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup
+//        `private struct ScaleButtonStyle: ButtonStyle` is duplicated
+//        in [[SpinnerButton]] (also `private`). Hoist to a shared
+//        helper (e.g. `Helpers/ButtonStyles/`) and drop both copies.
+//        Both implementations are functionally identical.
+//
+//  Usage constraint (was the original comment): each button must
+//  bind to its OWN `DrawerConfig` instance. Sharing a config across
+//  multiple drawer buttons causes the "open" frame measurements to
+//  collide — the second button's drawer renders at the first
+//  button's source frame.
+//
+//  Learning point
+//  ──────────────
+//  Confirm flow as an UPWARD-EXPANDING drawer: tap a danger button
+//  and it grows into a wider panel above itself with primary +
+//  cancel actions. Unlike a fullscreen confirm
+//  ([[AnimatedConfirmationButtonDemoView]]), the source button STAYS
+//  IN PLACE — the drawer is just attached above its top edge.
+//
+//  Two-piece architecture:
+//    • `DrawerButton` — the source button. Records its own frame via
+//      `onGeometryChange` so the overlay knows where to anchor.
+//    • `AlertDrawerContent` — the expanded panel, attached via the
+//      `alertDrawerOverlay(...)` view-extension. Uses
+//      `visualEffect` to morph from the recorded source frame to its
+//      expanded size + position.
+//  `DrawerConfig` is the shared state object that connects them
+//  (`@State` on the parent, `Binding` into both halves).
+//
+//  Key APIs
+//  ────────
+//  • `onGeometryChange(for: CGRect.self)` — iOS 18+. One-shot frame
+//    capture for the source button.
+//  • `visualEffect { content, proxy in ... }` — drives the morph
+//    from source rect to expanded rect.
+//  • `withAnimation(_:completionCriteria:.logicallyComplete) { } completion: { }`
+//    — defers the dismiss state mutation until the close animation
+//    has visually finished, so the drawer doesn't pop.
+//  • `View.alertDrawerOverlay(config:primaryTitle:...)` — the public
+//    API. Apply once per source button.
+//  • `ScaleButtonStyle` — file-private button style for the press
+//    feedback (see TODO above).
+//
+//  How to apply
+//  ────────────
+//  Use when the action is dangerous BUT the user shouldn't lose
+//  context (delete a row inside a list, archive an item without
+//  scrolling away). The expanded drawer is local to the source
+//  button — surrounding content stays visible and still scrolls.
+//
+//  See also
+//  ────────
+//  • AnimatedConfirmationButtonDemoView.swift — the fullscreen-zoom
+//    alternative for the same UX role; compare to pick by weight.
+//  • SpinnerButton.swift — duplicate `ScaleButtonStyle`; consolidate.
+//
 import SwiftUI
 
 struct DrawerButtonDemoView: View {
