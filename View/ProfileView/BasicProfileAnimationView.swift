@@ -2,12 +2,61 @@
 //  BasicProfileAnimationView.swift
 //  animation
 //
-//  how to build the custom matched geometry effect is with the help of the anchor preference API in SwiftUI.
-// 1. know the source view anchor frame
-// 2. when the detail view is pushed, add an overlay to the navigation stack
-// that will start from the source view and move to the destination view with the destination view anchor frame.
-// 3. by animating the size and destination anchor, we can achieve a custom geometry animation effect
-// source: https://www.youtube.com/watch?v=cyVQJ31AYKs&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=22
+//  ⚠️  WIRED INTO THE APP: `BasicProfileAnimationListView` is referenced
+//      from `View/LandingPages/PlayerAnimationView.swift`. Don't rename
+//      or delete without updating that demo browser.
+//
+//  Learning point
+//  ──────────────
+//  Hand-rolled "matched geometry" between a list row and a pushed
+//  detail screen, using ANCHOR PREFERENCES (no `matchedGeometryEffect`).
+//  Pattern in three steps:
+//    1. Each list row publishes its bounds via `.anchorPreference(key:
+//       AnchorKey.self, value: .bounds, transform: { [id: anchor] })`.
+//    2. The detail view publishes its destination bounds the same way
+//       under the same id key.
+//    3. A SINGLE `.overlayPreferenceValue(AnchorKey.self) { ... }` on
+//       the NavigationStack reads BOTH anchors and renders ONE
+//       `ImageView` whose `.offset` + `.frame` is animated by SwiftUI's
+//       implicit animation on the `rect` value.
+//
+//  Why not just use `matchedGeometryEffect`? Because the source and
+//  destination are in DIFFERENT NavigationStack levels — matched
+//  geometry across a push needs the same Namespace, but the push
+//  destroys the source's view identity. The overlay+anchor trick
+//  sidesteps that.
+//
+//  Key APIs
+//  ────────
+//  • `.anchorPreference(key:value: .bounds, transform:)`
+//  • `.overlayPreferenceValue(AnchorKey.self) { value in GeometryReader { geometry[anchor] }}`
+//  • `AnchorKey` (project helper) — `[String: Anchor<CGRect>]` reducing
+//    `PreferenceKey`. Strings are profile UUIDs.
+//  • `hideView: (Bool, Bool)` — first bool gates the overlay on/off
+//    after the push completes (hands hit-testing back to the real
+//    view); second bool fades in close button + title once the
+//    overlay settles. The 0.4s / 0.5s `asyncAfter` delays MUST stay
+//    in sync with the `.snappy(duration: 0.35)` push animation.
+//  • `.allowsHitTesting(false)` on the OTHER profile overlays so the
+//    list rows under the overlay still receive taps.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when (a) `matchedGeometryEffect` won't survive your
+//  navigation/sheet boundary and (b) you want a SINGLE shared layer
+//  to morph between source and destination. Watch the timing constants —
+//  they MUST match the navigation transition duration or the overlay
+//  will pop visibly.
+//
+//  See also
+//  ────────
+//  • ListExpandSheetHeroAnimationView.swift — same idea, but extracts
+//    the source/destination/overlay into a REUSABLE API
+//    (`SourceView`/`DestinationView`/`.heroLayer(...)`) backed by a
+//    second `UIWindow`. Use that for new code.
+//  • ProfileListView.swift — anchor-based hero plus a `heroProgress`
+//    slider that exposes the math for debugging / interactive dismiss.
+//
 
 import SwiftUI
 

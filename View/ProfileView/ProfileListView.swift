@@ -2,7 +2,69 @@
 //  ProfileListView.swift
 //  animation
 //
-//  source: https://www.youtube.com/watch?v=1h5NjJbheEU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=44
+//  ⚠️  WIRED INTO THE APP: referenced from
+//      `View/LandingPages/PlayerAnimationView.swift`. Don't rename or
+//      delete without updating that demo browser.
+//
+//  Learning point
+//  ──────────────
+//  Three independent techniques layered into one demo screen:
+//
+//    1. Anchor-preference hero animation driven by an explicit
+//       `heroProgress: CGFloat` (0...1). Unlike the other hero
+//       demos, the morph is NOT just an implicit animation on a
+//       rect — every dimension (width, height, x, y, corner radius)
+//       is computed as `source + (destination - source) * progress`.
+//       Exposing the slider at the bottom of the screen makes the
+//       interpolation math visible and lets you scrub the morph.
+//
+//    2. Interactive SWIPE-TO-DISMISS on the detail view. A 10pt
+//       leading edge "grab strip" hosts a `DragGesture` that maps
+//       horizontal translation into the SAME `heroProgress` value,
+//       so the hero layer literally tracks the finger backward
+//       toward the source row.
+//
+//    3. App-Store / iOS-Settings style DARK MODE TOGGLE: snapshot
+//       the screen before and after the toggle, stack both images,
+//       and reveal the new one through a circular mask anchored to
+//       the toggle button — using `.darkModeRect` (project helper)
+//       to get the button's screen rect and `.createImages`
+//       (project helper) to make the snapshot pair.
+//
+//  Key APIs
+//  ────────
+//  • `.anchorPreference(key: AnchorKey.self, value: .bounds)` for
+//    both source rows AND the detail's `"DESTINATION"` slot.
+//  • `.overlayPreferenceValue(AnchorKey.self) { ... }` — the single
+//    overlay reads both anchors and renders the morphing image.
+//  • `withAnimation(.snappy(0.35), completionCriteria: .logicallyComplete) { ... } completion: { ... }`
+//    — two-phase animation. Drives `heroProgress`, then on
+//    completion hides the hero overlay so taps go to the real view.
+//  • `@AppStorage("toggleDarkMode") / ("activeDarkMode")` — the
+//    user-facing toggle persists; `activeDarkMode` flips AFTER the
+//    mask animation completes, so the snapshot transition isn't
+//    spoiled by an early color-scheme change.
+//  • `.preferredColorScheme(activeDarkMode ? .dark : .light)`
+//  • `.mask(alignment: .topLeading) { Circle().frame(... maskAnimation ? 80 : 1).offset(...) }`
+//    — the circular reveal; multiplying `width * 80` is the trick
+//    that grows the mask off-screen to fully expose the new snapshot.
+//  • `Slider(value: $heroProgress)` — debugging affordance, leave it
+//    in for inspection or strip it for production.
+//
+//  How to apply
+//  ────────────
+//  Reach for technique #1 when you want SCRUBBABLE hero animation
+//  (drag to dismiss with live preview). Reach for #3 when you want
+//  the dark-mode snapshot transition; it pairs naturally with any
+//  `@AppStorage`-backed binary toggle, not just dark mode.
+//
+//  See also
+//  ────────
+//  • BasicProfileAnimationView.swift — the simpler version of the
+//    anchor-preference hero (no `heroProgress`, no swipe-to-dismiss).
+//  • ListExpandSheetHeroAnimationView.swift — when the morph needs
+//    to cross a sheet/push boundary, use that file's `HeroWrapper`.
+//
 
 import SwiftUI
 
