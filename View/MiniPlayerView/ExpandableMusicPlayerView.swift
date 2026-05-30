@@ -1,7 +1,101 @@
 //
 //  ExpandableMusicPlayerView.swift
 //  animation
-
+//
+//  ⚠️  Reusable component. Consumed by
+//      [[View/OverlayView/UniversalOverlayView+AppleMusicMiniPlaer]]
+//      as the floating mini-player in a `UniversalOverlay` host.
+//      Don't rename or remove without updating that file.
+//
+//  TODO: Cleanup candidates
+//        1. The `resizeWindow(_:)` helper (line ~181) reaches into
+//           `UIApplication.shared.connectedScenes.first.keyWindow.subviews.first`
+//           and applies a `CGAffineTransform` to scale the
+//           underlying app content. This is a private-implementation-
+//           detail trap — the chain assumes a specific UIWindow
+//           subview hierarchy that Apple may restructure. Same risk
+//           profile as `View/Carousel/InfiniteLoopingScrollView.swift`.
+//           If Apple ever ships a public API for "scale the content
+//           behind me," migrate.
+//        2. Inline note "personal preference (not work in preview)"
+//           at line ~188 — accurate, but a one-liner explaining
+//           WHY (no real `UIWindow` in preview canvas) would help
+//           future readers. Or move the corner-radius write behind
+//           `if !ProcessInfo.processInfo.isPreviewing`.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Music-style fullscreen player: tap a small pill-shaped
+//  bar at the bottom and it expands to fill the screen WHILE THE
+//  HOME SCREEN BEHIND IT TILTS AND SHRINKS — the iconic Apple Music
+//  trick. Drag down to dismiss; mid-drag, the underlying app
+//  un-shrinks proportionally so the dismiss feels physical.
+//
+//  Two layers of motion driven by ONE drag gesture:
+//    1. **The player itself** — `expandPlayer: Bool` toggles
+//       chrome (corner radius, color gradient), a separate
+//       `offsetY` tracks live drag distance. Standard drag-dismiss
+//       mechanics with velocity-aware threshold.
+//    2. **The host app behind the player** — `resizeWindow(_:)`
+//       reaches up to the keyWindow's first subview (the SwiftUI
+//       host) and applies a `CGAffineTransform` to scale + offset
+//       it. As the user drags down, `windowProgress` decreases
+//       from 0.1 → 0, smoothly returning the host to its native
+//       size. On dismiss, `resetResizeWindow()` un-does the
+//       transform via `UIView.animate`.
+//
+//  Why bridge to UIKit?
+//  ───────────────────
+//  SwiftUI doesn't expose the host UIWindow's transform. To get
+//  the iOS-system Music-app's "tilting home screen" feel, you have
+//  to reach through `UIApplication.shared.connectedScenes`. There
+//  is no SwiftUI-native equivalent today.
+//
+//  Velocity-aware dismiss
+//  ──────────────────────
+//  `.onEnd { ... let velocity = value.velocity.height / 5 }` plus
+//  the threshold check `if (translation + velocity) > size.height * 0.5`
+//  — a flick dismisses even on a small actual translation. Same
+//  trick used in [[MiniPlayerView]] and
+//  [[View/CustomMenu/PopOutMenuView]].
+//
+//  Key APIs
+//  ────────
+//  • Custom `PanGesture` (project helper at
+//    `Gesture/PanGesture.swift`) — wraps `UIPanGestureRecognizer`
+//    via `UIGestureRecognizerRepresentable`. Used here because
+//    SwiftUI's `DragGesture` doesn't deliver `velocity.height`
+//    cleanly across the gesture lifecycle.
+//  • `UIApplication.shared.connectedScenes` chain — the load-
+//    bearing reach-through to find the host window.
+//  • `CALayer.cornerRadius` + `mainWindow.layer.masksToBounds = true`
+//    — applies rounded-corner clipping on the host's UIView layer
+//    while the player is expanded.
+//  • `UIView.animate(withDuration:)` — used INSTEAD of SwiftUI's
+//    `withAnimation` for the un-resize because we're animating a
+//    UIKit transform, not a SwiftUI value.
+//  • `@Namespace private var animation` — declared but used by
+//    the `miniPlayer` ↔ `expandedPlayer` content swap.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when the brief literally says "make it feel like
+//  Apple Music." Otherwise [[MiniPlayerView]] (in the same folder)
+//  is simpler and doesn't reach through UIKit. The window-resize
+//  trick is the part that matters; lift `resizeWindow` /
+//  `resetResizeWindow` if you want to apply the same effect in
+//  another expanding-overlay UI.
+//
+//  See also
+//  ────────
+//  • View/OverlayView/UniversalOverlayView+AppleMusicMiniPlaer.swift
+//    — the consumer; embeds this view inside the `UniversalOverlay`
+//    host so it sits above NavigationStack / Sheet boundaries.
+//  • View/MiniPlayerView/MiniPlayerView.swift — sibling demo
+//    designed for tab-bar-integrated playback (no UIWindow tilt,
+//    different host model). Compare and contrast.
+//  • Gesture/PanGesture.swift — the UIKit pan-gesture bridge.
+//
 import SwiftUI
 
 struct ExpandableMusicPlayerView: View {
