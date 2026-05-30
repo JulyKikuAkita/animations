@@ -182,6 +182,7 @@
 		96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */; };
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
 		9656A1842FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */; };
+		9656A6182FCB84B80063550D /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A6172FCB84B80063550D /* ScaleButtonStyle.swift */; };
 		965836AB2DD2DA440062F372 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
@@ -729,6 +730,7 @@
 		96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedConfirmationButtonDemoView.swift; sourceTree = "<group>"; };
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
 		9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+customSearch+FAB+Tabbar.swift"; sourceTree = "<group>"; };
+		9656A6172FCB84B80063550D /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
 		9658369E2DD2BB250062F372 /* storeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = storeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
@@ -2205,6 +2207,7 @@
 			isa = PBXGroup;
 			children = (
 				96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */,
+				9656A6172FCB84B80063550D /* ScaleButtonStyle.swift */,
 			);
 			path = ButtonStyle;
 			sourceTree = "<group>";
@@ -3704,6 +3707,7 @@
 				96CE85352EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift in Sources */,
 				9662F0032C4E294200508B80 /* InfiniteLoopingScrollView.swift in Sources */,
 				AB8C58C42E0B94CA0003926E /* MorphActionButtoniOS26.swift in Sources */,
+				9656A6182FCB84B80063550D /* ScaleButtonStyle.swift in Sources */,
 				ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
 				ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */,

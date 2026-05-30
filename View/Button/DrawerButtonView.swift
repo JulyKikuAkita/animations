@@ -4,12 +4,6 @@
 //
 //  Standalone demo (not wired into the app's demo browser; preview-only).
 //
-//  TODO: Cleanup
-//        `private struct ScaleButtonStyle: ButtonStyle` is duplicated
-//        in [[SpinnerButton]] (also `private`). Hoist to a shared
-//        helper (e.g. `Helpers/ButtonStyles/`) and drop both copies.
-//        Both implementations are functionally identical.
-//
 //  Usage constraint (was the original comment): each button must
 //  bind to its OWN `DrawerConfig` instance. Sharing a config across
 //  multiple drawer buttons causes the "open" frame measurements to
@@ -45,8 +39,6 @@
 //    has visually finished, so the drawer doesn't pop.
 //  • `View.alertDrawerOverlay(config:primaryTitle:...)` — the public
 //    API. Apply once per source button.
-//  • `ScaleButtonStyle` — file-private button style for the press
-//    feedback (see TODO above).
 //
 //  How to apply
 //  ────────────
@@ -135,14 +127,6 @@ struct DrawerConfig {
     fileprivate(set) var isPresented: Bool = false
     fileprivate(set) var hideSourceButton: Bool = false
     fileprivate(set) var sourceRect: CGRect = .zero
-}
-
-private struct ScaleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .animation(.linear(duration: 0.2), value: configuration.isPressed)
-    }
 }
 
 /// Overlay view to expand the alert drawer

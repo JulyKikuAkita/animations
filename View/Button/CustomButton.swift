@@ -10,7 +10,6 @@
 //        `taskStatus = ...` mutation BEFORE `wiggle.toggle()`
 //        triggers the keyframe animation). Replace with the more
 //        explicit `await Task.yield()` and add a one-line comment.
-//        Also fix the typo on the next line: `workarond` → `workaround`.
 //
 //  Learning point
 //  ──────────────
@@ -112,7 +111,7 @@ struct CustomButton<ButtonContent: View>: View {
                 self.taskStatus = taskStatus
                 if isFailed {
                     try? await Task.sleep(for: .seconds(0))
-                    wiggle.toggle() // workarond for wiggle effect
+                    wiggle.toggle() // workaround for wiggle effect
                 }
                 try? await Task.sleep(for: .seconds(0.8))
                 if isFailed {

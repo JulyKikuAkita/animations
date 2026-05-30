@@ -4,13 +4,6 @@
 //
 //  Standalone demo (not wired into the app's demo browser; preview-only).
 //
-//  TODO: Cleanup
-//        `private struct ScaleButtonStyle: ButtonStyle` here is a
-//        copy of the `ScaleButtonStyle` in [[DrawerButtonView]]
-//        (also `private`). Hoist a single shared style into a
-//        `Helpers/ButtonStyles/` file and drop both copies. The two
-//        implementations are functionally identical.
-//
 //  Learning point
 //  ──────────────
 //  Multi-stage transactional button — unlike [[CustomButton]]'s
@@ -41,7 +34,6 @@
 //    vs. tint).
 //  • `ButtonTransactionState` enum — owns its own `.color` /
 //    `.icon` / `.label` mappings so the body stays declarative.
-//  • `ScaleButtonStyle` — file-private style; SEE TODO above.
 //
 //  How to apply
 //  ────────────
@@ -139,16 +131,6 @@ struct AnimatedSpinnerButton: View {
         var hPadding: CGFloat = 15
         var vPadding: CGFloat = 10
         var animation: Animation = .easeInOut(duration: 0.2)
-    }
-}
-
-private struct ScaleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .animation(.linear(duration: 0.2)) {
-                $0
-                    .scaleEffect(configuration.isPressed ? 0.9 : 1)
-            }
     }
 }
 
