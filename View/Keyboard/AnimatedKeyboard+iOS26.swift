@@ -3,15 +3,81 @@
 //  animation
 //
 //  Created on 4/22/26.
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ only — gated by `@available(iOS 26.0, *)`. Hard requirements:
+//  Liquid Glass (`.buttonStyle(.glass)`), `ToolbarSpacer`,
+//  `.toolbarTitleDisplayMode(.inlineLarge)`, and the project's
+//  `ExpandableGlassMenuContainer` helper.
 //
-// Learning: Animate a floating toolbar that expands when the keyboard appears,
-// mimicking the Notes app behavior on iOS 26.
-// Key techniques:
-//   - @FocusState drives all UI transitions from a single source of truth
-//   - .safeAreaInset keeps the toolbar pinned above the keyboard automatically
-//   - ExpandableGlassMenuContainer morphs between a compact and full-width toolbar
-//   - Layered animations (spring for layout, easeInOut for toolbar items)
-
+//  Note on reading order
+//  ─────────────────────
+//  This file already has TACTICAL `// Learning:` comments on most
+//  lines — read those for the line-by-line walkthrough. The block
+//  below is the STRATEGIC summary so you don't have to assemble
+//  the picture from individual comments.
+//
+//  Learning point
+//  ──────────────
+//  Notes-app-style floating editor toolbar that expands as the
+//  keyboard appears. One source of truth (`@FocusState
+//  isKeyboardActive`) drives everything: a "Done" toolbar button
+//  appears in the nav bar, a circular "compose" button at the
+//  bottom-right fades/blurs/shrinks out, and a compact action row
+//  morphs into a full horizontally-scrolling formatting toolbar.
+//  All synchronised, no manual KVO of keyboard frame.
+//
+//  Three load-bearing mechanics:
+//    1. `.safeAreaInset(edge: .bottom)` — SwiftUI auto-pushes the
+//       inset content above the keyboard. Zero keyboard-tracking
+//       code; the toolbar "just" stays pinned.
+//    2. `ExpandableGlassMenuContainer(progress:labelSize:)` — the
+//       project helper that morphs between a 220pt-wide `label`
+//       slot (collapsed) and a full-width `content` slot (expanded).
+//       Driven by a CGFloat 0→1 derived from the Bool focus state.
+//    3. Two distinct animation curves on two distinct values:
+//       • `.easeInOut(0.25)` on `isKeyboardActive` — for the
+//         conditional "Done" toolbar button fade.
+//       • `.interactiveSpring(response: 0.6, dampingFraction: 0.75)`
+//         on the safeAreaInset — for the toolbar's layout shift.
+//       Picking different curves per-property is the difference
+//       between "it animates" and "it feels right."
+//
+//  Disappear-effect tip (line ~133)
+//  ────────────────────────────────
+//  The compose button uses opacity + blur + scale TOGETHER to fade
+//  out instead of opacity alone. It's a small thing, but blur +
+//  scale add motion-vocabulary that opacity can't carry on its own.
+//  Worth copying for any "this control no longer applies" hide.
+//
+//  Key APIs
+//  ────────
+//  • `@FocusState` + `.focused(_:)` — the canonical pattern; bind
+//    once, read/write everywhere.
+//  • `.safeAreaInset(edge: .bottom, spacing: 0)` — auto-tracks
+//    keyboard avoidance.
+//  • `.toolbarTitleDisplayMode(.inlineLarge)` — iOS 26. Large title
+//    that collapses inline as the user scrolls (Notes-app behavior).
+//  • `ToolbarSpacer(.fixed, placement:)` — iOS 26. Fixed gap between
+//    toolbar items; cleaner than a custom Spacer view.
+//  • `.buttonStyle(.glass) + .buttonBorderShape(.circle)` — iOS 26
+//    Liquid Glass material on a circular button.
+//  • `ExpandableGlassMenuContainer` — project helper (defined
+//    elsewhere); the actual collapse/expand morph engine.
+//
+//  How to apply
+//  ────────────
+//  Use this whenever a TextEditor or TextField has a contextual
+//  toolbar — comments, message composers, in-app notes. Keep the
+//  tactical `// Learning:` comments style (one short note per
+//  non-obvious line) — it works well for demo code that doubles as
+//  a teaching example.
+//
+//  See also
+//  ────────
+//  • View/Keyboard/* — sibling keyboard-aware demos.
+//  • Helpers (search `ExpandableGlassMenuContainer`) — the helper
+//    type wrapping the collapse/expand morph.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)

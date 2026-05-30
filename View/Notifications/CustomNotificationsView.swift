@@ -3,11 +3,95 @@
 //  animation
 //
 //  Created on 9/6/25.
-//  iOS 26
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  Works on iOS 17+; padding/offset constants branch on `isiOS26OrLater`
+//  because the system permission alert layout shifted in iOS 26.
+//
+//  Note: `@Environment(\.openURL)` for `UIApplication.openNotificationSettingsURLString`
+//  works in the iOS 26 simulator; iOS < 26 needs a real device for
+//  the deep-link to actually open Settings.
+//
+//  TODO: Cleanup candidates
+//        1. Typo in property names — used in multiple places; do a
+//           project-wide rename when you're ready:
+//             • `notifacationTitle` → `notificationTitle`
+//               (declared in `NotificationOnboardingConfig`, used in
+//               the iPhone preview Text).
+//             • `askPermisisons` → `askPermissions` (@State + 4 usages).
+//        2. Dead `// @main` + `NotificationDemo: App` below — leftover
+//           from when this file shipped as its own target. Same
+//           pattern as in
+//           `View/PhotosView/AsyncImageViewerView+SkeletonviewDemo.swift`
+//           — either re-enable as `@main` or delete.
+//
+//  Learning point
+//  ──────────────
+//  Notification-permission onboarding screen: live phone preview at
+//  the top loops a fake notification animation while the bottom half
+//  pitches the value prop. Tapping "Continue" dims the screen, fades
+//  in a giant ↑ arrow, and triggers the SYSTEM
+//  `requestAuthorization` alert — the arrow points at the system
+//  alert's "Allow" button so the user knows where to tap. This is
+//  the standard "context before consent" pattern that converts
+//  better than asking cold.
+//
+//  Three-state primary button (label + behaviour driven by
+//  `UNAuthorizationStatus`):
+//    • `.notDetermined` → "Continue" → ask permission (with the
+//      arrow + dim choreography).
+//    • `.authorized`   → "You are all set." → calls `onPrimaryButtonTapped`.
+//    • `.denied`       → "Go to settings" → opens
+//      `UIApplication.openNotificationSettingsURLString` via
+//      `@Environment(\.openURL)`.
+//
+//  Loop animation note: `loopAnimation()` re-invokes itself with
+//  `await loopAnimation()` after a sleep. Each iteration is
+//  async-suspended at a sleep boundary, so the recursion isn't a
+//  growing stack — it's a chain of tasks. Stops cleanly via
+//  `loopContinue = false` on disappear.
+//
+//  Key APIs
+//  ────────
+//  • `UNUserNotificationCenter.current().notificationSettings()`
+//    — read current authorization (the source of truth for the
+//    three-state button).
+//  • `UNUserNotificationCenter.current().requestAuthorization(options:)`
+//    — fires the system permission alert. Note the `try?` /
+//    `?? false` pattern: a denial throws on some iOS versions, so
+//    we coalesce to a Bool we can pass to `onPermissionChange`.
+//  • `@Environment(\.openURL)` + `UIApplication.openNotificationSettingsURLString`
+//    — deep-link to the app's notification settings (the only way
+//    to recover from `.denied`).
+//  • `blurOpacity(_:)` — file-private extension that combines
+//    opacity + blur for the dim/arrow appear/disappear; reused on
+//    the main content too.
+//  • `compositingGroup()` — used inside `blurOpacity` so the blur
+//    + opacity apply to the GROUP, not the individual leaf views
+//    (otherwise text inside the screen would blur independently
+//    of its background).
+//
+//  How to apply
+//  ────────────
+//  Use as the template for ANY system-permission onboarding —
+//  notifications, location, contacts, mic. The arrow + dim
+//  choreography generalises: it points at the system alert,
+//  which always animates in from the top centre, so the offset
+//  in `.offset(x: ..., y: 150)` lines up across most devices.
+//  Always include the `.denied → Settings deep-link` branch, or
+//  users who tapped "Don't Allow" once will be permanently stuck.
+//
+//  See also
+//  ────────
+//  • View/LandingPages/PermissionOnboardingIOS26.swift — sibling
+//    iOS 26-only onboarding for the same kind of permission flow.
+//  • Any UNUserNotificationCenter setup in `Helpers/` for the actual
+//    request/scheduling logic.
 //
 import SwiftUI
 import UserNotifications
 
+// TODO: Dead — `// @main` is commented out; this `App` is never
+//       used. Same leftover-target pattern as the SkeletonviewDemo.
 // @main
 struct NotificationDemo: App {
     var body: some Scene {

@@ -1,8 +1,102 @@
 //
 //  WaveformsScrubberView.swift
 //  animation
-// Do not create multiple rectangles in a hstack for wave forms
-// Use custom shapes
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17+ — uses `onGeometryChange`, `Task.detached(priority:)`.
+//
+//  ⚠️  PERFORMANCE TIP (was the original top comment, kept here):
+//      Don't draw waveforms by rendering N rectangles in an HStack.
+//      Use a CUSTOM `Shape` (`WaveFormShape` below) and add a
+//      single path. SwiftUI's diff cost on hundreds of children
+//      kills frame rate during scrubbing.
+//
+//  TODO: Cleanup candidates
+//        1. Function name typo: `downszieAudioSamples` (line ~170)
+//           should be `downsizeAudioSamples`. Internal-only — safe
+//           project-wide rename.
+//        2. **Real bug**: `convertMP4ToAudio` (line ~190) writes
+//           the converted `.m4a` to the source URL's directory:
+//             `outputURL = url.deletingPathExtension().appendingPathExtension("m4a")`
+//           For `Bundle.main.url(forResource:)` URLs, that's the
+//           app bundle — read-only at runtime. The export will
+//           fail silently (only `print`ed). Write to
+//           `FileManager.default.temporaryDirectory` instead, or
+//           cache by hash in `.cachesDirectory`.
+//        3. `Task.detached(priority: .high) { ... }` for sample
+//           extraction is fine, but `extractAudioSamples`'s
+//           `try file.read(into: buffer)` allocates a buffer sized
+//           by `frameCount` (full file length). For a 5-min wav
+//           that's tens of millions of floats; consider streaming
+//           in chunks if real audio gets larger than demo files.
+//
+//  Learning point
+//  ──────────────
+//  Custom audio waveform scrubber: reads an audio file via
+//  `AVAudioFile`, downsamples to one peak-amplitude per pixel
+//  column, and draws via a single `Shape` path. A drag gesture
+//  scrubs the playhead and writes back through the `progress`
+//  Binding so callers can sync to actual audio playback.
+//
+//  Three layers:
+//    1. **Sample extraction** (`Task.detached`, off-main):
+//       AVAudioFile → AVAudioPCMBuffer → `[Float]` of raw samples.
+//       For .mp4 video, the file is first exported to .m4a via
+//       `AVAssetExportSession` (see TODO #2 about the buggy output
+//       path).
+//    2. **Downsampling**: collapse N raw samples into M peaks where
+//       M ≈ viewWidth / (spacing + shapeWidth). Each output peak
+//       is `chunk.max()` — the highest absolute amplitude in that
+//       slice. This is what makes the waveform look right at any
+//       view width.
+//    3. **Rendering**: ZStack of two `WaveFormShape` instances
+//       sharing the same downsampled array. Inactive layer fills
+//       in gray; active layer fills in the tint color, then is
+//       MASKED to `Rectangle().scale(x: progress, anchor: .leading)`.
+//       Result: the bar fills from left as `progress` advances.
+//
+//  Gesture mechanics:
+//    • `@GestureState isActive` flips true during a drag and is
+//      published outward via `onGestureActive` — callers can pause
+//      audio playback while the user is scrubbing.
+//    • `lastProgress` snapshots the current progress at drag start;
+//      delta = `value.translation.width / viewSize.width`. So a
+//      drag from anywhere on the bar adjusts FROM that anchor,
+//      rather than jumping to the touched x-position.
+//    • The `onChange(of: progress)` updates `lastProgress` only
+//      when the change came from OUTSIDE (i.e. `!isActive`), so
+//      audio-playback-driven progress doesn't fight the gesture.
+//
+//  Key APIs
+//  ────────
+//  • `AVAudioFile` + `AVAudioPCMBuffer` + `floatChannelData` — the
+//    PCM-sample read path. Always pass `format: file.processingFormat`
+//    so the buffer matches the file's native format.
+//  • `AVAssetExportSession(asset:presetName: AVAssetExportPresetAppleM4A)`
+//    + `.export(to:as:)` — async-throwing export for the MP4→M4A
+//    fallback path.
+//  • Custom `Shape` (`WaveFormShape`) — defined elsewhere; the
+//    performance-critical primitive. ONE path, drawn once per
+//    state change.
+//  • `Rectangle().scale(x: progress, anchor: .leading)` as a `mask`
+//    — neat way to "fill from left" without computing per-bar
+//    boolean state.
+//  • `nonisolated func ... async` — used for the off-actor extraction
+//    helpers so `Task.detached` doesn't trip MainActor isolation.
+//
+//  How to apply
+//  ────────────
+//  Use as a starting point for any media scrubber that needs
+//  amplitude visualisation — voice memos, podcasts, music players.
+//  Fix the m4a-output-path bug (TODO #2) before shipping. For
+//  pure-audio progress without amplitude (just a track + thumb),
+//  you don't need any of this — `Slider` is enough.
+//
+//  See also
+//  ────────
+//  • View/Slider/* — non-amplitude scrubbers.
+//  • View/Video/* — likely consumers if any of those demos add
+//    audio scrubbing.
 //
 import AVKit
 import SwiftUI
