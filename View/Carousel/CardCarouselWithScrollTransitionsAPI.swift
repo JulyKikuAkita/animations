@@ -1,7 +1,58 @@
 //
 //  CardCarouselWithScrollTransitionsAPI.swift
 //  animation
-//  iOS 18 API
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ only — `.scrollTransition(.interactive)` with phase-driven
+//  effects is the gating API.
+//
+//  Learning point
+//  ──────────────
+//  Catalog of three carousel "feels" built entirely from one tool —
+//  `.scrollTransition(.interactive) { content, phase in ... }`. The
+//  phase value (`.identity` / `.topLeading` / `.bottomTrailing`)
+//  exposes a continuous 0...1 you can drive *anything* with: opacity,
+//  rotation, blur, scale, offset. Read this file as three worked
+//  examples of the same API knob:
+//
+//    • `ParallaxCarousel18View`  — phase → vertical offset →
+//      classic horizontal-parallax look.
+//    • `ScaleCarousel18View`     — phase → blur radius + scale →
+//      "in-focus card" effect; flanking cards blurred and shrunk.
+//    • `CircularCarousel18View`  — phase → blur + scale + rotation +
+//      offset combined → cards orbit around an arc as they enter
+//      and leave.
+//    • `StackCardCarouselView`   — uses `zIndex(1.0 - blur)` plus
+//      negative `offset` so successive cards stack ON TOP of the
+//      active one instead of sliding past — pairs with
+//      `.scrollClipDisabled()` so cards can render outside the
+//      ScrollView's frame.
+//
+//  Key APIs
+//  ────────
+//  • `.scrollTransition(.interactive)` — iOS 18+. Phase-driven
+//    transition modifier; runs once per visible item per scroll tick.
+//  • `.scrollClipDisabled()` — required for `StackCardCarouselView`
+//    so off-frame cards still render.
+//  • `.scrollTargetLayout()` + `.scrollTargetBehavior(.viewAligned)` —
+//    snap-per-item.
+//  • Phase `.value` — the ±1 progress you multiply through.
+//
+//  How to apply
+//  ────────────
+//  Pick the example whose feel matches yours, then strip the others.
+//  These demos deliberately keep the math obvious; in production
+//  you'd extract the phase→effect math into a `ViewModifier`.
+//
+//  See also
+//  ────────
+//  • CardCarouselView.swift — pre-iOS 18 way to do the same thing
+//    using manual `minX` reduction math.
+//  • CircularCarouselSliderView.swift — `visualEffect`-based
+//    circular carousel for iOS 17.
+//  • ImageCarouselView.swift — extracts a similar pattern into a
+//    reusable `CustomCarousel<Content, Data>` generic.
+//
 import SwiftUI
 
 struct CardCarouselWithScrollTransitionsAPIView: View {
@@ -9,7 +60,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
         NavigationStack {
             GeometryReader {
                 let size = $0.size
-                ParallaxCarousel18View(size: size)
+                parallaxCarousel18View(size: size)
             }
         }
         .safeAreaPadding(.horizontal, 15)
@@ -17,7 +68,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
     }
 
     @ViewBuilder
-    func ParallaxCarousel18View(size: CGSize) -> some View {
+    func p(size: CGSize) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 10) {
                 ForEach(firstSetCards) { card in
@@ -46,7 +97,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
 
     /// Demo blur + scale scroll View
     @ViewBuilder
-    func ScaleCarousel18View(size: CGSize) -> some View {
+    func scaleCarousel18View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 10) {
                 ForEach(firstSetCards) { card in
@@ -73,7 +124,7 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
 
     /// Demo blur + scale scroll View
     @ViewBuilder
-    func CircularCarousel18View(size: CGSize) -> some View {
+    func circularCarousel18View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 10) {
                 ForEach(firstSetCards) { card in
@@ -89,7 +140,8 @@ struct CardCarouselWithScrollTransitionsAPIView: View {
                                 .blur(radius: phase == .identity ? 0 : 2, opaque: false)
                                 .scaleEffect(phase == .identity ? 1 : 0.9, anchor: .bottom)
                                 .offset(y: phase == .identity ? 0 : 35)
-                                .rotationEffect(.init(degrees: phase == .identity ? 0 : phase.value * 15), anchor: .bottom)
+                                .rotationEffect(.init(degrees: phase == .identity ? 0 : phase.value * 15),
+                                                anchor: .bottom)
                         }
                 }
             }
@@ -131,7 +183,8 @@ struct StackCardCarouselView: View {
                                             .blur(radius: phase == .identity ? 0 : 2, opaque: false)
                                             .scaleEffect(phase == .identity ? 1 : 0.9, anchor: .bottom)
                                             .offset(y: phase == .identity ? 0 : -10)
-                                            .rotationEffect(.init(degrees: phase == .identity ? 0 : phase.value * 5), anchor: .bottomTrailing)
+                                            .rotationEffect(.init(degrees: phase == .identity ? 0 : phase.value * 5),
+                                                            anchor: .bottomTrailing)
                                             .offset(x: minX < 0 ? minX / 2 : -minX)
                                     }
                             }

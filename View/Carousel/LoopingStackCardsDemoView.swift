@@ -1,7 +1,62 @@
 //
 //  LoopingStackCardsDemoView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ only — `Group(subviews:)` is the gating API.
+//
+//  Learning point
+//  ──────────────
+//  Tinder-style stack of cards where the top card drags left to
+//  reveal the next. On release, if the drag exceeded a threshold
+//  the card animates off-screen and the stack rotates so the next
+//  card becomes top; otherwise it springs back. Implemented via
+//  iOS 18's `Group(subviews:)` so callers pass a normal `ForEach`
+//  without IDs.
+//
+//  How the rotation works:
+//    • `Group(subviews:)` exposes the children as a `SubviewsCollection`.
+//    • A custom extension `rotateFromLeft(by:)` returns a copy with
+//      the first N items moved to the end — cycling without
+//      mutating state.
+//    • State stores how many cards have been "consumed"; the view
+//      rebuilds from `collection.rotateFromLeft(by: rotation)` so
+//      the visible top card is always at index 0.
+//
+//  Drag mechanics:
+//    • `DragGesture` updates `offset.width` directly while dragging.
+//    • `.rotation3DEffect(.degrees(offset.width / 20), axis: (0,1,0))`
+//      tilts the card around the Y-axis as it slides — that's the
+//      "physical card peeling off" feel.
+//    • On end: if `|offset.width| > threshold`, animate offset further
+//      off-screen, then bump the rotation index inside
+//      `.animation(...) { logicallyComplete(after: ...) }` so the
+//      stack updates after the card has visually left.
+//
+//  Key APIs
+//  ────────
+//  • `Group(subviews: content) { collection in ... }` — iOS 18+
+//    SubViews API.
+//  • `SubviewsCollection.rotateFromLeft(by:)` — file-local extension;
+//    handy little utility.
+//  • `DragGesture` + `.rotation3DEffect` + `.offset` — standard
+//    Tinder-card combo.
+//  • `.animation(...) { logicallyComplete(after:) }` — defers a
+//    state mutation until the visible animation finishes.
+//
+//  How to apply
+//  ────────────
+//  Reach for this for any "swipe to advance" stack — onboarding,
+//  card-based pickers, mini deck shufflers. The threshold + tilt
+//  numbers (`20`, the offset cutoff) are tuning knobs you'll want
+//  to expose if you generalise this.
+//
+//  See also
+//  ────────
+//  • InfiniteCarouselView.swift — also uses `Group(subviews:)`,
+//    different mechanic (auto-advancing horizontal pager).
+//  • View/3DAnimation/* — for richer 3D card flip patterns.
+//
 import SwiftUI
 
 struct LoopingStackCardsDemoView: View {

@@ -3,12 +3,56 @@
 //  animation
 //
 //  Created on 9/4/25.
+//  Standalone demo (not wired into the app's demo browser; preview-only).
 //
-// Tips to create reflection effect on button edge
-// - place a layer of scroll view content on top of the bottom bar
-// - clip to match shape
-// - add blur
-
+//  TODO: Filename misleads — uses no iOS 26-only APIs (no `.glassEffect`,
+//        no `layerEffect`, no Metal). The reflection trick is plain
+//        iOS 17+ blur + mask. Consider renaming to drop the `+iOS26`
+//        suffix, or move iOS 26 enhancements in.
+//
+//  Learning point
+//  ──────────────
+//  Faked "reflection on the bottom bar" effect: a SECOND copy of the
+//  carousel content is pinned over a tab-bar-sized area at the bottom
+//  of the screen, clipped to the bar's shape, and blurred. As the
+//  user scrolls the real carousel, the reflection scrolls in lockstep
+//  because both copies are bound to the same `scrollPosition(id:)`.
+//  This is the load-bearing idea — a real Metal mirror reflection
+//  would be cleaner; a clipped-blurred mirror copy is good enough at
+//  ~60fps and works back to iOS 17.
+//
+//  Three rules for this trick to look right:
+//    1. The clip shape MUST match the bottom bar shape exactly, or
+//       the seam is visible.
+//    2. Blur radius high enough to hide the fact that it's a literal
+//       copy — usually 20+.
+//    3. Bind both ScrollViews to the SAME scroll position so they
+//       move together.
+//
+//  Key APIs
+//  ────────
+//  • `.scrollPosition(id:)` — two-way binding shared between the
+//    real carousel and the reflection layer.
+//  • `.onGeometryChange` — measures the bottom-bar frame so the
+//    reflection layer knows where to sit.
+//  • `.scrollTargetBehavior(.viewAligned)` — paged snap for the
+//    main carousel.
+//  • `blur(radius:)` + `clipShape(...)` — the reflection itself.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when you want a "glass tab bar" or any UI element
+//  that should appear to refract content above it. For iOS 26+,
+//  prefer `.glassEffect` or a Metal `layerEffect` reflection (see
+//  [[iPodCarousel+iOS26]] for a real Metal mirror).
+//
+//  See also
+//  ────────
+//  • iPodCarousel+iOS26.swift / iPodCarouselReflection.metal —
+//    proper Metal-shader reflection (iOS 26+).
+//  • CardCarouselView.swift — non-reflective sibling using the same
+//    `firstSetCards` data.
+//
 import SwiftUI
 
 struct CarouselWithReflectionDemoView: View {
@@ -72,6 +116,7 @@ struct CustomCarouselReflection: View {
     }
 
     /// light reflection effect
+    // swiftlint:disable:next function_body_length
     func bottomBar(size: CGSize, cardWidth: CGFloat, cardHeight: CGFloat) -> some View {
         ZStack {
             let horizontalPadding = (size.width - cardWidth) / 2

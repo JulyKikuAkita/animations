@@ -1,7 +1,52 @@
 //
 //  ImageCarouselView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  This file's main contribution is a REUSABLE generic carousel —
+//  `CustomCarousel<Content, Data>` — wrapped behind a `Config` knob
+//  so callers don't have to hand-roll the scroll-progress math each
+//  time. The demo (`ImageCarouselDemoView`) is thin; the helper is
+//  the takeaway.
+//
+//  What `CustomCarousel` does:
+//    • Lays items out in a horizontal `LazyHStack` with
+//      `.scrollTargetLayout()` + `.viewAligned`.
+//    • Per item, a `visualEffect` reads scroll-space position and
+//      derives a 0...1 progress relative to viewport centre.
+//    • That progress drives `scaleEffect` and `opacity` so off-centre
+//      cards shrink and fade.
+//    • `Config` exposes spacing, scale, opacity, card size — i.e.
+//      the dials you'd normally rewrite each time.
+//
+//  Key APIs
+//  ────────
+//  • Generic `View where Data: RandomAccessCollection, Data.Element:
+//    Identifiable` + `@ViewBuilder var content: (Data.Element) -> C` —
+//    the standard reusable-carousel signature.
+//  • `.visualEffect { content, proxy in ... }` — the per-item
+//    progress→scale/opacity hook.
+//  • `.scrollPosition(id:)` — two-way binding so the parent knows
+//    which card is active.
+//  • Nested `Config` struct — preferred over a long parameter list.
+//
+//  How to apply
+//  ────────────
+//  Reach for this BEFORE hand-rolling carousel scroll math; copying
+//  `CustomCarousel` is faster than re-deriving. Tweak `Config` for
+//  shrinkage / gap / size; swap content via the trailing closure.
+//
+//  See also
+//  ────────
+//  • CardCarouselWithScrollTransitionsAPI.swift — same effect via
+//    `.scrollTransition(.interactive)` (iOS 18) instead of
+//    `visualEffect` (iOS 17). Compare the two for which API to use.
+//  • CircularCarouselSliderView.swift — vertical version of a similar
+//    progress→offset pattern.
+//
 import SwiftUI
 
 struct ImageCarouselDemoView: View {
@@ -41,9 +86,11 @@ struct CustomCarousel<Content: View, Data: RandomAccessCollection>: View where D
             let size = $0.size
 
             ScrollView(.horizontal) {
-                HStack(spacing: config.spacing) { /// if use lazyHStack + offset modifier, the view at both side might not be visible until itemView reaches the screen space
+                /// if use lazyHStack + offset modifier, the view at both side might not be visible until
+                /// itemView reaches the screen space
+                HStack(spacing: config.spacing) {
                     ForEach(data) { item in
-                        ItemView(item)
+                        itemView(item)
                     }
                 }
                 .scrollTargetLayout()
@@ -58,7 +105,7 @@ struct CustomCarousel<Content: View, Data: RandomAccessCollection>: View where D
     }
 
     @ViewBuilder
-    func ItemView(_ item: Data.Element) -> some View {
+    func itemView(_ item: Data.Element) -> some View {
         GeometryReader { proxy in
             let size = proxy.size
 

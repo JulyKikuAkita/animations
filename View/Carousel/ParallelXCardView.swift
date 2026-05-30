@@ -1,7 +1,55 @@
 //
 //  ParallelXCardView.swift
 //  animation
-//  source: https://www.youtube.com/watch?v=3zBSgXoSugU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=32
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  Source: https://www.youtube.com/watch?v=3zBSgXoSugU (index 32).
+//
+//  TODO: Cleanup
+//        `ParallaxCarousel17View` (further down this file) is the
+//        pre-iOS-18 implementation. It's only referenced from a
+//        commented-out call site (search for the `//` line near
+//        `ParallaxCarousel17View(size:`). Either delete it or
+//        re-enable as a side-by-side demo with the iOS 18 version
+//        and explain the contrast in this header.
+//
+//  Learning point
+//  ──────────────
+//  Travel-card carousel with parallax: the foreground image slides
+//  at one speed while the background overlay (gradient + text) slides
+//  at another, producing a layered depth effect. Two implementations
+//  live in this file:
+//    • `ParallaxCarousel18View` — uses iOS 18 `.scrollTransition` to
+//      offset the inner image proportional to the card's phase.
+//    • `ParallaxCarousel17View` — uses `visualEffect` + scroll-space
+//      `minX` to compute the same offset manually.
+//  Both achieve the same look; reading them side-by-side teaches the
+//  evolution of the API.
+//
+//  Key APIs
+//  ────────
+//  • `.scrollTransition(.interactive)` (iOS 18) — phase-driven
+//    offset on the inner image only; outer card stays put.
+//  • `.visualEffect { content, proxy in ... }` (iOS 17) — manual
+//    `minX` math, equivalent result.
+//  • Per-card overlay with linear-gradient mask + caption text — the
+//    "card art with credits" look.
+//  • `.scrollTargetBehavior(.viewAligned)` + `.scrollTargetLayout()`
+//    — paged snap.
+//
+//  How to apply
+//  ────────────
+//  Use whenever you want a card to feel "deep" — image at one rate,
+//  caption at another. The magic number is the inner-image offset
+//  multiplier; ~0.3–0.5× the page width reads as natural parallax.
+//
+//  See also
+//  ────────
+//  • CardCarouselWithScrollTransitionsAPI.swift — full catalog of
+//    `.scrollTransition` flavors (parallax, scale, circular, stack).
+//  • ImageCarouselView.swift — generic reusable version of the
+//    progress→effect pattern.
+//
 import SwiftUI
 
 struct ParallelXCardView: View {
@@ -45,9 +93,9 @@ struct TravelCardView: View {
                 GeometryReader { geometry in
                     let minX = geometry.frame(in: .scrollView).minX - 30.0
 
-                    ParallaxCarousel18View(size: geometry.size)
+                    parallaxCarousel18View(size: geometry.size)
                         .offset(x: -minX)
-//                    ParallaxCarousel17View(size: geometry.size)
+//                    parallaxCarousel17View(size: geometry.size)
                 }
                 .frame(height: 500)
                 .padding(.horizontal, -15)
@@ -59,7 +107,7 @@ struct TravelCardView: View {
     }
 
     @ViewBuilder
-    func ParallaxCarousel18View(size: CGSize) -> some View {
+    func parallaxCarousel18View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 10) {
                 ForEach(firstSetCards) { card in
@@ -74,7 +122,7 @@ struct TravelCardView: View {
                         }
                         .frame(width: size.width, height: size.height)
                         .overlay {
-                            OverlayView(card)
+                            overlayView(card)
                         }
                         .clipShape(.rect(cornerRadius: 25))
                         .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
@@ -90,7 +138,7 @@ struct TravelCardView: View {
     }
 
     @ViewBuilder
-    func ParallaxCarousel17View(size: CGSize) -> some View {
+    func parallaxCarousel17View(size: CGSize) -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 10) {
                 ForEach(firstSetCards) { card in
@@ -99,7 +147,7 @@ struct TravelCardView: View {
                         /// Simple Parallax effect (1)
                         let minX = proxy.frame(in: .scrollView).minX - 30.0
                         /// Simple Parallax effect (2)
-//                                    let minX = min((proxy.frame(in: .scrollView).minX - 30.0), proxy.size.width * 1.4)
+//                      let minX = min((proxy.frame(in: .scrollView).minX - 30.0), proxy.size.width * 1.4)
 
                         Image(card.image)
                             .resizable()
@@ -135,7 +183,7 @@ struct TravelCardView: View {
     }
 
     @ViewBuilder
-    func OverlayView(_ card: Card) -> some View {
+    func overlayView(_ card: Card) -> some View {
         ZStack(alignment: .bottomLeading, content: {
             LinearGradient(colors: [
                 .clear,
