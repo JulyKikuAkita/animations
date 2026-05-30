@@ -487,7 +487,7 @@
 		AB333B832E8B0E3400368EB8 /* CustomTabiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B802E8B0E3400368EB8 /* CustomTabiOS26.swift */; };
 		AB333B862E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */; };
 		AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */; };
-		AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */; };
+		AB38B0B82EDD0D7800767C20 /* BottomCarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38B0B72EDD0D7200767C20 /* BottomCarouselCardView.swift */; };
 		AB39CCAB2F8254D0001B9494 /* ImageGradientIOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39CCAA2F8254C3001B9494 /* ImageGradientIOS26View.swift */; };
 		AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
 		AB40B8482C9F5F9A00BC7747 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40B8462C9F5F9A00BC7747 /* Note.swift */; };
@@ -976,7 +976,7 @@
 		AB333B852E8B0F1B00368EB8 /* CustomTabbarUIToolKitiOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarUIToolKitiOS26.swift; sourceTree = "<group>"; };
 		AB35A6D62E4DB3DE00573A3D /* onBoarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onBoarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
-		AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtomCarouselCardView.swift; sourceTree = "<group>"; };
+		AB38B0B72EDD0D7200767C20 /* BottomCarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCarouselCardView.swift; sourceTree = "<group>"; };
 		AB39CCAA2F8254C3001B9494 /* ImageGradientIOS26View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGradientIOS26View.swift; sourceTree = "<group>"; };
 		AB40B8462C9F5F9A00BC7747 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		AB40B84B2C9F60A700BC7747 /* GridTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTransitionView.swift; sourceTree = "<group>"; };
@@ -2134,7 +2134,7 @@
 		969ECE492EC7FD5F0045601B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AB38B0B72EDD0D7200767C20 /* ButtomCarouselCardView.swift */,
+				AB38B0B72EDD0D7200767C20 /* BottomCarouselCardView.swift */,
 				AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */,
 				969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */,
 				969ECE4A2EC86A410045601B /* PulseRingView.swift */,
@@ -3492,7 +3492,7 @@
 				96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */,
 				96C8D5F12FA691B2008C57D5 /* BorderBeamEffect.swift in Sources */,
 				96E4E35A2D0D72950020261F /* Platform+View+Extension.swift in Sources */,
-				AB38B0B82EDD0D7800767C20 /* ButtomCarouselCardView.swift in Sources */,
+				AB38B0B82EDD0D7800767C20 /* BottomCarouselCardView.swift in Sources */,
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
 				96D5521F2FB5170B00FB070A /* LoopingKeyframeAnimation+iOS26.swift in Sources */,
 				96E4DD142CFFDE1F0020261F /* SportItem.swift in Sources */,
