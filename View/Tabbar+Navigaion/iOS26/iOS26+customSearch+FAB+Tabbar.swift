@@ -2,24 +2,52 @@
 //  iOS26+customSearch+FAB+Tabbar.swift
 //  animation
 //
-//  Created on 5/27/26.
-// Custom tabBar with floating action button in Bevel app style
-//  https://apps.apple.com/us/app/bevel-ai-health-coach/id6456176249
+//  Learning point
+//  ──────────────
+//  Repurpose iOS 26's `Tab(role: .search)` slot — which the system
+//  visually separates from the other tabs — as a FLOATING ACTION
+//  BUTTON. Instead of letting that tab become "active", we intercept
+//  the selection change (it briefly becomes nil), snap selection back
+//  to the previous tab, and toggle an overlay panel. The "+" glyph
+//  rotates 45° to read as an "x" while open — done in UIKit because
+//  SwiftUI has no direct handle on that glyph's image view.
+//  (Bevel app style: https://apps.apple.com/us/app/bevel-ai-health-coach/id6456176249)
 //
-// How the FAB works:
-//   iOS 26's `Tab(role: .search)` reserves a trailing slot in the system tab bar
-//   that is visually separated from the other tabs. We hijack that slot: instead
-//   of letting it switch tabs, we intercept the selection change, snap the
-//   selection back to the previous tab, and toggle an overlay (`isFABExpanded`).
-//   The "+" glyph in that slot is then rotated 45° via UIKit to read as an "x"
-//   while the overlay is open — SwiftUI has no direct handle on that image view,
-//   so we reach into the UITabBar through a UIViewRepresentable extractor.
+//  Key APIs
+//  ────────
+//  • `Tab(value: .none, role: .search) {} label: { ... }` — the slot
+//    we hijack. `value: .none` is the sentinel that lets `onChange`
+//    detect a tap and revert it.
+//  • `TabView(selection: $activeTab)` with typed `AppTab?` selection.
+//  • `UITabBar.setAnimationsEnabled(false)` + async restore — kills
+//    the flicker of the system "no selection" state during the revert.
+//  • `UIViewRepresentable` (`TabBarExtractor`) — walks the view tree
+//    to grab the underlying `UITabBar`. Fragile by design — see the
+//    inline note about the superview-chain assumption.
+//  • `GlassEffectContainer` in `TabOverlayModifier` — makes the dim
+//    scrim and the glass panel share ONE liquid-glass animation pass
+//    so they morph together rather than crossfading independently.
+//  • `.tabViewBottomAccessory { ... }` — bonus iOS 26 API showing a
+//    persistent accessory above the tab bar.
+//  • `.tabBarMinimizeBehavior(.onScrollDown)` — paired with above.
 //
-// How the overlay animates:
-//   `TabOverlayModifier` wraps the content in a `GlassEffectContainer` so the
-//   dimming scrim and the glass panel morph together with the iOS 26 liquid
-//   glass effect (instead of two independent fades). The interpolating spring
-//   on `isPresented` drives both the panel's slide-in and the scrim's opacity.
+//  How to apply
+//  ────────────
+//  Use when you want a FAB that LIVES IN the system tab bar (so it
+//  inherits liquid-glass styling, safe-area handling, and accessibility
+//  for free) instead of overlaying a custom button. Accept the cost:
+//  you depend on the `role: .search` layout reservation and on poking
+//  into `UITabBar`'s subviews — both can shift in future iOS updates.
+//
+//  See also
+//  ────────
+//  • CustomMorphingTabBarIOS26.swift — FAB OUTSIDE the tab bar (a
+//    separate "+" capsule beside it). More portable, less integrated.
+//  • CustomMorphingTab+BottomBar+IOS26.swift — yet another FAB style
+//    where the WHOLE bar morphs into an action bar.
+//  • LiquidGlassSearchableTabbar.swift — `.tabViewBottomAccessory`
+//    used for its intended purpose (a mini-player), not as a FAB.
+//
 import SwiftUI
 
 enum AppTab {

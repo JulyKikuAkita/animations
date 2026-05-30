@@ -2,8 +2,44 @@
 //  iOS26+tabbarSheet.swift
 //  animation
 //
-//  Created on 6/23/25.
-
+//  Learning point
+//  ──────────────
+//  A TabView living INSIDE a bottom `.sheet` with three detents
+//  (small / medium / large) — Apple's Find My / Maps "drawer of tabs"
+//  pattern. The tricky parts are: (a) keeping a custom tab strip
+//  (so the sheet's chrome aligns with the detent), (b) suppressing
+//  the system tab bar's default fade transition (which looks wrong
+//  inside a clear-background sheet), and (c) clearing UIKit-level
+//  background colors so the sheet's blur shows through.
+//
+//  Key APIs
+//  ────────
+//  • `.sheet(isPresented:)` + `.presentationDetents([.height, .fraction, .large])`
+//  • `.presentationBackgroundInteraction(.enabled)` — keep the map
+//    behind the sheet usable.
+//  • `.tabViewStyle(.tabBarOnly)` — TabView WITHOUT its own bar; we
+//    render a custom strip below.
+//  • `UITabBarControllerDelegate` + `UIViewControllerAnimatedTransitioning`
+//    with `.zero` duration — our identity transition replaces the
+//    default fade so tab switches feel instant in the sheet.
+//  • `.toolbarVisibility(.hidden, for: .tabBar)` +
+//    `.toolbarBackgroundVisibility(.hidden, for: .tabBar)` — workaround
+//    for an iOS 26 quirk where one alone is not enough.
+//  • `interactiveDismissDisabled()` — sheet stays put; user must use
+//    a detent handle.
+//
+//  How to apply
+//  ────────────
+//  Use when the tab content is SECONDARY to a primary surface (a map,
+//  a camera viewport, a video) and should be summonable. Don't reach
+//  for it when the tabs are the main app structure — a normal TabView
+//  is simpler and behaves better.
+//
+//  See also
+//  ────────
+//  • LiquidGlassSearchableTabbar.swift — the inverse pattern: tabs
+//    are primary, with an accessory (mini-player) above the bar.
+//
 import MapKit
 import SwiftUI
 

@@ -1,8 +1,46 @@
 //
 //  SearchableTabbariOS26Style.swift
 //  animation
-// Recreate iOS26 tab bar without glass effect and compatible with iOS16.4+
-
+//
+//  Learning point
+//  ──────────────
+//  Recreates the iOS 26 search-enabled tab bar look WITHOUT relying
+//  on `.glassEffect` — uses ultraThinMaterial + capsule strokes for
+//  iOS 16.4+ compatibility. Tabs are DRAG-SELECTABLE (drag the active
+//  capsule across the strip) and the trailing search icon expands
+//  into a full-width text field, which collapses the tab icons.
+//
+//  Key APIs
+//  ────────
+//  • `AnyLayout(HStackLayout()) ↔ AnyLayout(ZStackLayout())` — the
+//    layout-swap trick that morphs HStack of tabs ↔ Z-stacked overlap
+//    when the search field expands. Using `if/else` on layout would
+//    break view identity and lose the animation.
+//  • `DragGesture(minimumDistance: 0)` + `@GestureState isActive` —
+//    drives the active-capsule offset; the tap gesture is added with
+//    `.simultaneousGesture` so taps still snap-select.
+//  • `.background(alignment: .leading) { Capsule().offset(x:) }` — the
+//    sliding active indicator (offset is just `index * width`).
+//  • `optionalGeometryGroup()` — local helper that gates `geometryGroup()`
+//    behind `#available(iOS 17, *)` so the file compiles on 16.4.
+//  • `@FocusState` + animation-on-keyboard — when the keyboard opens
+//    the layout switches to ZStack-leading so the search can take
+//    full width while the tab capsule slides under it.
+//
+//  How to apply
+//  ────────────
+//  Pick this when you need the iOS 26 LOOK on older OSes, OR when you
+//  want drag-to-select interaction. If you're iOS 26-only and want
+//  glass, see `SearchExpandable+CustomTabbar+iOS26.swift` instead.
+//
+//  See also
+//  ────────
+//  • SearchExpandable+CustomTabbar+iOS26.swift — the iOS 26-only
+//    variant. Same "tap search → field expands" idea, but driven by
+//    horizontal scroll + `.glassEffect` and centered with `visualEffect`.
+//  • iOS26SegmentedTabBar.swift — the same drag-to-select philosophy
+//    on a horizontal segmented control instead of a tab bar.
+//
 import SwiftUI
 
 // @main

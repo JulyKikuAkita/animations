@@ -2,42 +2,42 @@
 //  CustomMorphingTab+BottomBar+IOS26.swift
 //  animation
 //
-//  Created on 5/17/26.
+//  Learning point
+//  ──────────────
+//  A single bottom bar that morphs between TWO ROLES depending on
+//  navigation depth: at the tab root it acts as a segmented tab selector;
+//  once a detail is pushed onto the NavigationStack it reshapes into a
+//  contextual action bar (main action + optional leading/trailing actions).
+//  The whole transition is driven by flipping ONE Bool inside a shared
+//  `Config` struct.
 //
-//  --- What is a "morph tab"? ----------------------------------------------
-//  A morphing tab bar is a single bottom bar that *changes shape and role*
-//  based on where the user is in the app, instead of being a fixed tab strip.
-//  Conceptually it has two states:
+//  Key APIs
+//  ────────
+//  • `GlassEffectContainer` — groups iOS 26 liquid-glass shapes so they
+//    blend / morph together instead of fading independently.
+//  • `AnyLayout` (HStack ↔ ZStack swap) — drives the layout change without
+//    if/else branches that would re-identify the views and break animation.
+//  • `.glassEffect(_:in:)` with `.interactive(_:)` — toggled per-state so
+//    the highlight only follows touch when the bar is in action mode.
+//  • `UIViewRepresentable` over `UISegmentedControl` — used for the tab
+//    selector so we get the system's segmented control look-and-feel.
+//  • `.toolbarVisibility(.hidden, for: .tabBar)` per Tab — hides the
+//    system tab bar so the custom one can float in its place.
 //
-//    1. Tab-selector state  — at the root of a tab, the bar shows segmented
-//                             icons so the user can switch top-level tabs.
-//    2. Action state        — once the user drills into a detail screen
-//                             (a NavigationStack push), the same bar morphs
-//                             into a contextual action bar: a primary action
-//                             in the middle (e.g. "like"), with optional
-//                             leading/trailing actions (e.g. up/down vote).
+//  How to apply
+//  ────────────
+//  Reach for this when ONE bar must serve different jobs in different
+//  app states (root vs detail, idle vs editing, viewer vs composer).
+//  Keep state in a single source of truth and let SwiftUI animate the
+//  diff; resist branching the bar into two separate views.
 //
-//  The animation between these two states is driven by SwiftUI's implicit
-//  animation on a single boolean (`config.isMorphed`) plus a `GlassEffectContainer`
-//  so the iOS 26 liquid-glass shapes blend smoothly.
-//
-//  --- How this demo wires it up (read top-down) ---------------------------
-//  • `FlexMorphingTabAndBottomBarIOS26DemoView` is the host screen.
-//  • It puts a native `TabView` and the custom `FlexMorphingTabAndBottomBarIOS26`
-//    inside a bottom-aligned `ZStack` so the custom bar floats over the
-//    TabView's content area.
-//  • The native tab bar is hidden per-Tab with `.toolbarVisibility(.hidden, for: .tabBar)`,
-//    otherwise two bars would stack on top of each other.
-//  • A single `@State` value (`tabConfig`) is shared, by `@Binding`, with both
-//    the inner content view and the morph bar. This is the SwiftUI pattern for
-//    "one source of truth, many readers" — when the home view pushes a detail,
-//    it flips `config.isMorphed` and the bar rebuilds itself.
-//  • `TabView` is kept (not replaced by manual switching) so each tab retains
-//    its own NavigationStack state when the user switches away and back.
-//
-//  Beginners: trace the flow as State -> Binding -> View body. Every visual
-//  change you see is the result of a value in `tabConfig` changing, which
-//  causes SwiftUI to recompute `body` and animate the diff.
+//  See also
+//  ────────
+//  • CustomMorphingTabBarIOS26.swift — the OTHER glass-morph variant:
+//    instead of swapping roles, it expands into a 4-column action grid
+//    (Apple-Music–style FAB).
+//  • iOS26+customSearch+FAB+Tabbar.swift — yet another FAB pattern that
+//    hijacks `Tab(role: .search)` instead of using a custom bar.
 //
 import SwiftUI
 
