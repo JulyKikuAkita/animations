@@ -1,6 +1,45 @@
 //
 //  FloatingTabbar.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  REUSABLE COMPONENT (not a full demo): a floating capsule tab bar
+//  whose active pill slides under the selected tab via
+//  `matchedGeometryEffect`, with the active tab also revealing its
+//  TEXT LABEL inline. Specific tabs (`.apps` / `.chat`) trigger a
+//  conditional adjacent button that morphs in via `MorphingSymbolView`
+//  with a soft offset/padding animation.
+//
+//  Key APIs
+//  ────────
+//  • `matchedGeometryEffect(id: "ACTIVETAB", in: namespace)` — sliding
+//    selection background. The `.fill(.clear)` capsule serves as the
+//    matched-geometry SOURCE; the colored capsule is rendered separately
+//    via `tabLocation` so its frame can outlive the source's view life.
+//  • `.onGeometryChange(for: CGRect.self)` in a named coordinate space
+//    (`.named("TABBARVIEW")`) — captures the active tab's frame in the
+//    tab bar's local space.
+//  • `MorphingSymbolView` (project helper) — keyframe-driven SF symbol
+//    morph, used for the trailing `person.fill ↔ slider.vertical.3`.
+//  • Layered `.shadow(.drop(...))` on `.background` — soft floating
+//    look without `.ultraThinMaterial`.
+//
+//  How to apply
+//  ────────────
+//  Drop this into a parent view that supplies `$activeTab` and hides
+//  the system tab bar (see FloatingTabBarView.swift for the
+//  iOS 17/18 hide gymnastics, or FloatingTabBarViewV2.swift for the
+//  cleaner generic version).
+//
+//  See also
+//  ────────
+//  • FloatingTabBarView.swift — the demo wrapper that USES this
+//    component. Includes a UIKit `HideTabBar` workaround for an
+//    iOS 17.3/4 glitch.
+//  • FloatingTabBarViewV2.swift — a fully generic, protocol-based
+//    rewrite of the same idea (PREFERRED for new code).
+//
 
 import SwiftUI
 

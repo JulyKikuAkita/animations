@@ -1,6 +1,51 @@
 //
 //  InteractiveNavigationGestureView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  Bridge UIKit's INTERACTIVE POP GESTURE (the edge-swipe-back) into
+//  SwiftUI so the bottom tab bar can morph IN PROGRESS with the swipe:
+//  inactive icons blur and shrink as the user swipes back to root, and
+//  fully restore once the pop completes. Keeps the visual feedback
+//  truthful to where the gesture actually is — not a binary appear/
+//  disappear at the end.
+//
+//  The trick: walk to the hosting `UINavigationController` via
+//  `.viewExtractor`, attach a target/action to its
+//  `interactivePopGestureRecognizer`, and read
+//  `transitionCoordinator?.percentComplete` on each callback. SwiftUI
+//  `NavigationPath` alone can't expose this — it only fires AFTER
+//  the transition resolves.
+//
+//  Key APIs
+//  ────────
+//  • `@Observable class NavigationHelper: NSObject, UIGestureRecognizerDelegate`
+//    — owns `popProgress: CGFloat` (0...1). All visual modifiers read
+//    from this single source.
+//  • `controller.interactivePopGestureRecognizer?.addTarget(_:action:)`
+//    — UIKit target/action attached to the system pop gesture.
+//  • `controller.transitionCoordinator?.percentComplete` — the live
+//    progress signal during the swipe.
+//  • `gestureRecognizerShouldBegin(_:)` — overridden so the pop gesture
+//    works even when the navigation bar is hidden.
+//  • `.viewExtractor` (project helper, UIViewRepresentable) — finds
+//    the parent `UINavigationController` from a SwiftUI `NavigationStack`.
+//  • SwiftUI side: `.blur(radius:)` + `.scaleEffect(_:)` driven by
+//    `(1 - popProgress)` for inactive tabs.
+//
+//  How to apply
+//  ────────────
+//  Use when ANY part of the UI should move WITH a back-swipe (parallax
+//  headers, breadcrumb fades, tab-bar reveals). The same helper class
+//  pattern generalizes — `popProgress` is just one signal, you can
+//  expose more.
+//
+//  See also
+//  ────────
+//  • iOS26/CustomToolBarIOS26.swift — uses scroll progress instead of
+//    pop progress to drive a similar in-flight morph.
+//
 
 import SwiftUI
 

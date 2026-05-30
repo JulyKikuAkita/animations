@@ -1,6 +1,41 @@
 //
 //  AnimatedTabView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  iOS 17 equivalent of the symbolEffect-on-selection demo. Uses the
+//  pre-iOS-18 `.tabItem`-style TabView, drives bounce animation via
+//  per-tab `AnimatedTab` model objects (`isAnimating: Bool?`), and
+//  exposes a runtime toggle to flip bounce direction (up vs down).
+//  Pairs with `TabStateScrollView` (project helper) for tab-bar
+//  hide-on-scroll behavior.
+//
+//  Key APIs
+//  ────────
+//  • `.tabItem { Image; Text }` — old-school TabView item builder.
+//  • `.symbolEffect(.bounce.up.byLayer / .down.byLayer, value:)`
+//  • `withAnimation(_:completionCriteria: .logicallyComplete) { ... } completion: { ... }`
+//    — the two-phase animation pattern: animate, then on logical
+//    completion clear the trigger inside a transaction with
+//    `disablesAnimations = true` so the next state change doesn't
+//    re-animate.
+//  • `.toolbar(_ visibility, for: .tabBar)` — iOS 17 spelling of the
+//    visibility modifier.
+//  • `TabStateScrollView` (project helper) — observes scroll direction
+//    and writes `Visibility` back to a binding.
+//
+//  How to apply
+//  ────────────
+//  Use when the deployment target still includes iOS 17. The bounce-
+//  direction picker is illustrative — production apps usually pick one
+//  direction and stick with it for consistent feedback.
+//
+//  See also
+//  ────────
+//  • AnimatedTabBariOS18.swift — iOS 18+ rewrite using the typed
+//    `Tab` API and per-tab effect variation.
+//
 
 import SwiftUI
 

@@ -1,6 +1,46 @@
 //
 //  DraggableTabbarView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  Drag-to-REORDER tabs (NOT drag-to-select): user toggles "Edit Tab
+//  Locations", icons start a looping wiggle, and a long-press-and-drag
+//  swaps tab positions. Order is persisted to UserDefaults under key
+//  `"DraggableTabBarOrder"` and restored on next launch.
+//
+//  The drag uses `DraggablePanGesture` (UIKit `UIPanGestureRecognizer`
+//  wrapper) because the global coordinate space is required for the
+//  ghost-image overlay — see the inline comment "UIKit pan gesture
+//  only works on global namespace not custom one".
+//
+//  Key APIs
+//  ────────
+//  • `@Observable class TabProperties` — owns activeTab, editMode, the
+//    tabs array, the dragging state (movingTab / moveOffset / moveLocation),
+//    haptics trigger. Passed via `.environment(_)`.
+//  • `DraggablePanGesture` (project helper, UIKit-backed).
+//  • `.symbolEffect(.wiggle.byLayer.counterClockwise, isActive:)` — the
+//    edit-mode jiggle effect.
+//  • `.sensoryFeedback(.success, trigger:)` — iOS 17 haptic on swap.
+//  • `UserDefaults` round-trip for order persistence.
+//  • `.onGeometryChange` per tab in TWO coord spaces: `.named("VIEW")`
+//    for swap detection, `.global` for the dragging ghost overlay.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when users need to CUSTOMIZE tab order (productivity
+//  apps, custom dashboards). Don't ship edit mode without an obvious
+//  affordance — the wiggle + toggle is the standard hint.
+//
+//  See also
+//  ────────
+//  • DraggableTabbariOS18View.swift — drag-to-SELECT variant. Same
+//    gesture family, different goal. The two together teach the full
+//    "drag in a tab bar" design space.
+//  • AdaptiveLayoutView.swift — also uses the UIKit-backed pan gesture
+//    for the same gesture-coexistence reason.
+//
 
 import SwiftUI
 

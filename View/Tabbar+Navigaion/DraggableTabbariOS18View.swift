@@ -1,7 +1,48 @@
 //
 //  DraggableTabbariOS18View.swift
 //  animation
-// support both iOS 17 & 18
+//
+//  Learning point
+//  ──────────────
+//  Drag-to-SELECT (not reorder): the user drags across the tab bar
+//  and the active tab follows the finger, snapping to whichever tab
+//  the finger is currently over. Two visual treatments live in this
+//  one file:
+//    1. `FloatingInteractiveTabBar` — capsule pill with `matchedGeometryEffect`
+//       sliding under the dragged-over tab.
+//    2. `DraggableTabBariOS18` — circular icon that scales up and an
+//       elevated padding effect on the active tab (Dock-style bounce).
+//
+//  Hit-detection trick: each tab records its `frame(in: .named("TABBAR"))`
+//  via `.onGeometryChange`. The drag gesture lives in the same named
+//  coordinate space, so deciding which tab is under the finger is just
+//  `tabButtonsLocations.firstIndex(where: { $0.contains(value.location) })`.
+//
+//  Key APIs
+//  ────────
+//  • `DragGesture(coordinateSpace: .named("TABBAR"))` + `coordinateSpace(.named(...))`
+//  • `.onGeometryChange(for: CGRect.self, of: .frame(in: .named(...)))` —
+//    rect-per-tab capture, the heart of hit-testing.
+//  • `matchedGeometryEffect(id: "ACTIVETAB", in: animation)` — the
+//    sliding pill / circle.
+//  • `gesture(_, isEnabled: activeTab == tab)` — only the active tab
+//    owns the drag gesture; non-active tabs receive taps. The inline
+//    comment notes why `isActive` would be wrong here (it would
+//    disable mid-drag).
+//
+//  How to apply
+//  ────────────
+//  Use when tabs themselves should be draggable input (camera mode
+//  pickers, iOS Camera shutter, "swipe-style" tab strips). For
+//  REORDERING tabs, see DraggableTabbarView.swift instead.
+//
+//  See also
+//  ────────
+//  • DraggableTabbarView.swift — drag-to-REORDER variant (edit mode,
+//    persistence, haptics). Different gesture, different goal.
+//  • iOS26/iOS26SegmentedTabBar.swift — the iOS 26 evolution of the
+//    drag-to-select pattern with glass + scroll-snap.
+//
 
 import SwiftUI
 

@@ -1,7 +1,48 @@
 //
 //  HorizontalTabView.swift
 //  animation
-// Use iOS17 scrollPosition tModifier to locate the page view
+//
+//  Learning point
+//  ──────────────
+//  YouTube-style horizontal page swiper with a scrollable tab bar
+//  above it. The tab bar and the content scroll view stay in lockstep
+//  in BOTH directions:
+//    • Tap a tab → animate the content scroll view to that page AND
+//      center the tapped tab in the strip.
+//    • Swipe the content → update the active tab AND auto-center it.
+//  The bottom indicator (line under the active tab) is INTERPOLATED
+//  off the live scroll progress so it slides smoothly during the
+//  swipe, including width interpolation when adjacent tabs differ
+//  in label length.
+//
+//  Key APIs
+//  ────────
+//  • `.scrollPosition(id:)` — iOS 17. Bound to the active page id;
+//    write to it programmatically to scroll, read it as user swipes.
+//  • `.scrollTargetLayout()` + `.scrollTargetBehavior(.paging)` — page
+//    snap behavior on the LazyHStack.
+//  • `OffsetKey` (project helper) + `.rect(completion:)` extension —
+//    captures each tab's `frame(in: .scrollView(axis: .horizontal))`
+//    via PreferenceKey. Real-time even when the indicator is rendered
+//    OUTSIDE the scroll view.
+//  • `progress.interpolate(inputRange:outputRange:)` — project helper
+//    for piecewise-linear interpolation; drives indicator width AND
+//    horizontal offset off the same `progress` scalar.
+//
+//  How to apply
+//  ────────────
+//  Use when content lives in a horizontal pager (Twitter timelines,
+//  YouTube feed sections). The two-way sync is the value — most
+//  homemade tab strips only sync ONE direction and feel broken on
+//  swipe.
+//
+//  See also
+//  ────────
+//  • ScrollablePageTabsColorView.swift — older `tabViewStyle(.page)`
+//    approach that bridges to UICollectionView via KVO for the same
+//    progress signal. Use HorizontalTabView for new code.
+//
+
 import SwiftUI
 
 struct HorizontalTabView: View {

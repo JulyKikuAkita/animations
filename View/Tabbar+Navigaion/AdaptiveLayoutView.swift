@@ -1,6 +1,46 @@
 //
 //  AdaptiveLayoutView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  A drawer-style sidebar that switches between two layouts based on
+//  device orientation/size class:
+//    • Landscape / regular width → permanent HStack sidebar.
+//    • Portrait / compact width → ZStack-leading drawer revealed by
+//      a horizontal pan from the edge.
+//  The pan is a UIKit `UIPanGestureRecognizer` (via `ToggleablePanGesture`),
+//  not a SwiftUI `DragGesture` — see the inline comment about why
+//  iOS 18's SwiftUI gestures don't compose well with buttons / scroll
+//  views / tap gestures.
+//
+//  Key APIs
+//  ────────
+//  • `AnyLayout(HStackLayout()) ↔ AnyLayout(ZStackLayout())` — swap
+//    layouts without losing view identity (no if/else).
+//  • `ToggleablePanGesture` (project helper) wrapping `UIPanGestureRecognizer`
+//    — handles begin/changed/ended, gives us `velocity`, integrates
+//    with scroll views without conflict.
+//  • `progress` derived from `offset / sideBarWidth` — single 0...1
+//    value drives the dimming overlay opacity AND animates correctly.
+//  • `.tabViewStyle(.tabBarOnly)` — keeps a real TabView underneath
+//    so each tab retains its own NavigationStack state.
+//  • `AdaptiveView` (helper) — a tiny `GeometryReader` + size-class
+//    wrapper that yields `(size, isLandscape)` to the body.
+//
+//  How to apply
+//  ────────────
+//  Use when you want the SAME view tree to serve phone (drawer) and
+//  iPad/landscape (split). The pan gesture is the load-bearing piece —
+//  reach for UIKit when SwiftUI gestures fight your tap targets.
+//
+//  See also
+//  ────────
+//  • SideBarView.swift — the sidebar content used here. Keep them
+//    together; SideBarView has no useful preview standalone.
+//  • DraggableTabbarView.swift — also leans on `DraggablePanGesture`
+//    (UIKit) for the same gesture-coexistence reason.
+//
 
 import SwiftUI
 

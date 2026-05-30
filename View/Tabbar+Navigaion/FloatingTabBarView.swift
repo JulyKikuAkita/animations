@@ -1,7 +1,50 @@
 //
 //  FloatingTabBarView.swift
 //  animation
-// support both iOS 17 & 18
+//
+//  Learning point
+//  ──────────────
+//  Demo HOST that drops the `FloatingTabbar` component over a real
+//  TabView and demonstrates how to hide the SYSTEM tab bar across
+//  iOS 17 vs iOS 18. The trick the file teaches:
+//
+//    iOS 18 → `.toolbarVisibility(.hidden, for: .tabBar)` per Tab.
+//    iOS 17 → that modifier has a glitch on iOS 17.3/4, so we drop
+//             a UIKit `HideTabBar` UIViewRepresentable as a `.background`,
+//             which walks up to the `UITabBarController` and sets
+//             `tabBar.isHidden = true` directly. `UITabBar.appearance().isHidden`
+//             is briefly toggled to suppress the initial flash.
+//
+//  Key APIs
+//  ────────
+//  • `#available(iOS 18, *)` branch — pre-18 fallback uses old `.tag(_)`
+//    selection, post-18 uses `Tab(value:)`.
+//  • `UIViewRepresentable` + `UIView.tabController` extension — chain
+//    up `next`-responder to find the hosting `UITabBarController`.
+//  • `UITabBar.appearance().isHidden = true` — global hide during view
+//    creation so the bar never flashes; reset to `false` once the
+//    controller-level hide is applied.
+//
+//  How to apply
+//  ────────────
+//  Use this file as the iOS 17 reference when you must keep iOS 17.3/4
+//  in your deployment target. For new code targeting iOS 18+, prefer
+//  `FloatingTabBarViewV2.swift` — it's generic and configurable.
+//
+//  Future removal note
+//  ───────────────────
+//  V2 supersedes this file's GENERAL tab-bar wrapping job. The ONLY
+//  thing this file uniquely teaches is the `HideTabBar` UIKit
+//  workaround for the iOS 17.3/4 toolbar-hide glitch. When iOS 17.3/4
+//  drops out of your support matrix, this file can be deleted (along
+//  with its `animation.xcodeproj` reference). Until then, keep it for
+//  the workaround alone.
+//
+//  See also
+//  ────────
+//  • FloatingTabbar.swift — the reusable bar component this demo hosts.
+//  • FloatingTabBarViewV2.swift — generic replacement; preferred.
+//
 
 import SwiftUI
 

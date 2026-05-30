@@ -1,6 +1,45 @@
 //
-// support both iOS 17 & 18
-// different way to hide tabbar
+//  FloatingTabBarViewV2.swift
+//  animation
+//
+//  Learning point
+//  ──────────────
+//  PREFERRED, GENERIC floating tab bar: takes any enum that is
+//  `CaseIterable & Hashable & FloatingTabProtocol`, plus an optional
+//  `FloatingTabBarViewV2Config` for tints / animation / padding /
+//  translucency. Tab-bar hiding is driven through a private
+//  `ObservableObject` helper passed via `.environmentObject`, exposed
+//  as a `.hideFloatingTabBar(_:)` view modifier — content views can
+//  request hide WITHOUT knowing about the host.
+//
+//  Key APIs
+//  ────────
+//  • `protocol FloatingTabProtocol { var symbolImage: String { get } }`
+//    — minimal contract for any tab enum; `VideoTab` conforms via
+//    extension at the bottom of this file.
+//  • Generic `FloatingTabBar<Value: CaseIterable & Hashable & FloatingTabProtocol>`
+//    where `Value.AllCases: RandomAccessCollection` — one component
+//    that adapts to any tab enum.
+//  • `matchedGeometryEffect(id: "ACTIVETAB", in:)` — sliding indicator.
+//  • `@StateObject FloatingTabBarViewV2Helper` + `.environmentObject(_)`
+//    + `HideFloatingTabBarModifier` — the hide-from-anywhere channel.
+//  • `.symbolEffect(.bounce.byLayer.down, value:)` — per-tap symbol pop.
+//  • `.toolbarVisibility(.hidden, for: .tabBar)` per Tab on iOS 18+,
+//    `.tag(_)` fallback on iOS 17 — both paths shown.
+//
+//  How to apply
+//  ────────────
+//  Default to this file for new code. Define your tab enum, conform it
+//  to `FloatingTabProtocol`, hand it to `FloatingTabBarV2View(selection:
+//  content:)`. Use `.hideFloatingTabBar(_)` from any descendant view to
+//  hide the bar on demand (a Detail screen, a fullscreen video, etc.).
+//
+//  See also
+//  ────────
+//  • FloatingTabbar.swift — the original non-generic component.
+//  • FloatingTabBarView.swift — older demo, kept only for the iOS 17.3/4
+//    `HideTabBar` UIKit workaround.
+//
 
 import SwiftUI
 
