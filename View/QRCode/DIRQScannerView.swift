@@ -3,7 +3,90 @@
 //  animation
 //
 //  Created on 2/1/26.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ only — gated by `@available(iOS 26.0, *)` on every type
+//  in this file.
+//
+//  Learning point
+//  ──────────────
+//  "DIRQ" = **D**ynamic-**I**sland-**R**egion **Q**R scanner: the
+//  scanner UI is presented by morphing the iPhone's Dynamic Island
+//  into a fullscreen camera viewfinder, then morphs back to the
+//  island shape on dismiss. Two distinct techniques stitched
+//  together:
+//
+//    1. AVFoundation QR scanning (the "what works" layer)
+//       • `AVCaptureSession` + `AVCaptureMetadataOutput` configured
+//         for `.qr` only.
+//       • `CameraLayeriOS26View` (`UIViewRepresentable`) hosts the
+//         capture session inside a UIView so the preview layer can
+//         render — SwiftUI doesn't host `CALayer` directly.
+//       • Permission is gated via the static helper on
+//         `CameraProperties`; the view branches on
+//         `.idle / .approved / .denied` and offers a "Go to Settings"
+//         link for denied.
+//       • Threading: `session.startRunning()` /
+//         `session.stopRunning()` MUST be off-main — both calls hop
+//         to a background queue. The session/output read uses
+//         `MainActor.run { ... }` because `parent.camera` is
+//         MainActor-isolated.
+//
+//    2. Dynamic Island morph (the "feels iOS 26" layer)
+//       • The scanner content sits inside a `ConcentricRectangle`
+//         (iOS 26) sized to match the Dynamic Island pill at rest
+//         (120×36) and animated to the expanded scanner rect
+//         (~screenWidth × screenWidth).
+//       • `topOffset` calculation accounts for whether the device
+//         has a Dynamic Island (safeArea.top ≥ 59pt) — keeps the
+//         pill anchored to the actual island on iPhone 15 Pro+, and
+//         mocks the position on older safe-area devices.
+//       • `fullScreenCover` is opened with `Transaction.disablesAnimations`
+//         so the cover itself doesn't animate; ALL motion comes from
+//         the manual `withAnimation(.interpolatingSpring(...))`
+//         around `isExpanding`.
+//       • Dismiss flow: animation runs first → `onDisappear` of an
+//         invisible Rectangle inside the expanding view fires →
+//         flips `showContent = false` → outer ZStack's
+//         `.transition(.identity)` lets the cover dismiss without
+//         a second animation.
+//
+//  Key APIs
+//  ────────
+//  • `AVCaptureMetadataOutput` + `AVMetadataObject.ObjectType.qr` —
+//    the QR-flavoured output; restrict types early so the delegate
+//    isn't woken on faces/barcodes.
+//  • `AVCaptureMetadataOutputObjectsDelegate` (Coordinator) — the
+//    delegate that publishes `scannedCode` back into SwiftUI state.
+//  • `ConcentricRectangle(corners: .concentric(minimum: .fixed(30)))`
+//    — iOS 26 shape that automatically rounds to match nested
+//    geometry; load-bearing for the morph fitting the island
+//    silhouette.
+//  • `phaseAnimator([false, true]) { ... }` — drives the scanning
+//    line's perpetual top↔bottom shimmer. Self-restarting; no Timer.
+//  • `Transaction(disablesAnimations: true) + withTransaction { ... }`
+//    — the trick that suppresses `fullScreenCover`'s default
+//    transition.
+//
+//  How to apply
+//  ────────────
+//  Use the morph pattern whenever a CHROME element (status bar,
+//  Dynamic Island, navigation bar) is the natural source for an
+//  expanded view. The QR-specific bits are isolated in
+//  `CameraLayeriOS26View.Coordinator.setupCamera()` — swap that
+//  closure for face detection, text recognition, etc., and the
+//  enclosing morph still works.
+//
+//  See also
+//  ────────
+//  • CameraProperties.swift — the small AVFoundation state bag.
+//  • View/CameraInterface/CameraControlView.swift — sibling demo
+//    for *capture* (photo) using `AVCapturePhotoOutput`. Different
+//    intent (take a picture vs. scan metadata), so the folders stay
+//    separate even though both touch AVFoundation.
+//  • View/CameraInterface/PicoCamPart1DemoView.swift — also uses a
+//    Dynamic-Island-anchored frame for a different UX (instant-camera
+//    print frame).
+//
 import AVFoundation
 import SwiftUI
 
