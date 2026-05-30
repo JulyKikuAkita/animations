@@ -56,7 +56,7 @@
 import SwiftUI
 
 // any image model has id, image
-let images = firstSetCards
+private let images = firstSetCards
 struct ImageWithAmbientBackgroundDemoView: View {
     /// View properties
     @State private var topInset: CGFloat = 0
