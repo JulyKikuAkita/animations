@@ -3,8 +3,59 @@
 //  animation
 //
 //  Created on 12/18/25.
-// Apple book style expandable menu buttons
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Filename mismatch
+//        The `iOS26` suffix is misleading — this file uses NO
+//        iOS 26-only APIs. There's no `@available(iOS 26.0, *)`
+//        gate, no `.glassEffect`, no `GlassEffectContainer`. It
+//        compiles back to iOS 16+. Either drop the `iOS26` suffix
+//        or add iOS 26 enhancements (e.g. swap `.ultraThinMaterial`
+//        for `.glassEffect(.regular)`) to justify the name.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Books-style FAB-to-menu reveal: a circular floating action
+//  button taps open into a grid of action buttons, with the source
+//  button morphing into the menu's anchor. Closes on tap-anywhere
+//  outside. The headline trick is using `visualEffect` to scale +
+//  blur the source FAB so it APPEARS to expand into the menu, even
+//  though the menu is a separate view tree.
+//
+//  Two-layer reveal:
+//    • The FAB blurs out + shrinks via `visualEffect`.
+//    • The menu container blurs in + scales up from the FAB's
+//      anchor.
+//  Synchronised on a single `progress: CGFloat` (or Bool) so they
+//  always read as one continuous gesture, never two parallel
+//  animations fighting each other.
+//
+//  Key APIs
+//  ────────
+//  • `.visualEffect { content, proxy in ... }` — runs per-item on
+//    every layout tick, ideal for tying a transform to a state value.
+//  • `.allowsHitTesting(false)` on the dim backdrop while menu is
+//    closed — prevents stealing taps when there's nothing to tap.
+//  • `.transition(.identity)` on the menu container — opt OUT of
+//    SwiftUI's default insert/remove transition so our custom
+//    blur+scale runs alone.
+//  • `.ultraThinMaterial` — chrome for the menu surface; iOS 15+.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when a single FAB triggers a small set of
+//  related actions (compose, share, attach). Keep the action count
+//  ≤ 6; beyond that, a sheet reads better.
+//
+//  See also
+//  ────────
+//  • MorphActionButtoniOS26.swift — alternative FAB-morph using
+//    `fullScreenCover` instead of an inline overlay.
+//  • MorphCustomMenuDemoView.swift — radial menu variant of the
+//    same source-button-expands-to-menu idea.
+//  • GlassMorphEffectMenuiOS26.swift — iOS 26 sibling using
+//    `.glassEffect` for the menu surface.
+//
 import SwiftUI
 
 struct ExpandableMenuiOS26DemoView: View {

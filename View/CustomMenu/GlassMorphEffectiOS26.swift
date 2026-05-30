@@ -1,6 +1,67 @@
 //
-//  MorphActionButtoniOS26.swift
+//  GlassMorphEffectiOS26.swift
 //  animation
+//  (Header comment was previously misnamed `MorphActionButtoniOS26.swift`
+//   — that's a different file. Fixed in this pass.)
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ only — `@available(iOS 26.0, *)` on every type.
+//
+//  Learning point
+//  ──────────────
+//  Horizontal expandable glass button: a single capsule grows
+//  rightward to reveal a row of action items, all rendered as ONE
+//  Liquid-Glass surface using `.glassEffectUnion(id:namespace:)`.
+//  The icon morphs between `ellipsis` (collapsed) and `xmark`
+//  (expanded) via `matchedGeometryEffect` in the same namespace.
+//  At any progress value 0…1 the result is a single coherent glass
+//  blob — not a button + N separate buttons.
+//
+//  Why `glassEffectUnion`?
+//  ───────────────────────
+//  Without it, each item gets its own glass material and they
+//  COMPOUND visually — light bouncing off light. Marking them with
+//  the same `id` in a shared namespace tells the system "render
+//  these as ONE glass region for material purposes," and the union
+//  does the right thing on overlap, edges, and refraction.
+//
+//  The `Animatable` conformance on `ExpandableHorizontalGlassContainer`
+//  ─────────────────────────────────────────────────────────────────
+//  Required because we drive the expansion off `progress: CGFloat`
+//  and want SwiftUI to interpolate `progress` at frame rate during
+//  spring animations. Without `AnimatableData`, `progress` would
+//  step, not animate.
+//
+//  Key APIs
+//  ────────
+//  • `.glassEffect(.regular.interactive(...), in: .capsule)` —
+//    iOS 26. The `.interactive(...)` flavor adds press-state shine.
+//  • `.glassEffectUnion(id:namespace:)` — iOS 26. Marks views as
+//    belonging to a single glass region.
+//  • `Animatable` + `AnimatableData` — manual conformance to
+//    interpolate the `progress` driver smoothly.
+//  • `ForEach(subviews:)` (iOS 18+) — extracts collection from a
+//    ViewBuilder so the container can iterate without forcing the
+//    caller to use Identifiable.
+//  • `@Entry` + container values — clean way to attach per-item
+//    metadata that the parent reads back via `containerValues`.
+//  • `matchedGeometryEffect` — the icon swap (`ellipsis`↔`xmark`).
+//
+//  How to apply
+//  ────────────
+//  Use when you want a "more actions" button that EXPANDS in place
+//  rather than opening a menu sheet — toolbar-style augmentation,
+//  inline edit toggles, message reactions. The glass-union pattern
+//  generalises to any Liquid-Glass UI where multiple sub-elements
+//  should read as one material.
+//
+//  See also
+//  ────────
+//  • GlassMorphEffectMenuiOS26.swift — sibling demo using the SAME
+//    pattern but for a menu pop-out (alignment-aware container).
+//    Read both side-by-side; the contrast is the lesson.
+//  • CustomSideMenu+iOS26.swift — different iOS 26 menu pattern
+//    (slide-out side menu).
 //
 import SwiftUI
 

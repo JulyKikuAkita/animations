@@ -1,6 +1,69 @@
 //
-//  MorphActionMenuiOS26.swift
+//  GlassMorphEffectMenuiOS26.swift
 //  animation
+//  (Header comment was previously misnamed `MorphActionMenuiOS26.swift`
+//   — that's a non-existent file. Fixed in this pass.)
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ only — `@available(iOS 26.0, *)` on every type.
+//
+//  Learning point
+//  ──────────────
+//  Sibling to [[GlassMorphEffectiOS26]]: same Liquid-Glass / morphing
+//  technique, but applied to a POP-OUT MENU (button → menu panel)
+//  rather than an horizontal action row. Differential between the
+//  two helpers tells the lesson:
+//
+//    • [[GlassMorphEffectiOS26]] → `ExpandableHorizontalGlassContainer`
+//      (rightward expansion, items inline).
+//    • This file → `ExpandableGlassMenuContainer` (alignment-aware
+//      pop-out, content lives on a different layer than the label).
+//
+//  Headline trick: `ExpandableGlassMenuContainer` takes BOTH a
+//  `label` ViewBuilder (the resting button) and a `content`
+//  ViewBuilder (the menu panel), measures both, and morphs between
+//  them by interpolating size + position from the label's frame to
+//  the content's frame. The `alignment` parameter chooses the
+//  growth direction; the helper converts that into a `UnitPoint` for
+//  `scaleEffect(anchor:)` so the panel grows from the correct edge.
+//
+//  Layered animation choreography:
+//    • Label and content cross-fade via `.opacity`.
+//    • Content scales from `0.5 → 1.0` anchored at the label's
+//      edge.
+//    • Content blurs from `~10pt → 0pt` for the soft "fade in
+//      through frosted glass" feel.
+//    • All three driven by ONE `progress: CGFloat` so they always
+//      stay synchronised.
+//
+//  Key APIs
+//  ────────
+//  • `.glassEffect(_, in: .rect(cornerRadius:))` (iOS 26) — same
+//    Liquid-Glass material as the horizontal sibling, but in a
+//    rounded rect rather than a capsule.
+//  • `GlassEffectContainer` — coordinates multiple glass regions
+//    so they read as one material when overlapping.
+//  • `Animatable` + `AnimatableData` — interpolates `progress` at
+//    frame rate.
+//  • `onGeometryChange(for: CGSize.self)` — measures both the
+//    label and content sizes for the morph math.
+//  • Custom `scaleAnchor(for: Alignment)` helper — converts the
+//    user-supplied alignment into a `UnitPoint` (e.g. `.topLeading`
+//    → `(0, 0)` so scale-from-zero grows toward bottom-right).
+//
+//  How to apply
+//  ────────────
+//  Reuse `ExpandableGlassMenuContainer` for any "tap a chip → it
+//  unfolds into a popover panel" UI: filter chips, share buttons,
+//  inline actions. Pair with this file's pattern for the demo wiring.
+//
+//  See also
+//  ────────
+//  • GlassMorphEffectiOS26.swift — horizontal-expansion sibling.
+//    Compare to pick by growth direction.
+//  • View/Keyboard/AnimatedKeyboard+iOS26.swift — also consumes
+//    `ExpandableGlassMenuContainer` (and references it in its
+//    header). The container is a reusable helper across demos.
 //
 import SwiftUI
 
