@@ -3,17 +3,99 @@
 //  animation
 //
 //  Created on 10/25/25.
-//  when mix sheet with textfield, need to be aware that sheet does not have safeAreaBottom but
-//  (default) keyboard view has default safeAreaBottom on top
-//  -> use custom keyboard and read it's height instead, apply the same height to sheet's detent
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17+ for the `.sheet` detents; iOS 26 for the
+//  `.onGeometryChange` keyboard-tracking branch.
 //
-// single line  Textfield -> keyboard has a return button
-// multiline textfield -> no button but use scrollDismissKeyboard modifier to dismiss the keyboard
-// how to read scrollview dismiss offset updates? iOS26 -> use onGeometryReader to calculate the
-// offset and apply it to the bottom bar.
-// Note the scrollView should not have .ignoreSafeArea modifier, nor padding, scale. frame modifier
-// to get the right offset value
-
+//  Inline tips (preserved from the original header):
+//    • When mixing a sheet with a TextField, sheets DON'T have a
+//      `safeAreaBottom`, but the (default) keyboard view DOES
+//      project a default `safeAreaBottom` on top — use a CUSTOM
+//      keyboard, read its height, and apply the same height to
+//      the sheet's `presentationDetents`.
+//    • Single-line TextField → keyboard has a Return button.
+//    • Multi-line TextField → no Return button; use
+//      `scrollDismissesKeyboard(.interactively)` to dismiss.
+//    • iOS 26: read the scroll-dismiss offset via `onGeometryChange`
+//      and apply it to the bottom bar so the bar tracks the
+//      keyboard mid-drag.
+//    • The host ScrollView MUST NOT have `.ignoresSafeArea`, padding,
+//      scale, or frame modifiers — those distort the offset value.
+//
+//  TODO: Cleanup
+//        Line ~131: `.interactiveDismissDisabled() // not working
+//        (still can pulldown photo views)` — the workaround for this
+//        is the `DisableInteractiveDismissPreview` UIViewRepresentable
+//        farther down. Add a one-line cross-reference comment so a
+//        future reader connects them.
+//
+//  Learning point
+//  ──────────────
+//  iMessage-style chat composer that toggles a photo picker as a
+//  bottom sheet WITHOUT losing the keyboard or the chat scroll
+//  position. The whole demo is about coordinating three moving
+//  parts that normally fight each other:
+//    1. The chat `ScrollView` and its keyboard-aware bottom bar.
+//    2. A `.sheet` (with `.presentationDetents([.height(...), .large])`)
+//       containing `PhotosPicker(selection:matching:photoLibrary:)`
+//       in its inline display style.
+//    3. A keyboard-height observer (iOS 17 fallback via
+//       `UIResponder.keyboardWillChangeFrameNotification`, iOS 26
+//       via `onGeometryChange`) so the bar lifts cleanly with the
+//       keyboard and the sheet's detent matches.
+//
+//  Why this is hard
+//  ────────────────
+//  iOS treats sheets and keyboards as INDEPENDENT presentation
+//  surfaces. Dragging the keyboard down doesn't move a presented
+//  sheet; presenting a sheet doesn't dismiss the keyboard. The
+//  composite "drag down the keyboard, watch the photo picker rise
+//  to fill the freed space" feel of iMessage requires manually
+//  coordinating both — that's what this file demonstrates.
+//
+//  `DisableInteractiveDismissPreview` workaround
+//  ─────────────────────────────────────────────
+//  `interactiveDismissDisabled()` doesn't actually prevent pull-
+//  to-dismiss when the sheet wraps a `PhotosPicker` — the picker's
+//  inner `PHPickerViewController` still responds to its own pan.
+//  The workaround is a `UIViewControllerRepresentable` that walks
+//  up the responder chain to find the `PHPickerViewController` and
+//  sets `isModalInPresentation = true`. Brittle; if Apple
+//  restructures the picker's view hierarchy, the walk fails.
+//
+//  Key APIs
+//  ────────
+//  • `PhotosPicker(selection:matching:photoLibrary:)` (the inline
+//    UI variant — different from `PhotosPickerItem`-based pickers
+//    in [[ImagePicker]]).
+//  • `.presentationDetents([.height(...), .large])` — fixed-
+//    height detent matched to the keyboard height.
+//  • `.scrollDismissesKeyboard(.interactively)` — drives the
+//    drag-down-to-dismiss feel.
+//  • `onGeometryChange(for: CGFloat.self)` (iOS 26) — keyboard
+//    tracking via the scroll geometry, more reliable than
+//    `keyboardWillChangeFrame` notifications.
+//  • `UIResponder.keyboardWillChangeFrameNotification` (iOS < 26)
+//    — the fallback path.
+//  • `UIViewRepresentable` walking the responder chain to find
+//    `PHPickerViewController` — the workaround above.
+//
+//  How to apply
+//  ────────────
+//  Use as a starting template whenever a chat/composer needs an
+//  inline photo picker that doesn't disrupt typing. Copy the
+//  detent/keyboard coordination wholesale; the photo-picker
+//  workaround can stay or go depending on whether your sheet has
+//  its own pull-to-dismiss UX.
+//
+//  See also
+//  ────────
+//  • ImagePicker.swift — simpler `PhotosPickerItem` flow without
+//    the sheet/keyboard coordination.
+//  • View/Keyboard/AnimatedKeyboard+iOS26.swift — different
+//    keyboard-aware UI pattern using `safeAreaInset(edge: .bottom)`
+//    + `ExpandableGlassMenuContainer`.
+//
 import PhotosUI
 import SwiftUI
 
@@ -77,8 +159,8 @@ struct MockMessageView: View {
             .toolbarTitleDisplayMode(.inlineLarge)
     }
 
-    // swift:disable:function_body_length
     @ViewBuilder
+    // swift:disable:function_body_length
     func bottomBar() -> some View {
         HStack(alignment: .bottom, spacing: 8) {
             Button {

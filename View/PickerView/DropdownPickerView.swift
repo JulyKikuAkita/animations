@@ -1,7 +1,68 @@
 //
 //  DropdownPickerView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Custom dropdown that grows out of a button: tap the trigger,
+//  the menu unfolds downward over the underlying content with a
+//  blurred backdrop, and the active selection is hidden from the
+//  list (so the user can't pick what they already have). Closes on
+//  tap-outside via the backdrop, with a height-based mask for the
+//  unfold animation rather than a clip-rectangle.
+//
+//  Three pieces:
+//    1. `DropdownPickerView` — the trigger button. Reports its frame
+//       via `onGeometryChange` so the menu knows where to anchor.
+//    2. `DropdownView` — the overlay menu itself. Uses a scroll view
+//       with `.scrollPosition(id:)` so the menu opens scrolled to
+//       the currently-selected item (small thing, big UX win on
+//       long lists).
+//    3. `DropdownConfig` — the shared state (`isExpanded`, anchor
+//       frame, options).
+//
+//  The unfold animation
+//  ────────────────────
+//  Instead of clipping, the menu uses
+//  `.mask(alignment: .top) { Rectangle().frame(height: maskHeight) }`
+//  where `maskHeight` animates from 0 to the menu's intrinsic height.
+//  Result: items appear to peel out from the trigger top-down, with
+//  shadows + corners preserved (a clip would cut them).
+//
+//  Custom `reverseMask` extension
+//  ──────────────────────────────
+//  Defined inside this file. Uses `.blendMode(.destinationOut)` to
+//  CUT a hole in the blurred backdrop where the trigger button sits,
+//  so the trigger appears un-blurred while everything else dims.
+//  Tiny utility worth lifting into the project's helpers folder.
+//
+//  Key APIs
+//  ────────
+//  • `onGeometryChange(for: CGRect.self)` — captures the trigger's
+//    on-screen frame for menu anchoring.
+//  • `.scrollPosition(id:)` + `.scrollTargetBehavior(.viewAligned(limitBehavior:))`
+//    — opens scrolled to the active selection.
+//  • `.mask(alignment: .top) { Rectangle().frame(height: ...) }`
+//    — height-animated reveal that preserves shadows/corners.
+//  • `.ultraThinMaterial` for the dimmed backdrop, with
+//    `reverseMask` cutting through to keep the trigger crisp.
+//  • `.snappy` animation curve — the unifying motion.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when stock `.menu` style feels too system-y and
+//  you want branded chrome. The reveal-via-mask trick generalises:
+//  use it any time `.clipShape` would chop off shadows.
+//
+//  See also
+//  ────────
+//  • PickerStylesGesturesView.swift — different picker UX flavor;
+//    composition not relation.
+//  • TimePickerView.swift — `.wheel`-style picker for ranged
+//    numeric input.
+//
 import SwiftUI
 
 struct DropdownPickerDemoView: View {
@@ -29,11 +90,11 @@ private struct DropdownView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 0) {
-                ItemView(config.activeText)
+                itemView(config.activeText)
                     .id(config.activeText)
 
                 ForEach(filteredValues, id: \.self) { item in
-                    ItemView(item)
+                    itemView(item)
                 }
             }
             .scrollTargetLayout()
@@ -83,8 +144,7 @@ private struct DropdownView: View {
         .ignoresSafeArea()
     }
 
-    @ViewBuilder
-    func ItemView(_ item: String) -> some View {
+    func itemView(_ item: String) -> some View {
         HStack {
             Text(item)
 

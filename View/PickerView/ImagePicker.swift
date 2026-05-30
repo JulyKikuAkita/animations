@@ -1,7 +1,70 @@
 //
 //  ImagePicker.swift
 //  animation
-// https://www.youtube.com/watch?v=p1U13Ch8ykk&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=31
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  Source: https://www.youtube.com/watch?v=p1U13Ch8ykk (index 31).
+//  iOS 17+ baseline; iOS 16 fallback path lives inside the
+//  `optionalViewModifier` extension for the older `.onChange`
+//  signature.
+//
+//  TODO: Cleanup
+//        The `optionalViewModifier` workaround at the bottom of the
+//        file exists to bridge the iOS 16 → iOS 17 `.onChange`
+//        signature change. Once iOS 16 support is dropped, replace
+//        with the native iOS 17 `.onChange(of:initial:_:)` directly
+//        and delete the wrapper.
+//
+//  Learning point
+//  ──────────────
+//  Two-input image picker that accepts BOTH a tap-to-pick (via
+//  PhotosUI's `PhotosPicker`) AND drag-and-drop (via
+//  `.dropDestination(for: Data.self)`). Loads the picked
+//  `PhotosPickerItem` as `Data`, generates a thumbnail via
+//  `byPreparingThumbnail(ofSize:)`, and renders it. While loading,
+//  shows a spinner.
+//
+//  Why both input methods?
+//  ───────────────────────
+//  iPad and Mac users frequently drag from Finder/Photos directly
+//  onto a picker target — a tap-only picker feels broken on those
+//  platforms. The `.dropDestination(for: Data.self)` modifier costs
+//  ~5 lines and supports the full system drop target experience for
+//  free.
+//
+//  Thumbnail generation
+//  ────────────────────
+//  `UIImage.byPreparingThumbnail(ofSize:)` is the right API for
+//  display-time thumbnails — async, off-main, generates an
+//  appropriately-sized bitmap. Don't use `UIImage(data:)` followed
+//  by `.resizable()` — that decodes the FULL-resolution image
+//  every render.
+//
+//  Key APIs
+//  ────────
+//  • `PhotosPicker(selection:matching:photoLibrary:)` + `PhotosPickerItem`
+//    — iOS 16+ Photos framework picker.
+//  • `.dropDestination(for: Data.self) { items, location in ... }`
+//    — iOS 16+ drag-and-drop drop target.
+//  • `UIImage.byPreparingThumbnail(ofSize:)` — async off-main
+//    thumbnail generation.
+//  • `optionalViewModifier` (file-local extension) — the
+//    iOS 16/17 `.onChange` bridge; remove when dropping iOS 16.
+//
+//  How to apply
+//  ────────────
+//  Use as the template for any "let the user attach an image"
+//  flow — profile pictures, message attachments, item photos.
+//  The drag-and-drop branch is essentially free; always include it.
+//  For the iMessage-style "stay in chat while picking" flavor,
+//  see [[PhotoPickeriMessageStyleDemoView]].
+//
+//  See also
+//  ────────
+//  • PhotoPickeriMessageStyleDemoView.swift — sibling using
+//    `PhotosPicker` (not `PhotosPickerItem`) inside a sheet for
+//    chat-style integration. Different surface, different API.
+//
 import PhotosUI
 import SwiftUI
 
