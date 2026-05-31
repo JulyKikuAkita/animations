@@ -1,7 +1,70 @@
 //
 //  FloatingBottomSheetsView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 15+ baseline. Compare with the iOS-26-styled siblings
+//  ([[iOS26StyleFloatingSheet]], [[iOS26-bottomSheet]]) to see
+//  what newer chrome adds.
+//
+//  Learning point
+//  ──────────────
+//  Two flavours of "floating" bottom sheet (sheet that visually
+//  floats above the host instead of attaching to the screen edge):
+//
+//    1. **Alert-style** — fixed-height sheet with icon / title /
+//       description / two buttons, wrapped in a custom
+//       `.floatingBottomSheet` modifier exposed by this file.
+//    2. **Free-form** — taller sheet with
+//       `.presentationBackgroundInteraction` so the host's scroll
+//       stays interactive while presented (Apple Maps style).
+//
+//  Both share the same chrome trick:
+//  `.presentationBackground(.clear)` +
+//  `.presentationDragIndicator(.hidden)` +
+//  `.clipShape(.rect(cornerRadius:))` with `.compositingGroup()`
+//  shadows to make the sheet a true rounded-rect floater rather
+//  than the system's default edge-attached sheet.
+//
+//  The shadow-removal hack
+//  ───────────────────────
+//  `sheetShadowRemover` (UIViewRepresentable at the bottom of the
+//  file) walks up to find the `_UIPresentationController` and
+//  zeroes its shadow path. Without this, iOS draws an extra
+//  drop-shadow under the sheet that conflicts with the rounded
+//  floating chrome. Fragile UIKit reach-through — same risk
+//  profile as `View/Alert/ProgressAlertDemoView.swift`'s
+//  UIAlertController introspection.
+//
+//  Key APIs
+//  ────────
+//  • `.floatingBottomSheet(...)` — file-local View extension
+//    bundling the chrome modifiers.
+//  • `.presentationBackground(.clear)` + `.presentationCornerRadius(0)`
+//    + `.presentationDragIndicator(.hidden)` — strip the system
+//    sheet chrome.
+//  • `.presentationDetents([.height(...), .fraction(0.999)])` —
+//    fixed height + near-full alternative.
+//  • `.presentationBackgroundInteraction(.enabled(upThrough:))` —
+//    iOS 16+; user-interactive host content while sheet is
+//    presented.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when stock `.sheet` chrome looks too "system."
+//  For iOS 26 visual polish, see [[iOS26StyleFloatingSheet]] —
+//  same techniques composed into a reusable wrapper with an
+//  `#available` fallback.
+//
+//  See also
+//  ────────
+//  • iOS26StyleFloatingSheet.swift — iOS 26 upgrade of the same
+//    pattern with backwards-compat fallback.
+//  • iOS26-bottomSheet.swift — Maps-style sheet + floating toolbar
+//    responding to detent changes.
+//  • iOS26ResizingSheet.swift — YouTube-Shorts-style sheet that
+//    shrinks the underlying video as it expands.
+//
 import SwiftUI
 
 struct FloatingBottomSheetsViewDemo: View {
@@ -84,10 +147,10 @@ struct FloatingBottomSheetsView: View {
                 .lineLimit(2)
                 .foregroundStyle(.gray)
 
-            ButtonView(button1)
+            buttonView(button1)
 
             if let button2 {
-                ButtonView(button2)
+                buttonView(button2)
             }
         }
         .padding([.horizontal, .bottom], 15)
@@ -100,8 +163,7 @@ struct FloatingBottomSheetsView: View {
         .padding(.horizontal, 15)
     }
 
-    @ViewBuilder
-    func ButtonView(_ config: Config) -> some View {
+    func buttonView(_ config: Config) -> some View {
         Button {} label: {
             Text(config.content)
                 .fontWeight(.bold)
@@ -125,18 +187,22 @@ struct FloatingBottomSheetsView: View {
 
 extension View {
     @ViewBuilder
-    func floatingBottomSheet(isPresented: Binding<Bool>, onDismiss: @escaping () -> Void = {}, @ViewBuilder content: @escaping () -> some View) -> some View {
+    func floatingBottomSheet(
+        isPresented: Binding<Bool>,
+        onDismiss: @escaping () -> Void = {},
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         sheet(isPresented: isPresented, onDismiss: onDismiss) {
             content()
                 .presentationCornerRadius(0)
                 .presentationBackground(.clear)
                 .presentationDragIndicator(.hidden)
-                .background(sheetShadowRemover())
+                .background(SheetShadowRemover())
         }
     }
 }
 
-private struct sheetShadowRemover: UIViewRepresentable {
+private struct SheetShadowRemover: UIViewRepresentable {
     func updateUIView(_: UIViewType, context _: Context) {}
 
     func makeUIView(context _: Context) -> some UIView {

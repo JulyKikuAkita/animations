@@ -3,7 +3,22 @@
 //  animation
 //
 //  Created on 3/9/26.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 15+ baseline (despite the iOS 26 filename) — the
+//  `CADisplayLink` + `layer.presentation()` pattern works back
+//  to early UIKit. Filename's `iOS26` is aspirational; the actual
+//  technique is platform-stable.
+//
+//  Note on file length
+//  ───────────────────
+//  This file is the largest in the folder (~345 lines) because it
+//  ships its OWN inline documentation (lines ~287–end) explaining
+//  CADisplayLink, retain cycles, and `layer.presentation()`. The
+//  block below is the strategic summary; the inline docs are the
+//  tactical walkthrough.
+//
+//  Original tip (preserved below the block):
+//
 // YouTube-style auto-resizing sheet: background content (video) shrinks and moves
 // as the sheet slides up, staying fully visible above the sheet at all times.
 //

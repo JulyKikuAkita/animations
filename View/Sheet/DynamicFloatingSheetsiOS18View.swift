@@ -1,7 +1,51 @@
 //
 //  DynamicFloatingSheetsiOS18View.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ — `.blurReplace` transition + `.contentTransition(.numericText())`
+//  are the gating APIs.
+//
+//  Learning point
+//  ──────────────
+//  Multi-step floating sheet that swaps between sub-views in place
+//  (subscription options → period picker → custom keypad) instead
+//  of pushing a navigation stack. Each transition uses
+//  `.blurReplace` so the swap feels like one continuous sheet
+//  morphing through three layouts rather than three separate
+//  screens.
+//
+//  Why `.blurReplace` and not a navigation push?
+//  ─────────────────────────────────────────────
+//  The sheet detent stays the same across steps. A navigation push
+//  would slide content sideways — reads as "deeper into unrelated
+//  detail." Blur-replace reads as "this same UI is now in a
+//  different mode" — right semantic for picker / config flows.
+//
+//  Key APIs
+//  ────────
+//  • `.transition(.blurReplace)` — iOS 17+. The swap effect.
+//  • `.contentTransition(.numericText())` — animates digit changes
+//    (price, duration) without a hard cut.
+//  • `.contentTransition(.symbolEffect)` — animates SF Symbol
+//    swaps.
+//  • `@ViewBuilder` switch over a `CurrentView` enum to drive
+//    which sub-view renders.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a sheet has 2–3 RELATED steps that should feel
+//  like one surface in different modes (subscription → period,
+//  filter → operator, search → results). For unrelated multi-step
+//  flows, a NavigationStack inside the sheet is clearer.
+//
+//  See also
+//  ────────
+//  • DynamicSheetView.swift — older horizontal-paged sheet
+//    pattern with custom geometry preferences (iOS 15 baseline).
+//  • DynamicHeightSheetViewiOS26.swift — wraps this demo with
+//    iOS 26's `onGeometryChange`-driven dynamic height.
+//
 import SwiftUI
 
 enum CurrentView {
@@ -63,7 +107,6 @@ struct DynamicFloatingSheetsiOS18View: View {
         .padding(20)
     }
 
-    @ViewBuilder
     func view1() -> some View {
         VStack(spacing: 12) {
             HStack {
@@ -114,7 +157,7 @@ struct DynamicFloatingSheetsiOS18View: View {
     }
 
     /// Grid Box view
-    @ViewBuilder
+    // swiftlint:disable:next function_body_length
     func view2() -> some View {
         VStack(spacing: 12) {
             HStack {
@@ -180,7 +223,7 @@ struct DynamicFloatingSheetsiOS18View: View {
     }
 
     /// Custom Keypad value view
-    @ViewBuilder
+    // swiftlint:disable:next function_body_length
     func view3() -> some View {
         VStack(spacing: 12) {
             HStack {

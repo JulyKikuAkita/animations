@@ -1,16 +1,55 @@
 //
 //  DynamicSheetView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 15+ baseline — uses custom `PreferenceKey`s for geometry
+//  rather than the iOS 16+ `onGeometryChange`. Predates the modern
+//  `[[DynamicHeightSheetViewiOS26]]` approach.
+//
+//  Learning point
+//  ──────────────
+//  Two-page horizontally-paging onboarding sheet (intro → login /
+//  signup) where the sheet's HEIGHT and CTA TEXT change per page,
+//  with keyboard awareness for the form page. The most pre-iOS-16
+//  thing in this folder: custom `PreferenceKey`s
+//  (`heightChangePreference`, `minXChangePreference`) publish
+//  geometry up the view tree because `onGeometryChange` didn't
+//  exist yet.
+//
+//  Read this file for the historical pattern (PreferenceKeys are
+//  still useful where iOS 16+ APIs don't cover); for new code,
+//  prefer [[DynamicHeightSheetViewiOS26]] — same problem, less
+//  ceremony.
+//
+//  Key APIs
+//  ────────
+//  • Custom `PreferenceKey`s — pre-iOS-16 way to bubble geometry
+//    measurements up the view tree.
+//  • `.scrollTargetBehavior(.paging)` — paged horizontal scroll
+//    between intro / form.
+//  • `.sheet(onDismiss:)` with state-reset closure — clean
+//    separation of "dismissed mid-flow" vs. "completed."
+//  • `.interactiveDismissDisabled()` — gates pull-to-dismiss while
+//    the form is partially filled.
+//  • `UIResponder` keyboard notifications — pre-iOS 26 way to
+//    track keyboard height.
+//  • `AttributedString` — rich-text legal copy.
+//
+//  How to apply
+//  ────────────
+//  Reach for the PreferenceKey pattern when you need geometry
+//  measurements pre-iOS 16, OR for cases the modern modifiers
+//  don't cover. For everything else, use the iOS 26 path.
+//
+//  See also
+//  ────────
+//  • DynamicHeightSheetViewiOS26.swift — modern replacement using
+//    `onGeometryChange` + custom `Animatable` modifier.
+//  • DynamicFloatingSheetsiOS18View.swift — multi-step in-place
+//    swap; different goal.
+//
 import SwiftUI
-
-struct DynamicSheetApp: App {
-    var body: some Scene {
-        WindowGroup {
-            DynamicSheetDemoView()
-        }
-    }
-}
 
 struct DynamicSheetDemoView: View {
     var body: some View {
@@ -232,7 +271,7 @@ struct DynamicSheetView: View {
 
                 if !hasAccount {
                     Text("""
-                    By signing up, you're agreeing to out
+                    By signing up, you're agreeing to our
                     **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)***
                     """)
                     .font(.caption)

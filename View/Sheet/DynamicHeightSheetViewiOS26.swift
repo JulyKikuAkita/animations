@@ -1,9 +1,54 @@
 //
-//  DynamicHeightSheetDemoView.swift
+//  DynamicHeightSheetViewiOS26.swift
 //  animation
 //
 //  Created on 8/31/2025
-// iOS 26 API
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ — `onGeometryChange`-driven detent updates inside a
+//  custom `Animatable` modifier.
+//
+//  Learning point
+//  ──────────────
+//  Sheet whose presentation detent ANIMATES SMOOTHLY as the inner
+//  content's height changes (e.g. a Picker reveals padding for
+//  its selection). The trick is to NOT use static `.height(...)`
+//  detents — instead a custom `Animatable` `SheetHeightModifier`
+//  reads the content's measured height via `onGeometryChange` and
+//  publishes it to a Binding that drives the detent.
+//
+//  Why a custom Animatable modifier?
+//  ─────────────────────────────────
+//  `.presentationDetents` accepts a static set; switching between
+//  set members is a hard cut. To get continuous interpolation,
+//  the modifier needs `Animatable` so SwiftUI can interpolate
+//  `animatableData` (the height) at frame rate. Without
+//  `Animatable`, the height jumps step-by-step.
+//
+//  Key APIs
+//  ────────
+//  • `.onGeometryChange(for: CGFloat.self)` (iOS 26) — measures
+//    the live content height.
+//  • Custom `Animatable` modifier — interpolates the height as a
+//    CGFloat so the detent updates smoothly.
+//  • `.presentationDetents([.height(...)])` — driven by the
+//    measured value via Binding.
+//  • `.smooth(duration:extraBounce:)` animation curve.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a sheet's content has variable size and you don't
+//  want the user to see "snap" between detents (filter sheets that
+//  expand on more options, edit forms with collapsible fields).
+//  For multi-step sheets that all fit one detent, see
+//  [[DynamicFloatingSheetsiOS18View]] — different problem.
+//
+//  See also
+//  ────────
+//  • DynamicFloatingSheetsiOS18View.swift — wrapped by this demo
+//    as one of the sample sheet bodies.
+//  • DynamicSheetView.swift — pre-iOS-26 baseline using custom
+//    PreferenceKeys instead of `onGeometryChange`.
+//
 import SwiftUI
 
 struct DynamicHeightSheetiOS26DemoView: View {
@@ -57,7 +102,7 @@ struct DynamicHeightSheetView: View {
         }
         .sheet(isPresented: $showSheet) {
             DynamicSheetiOS26(
-                /// avoid using bouncy animations; smooth or snappy works best for this sheet height udpate
+                /// avoid using bouncy animations; smooth or snappy works best for this sheet height update
                 animation: .smooth(duration: 0.35, extraBounce: 0)
             ) {
                 VStack(spacing: 15) {

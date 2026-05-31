@@ -1,9 +1,59 @@
 //
-//  iOS26/iOS18 compatible BottomSheet.swift
+//  iOS26+bottomSheet.swift
 //  animation
-// use onGeometryReader to get sheet's height
-// then adjust the floating tool bar position and opacity
-// use safeAreaBottomInset to start fading once the sheet pass center detent
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ baseline; iOS 26 path adds `.glassEffect` chrome via
+//  `if #available(iOS 26, *)` (lines ~108–113). Header comment was
+//  previously misnamed `iOS26/iOS18 compatible BottomSheet.swift`
+//  — fixed in this pass.
+//
+//  Inline tips (preserved):
+//    • Use `onGeometryChange` to get the sheet's height.
+//    • Adjust the floating toolbar's position + opacity from that.
+//    • Use `safeAreaBottomInset` to start fading once the sheet
+//      passes the centre detent.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Maps-style bottom sheet over a `Map` view, with a
+//  floating action toolbar (location button + search button) that
+//  fades + slides as the sheet rises. The trick: the toolbar is
+//  attached via `safeAreaInset(edge: .bottom)` to the Map, so its
+//  position is REACTIVE to the sheet's measured height (read via
+//  `onGeometryChange` on the sheet content). Once the sheet
+//  passes the centre detent the toolbar fades to zero.
+//
+//  Key APIs
+//  ────────
+//  • `.sheet(isPresented:)` + `.presentationDetents([.height(...), .large], selection:)`
+//    — multi-detent with programmatic selection.
+//  • `.presentationBackgroundInteraction(.enabled)` — keeps the
+//    Map interactive while the sheet is presented.
+//  • `.onGeometryChange(for: CGFloat.self)` — measures sheet height
+//    for toolbar fade math.
+//  • `safeAreaInset(edge: .bottom)` on the Map — anchors the
+//    toolbar above the sheet's lip.
+//  • `.tryGlassEffect()` (project helper, line ~82) — applies
+//    `.glassEffect` on iOS 26, no-op fallback otherwise.
+//
+//  How to apply
+//  ────────────
+//  Use as the template for any "Map + floating sheet + toolbar"
+//  layout. The `safeAreaInset` + measured-sheet-height + fade
+//  pattern generalises to other backgrounds (feeds, players,
+//  dashboards).
+//
+//  See also
+//  ────────
+//  • iOS26ResizingSheet.swift — advanced YouTube-Shorts variant
+//    that SHRINKS the underlying view rather than fading overlay
+//    chrome.
+//  • iOS26StyleFloatingSheet.swift — visual-polish wrapper that
+//    composes the same chrome modifiers into one modifier.
+//  • View/Map/View/CustomMapView.swift — sibling map demo with a
+//    paged carousel instead of a bottom sheet.
+//
 import MapKit
 import SwiftUI
 

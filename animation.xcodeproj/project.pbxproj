@@ -391,7 +391,7 @@
 		96CE85302EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */; };
 		96CE85352EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */; };
 		96D04B312C09A1960062520D /* StackedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D04B302C09A1960062520D /* StackedScrollView.swift */; };
-		96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */; };
+		96D265162E106E8F00B1D1EF /* iOS26+BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D265152E106E8F00B1D1EF /* iOS26+BottomSheet.swift */; };
 		96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */; };
 		96D495812BBD0E140011D5AA /* ReelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D495802BBD0E140011D5AA /* ReelView.swift */; };
 		96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */; };
@@ -895,7 +895,7 @@
 		96CE852F2EF0C512009AC09D /* ToolBarHeaderScrollEffectDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarHeaderScrollEffectDemoView.swift; sourceTree = "<group>"; };
 		96CE85342EF0D9D3009AC09D /* iOS26ToolbarButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS26ToolbarButtonStyle.swift; sourceTree = "<group>"; };
 		96D04B302C09A1960062520D /* StackedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedScrollView.swift; sourceTree = "<group>"; };
-		96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26-bottomSheet.swift"; sourceTree = "<group>"; };
+		96D265152E106E8F00B1D1EF /* iOS26+BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+BottomSheet.swift"; sourceTree = "<group>"; };
 		96D26A6C2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableTabbariOS26Style.swift; sourceTree = "<group>"; };
 		96D495802BBD0E140011D5AA /* ReelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelView.swift; sourceTree = "<group>"; };
 		96D496602BBFADD10011D5AA /* CircularCarouselSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCarouselSliderView.swift; sourceTree = "<group>"; };
@@ -2241,7 +2241,7 @@
 				ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */,
 				969222092D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift */,
 				968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */,
-				96D265152E106E8F00B1D1EF /* iOS26-bottomSheet.swift */,
+				96D265152E106E8F00B1D1EF /* iOS26+BottomSheet.swift */,
 				ABC31E272EA4AB820068C41D /* iOS26StyleFloatingSheet.swift */,
 				ABE1AE762E34B08B0090A2F0 /* PermissionSheetDemo.swift */,
 				ABA102202E1E24B6007ECA07 /* iOS26OnBoardingSheet.swift */,
@@ -3711,7 +3711,7 @@
 				ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
 				ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */,
-				96D265162E106E8F00B1D1EF /* iOS26-bottomSheet.swift in Sources */,
+				96D265162E106E8F00B1D1EF /* iOS26+BottomSheet.swift in Sources */,
 				96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */,
 				968B61052F2442D8003BCF16 /* SlideToCancelText.swift in Sources */,
 				96AE18FD2C045C9A0015155A /* ScrollablePageTabsColorView.swift in Sources */,
