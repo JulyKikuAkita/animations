@@ -1,6 +1,66 @@
 //
 //  RotatingIconEffectView.swift
 //  animation
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Button-driven sport-icon carousel with a deliberately staged,
+//  multi-step transition. Tapping NEXT/BACK doesn't just swap the
+//  centre icon — it choreographs three motions in sequence:
+//
+//    1. Active icon scales DOWN and fades; flanking icons reveal.
+//    2. Stack ROTATES one slot left/right (`rotationEffect` on
+//       the whole HStack).
+//    3. New centre icon scales UP, with a 2nd `rotationEffect`
+//       cancelling the parent rotation so the icon itself stays
+//       upright.
+//
+//  Two `.rotationEffect` calls per icon are load-bearing: one
+//  rotates the LAYOUT, the other counter-rotates the GLYPH so it
+//  reads naturally even as the layout pivots underneath. Compare
+//  with [[Paywall3DAnimation]] (also in this repo) which uses the
+//  same counter-rotation trick on a 3D-tilted ring.
+//
+//  Animation chaining via `Task`
+//  ─────────────────────────────
+//  `updateItem(_:)` (around line ~126) uses `Task` + `Task.sleep`
+//  to chain three `withAnimation` blocks back-to-back so one
+//  finishes before the next starts. The inline comment about
+//  "Swift 6 error" refers to the strict-concurrency requirement
+//  that mutations on `@MainActor` state happen via `await
+//  MainActor.run` or inside an actor-isolated context — the
+//  `Task { @MainActor in ... }` shape addresses that.
+//
+//  Key APIs
+//  ────────
+//  • `.rotationEffect(_:)` ×2 per icon — layout vs. glyph rotation.
+//  • `.scaleEffect(_, anchor:)` — anchored scale so icons appear
+//    to grow from the centre slot.
+//  • `.zIndex(_:)` — keeps the active icon above its neighbours.
+//  • `Task { @MainActor in ... }` + `Task.sleep` — sequential
+//    animation chaining without `withAnimation(_:completion:)`'s
+//    closure pyramid.
+//  • `.bouncy(duration:)` — spring curve with overshoot for the
+//    "settle into centre" feel.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when carousel transitions need to TEACH the user
+//  about each item (sports onboarding, feature spotlight, category
+//  picker). For scroll-driven instead of button-driven, see
+//  [[InfiniteHorizontalScrollViewDemo]] — different interaction
+//  model, similar visual outcome.
+//
+//  See also
+//  ────────
+//  • InfiniteHorizontalScrollViewDemo.swift — scroll-driven
+//    sibling carousel; auto-advances.
+//  • View/Carousel/* — the broader carousel zoo.
+//  • View/3DAnimation/Paywall3DAnimation.swift — same
+//    layout-vs-glyph counter-rotation trick on a 3D tilted ring.
+//
 import SwiftUI
 
 struct RotatingIconEffectDemoView: View {

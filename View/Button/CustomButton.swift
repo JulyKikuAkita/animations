@@ -1,7 +1,64 @@
 //
 //  CustomButton.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup
+//        Around line 56: `try? await Task.sleep(for: .seconds(0))`
+//        is a deliberate yield (lets SwiftUI commit the previous
+//        `taskStatus = ...` mutation BEFORE `wiggle.toggle()`
+//        triggers the keyframe animation). Replace with the more
+//        explicit `await Task.yield()` and add a one-line comment.
+//
+//  Learning point
+//  ──────────────
+//  Async-action button that morphs in place: tap → spinner → green
+//  checkmark on success / red X on fail / wiggle + popover on
+//  failure. No modal, no confirm — the button itself is the entire
+//  flow. Demonstrates how to compose iOS 17 `keyframeAnimator` with
+//  Swift Concurrency state mutations.
+//
+//  State machine (`TaskStatus` enum at module scope):
+//    .idle → .loading → (.success | .failed(message)) → .idle (after settle)
+//
+//  Flow per tap:
+//    1. `taskStatus = .loading`, isLoading = true → button shrinks
+//       to a circle, spinner appears.
+//    2. Caller's `task` closure runs; returns `.success` or
+//       `.failed(...)`.
+//    3. Result drives icon swap (✓ / ✗) via `.snappy` animation.
+//    4. If failed: `Task.yield()` (the sleep-zero), then
+//       `wiggle.toggle()` triggers the keyframe wiggle, then
+//       0.8s later the popover with the failure message.
+//    5. Reset to `.idle`, isLoading = false → button morphs back.
+//
+//  Key APIs
+//  ────────
+//  • `keyframeAnimator(initialValue:trigger:keyframes:)` — iOS 17.
+//    `KeyframeTrack(\.degrees) { CubicKeyframe(...) }` builds the
+//    wiggle as a sequence of rotation angles around 0°.
+//  • `.popover(isPresented:)` — iOS 16+. The failure message floats
+//    above the button without claiming the full screen.
+//  • `OpacityLessButtonStyle` — file-private style that suppresses
+//    the default press-opacity dim so the morph reads cleanly.
+//  • `.animation(.snappy, value:)` — chained per property to control
+//    which transitions feel snappy vs. smooth.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when an async action is ATOMIC enough that a modal
+//  feels heavy — login, save, send. The wiggle is the most-copied
+//  bit; the keyframe track is the reusable core.
+//
+//  See also
+//  ────────
+//  • SpinnerButton.swift — same async-button idea but multi-stage
+//    state (analyzing → processing → completed); compare the two
+//    state-machine flavors.
+//  • AnimatedConfirmationButtonDemoView.swift — when the action is
+//    DESTRUCTIVE and warrants a confirm step instead of inline morph.
+//
 import SwiftUI
 
 struct DemoButtonView: View {
@@ -54,7 +111,7 @@ struct CustomButton<ButtonContent: View>: View {
                 self.taskStatus = taskStatus
                 if isFailed {
                     try? await Task.sleep(for: .seconds(0))
-                    wiggle.toggle() // workarond for wiggle effect
+                    wiggle.toggle() // workaround for wiggle effect
                 }
                 try? await Task.sleep(for: .seconds(0.8))
                 if isFailed {

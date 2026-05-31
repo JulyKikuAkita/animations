@@ -1,6 +1,44 @@
 //
 //  CustomTabbariOS26.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  A bottom tap bar that combines THREE responsibilities — leading
+//  action cluster, inline search field, and a trailing main action —
+//  and reshapes itself based on (a) NavigationStack depth and (b)
+//  keyboard focus. Demonstrates how a single `GlassEffectContainer`
+//  can host views that each animate INDEPENDENTLY while still sharing
+//  one glass-morph pass.
+//
+//  Key APIs
+//  ────────
+//  • `GlassEffectContainer(spacing:)` — groups the leading cluster,
+//    search capsule, and main-action capsule under one liquid-glass.
+//  • `.safeAreaBar(edge:)` — reserves space at the bottom so the
+//    NavigationStack content doesn't disappear under the bar.
+//  • `ScaleModifier` (custom, `Animatable`) — animates a "bounce + blur"
+//    pulse via `loopProgress` derived from a monotonically-increasing
+//    `bounce` counter (the classic trick for re-triggerable animations).
+//  • `.blurFade(_:)` (project helper) — fade-with-blur transition used
+//    on icons that swap based on the expanded/keyboard state.
+//  • `@FocusState` + `.scaleEffect(anchor:)` — search expansion is just
+//    a scale collapse to the bar's leading edge.
+//
+//  How to apply
+//  ────────────
+//  Use when one bar must absorb several states (search vs idle vs
+//  in-detail) without spawning multiple bar variants. Treat the bar
+//  as a layout, not a screen — pass bindings for the state that
+//  drives shape changes.
+//
+//  See also
+//  ────────
+//  • CustomToolBarIOS26.swift — same idea applied to the TOP toolbar
+//    (title/subtitle morph) instead of the bottom bar.
+//  • iOS26+customSearch+FAB+Tabbar.swift — alternative when you want a
+//    FAB rather than an inline search field.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)

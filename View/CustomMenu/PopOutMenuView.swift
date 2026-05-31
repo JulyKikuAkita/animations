@@ -2,6 +2,74 @@
 //  PopOutMenuView.swift
 //  animation
 //
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 16+ — no iOS 26-specific APIs.
+//
+//  Learning point
+//  ──────────────
+//  Source-button-to-fullscreen menu with VELOCITY-AWARE drag
+//  dismissal: tap a small icon, the menu grows from that icon's
+//  on-screen frame to a fullscreen overlay; flick downward to
+//  dismiss. Unlike `.sheet`/`.fullScreenCover`'s built-in dismiss,
+//  the drag here scales the overlay's content while it's pulled,
+//  giving "physical drag the panel away" feedback.
+//
+//  Three-piece architecture:
+//    1. `PopOutView(header:content:)` — the source button. Two
+//       trailing closures: a compact header that's visible at all
+//       times, and the content that the menu reveals. Owns its own
+//       frame via `onGeometryChange`.
+//    2. `PopOutOverlayView` — the fullscreen overlay. Receives
+//       source frame + namespace, runs the morph from source rect
+//       to fullscreen, and owns the drag gesture.
+//    3. `.matchedGeometryEffect` shuffles the icon between the
+//       source button and the overlay header so it appears to
+//       "fly with" the morph instead of cross-fading.
+//
+//  Drag-dismiss mechanics:
+//    • `DragGesture()` writes to `dragOffset.height`.
+//    • Content inside the overlay scales by `1 - dragOffset/screenHeight`,
+//      so it shrinks as the user pulls down.
+//    • On `.onEnded`, both `translation.height` AND
+//      `predictedEndTranslation.height` are checked — a flick with
+//      high velocity dismisses even on small actual translation.
+//      This is the "feels right" piece compared to threshold-only
+//      dismissal.
+//
+//  Key APIs
+//  ────────
+//  • `.fullScreenCover(isPresented:)` opened inside
+//    `withTransaction(.disablesAnimations)` so the cover itself
+//    contributes no transition — the morph is the only motion.
+//  • `onGeometryChange(for: CGRect.self)` — frame capture for the
+//    source button.
+//  • `matchedGeometryEffect(id:in:)` — shared icon between source
+//    and overlay header.
+//  • `DragGesture` with `predictedEndTranslation` — velocity-aware
+//    dismiss check; the "predicted" value is what UIKit uses for
+//    flick gestures.
+//  • `.presentationBackground(.clear)` — strips the cover's
+//    default background so our morph layer is the only chrome.
+//  • Custom `solidBackground` extension — file-private helper for
+//    consistent menu surface styling.
+//
+//  How to apply
+//  ────────────
+//  Use for transient context menus that benefit from a flick-to-
+//  dismiss feel (settings panels, share sheets you control,
+//  filter trays). For binary "this either opens or closes" menus,
+//  the standard `.fullScreenCover` is enough.
+//
+//  See also
+//  ────────
+//  • MorphActionButtoniOS26.swift — sibling using the same morph
+//    technique but with content/expandedContent two-stage reveal
+//    instead of drag-dismiss.
+//  • PopMenuiOS26+DatePickerDemo.swift — popover variant for iOS 26
+//    using `.matchedTransitionSource` + `.navigationTransition(.zoom)`.
+//    The iOS 26 path is cleaner — prefer it when the deployment
+//    target allows.
+//
 import SwiftUI
 
 struct PopOutMenuDemoView: View {

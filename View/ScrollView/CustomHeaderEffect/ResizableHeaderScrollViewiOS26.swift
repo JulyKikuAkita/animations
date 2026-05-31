@@ -1,8 +1,61 @@
 //
-//  ResizableHeaderScrollView.swift
+//  ResizableHeaderScrollViewiOS26.swift
 //  animation
-// iOS 18 API: scroll View and Gesture can work seamlessly
-// prior to iOS 18: only either one works
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup
+//        1. Filename suffix `iOS26` misleads — this file uses NO
+//           iOS 26-only APIs (no `@available(iOS 26, *)`, no
+//           `.glassEffect`). The collapsing patterns are pure
+//           iOS 17+. Either drop the suffix or add iOS 26
+//           enhancements (`.glassEffect` chrome) to justify it.
+//
+//  Learning point
+//  ──────────────
+//  Catalogue of TWO collapsing-header layouts driven by progress
+//  interpolation (no gestures, no phase snaps — just smooth
+//  `(maximumHeight - minimumHeight) * progress` math):
+//
+//    • `Example1View` — generic collapsing-header scroll using
+//      `LazyVStack(pinnedViews: [.sectionHeaders])` so the section
+//      header docks at the top once the hero header has shrunk
+//      out of view.
+//    • `Example2View` — Xbox-style compact header where the hero
+//      title scales down + slides into the toolbar at a fixed
+//      height. Same progress math, different visual outcome.
+//
+//  The reusable `ResizableHeaderScrolliOS26View` (sic) generic
+//  abstracts the progress + header-frame plumbing so callers just
+//  pass `maximumHeight`, `minimumHeight`, and a header builder.
+//
+//  Key APIs
+//  ────────
+//  • `LazyVStack(pinnedViews: [.sectionHeaders])` — keeps a
+//    section-style sub-header pinned at top once the hero header
+//    has collapsed.
+//  • `onScrollGeometryChange` — drives the progress value.
+//  • Progress-driven `(maximumHeight - minimumHeight) * progress`
+//    — the linear collapse formula; no gestures, no phase snaps.
+//  • `.scrollClipDisabled()` — needed because the hero header
+//    extends above the scroll's frame during collapse.
+//
+//  How to apply
+//  ────────────
+//  Use when "header collapses smoothly with scroll" is enough and
+//  you don't need gesture-driven nuance ([[ResizableHeaderScrollView]])
+//  or snap-on-settle physics ([[ResizableHeaderIOS26View]]).
+//  Simplest of the three siblings; copy this if you don't have
+//  a strong reason for the others.
+//
+//  See also
+//  ────────
+//  • ResizableHeaderScrollView.swift — gesture-driven sibling
+//    (iOS 18+).
+//  • ResizableHeaderIOS26View.swift — snap-on-settle sibling with
+//    iOS 26 Liquid Glass chrome.
+//  • ScrollToHideHeaderView.swift — minimal hide-on-scroll;
+//    different mechanic.
 //
 import SwiftUI
 

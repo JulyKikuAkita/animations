@@ -1,7 +1,54 @@
 //
 //  SpinnerButton.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Multi-stage transactional button — unlike [[CustomButton]]'s
+//  binary success/fail, this one walks through several states with
+//  distinct visuals:
+//    .idle → .analyzing → .processing → (.failed | .completed)
+//
+//  Each state has its own label, icon, and tint, so the button is
+//  effectively a tiny progress indicator that happens to be shaped
+//  like a button. Two transition modifiers do the heavy lifting:
+//    • `.contentTransition(.interpolate)` on the Text — smoothly
+//      morphs glyph-to-glyph as the label changes.
+//    • `.transition(.blurReplace)` on each icon — fades out the
+//      old SF Symbol and blurs in the new one rather than a hard cut.
+//
+//  Spinner integration: while `isLoading == true`, an
+//  `AnimatedSpinnerView(...)` (helper defined elsewhere in the repo)
+//  renders in the icon slot. The state-driven icon takes over once
+//  loading flips to `false`.
+//
+//  Key APIs
+//  ────────
+//  • `.contentTransition(.interpolate)` — iOS 17+. Per-glyph morph
+//    instead of a fade-replace.
+//  • `.transition(.blurReplace)` — iOS 17+. Soft icon swap.
+//  • `.animation(_:value:)` chained per property — keeps each
+//    state-change's animation tuned independently (icon vs. label
+//    vs. tint).
+//  • `ButtonTransactionState` enum — owns its own `.color` /
+//    `.icon` / `.label` mappings so the body stays declarative.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a single tap triggers MULTI-PHASE async work and
+//  the user benefits from per-phase feedback (payment flow, KYC
+//  upload, model inference). For binary success/fail flows reach
+//  for [[CustomButton]] — it's lighter.
+//
+//  See also
+//  ────────
+//  • CustomButton.swift — binary-state cousin; compare to pick by
+//    state-machine complexity.
+//  • DrawerButtonView.swift — duplicate `ScaleButtonStyle`;
+//    consolidate.
+//
 import SwiftUI
 
 struct AnimatedSpinnerButtonDemoView: View {
@@ -84,16 +131,6 @@ struct AnimatedSpinnerButton: View {
         var hPadding: CGFloat = 15
         var vPadding: CGFloat = 10
         var animation: Animation = .easeInOut(duration: 0.2)
-    }
-}
-
-private struct ScaleButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .animation(.linear(duration: 0.2)) {
-                $0
-                    .scaleEffect(configuration.isPressed ? 0.9 : 1)
-            }
     }
 }
 

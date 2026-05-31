@@ -3,10 +3,77 @@
 //  animation
 //
 //  Created on 6/24/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Filename mismatch
+//        The `iOS26` suffix is misleading — this file uses NO
+//        iOS 26-only APIs (no `@available(iOS 26.0, *)`, no
+//        `.glassEffect`, no `.matchedTransitionSource`). It's
+//        iOS 16+ compatible. Either drop the `iOS26` suffix or add
+//        iOS 26 enhancements (Liquid Glass surface, zoom transition)
+//        to justify the name.
+//
+//  TODO: Typo in inline comment below — `morthButtonOverlay` should
+//        be `morphButtonOverlay`. Internal-only; just fix the
+//        comment when convenient.
+//
+//  Learning point
+//  ──────────────
+//  FAB → fullscreen morph: tap a small action button and it
+//  expands into a fullscreen panel via `.fullScreenCover`. Two
+//  innovations on the standard fullscreen-cover pattern:
+//
+//    1. `MorphingButton(label:content:expandedContent:)` takes
+//       THREE ViewBuilders. `content` is the initial sheet content
+//       (e.g. a confirmation prompt); `expandedContent` is what's
+//       revealed AFTER a follow-up interaction (e.g. a detailed form).
+//       Both swap via `.transition(.blurReplace)` for a soft
+//       in-cover content swap.
+//    2. The cover is opened inside a `Transaction(disablesAnimations: true)`
+//       so iOS's default sheet-rise animation is suppressed — the
+//       morph from button rect → fullscreen rect is the ONLY motion
+//       the user sees.
+//
+//  Inline comment on the demo: "the morphButtonOverlay works in
+//  list, section, overlay" — reminding callers that the trigger
+//  button is layout-agnostic. The geometry capture uses
+//  `onGeometryChange` + `geometryGroup()` so the morph anchor stays
+//  correct even when the source button is inside a List row.
+//
+//  Key APIs
+//  ────────
+//  • `.fullScreenCover(isPresented:)` — the presentation surface;
+//    deliberately neutered with `Transaction.disablesAnimations`.
+//  • `onGeometryChange(for: CGRect.self)` — captures the source
+//    button's frame for the morph anchor.
+//  • `geometryGroup()` — keeps geometry stable inside the morph;
+//    without it, child layouts shift mid-animation.
+//  • `.transition(.blurReplace)` — content↔expandedContent swap.
+//  • `Transaction(disablesAnimations: true) + withTransaction`
+//    — the cover-suppression trick.
+//
+//  How to apply
+//  ────────────
+//  Use when an action needs CONFIRMATION + DETAIL on the same
+//  surface (delete with confirm-and-form, share with picker, etc.).
+//  Stay with the inline-overlay pattern (see [[ExpandableMenuiOS26DemoView]])
+//  for lighter-weight cases.
+//
+//  See also
+//  ────────
+//  • PopOutMenuView.swift — sibling using `.fullScreenCover` +
+//    drag-to-dismiss. Picks the same overlay vs. menu trade-off
+//    differently.
+//  • AnimatedConfirmationButtonDemoView.swift (View/Button) —
+//    same FAB-to-fullscreen morph but uses an `ImageRenderer`
+//    snapshot for the source instead of a live geometry frame.
+//    Compare for which approach to copy.
+//  • ExpandableMenuiOS26DemoView.swift — inline-overlay alternative
+//    in the same folder.
+//
 import SwiftUI
 
-/// the morthButtonOverlay works in list, section, overlay
+/// the morphButtonOverlay works in list, section, overlay
 struct MorphActionButtonDemo: View {
     @State private var showExpandedContent: Bool = false
     var body: some View {

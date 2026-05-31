@@ -2,12 +2,50 @@
 //  CustomTabbarUIToolKitiOS26.swift
 //  animation
 //
-//  Created on 9/29/25.
-// Create Custom tab bar with glass effect using UIToolKit
-// to get more custom control
-// Exploring 2 ways to convert a custom view to segmented control
-// 1. Convert a swiftUI view to an UIImage within the segment control
-// 2. Utilize swifUI view api direclty
+//  Learning point
+//  ──────────────
+//  TWO TECHNIQUES for putting a custom SwiftUI cell inside a UIKit
+//  `UISegmentedControl` (which only natively accepts `String` or
+//  `UIImage` items):
+//
+//    Type 1 — `CustomTabbarUITK` (renders SwiftUI → `UIImage`):
+//      Uses `ImageRenderer` to rasterize the SwiftUI tab cell and
+//      hand it to `setImage(_:forSegmentAt:)`. Pros: zero hierarchy
+//      surprises, perfect alignment. Cons: image is STATIC — no
+//      dynamic content (e.g. live badges) and Dynamic Type changes
+//      need a re-render.
+//
+//    Type 2 — `CustomTabbarTypeTwo` (SwiftUI overlay over UIKit):
+//      Renders an empty segmented control, then `.overlay`s a real
+//      SwiftUI HStack on top. Pros: live SwiftUI content, animatable.
+//      Cons: alignment is on you, hit-testing is the UIKit control's.
+//
+//  Both demos compose with `GlassEffectContainer` + a glass-capsule
+//  trailing action button to land on iOS 26's liquid-glass aesthetic.
+//
+//  Key APIs
+//  ────────
+//  • `UIViewRepresentable` + `UISegmentedControl`
+//  • `ImageRenderer(content:)` — SwiftUI → CGImage/UIImage rasterizer.
+//  • `.glassEffect(.regular.interactive(), in: .capsule)`
+//  • `.toolbarVisibility(.hidden, for: .tabBar)` per Tab — to hide the
+//    system tab bar while keeping `TabView` selection behavior.
+//  • `.safeAreaBar` / `.safeAreaInset` — reserves layout space for the
+//    custom bar.
+//
+//  How to apply
+//  ────────────
+//  Pick Type 1 when the cell is decorative (icon + static label) and
+//  Type 2 when the cell needs LIVE SwiftUI (animated symbols, live
+//  badges, conditional accents). When neither fits, drop to a fully
+//  custom HStack — see CustomTabbariOS26.swift.
+//
+//  See also
+//  ────────
+//  • CustomMorphingTabBarIOS26.swift — same UIKit bridge, generic
+//    `MorphingTabProtocol`, paired with an expanding action grid.
+//  • CustomMorphingTab+BottomBar+IOS26.swift — same UIKit bridge,
+//    paired with a NAV-driven 2-state morph.
 //
 
 import SwiftUI

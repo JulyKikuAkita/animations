@@ -3,7 +3,77 @@
 //  animation
 //
 //  Created on 1/28/26.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Filename mismatch
+//        The `IOS26` suffix is misleading — this file uses NO
+//        iOS 26-only APIs (no `@available(iOS 26.0, *)`, no
+//        `.glassEffect`, no `ConcentricRectangle`). It compiles on
+//        iOS 17.1+ (gating APIs are `onGeometryChange` and
+//        `UIGestureRecognizerRepresentable`). Either drop the
+//        `IOS26` suffix or add iOS 26 enhancements to justify the
+//        name. Compare with `View/CustomMenu/CustomSideMenu+iOS26.swift`,
+//        which DOES use `ConcentricRectangle` and earns its suffix.
+//
+//  Learning point
+//  ──────────────
+//  Drag-to-reorder grid with LIVE preview that follows the finger:
+//  long-press a cell → a floating preview "lifts" out and tracks
+//  the drag → cells underneath shuffle aside as the preview passes
+//  over them → release drops the cell into the new slot.
+//
+//  Generic over THREE type parameters
+//  ──────────────────────────────────
+//  `SortableIOS26GridView<Content, DraggingPreview, Data>`:
+//    • `Content` — what each grid cell looks like at rest.
+//    • `DraggingPreview` — what the floating "I'm being dragged"
+//      view looks like (often a scaled-up version of `Content`).
+//    • `Data` — a `RandomAccessCollection` of items conforming to
+//      `SortableGridProtocol` (provides `id` + a mutable `position:
+//      CGRect` for the helper to write back to).
+//  This is the price of reusability — three closures plus a binding
+//  to the data — but the call site stays clean.
+//
+//  Mechanics
+//  ─────────
+//    1. Each cell records its own `frame(in: .named(coordSpace))`
+//       via `onGeometryChange` and writes back to the model's
+//       `position`.
+//    2. Long-press lifts the dragging preview; subsequent pan
+//       updates set its `offset` directly off
+//       `gesture.translation`.
+//    3. As the preview moves, the gesture coordinator computes the
+//       overlap with each cell's recorded `position`. The cell with
+//       the largest overlap is the swap target; we swap data items
+//       and animate the move.
+//    4. Coordinate-space conversion via
+//       `context.converter.convert(_:from:to:)` makes the gesture's
+//       UIKit coords agree with the SwiftUI named coordinate space.
+//
+//  Key APIs
+//  ────────
+//  • `UIGestureRecognizerRepresentable` (iOS 18+) — bridge to
+//    `UILongPressGestureRecognizer`.
+//  • `coordinateSpace(.named("..."))` — the shared frame-of-
+//    reference for cell geometry and gesture location.
+//  • `onGeometryChange(for: CGRect.self)` — frame capture per cell.
+//  • `SortableGridProtocol` — file-private protocol bundling
+//    `id: Hashable` and `position: CGRect` so the helper can write
+//    layout state back into the model.
+//
+//  How to apply
+//  ────────────
+//  Use when reorder needs a LIVE follow-finger preview (Photos
+//  arrange-mode, Home-Screen icon edit). For simpler cases without
+//  a preview, [[GridView]] is a one-modifier solution. For
+//  multi-select drag-select (lasso), [[Grid+PanGestureView]].
+//
+//  See also
+//  ────────
+//  • GridView.swift — simplest reorder, native `.draggable`.
+//  • Grid+PanGestureView.swift — drag-select with auto-scroll;
+//    same UIKit-bridge philosophy, different interaction.
+//
 import SwiftUI
 
 protocol SortableGridProtocol: Identifiable {

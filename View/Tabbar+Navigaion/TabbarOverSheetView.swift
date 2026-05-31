@@ -1,8 +1,55 @@
 //
 //  TabbarOverSheetView.swift
 //  animation
-//  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
-//  Use AnimationApp2 to test, preview crash with sceneDelegate
+//
+//  ⚠️  WIRED INTO THE APP: referenced from `animationApp.swift` as
+//      `AnimationTabbar`. Don't delete or rename without updating
+//      the app entry point and the pbxproj.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Maps-style tab bar that ALWAYS SITS ABOVE a presented
+//  bottom sheet (not behind it). Achieved by hosting the tab bar in
+//  a SECOND UIWindow (set up in `SceneDelegate.addTabBar`, called
+//  on appear), so the SwiftUI sheet's window can come and go without
+//  occluding the bar. The `.tabSheet` modifier is the wiring layer
+//  that drives the sheet's `presentationDetent` from
+//  `WindowSharedModelTabbar` (an `@Observable` shared across both
+//  windows via environment).
+//
+//  Why preview crashes with `@Environment(SceneDelegate.self)`:
+//    Previews don't construct a full UIApplicationDelegate, so the
+//    SceneDelegate isn't injected. The `#Preview` here uses
+//    `@UIApplicationDelegateAdaptor(AppDelegate.self)` and provides
+//    a fresh `WindowSharedModelTabbar()` to dodge the crash, with
+//    the `.onAppear { sceneDelegate.addTabBar(...) }` call commented
+//    out. To run the real two-window setup, use the app target.
+//
+//  Key APIs
+//  ────────
+//  • `@UIApplicationDelegateAdaptor(AppDelegate.self)` + custom
+//    `SceneDelegate` that creates a second `UIWindow` for the tab bar.
+//  • `@Observable class WindowSharedModelTabbar` — passed via
+//    `.environment(_)`, observed in BOTH windows.
+//  • `.tabSheet(initialHeight:sheetCornerRadius:)` (project helper) —
+//    presents a sheet whose detent is bound to shared state.
+//  • `MapKit.Map(initialPosition: .region(.applePark))` — the primary
+//    surface UNDER the sheet.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when content has a primary spatial surface (map,
+//  camera viewport, video) and tabs must remain reachable while a
+//  detent-controlled sheet is active. Don't reach for it for normal
+//  app navigation — a regular TabView is simpler and has fewer
+//  windowing edge cases.
+//
+//  See also
+//  ────────
+//  • iOS26/iOS26+tabbarSheet.swift — the iOS 26 evolution of this
+//    pattern using native sheet detents WITHOUT the second-window
+//    trick. Same idea, much less ceremony.
+//
 import MapKit
 import SwiftUI
 

@@ -1,7 +1,77 @@
 //
 //  ExpandableWheelPickerView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup
+//        Lines ~88–89 and ~264–268 contain commented-out code
+//        (`LeadingSideWheelTextView` variant + an old preview
+//        block). Either uncomment + label as a side-by-side variant
+//        or delete; keeping commented code blocks rots over time.
+//
+//  Learning point
+//  ──────────────
+//  Vertical wheel-picker that EXPANDS from a button into a
+//  full-screen overlay with center-aligned items, then collapses
+//  back when the user picks. Two demos (`ExpandableWheelPickerDemoView`)
+//  show the same picker in different alignments — read them
+//  side-by-side.
+//
+//  Layout trick
+//  ────────────
+//  The picker is a vertical `ScrollView` with `safeAreaPadding(.vertical)`
+//  applied so the FIRST and LAST items can come to rest at viewport
+//  centre — that's how `scrollPosition(id:)` snaps to the selected
+//  item when items are paged. Without the padding the first/last
+//  items can never sit at centre.
+//
+//  Per-item visual effect
+//  ──────────────────────
+//  Each item uses `.visualEffect` to read its scroll-space minY,
+//  derive a 0...1 progress relative to centre, then apply
+//  `rotationEffect` (gentle tilt for off-centre items) + `opacity`
+//  fade so distant items recede. This is the radial-feel layer on
+//  top of the otherwise-flat scroll.
+//
+//  Staged appearance
+//  ─────────────────
+//  Tap-to-expand chains three animations via `.task` +
+//  `await Task.sleep`:
+//    1. Backdrop fades in (`.ultraThinMaterial`).
+//    2. Wheel scrolls to the current selection.
+//    3. Items fade/scale in around centre.
+//  Reversed on collapse. The sleep durations MUST match the
+//  animation durations or the next stage starts before the previous
+//  finishes visually.
+//
+//  Key APIs
+//  ────────
+//  • `.scrollPosition(id:)` + `.scrollTargetBehavior(.viewAligned)`
+//    — snap-per-item with a Binding to the active id.
+//  • `safeAreaPadding(.vertical, ...)` — half-viewport padding so
+//    edges of the list can rest at centre.
+//  • `.visualEffect { content, proxy in ... }` — the per-item
+//    rotation + opacity math driven by scroll-space minY.
+//  • `.task` + `await Task.sleep(for: .seconds(...))` — sequential
+//    animation chaining without `withAnimation(_:completion:)`'s
+//    closure pyramid.
+//  • `.ultraThinMaterial` background.
+//
+//  How to apply
+//  ────────────
+//  Use when a list-style picker would feel too utilitarian and a
+//  full-screen sheet too heavy. The expand-from-button choreography
+//  reads as "this is the SAME control, in detail mode."
+//
+//  See also
+//  ────────
+//  • CircularWheelPicker.swift — sibling wheel pattern; geometric
+//    arc layout instead of vertical+visualEffect tilt.
+//  • PickerStylesGesturesView.swift — composes this view as a
+//    selector for choosing which gesture demo to run.
+//  • TimePickerView.swift — column-based `.wheel`-style picker.
+//
 import SwiftUI
 
 struct ExpandableWheelPickerDemoView: View {
@@ -85,8 +155,8 @@ private struct CustomWheelPickerView: View {
             ScrollView(.vertical) {
                 VStack(spacing: 0) {
                     ForEach(texts, id: \.self) { text in
-                        WheelTextView(text, size: size)
-//                        LeadingSideWheelTextView(text, size: size)
+                        wheelTextView(text, size: size)
+//                        leadingSideWheelTextView(text, size: size)
                     }
                 }
                 .scrollTargetLayout() // required to sync with scroll position
@@ -119,7 +189,7 @@ private struct CustomWheelPickerView: View {
                 .opacity(showScrollview ? 0 : 1)
                 .ignoresSafeArea(.all, edges: showContents ? [] : .all)
 
-            CloseButton()
+            closeButton()
         }
         .task {
             /// Doing actions only for the first time
@@ -150,7 +220,7 @@ private struct CustomWheelPickerView: View {
 
     /// Close expanded wheel view
     @ViewBuilder
-    func CloseButton() -> some View {
+    func closeButton() -> some View {
         Button {
             Task {
                 /// Order is import, revert the animation
@@ -186,7 +256,7 @@ private struct CustomWheelPickerView: View {
     }
 
     @ViewBuilder
-    private func WheelTextView(_ text: String, size: CGSize) -> some View {
+    private func wheelTextView(_ text: String, size: CGSize) -> some View {
         GeometryReader { proxy in
             let width = proxy.size.width
 
@@ -238,7 +308,7 @@ private struct CustomWheelPickerView: View {
     }
 
     @ViewBuilder
-    private func LeadingSideWheelTextView(_ text: String, size: CGSize) -> some View {
+    private func leadingSideWheelTextView(_ text: String, size: CGSize) -> some View {
         GeometryReader { proxy in
             let width = proxy.size.width
 

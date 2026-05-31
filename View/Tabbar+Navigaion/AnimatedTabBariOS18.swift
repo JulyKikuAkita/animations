@@ -1,7 +1,45 @@
 //
 //  AnimatedTabBariOS18.swift
 //  animation
-// Recreate animated tab bar using iOS18 api
+//
+//  Learning point
+//  ──────────────
+//  iOS 18 take on the per-tab `symbolEffect` recipe: each tab icon
+//  picks ITS OWN animation style (bounce / breathe / wiggle / etc.)
+//  triggered exactly once on selection. The trick — fire the trigger,
+//  then immediately clear it inside a `Transaction(disablesAnimations: true)`
+//  so the symbol effect runs once and doesn't loop.
+//
+//  Two tab-bar-hide strategies are sketched side-by-side:
+//    • `@Observable class TabBarData` (active) — class-level Bool
+//      passed via `.environment`; persists per-process, NOT across
+//      app launches; works in Xcode previews.
+//    • `@SceneStorage("hideTabBar")` (commented out) — persists the
+//      flag across launches but does NOT work in previews.
+//
+//  Key APIs
+//  ────────
+//  • `Tab(value:) { ... }` — iOS 18 typed-value tab API.
+//  • `.symbolEffect(.bounce.byLayer.up / .down, value:)`
+//  • `.symbolEffect(.breathe.byLayer, value:)`
+//  • `.symbolEffect(.wiggle.left / .backward, options: .speed(_), value:)`
+//  • `Transaction().disablesAnimations = true` + `withTransaction` —
+//    the "fire-and-forget" pattern for one-shot symbol effects.
+//  • `@Observable` + `.environment(_)` — per-process tab-bar visibility.
+//  • `.toolbarVisibility(_:for: .tabBar)` — animatable hide.
+//  • `.ignoresSafeArea(.keyboard)` — keyboard auto-hides the bar.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when tab icons should feel "alive" on selection. Pick
+//  ONE animation per tab — applying every effect to every tab muddies
+//  the selection feedback.
+//
+//  See also
+//  ────────
+//  • AnimatedTabView.swift — the iOS 17 equivalent. Same idea but uses
+//    deprecated `.tabItem` and a togglable bounce-direction picker.
+//
 
 import SwiftUI
 

@@ -2,7 +2,44 @@
 //  iOS26SegmentedTabBar.swift
 //  animation
 //
-//  Created on 6/30/25.
+//  Learning point
+//  ──────────────
+//  A horizontally-scrollable, drag-to-select segmented control modeled
+//  on the iOS Camera mode picker (TIME-LAPSE / SLO-MO / PHOTO / …).
+//  The segment under the center is "selected"; you can either drag the
+//  strip directly or tap to scroll a label into the center. The active
+//  capsule is rendered as a separate overlay so it can carry a glass
+//  effect that the rest of the strip doesn't.
+//
+//  Key APIs
+//  ────────
+//  • `ScrollView(.horizontal)` + `.scrollPosition(id:anchor: .center)`
+//    + `.scrollTargetLayout()` — scroll-snap behavior anchored to
+//    the active item.
+//  • `.scrollDisabled(true)` — system scroll is disabled; the parent
+//    `DragGesture` drives scrolling instead, so we control the feel.
+//  • `DragGesture(minimumDistance: 0)` + `@GestureState isActive` —
+//    detects gesture-in-progress for the "expand mask" effect.
+//  • `.mask { Capsule().padding(.horizontal: ...) }` — the trick that
+//    makes the strip's background visually grow when the user is
+//    interacting (extra horizontal padding = larger mask area).
+//  • `.onGeometryChange(for: CGSize.self)` per label — captures each
+//    label's intrinsic width so the active capsule can size to match.
+//  • `.backgroundExtensionEffect()` — extends the dark background under
+//    safe areas without `.ignoresSafeArea` clobbering layout.
+//
+//  How to apply
+//  ────────────
+//  Pick this when the tabs ARE the primary input (camera modes, story
+//  filters, "type of post" pickers) — interaction-heavy and visual.
+//  For navigation-style tabs use a TabView; this pattern is overkill
+//  there.
+//
+//  See also
+//  ────────
+//  • SearchableTabbariOS26Style.swift — same drag-driven philosophy
+//    applied to a BOTTOM tab bar, with an expandable search field.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)

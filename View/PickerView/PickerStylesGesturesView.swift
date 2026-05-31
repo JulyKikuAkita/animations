@@ -1,7 +1,72 @@
 //
 //  PickerStylesGesturesView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Animated catalog of UI gestures rendered inside a mock iPhone
+//  frame: the user picks a gesture from a wheel-style selector
+//  (composing [[ExpandableWheelPickerView]]) and the iPhone mockup
+//  loops a representative animation for that gesture — tap,
+//  long-press, vertical swipe, horizontal swipe, pinch. Useful as
+//  a "what does each gesture FEEL like" reference card more than
+//  as a runtime control.
+//
+//  Self-repeating animation pattern
+//  ────────────────────────────────
+//  The animation runs forever via a `.task` that calls a recursive
+//  `animationEffect()` async function. Each iteration:
+//    1. `withAnimation` for the "press" / "swipe" / "pinch" phase.
+//    2. `await Task.sleep(for: .seconds(...))` for the dwell.
+//    3. `withAnimation` for the release.
+//    4. `await Task.sleep(...)` again.
+//    5. Recurse.
+//  The recursion is guarded by a Bool that the gesture-picker
+//  binding flips to `false` before swapping demos, so the in-flight
+//  Task exits cleanly. Same general shape as
+//  [[View/LandingPages/RotatingIconEffectView]]'s `updateItem`
+//  pattern.
+//
+//  `Interactions<Content>` generic
+//  ───────────────────────────────
+//  The wrapper that owns the animation state machine. Generic over
+//  `Content: View` so any iPhone-mockup body can be dropped in
+//  (the demo uses a static iPhone frame, but you could swap in a
+//  device screenshot or live app preview).
+//
+//  Key APIs
+//  ────────
+//  • `.task` + `await Task.sleep(for: .seconds(...))` — sequential
+//    animation chaining without nested `withAnimation(_:completion:)`
+//    closures.
+//  • `withAnimation(.easeIn / .snappy / .linear) { ... }` — picked
+//    per-phase to match the gesture's feel (snappy for taps,
+//    linear for swipes).
+//  • `.scaleEffect`, `.offset`, `.blur` — the per-gesture transform
+//    set; only some apply per gesture (pinch = scale; swipe =
+//    offset; tap = scale + brief blur).
+//  • `InteractionsEffect` enum — picks which set of transforms
+//    runs in the next iteration.
+//  • Composes [[ExpandableWheelPickerView]] as the demo's selector
+//    — same folder, no cross-folder dependency.
+//
+//  How to apply
+//  ────────────
+//  Use as inspiration for "what gestures does my UI support?"
+//  onboarding screens. The recursive-task animation pattern is the
+//  reusable bit — copy it for any "loop a self-explanatory
+//  animation forever until the user moves on" UI.
+//
+//  See also
+//  ────────
+//  • ExpandableWheelPickerView.swift — the picker UI used here as
+//    the gesture selector.
+//  • View/LandingPages/RotatingIconEffectView.swift — same
+//    `Task { @MainActor in ... }` recursive-animation chaining
+//    pattern.
+//
 import SwiftUI
 
 struct GesturesDemoView: View {
@@ -52,15 +117,6 @@ struct GesturesDemoView: View {
                     }
                 }
             }
-//            Button("Update Gesture") {
-//                showView = false
-//                Task {
-//                    if let updated = InteractionsEffect.mapEffect(text: config.text) {
-//                        effect = updated
-//                    }
-//                    showView = true
-//                }
-//            }
         }
         .customWheelPicker($config, items: pickerValues)
         .padding()

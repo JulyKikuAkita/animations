@@ -2,7 +2,39 @@
 //  CustomMorphingTabBarIOS26.swift
 //  animation
 //
-//  Created on 2/11/26.
+//  Learning point
+//  ──────────────
+//  A glass tab bar paired with a "+" floating action button that EXPANDS
+//  into a 4-column grid of quick actions (think Apple Music / iMovie
+//  edit menus). Tapping "+" toggles `isExpanded`; the whole grid morphs
+//  out of the same liquid-glass surface as the tab bar.
+//
+//  Key APIs
+//  ────────
+//  • `ExpandableGlassMenuContainer` (custom) — the project's helper that
+//    drives the open/close progress and re-shapes the container.
+//  • `GlassEffectContainer` — wraps the action grid so each button shares
+//    one glass pass and morphs together.
+//  • `.glassEffect(.regular.interactive(), in:)` — per-button glass with
+//    touch-following highlight; reused in `PlanGlassButtonEffect`.
+//  • `UIViewRepresentable` over `UISegmentedControl` — same UIKit-bridge
+//    pattern as the other morph demos, generic over any `MorphingTabProtocol`.
+//  • `withAnimation(.bouncy(duration:extraBounce:))` — drives the FAB toggle.
+//
+//  How to apply
+//  ────────────
+//  Use when you need a quick-action surface anchored to the tab bar
+//  WITHOUT replacing the tab bar (the bar stays usable while expanded).
+//  Good for editor / compose flows that need 4–12 secondary actions.
+//
+//  See also
+//  ────────
+//  • CustomMorphingTab+BottomBar+IOS26.swift — the other glass-morph
+//    variant: same UISegmentedControl bridge, but morphs by NAV DEPTH
+//    rather than by an explicit FAB tap.
+//  • iOS26+customSearch+FAB+Tabbar.swift — a third FAB style that lives
+//    INSIDE the system tab bar via `Tab(role: .search)`.
+//
 import SwiftUI
 
 private enum MorphTabTab: String, MorphingTabProtocol {

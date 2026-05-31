@@ -1,15 +1,58 @@
 //
 //  InfiniteHorizontalScrollViewDemo.swift
 //  animation
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ — uses `onScrollGeometryChange` and the iOS 18
+//  `.scrollTransition(.interactive.threshold(.centered))` API.
+//
+//  Learning point
+//  ──────────────
+//  Auto-scrolling carousel with two interlocking effects:
+//    1. Cards live in an `InfiniteScrollHelper`-backed ScrollView
+//       (project helper at `Helpers/Transition/InfiniteScrollHelper.swift`)
+//       that duplicates content to fake an endless loop.
+//    2. Each card uses `.scrollTransition(.interactive)` to rotate
+//       and offset based on its scroll-position phase, so the
+//       active card "pops" forward while neighbours recede.
+//  Above the carousel, a custom `TitleTextRenderer` (project helper)
+//  pulls the title in glyph-by-glyph as the carousel settles.
+//
+//  Auto-advance: a Combine `Timer.publish(every: 3).autoconnect()`
+//  fires every 3 seconds, calls `scrollPosition.scrollTo(...)` on the
+//  next card, and a `blurOpacityEffect` extension fades the current
+//  card softly between transitions.
+//
+//  Key APIs
+//  ────────
+//  • `.scrollTransition(.interactive.threshold(.centered), axis: .horizontal)`
+//    — iOS 18. Fires the closure with a phase value as each card
+//    crosses the viewport centre.
+//  • `.containerRelativeFrame(.vertical)` — pins each card to a
+//    consistent vertical extent inside its container.
+//  • `onScrollGeometryChange(for:)` — drives the active-card index
+//    state without onChange ladders.
+//  • `Timer.publish(every:on:in:).autoconnect()` — auto-advance.
+//  • `InfiniteScrollHelper` (project) — duplicates content for the
+//    seamless loop; see `Helpers/Transition/InfiniteScrollHelper.swift`.
+//
+//  How to apply
+//  ────────────
+//  Use whenever you want a hero carousel that auto-rotates AND
+//  responds to user touch. The duplicate-content loop is cheaper
+//  than head/tail rebound (compare with
+//  `View/Carousel/InfiniteCarouselView.swift`).
+//
+//  See also
+//  ────────
+//  • View/Carousel/InfiniteCarouselView.swift — alternate
+//    seamless-loop technique using head/tail duplicates.
+//  • View/Carousel/InfiniteLoopingScrollView.swift — UIKit
+//    `UIScrollViewDelegate` reach-through for the same goal.
+//  • RotatingIconEffectView.swift — sibling carousel in this
+//    folder; button-driven instead of auto-scroll.
+//
 import SwiftUI
-
-struct InfiniteHorizontalScrollApp: App {
-    var body: some Scene {
-        WindowGroup {
-            InfiniteHorizontalScrollViewDemo()
-        }
-    }
-}
 
 struct InfiniteHorizontalScrollViewDemo: View {
     var body: some View {

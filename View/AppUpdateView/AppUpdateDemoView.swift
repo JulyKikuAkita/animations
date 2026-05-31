@@ -3,7 +3,71 @@
 //  animation
 //
 //  Created on 10/11/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup candidates
+//        1. The illustration overlay locks itself to the actual
+//           asset dimensions (`399 × 727`, `logoSize: 100×100`,
+//           `logoPlacement: 173×365`). If `Image(.appUpdate)` is
+//           ever swapped for a different asset, the logo will land
+//           in the wrong spot. Document the dependency or replace
+//           with a SafeAreaInset-style overlay that doesn't depend
+//           on absolute pixel coordinates.
+//        2. The mock at the bottom (`mockcheckIfAppUpdateAvailable`)
+//           is `#if DEBUG`-gated — fine. But the call site uses it
+//           unconditionally, so a release build wouldn't have a
+//           mock to fall back on. If this file ever ships, replace
+//           with a real `checkIfAppUpdateAvailable` implementation
+//           in `Helpers/Managers/VersionCheckManager.swift`.
+//
+//  Learning point
+//  ──────────────
+//  In-app update prompt: on view appear, ask `VersionCheckManager`
+//  whether a newer build is available; if yes, present a sheet with
+//  "Update" / "No Thanks" buttons (or just "Update" for forced
+//  updates). The headline UX trick is the FORCED variant:
+//  `interactiveDismissDisabled(forcedUpdate)` blocks pull-to-dismiss
+//  AND hides the "No Thanks" button, so a critical-fix release can't
+//  be skipped by the user.
+//
+//  Forced-update detection is content-based: the demo treats
+//  `releaseNotes.contains("critical fix")` as a force-trigger.
+//  Real apps would use a server-side flag instead — keep that in
+//  mind if you copy this pattern.
+//
+//  Key APIs
+//  ────────
+//  • `.sheet(item: ...)` — drives presentation off the optional
+//    `updateAppInfo` so the sheet only appears when the version
+//    check actually returns a result.
+//  • `.interactiveDismissDisabled(_:)` — gates pull-down dismiss;
+//    paired with hiding the No-Thanks button to enforce the update.
+//  • `.presentationDetents([.height(450)])` — fixed-height sheet
+//    rather than full medium/large; matches the illustration's
+//    intrinsic size.
+//  • `.presentationBackground(.background)` — strips the default
+//    sheet background so the illustration's edges read cleanly.
+//  • `@Environment(\.openURL)` — opens the App Store URL without
+//    a UIApplication import.
+//  • `isiOS26OrLater` — project helper; iOS 26 changed sheet inset
+//    behaviour, so the bottom padding / `ignoresSafeArea` branch.
+//
+//  How to apply
+//  ────────────
+//  Wire `VersionCheckManager` to your real backend (App Store
+//  Connect API, custom service, etc.), then drop this view into
+//  your root scene. Use `forcedUpdate: true` ONLY for critical
+//  fixes — blocking dismissal is a heavy hand and degrades UX if
+//  overused.
+//
+//  See also
+//  ────────
+//  • AppRatingDemoView.swift — sibling demo for the in-app rating
+//    prompt; same folder, different intent.
+//  • Helpers/Managers/VersionCheckManager.swift — the manager this
+//    file consumes. Production version check logic should live
+//    there, not here.
+//
 import SwiftUI
 
 struct AppUpdateDemoView: View {
@@ -76,7 +140,7 @@ struct AppUpdateView: View {
                     .font(.title.bold())
 
                 Text(
-                    "There is an app update availblable from\nversion **\(appInfo.currentVersion)** to version **\(appInfo.availableVersion)**!"
+                    "There is an app update available from\nversion **\(appInfo.currentVersion)** to version **\(appInfo.availableVersion)**!"
                 )
                 .font(.callout)
                 .multilineTextAlignment(.center)

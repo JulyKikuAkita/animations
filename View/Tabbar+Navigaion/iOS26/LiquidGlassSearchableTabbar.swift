@@ -2,8 +2,42 @@
 //  LiquidGlassSearchableTabbar.swift
 //  animation
 //
-//  Created on 6/21/25.
-
+//  Learning point
+//  ──────────────
+//  Apple Music-style tab bar with a "mini player" pinned ABOVE the
+//  bar (via `.tabViewBottomAccessory`) that zoom-expands into a full
+//  screen when tapped — using `matchedTransitionSource` +
+//  `.navigationTransition(.zoom(...))`. Also branches on iOS version
+//  to keep an iOS 18 fallback (manual overlay + safe-area padding).
+//
+//  Key APIs
+//  ────────
+//  • `.tabViewBottomAccessory { ... }` — iOS 26 native API for a
+//    persistent accessory pinned just above the tab bar. The bar
+//    auto-resizes to make room.
+//  • `.tabBarMinimizeBehavior(.onScrollDown)` — auto-hide the tab
+//    bar (and its accessory) on downward scroll.
+//  • `Tab(role: .search)` — the system's reserved trailing search
+//    slot; pairs with `.searchable(text:placement: .toolbar)` inside.
+//  • `matchedTransitionSource(id:in:)` + `.navigationTransition(.zoom(sourceID:in:))`
+//    — the iOS 18 / 26 zoom transition primitives that grow a small
+//    source view into the destination's hero.
+//  • `.fullScreenCover(isPresented:)` — destination for the zoom.
+//
+//  How to apply
+//  ────────────
+//  Use this when you have a persistent secondary control (mini player,
+//  active call, current order) that needs to (a) stay visible across
+//  tab switches and (b) zoom-expand into a detail. Don't use it for
+//  ad-hoc banners — the accessory is high-signal real estate.
+//
+//  See also
+//  ────────
+//  • iOS26+minimizedTabbar.swift — focused demo of `.tabBarMinimizeBehavior`
+//    in isolation, with both native and manual implementations.
+//  • iOS26+customSearch+FAB+Tabbar.swift — `.tabViewBottomAccessory`
+//    re-purposed (overload-of-meaning: secondary surface vs FAB panel).
+//
 import SwiftUI
 
 #if canImport(FoundationModels)

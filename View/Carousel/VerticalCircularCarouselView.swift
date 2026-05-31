@@ -1,7 +1,51 @@
 //
 //  VerticalCircularCarouselView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Vertical carousel where each card rotates around its LEADING edge
+//  as it scrolls — the cards swing open like pages of a Rolodex. The
+//  whole thing sits anchored to the left of the viewport so the
+//  rotation pivot lines up with the screen edge, which is what gives
+//  the "orbiting around an off-screen point" feel.
+//
+//  Mechanics:
+//    • `safeAreaPadding(.vertical, ...)` — half-viewport padding so
+//      the first/last card can come to rest at viewport centre.
+//    • Each card's `visualEffect` reads its scroll-space `minY` and
+//      converts it into a rotation angle via a custom helper
+//      (`cardRotation(proxy)`).
+//    • `.rotation3DEffect(.degrees(angle), axis: (0, 0, 1), anchor:
+//      .leading)` applies the rotation around the leading edge.
+//
+//  Key APIs
+//  ────────
+//  • `.visualEffect { content, proxy in ... }` — iOS 17+. Hook for
+//    the per-card rotation/offset math.
+//  • `.rotation3DEffect(_:axis:anchor:)` with anchor `.leading` —
+//    pivot at the left edge for the orbit illusion.
+//  • `.scrollTargetBehavior(.viewAligned)` + `.scrollTargetLayout()`
+//    — paged snap.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when stock vertical scrolling feels flat for a
+//  high-stakes UI (loyalty card wallet, premium photo strip). Watch
+//  the rotation magnitude — anything past ±45° starts looking
+//  cartoonish; the demo's gentler curve is intentional.
+//
+//  See also
+//  ────────
+//  • CircularCarouselSliderView.swift — same vertical carousel
+//    layout but uses sideways `offset` instead of `rotation3DEffect`
+//    to fake the arc. Compare the two — they trade visual punch for
+//    different hit-test/clip behaviour.
+//  • iPodCarousel+iOS26.swift — horizontal cousin where rotation
+//    anchor flips between leading/trailing across centre.
+//
 import SwiftUI
 
 struct VerticalCircularCarouselView: View {
@@ -12,7 +56,7 @@ struct VerticalCircularCarouselView: View {
             ScrollView(.vertical) {
                 LazyVStack(spacing: 0) {
                     ForEach(creditCards) { card in
-                        CardView(card)
+                        cardView(card)
                             .frame(width: 220, height: 150)
                             .visualEffect { content, geometryProxy in
                                 content
@@ -71,7 +115,7 @@ struct VerticalCircularCarouselView: View {
     }
 
     @ViewBuilder
-    func CardView(_ card: CreditCard) -> some View {
+    func cardView(_ card: CreditCard) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25.0)
                 .fill(card.color.gradient)
@@ -119,7 +163,8 @@ struct VerticalCircularCarouselView: View {
         let progress = minY / height
         let showCardRange = 3.0 // change how many card to show in above and below
         let angleForEachCard: CGFloat = 50 // your choice of number
-        let cappedProgress = progress < 0 ? min(max(progress, -showCardRange), 0) : max(min(progress, showCardRange), 0) // [-1, 1]
+        let cappedProgress = progress < 0 ?
+            min(max(progress, -showCardRange), 0) : max(min(progress, showCardRange), 0) // [-1, 1]
 
         return cappedProgress * angleForEachCard
     }

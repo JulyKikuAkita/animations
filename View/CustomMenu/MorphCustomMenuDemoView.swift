@@ -2,9 +2,79 @@
 //  MorphCustomMenuDemoView.swift
 //  animation
 //
-//  iMessage morph menu effect
-// use visual effect modifier for expand menu button animation
-// also scaling and blur on the menu items
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup — typos in identifiers and copy
+//        Three real typos to fix together:
+//          1. `CustomMorphMeunView` (lines ~13, 72) → `CustomMorphMenuView`.
+//          2. `MenuSourceBotton` (lines ~45, 213) → `MenuSourceButton`.
+//          3. `Cameta` user-visible label (line ~30) → `Camera`.
+//        All are internal-only callers in this same file plus the
+//        one user-visible string, so a project-wide rename is a
+//        single-file change.
+//
+//  Learning point
+//  ──────────────
+//  iMessage-style radial action menu: tap the source button and a
+//  set of action items (10 in the demo) animate from the button's
+//  center out to their final layout, with the source button itself
+//  blurring + shrinking out of view. Reverses cleanly on dismiss.
+//
+//  Three pieces working in concert:
+//    1. `MenuSourceBotton` (typo above) — captures its own frame
+//       via `onGeometryChange` so the items know where to fly OUT
+//       FROM.
+//    2. `CustomMorphMeunView` (typo above) — the overlay container.
+//       Reads source frame via Binding; lays each item out at its
+//       final position, then offsets each one toward source-frame
+//       center while menu is closed, animating delta to 0 on open.
+//    3. `MenuConfig` + `MenuAction` + `@resultBuilder MenuActionBuilder`
+//       — DSL for declaring menu items at the call site:
+//         ```
+//         CustomMorphMeunView(config: $config) {
+//             MenuAction(symbolImage: "camera", text: "Camera")
+//             MenuAction(symbolImage: "doc", text: "File")
+//             ...
+//         }
+//         ```
+//
+//  Choreography:
+//    • Source button: `scale → 0`, `blur → 8`, `opacity → 0`.
+//    • Items: each starts at `offset = source.center - itemFrame.center`,
+//      animates to `offset = .zero`. Combined with `.smooth`
+//      animation, items appear to fly out of the source button.
+//    • The dim backdrop is a tap-to-dismiss layer.
+//
+//  Key APIs
+//  ────────
+//  • `@resultBuilder MenuActionBuilder` — turns the trailing-closure
+//    `{ MenuAction(...); MenuAction(...) }` into an array. The
+//    cleanest way to expose a SwiftUI-native call site for a
+//    fixed-shape DSL.
+//  • `.visualEffect { content, proxy in ... }` — drives both source
+//    and items off scroll-space / view-space frames.
+//  • `onGeometryChange(for: CGRect.self)` — frame capture for the
+//    source button.
+//  • `safeAreaInset` + `safeAreaPadding` — padding the menu
+//    container so items don't clip on small phones.
+//  • `.smooth(duration:)` — the unifying animation curve;
+//    `.smooth` (no extraBounce) reads less "springy" than `.bouncy`
+//    and matches iMessage's feel.
+//
+//  How to apply
+//  ────────────
+//  Use when a single button has 5–10 contextual actions and you
+//  want the radial-menu feel (vs. a list sheet). Beyond ~10 items
+//  the layout gets awkward; switch to a sheet.
+//
+//  See also
+//  ────────
+//  • ExpandableMenuiOS26DemoView.swift — grid-layout cousin (same
+//    "FAB expands into menu" but laid out in a grid, not radially).
+//  • MorphActionButtoniOS26.swift — single-action FAB-to-fullscreen
+//    pattern; pick by action count (one vs. many).
+//  • PopOutMenuView.swift — fullscreen-cover variant.
+//
 import SwiftUI
 
 struct MorphCustomMenuDemoView: View {

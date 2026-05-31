@@ -18,6 +18,8 @@ struct PicoCamPart1DemoView: View {
     @State private var cards = firstSetCards
     @State private var selectedCard: Card?
     @State private var flowState: PicoFlowState = .gallery
+    @State private var committedSlotScale: CGFloat = 1
+    @GestureState private var slotScaleDelta: CGFloat = 0
 
     var body: some View {
         GeometryReader { proxy in
@@ -44,32 +46,58 @@ struct PicoCamPart1DemoView: View {
                 // snap effect
                 if let selectedCard, showsInstantCard {
                     PicoInstantCardView(card: selectedCard, flowState: flowState)
-                        .frame(width: 190, height: 240)
+                        .frame(
+                            width: PicoHardwareIslandMetrics.cardLayoutSize.width,
+                            height: PicoHardwareIslandMetrics.cardLayoutSize.height
+                        )
+                        .scaleEffect(cardScale, anchor: .top)
                         .offset(y: PicoHardwareIslandMetrics.printFrameTop + instantCardOffset)
                         .zIndex(instantCardZIndex)
                 }
 
-                PicoIslandPrintFrame(
-                    card: selectedCard,
-                    flowState: flowState
+                PicoIslandPrintFrame(card: selectedCard, flowState: flowState)
+                    .frame(
+                        width: PicoHardwareIslandMetrics.baseDynamicIslandWidth,
+                        height: PicoHardwareIslandMetrics.printFrameHeight
+                    )
+                    .scaleEffect(slotScale, anchor: .top)
+                    .position(
+                        x: proxy.size.width / 2,
+                        y: PicoHardwareIslandMetrics.printFrameTop +
+                            (PicoHardwareIslandMetrics.printFrameHeight / 2)
+                    )
+                    .zIndex(12)
+                    .gesture(slotResizeGesture, isEnabled: flowState == .generationMode)
+
+                // Fills the area beside the hardware dynamic island so the
+                // frame's top reads as one continuous bar. Stays visible
+                // through the eject so the printed card emerges from
+                // beneath the bar; hides during preview (card is held
+                // mid-screen, slot is empty).
+                UnevenRoundedRectangle(
+                    topLeadingRadius: 25,
+                    bottomLeadingRadius: 0,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 25
                 )
+                .fill(.black)
                 .frame(
-                    width: PicoHardwareIslandMetrics.slotSize.width,
-                    height: PicoHardwareIslandMetrics.slotSize.height
+                    width: PicoHardwareIslandMetrics.baseDynamicIslandWidth * slotScale,
+                    height: PicoHardwareIslandMetrics.dynamicIslandTopBarHeight
                 )
                 .position(
                     x: proxy.size.width / 2,
-                    y: PicoHardwareIslandMetrics.printFrameTop +
-                        (PicoHardwareIslandMetrics.slotSize.height / 2)
+                    y: -PicoHardwareIslandMetrics.dynamicIslandTopBarHeight / 2
                 )
-                .zIndex(12)
+                .opacity(flowState == .gallery || flowState == .previewingCard ? 0 : 1)
+                .zIndex(11)
 
-                if flowState == .flash {
-                    Color.white
-                        .ignoresSafeArea()
-                        .transition(.opacity)
-                        .zIndex(20)
-                }
+                Color.white
+                    .ignoresSafeArea()
+                    .opacity(flowState == .flash ? 1 : 0)
+                    .allowsHitTesting(false)
+                    .animation(.easeOut(duration: 0.12), value: flowState)
+                    .zIndex(20)
             }
         }
         .background(Color.picoRed)
@@ -85,35 +113,92 @@ struct PicoCamPart1DemoView: View {
     }
 
     private var showsInstantCard: Bool {
-        flowState == .ejectingCard ||
+        flowState == .flash ||
+            flowState == .ejectingCard ||
             flowState == .previewingCard ||
             flowState == .retreatingCard
     }
 
-    private var instantCardOffset: CGFloat {
+    // TODO: The eject spring (`runCaptureAnimation` line ≈215, response 0.45)
+    // is too fast — the print-out motion barely registers visually. Bump
+    // response to ~0.7 and the matching `Task.sleep` (560ms → ~800ms) so the
+    // next phase doesn't fire mid-spring.
+    //
+    // TODO: User wants the top bar's width to match the photo's width. Today
+    // the bar = `baseDynamicIslandWidth × slotScale`, which is the *outer*
+    // card width including white border. With rotation in `.ejectingCard`,
+    // the visible photo (rotated rectangle) reads narrower than the bar.
+    // Either remove the eject rotation, or compute the bar width from the
+    // image's effective width (cardWidth − 2×padding) × cardScale.
+    //
+    // TODO: Explore Y-only variant. Currently emerge uses Y offset + Z
+    // (card behind bar) + mask (clip in unsafe area). The mask exists only
+    // because the card travels into the status-bar region where the bar
+    // doesn't reach. If we either (a) make the bar tall enough to cover
+    // the card's full upward travel, or (b) clip the parent ZStack to its
+    // safe-area-respecting bounds, the mask becomes redundant and the
+    // emerge is purely "card slides Y, opaque bar occludes in front".
+    private var cardScale: CGFloat {
         switch flowState {
-        case .ejectingCard:
-            PicoHardwareIslandMetrics.dynamicIslandHeight - 2
+        case .flash, .ejectingCard:
+            slotScale * PicoHardwareIslandMetrics.baseDynamicIslandWidth /
+                PicoHardwareIslandMetrics.cardLayoutSize.width
         case .previewingCard:
-            130
+            1
         case .retreatingCard:
-            PicoHardwareIslandMetrics.dynamicIslandHeight - 8
+            0.5
         default:
-            0
+            0.5
+        }
+    }
+
+    // Offset moves the card's layout top in screen Y. With the mask edge at
+    // y = 0 (top bar bottom), placing card top at -0.9 × cardVisualHeight
+    // leaves only the bottom 10% visible below the bar. .ejectingCard pushes
+    // the top down to y = 0 (fully clear of the bar). .retreatingCard goes
+    // back to the 10%-visible position before the gallery removes the card.
+    private var instantCardOffset: CGFloat {
+        let printFrameTop = PicoHardwareIslandMetrics.printFrameTop
+        let cardVisualHeight = PicoHardwareIslandMetrics.cardLayoutSize.height * cardScale
+        switch flowState {
+        case .flash, .retreatingCard:
+            return -0.9 * cardVisualHeight - printFrameTop
+        case .ejectingCard:
+            return -printFrameTop
+        case .previewingCard:
+            return 130
+        default:
+            return 0
         }
     }
 
     private var instantCardZIndex: Double {
         switch flowState {
-        case .ejectingCard:
-            13
-        case .previewingCard:
-            14
-        case .retreatingCard:
-            9
+        case .flash, .ejectingCard, .retreatingCard:
+            10
         default:
-            8
+            0
         }
+    }
+
+    private var instantCardMaskCutoff: CGFloat {
+        let cardTopInScreen = PicoHardwareIslandMetrics.printFrameTop + instantCardOffset
+        return -cardTopInScreen
+    }
+
+    private var slotScale: CGFloat {
+        max(1, committedSlotScale + slotScaleDelta)
+    }
+
+    private var slotResizeGesture: some Gesture {
+        DragGesture()
+            .updating($slotScaleDelta) { value, state, _ in
+                state = value.translation.height / PicoHardwareIslandMetrics.dragScaleSensitivity
+            }
+            .onEnded { value in
+                let delta = value.translation.height / PicoHardwareIslandMetrics.dragScaleSensitivity
+                committedSlotScale = max(1, committedSlotScale + delta)
+            }
     }
 
     private func selectCard(_ card: Card) {
@@ -125,36 +210,6 @@ struct PicoCamPart1DemoView: View {
         }
     }
 
-    // TODO: Make the card visually eject *from* the dynamic island, not just
-    // appear below it. Today the card materializes at `offset = 32` (already
-    // past the island's bottom edge) at zIndex 13, in front of the island
-    // (zIndex 12), so there's no "printing through a slot" feel.
-    //
-    // Suggested approach (changes are coupled — do them together):
-    //   1. Include `.flash` in `showsInstantCard` so the card is in the
-    //      hierarchy *before* the eject begins, positioned at `offset = 0`
-    //      (centered on the island) with `instantCardZIndex < 12` so the
-    //      island visually contains it.
-    //   2. Add a mask/clip on the card whose top edge is the island's bottom
-    //      edge (`printFrameTop + dynamicIslandHeight`). Only the portion of
-    //      the card past that line is visible — as `instantCardOffset`
-    //      animates 0 → 32 inside the existing spring, the card appears to
-    //      slide out through the island's bottom.
-    //   3. Drop the `flash` opacity *before* (or with a much shorter duration
-    //      than) the 0.45s spring. The current shared spring hides the first
-    //      ~150ms of the slide behind the white flash.
-    //
-    // TODO: Grow `dynamicIslandWidth` to match the printed card's width
-    // during `.flash`/`.ejectingCard`/`.previewingCard` so the slot looks
-    // wide enough to print a 190pt card. Today it's a static 128.
-    //   - Convert `PicoHardwareIslandMetrics.dynamicIslandWidth` (and
-    //     `slotSize`) from `static let` constants into a flowState-driven
-    //     value (e.g., 128 in `.gallery`/`.generationMode`/`.retreatingCard`,
-    //     ~210 in the printing states to fit the 190 card + side frames).
-    //   - Pass that width into `PicoIslandPrintFrame.frame(width:)` and the
-    //     `.position(x:)` calc in `body` (both currently read the enum).
-    //   - Apply the width change inside the same `withAnimation(.spring(...))`
-    //     that drives `.ejectingCard` so it interpolates with the eject.
     private func runCaptureAnimation() {
         guard flowState == .generationMode, let selectedCard else { return }
 
@@ -195,6 +250,7 @@ struct PicoCamPart1DemoView: View {
 
             withAnimation(.easeInOut(duration: 0.24)) {
                 flowState = .gallery
+                committedSlotScale = 1
             }
         }
     }
@@ -327,36 +383,6 @@ private struct PicoGalleryTitlePill: View {
     }
 }
 
-// TODO: Make tcan ch-resizable while in the snap view
-// (i.e., `flowState == .generationMode`, after the user taps a thumbnail).
-//
-// Desired behavior:
-//   - Add a `MagnifyGesture` (or `simultaneousGesture` with the existing
-//     shutter tap) to this frame so the user can pinch to scale the photo
-//     and its surrounding U-shaped frame together.
-//   - The frame's TOP edge stays pinned to the bottom of the dynamic island
-//     — the island itself acts as the top bar of the frame, so the rendered
-//     U-shape only draws the two sides + bottom. Anchor scaling at the top
-//     center (`.scaleEffect(_, anchor: .top)`) so the bottom grows downward
-//     while the top stays glued to the island.
-//   - Width clamping:
-//       * Min width = `PicoHardwareIslandMetrics.dynamicIslandWidth` —
-//         pinching smaller than the island is a no-op.
-//       * No fixed max — let the user pinch larger (the camera "zooms").
-//   - When the pinched width exceeds the dynamic island width, draw two
-//     additional black rectangles flanking the island at its top y-range
-//     (height = `dynamicIslandHeight`, width = `(pinchedWidth - islandWidth) / 2`
-//     on each side) so the frame's top bar visually extends out past the
-//     island and the whole thing reads as one continuous frame around the
-//     photo. Inside the island's own width, draw nothing on top — the real
-//     island is the top bar.
-//   - Persist the pinched size as `@State private var pinchedSize: CGSize`
-//     on `PicoCamPart1DemoView` (or via a `GestureState` while pinching +
-//     committed `@State` on end). Reset to the default when returning to
-//     `.gallery`.
-//   - Reuse the same width when ejecting: this dovetails with the
-//     `dynamicIslandWidth` TODO above — the eject animation should expand
-//     the slot to match whatever width the user pinched to.
 private struct PicoIslandPrintFrame: View {
     let card: Card?
     let flowState: PicoFlowState
@@ -368,14 +394,12 @@ private struct PicoIslandPrintFrame: View {
                     .resizable()
                     .scaledToFill()
                     .frame(
-                        width: PicoHardwareIslandMetrics.dynamicIslandWidth -
+                        width: PicoHardwareIslandMetrics.baseDynamicIslandWidth -
                             (PicoHardwareIslandMetrics.frameEdgeThickness * 2),
-                        height: PicoHardwareIslandMetrics.printFrameHeight +
-                            PicoHardwareIslandMetrics.dynamicIslandOverlap -
+                        height: PicoHardwareIslandMetrics.printFrameHeight -
                             PicoHardwareIslandMetrics.frameEdgeThickness
                     )
                     .clipShape(.rect(cornerRadius: 3))
-                    .offset(y: -PicoHardwareIslandMetrics.dynamicIslandOverlap)
                     .opacity(imageOpacity)
                     .blur(radius: imageBlur)
             }
@@ -406,10 +430,8 @@ private struct PicoIslandPrintFrame: View {
             .fill(frameColor)
             .frame(
                 width: PicoHardwareIslandMetrics.frameEdgeThickness,
-                height: PicoHardwareIslandMetrics.printFrameHeight +
-                    PicoHardwareIslandMetrics.dynamicIslandOverlap
+                height: PicoHardwareIslandMetrics.printFrameHeight
             )
-            .offset(y: -PicoHardwareIslandMetrics.dynamicIslandOverlap)
     }
 
     private var frameColor: Color {
@@ -489,18 +511,19 @@ private struct PicoInstantCardView: View {
     let flowState: PicoFlowState
 
     var body: some View {
-        VStack(spacing: 0) {
+        ZStack(alignment: .top) {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.white)
+
             Image(card.image)
                 .resizable()
                 .scaledToFill()
-                .frame(height: imageHeight, alignment: .bottomLeading)
+                .frame(height: imageHeight)
                 .clipShape(.rect(cornerRadius: 6))
+                .padding(cardPadding)
         }
-        .padding(cardPadding)
-        .background(.white, in: .rect(cornerRadius: 10))
         .shadow(color: .black.opacity(0.3), radius: 20, y: 14)
         .rotationEffect(.degrees(rotation))
-        .scaleEffect(scale, anchor: .top)
         .opacity(opacity)
     }
 
@@ -539,19 +562,6 @@ private struct PicoInstantCardView: View {
         }
     }
 
-    private var scale: CGFloat {
-        switch flowState {
-        case .ejectingCard:
-            0.56
-        case .previewingCard:
-            1
-        case .retreatingCard:
-            0.5
-        default:
-            0.5
-        }
-    }
-
     private var opacity: Double {
         flowState == .retreatingCard ? 0.72 : 1
     }
@@ -568,16 +578,14 @@ private extension Card {
 }
 
 private enum PicoHardwareIslandMetrics {
-    static let dynamicIslandWidth: CGFloat = 128
+    static let baseDynamicIslandWidth: CGFloat = 128
     static let dynamicIslandHeight: CGFloat = 34
+    static let dynamicIslandTopBarHeight: CGFloat = 55
     static let frameEdgeThickness: CGFloat = 16
-    static let dynamicIslandOverlap: CGFloat = 23
     static let printFrameHeight: CGFloat = 112
     static let printFrameTop: CGFloat = -12
-    static let slotSize = CGSize(
-        width: dynamicIslandWidth,
-        height: printFrameHeight
-    )
+    static let dragScaleSensitivity: CGFloat = 220
+    static let cardLayoutSize = CGSize(width: 190, height: 240)
 }
 
 #Preview {

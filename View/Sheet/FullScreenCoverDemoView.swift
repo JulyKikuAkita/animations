@@ -3,7 +3,60 @@
 //  animation
 //
 //  Created on 10/9/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ — `@available(iOS 26.0, *)`, uses `ConcentricRectangle`
+//  and (commented-out) `.matchedTransitionSource` /
+//  `.navigationTransition(.zoom(...))`.
+//
+//  Learning point
+//  ──────────────
+//  Outlier in this folder — uses `.fullScreenCover` (full screen)
+//  rather than `.sheet` (modal). Demonstrates a custom velocity-
+//  aware drag-to-dismiss with a `ConcentricRectangle` background
+//  that matches the iPhone's device corner radius so the cover
+//  reads edge-to-edge hardware-aligned.
+//
+//  Three pieces:
+//    1. `FullScreenSheet` — custom modifier wrapping
+//       `.fullScreenCover` + custom dismiss gesture.
+//    2. `ScrollAwarePanGesture` (project helper) — UIKit-backed
+//       pan that DEFERS to a child UIScrollView when the scroll
+//       isn't at the top. Without this, dragging the scroll
+//       content would also dismiss the cover.
+//    3. `Transaction.disablesAnimations` — opens / closes the
+//       cover without iOS's default fade so the manual rect morph
+//       is the only motion (same trick as
+//       [[View/QRCode/DIRQScannerView]]).
+//
+//  Key APIs
+//  ────────
+//  • `.fullScreenCover(isPresented:)` — fullscreen, no detents.
+//  • `.matchedTransitionSource(id:in:)` (line ~19; the
+//    `.navigationTransition(.zoom(...))` consumer is commented at
+//    line ~40) — iOS 26 zoom-from-source. Currently half-wired;
+//    uncomment to enable.
+//  • `ConcentricRectangle()` — iOS 26 shape; corner radius matches
+//    nested geometry.
+//  • `ScrollAwarePanGesture` (project helper) — scroll-aware pan.
+//  • `Transaction.disablesAnimations` + `withTransaction` — the
+//    no-cover-fade trick.
+//
+//  How to apply
+//  ────────────
+//  Use when a fullscreen presentation needs custom dismiss
+//  physics (velocity, scale, scroll-aware deferral) that
+//  `.fullScreenCover`'s default behaviour can't deliver. For
+//  modal sheet flavours (detents, partial heights), reach for
+//  the sheet siblings in this folder instead.
+//
+//  See also
+//  ────────
+//  • View/QRCode/DIRQScannerView.swift — same
+//    `Transaction.disablesAnimations` + manual morph trick on a
+//    different presentation surface.
+//  • iOS26ResizingSheet.swift — sheet variant of the
+//    "shrink-the-host" feel.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)

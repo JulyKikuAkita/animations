@@ -4,7 +4,49 @@
 //
 //  Created by IFang Lee on 4/4/24.
 //
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Vertical slider where cards "bob" up and down as they pass the
+//  centre — the cards trace an arc rather than a straight line. Two
+//  modes (`Normal` / `Scaled`) toggle the same trick on/off so you
+//  can see the carousel's underlying linear scroll versus the arced
+//  presentation.
+//
+//  How the arc is faked: each card's `visualEffect` reads its position
+//  in scroll-space, normalises it to a 0...1 progress relative to the
+//  viewport centre, and applies an `offset(x:)` whose magnitude grows
+//  toward the edges. The cards themselves never move along an actual
+//  curve — `visualEffect` translates them sideways at render time so
+//  layout/hit-testing stays linear.
+//
+//  Key APIs
+//  ────────
+//  • `.visualEffect { content, proxy in ... }` — iOS 17+. The hook
+//    where the per-card progress→offset math lives.
+//  • `.scrollTransition(.interactive)` — phase-driven scale for the
+//    `Scaled` mode.
+//  • `.scrollPosition(id:)` + `.scrollTargetBehavior(.viewAligned)` —
+//    paged snap with a binding for selection.
+//  • `safeAreaPadding(.vertical, ...)` — half-viewport padding so the
+//    first/last item can rest at centre.
+//
+//  How to apply
+//  ────────────
+//  Use when you want a vertical date / number / option picker that
+//  feels more "physical" than a flat list. The progress→offset
+//  function is the customisable knob — swap in your own curve
+//  (`sin`, `pow`, etc.) for a different arc shape.
+//
+//  See also
+//  ────────
+//  • VerticalCircularCarouselView.swift — same vertical layout but
+//    uses `rotation3DEffect` around the leading edge instead of a
+//    sideways `offset`. Compare and contrast.
+//  • CircularCarousel18View (in CardCarouselWithScrollTransitionsAPI.swift)
+//    — iOS 18 `.scrollTransition`-based version of a similar idea.
+//
 import SwiftUI
 
 struct CircularCarouselSliderView: View {

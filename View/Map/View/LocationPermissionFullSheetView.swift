@@ -3,7 +3,76 @@
 //  animation
 //
 //  Created on 11/14/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Location-permission onboarding presented as a full-screen cover
+//  with a SHRINKING-TO-CARD effect: the host screen content stays
+//  visible at the top, scaling down + dimming as the cover rises;
+//  the bottom holds the permission prompt copy + buttons + a
+//  pulsing pin animation. When the user taps Allow (or, post-denial,
+//  "Go to Settings"), the cover dismisses and `authorizationDidChange`
+//  fires.
+//
+//  Three pieces working together:
+//    1. `LocationPermissionViewConfig` — pure data struct that
+//       lets callers brand the prompt (app name, tints, whether
+//       to show the pulsing pin, optional dynamic-island chrome).
+//    2. `View.locationPermissionFullScreenCover(...)` — public
+//       extension; the one-line API.
+//    3. Private `LocationPermissionFullSheetView<ScreenContent>` —
+//       the actual implementation; reads `MapLocationManager`
+//       (helper file in this folder) for live `CLAuthorizationStatus`
+//       and switches button label/behaviour across `notDetermined →
+//       authorizedWhenInUse → denied`.
+//
+//  Three-state primary button
+//  ──────────────────────────
+//  Same standard pattern as
+//  [[View/Notifications/CustomNotificationsView]]:
+//    • `.notDetermined` → "Allow Location" → request permission.
+//    • `.authorizedWhenInUse` → confirmation copy → dismiss + callback.
+//    • `.denied` → "Go to Settings" → opens
+//      `UIApplication.openSettingsURLString` via
+//      `@Environment(\.openURL)`.
+//  ALWAYS include the denied → Settings deep-link or users who tap
+//  "Don't Allow" once are stuck forever.
+//
+//  Key APIs
+//  ────────
+//  • `MapLocationManager` (helper at
+//    `View/Map/LocationManager/LocationManagerHelper.swift`) —
+//    `@Observable @MainActor` wrapper around `CLLocationManager`.
+//  • `.contentTransition(.numericText())` on the button labels —
+//    smooth glyph morph as button text changes between states.
+//  • `.fullScreenCover(isPresented:)` + `presentationBackground(.background)`
+//    — the cover surface; transparent so the host content shows
+//    through during the shrink.
+//  • Dynamic Island branch (`config.showsDynamicIsland`) — extends
+//    the prompt visual into the device's hardware island for a
+//    "system asks you" feel.
+//  • `MapLocationManager.requestLocationAccess()` — wraps
+//    `requestWhenInUseAuthorization()`.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a feature needs location and the cold "system alert
+//  with no context" feels too jarring. The shrink-the-host-content
+//  effect generalises to OTHER permission types too (notifications,
+//  contacts, mic) — copy the cover machinery, swap the manager.
+//
+//  See also
+//  ────────
+//  • View/Map/LocationManager/LocationManagerHelper.swift — the
+//    `MapLocationManager` consumed here.
+//  • View/Map/LocationPickerView.swift — usually paired with this
+//    cover; show the cover first, then the picker.
+//  • View/Notifications/CustomNotificationsView.swift — same
+//    "context before consent" pattern for notification permission.
+//  • View/LandingPages/PermissionOnboardingIOS26.swift —
+//    permission-prompt onboarding using a different visual idiom.
+//
 import CoreLocation
 import SwiftUI
 

@@ -1,10 +1,94 @@
 //
 //  GridTransitionView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ — `onGeometryChange` is the gating API; SwiftData
+//  (`@Query`, `@Model`) requires iOS 17+.
+//
+//  Companion file: `GridTransitionView+SearchQuery.swift` defines
+//  `SearchQueryView` used by this view's `.searchable` integration.
+//
+//  TODO: Cleanup candidates
+//        1. `struct ColorNotes: App { ... }` directly below this
+//           header is dead code — it has no `@main` attribute, so
+//           it never runs. Same leftover-target pattern as
+//           `View/PhotosView/AsyncImageViewerView+SkeletonviewDemo.swift`
+//           and `View/Notifications/CustomNotificationsView.swift`.
+//           Either re-enable as `@main` or delete.
+//        2. The safe-area read via `UIApplication.shared.connectedScenes`
+//           (around line ~352) is the pre-iOS-17 idiom; iOS 17+
+//           has `safeAreaInsets` reachable via `GeometryReader` /
+//           `onGeometryChange`. Modernise when convenient.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Notes-style note grid with shared-element transition: tap
+//  a card → it expands in place to a fullscreen detail editor;
+//  pinch-or-tap to dismiss → it morphs back. SwiftData drives the
+//  underlying data (`Note` model), and `matchedGeometryEffect`
+//  drives the morph. The full demo bundles five behaviours worth
+//  reading separately:
+//
+//    1. SwiftData CRUD via `@Query` + `@Environment(\.modelContext)`
+//       — create/edit/delete notes that persist across launches.
+//    2. Shared-element transition between grid card and detail
+//       editor via `matchedGeometryEffect(id: note.id, in:
+//       animation)`.
+//    3. Inline edit-in-place: `TextField` for title and `TextEditor`
+//       for body sit ON TOP OF the morphed card; no second view to
+//       navigate to.
+//    4. Color tagging: each note has a swatch; the grid card and
+//       the detail header tint to match.
+//    5. Search: `.searchable` filters via `SearchQueryView` (defined
+//       in the companion file) which uses a SwiftData `#Predicate`.
+//
+//  Animation timing trick
+//  ──────────────────────
+//  The detail view fades its body content in via a delayed
+//  `.opacity` so the body doesn't appear until the morph has
+//  visually arrived. Without the delay, the body would pop on
+//  immediately and undermine the "card is becoming the detail
+//  editor" illusion.
+//
+//  Key APIs
+//  ────────
+//  • `@Query` + `#Predicate` — SwiftData's reactive fetch; auto-
+//    refreshes the grid as notes are inserted/edited/deleted.
+//  • `@Environment(\.modelContext)` — write path for inserts and
+//    deletes.
+//  • `matchedGeometryEffect(id:in:)` — the morph mechanism; ids
+//    must be stable (`note.id`) across both source and destination.
+//  • `onGeometryChange(for: CGSize.self)` — measures the grid card
+//    so the detail view can size itself for the morph.
+//  • Project helper `noteAnimation` (View extension) — the unifying
+//    animation curve; keeps grid + detail in sync.
+//  • `.searchable(text:)` — toolbar search field; routes to the
+//    sibling file's `SearchQueryView`.
+//
+//  How to apply
+//  ────────────
+//  Use as a starting template for any list-with-detail editor where
+//  the items have visual identity (cards with color, image, etc.).
+//  Drop SwiftData if you don't need persistence; the morph and
+//  search machinery work with plain `@State` arrays too.
+//
+//  See also
+//  ────────
+//  • GridTransitionView+SearchQuery.swift — companion; the
+//    `SearchQueryView` used here.
+//  • View/PhotosView/PhotoGridViewIos26+TransitionEffect.swift —
+//    different "grid card → fullscreen" pattern using a manual
+//    rect-morph instead of `matchedGeometryEffect`. Compare the
+//    two; pick by whether you need pinch-to-dismiss (that file)
+//    or simpler tap-to-expand (this file).
+//
 import SwiftData
 import SwiftUI
 
+// TODO: Dead — this `App` struct has no `@main` annotation, so it
+//       never runs. Leftover from when this file shipped as its
+//       own target. Either annotate `@main` or delete.
 struct ColorNotes: App {
     var body: some Scene {
         WindowGroup {

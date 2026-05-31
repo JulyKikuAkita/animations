@@ -1,7 +1,84 @@
 //
 //  TimePickerView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup — DUPLICATE-DIVERGENT FILE
+//        An identically-named file at
+//        `PomodoroFocusTimer/TimePickerView.swift` defines THE SAME
+//        struct names: `TimePickerDemoView`, `TimePickerView`,
+//        `PickerViewWithoutIndicator`. They likely live in different
+//        Xcode targets (so no compile collision), but they're
+//        parallel implementations that will drift apart silently.
+//        Either:
+//          (a) Consolidate into one Helpers/ file shared by both
+//              targets, or
+//          (b) Add target prefixes (e.g. `PomodoroTimePickerView`)
+//              so future maintainers can grep without confusion.
+//
+//  TODO: Cleanup — UIPickerView internals
+//        Lines ~79–80 reach into UIPickerView's subview hierarchy
+//        ("trial and error and found 2nd subview contained the bg")
+//        to clear the picker's default background. Private-
+//        implementation-detail trap; Apple may renumber subviews in
+//        any iOS update. Same risk profile as
+//        `View/Alert/ProgressAlertDemoView.swift`'s UIAlertController
+//        introspection. Migrate to a fully-custom wheel (similar to
+//        [[ExpandableWheelPickerView]]) when the hack breaks.
+//
+//  Learning point
+//  ──────────────
+//  Hours/minutes/seconds wheel picker built from three side-by-side
+//  `Picker(.wheel)` columns. Two practical bits worth understanding:
+//
+//    1. **Indicator removal** via `RemovePickerIndicator`
+//       (`UIViewRepresentable` at the bottom of the file). Walks
+//       the responder chain from a no-op host UIView up to the
+//       enclosing `UIPickerView` and clears its 2nd subview's
+//       background — that's the rounded-rect "selection
+//       indicator" Apple draws by default. The cleared indicator
+//       is what makes a custom-styled time picker look integrated
+//       rather than "stock UIPickerView under custom chrome."
+//    2. **`PickerViewWithoutIndicator<Content, Selection>`** — the
+//       generic wrapper that bundles the indicator removal with a
+//       standard `Picker(_:selection:)`. Reusable anywhere a flat-
+//       styled wheel is wanted.
+//
+//  Why three Pickers instead of one composite?
+//  ───────────────────────────────────────────
+//  SwiftUI's `Picker(.wheel)` is single-column. Multi-column wheels
+//  (like the system date picker) are bespoke UIKit controls that
+//  don't have a SwiftUI peer. Three columns side by side, each
+//  binding a separate `@State Int`, is the simplest path.
+//
+//  Key APIs
+//  ────────
+//  • `Picker(_:selection:).pickerStyle(.wheel)` — single-column
+//    wheel; one per HMS unit.
+//  • `UIViewRepresentable` walking the responder chain — the
+//    UIKit reach-through to find the enclosing `UIPickerView`.
+//  • `pickerView` recursive extension property — converts
+//    `UIView → UIPickerView` by walking `superview` until a
+//    matching ancestor is found.
+//  • `DispatchQueue.main.async { ... }` — defers the subview-
+//    background clear until after the picker has finished initial
+//    layout (otherwise the cleared layer gets re-drawn).
+//
+//  How to apply
+//  ────────────
+//  Use for any "duration / time-of-day" entry that needs custom
+//  styling. For wholly custom wheel UX without UIKit, see
+//  [[ExpandableWheelPickerView]] or [[CircularWheelPicker]] —
+//  SwiftUI-native and free of the introspection trap.
+//
+//  See also
+//  ────────
+//  • PomodoroFocusTimer/TimePickerView.swift — the duplicate-
+//    divergent sibling (see TODO above).
+//  • CircularWheelPicker.swift, ExpandableWheelPickerView.swift —
+//    SwiftUI-native wheel alternatives.
+//
 import SwiftUI
 
 struct TimePickerDemoView: View {
@@ -33,9 +110,9 @@ struct TimePickerView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            CustomView("hours", 0 ... 24, $hours)
-            CustomView("mins", 0 ... 60, $minutes)
-            CustomView("seconds", 0 ... 60, $seconds)
+            customView("hours", 0 ... 24, $hours)
+            customView("mins", 0 ... 60, $minutes)
+            customView("seconds", 0 ... 60, $seconds)
         }
         .offset(x: -25)
         .background {
@@ -46,7 +123,7 @@ struct TimePickerView: View {
     }
 
     @ViewBuilder
-    private func CustomView(_ title: String, _ range: ClosedRange<Int>, _ selection: Binding<Int>) -> some View {
+    private func customView(_ title: String, _ range: ClosedRange<Int>, _ selection: Binding<Int>) -> some View {
         PickerViewWithoutIndicator(selection: selection) {
             ForEach(range, id: \.self) { value in
                 Text("\(value)")
@@ -95,7 +172,8 @@ private struct RemovePickerIndicator: UIViewRepresentable {
         view.backgroundColor = .clear
         DispatchQueue.main.async {
             if let pickerView = view.pickerView {
-                if pickerView.subviews.count >= 2 { // trial and error and found 2nd subview contained the bg for the UIPicker view
+                // trial and error and found 2nd subview contained the bg for the UIPicker view
+                if pickerView.subviews.count >= 2 {
                     pickerView.subviews[1].backgroundColor = .clear
                 }
                 result()

@@ -1,6 +1,48 @@
 //
 //  ScrollablePageTabsColorView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  Pre-iOS-17 page-tab pattern: `TabView(.page())` + a custom tab
+//  strip whose ACTIVE pill slides AND fills the active label with a
+//  contrasting color as the user swipes. Because `.page()` is built
+//  on `UICollectionView` and SwiftUI doesn't expose its content
+//  offset, the file teaches the UIKit bridge needed to read it:
+//
+//    1. Drop a `FindCollectionView` `UIViewRepresentable` as a
+//       `.background` of one tab. Walk up `superview` to find the
+//       hosting `UICollectionView`.
+//    2. Hand that collection view to `PageOffsetObserver` (NSObject)
+//       which uses KVO on `"contentOffset"` to publish a live offset.
+//    3. Read `offsetObserver.offset / collectionViewBounds.width` →
+//       progress, used to position TWO overlays: a black capsule
+//       indicator and a `.mask`ed re-render of the same labels in
+//       white so the active label "fills" with color as it slides.
+//
+//  Key APIs
+//  ────────
+//  • `tabViewStyle(.page(indexDisplayMode: .always))`
+//  • `UICollectionView` + `addObserver(_:forKeyPath: "contentOffset", ...)`
+//    — KVO instead of UICollectionViewDelegate so we don't displace
+//    SwiftUI's own delegate (which would break paging behavior).
+//  • `.mask(alignment: .leading) { Capsule().offset(x:) }` — render
+//    the same labels in two colors and reveal a window of the second
+//    color over the first.
+//  • `superview?.collectionSuperView` recursive walker — finds the
+//    nearest UICollectionView ancestor.
+//
+//  How to apply
+//  ────────────
+//  Use when stuck on iOS 16 or below where `.scrollPosition` doesn't
+//  exist. For iOS 17+ prefer `HorizontalTabView.swift` — it expresses
+//  the same UX without the UIKit bridge or KVO.
+//
+//  See also
+//  ────────
+//  • HorizontalTabView.swift — modern (iOS 17+) replacement using
+//    `.scrollPosition` and `.scrollTargetBehavior(.paging)`.
+//
 
 import SwiftUI
 

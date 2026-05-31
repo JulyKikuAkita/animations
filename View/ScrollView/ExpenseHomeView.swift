@@ -2,6 +2,54 @@
 //  ExpenseHomeView.swift
 //  animation
 //
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Banking-app home screen with a paged horizontal carousel of
+//  expense cards at the top that LOCKS to the navigation bar as
+//  the user scrolls past it; the list of recent transactions
+//  scrolls underneath. The headline trick is the carousel
+//  selectively disabling its own paging behaviour once it has
+//  collapsed against the top — so the user can't horizontally swipe
+//  cards while the vertical scroll controls the page-stack.
+//
+//  Two scroll surfaces composed:
+//    • Outer vertical ScrollView holds the carousel-as-header + the
+//      transactions list.
+//    • Inner horizontal carousel with `.scrollTargetBehavior(.paging)`
+//      + `.scrollPosition(id:)` for snap-per-card.
+//  A `CustomScrollBehavior` (file-local) overrides scroll target
+//  behaviour so the carousel doesn't fight the parent vertical
+//  scroll once the cards have docked.
+//
+//  Key APIs
+//  ────────
+//  • `containerRelativeFrame(.horizontal)` — sizes each card to one
+//    full carousel viewport.
+//  • `.scrollTargetBehavior(.paging)` + `.scrollPosition(id:)` —
+//    the per-card paging snap.
+//  • `.visualEffect` driven by scroll offset — drives the carousel's
+//    mask/clip as it docks.
+//  • Custom `ScrollTargetBehavior` conformance (`CustomScrollBehavior`)
+//    — disables horizontal paging once vertical scroll has docked
+//    the carousel. The right hook for "this carousel only pages
+//    while it's the focused element."
+//
+//  How to apply
+//  ────────────
+//  Use whenever a hero/header element should compress to a sticky
+//  toolbar as the user scrolls past it (banking, music, fitness).
+//  The `CustomScrollBehavior` pattern is the reusable nugget — it
+//  generalises beyond carousels to any scroll-within-scroll layout.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/CustomHeaderEffect/* — header-collapse
+//    siblings; different visual but same "compress on scroll" idea.
+//  • View/Carousel/* — the carousel zoo; this file's carousel is
+//    a standard `.paging` flavour.
+//
 import SwiftUI
 
 struct ExpenseHomeView: View {
@@ -157,8 +205,10 @@ struct ExpenseHomeView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Spacer(minLength: 0)
 
-                    Text("Current Balance \(offset)") // print offset for debug
-                        .font(.callout)
+                    #if DEBUG
+                        Text("Current Balance \(offset)")
+                            .font(.callout)
+                    #endif
 
                     Text(card.balance)
                         .font(.title.bold())

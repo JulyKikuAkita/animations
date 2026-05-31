@@ -2,9 +2,67 @@
 //  ProfileList+SheetView.swift
 //  animation
 //
-//  source: https://www.youtube.com/watch?v=zHtB8mHPLDU&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=32
+//  Learning point
+//  ──────────────
+//  Hero animation across a SHEET BOUNDARY using a SECOND UIWINDOW set
+//  up by `SceneDelegate` (`sceneDelegate.addHeroWindow(_:)`). The
+//  reason to split into two windows: a `.sheet` is presented on the
+//  main window, but the hero LAYER must float above BOTH the sheet
+//  and the underlying list — that means it can't live in either's
+//  view tree. So we add a hero-only `UIWindow` and let it host
+//  `CustomHeroAnimationView` (defined in
+//  `WindowSharedModelHeroAnimationView.swift`) which reads from a
+//  shared `WindowSharedModel`.
 //
-// Note: preview is not available due to use SceneDelegate env var
+//  The interaction sequence (open):
+//    1. Tap a row → record its `geometry.frame(in: .global)` as
+//       `windowSharedModel.sourceRect`, set `selectedProfile`,
+//       `cornerRadius`, and `previousSourceRect` (saved for the close
+//       animation).
+//    2. `hideNativeView = true` → row + sheet image both go invisible;
+//       the hero window's view becomes the only thing rendering the
+//       avatar.
+//    3. `showProfileView.toggle()` presents the sheet.
+//    4. The sheet's `DetailedSheetProfileView` publishes ITS OWN
+//       global frame via `RectKey`; on `.onPreferenceChange` we feed
+//       it back into `sourceRect` so the hero view animates to fill
+//       the sheet's image area.
+//
+//  Close inverts the sequence using `previousSourceRect`.
+//
+//  Why preview is unavailable
+//  ──────────────────────────
+//  `@Environment(SceneDelegate.self)` is unsatisfied in `#Preview`
+//  because previews don't construct the real UIApplicationDelegate
+//  graph. Run on the simulator to test.
+//
+//  Key APIs
+//  ────────
+//  • `@Environment(WindowSharedModel.self)` + `@Environment(SceneDelegate.self)`
+//    — observable state shared across both windows.
+//  • Custom `RectKey: PreferenceKey` — a tiny one-CGRect preference
+//    used by the sheet to publish its destination frame to the
+//    enclosing view (which then writes it onto `WindowSharedModel`).
+//  • `interactiveDismissDisabled()` + `presentationDragIndicator(.hidden)`
+//    — required so the sheet can't be dismissed mid-animation.
+//  • `Task { ... try? await Task.sleep(...) ... }` chains — used as
+//    a quick way to sequence frame writes within the same animation
+//    tick.
+//
+//  How to apply
+//  ────────────
+//  Use this when you must hero-animate across a sheet boundary AND
+//  you can own the SceneDelegate. For new code, prefer
+//  `ListExpandSheetHeroAnimationView.swift`'s `HeroWrapper` —  it
+//  spins up the overlay window itself and keeps preview-friendly.
+//
+//  See also
+//  ────────
+//  • WindowSharedModelHeroAnimationView.swift — the View that
+//    actually renders inside the hero window for THIS demo. Pair.
+//  • ListExpandSheetHeroAnimationView.swift — the modern reusable
+//    rewrite with the same goal.
+//
 
 import SwiftUI
 

@@ -3,7 +3,54 @@
 //  animation
 //
 //  Created on 10/30/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17+ — `safeAreaPadding`, `onScrollGeometryChange`.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Maps–style bottom sheet that the user drags while the
+//  underlying ScrollView keeps a stable layout: as the sheet
+//  rises, scroll content's BOTTOM safe-area padding grows so list
+//  items stay reachable above the sheet's lip. The trick is
+//  treating the sheet's height as a published `CGFloat` state and
+//  feeding it into `safeAreaPadding(.bottom, ...)` — the scroll
+//  layout reflows automatically.
+//
+//  Why `SimultaneousPanGesture`?
+//  ─────────────────────────────
+//  A regular `DragGesture` on the sheet would COMPETE with the
+//  scroll view's own pan gesture. `SimultaneousPanGesture` (project
+//  helper at `Gesture/SimultaneousPanGesture.swift`) configures the
+//  UIKit pan recognizer to recognise alongside the scroll, so the
+//  user can drag the sheet handle even while the scroll is
+//  mid-flick.
+//
+//  Key APIs
+//  ────────
+//  • `safeAreaPadding(.bottom, ...)` driven by sheet height — the
+//    load-bearing trick.
+//  • `onScrollGeometryChange` — for syncing scroll position to
+//    other UI as the sheet expands.
+//  • `SimultaneousPanGesture` (project helper) — UIKit pan that
+//    coexists with the scroll's gesture.
+//  • `.scrollClipDisabled(true)` — lets the sheet render above
+//    the scroll's frame.
+//
+//  How to apply
+//  ────────────
+//  Use as the template for any "scroll content + draggable bottom
+//  sheet" composition (Maps, Apple Music, transit apps). The
+//  bottom-padding-from-sheet-height pattern generalises whenever
+//  a panel coexists with scrollable content without occluding it.
+//
+//  See also
+//  ────────
+//  • Gesture/SimultaneousPanGesture.swift — the gesture bridge.
+//  • View/MiniPlayerView/MiniPlayerView.swift — same architectural
+//    challenge solved differently (Binding<PlayerConfig> instead
+//    of safeAreaPadding).
+//  • View/ScrollView/CustomHeaderEffect/* — sticky-header siblings.
+//
 import SwiftUI
 
 struct ScrollViewBottomSheetInteractionDemoView: View {
@@ -62,7 +109,6 @@ struct ScrollViewBottomSheetInteractionDemoView: View {
                 .padding(.top, 10)
         }
         .padding(15)
-//        .padding(.bottom, 500)
     }
 }
 

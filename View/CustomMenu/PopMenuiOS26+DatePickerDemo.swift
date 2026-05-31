@@ -3,10 +3,70 @@
 //  animation
 //
 //  Created on 9/24/25.
-// iOS 26 only: popover API and Zoom transition on sheet/popovers
-// animation note:
-// apply matchedTransitionSource modifier before glass effect to avoid clip the glass + shadows
-// also glass background is auto applied for the transition without workaround
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ only — `@available(iOS 26.0, *)`. Gating APIs:
+//  `.matchedTransitionSource` and `.navigationTransition(.zoom(...))`.
+//
+//  Inline tips (kept verbatim from the original header):
+//    • Apply `matchedTransitionSource` BEFORE the glass effect, or
+//      the transition clips the glass + shadows.
+//    • Glass background is auto-applied during the transition; no
+//      workaround needed.
+//
+//  Learning point
+//  ──────────────
+//  Popover-as-zoom: tap a button and instead of a flat popover
+//  fade-in, the popover GROWS out of the button via the iOS 26
+//  zoom transition. The button is the source; the popover is the
+//  destination; matching them with `matchedTransitionSource(id:in:)`
+//  on the source and `navigationTransition(.zoom(sourceID:in:))`
+//  on the destination tells the system to animate the bounding
+//  rect between the two.
+//
+//  Inside the popover: a date-range picker (`DateFilterDemoView`)
+//  with two `DatePicker(.graphical)` panels. The popover uses
+//  `.presentationCompactAdaptation(.popover)` so it stays a
+//  popover even on compact (phone) widths instead of forcing a
+//  sheet.
+//
+//  `CustomPopMenuiOS26` (reusable button)
+//  ──────────────────────────────────────
+//  Wraps the source-button + popover wiring into a one-line API:
+//  caller passes a label, content, and tap handler; the helper
+//  handles the namespace, transition source, and presentation.
+//  Copy-paste this if you need the same effect on another button.
+//
+//  Key APIs
+//  ────────
+//  • `.matchedTransitionSource(id:in:)` — iOS 26. Marks a view as
+//    the SOURCE of a zoom transition. The order of modifiers
+//    matters here (see inline tip above).
+//  • `.navigationTransition(.zoom(sourceID:in:))` — iOS 26. Marks
+//    the destination; sourceID matches the source's id; namespace
+//    must match too.
+//  • `.popover(isPresented:)` — iOS 16+. The presentation surface;
+//    iOS 26 lets it pick up the zoom transition automatically.
+//  • `.presentationCompactAdaptation(.popover)` — keeps the popover
+//    a popover on iPhone (vs. the default sheet adaptation).
+//  • `.glassProminent` button style + `.sensoryFeedback(.impact)`
+//    — iOS 26 chrome + haptic feedback.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a button's popover content is closely tied to the
+//  button itself (filter chip → filter editor, date label → date
+//  picker, member chip → member detail). The zoom feels like the
+//  button "opens up." For unrelated content, prefer a stock
+//  popover.
+//
+//  See also
+//  ────────
+//  • View/Notifications/CustomNotificationsView.swift — different
+//    iOS 26 transition (no zoom, but similar source-anchored
+//    presentation feel).
+//  • View/QRCode/DIRQScannerView.swift — also uses
+//    `Transaction(disablesAnimations:)` + manual morph for a
+//    fullScreenCover; compare the two strategies.
 //
 import SwiftUI
 

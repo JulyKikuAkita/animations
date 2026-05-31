@@ -2,10 +2,61 @@
 //  CarouselImageWithAmbientBackgroundEffectView.swift
 //  animation
 //
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup
+//        Top-level `let images = firstSetCards` below leaks into
+//        module scope — every other file in the target sees a global
+//        named `images`. Move it inside `ImageWithAmbientBackgroundDemoView`
+//        as a stored property, or rename to a file-private constant
+//        (`private let images = ...`).
+//
+//  Learning point
+//  ──────────────
+//  Apple Music–style "ambient" carousel: a horizontally-paged image
+//  carousel sits over a heavily-blurred copy of the SAME images,
+//  cross-fading the background as the user pages. Two scroll-geometry
+//  subscriptions feed two distinct effects:
+//    • `topInset` + vertical `scrollOffsetY` — pulls the ambient
+//      backdrop UP so it covers the area behind the header on scroll.
+//    • Horizontal `scrollProgressX` (0...count-1) — drives per-image
+//      `opacity(index - scrollProgressX)` on the stacked backdrop,
+//      producing a continuous cross-fade rather than a hard cut.
+//
+//  Key APIs
+//  ────────
+//  • `.onScrollGeometryChange(for:_:action:)` — iOS 18+. Used twice
+//    with two different shapes (ScrollGeometry vs. CGFloat): once
+//    on the outer vertical ScrollView, once on the inner paging
+//    carousel.
+//  • `.scrollTargetBehavior(.viewAligned(limitBehavior: .always))` +
+//    `.scrollTargetLayout()` — snaps the carousel one image at a
+//    time.
+//  • `.containerRelativeFrame(.horizontal)` — sizes each image to
+//    fill the carousel viewport.
+//  • `.compositingGroup() + .blur(radius:opaque:) + .mask(...)` — the
+//    ambient blur stack. `opaque: true` is critical; without it the
+//    blur leaks edge pixels.
+//  • `.scaleEffect(y: -1)` on the background gradient — vertical
+//    flip for the dark→light bottom fade.
+//
+//  How to apply
+//  ────────────
+//  Use when you want carousel content to colour the surrounding
+//  chrome. Cost is rendering N stacked + blurred copies — fine for
+//  ~5 cards, watch for jank with large sets. The inline
+//  "better to use a low resolution image here" note is the right
+//  instinct: feed a downscaled variant to `backdropCarouselView`.
+//
+//  See also
+//  ────────
+//  • View/Carousel/* — non-ambient carousel patterns.
+//  • PlayStationApp/View — uses similar ambient-blur staging.
+//
 import SwiftUI
 
 // any image model has id, image
-let images = firstSetCards
+private let images = firstSetCards
 struct ImageWithAmbientBackgroundDemoView: View {
     /// View properties
     @State private var topInset: CGFloat = 0

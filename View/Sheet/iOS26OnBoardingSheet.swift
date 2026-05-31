@@ -3,7 +3,61 @@
 //  animation
 //
 //  Created on 7/8/25.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ for cascade chrome; iPad-specific
+//  `.presentationSizing(.fitted)` is iOS 18+ (`#available` checks
+//  at lines ~234–244).
+//
+//  Learning point
+//  ──────────────
+//  Apple-style onboarding sheet with STAGGERED CASCADE animations:
+//  icon first, then title, then each card row in sequence, then
+//  footer, then the CTA button. Reads as "the sheet is teaching
+//  me one thing at a time" rather than "everything popped on at
+//  once."
+//
+//  Two implementation pieces worth understanding:
+//    1. **`@resultBuilder OnBoardingCardResultBuilder`** — DSL
+//       sugar that lets callers declare cards as a series of
+//       `OnBoardingCard(...)` calls inside a trailing closure.
+//       Same pattern as SwiftUI's `@ViewBuilder`.
+//    2. **`.blurSlide()` custom modifier** — blur + opacity +
+//       offset combined into one transition. Each cascade element
+//       uses this with a STAGGERED `.delay(...)`.
+//
+//  Animation gating: `.allowsHitTesting(false)` is applied during
+//  the cascade so taps on the CTA button don't fire before the
+//  cascade finishes. Released once the final stagger lands.
+//
+//  Key APIs
+//  ────────
+//  • `@resultBuilder` — DSL primitive; collects `OnBoardingCard`s
+//    declaratively.
+//  • `.task` + `await Task.sleep(for:)` — the cascade scheduler;
+//    each element flips its visibility flag after its delay.
+//  • Custom `.blurSlide(...)` — file-local modifier combining
+//    blur, opacity, offset.
+//  • `.compositingGroup()` — applies the combined modifier
+//    atomically, not per-leaf.
+//  • `.presentationSizing(.fitted)` (iOS 18+) — iPad-aware
+//    sizing branch.
+//
+//  How to apply
+//  ────────────
+//  Use whenever an onboarding/welcome screen has 3+ elements that
+//  benefit from sequential reveal. The `@resultBuilder` + cascade-
+//  via-`Task.sleep` pattern is the reusable nugget.
+//
+//  See also
+//  ────────
+//  • View/LandingPages/OnBoardingiOS26View.swift — sibling
+//    flavor with simulator-bezel app preview instead of cascade
+//    cards.
+//  • PermissionSheetDemo.swift — domain-specific permission
+//    onboarding sheet in the same folder.
+//  • View/LandingPages/PermissionOnboardingIOS26.swift —
+//    permission onboarding with KeyframeAnimator-driven motion.
+//
 import SwiftUI
 
 struct OnBoardingSheetiOS26Demo: View {
@@ -48,7 +102,7 @@ struct OnBoardingSheetiOS26Demo: View {
                     Image(systemName: "person.3.fill")
                         .foregroundStyle(.red)
 
-                    Text("Your gameplay information, inclduing what you play and your game activity, is used to improve Game Center.")
+                    Text("Your gameplay information, including what you play and your game activity, is used to improve Game Center.")
                         .font(.caption2)
                         .foregroundStyle(.gray)
                 }

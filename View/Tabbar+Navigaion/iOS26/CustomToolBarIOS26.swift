@@ -2,7 +2,45 @@
 //  CustomToolBarIOS26.swift
 //  animation
 //
-//  Created on 2/11/26.
+//  Learning point
+//  ──────────────
+//  A scroll-driven TOP toolbar that morphs based on what the user has
+//  scrolled past. As the header scrolls off-screen the navigation bar
+//  fades a title (and a numeric-text-transitioned subtitle) in; once
+//  the subscribe button scrolls past, a glass-prominent "Add" primary
+//  action appears at the trailing edge.
+//
+//  Key APIs
+//  ────────
+//  • `.onGeometryChange(for:of:action:)` — used per element to detect
+//    when it scrolls past the navigation bar's bottom edge. Cheaper
+//    than a single big GeometryReader for the whole scroll view.
+//  • `.toolbar { ToolbarItem(placement:) }` with `.principal` — center
+//    title slot. The trick: `.principal` content is sized to its
+//    intrinsic width, so a 50-space string is used as a spacer to
+//    take up the full bar width and let the real title/subtitle
+//    sit in an `.overlay(alignment: .leading)` without shifting.
+//  • `.transition(.offset(y:).combined(with: .blurReplace))` — title
+//    slides + blur-fades in.
+//  • `.contentTransition(.numericText())` — animated digit/character
+//    rolls when subtitle text changes.
+//  • `.navigationBarBackButtonHidden()` + custom leading button — full
+//    control over the leading slot.
+//
+//  How to apply
+//  ────────────
+//  Use when the toolbar should feel "live" (Apple Music artist page,
+//  Music album header) rather than static. Drive every visibility flag
+//  from per-element geometry, not from a single scroll offset — that
+//  way the bar never lies about what's visible.
+//
+//  See also
+//  ────────
+//  • ToolBarHeaderScrollEffectDemoView.swift — same scroll-driven
+//    pattern but mimics App Store product page (icon + open/install).
+//  • ToolBar+NativeAPI.swift — when the same UX is achievable purely
+//    with native `.toolbar` items, prefer that over a custom modifier.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)

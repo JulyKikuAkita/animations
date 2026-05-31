@@ -2,11 +2,62 @@
 //  ListExpandSheetHeroAnimationView.swift
 //  animation
 //
-//  Hero animation using overlay window + anchor preferences.
-//  SourceView: wraps the origin view.
-//  DestinationView: wraps the target view.
-//  HeroWrapper: creates an overlay window for smooth cross-hierarchy animation.
-//  Use .heroLayer() modifier to connect source and destination.
+//  Learning point
+//  ──────────────
+//  REUSABLE HERO-ANIMATION INFRASTRUCTURE that survives any view-
+//  hierarchy boundary (sheet, push, fullScreenCover) by rendering
+//  the morph LAYER in a separate transparent UIWindow on top of
+//  everything. Three pieces:
+//
+//    `HeroWrapper { ... }` — the entry point. Holds a `HeroModel`
+//      `ObservableObject` and, on first `.active` scenePhase, spins
+//      up a transparent `UIWindow` whose root is `HeroLayerView`.
+//    `SourceView(id:) { ... }` / `DestinationView(id:) { ... }` —
+//      drop-in wrappers that publish their bounds via anchor
+//      preferences, keyed by the shared `id`. The wrapped content
+//      goes invisible (`opacity(0)`) while the hero is in flight; the
+//      overlay window draws the morphing layer.
+//    `.heroLayer(id:animate:content:completion:)` — view modifier.
+//      Toggle the bound `animate` Bool; the layer interpolates from
+//      source rect to destination rect with `.snappy(0.35)` spring.
+//
+//  Two demos are included to show the SAME API working across
+//  different presentation styles:
+//    • `ListExpandSheetHeroAnimationView` — list cell → `.sheet`.
+//    • `NavigationPushHeroAnimationView` — view → `.navigationDestination`.
+//
+//  Key APIs
+//  ────────
+//  • `UIApplication.shared.connectedScenes` → grab a `UIWindowScene`
+//    → instantiate a fresh `UIWindow` + `UIHostingController`. The
+//    window has `isUserInteractionEnabled = false` so taps fall
+//    through to the real UI underneath.
+//  • Anchor preferences (`AnchorKey` carries `[id: Anchor<CGRect>]`
+//    for source AND `[idDESTINATION: Anchor<CGRect>]` for destination)
+//    bridged through `HeroModel` — that's how the layer view in the
+//    OTHER window can read frames computed in this window's geometry.
+//  • `.environmentObject(model)` — `HeroModel` is shared across the
+//    main view tree AND the overlay window's root.
+//  • `withAnimation(.snappy(0.35)) { model.info[i].animateView = true }`
+//    after a 0.06s delay — the delay lets the destination view mount
+//    and publish its anchor BEFORE the morph begins.
+//
+//  How to apply
+//  ────────────
+//  Default to this file's API for new hero animations. Wrap the app
+//  root in `HeroWrapper { ... }` once; then use `SourceView` /
+//  `DestinationView` / `.heroLayer` wherever you need a morph.
+//
+//  See also
+//  ────────
+//  • BasicProfileAnimationView.swift — the same anchor-preferences
+//    technique, but with the overlay rendered IN-TREE (no UIWindow).
+//    Simpler when the source and destination share a NavigationStack.
+//  • ProfileList+SheetView.swift + WindowSharedModelHeroAnimationView.swift
+//    — the older two-window approach using SceneDelegate. Superseded
+//    by `HeroWrapper` here, kept only as a reference.
+//  • ProfileListView.swift — anchor hero plus a `heroProgress` slider
+//    and interactive swipe-to-dismiss.
 //
 import SwiftUI
 

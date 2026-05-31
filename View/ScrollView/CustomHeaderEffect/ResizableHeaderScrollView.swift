@@ -1,8 +1,52 @@
 //
 //  ResizableHeaderScrollView.swift
 //  animation
-// iOS 18 API: scroll View and Gesture can work seamlessly
-// prior to iOS 18: only either one works
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ — depends on the behaviour change where ScrollView
+//  and a custom `DragGesture` recognise SIMULTANEOUSLY. Pre-iOS 18,
+//  only one wins. No `@available(iOS 18, *)` gate currently;
+//  consider adding one.
+//
+//  Inline tip (preserved):
+//    iOS 18 API: ScrollView and Gesture can work seamlessly;
+//    prior to iOS 18, only either one works.
+//
+//  Learning point
+//  ──────────────
+//  Header-collapsing scroll view driven by a SIMULTANEOUS
+//  `DragGesture(minimumDistance: 10)` riding alongside the scroll's
+//  own pan. The gesture translation drives the header's `.offset(y:)`
+//  while `onScrollGeometryChange` clamps the offset between full
+//  size and collapsed. The user feels one continuous drag even
+//  though two gesture systems are firing in parallel.
+//
+//  Why simultaneous gestures matter
+//  ────────────────────────────────
+//  A bare `DragGesture` would steal events from the ScrollView's
+//  internal pan, freezing scroll. iOS 18's default-simultaneous
+//  behaviour for these gestures is what makes the pattern viable.
+//
+//  Key APIs
+//  ────────
+//  • `DragGesture(minimumDistance: 10)` simultaneous with scroll
+//    — load-bearing.
+//  • `onScrollGeometryChange` — canonical scroll offset feed.
+//  • `safeAreaInset(edge: .top)` — pins the collapsing header above
+//    the content.
+//
+//  How to apply
+//  ────────────
+//  Use when the header should COLLAPSE on each drag tick (smooth
+//  feel). For snap-on-settle instead, see [[ResizableHeaderIOS26View]].
+//
+//  See also
+//  ────────
+//  • ResizableHeaderIOS26View.swift — iOS 26 sibling using
+//    `.glassEffect` + snap-on-phase-change.
+//  • ResizableHeaderScrollViewiOS26.swift — generic patterns
+//    (filename misleads — no iOS 26 APIs).
+//  • ScrollToHideHeaderView.swift — minimal hide-on-scroll variant.
 //
 import SwiftUI
 

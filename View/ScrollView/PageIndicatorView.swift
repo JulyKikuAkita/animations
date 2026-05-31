@@ -2,7 +2,20 @@
 //  PageIndicatorView.swift
 //  animation
 //
-// SwiftUI learning notes — key takeaways in this file:
+//  ⚠️  REUSABLE COMPONENT, NOT A STANDALONE DEMO. Consumed by
+//      `View/Carousel/AnimatedPagingIndicatorsView.swift:65` as
+//      the morphing page-indicator pill that lives below the
+//      paging carousel. Don't rename or remove without updating
+//      that call site.
+//
+//  Note on reading order
+//  ─────────────────────
+//  The four numbered learning notes below are excellent — keep
+//  them. They are the inline tactical notes for someone reading
+//  the code; the structured "Key APIs / How to apply / See also"
+//  block lives at the bottom for cross-file consistency.
+//
+//  SwiftUI learning notes — key takeaways in this file:
 //
 // 1. `GeometryReader` exposes this view's own size/frame, but the iOS 17+
 //    `bounds(of: .scrollView(axis:))` + `frame(in: .scrollView(axis:))`
@@ -16,6 +29,33 @@
 //    layout (width here) while the overlay follows along.
 // 4. `.offset(x: -minX)` cancels out the parent's scroll offset, keeping this
 //    view visually pinned even though it's laid out inside the ScrollView.
+//
+//  Key APIs
+//  ────────
+//  • `proxy.bounds(of: .scrollView(axis: .horizontal))` (iOS 17+)
+//    — returns the ENCLOSING scroll view's content bounds; this
+//    is the load-bearing API that lets PageIndicator be a CHILD of
+//    the scroll without state plumbing.
+//  • `proxy.frame(in: .scrollView(axis: .horizontal))` — this view's
+//    own frame in scroll-space, used to compute `progress`.
+//  • Combo `Capsule().frame(width: ...)` + `.overlay(alignment:)` —
+//    the morphing pill: the frame width animates while the overlay
+//    of dots follows along.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a paging horizontal carousel needs a custom
+//  indicator that morphs continuously rather than hard-flipping
+//  between dots. The "child reads ancestor's scroll metrics"
+//  pattern is the reusable nugget — copy it for any scroll-driven
+//  child (parallax, sticky overlay, page-progress).
+//
+//  See also
+//  ────────
+//  • View/Carousel/AnimatedPagingIndicatorsView.swift — the consumer.
+//  • View/ScrollView/ContactScrollDemoView.swift — sibling that
+//    uses the same scroll-metrics-from-child idea for an alphabet
+//    index instead of a page indicator.
 //
 import SwiftUI
 

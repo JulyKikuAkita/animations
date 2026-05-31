@@ -3,8 +3,53 @@
 //  animation
 //
 //  Created on 9/11/25.
-// iOS 26
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  Filename suggests iOS 26 only, but the file uses no iOS 26-only
+//  APIs — `List` + `Section` + `onScrollPhaseChange(context:)` are
+//  iOS 17+. Keep the suffix or drop it; either is fine.
+//
+//  Learning point
+//  ──────────────
+//  App-Store-style collapsible list: a hero menu card at the top
+//  that scales DOWN to a compact title pinned to the navigation
+//  bar as the user scrolls. The interesting bit is using
+//  `onScrollPhaseChange(context:)` (with the context parameter,
+//  iOS 17.1+) to read which sticky section is currently anchored
+//  at the top of the viewport — and updating the navigation title
+//  to match.
+//
+//  Two-piece architecture:
+//    1. `CustomList<...>` (generic) — owns the scroll, the
+//       `Section` headers, and a `.customListRow()` extension that
+//       styles each row.
+//    2. `updateCurrentMenuTitle(...)` (typo above) — scroll-phase
+//       handler that reads which `MenuCard` is currently pinned
+//       and writes its title to a `@State`. The navigation title
+//       binds to that state, so the title morphs as the user
+//       scrolls past sections.
+//
+//  Key APIs
+//  ────────
+//  • `List` + `Section` — standard list with section headers.
+//  • `onScrollPhaseChange(context:)` (iOS 17.1+) — context-aware
+//    settle detection that exposes which section is pinned.
+//  • Custom `.customListRow()` view extension — file-local row
+//    styling.
+//  • `onGeometryChange` — frame tracking for the hero scale.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a long list has SECTIONS that should be reflected
+//  in the navigation title (App Store, Settings, music libraries).
+//  The `onScrollPhaseChange(context:)` pattern is the reusable
+//  nugget; the rest is product styling.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/CustomHeaderEffect/* — header-collapse
+//    siblings; this file is the LIST-flavoured version of the
+//    same idea.
+//
 import SwiftUI
 
 struct CustomListiOS26DemoView: View {
@@ -40,7 +85,7 @@ struct CustomListiOS26DemoView: View {
                             .onGeometryChange(for: CGFloat.self) {
                                 $0.frame(in: .global).minY
                             } action: { newValue in
-                                updateCurrentMenutTitle(card: card, offset: newValue)
+                                updateCurrentMenuTitle(card: card, offset: newValue)
                             }
                             .id(card.id)
                             .customListRow()
@@ -164,7 +209,7 @@ struct CustomListiOS26DemoView: View {
         .padding(.top, 10)
     }
 
-    fileprivate func updateCurrentMenutTitle(card: MenuCard, offset: CGFloat) {
+    fileprivate func updateCurrentMenuTitle(card: MenuCard, offset: CGFloat) {
         if offset < 200 {
             if card.title != currentMenuTitle {
                 currentMenuTitle = card.title

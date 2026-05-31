@@ -3,7 +3,55 @@
 //  animation
 //
 //  Created on 4/5/26.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Filename misleads — this file uses no iOS 26-only API. The
+//        gradient pipeline is Core Image (`CIFilter.areaAverage`),
+//        which works back to iOS 13. Consider dropping the `IOS26`
+//        suffix, or adding an iOS 26 enhancement (e.g., `MeshGradient`)
+//        to justify it.
+//
+//  Learning point
+//  ──────────────
+//  Builds an "ambient" full-screen gradient by SAMPLING the dominant
+//  colours from a UIImage and stitching them into a vertical
+//  LinearGradient. The image is split into N horizontal bands; each
+//  band's average colour becomes one stop. Tap to cycle through the
+//  bundled image set and watch the background recolour.
+//
+//  Pipeline:
+//    1. Downsample the input UIImage so the average filter doesn't
+//       chew through full-resolution pixels.
+//    2. For each horizontal band, run `CIFilter.areaAverage` over
+//       just that band's `extent`.
+//    3. Read the 1×1 output pixel back as RGBA via `CIContext.render`.
+//    4. Convert to `Color` and feed `LinearGradient(stops:)`.
+//
+//  Key APIs
+//  ────────
+//  • `CIFilter.areaAverage(inputImage:extent:)` — the sampler. One
+//    call per band; cheap on downscaled inputs.
+//  • `CIContext.render(_:toBitmap:rowBytes:bounds:format:colorSpace:)`
+//    — pulls the 1×1 result back to CPU as `[UInt8]`.
+//  • `LinearGradient(stops: [.init(color:location:)])` — the
+//    SwiftUI side; one stop per band.
+//  • `UIGraphicsImageRenderer` (in the downsample helper) — quick
+//    way to scale a UIImage before sampling.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when chrome should colour-match the displayed
+//  artwork (album art, hero images). Watch the band count: 4–6 is
+//  enough; more bands ≠ better, and `areaAverage` calls add up. For
+//  the all-iOS 26 path, MeshGradient + 4 corner colours is even
+//  cheaper.
+//
+//  See also
+//  ────────
+//  • View/PhotosView/CarouselImageWithAmbientBackgroundEffectView.swift
+//    — alternative ambient-background trick using stacked blurred
+//    copies of the image rather than colour sampling.
+//
 import CoreImage.CIFilterBuiltins
 import SwiftUI
 

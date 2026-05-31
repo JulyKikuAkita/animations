@@ -2,10 +2,45 @@
 //  iOS26+MinimizableTabBar.swift
 //  animation
 //
-//  Created on 6/23/25.
-// iOS 26 has native modifier of .tabBarMinimizeBehavior(.onScrollDown) for tabViewBottomAccessory content that minimize tabbar during scroll and
-// reveal when at the top end of scroll
-// The customized implementation using onScrollGeomtryChange hides the tab bar when scroll and reveals after certain scroll distance
+//  Learning point
+//  ──────────────
+//  Two ways to hide a tab bar on scroll:
+//
+//    NATIVE (commented out at the bottom):
+//      `.tabBarMinimizeBehavior(.onScrollDown)` — one line, iOS 26+,
+//      handled by the system. Use this when you can.
+//
+//    MANUAL (the active code):
+//      `.onScrollGeometryChange` + `.onScrollPhaseChange` track scroll
+//      direction and phase, then drive `.toolbarVisibility(.hidden,
+//      for: .tabBar)`. Worth studying because the same building blocks
+//      (phase + offset + a "stored offset" anchor) generalize to any
+//      scroll-reactive UI: floating headers, snap-to-top buttons, etc.
+//
+//  Key APIs
+//  ────────
+//  • `.tabBarMinimizeBehavior(.onScrollDown)` — native one-liner.
+//  • `.onScrollGeometryChange(for:of:action:)` — observe content
+//    offset (relative to top inset) without a GeometryReader.
+//  • `.onScrollPhaseChange { _, phase in }` — gate state changes to
+//    the `.interacting` phase so the bar doesn't flicker during
+//    deceleration.
+//  • `.toolbarVisibility(.hidden, for: .tabBar)` — animatable hide.
+//  • `Tab(role: .search) {}` + `.tabViewBottomAccessory { ... }` —
+//    bonus pieces showing the iOS 26 search-tab + accessory pattern.
+//
+//  How to apply
+//  ────────────
+//  Reach for the native modifier on iOS 26+. Keep the manual version
+//  if you need: (a) a custom threshold, (b) iOS < 26 support, or
+//  (c) bar visibility tied to something OTHER than scroll direction
+//  (e.g. content-based visibility).
+//
+//  See also
+//  ────────
+//  • LiquidGlassSearchableTabbar.swift — `.tabBarMinimizeBehavior`
+//    in a fuller example with a tabViewBottomAccessory mini-player.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)

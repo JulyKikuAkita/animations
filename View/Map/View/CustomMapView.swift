@@ -3,8 +3,75 @@
 //  animation
 //
 //  Created on 11/29/25.
-// support ios18+
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+; iOS 26 branch uses `Button(role: .cancel)` and
+//  `MKMapItem.location.coordinate`.
+//
+//  Learning point
+//  ──────────────
+//  Apple-Maps-style "search nearby + scroll through results" demo:
+//  shows a `Map` with annotated pins for nearby places matching a
+//  search term (`"GameStop"`, `"Starbucks"`, etc.), with a paged
+//  bottom carousel where each card represents one place. Selecting
+//  a card animates the map's camera to centre on that place's pin
+//  and pulses a ring around it; tapping "Learn More" presents a
+//  zoom-transition sheet for that place.
+//
+//  Three pieces working together:
+//    1. `MKLocalSearch` queries Apple's POI database scoped to a
+//       region (here: `MKCoordinateRegion.applePark250K`). Returns
+//       `MKMapItem`s converted to a local `Place` model.
+//    2. The bottom carousel is a horizontal `LazyHStack` with
+//       `.scrollTargetBehavior(.paging)` + `.scrollPosition(id:)`.
+//       The `.onChange(of: selectedPlaceID)` updates
+//       `cameraPosition` with a `withAnimation(animation)` so the
+//       map flies to the new place as the user pages.
+//    3. `matchedTransitionSource(id: place.id, in: animationID)` on
+//       the carousel card + `.navigationTransition(.zoom(...))` on
+//       the sheet creates the iOS 26 zoom transition.
+//
+//  Loading-state choreography
+//  ──────────────────────────
+//  While `places.isEmpty`, a redacted placeholder
+//  `BottomCarouselCardView(place: nil, ...)` renders in the carousel
+//  slot and a 35%-black overlay dims the map. As soon as
+//  `MKLocalSearch` returns, both fade to their loaded state in a
+//  single `withAnimation(animation)` block. This is the cleanest
+//  pattern for "show something useful before the network resolves."
+//
+//  Key APIs
+//  ────────
+//  • `MKLocalSearch.Request` + `search.start()` — async POI lookup
+//    scoped to a region.
+//  • `Map(position: $cameraPosition)` + `MapCameraPosition.camera(...)`
+//    — programmatic camera control. iOS 17+ MapKit-for-SwiftUI.
+//  • `Annotation(_:coordinate:)` — declarative pin placement; the
+//    closure body is the pin view.
+//  • `.scrollTargetBehavior(.paging)` + `.scrollPosition(id:)` —
+//    the paged carousel binding that drives the camera.
+//  • `.matchedTransitionSource(id:in:)` + `.navigationTransition(.zoom(...))`
+//    — iOS 26 zoom transition.
+//  • `.safeAreaInset(edge: .bottom)` — keeps Apple's legal map
+//    attribution visible above the carousel.
+//
+//  How to apply
+//  ────────────
+//  Use as a starting template for any "find me X near here" UX.
+//  Drop the search query into a `@Binding` to make it interactive;
+//  pair with [[LocationPermissionFullSheetView]] to gate access on
+//  the user's "When in Use" permission.
+//
+//  See also
+//  ────────
+//  • View/Map/View/BottomCarouselCardView.swift — the carousel
+//    card view.
+//  • View/Map/View/PulseRingView.swift — the selected-pin pulse.
+//  • View/Map/View/LocationPermissionFullSheetView.swift —
+//    permission flow you'd use BEFORE this demo.
+//  • View/CustomMenu/PopMenuiOS26+DatePickerDemo.swift — same
+//    matched-transition + zoom-presentation pattern on a date
+//    picker.
+//
 import MapKit
 import SwiftUI
 
@@ -74,15 +141,15 @@ struct CustomMapView: View {
             .overlay {
                 loadingOverlay()
             }
-            /// buttomCarousel use safeAreaInset to let map legal link visible
+            /// bottomCarousel use safeAreaInset to let map legal link visible
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 GeometryReader {
                     let size = $0.size
-                    buttomCarousel(size)
+                    bottomCarousel(size)
 
-                    /// a temp card until plces is full loaded
+                    /// a temp card until places is full loaded
                     if places.isEmpty {
-                        ButtomCarouselCardView(
+                        BottomCarouselCardView(
                             place: nil,
                             expandedItem: $expandedItem
                         )
@@ -104,7 +171,7 @@ struct CustomMapView: View {
                         Button {
                             dismiss()
                         } label: {
-                            Image(systemName: "xmark,circle.fill")
+                            Image(systemName: "xmark.circle.fill")
                                 .font(.largeTitle)
                                 .foregroundStyle(.primary)
                         }
@@ -123,11 +190,11 @@ struct CustomMapView: View {
         }
     }
 
-    private func buttomCarousel(_ size: CGSize) -> some View {
+    private func bottomCarousel(_ size: CGSize) -> some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
                 ForEach(places) { place in
-                    ButtomCarouselCardView(
+                    BottomCarouselCardView(
                         place: place,
                         expandedItem: $expandedItem
                     )

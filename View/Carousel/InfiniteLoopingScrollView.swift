@@ -1,7 +1,61 @@
 //
 //  InfiniteLoopingScrollView.swift
 //  animation
-// https://www.youtube.com/watch?v=lyuo59840qs&list=PLimqJDzPI-H97JcePxWNwBXJoGS-Ro3a-&index=56
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  Source: https://www.youtube.com/watch?v=lyuo59840qs (index 56).
+//
+//  TODO: Cleanup candidates
+//        1. The `asyncAfter(deadline: .now() + 0.06)` inside
+//           `ScrollViewHelper` is timing-fragile — it waits "long
+//           enough" for SwiftUI to install the underlying UIScrollView
+//           into the view hierarchy. Investigate
+//           `UIIntrospect`-style introspection or
+//           `UIViewRepresentable`'s newer `Coordinator` lifecycle to
+//           replace the magic delay.
+//        2. The `superview?.superview?.superview` chain to find the
+//           UIScrollView is a private-implementation-detail trap —
+//           any SwiftUI internal change can break it.
+//        3. Compare with [[InfiniteCarouselView]] — same goal, two
+//           very different techniques. If both stay, document why we
+//           keep both; if not, drop one.
+//
+//  Learning point
+//  ──────────────
+//  Alternative "infinite scroll" technique: instead of duplicating
+//  head/tail items in SwiftUI (see [[InfiniteCarouselView]]), reach
+//  through SwiftUI to grab the underlying `UIScrollView` and
+//  intercept `scrollViewDidScroll` to RESET the contentOffset whenever
+//  the user nears either end. The user never sees the seam because
+//  the reset is one-frame instant.
+//
+//  Trade-offs vs the SubViews-duplication technique:
+//    • + Doesn't duplicate cells (cheaper for expensive content).
+//    • + Smooth at any scroll velocity.
+//    • − Requires walking SwiftUI's view tree (`superview` chain) to
+//        find the actual UIScrollView — fragile.
+//    • − Needs `asyncAfter` to wait for view-tree installation.
+//
+//  Key APIs
+//  ────────
+//  • `UIViewRepresentable` + `Coordinator: UIScrollViewDelegate` —
+//    the bridge to UIKit's delegate methods.
+//  • `scrollViewDidScroll(_:)` — fires every frame; reset offset
+//    when contentOffset.x < itemWidth or ≥ N×itemWidth.
+//  • Generic `LoopingScrollView<Content, Item>` — repeats the source
+//    items enough times to fill the scroll runway, then snaps back.
+//
+//  How to apply
+//  ────────────
+//  Use when the cells are too heavy to duplicate (large images,
+//  video thumbnails). Otherwise prefer
+//  [[InfiniteCarouselView]] — pure SwiftUI, no UIKit reach-through.
+//
+//  See also
+//  ────────
+//  • InfiniteCarouselView.swift — pure-SwiftUI alternative using
+//    head/tail duplicates.
+//
 import SwiftUI
 
 struct InfiniteLoopingScrollDemoView: View {
@@ -31,7 +85,8 @@ struct InfiniteLoopingScrollView: View {
                                     .foregroundStyle(.gray)
                             }
                     }
-//                    .contentMargins(.horizontal, 15, for: .scrollContent) /// adding margin to scrollview w/o impacting it's natural bound
+                    /// adding margin to scrollview w/o impacting it's natural bound
+//                    .contentMargins(.horizontal, 15, for: .scrollContent)
                     .scrollTargetBehavior(.paging)
                 }
                 .frame(height: 220)

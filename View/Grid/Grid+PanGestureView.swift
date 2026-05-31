@@ -1,8 +1,64 @@
 //
 //  Grid+PanGestureView.swift
 //  animation
-//  iOS 18
-// Using UIKit pan gesture as SwiftUI gesture support still not perform well
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ — `onScrollGeometryChange` is the gating API. Uses
+//  `UIPanGestureRecognizer` (via `UIGestureRecognizerRepresentable`)
+//  because SwiftUI's `DragGesture` doesn't coordinate well with a
+//  parent `ScrollView` for multi-cell drag-select.
+//
+//  Learning point
+//  ──────────────
+//  Multi-select color grid with drag-select-and-delete: long-press
+//  any cell → enter selection mode → drag finger across cells to
+//  add/remove from selection → release to delete the selected
+//  cells. Auto-scrolls when the finger nears the top/bottom edge
+//  of the grid.
+//
+//  Two interlocking pieces:
+//    1. UIKit pan recognizer for the drag-select. Reads
+//       `gesture.location(in:)` against each cell's recorded
+//       `frame(in: .global)` (captured via `onGeometryChange`)
+//       and toggles the selection set as the finger crosses cells.
+//       SwiftUI's `DragGesture` can't do this cleanly inside a
+//       `ScrollView` without fighting the scroll's own gesture.
+//    2. Edge-zone auto-scroll. Two `ScrollDetectionRegion` views
+//       overlaid at the top + bottom 60pt of the grid; when the
+//       drag enters one, a `ScrollProperties` state machine ticks
+//       the scroll position via `scrollPosition` until the finger
+//       leaves the zone. Direction is captured by `ScrollDirection`
+//       enum.
+//
+//  Key APIs
+//  ────────
+//  • `UIGestureRecognizerRepresentable` (iOS 18+) — modern way to
+//    drop a `UIPanGestureRecognizer` into SwiftUI declaratively.
+//  • `onGeometryChange(for: CGRect.self)` per cell — records
+//    `frame(in: .global)` so the gesture can hit-test by location.
+//  • `onScrollGeometryChange(for: ScrollGeometry.self)` — drives
+//    the edge-zone auto-scroll.
+//  • `LazyVGrid(columns:)` with 4 columns — the grid layout.
+//  • Local helper structs `SelectionProperties`, `ScrollProperties`,
+//    `ScrollDirection`, `ItemCardView`, `ScrollDetectionRegion` —
+//    the demo's state machine, not exported.
+//
+//  How to apply
+//  ────────────
+//  Reach for this whenever you need lasso-style multi-select inside
+//  a scroll view (Photos, Files, Mail). Watch the magic numbers
+//  (4 columns, 60pt edge zone) — they're tuned for phone widths;
+//  scale by size class for iPad.
+//
+//  See also
+//  ────────
+//  • SortableIOS26GridView.swift — sibling demo using
+//    `UILongPressGestureRecognizer` for drag-reorder rather than
+//    drag-select. Same UIKit-bridge philosophy, different
+//    interaction.
+//  • GridView.swift — the simplest grid demo using native
+//    `.draggable` + `.dropDestination`. No UIKit reach-through;
+//    for cases where you don't need lasso semantics.
 //
 import SwiftUI
 
@@ -41,7 +97,7 @@ struct GridColorBlockView: View {
 
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 4)) {
                     ForEach($items) { $item in
-                        ItemCardView($item)
+                        itemCardView($item)
                     }
                 }
             }
@@ -50,10 +106,10 @@ struct GridColorBlockView: View {
         .safeAreaPadding(15)
         .scrollPosition($scrollProperties.position)
         .overlay(alignment: .top) {
-            ScrollDetectionRegion()
+            scrollDetectionRegion()
         }
         .overlay(alignment: .bottom) {
-            ScrollDetectionRegion(false)
+            scrollDetectionRegion(false)
         }
         .onAppear(perform: createRandomColor)
         .onChange(of: isSelectionEnabled) { _, newValue in
@@ -113,7 +169,7 @@ struct GridColorBlockView: View {
     }
 
     @ViewBuilder
-    func ItemCardView(_ binding: Binding<ColorItem>) -> some View {
+    func itemCardView(_ binding: Binding<ColorItem>) -> some View {
         let item = binding.wrappedValue
         if let index = items.firstIndex(where: { $0.id == item.id }) {
             RoundedRectangle(cornerRadius: 10)
@@ -155,7 +211,7 @@ struct GridColorBlockView: View {
     }
 
     @ViewBuilder
-    func ScrollDetectionRegion(_ isTop: Bool = true) -> some View {
+    func scrollDetectionRegion(_ isTop: Bool = true) -> some View {
         Rectangle()
             .foregroundStyle(.clear)
             .frame(height: 100)
@@ -256,27 +312,6 @@ struct GridColorBlockView: View {
         case up, down, none
     }
 }
-
-/// Custom UIKit Gesture -> move to Gesture + PanGesture file
-// struct PanGesture: UIGestureRecognizerRepresentable {
-//    var handle: (UIPanGestureRecognizer) -> ()
-//
-//    func makeUIGestureRecognizer(context: Context) -> UIPanGestureRecognizer {
-//        return UIPanGestureRecognizer()
-//    }
-//
-//    func updateUIGestureRecognizer(
-//        _ recognizer: UIPanGestureRecognizer,
-//        context: Context
-//    ) {}
-//
-//    func handleUIGestureRecognizerAction(
-//        _ recognizer: UIPanGestureRecognizer,
-//        context: Context
-//    ) {
-//        handle(recognizer)
-//    }
-// }
 
 #Preview {
     GridColorBlockDemoView()

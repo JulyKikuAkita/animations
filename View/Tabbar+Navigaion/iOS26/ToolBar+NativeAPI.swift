@@ -2,8 +2,49 @@
 //  ToolBar+NativeAPI.swift
 //  animation
 //
-//  Created on 11/25/25.
-// Show Native iOS26.1 Toolbar API in Note/Mail app
+//  Learning point
+//  ──────────────
+//  THREE flavors of the iOS 26.1 native toolbar, no custom modifiers,
+//  no glass-shape gymnastics — just `.toolbar { ... }` content modeled
+//  on Apple's own apps:
+//
+//    1. ToolBarSearchBarBottomAlignDemoView — `.searchable` paired with
+//       a single bottom-bar action button. The simplest possible setup.
+//    2. NoteStyleToolBarNativeAPIDemoView — Notes app pattern using
+//       `DefaultToolbarItem(kind: .search, placement: .bottomBar)` and
+//       `ToolbarSpacer(placement: .bottomBar)` to split items.
+//    3. MailStyleToolBarNativeAPIDemoView — Mail app pattern. Adds a
+//       second `.toolbar(id: "WRITEACTION")` namespace; using a stable
+//       toolbar ID is the "no-bounce" trick when items appear/disappear
+//       across navigation pushes (the system would otherwise re-flow
+//       and bounce).
+//
+//  Key APIs
+//  ────────
+//  • `.toolbar { ToolbarItem(placement: .bottomBar) { ... } }`
+//  • `DefaultToolbarItem(kind: .search, placement: .bottomBar)` — the
+//    system's own search field, properly placed in the bottom bar.
+//  • `ToolbarSpacer(.flexible / .fixed, placement: .bottomBar)` — gap
+//    items; `.flexible` pushes neighbors apart, `.fixed` adds a fixed
+//    gap.
+//  • `.toolbar(id: "...")` + `ToolbarItem(id:placement:)` — stable IDs
+//    that suppress nav-push bounce animations.
+//  • `.searchable(text:)` paired with `.navigationTitle` / `.navigationSubtitle`.
+//
+//  How to apply
+//  ────────────
+//  Default to these PURE NATIVE patterns first. Reach for
+//  `CustomToolBarIOS26.swift` only when you need behavior the native
+//  API can't express (scroll-driven title morph, custom principal
+//  layout). Avoiding custom toolbars saves you from reimplementing
+//  safe-area, large-title, and search ergonomics.
+//
+//  See also
+//  ────────
+//  • CustomToolBarIOS26.swift — when native isn't enough.
+//  • ToolBarHeaderScrollEffectDemoView.swift — App Store style,
+//    scroll-driven, also custom (see when to escalate).
+//
 
 import SwiftUI
 

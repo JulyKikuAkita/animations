@@ -2,11 +2,62 @@
 //  HeaderPageScrollTabiOS18View.swift
 //  animation
 //
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 18+ — `Group(subviews:)`, multi-scroll `scrollPosition`
+//  bindings, per-tab `onScrollPhaseChange`.
+//
+//  Inline notes (preserved from the original header):
+//
 // How iOS18 api helps synchronizing scrollView interactions:
 // 1. using scrollPosition to sync scrollView offsets:
 //  - when offset is < 0, (bouncing), reset all other scrollviews to initial position
 //  - when is scrolling, update other scrollviews.
 //      -- by checking after the tab bar reaches top
+//
+//  Learning point
+//  ──────────────
+//  Multi-tab paging layout where each tab has its OWN vertical
+//  scroll, all sharing a STICKY HEADER + tab bar that hides as
+//  any tab scrolls down. The tricky bit is keeping the per-tab
+//  scroll positions IN SYNC so the header animation stays
+//  consistent regardless of which tab the user is on — switching
+//  tabs after scrolling tab A shouldn't reset the header.
+//
+//  Sync mechanics:
+//    1. Each tab gets its own `@State scrollPosition` binding.
+//    2. `onScrollPhaseChange` fires per-tab; the handler updates
+//       a SHARED `@State` representing the global scroll state.
+//    3. When the user switches tabs, the destination tab applies
+//       the shared state to its scroll position via the binding.
+//  This is the iOS-18-only path — pre-iOS-18 you'd reach for
+//  `UIScrollViewDelegate` to coordinate, see
+//  [[View/Carousel/InfiniteLoopingScrollView]] for an example of
+//  that.
+//
+//  Key APIs
+//  ────────
+//  • `Group(subviews:)` (iOS 17.1+) — extracts page bodies so each
+//    one can have its own scroll position binding.
+//  • `.scrollPosition($scrollPositions[index])` — per-tab binding
+//    in an array.
+//  • `.onScrollPhaseChange` — per-tab settle detection that updates
+//    the shared global scroll state.
+//  • `.scrollClipDisabled()` — needed because the sticky header
+//    extends above each tab's scroll frame.
+//
+//  How to apply
+//  ────────────
+//  Use for any tabbed UX where each tab has long content but the
+//  CHROME (header, tab bar) should feel like one shared element
+//  (Twitter profile, Apple Music, App Store). The shared-scroll-
+//  state pattern is the reusable nugget.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/CustomHeaderEffect/ResizableHeaderIOS26View.swift
+//    — single-scroll header collapse using iOS 26 Liquid Glass.
+//  • View/ScrollView/CustomHeaderEffect/ScrollToHideHeaderView.swift
+//    — single-scroll hide-on-scroll header.
 //
 import SwiftUI
 

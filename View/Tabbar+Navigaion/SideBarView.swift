@@ -1,6 +1,40 @@
 //
 //  SideBarView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  Reusable sidebar SUB-COMPONENT (not a standalone demo). Renders
+//  a profile header + a list of `SideBarActions` rows that push
+//  values onto a bound `NavigationPath`. Adapts horizontal padding
+//  based on whether the device has non-zero leading/trailing safe
+//  area insets (iPad / landscape phone).
+//
+//  Notable: every sidebar tap calls BOTH `toggleSideBar()` (the host
+//  closure that closes the drawer) AND `path.append(...)`. That
+//  ordering is intentional — closing the drawer first lets the
+//  push transition come from a clean state.
+//
+//  Key APIs
+//  ────────
+//  • `@Binding var path: NavigationPath` — the host owns the path,
+//    this view only mutates it.
+//  • `GeometryReader { let safeArea = $0.safeAreaInsets ... }` —
+//    layout decisions from safe-area shape (vs size class).
+//  • `.scrollClipDisabled()` — lets the row separators bleed past
+//    the scroll bounds for the right visual feel.
+//
+//  How to apply
+//  ────────────
+//  Use as the content of a drawer or split-view sidebar. The host
+//  is responsible for layout (width, offset, animation) and for
+//  hiding it — this view is layout-agnostic.
+//
+//  See also
+//  ────────
+//  • AdaptiveLayoutView.swift — the host that drives this sidebar
+//    in both drawer (portrait) and permanent-split (landscape) modes.
+//
 
 import SwiftUI
 

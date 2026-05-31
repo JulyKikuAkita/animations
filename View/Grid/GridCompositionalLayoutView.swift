@@ -1,7 +1,64 @@
 //
 //  GridCompositionalLayoutView.swift
 //  animation
-
+//
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 17.1+ — `Group(subviews:)` is the gating API.
+//
+//  Learning point
+//  ──────────────
+//  Dynamic grid that morphs between 1, 2, 3, 4-column layouts via
+//  a segmented picker. As the column count changes, EVERY cell
+//  animates from its old position to its new one via
+//  `matchedGeometryEffect` in a shared `Namespace`. Result: cells
+//  appear to slide between layouts rather than re-laying out
+//  abruptly.
+//
+//  Why `Group(subviews:)` is load-bearing
+//  ──────────────────────────────────────
+//  The reusable `GridCompositionalLayoutView<Content>` accepts a
+//  `@ViewBuilder` closure and uses iOS 17.1+ `Group(subviews:)` to
+//  extract the children as a `SubviewsCollection`. From there, a
+//  local `ChunkedCollection` extension chunks the subviews into
+//  rows of N. This lets callers write a flat `ForEach { ... }` and
+//  have the helper handle the row-splitting math.
+//
+//  The morph mechanic
+//  ──────────────────
+//  Each subview has a stable `id` (chunk index + position-in-chunk).
+//  When the column count changes, SwiftUI sees the SAME ids appear
+//  at NEW positions in the layout. Combined with
+//  `.matchedGeometryEffect(id: ..., in: namespace)` and a `.bouncy`
+//  animation, SwiftUI interpolates each cell's frame from old → new
+//  for free.
+//
+//  Key APIs
+//  ────────
+//  • `Group(subviews: content) { collection in ... }` — iOS 17.1+
+//    SubViews API. The whole demo hinges on this.
+//  • `matchedGeometryEffect(id:in:)` — drives the per-cell morph.
+//  • `Namespace` — shared between the picker target and the chunk
+//    layout so ids match across layout changes.
+//  • `ChunkedCollection<C>` — file-local extension on
+//    `SubviewsCollection` that yields N-item slices. Could be lifted
+//    if reused.
+//  • `.bouncy` — the unifying animation curve; `bouncy` reads as
+//    "physical" without overshooting too much.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a grid has a USER-CONTROLLED column count or needs
+//  to adapt to size-class changes. The chunking helper is
+//  generalisable — copy it into any project that wants
+//  declarative N-up grid math.
+//
+//  See also
+//  ────────
+//  • GridView.swift — fixed 3-column grid; this file's "static
+//    counterpart."
+//  • View/Carousel/CardCarouselView.swift — different reduction-
+//    on-scroll trick; complementary visual technique.
+//
 import SwiftUI
 
 struct GridCompositionalLayoutDemoView: View {
@@ -132,7 +189,6 @@ private extension SubviewsCollection {
         stride(from: 0, to: count, by: size).map {
             let collection = Array(self[$0 ..< Swift.min($0 + size, count)])
             let layoutID = ($0 / size) % 4
-            print(layoutID)
             return .init(layoutID: layoutID, collection: collection)
         }
     }

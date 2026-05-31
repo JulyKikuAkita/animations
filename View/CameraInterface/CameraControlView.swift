@@ -1,8 +1,56 @@
 //
 //  CameraControlView.swift
 //  animation
-// Only runs on real iPhone 18 devices (with camera control button)
-// Add camera privacy property at the info.list
+//
+//  Only runs on real iPhone 16+ devices (those with the hardware Camera Control button).
+//  Add the `NSCameraUsageDescription` key in Info.plist or the app will crash on permission request.
+//
+//  =============================================================================
+//  HOW TO USE AVKit TO ACCESS THE CAMERA IN SwiftUI — A WALKTHROUGH FOR NEW DEVS
+//  =============================================================================
+//
+//  SwiftUI does not own a camera view. The camera lives in AVFoundation/AVKit
+//  (UIKit-era APIs), so we bridge it into SwiftUI in three layers:
+//
+//  1. Model layer — `Camera` (an `@Observable` class)
+//     • Owns the `AVCaptureSession`, which is the pipeline that wires camera
+//       input (`AVCaptureDeviceInput`) to outputs (`AVCapturePhotoOutput`).
+//     • Handles permission via `AVCaptureDevice.authorizationStatus(for: .video)`
+//       and `AVCaptureDevice.requestAccess(for: .video)`.
+//     • `session.beginConfiguration()` / `commitConfiguration()` brackets all
+//       wiring changes; `startRunning()` / `stopRunning()` MUST run off the main
+//       thread (we use `Task.detached(priority: .background)`) — calling them
+//       on main will jank the UI.
+//     • Conforms to `AVCaptureSessionControlsDelegate` so the system can notify
+//       us when the iPhone 16 Camera Control button becomes active/inactive.
+//
+//  2. SwiftUI layer — `CameraControlView`
+//     • Holds the `Camera` model and injects it into the environment so child
+//       views can read it via `@Environment(Camera.self)`.
+//     • Uses `@Environment(\.scenePhase)` to start/stop the session when the
+//       app foregrounds/backgrounds (saves battery, releases the camera).
+//
+//  3. Bridge layer — `CameraLayerView` (`UIViewRepresentable`)
+//     • SwiftUI cannot host a `CALayer` directly, so we wrap a UIKit `UIView`
+//       and add an `AVCaptureVideoPreviewLayer` as its sublayer. The preview
+//       layer is what actually renders the live camera feed.
+//     • `makeUIView` builds the view once; `updateUIView` is a no-op here
+//       because the layer reads from the session reactively.
+//     • `AVCaptureEventInteraction` listens for hardware Camera Control button
+//       presses and triggers `camera.capturePhoto()` on release.
+//
+//  Camera Control customization (iPhone 16+):
+//     `setupCameraControl(_:)` adds an `AVCaptureSlider` (zoom) and an
+//     `AVCaptureIndexPicker` (filter) that appear in the system Camera Control
+//     UI. Always gate with `session.supportsControls` and `canAddControl(_:)`.
+//
+//  Threading rules to remember:
+//     • Session start/stop → background thread.
+//     • Configuration changes → between `beginConfiguration()` and
+//       `commitConfiguration()`.
+//     • Delegate callbacks → marked `nonisolated` because they fire off-main.
+//  =============================================================================
+
 import AVKit
 import SwiftUI
 

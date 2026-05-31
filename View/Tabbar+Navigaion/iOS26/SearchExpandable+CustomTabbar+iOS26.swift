@@ -2,8 +2,41 @@
 //  SearchExpandable+CustomTabBar+iOS26.swift
 //  animation
 //
-//  Created on 4/9/26.
-//  Apple Fitness App
+//  Learning point
+//  ──────────────
+//  Apple Fitness+ style horizontally-scrolling tab strip where the
+//  trailing search "icon" expands inline into a full search field.
+//  When expanded, the strip auto-CENTERS the search field by offsetting
+//  the entire HStack — done with `.visualEffect`, which gives access
+//  to the scroll-view-relative frame WITHOUT triggering re-layout.
+//
+//  Key APIs
+//  ────────
+//  • `ScrollView(.horizontal)` + `.scrollDisabled(isSearchExpanded)` —
+//    free scrolling when collapsed, locked when search has focus.
+//  • `.visualEffect { content, proxy in ... .offset(x:) }` — reads
+//    `proxy.frame(in: .scrollView)` and shifts the content as a render-
+//    only effect. Cheaper than driving `@State` from a geometry change
+//    because it doesn't invalidate layout.
+//  • `.glassEffect(.regular.interactive(_:), in: .capsule)` — applied
+//    per-pill; `.interactive(false)` while expanded prevents stray
+//    glass highlights on disabled tabs.
+//  • `@FocusState` + `.onChange` — propagates keyboard activation up
+//    via the `onSearchActivated` callback so the host view can hide
+//    its title.
+//  • `.glassEffect(_:in: .circle)` on the trailing dismiss button.
+//
+//  How to apply
+//  ────────────
+//  Use when the tab strip is content-heavy (many tabs) and search is
+//  a secondary action. The horizontal scroll handles overflow that a
+//  fixed bottom bar can't.
+//
+//  See also
+//  ────────
+//  • SearchableTabbariOS26Style.swift — the same "tap search → field
+//    expands" UX, but for a fixed BOTTOM tab bar, drag-driven, and
+//    iOS 16.4+ compatible (no glass effect).
 //
 import SwiftUI
 

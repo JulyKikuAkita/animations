@@ -3,7 +3,63 @@
 //  animation
 //
 //  Created on 2/19/26.
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ only — `@available(iOS 26.0, *)` on every type.
+//
+//  Learning point
+//  ──────────────
+//  iOS-26-styled onboarding with a simulator-bezel app preview at
+//  the top and a glassmorphic action panel pinned to the bottom.
+//  Tapping the bottom button advances through preview screens; the
+//  active screen scales up while neighbours recede, all driven by a
+//  `scrollPosition(id:)` binding that's READ-ONLY from the user's
+//  perspective (the user can't drag — only the button advances).
+//
+//  The "scroll-position-as-state-machine" trick
+//  ────────────────────────────────────────────
+//  `scrollPosition(id:)` is bound to a computed get/set that READS
+//  the position but only ALLOWS writes through the button. Setting
+//  it to `nil` for the user is what locks the gesture; setting it
+//  to a new id from the button is what advances.
+//
+//  Visual layers (top to bottom):
+//    1. Simulator-bezel container — a `ConcentricRectangle` clip
+//       sized to phone aspect ratio.
+//    2. Inner `HStack` of preview screens, snapped via
+//       `.scrollTargetBehavior(.viewAligned)`.
+//    3. Each screen `.scaleEffect(_, anchor:)`-ed based on its
+//       distance to centre (`onGeometryChange` + scroll-progress).
+//    4. Bottom panel using `.glassEffect(.clear.tint(...), in: .rect)`
+//       — iOS 26 Liquid Glass with custom tint.
+//
+//  Key APIs
+//  ────────
+//  • `ConcentricRectangle` (iOS 26) — corner radius matches nested
+//    geometry; load-bearing for the bezel-inside-bezel illusion.
+//  • `.glassEffect(_, in:)` — iOS 26 Liquid Glass material; the
+//    `.clear.tint(...)` flavor adds a brand-color wash.
+//  • `.containerShape(_:)` — clips hit-testing to the bezel shape
+//    so taps outside the device frame don't register.
+//  • `.scrollPosition(id: $boundIdentifier)` with a custom getter/
+//    setter — turns a SwiftUI gesture into a state machine.
+//  • `onGeometryChange(for: CGFloat.self)` — drives per-screen
+//    scale based on distance to centre.
+//
+//  How to apply
+//  ────────────
+//  Use as a template for any onboarding that needs to PREVIEW the
+//  app's actual UI (vs. abstract illustrations). The bezel-and-
+//  scroll-state pattern generalises beyond onboarding — any
+//  "device walkthrough" UI can copy it.
+//
+//  See also
+//  ────────
+//  • LandingView.swift — simpler onboarding flavor (symbol carousel,
+//    no app preview).
+//  • PermissionOnboardingIOS26.swift — sibling iOS 26 onboarding
+//    focused on permission prompts. Read both — they teach DIFFERENT
+//    iOS 26 patterns despite similar surface.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)
@@ -12,7 +68,7 @@ struct OnBoardingiOS26DemoView: View {
         let image = UIImage(named: "Bitcoin") // use IMG_6162 for screenshot image
         let title = "Welcome to iOS 26"
         let subtitle = "Introducing a new design with\nLiquid Glass."
-        IOS26StyeOnBoarding(
+        IOS26StyleOnBoarding(
             tint: .orange,
             hideBezels: true, // hide device frame
             items: [
@@ -36,7 +92,7 @@ struct OnBoardingiOS26DemoView: View {
 }
 
 @available(iOS 26.0, *)
-struct IOS26StyeOnBoarding: View {
+struct IOS26StyleOnBoarding: View {
     var tint: Color = .blue
     var hideBezels: Bool = false
     var items: [Item]

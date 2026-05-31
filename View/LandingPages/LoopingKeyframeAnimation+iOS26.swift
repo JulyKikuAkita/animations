@@ -3,6 +3,76 @@
 //  animation
 //
 //  Created on 5/13/26.
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  TODO: Cleanup candidates
+//        1. Filename misleads — `+iOS26` suffix, but no
+//           `@available(iOS 26.0, *)` and no iOS 26-only APIs
+//           (`@Animatable` is iOS 18+, `KeyframeAnimator` and
+//           `TimelineView` are iOS 17+). Either rename to
+//           `LoopingKeyframeAnimation+iOS18.swift` or add the
+//           `@available` gate if iOS 26 is actually intended.
+//
+//  Learning point
+//  ──────────────
+//  Three concurrent perpetual animations driven from a single
+//  3-second time budget:
+//    • Symbol glow that PULSES — radial gradient scales up + fades
+//      out, on a `KeyframeAnimator` with a `repeating: true` flag.
+//    • Concentric pulse rings — one `Pulse` instance per ring,
+//      offset by `delay` so the rings stagger.
+//    • Phase rotation — `TimelineView(.periodic(from: now, by: 3))`
+//      ticks every 3 seconds, advancing the active phase index
+//      which swaps title/subtitle text below.
+//  All three derive their timing from the SAME 3-second period so
+//  they always feel locked.
+//
+//  The `@Animatable` `Pulse` struct (line ~223)
+//  ────────────────────────────────────────────
+//  iOS 18 macro auto-synthesises `AnimatableData` from the
+//  struct's stored properties (`scale`, `opacity`). Without it,
+//  you'd implement `Animatable` by hand and expose
+//  `AnimatablePair<CGFloat, CGFloat>` — six lines of boilerplate
+//  the macro replaces with one annotation. The inline comment in
+//  the file is intentionally pedagogical; keep it.
+//
+//  Why `TimelineView(.periodic)` instead of a `Timer`?
+//  ───────────────────────────────────────────────────
+//  `TimelineView` is driven by SwiftUI's render loop, so the
+//  timeline and the keyframe animations stay in sync without
+//  manual coordination. A real `Timer` runs on a different clock
+//  and would drift relative to the keyframe-driven pulse.
+//
+//  Key APIs
+//  ────────
+//  • `@Animatable` (iOS 18+) — auto-synthesises `AnimatableData`.
+//  • `KeyframeAnimator(initialValue:repeating:)` — iOS 17+.
+//    `repeating: true` makes the keyframe sequence loop forever.
+//  • `SpringKeyframe` + `LinearKeyframe` + `CubicKeyframe` —
+//    keyframe primitives mixed within a single track for different
+//    interpolation feels.
+//  • `TimelineView(.periodic(from:by:))` — iOS 17+. Periodic time
+//    schedule; gives `context.date` to drive phase math.
+//  • `.visualEffect` — drives the offset of the symbol's glow
+//    layer per frame.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when an empty/idle state needs perpetual,
+//  non-distracting motion (loading screens that take >2s, hero
+//  illustrations, security-explainer cards). Watch the keyframe
+//  durations: every track's TOTAL must equal the period (3s here)
+//  or the animations will desync over time.
+//
+//  See also
+//  ────────
+//  • View/3DAnimation/Paywall3DAnimation.swift — same `@Animatable`
+//    + `@AnimatableIgnored` pattern on a different effect.
+//  • View/SpecialAnimationEffects/MetaballAnimation_iOS26.swift —
+//    sibling using the same macro for metaball blob math.
+//  • OnBoardingiOS26View.swift, PermissionOnboardingIOS26.swift —
+//    onboarding-flavor cousins in this folder.
+//
 import SwiftUI
 
 let mockPhaseData: [LoopOnBoarding.Phase] = [
@@ -18,7 +88,7 @@ let mockPhaseData: [LoopOnBoarding.Phase] = [
     ),
     .init(
         symbol: "key.icloud.fill",
-        title: "iCoud Key Security",
+        title: "iCloud Key Security",
         description: "Lorem ipsum dolor sit amet..."
     ),
 ]

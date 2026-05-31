@@ -1,8 +1,56 @@
 //
-//  CalendarWithMultipleSCrollView.swift
+//  CalendarWithMultipleScrollView.swift
 //  animation
 //
-
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  Two-scroll calendar pattern: a horizontal week strip pinned at
+//  the top + a vertical schedule list below, with the two
+//  bidirectionally synchronised. Tapping a day in the strip
+//  scrolls the list to that day's section; scrolling the list
+//  vertically updates the highlighted day in the strip.
+//
+//  Two pieces:
+//    1. Horizontal week-strip ScrollView with paged days.
+//    2. Vertical content list with `pinnedViews: [.sectionHeaders]`
+//       so each day's header stays visible as its events scroll
+//       past — same trick as `View/ScrollView/ContactScrollDemoView`.
+//
+//  Bidirectional sync
+//  ──────────────────
+//  Both scrolls bind to a shared `@State` representing the active
+//  day id. Each scroll uses `.scrollPosition(id:)` against this
+//  binding; an `.onChange(of: ...)` guard prevents the ping-pong
+//  feedback loop where each scroll's update fires the other.
+//  Standard pattern; copy verbatim.
+//
+//  Key APIs
+//  ────────
+//  • `LazyVStack(pinnedViews: [.sectionHeaders])` — sticky day
+//    headers in the vertical list.
+//  • `.scrollPosition(id:)` — TWO-way binding, one per scroll.
+//  • `.scrollTargetLayout()` + `.scrollTargetBehavior(.viewAligned)` —
+//    paged snap on the horizontal week strip.
+//  • `.contentMargins(.horizontal, ...)` — leading/trailing
+//    padding inside the scroll's content (not the scroll's
+//    container) so the first/last day can sit centred.
+//  • `onGeometryChange` — frame tracking for the active-day
+//    highlight.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a UI has TWO independently scrollable surfaces
+//  that must stay logically in sync (calendar + schedule, tab bar
+//  + content, gallery + detail). The bidirectional `scrollPosition`
+//  pattern is the reusable primitive.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/ContactScrollDemoView.swift — same pinned-
+//    section-header trick on alphabetical contacts.
+//
 import SwiftUI
 
 struct CalendarWithMultipleHomeView: View {

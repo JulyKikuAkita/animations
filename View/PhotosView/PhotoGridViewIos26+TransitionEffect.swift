@@ -1,14 +1,69 @@
+// swiftlint:disable file_length
 //
 //  PhotoGridViewIos26+TransitionEffect.swift
 //  animation
 //
 //  Created on 3/4/26.
-// Simulate Apple Photo app iOS26 transition animation
-// Gesture: use customized pan gesture instead of drag gesture to work with scrollView also has the flexibility to fail the gesture in specific conditions
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//
+//  Learning point
+//  ──────────────
+//  From-scratch reimplementation of the Apple Photos app iOS 26
+//  expand-from-grid → swipe-down-to-dismiss transition. Three
+//  load-bearing pieces:
+//    1. SOURCE→DETAIL geometry handoff. Each grid cell records its
+//       `frame(in: .global)` at tap time (`config.sourceLocation`).
+//       The detail view starts at that exact rect (`isExpanded =
+//       false`) and animates to fullscreen on `.task` (`isExpanded
+//       = true`). Dismiss reverses the same animation.
+//    2. UIKit pan gesture for vertical swipe-to-dismiss
+//       (`PhotoDismissPanGesture` at the bottom of this file). NOT a
+//       SwiftUI `DragGesture` — see the long inline comment above
+//       its declaration. Its delegate uses `shouldBeRequiredToFailBy`
+//       (NOT simultaneous recognition) so the gesture defers to a
+//       child UIScrollView when that scrollview has been scrolled
+//       past the top.
+//    3. `fullScreenCover` is opened inside `withoutAnimation { ... }`
+//       so the cover contributes ZERO transition of its own — all
+//       visible motion comes from the manual frame/offset animation.
+//       Otherwise iOS's default cover transition fights ours.
+//
+//  Key APIs
+//  ────────
+//  • `UIGestureRecognizerRepresentable` (iOS 18+) — modern wrapper
+//    that lets us drop a `UIPanGestureRecognizer` into SwiftUI
+//    declaratively (preferred over `UIViewRepresentable` for gestures).
+//  • `withoutAnimation { }` — project helper; suppresses implicit
+//    SwiftUI animation around a state mutation.
+//  • `ScrollPosition` + `.scrollPosition($config.sourceScrollPosition)`
+//    + `scrollTo(id:)` — keeps the underlying grid scrolled to the
+//    currently-displayed detail item, so on dismiss the grid lands
+//    where the user expects.
+//  • `interpolatingSpring(duration: 0.3, bounce: 0)` — the unifying
+//    animation curve for expand, dismiss, and snap-back.
+//  • `.glassEffect(.regular.interactive(), in: .capsule)` +
+//    `.buttonStyle(.glass)` — iOS 26 glass overlay actions.
+//
+//  How to apply
+//  ────────────
+//  Use as a starting template when you need a fully custom hero
+//  transition (Apple's `matchedGeometryEffect` + `.zoom` transition
+//  cannot model swipe-to-dismiss-with-fade-progress). The generic
+//  `PhotoGridView<Data, GridItem, Detail, Overlay>` is reusable —
+//  the demo just wires `samplePhotoItems` into it.
+//
+//  See also
+//  ────────
+//  • ApplePhoto/* — earlier Photos-app demos predating iOS 26.
+//  • PinterestGrid/GridImageView.swift — different grid layout, same
+//    `samplePhotoItems` source.
+//  • `PhotoDismissPanGesture` (bottom of this file) — file-private;
+//    lift it if another view needs the same scroll-aware vertical-
+//    only dismiss gesture.
+//
 import SwiftUI
 
 extension PhotoItem: PhotoProtocol {}
-
 struct PhotoGridIOS26TransitionDemoView: View {
     var body: some View {
         NavigationStack {
@@ -59,6 +114,7 @@ struct PhotoGridIOS26TransitionDemoView: View {
     }
 
     @available(iOS 26, *)
+    // swiftlint:disable:next function_body_length
     func overlayActionView(dragOffset: CGSize, dismiss: @escaping () -> Void) -> some View {
         let interactiveOpacity: CGFloat = 1 - min(abs(dragOffset.height / 30), 1)
         return VStack {
@@ -139,7 +195,9 @@ private struct PhotoHeroEffectConfig<Element: PhotoProtocol> {
     var showFullScreenCover: Bool = false
 }
 
-struct PhotoGridView<Data: RandomAccessCollection, GridItem: View, Detail: View, Overlay: View>: View where Data.Element: PhotoProtocol {
+struct PhotoGridView<Data: RandomAccessCollection, GridItem: View, Detail: View, Overlay: View>: View
+    where Data.Element: PhotoProtocol
+{
     var spacing: CGFloat = 5
     var gridCount: Int = 3
     var gridItemHeight: CGFloat = 120
@@ -209,7 +267,9 @@ struct PhotoGridView<Data: RandomAccessCollection, GridItem: View, Detail: View,
     }
 }
 
-private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Overlay: View>: View where Data.Element: PhotoProtocol {
+private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Overlay: View>: View
+    where Data.Element: PhotoProtocol
+{
     @Binding var config: PhotoHeroEffectConfig<Data.Element>
     var data: Data
     @ViewBuilder var detail: (Data.Element, Bool, CGSize, @escaping () -> Void) -> Detail
@@ -358,7 +418,9 @@ private struct PhotoDismissPanGesture: UIGestureRecognizerRepresentable {
     }
 
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
-        private func gestureRecognizer(_: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIPanGestureRecognizer) -> Bool {
+        private func gestureRecognizer(_: UIGestureRecognizer,
+                                       shouldBeRequiredToFailBy otherGestureRecognizer: UIPanGestureRecognizer) -> Bool
+        {
             if let scrollView = otherGestureRecognizer.view as? UIScrollView {
                 let contentOffset = scrollView.contentOffset
                 return contentOffset.y <= 0

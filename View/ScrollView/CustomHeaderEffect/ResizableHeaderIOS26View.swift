@@ -3,11 +3,64 @@
 //  animation
 //
 //  Created on 3/22/26.
-//  Telegram app resizable header
-// When create a sticky view with LazyVStack,
-// attach the LazyVstack to the safeAreaInset
-// to avoid lazyVStack unloads views that move outside its visitbale bounds
-// during scrolling or laytout changes
+//  Standalone demo (not wired into the app's demo browser; preview-only).
+//  iOS 26+ — `.glassEffect` is the gating API; falls back gracefully
+//  pre-iOS 26 via `#available(iOS 26, *)` checks.
+//
+//  Inline tip (preserved from the original header):
+//    When creating a sticky view with `LazyVStack`, attach the
+//    `LazyVStack` to the `safeAreaInset` — otherwise the lazy
+//    layout unloads sticky views that move outside its visible
+//    bounds during scrolling or layout changes.
+//
+//  Learning point
+//  ──────────────
+//  Telegram-app-style collapsible header: a large rounded avatar
+//  + name banner at the top of a scroll, which scales DOWN and
+//  blurs into a system-style toolbar pill as the user scrolls
+//  past it. On iOS 26 the toolbar pill is rendered via
+//  `.glassEffect` (Liquid Glass material).
+//
+//  Two-stage collapse choreography:
+//    1. While `scrollOffset < headerHeight`, the avatar scales
+//       smoothly to its toolbar size — driven by `visualEffect`
+//       reading `onScrollGeometryChange`.
+//    2. When `onScrollPhaseChange` reports `.idle` near the
+//       collapse threshold, snap to either fully-expanded or
+//       fully-collapsed; never stay in an in-between state.
+//  Step 2 is what makes it feel like a real navigation bar
+//  rather than "your scroll is between two states."
+//
+//  Key APIs
+//  ────────
+//  • `onScrollGeometryChange` — drives the live scale/blur during
+//    drag.
+//  • `onScrollPhaseChange` — the snap-to-state on settle.
+//  • `.glassEffect(_, in:)` — iOS 26 Liquid Glass; the chrome.
+//  • `safeAreaInset(edge: .top)` containing a `LazyVStack` — the
+//    sticky header position. The inline tip explains why
+//    `LazyVStack` attached to safeAreaInset is the right choice.
+//  • `geometryGroup()` — keeps the scaling header's geometry
+//    stable through the visual effect chain.
+//
+//  How to apply
+//  ────────────
+//  Use as the template for any "hero header that becomes nav-bar
+//  chrome on scroll" UX (Telegram, Twitter, Apple Music profile
+//  views). The two-stage collapse + snap-on-settle pattern is
+//  copy-pasteable to other header geometries.
+//
+//  See also
+//  ────────
+//  • View/ScrollView/CustomHeaderEffect/ResizableHeaderScrollView.swift
+//    — iOS 18-only sibling using gesture-based collapse.
+//  • View/ScrollView/CustomHeaderEffect/ResizableHeaderScrollViewiOS26.swift
+//    — generic patterns; despite the filename, no iOS 26-specific
+//    APIs.
+//  • View/ScrollView/CustomHeaderEffect/ScrollToHideHeaderView.swift
+//    — simpler hide-on-scroll header without the morph chrome.
+//  • View/ScrollView/CustomListView/CustomList+iOS26.swift —
+//    list-flavour version of the same idea.
 //
 import SwiftUI
 
@@ -22,10 +75,10 @@ struct ResizableHeaderDemoView: View {
                         /// we keep it to get the back button + swipe to dismiss feature
                         /// but adjust top inset to hide an additional blank space of the navigation bar
                         if #available(iOS 26, *) {
-                            TelegrameHeaderDemoView()
+                            TelegramHeaderDemoView()
                                 .scrollEdgeEffectHidden(true, for: .top)
                         } else {
-                            TelegrameHeaderDemoView()
+                            TelegramHeaderDemoView()
                         }
                     }
                     .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
@@ -43,7 +96,7 @@ struct ResizableHeaderDemoView: View {
     }
 }
 
-struct TelegrameHeaderDemoView: View {
+struct TelegramHeaderDemoView: View {
     @State private var isLargeHeader: Bool = false
     @State private var topInset: CGFloat = 0
     @State private var scrollPhase: ScrollPhase = .idle
@@ -213,10 +266,26 @@ struct ResizableHeaderIOS26View: View {
 
     private func headerActions() -> some View {
         HStack(spacing: 6) {
-            CustomActionButton(isLargeHeader: isLargeHeader, icon: "bell.fill", title: "Mute")
-            CustomActionButton(isLargeHeader: isLargeHeader, icon: "magnifyingglass", title: "Search")
-            CustomActionButton(isLargeHeader: isLargeHeader, icon: "rectangle.portrait.and.arrow.forward", title: "Leave")
-            CustomActionButton(isLargeHeader: isLargeHeader, icon: "ellipsis", title: "More")
+            CustomActionButton(
+                isLargeHeader: isLargeHeader,
+                icon: "bell.fill",
+                title: "Mute"
+            )
+            CustomActionButton(
+                isLargeHeader: isLargeHeader,
+                icon: "magnifyingglass",
+                title: "Search"
+            )
+            CustomActionButton(
+                isLargeHeader: isLargeHeader,
+                icon: "rectangle.portrait.and.arrow.forward",
+                title: "Leave"
+            )
+            CustomActionButton(
+                isLargeHeader: isLargeHeader,
+                icon: "ellipsis",
+                title: "More"
+            )
         }
     }
 }

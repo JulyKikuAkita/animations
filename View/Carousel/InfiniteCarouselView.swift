@@ -2,7 +2,61 @@
 //  InfiniteCarousel.swift
 //  animation
 //
-// iOS18 Group SubViews API
+//  ⚠️  WIRED INTO THE APP: `InfiniteCarouselIOS18DemoView` is referenced
+//      from `View/CustomMenu/VisionProMenuBarView.swift:44` — don't
+//      rename or delete without updating that demo.
+//
+//  iOS 18+ only — the gating API is `Group(subviews:)`.
+//
+//  Learning point
+//  ──────────────
+//  Auto-scrolling infinite carousel via the iOS 18 SubViews API.
+//  Trick: duplicate the FIRST item at the END and the LAST item at
+//  the FRONT, then on scroll-settle silently jump the scroll offset
+//  back to the "real" position so the user never sees the seam.
+//  Wired together with a `Timer` that nudges scroll forward every
+//  N seconds for the auto-advance.
+//
+//  Loop sequence:
+//    [last, item0, item1, …, itemN, first]
+//             ↑                       ↑
+//        if user lands on `first` → jump to itemN (no animation)
+//        if user lands on `last`  → jump to item0 (no animation)
+//
+//  The settle detection is `onScrollPhaseChange` — only run the
+//  jump when phase becomes `.idle`, otherwise we'd interrupt a
+//  user gesture.
+//
+//  Also bundled in this file: `MenuBatControls` — the menu-bar
+//  overlay that wraps the carousel for the VisionPro demo. The two
+//  views share state so the carousel can pause auto-scroll while
+//  the menu is expanded.
+//
+//  Key APIs
+//  ────────
+//  • `Group(subviews: content) { collection in ... }` — iOS 18+.
+//    Lets us count items and synthesise the head/tail duplicates
+//    without forcing the caller to use IDs.
+//  • `Timer.scheduledTimer` + `withAnimation` + `scrollTo(id:)` for
+//    auto-advance.
+//  • `.onScrollPhaseChange` — settle detection.
+//  • `.onScrollGeometryChange` — current page tracking for the
+//    pager dots and the silent rebound.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a carousel needs to wrap seamlessly (hero banners,
+//  onboarding loops). Watch out: the head/tail duplicates double
+//  the cost of the first/last cells — keep them cheap (image only,
+//  no expensive children).
+//
+//  See also
+//  ────────
+//  • InfiniteLoopingScrollView.swift — alternate looping technique
+//    that intercepts `UIScrollView` delegation for content offset
+//    reset (no head/tail duplication, but UIKit-flavoured).
+//  • View/CustomMenu/VisionProMenuBarView.swift — the consumer.
+//
 import SwiftUI
 
 struct InfiniteCarouselIOS18DemoView: View {
