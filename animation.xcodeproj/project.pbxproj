@@ -183,6 +183,7 @@
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
 		9656A1842FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */; };
 		9656A6182FCB84B80063550D /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A6172FCB84B80063550D /* ScaleButtonStyle.swift */; };
+		9656A7A42FCE10CA0063550D /* CustomSegmenetedControlMailTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A7A32FCE10AE0063550D /* CustomSegmenetedControlMailTabbar.swift */; };
 		965836AB2DD2DA440062F372 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
@@ -731,6 +732,7 @@
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
 		9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+customSearch+FAB+Tabbar.swift"; sourceTree = "<group>"; };
 		9656A6172FCB84B80063550D /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
+		9656A7A32FCE10AE0063550D /* CustomSegmenetedControlMailTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmenetedControlMailTabbar.swift; sourceTree = "<group>"; };
 		9658369E2DD2BB250062F372 /* storeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = storeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
@@ -2420,6 +2422,7 @@
 		AB333B842E8B0EDD00368EB8 /* iOS26 */ = {
 			isa = PBXGroup;
 			children = (
+				9656A7A32FCE10AE0063550D /* CustomSegmenetedControlMailTabbar.swift */,
 				96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */,
 				96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */,
 				AB95E8962F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift */,
@@ -3541,6 +3544,7 @@
 				969222112D7AD29C00326523 /* View+Extension+Tray.swift in Sources */,
 				96F9FB872BB3F17B00C35779 /* SegmentControl.swift in Sources */,
 				963DC1942D23309200C97334 /* ResizedImageToScreenView.swift in Sources */,
+				9656A7A42FCE10CA0063550D /* CustomSegmenetedControlMailTabbar.swift in Sources */,
 				961868B82BC7A78700552748 /* FloatingButton.swift in Sources */,
 				96F7CF892EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift in Sources */,
 				96DF8A8A2C39D81E0063A931 /* DynamicSheetView.swift in Sources */,
