@@ -1,7 +1,67 @@
 //
 //  SkeletonView.swift
 //  animation
-// note: use redacted modifier for skeleton effect
+//
+//  Learning point
+//  ──────────────
+//  The **redacted-modifier** flavour of skeleton loading: a single
+//  `.skeleton(isRedacted:)` modifier wraps any existing real view and,
+//  while `isRedacted` is true:
+//    1. Applies `.redacted(reason: .placeholder)` so the system replaces
+//       text/images with grey bars/blocks.
+//    2. Overlays a moving shimmer that's **masked by the redacted
+//       version of the same content** — so the sheen lights up only
+//       where placeholder bars are, not over the whole rectangle.
+//
+//  Compare with `[[SkeletonView]]` in the same folder, which takes the
+//  opposite approach (substitute a separate `Shape` per leaf). Both
+//  ship together so callers can pick whichever suits the use case.
+//
+//  The mask trick is the load-bearing idea
+//  ───────────────────────────────────────
+//  Without `.mask { content.redacted(.placeholder) }`, the shimmer
+//  would sweep across the entire bounding box — including padding
+//  and gaps between bars. By masking with the redacted content
+//  itself, the sheen is clipped to *exactly* the shape of the
+//  placeholder bars. Looks much more polished.
+//
+//  Why `.blendMode(.softLight)` here vs `.luminosity` in SkeletonView?
+//  ──────────────────────────────────────────────────────────────────
+//  `.luminosity` (used in `[[SkeletonView]]`) replaces the underlying
+//  hue with the highlight's brightness — fine when the bone is a
+//  solid grey rectangle. `.softLight` (this file) gently brightens
+//  whatever's underneath, which works better here because the
+//  redacted bars already have the system's chosen placeholder colour.
+//
+//  Same `.transaction { ... }` filter as in SkeletonView
+//  ─────────────────────────────────────────────────────
+//  The bottom of the modifier filters out any animation that isn't OUR
+//  repeating sheen — preventing parent-side `withAnimation { ... }`
+//  calls from hijacking and stalling the shimmer mid-sweep.
+//
+//  Key APIs
+//  ────────
+//  • `.redacted(reason: .placeholder)` — system-rendered placeholder
+//    bars for `Text`, `Image`, etc.
+//  • `.mask { ... }` — clip the shimmer to the placeholder silhouette.
+//  • `.blendMode(.softLight)` — brighten-only compositing.
+//  • `.task { ... }` — start the sheen loop on appear (replaces the
+//    older `.onAppear` for async or one-shot setup).
+//  • `.transaction { ... }` — same animation isolation trick as
+//    `[[SkeletonView]]`.
+//
+//  How to apply
+//  ────────────
+//  Drop `.skeleton(isRedacted: isLoading)` on any complex existing
+//  view (a Card, a profile row, a search result). Useful when you'd
+//  rather not duplicate layout in two states. For per-leaf control
+//  over placeholder shape, prefer `[[SkeletonView]]` substitution.
+//
+//  See also
+//  ────────
+//  • SkeletonView.swift — shape-substitution alternative.
+//  • SkeletonView+RedacttDemo.swift — call-site demo for both.
+//
 import SwiftUI
 
 extension View {
@@ -38,6 +98,12 @@ struct SkeletonViewModifier: ViewModifier {
                             /// repeating moving animation from left to right
                             .offset(x: isAnimating ? maxX : minX)
                     }
+                    // Tip: mask the shimmer with the REDACTED content,
+                    // not the original content. Without `.placeholder`
+                    // here, the mask would be the real text/image shapes
+                    // — causing the sheen to highlight the actual content
+                    // through the redaction. Using the redacted version
+                    // makes the sheen visible only on placeholder bars.
                     .mask {
                         content
                             .redacted(reason: .placeholder)
