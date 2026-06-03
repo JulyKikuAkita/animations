@@ -132,10 +132,16 @@ private struct FullScreenSheet<Content: View, Background: View>: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .contentShape(.rect)
             .offset(y: offset)
+            // Tip: `ScrollAwarePanGesture` is a UIKit-backed pan that yields
+            // to a child UIScrollView when it is NOT at the top — so dragging
+            // a list inside the cover scrolls it instead of dismissing. Without
+            // this guard, every downward drag would dismiss the cover.
             .gesture(
                 ScrollAwarePanGesture { gesture in
                     let state = gesture.state
                     let halfHeight = windowSize.height / 2
+                    // Clamp translation to [0, windowHeight] — only allow
+                    // downward drag (no upward "rubber band").
                     let translation = min(
                         max(gesture.translation(in: gesture.view).y, 0),
                         windowSize.height
@@ -155,6 +161,10 @@ private struct FullScreenSheet<Content: View, Background: View>: View {
                     case .ended, .cancelled, .failed:
                         /// disable interaction until animation ends
                         gesture.isEnabled = false
+                        // Tip: dismissal physics — combine remaining translation
+                        // with current velocity. Past half the screen → dismiss.
+                        // Velocity is capped at `halfHeight` so a fast flick
+                        // doesn't dominate the calculation but still helps it.
                         if (translation + velocity) > halfHeight {
                             withAnimation(.snappy(duration: 0.3, extraBounce: 0)) {
                                 offset = windowSize.height
@@ -162,9 +172,11 @@ private struct FullScreenSheet<Content: View, Background: View>: View {
 
                             Task {
                                 try? await Task.sleep(for: .seconds(0.3))
-                                /// dismiss() comes with animation but we don't need it here
-                                ///  so use transation to remove the animation
-                                ///  to make move down gesture more repsonsive
+                                // Tip: dismiss() carries the system's default
+                                // crossfade. Wrapping in a `Transaction` with
+                                // `disablesAnimations = true` skips that fade —
+                                // the manual offset animation is the only motion
+                                // the user sees, which feels more responsive.
                                 var transaction = Transaction()
                                 transaction.disablesAnimations = true
                                 withTransaction(transaction) {

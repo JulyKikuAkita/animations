@@ -1,6 +1,25 @@
 //
 //  ExpandableNavigationSearchBarView.swift
 //  animation
+//
+//  Learning points / Demo goals:
+//  • Build an iOS-Messages-style expandable nav bar: large title that scales on
+//    pull-down, a search bar that morphs into a full-width focused input, and a
+//    matched-geometry segmented picker.
+//  • Pin the bar to the top while searching by cancelling the scroll offset.
+//
+//  Key SwiftUI APIs / patterns:
+//  • `safeAreaInset(edge: .top)` — host a custom navigation bar that participates
+//    in scroll layout (instead of `.toolbar`).
+//  • `GeometryReader` + `.scrollView(axis:)` coordinate space — drive shrink/scale
+//    progress from `minY`.
+//  • `matchedGeometryEffect` — animate the active capsule between segmented tabs.
+//  • Custom `ScrollTargetBehavior` — snap the header so it never rests mid-collapse.
+//  • `contentMargins(.top, _, for: .scrollIndicators)` — keep the iOS scroll
+//    indicator from drawing over the floating header.
+//
+//  Notable trick: the search bar's background uses *negative* paddings driven by
+//  `progress` so it can grow to fill the safe-area + nav region when focused.
 
 import SwiftUI
 
@@ -39,16 +58,21 @@ struct ExpandableNavigationSearchBarView: View {
         .contentMargins(.top, 190, for: .scrollIndicators) // hide scroll indicator on header
     }
 
-    /// Expandable Navigation Bar
+    // swiftlint:disable:next function_body_length
     func expandableNavigationBar(_ title: String = "Messages") -> some View {
         GeometryReader { proxy in
             let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
             let scrollViewHeight = proxy.bounds(
                 of: .scrollView(axis: .vertical))?.height ?? 0
-            // scale title size
+            // Tip: only scale up on pull-down (minY > 0). Cap at +50% so the title
+            // doesn't grow without bound; bottom-out at 1 so push-up never shrinks below 100%.
             let scaleProgress = minY > 0 ? 1 + (
                 max(min(minY / scrollViewHeight, 1), 0) * 0.5) : 1
-            let randomValue: CGFloat = 70.0 // any value, the lower, the faster scrolling animation
+            // Tip: `randomValue` is the scroll distance (in pts) over which the
+            // collapse animation completes. Smaller → snappier collapse.
+            let randomValue: CGFloat = 70.0
+            // When searching, force progress=1 so the bar morphs to the focused state
+            // even without scroll input.
             let progress = isSearching ? 1 : max(min(-minY / randomValue, 1), 0)
             VStack(spacing: 10) {
                 /// Title
@@ -111,6 +135,10 @@ struct ExpandableNavigationSearchBarView: View {
                                     .padding(.vertical, 8)
                                     .padding(.horizontal, 15)
                                     .background {
+                                        // Tip: use `matchedGeometryEffect` with a single
+                                        // shared id ("ACTIVETAB") so the filled capsule
+                                        // appears to slide between tabs instead of
+                                        // cross-fading.
                                         if activeTab == tab {
                                             Capsule()
                                                 .fill(Color.primary)

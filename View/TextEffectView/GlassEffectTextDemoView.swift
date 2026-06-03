@@ -3,6 +3,61 @@
 //  animation
 //
 //  Created on 11/20/25.
+//
+//  Learning point
+//  ──────────────
+//  Two iOS 26 tricks that turn a `Text` into something the system can
+//  apply effects to:
+//
+//    Example1 — Glass Effect Text
+//    ────────────────────────────
+//    Use the literal letterforms of "Budapest" as the SHAPE for
+//    `glassEffect(.clear, in: textShape)`. The text becomes a
+//    refractive glass cutout over a background photo — drag a grabber
+//    to scale it. The hidden `Text` is kept (`.opacity(0)`) so layout,
+//    accessibility, and font scaling all work as if it were rendered
+//    normally.
+//
+//    Example2 — Writing Effect
+//    ─────────────────────────
+//    Convert text to a `Path` (via `TextToShape: Shape`), then
+//    `.trim(from:to:)` + `.stroke()` it. Animating `to: 0 → 1` traces
+//    the strokes like handwriting. Crucial gotcha: works on a STROKED
+//    path, not a filled one — fills can't be partial.
+//
+//  How `TextToShape` works
+//  ───────────────────────
+//  `font.drawGlyphs(value)` (a project helper on `UIFont`) yields
+//  per-glyph `CGPath`s with their pen-position offsets. Each glyph is
+//  flipped vertically (`.scaledBy(x: 1, y: -1)`) because Core Text uses
+//  Y-up coordinates while SwiftUI/CG uses Y-down. After accumulation,
+//  the entire path is centred to its bounding rect. `nonisolated`
+//  marks the function so `Shape.path(in:)` can be called from any
+//  actor context.
+//
+//  Key APIs
+//  ────────
+//  • `Glass.clear` / `.tint(...)` + `.glassEffect(_:in:)` (iOS 26) —
+//    arbitrary `Shape` becomes the lensing region.
+//  • `Shape.trim(from:to:)` — animatable trimming for stroke-on
+//    "writing" reveals.
+//  • `UIFont.drawGlyphs(_:_:)` (project helper) — extract per-glyph
+//    paths from any UIFont, custom or system.
+//  • `Path.boundingRect` + `CGAffineTransform(translationX:y:)` —
+//    centre the assembled glyph path within the host rect.
+//
+//  How to apply
+//  ────────────
+//  • Use `GlassEffectText` for hero typography over photos / video on
+//    iOS 26 (with a `fallbackColor` for older systems).
+//  • Use `TextToShape` whenever you need text as a `Shape` — masking,
+//    stroking, morphing between shapes, animating along the path.
+//
+//  See also
+//  ────────
+//  • PixellateTextView.swift — sister demo using `TextRenderer` +
+//    Metal shader for per-character effects.
+//
 import SwiftUI
 
 struct GlassEffectTextDemoView: View {
@@ -125,6 +180,13 @@ private struct Example2: View {
     }
 }
 
+/// Tip: the layout-preserving glass-text recipe.
+/// • Render an INVISIBLE `Text` (`.opacity(0)`) so SwiftUI still computes
+///   correct intrinsic size, accessibility label, and Dynamic Type.
+/// • Draw the visible glass effect via `.glassEffect(... in: textShape)`,
+///   where `textShape` is the `TextToShape` of the same string.
+/// • On pre-iOS 26 systems, fall back to ordinary tinted `Text` —
+///   callers don't need to branch.
 struct GlassEffectText: View {
     var text: String
     var font: UIFont
@@ -146,6 +208,18 @@ struct GlassEffectText: View {
     }
 }
 
+/// Tip: text → `Path` conversion.
+/// `font.drawGlyphs(_:_:)` (a project extension on `UIFont`) walks each
+/// glyph in `value` and yields a `(position, CGPath)` pair. Steps:
+///   1. Translate to glyph's pen position.
+///   2. Flip Y axis — Core Text emits paths in mathematician coords
+///      (Y-up); SwiftUI/CoreGraphics expect Y-down. Without `.scaledBy(x: 1, y: -1)`
+///      every letter renders upside-down.
+///   3. Append to the assembled path.
+///   4. Re-centre the assembled path to `rect.center` so the shape sits
+///      correctly inside whatever host frame `path(in:)` is given.
+/// Marked `nonisolated` so `Shape.path(in:)` can run off the main actor
+/// (Shape evaluation may happen during layout passes outside @MainActor).
 struct TextToShape: Shape {
     var value: String
     var font: UIFont

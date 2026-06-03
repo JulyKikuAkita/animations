@@ -1,6 +1,67 @@
 //
 //  TagFieldView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  Native-feeling tag input field (think: GitHub label picker, mail
+//  recipient field). Each tag is its own `TextField`-shaped row laid
+//  out via `TagLayout` (flow-wrap). Three keyboard interactions matter:
+//
+//    1. **Comma → commit** — typing "," ends the current tag and inserts
+//       a fresh empty one. Implemented in `onChange(of: tag.value)`:
+//       strip the trailing comma, append a new `Tag(value: "")`.
+//    2. **Backspace on empty → delete previous** — the magic part. Pure
+//       SwiftUI `TextField` doesn't expose backspace-on-empty events, so
+//       we drop down to UIKit (`BackSpaceListenerTextField`,
+//       `UIViewRepresentable`) and override `UITextField.deleteBackward`.
+//    3. **Keyboard dismiss → seal current tag** — listening to
+//       `UIResponder.keyboardWillHideNotification` ensures any in-flight
+//       text gets committed when the user taps outside.
+//
+//  Why a `UIViewRepresentable` for a TextField?
+//  ────────────────────────────────────────────
+//  iOS's SwiftUI `TextField` doesn't deliver a "user pressed backspace
+//  in an already-empty field" event — that signal only exists on
+//  `UITextField.deleteBackward`. Subclassing UIKit and bridging it via
+//  `UIViewRepresentable` is the common (and idiomatic) escape hatch
+//  whenever you need keyboard-event granularity SwiftUI doesn't surface.
+//
+//  Bonus: `canPerformAction(_:withSender:)` is overridden to return
+//  `false` so the standard cut/copy/paste/share menu doesn't appear on
+//  long-press. Tags are short labels — the menu is noise.
+//
+//  `isInitial` flag — what is it for?
+//  ──────────────────────────────────
+//  `Tag.isInitial` distinguishes "freshly inserted empty placeholder
+//  awaiting tap-to-edit" from "actively-being-typed empty tag." Used to
+//  gate focus and tap targets so the placeholder doesn't auto-focus on
+//  every state change.
+//
+//  Key APIs
+//  ────────
+//  • `UIViewRepresentable` + `UITextField` subclass — keyboard event
+//    bridge.
+//  • `UITextField.deleteBackward` override — capture backspace.
+//  • `sizeThatFits(_:uiView:context:)` — return `intrinsicContentSize`
+//    so the bridged textfield doesn't expand to fill its container.
+//  • `NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)`
+//    — react to keyboard dismiss.
+//  • `TagLayout` (project-local) — flow layout for the chips row.
+//
+//  How to apply
+//  ────────────
+//  Reach for the UIKit bridge any time you need keyboard semantics
+//  SwiftUI doesn't expose: backspace on empty, return-key behaviour,
+//  inputAccessoryView, custom keyboards. Wrap the minimum necessary in
+//  `UIViewRepresentable` and keep all SwiftUI styling outside.
+//
+//  See also
+//  ────────
+//  • SelectTagView.swift — non-text-input tag picker.
+//  • DynamicTagWidthView.swift — same `TagLayout` flow-wrap idea
+//    applied to read-only chips.
+//
 import SwiftUI
 
 struct TagFieldDemoView: View {
@@ -156,6 +217,17 @@ private struct BackSpaceListenerTextField: UIViewRepresentable {
     }
 }
 
+/// Tip: the only reason this UIKit subclass exists.
+/// `deleteBackward` is the lowest-level hook for "user just pressed the
+/// keyboard's delete key" — it fires even when the field is empty,
+/// which `.onChange(of: text)` does NOT (no string change to observe).
+/// SwiftUI's `TextField` doesn't expose this signal at all in iOS 17/18,
+/// so dropping down to `UITextField` is the only path.
+///
+/// `canPerformAction` returns `false` to suppress the system edit menu
+/// (cut / copy / paste / share). Tags are tiny labels — the menu is
+/// visual noise and almost never useful. Remove this override if you
+/// actually want copy/paste on tag values.
 private class CustomTextField: UITextField {
     open var onBackPressed: (() -> Void)?
 
@@ -169,7 +241,7 @@ private class CustomTextField: UITextField {
     }
 
     override func deleteBackward() {
-        /// this will be called when keyboard back button is pressed
+        /// fires for both "remove a character" and "backspace on empty"
         onBackPressed?()
         super.deleteBackward()
     }

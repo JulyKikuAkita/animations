@@ -2,6 +2,57 @@
 //  iOS26 Style sheet.swift
 //  animation
 //
+//  Learning point
+//  ──────────────
+//  Backwards-compatible "iOS 26-style floating sheet" — on iOS 26 it lets the
+//  system render its native glassy floating chrome; on older iOS it
+//  RECREATES the look manually (rounded clip, padding, device-corner-radius
+//  match, dynamic shadow removal). One call site, two implementations.
+//
+//  Three pieces worth studying:
+//    1. `iOS26StyleSheet` View extension — single-modifier API surface;
+//       caller doesn't see the version branching.
+//    2. `StyleiOS26SheetModifier` — does the `if #available(iOS 26)` switch
+//       inside `.sheet` content. The fallback path computes an animated
+//       padding/cornerRadius driven by the sheet's live measured height.
+//    3. `SheetHelper` (UIViewRepresentable) — UIKit introspection that
+//       (a) reads the device's actual hardware corner radius from the
+//       sheet container's `layer.cornerRadius`, and (b) clears the system
+//       drop shadow that otherwise leaks past the rounded clip.
+//
+//  Why match the device corner radius?
+//  ───────────────────────────────────
+//  When the sheet expands to nearly full screen, its rounded corners should
+//  visually concentric with the iPhone's hardware corners. Reading the
+//  container's `cornerRadius` gives the per-device value (different on
+//  notch / Dynamic Island / Touch-ID devices), then we subtract our own
+//  padding to produce a concentric inner radius.
+//
+//  Key APIs / patterns
+//  ───────────────────
+//  • `if #available(iOS 26, *)` inside `.sheet { ... }` — version-fork the
+//    presentation chrome without forking the call site.
+//  • `.presentationCornerRadius` + `.presentationBackground(.clear)` —
+//    strip system chrome so our `.background(RoundedRectangle...)` owns it.
+//  • `Animatable`-free animation: caller passes the height progress through
+//    `.animation(.easeInOut(duration: animationDuration), value: progress)`,
+//    and `animationDuration` itself is dynamic (proportional to drag delta)
+//    — see `height` callback for the math.
+//  • UIKit introspection (`SheetHelper`) — same pattern as
+//    [[FloatingBottomSheetsView]]'s `SheetShadowRemover`.
+//
+//  How to apply
+//  ────────────
+//  Use whenever you want a polished floating sheet that looks the same on
+//  iOS 17/18/19 as on iOS 26 — without leaking the per-iOS branching into
+//  every call site.
+//
+//  See also
+//  ────────
+//  • FloatingBottomSheetsView.swift — simpler shadow-removal recipe.
+//  • iOS26+BottomSheet.swift — Maps-style sibling without the
+//    backwards-compat branching.
+//
 import MapKit
 import SwiftUI
 
@@ -86,8 +137,14 @@ private struct StyleiOS26SheetModifier<SheetContent: View>: ViewModifier {
         content
             .sheet(isPresented: $isPresented, onDismiss: resetProgress) {
                 if #available(iOS 26, *) {
+                    // iOS 26+: system already does the floating chrome.
                     sheetContent
                 } else {
+                    // Tip: the fallback recipe.
+                    // As `progress` goes 0 → 1 (sheet collapsed → near-full),
+                    //   padding shrinks from `padding` → 0
+                    //   cornerRadius grows from (deviceCorner - padding) → deviceCorner
+                    // so the sheet visually "merges into" the device's hardware corners.
                     let padding = padding * (1 - progress)
                     let cornerRadius = deviceCornerRadius - padding
                     GeometryReader { _ in
@@ -147,7 +204,15 @@ private struct StyleiOS26SheetModifier<SheetContent: View>: ViewModifier {
     }
 }
 
-/// Calculate sheet corner radius per each devices type
+/// Tip: this UIViewRepresentable does TWO things at once:
+///   1. **Reports device corner radius** — by walking up to the sheet
+///      container's UIView and reading `layer.cornerRadius`. That value
+///      reflects the device's actual hardware corner radius (different on
+///      iPhone X / 14 Pro / Touch-ID devices).
+///   2. **Reports current sheet height** — via `updateUIView(_:_:context:)`
+///      which receives the `ProposedViewSize` SwiftUI offers each layout pass.
+/// Plus side effect: clears the sheet's drop shadow once on first appearance
+/// (same UIKit reach-through trick as `[[FloatingBottomSheetsView]]`).
 private struct SheetHelper: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator()

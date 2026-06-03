@@ -78,16 +78,25 @@ struct BottomSheetiOS2618Demo: View {
                     )
                     .presentationBackgroundInteraction(.enabled)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    // Tip: this is the closure pattern that makes the toolbar
+                    // react to live sheet drags. The first closure measures
+                    // (clamp to [0, 400+inset]); the action closure converts
+                    // height into THREE driven values: `sheetHeight` (toolbar
+                    // offset), `toolbarOpacity` (fade window), and
+                    // `animationDuration` (proportional to drag delta).
                     .onGeometryChange(for: CGFloat.self) { geometry in
                         max(min(geometry.size.height, 400 + safeInset), 0)
                     } action: { oldValue, newValue in
                         sheetHeight = min(newValue, 350 + safeInset)
 
-                        /// apply to opacity, limit offset to 300 so opacity won't be 0
+                        // Fade window: 50pt past the centre detent (350) → 0 alpha.
+                        // The clamped `progress` keeps the math safe at extremes.
                         let progress = max(min((newValue - (350 + safeInset)) / 50, 1), 0)
                         toolbarOpacity = 1 - progress
 
-                        /// calculating animation duration
+                        // Tip: dynamic animation duration based on how fast the
+                        // sheet height is changing — small drag = quick blend,
+                        // big drag = longer ease. Capped at 0.3s.
                         let diff = abs(newValue - oldValue)
                         let duration = max(min(diff / 100, 0.3), 0)
                         animationDuration = duration
@@ -176,7 +185,10 @@ struct DummyBottomSheetView: View {
                 .frame(height: 80)
                 .padding(.top, 5)
                 .animation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0), value: isFocused)
-                /// update sheet size when textField is focus
+                // Tip: programmatic detent control via the `selection` Binding
+                // passed to `.presentationDetents`. Tapping the search field
+                // forces `.large`, mimicking how Apple Maps expands the sheet
+                // to full when the user starts searching.
                 .onChange(of: isFocused) { _, newValue in
                     sheetDent = newValue ? .large : .height(350)
                 }
