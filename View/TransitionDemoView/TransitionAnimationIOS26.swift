@@ -4,11 +4,137 @@
 //
 //  Created on 4/11/26.
 //
-// Apple Store Transition Animation (Shared Element Transition)
+//  Learning point
+//  ──────────────
+//  Apple-Store-style hero card → fullscreen detail transition.
+//  Tap a card; it press-shrinks slightly, the cover materialises
+//  AT THE CARD's exact frame, then expands to fullscreen with the
+//  hero pinning to the top as the user scrolls. Drag down (or
+//  edge-swipe from left) to dismiss back to the card. THIS is the
+//  cinematic transition iOS uses for the App Store today, App
+//  Store games, and several Apple promotional carousels.
+//
+//  The architecture: NOT `matchedTransitionSource`
+//  ───────────────────────────────────────────────
+//  iOS 18 ships `matchedTransitionSource` + `.navigationTransition(.zoom(...))`
+//  for simpler hero animations, but it's limited: only works
+//  through `NavigationLink`, can't be combined with custom
+//  scroll/pan dismissal, and the source frame must be a
+//  rectangle. This file uses `.fullScreenCover` instead and
+//  drives the hero MANUALLY via `sourceRect` + `animateContent`
+//  flag — giving full control over enter, scroll-pin, drag-to-
+//  dismiss, and any visual effect we want.
+//
+//  Six pieces working together
+//  ───────────────────────────
+//    1. **`sourceRect: CGRect`** — read from the source button via
+//       `onGeometryChange(for: CGRect.self) { $0.frame(in: .global) }`.
+//       This is THE coordinate the cover uses to position the hero
+//       so it materialises exactly over the card.
+//    2. **`animateContent: Bool`** — flips `false → true` inside a
+//       `.task { withAnimation { ... } }` once the cover appears.
+//       Drives EVERY visual transform: hero frame, hero offset,
+//       mask shape, mask offset, dismiss button position.
+//    3. **Inner-frame + outer-alignment pattern** —
+//          .frame(width/height: collapsed-or-expanded values)
+//          .offset(x/y: sourceRect.minX/Y or 0)
+//          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+//       Inner frame sets the hero's own size; offset positions it
+//       at the source rect; outer .infinity-frame creates a
+//       full-screen container so the offset is interpreted in
+//       SCREEN coords. This pattern repeats for the mask, the
+//       dismiss button, and any UI that needs to track the hero.
+//    4. **Sticky header via `visualEffect`** — once expanded, the
+//       hero pins to the top during scroll using:
+//          let minY = proxy.frame(in: .scrollView).minY
+//          .offset(y: -minY > height ? -(minY + height) : 0)
+//          .offset(y: minY > 0 ? -minY : 0)
+//       Two stacked offsets: pin past `height`, prevent overscroll
+//       bounce.
+//    5. **Custom UIPanGestureRecognizer for dismiss** — bridged via
+//       `UIGestureRecognizerRepresentable` (iOS 18+). The delegate
+//       allows simultaneous gestures only when the scrollView is
+//       at the top (`contentOffset.y <= 1`), and starts on
+//       VERTICAL drag-down OR a left-edge slide (< 30pt from
+//       leading). Both behaviours combined are why this is
+//       file-private — neither alone is reusable.
+//    6. **Two stacked `.scaleEffect`s** — `dragScale` (interactive
+//       drag feedback) and `buttonScale` (matching the source
+//       button's press-down keyframe). Layered, so a press during
+//       drag still scales naturally.
+//
+//  The press-down handoff
+//  ──────────────────────
+//  When the user taps the card, `SharedElementTransitionButtonStyle`
+//  applies a `KeyframeAnimator` that scales the button to 0.95
+//  while pressed. The cover's `buttonScale` (read live via
+//  `onGeometryChange` on the button's frame) tracks this. So the
+//  cover materialises AT 0.95 scale, exactly matching the card's
+//  pressed state. Releases ease back to 1.0 in lockstep with the
+//  button. Without this, the cover would visibly "snap" to a
+//  different scale on appearance.
+//
+//  Why `withoutAnimation { showFullScreenCover = true }` (and again on dismiss)
+//  ───────────────────────────────────────────────────────────────────────────
+//  iOS's `.fullScreenCover` ships with its own default fade
+//  animation. We don't want that — we want the cover to
+//  materialise INSTANTLY at the card's frame and then animate
+//  the hero/expansion ourselves via `animateContent`. The
+//  `withoutAnimation` helper (project utility) wraps the state
+//  toggle in a `Transaction(disablesAnimations: true)` to skip
+//  the system fade.
+//
+//  Why `completionCriteria: .removed` on dismiss animation
+//  ───────────────────────────────────────────────────────
+//      withAnimation(config.animation, completionCriteria: .removed) {
+//          dragScale = 1; animateContent = false
+//      } completion: {
+//          withoutAnimation { showFullScreenCover = false }
+//      }
+//  `.removed` (iOS 18+) fires the completion only AFTER any
+//  removal transition finishes — including the hero collapsing
+//  back into the card. Using `.logicallyComplete` would dismiss
+//  the cover before the hero finished collapsing, leaving a
+//  visible discontinuity.
+//
+//  Key APIs
+//  ────────
+//  • `.fullScreenCover` + `withoutAnimation` — opt out of system
+//    cover fade for hand-controlled transitions.
+//  • `.onGeometryChange(for: CGRect.self) { $0.frame(in: .global) }` —
+//    track source frame.
+//  • Custom `ButtonStyle` with `keyframeAnimator(trigger: configuration.isPressed)` —
+//    press-down keyframe.
+//  • `UIGestureRecognizerRepresentable` (iOS 18+) — bridge custom
+//    UIKit gestures into SwiftUI.
+//  • `withAnimation(_, completionCriteria: .removed)` — fire
+//    completion after removal transitions finish.
+//  • `visualEffect { content, proxy in ... }` — sticky header
+//    via scroll-frame offsets.
+//
+//  How to apply
+//  ────────────
+//  Reach for this template whenever you need a CINEMATIC card →
+//  fullscreen reveal that survives complex scroll behaviour:
+//  product detail pages, video preview → playback, gallery
+//  zoom-in. The "inner-frame + offset + outer-alignment"
+//  pattern is the architectural lesson, useful for any UI that
+//  needs to track another view's screen position during
+//  animation.
+//
+//  See also
+//  ────────
+//  • RippleTransitionDemoView.swift — shader-driven transition
+//    (different category).
+//  • View/Sheet/iOS26ResizingSheet.swift — sibling sticky-header
+//    pattern using `CADisplayLink` for layer-presentation Y reads.
+//  • View/Video/ZoomTransitionView.swift — built-in
+//    `.zoom(sourceID:in:)` for simpler list → detail flows.
+//
 
 import SwiftUI
 
-struct AppleStoreSharedElementTransitionDemoView: View {
+struct AppleStoreSharedElementTransitionDemo: View {
     var body: some View {
         NavigationStack {
             VStack {
@@ -355,5 +481,5 @@ private struct TransitionDismissPanGesture: UIGestureRecognizerRepresentable {
 }
 
 #Preview {
-    AppleStoreSharedElementTransitionDemoView()
+    AppleStoreSharedElementTransitionDemo()
 }
