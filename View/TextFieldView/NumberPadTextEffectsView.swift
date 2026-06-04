@@ -1,6 +1,91 @@
 //
 //  NumberPadTextEffectsView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  Apple-Cash / Venmo-style "Send Money" amount entry: each digit
+//  pushes in from the bottom, each delete pushes UP and out, and
+//  thousand-separator commas SLIDE between positions instead of
+//  appearing/disappearing. The polish comes from one architectural
+//  choice — each character is its own identity-stable view, so
+//  SwiftUI can animate INDIVIDUAL characters rather than treating
+//  the whole `Text("1,234")` as one opaque string.
+//
+//  Three reusable mechanics
+//  ────────────────────────
+//    1. **`KeypadValue` model** — splits the displayed amount into
+//       a `[Number]` array where each entry has its own UUID.
+//       Digits and commas are separate entries, so `ForEach(stackViews)`
+//       animates each independently.
+//    2. **Asymmetric push transitions** — digits use
+//       `.transition(.asymmetric(insertion: .push(from: .bottom),
+//       removal: .push(from: .top)))` so the user sees them slide
+//       *in* from below the keypad and *out* upward when deleted.
+//       Commas use `.contentTransition(.interpolate)` instead.
+//    3. **`matchedGeometryEffect` for commas** — commas keep a
+//       stable `commaID` (their ordinal among commas, not their
+//       string index). So when "1234" → "12345" reshapes from
+//       "1,234" to "12,345", the SAME comma view slides from
+//       between "1,234" to between "12,345" rather than fading
+//       in a new one.
+//
+//  Why preserve commas in `updateCommas()` instead of rebuilding
+//  ─────────────────────────────────────────────────────────────
+//  Trivial implementation: re-format on every keystroke and
+//  replace the entire `stackViews` array. SwiftUI sees that as
+//  removing all old views and inserting all new ones — every
+//  digit and comma fades / pushes simultaneously. Looks chaotic.
+//
+//  This file's approach: only INSERT commas at the right indices
+//  WITHOUT touching existing digit views. Each digit's identity
+//  (UUID) survives, so they stay in place; only commas animate.
+//  Subtle but the visual difference is obvious.
+//
+//  Why `Text("0")` placeholder uses `.contentTransition(.numericText())`
+//  ────────────────────────────────────────────────────────────────────
+//  When the input is empty, we show "0" in grey. As soon as the
+//  user types, the "0" needs to disappear and "1" needs to slide
+//  in. `.contentTransition(.numericText())` animates the "0 → 1"
+//  morph as a digit roll. Combined with `.frame(width: value.isEmpty ? nil : 0)`
+//  to collapse the placeholder cell, it produces a smooth handoff.
+//
+//  Why `.buttonRepeatBehavior(.enabled)` on backspace
+//  ──────────────────────────────────────────────────
+//  iOS 17+ feature: long-press auto-repeats a button's tap action.
+//  On the delete button this means hold-to-erase (like the system
+//  number pad). Disabled on the "0" key to avoid accidental
+//  spam-zero entry.
+//
+//  Key APIs
+//  ────────
+//  • `matchedGeometryEffect(id:in:)` — preserve view identity for
+//    commas across reformats.
+//  • `.transition(.asymmetric(insertion:removal:))` — different
+//    enter / exit motions per direction.
+//  • `.contentTransition(.numericText())` and `.contentTransition(.interpolate)` —
+//    in-place animated text swaps.
+//  • `.buttonRepeatBehavior(.enabled)` — iOS 17+ auto-repeat on
+//    long press.
+//  • `NumberFormatter(numberStyle: .decimal, locale:)` — locale-
+//    aware thousand separators (here pinned to "en_US"; swap to
+//    `Locale.current` for native formatting).
+//
+//  How to apply
+//  ────────────
+//  Use this pattern for any "amount entry" UI: payments, currency,
+//  calculator displays, OTP confirms with formatting. The
+//  per-character identity model is the architectural lesson —
+//  most "animated number text" UIs are one rebuilt string and
+//  miss the polish.
+//
+//  See also
+//  ────────
+//  • OTPVerificationTextFieldView.swift — sister number-input
+//    pattern with fixed-length validation.
+//  • CustomTextFieldKeyboardsView.swift — generic custom keyboard
+//    template.
+//
 
 import SwiftUI
 
@@ -47,10 +132,14 @@ struct KeypadValue {
                 return Number(value: value, isComma: value == ",")
             }
 
-            /// We only want to update commas without impacting existing number stack views
-            /// in order to preserve the animation id to achive a text push effect instead of replace effect
-            /// aka animating slide the comma to the updated postiion
-            /// (trying to re init the stackViews instead of replace comma to see the difference)
+            // Tip: insert commas WITHOUT replacing the digit array.
+            // `stackViews` retains its existing `Number(UUID)` digits;
+            // we only `.insert` new comma entries at the right indices.
+            // The `commaID` is the comma's ordinal position among
+            // commas (0, 1, 2, ...), used as the matchedGeometry id
+            // so the SAME comma view slides between positions as the
+            // amount changes (e.g. "1,234" → "12,345" reuses the
+            // single comma with id=0).
             let onlyCommaArray = stackWithCommas.filter(\.isComma)
             for index in stackWithCommas.indices {
                 let placeHolder = stackWithCommas[index]
@@ -104,12 +193,12 @@ struct NumberPadTextEffectsViewDemoView: View {
             .frame(maxHeight: .infinity)
 
             HStack(spacing: 2) {
-                AnimatedNumberTextView()
+                animatedNumberTextView()
             }
             .frame(height: 50)
             .padding(.bottom, 30)
 
-            CustomNumberKeypad()
+            customNumberKeypad()
         }
         .fontDesign(.rounded)
         .padding(15)
@@ -117,7 +206,7 @@ struct NumberPadTextEffectsViewDemoView: View {
     }
 
     @ViewBuilder
-    func AnimatedNumberTextView() -> some View {
+    func animatedNumberTextView() -> some View {
         HStack(spacing: 2) {
             Text("$")
 
@@ -144,7 +233,7 @@ struct NumberPadTextEffectsViewDemoView: View {
     }
 
     @ViewBuilder
-    func CustomNumberKeypad() -> some View {
+    func customNumberKeypad() -> some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3)) {
             ForEach(1 ... 9, id: \.self) { index in
                 Button {

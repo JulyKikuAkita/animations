@@ -2,6 +2,91 @@
 //  OTPVerificationTextFieldView.swift
 //  animation
 //
+//  Learning point
+//  ──────────────
+//  4- or 6-digit OTP / verification field that LOOKS like N
+//  separate boxes but is actually ONE invisible `TextField`
+//  underneath. The visible boxes are "fake" — they read the
+//  shared `value` string and display the matching character.
+//  This setup gets you for free:
+//    • Native paste support (paste a 6-digit code from SMS).
+//    • Native iOS auto-fill of `oneTimeCode` (the keyboard's
+//      yellow autofill bar).
+//    • Single source of truth (`@Binding var value: String`).
+//    • Standard cursor / selection inside the hidden field.
+//
+//  Three reusable mechanics
+//  ────────────────────────
+//    1. **Hidden TextField behind visible boxes** —
+//       a `TextField` placed in `.background` is masked to a
+//       1×1 rect (`.opacity(0.01)`) so it occupies almost no
+//       space but still receives focus and pastes. A tap
+//       gesture on the box stack sets `isActive = true`,
+//       summoning the keyboard.
+//    2. **Per-box derived display** — `string(_ index:)` reads
+//       the n-th character of `value`. The active index gets
+//       a primary border colour; everything else is grey.
+//       `.transition(.blurReplace)` softens the digit appear.
+//    3. **`.phaseAnimator` for invalid shake** —
+//       `[0, 10, -10, 10, -5, 5, 0]` walks the X offset through
+//       a damped wobble each time `invalidTrigger` toggles.
+//       Native iOS-style wrong-password shake without a
+//       custom `Animatable` modifier.
+//
+//  Why `.textContentType(.oneTimeCode)`
+//  ────────────────────────────────────
+//  Tells iOS this field expects an SMS one-time code, which
+//  enables auto-fill from the system. iOS reads incoming SMS
+//  for codes and offers a tap-to-fill in the QuickType bar.
+//  Critical for verification UX — without this, users have to
+//  manually copy/paste codes.
+//
+//  Why `.allowsHitTesting(false)` on the hidden TextField
+//  ─────────────────────────────────────────────────────
+//  We DON'T want the user actually tapping into the 1×1
+//  rectangle. They tap on the visible box stack; our explicit
+//  `.onTapGesture` sets focus to the hidden field. This keeps
+//  the visible boxes feeling like the real input.
+//
+//  Why `Task { @MainActor in ... }` for validation
+//  ───────────────────────────────────────────────
+//  `onChange(_:)` is sync. The `onChange` callback the caller
+//  provides is `async` (e.g. it might hit the network), so we
+//  spawn a `Task` to call it. Result triggers `state` update
+//  and conditionally fires `invalidTrigger.toggle()` to start
+//  the shake.
+//
+//  Two visual styles
+//  ─────────────────
+//  • **`.roundedBorder`** — full bordered boxes, e.g. SMS code
+//    or 2FA flows.
+//  • **`.underlined`** — minimalist single underline per char,
+//    e.g. credit-card CVV style.
+//
+//  Key APIs
+//  ────────
+//  • `.textContentType(.oneTimeCode)` + `.keyboardType(.numberPad)` —
+//    the OTP autofill combo.
+//  • `.phaseAnimator(_:trigger:content:animation:)` (iOS 17+) —
+//    sequenced state animations driven by a Boolean ratchet.
+//  • `.toolbar { ToolbarItem(placement: .keyboard) { ... } }` —
+//    add a "Done" above the keyboard (gated on `showsToolbar`).
+//  • `.transition(.blurReplace)` — soft enter for new digits.
+//
+//  How to apply
+//  ────────────
+//  Drop in for any verification flow: 2FA, email confirmation
+//  codes, PIN entry, recovery codes. The hidden-textfield-with-
+//  fake-boxes pattern generalises whenever you want native
+//  text-field semantics with a custom visual layout.
+//
+//  See also
+//  ────────
+//  • NumberPadTextEffectsView.swift — sister number-input that
+//    drives a custom keypad UI (no system keyboard).
+//  • CustomTextFieldKeyboardsView.swift — full custom keyboard
+//    overlay pattern.
+//
 
 import SwiftUI
 
