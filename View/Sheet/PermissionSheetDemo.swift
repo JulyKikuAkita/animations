@@ -3,6 +3,57 @@
 //  animation
 //
 //  Created on 7/25/25.
+//
+//  Learning point
+//  ──────────────
+//  Reusable "request all required permissions before the user can use the app"
+//  sheet. Driven by a `[Permission]` array passed into a single
+//  `.permisisonSheet([...])` modifier. The sheet:
+//    • shows one row per permission with a live ✓/✗/? badge
+//    • requests each in order, advancing automatically as the user responds
+//    • disables the "Start" button until everything is granted
+//    • surfaces a "Go to Settings" deep-link if any permission was rejected
+//      (since iOS only lets you re-prompt natively the first time).
+//
+//  Three patterns worth understanding:
+//    1. **Heterogeneous async permission APIs** — Camera/Mic use
+//       `AVCaptureDevice.requestAccess`, Photos uses
+//       `PHPhotoLibrary.requestAuthorization`, Location uses
+//       `CLLocationManager` + delegate callback. Each is normalised into the
+//       same `isGranted: Bool?` field.
+//    2. **`@Observable` + delegate bridge for Location** —
+//       `CLLocationManagerDelegate` is callback-based; `@Observable` +
+//       `locationManagerDidChangeAuthorization` republishes the status as
+//       observable state that SwiftUI can react to via `.onChange(of:)`.
+//    3. **Deep-link to Settings** — `UIApplication.openSettingsURLString`
+//       opens the system Settings page for THIS app, the standard remediation
+//       path when a permission has already been denied once.
+//
+//  Key APIs / patterns
+//  ───────────────────
+//  • `.contentTransition(.symbolEffect(.replace))` — animates the sheet's
+//    hero icon between "shield-checkmark" and "shield-exclamationmark" as
+//    the granted state flips.
+//  • `.transition(.symbolEffect)` on each row badge — the same trick at
+//    row level.
+//  • `.interactiveDismissDisabled()` — gates pull-to-dismiss until all
+//    permissions are answered.
+//  • `Task { @MainActor in ... }` for `await` permission APIs that update
+//    `@State` — keeps mutations on the main actor.
+//
+//  How to apply
+//  ────────────
+//  Drop `.permisisonSheet([.location, .camera, .microPhone, .photoLibrary])`
+//  on the root view. Add a new permission case to the `Permission` enum
+//  (in the project's models) and a new branch in `requestPermission(_:)`.
+//
+//  See also
+//  ────────
+//  • iOS26OnBoardingSheet.swift — generic onboarding cascade (this file
+//    is a domain-specific cousin).
+//  • View/LandingPages/PermissionOnboardingIOS26.swift — fancier
+//    KeyframeAnimator-driven motion variant.
+//
 import AVKit
 import CoreLocation
 import PhotosUI
@@ -41,6 +92,7 @@ private struct PermissionSheetViewModifier: ViewModifier {
     var locationManager = LocationManager()
     @Environment(\.openURL) var openURL
 
+    // swiftlint:disable:next function_body_length
     func body(content: Content) -> some View {
         content
             .sheet(isPresented: $showSheet) {
@@ -49,15 +101,18 @@ private struct PermissionSheetViewModifier: ViewModifier {
                         .font(.title)
                         .fontWeight(.bold)
 
-                    Image(systemName: isAllGranted ? "person.badge.shield.checkmark" : "person.badge.shield.exclamationmark")
-                        .font(.system(size: 60))
-                        .foregroundStyle(.white)
-                        .contentTransition(.symbolEffect(.replace))
-                        .frame(width: 100, height: 100)
-                        .background {
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(.blue.gradient)
-                        }
+                    Image(
+                        systemName: isAllGranted ?
+                            "person.badge.shield.checkmark" : "person.badge.shield.exclamationmark"
+                    )
+                    .font(.system(size: 60))
+                    .foregroundStyle(.white)
+                    .contentTransition(.symbolEffect(.replace))
+                    .frame(width: 100, height: 100)
+                    .background {
+                        RoundedRectangle(cornerRadius: 30)
+                            .fill(.blue.gradient)
+                    }
 
                     /// Permission rows
                     VStack(alignment: .leading, spacing: 20) {
@@ -103,6 +158,14 @@ private struct PermissionSheetViewModifier: ViewModifier {
                 .presentationDetents([.height(480)])
                 .interactiveDismissDisabled()
             }
+            // Tip: Location is the odd one out — its API is delegate-based,
+            // not async/await. The `@Observable LocationManager` republishes
+            // `CLAuthorizationStatus` as state, and this `.onChange` bridges
+            // it back into the same `isGranted: Bool?` shape used for the
+            // other permissions. Three explicit branches:
+            //   • `.notDetermined` → re-show sheet and request again
+            //   • `.denied / .restricted` → flag as failed, force Settings link
+            //   • `.authorizedAlways / .authorizedWhenInUse` → granted
             .onChange(of: locationManager.status) { _, _ in
                 if let status = locationManager.status,
                    let index = states.firstIndex(where: { $0.id == .location })
@@ -183,6 +246,16 @@ private struct PermissionSheetViewModifier: ViewModifier {
         }
     }
 
+    // Tip: each permission has a different API shape — this method normalises
+    // them into a single `isGranted: Bool?` write.
+    //   • Camera / Mic → `AVCaptureDevice.requestAccess` returns Bool directly.
+    //   • Photos → `PHPhotoLibrary.requestAuthorization` returns an enum;
+    //     we treat both `.authorized` AND `.limited` as success (limited is
+    //     iOS 14+'s "let user pick which photos" mode).
+    //   • Location → fire-and-forget; result lands in
+    //     `locationManagerDidChangeAuthorization` (see `.onChange` above).
+    // Final line auto-advances `currentIndex`, which triggers the next
+    // permission via the `currentIndex` `.onChange` handler — chain pattern.
     private func requestPermission(_ index: Int) {
         Task { @MainActor in
             let permission = states[index].id
@@ -198,7 +271,7 @@ private struct PermissionSheetViewModifier: ViewModifier {
                 states[index].isGranted = status
             case .photoLibrary:
                 let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
-                /// Limited is optional
+                /// `.limited` = iOS 14+ partial photo access; treat as success.
                 states[index].isGranted = status == .authorized || status == .limited
             }
 
@@ -211,6 +284,11 @@ private struct PermissionSheetViewModifier: ViewModifier {
     PermissionSheetDemo()
 }
 
+/// Tip: the modern delegate-bridge pattern.
+/// `@Observable` (iOS 17+) exposes `status` as observable property; the
+/// delegate callback `locationManagerDidChangeAuthorization` writes to it,
+/// and any SwiftUI `.onChange(of: locationManager.status)` re-fires.
+/// Replaces the older `@Published` + `ObservableObject` ceremony.
 @Observable
 @MainActor private class LocationManager: NSObject, CLLocationManagerDelegate {
     var status: CLAuthorizationStatus?

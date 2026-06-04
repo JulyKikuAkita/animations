@@ -146,23 +146,30 @@ struct DynamicSheetiOS26<Content: View>: View {
     var body: some View {
         ZStack {
             content
+                // Tip: `.fixedSize(vertical: true)` lets the content claim its
+                // intrinsic height instead of being stretched by the sheet —
+                // essential for accurate height measurement.
                 .fixedSize(horizontal: false, vertical: true)
                 .onGeometryChange(for: CGSize.self) {
                     $0.size
                 } action: { newValue in
                     if sheetHeight == .zero {
-                        /// set large size as windowSize - 110 to smooth animation transtion
+                        // First measurement: set without animation so the sheet
+                        // doesn't animate up from 0 on initial present.
                         sheetHeight = min(newValue.height, windowSize.height - 110)
                     } else {
-                        ///  we can use animatable protocol with SheetHeightModifier
+                        // Subsequent measurements: animate. The 110pt cap keeps
+                        // the sheet below the status-bar / nav-bar so it never
+                        // overlaps system chrome.
                         withAnimation(animation) {
                             sheetHeight = min(newValue.height, windowSize.height - 110)
                         }
                     }
                 }
         }
-        // Note: sheet height with presentation detens has no default animation,
-        // .presentationDetents(sheetHeight == .zero ? [.medium] : [.height(sheetHeight)])
+        // Note: setting `.presentationDetents([.height(x)])` directly does NOT
+        // animate when x changes — SwiftUI snaps. The `Animatable` modifier
+        // below is the workaround (interpolates `height` at frame rate).
         .modifier(SheetHeightModifier(height: sheetHeight))
     }
 
@@ -174,6 +181,12 @@ struct DynamicSheetiOS26<Content: View>: View {
     }
 }
 
+/// Tip: this is the core trick.
+/// Conforming to `Animatable` and exposing `height` as `animatableData` lets
+/// SwiftUI interpolate the value over time. Inside `body`, the recomputed
+/// `.presentationDetents([.height(height)])` is reapplied each frame, so the
+/// detent updates smoothly instead of snapping. Without `Animatable`, even
+/// `withAnimation { ... }` produces a hard step.
 private struct SheetHeightModifier: ViewModifier, Animatable {
     var height: CGFloat
     var animatableData: CGFloat {

@@ -1,7 +1,47 @@
 //
 //  DynamicTagWidthView.swift
 //  animation
-
+//
+//  Learning point
+//  ──────────────
+//  Width-aware "pill" / "chip" wrapping using iOS 18's
+//  `Group(subviews:)` + `@Entry` `ContainerValues`. Each chip measures
+//  its own intrinsic width and stashes it into a custom container value;
+//  the parent then chunks subviews into rows that fit `maxWidth`.
+//
+//  Why not just `FlowLayout` / a custom `Layout`?
+//  ──────────────────────────────────────────────
+//  A `Layout` recomputes sizes on every layout pass and is hard to
+//  customise with per-child styling outside the layout function. The
+//  `Group(subviews:) + chunkByWidth` pattern uses ordinary SwiftUI views
+//  with an `HStack`/`VStack`, so each row keeps standard alignment,
+//  spacing, and animation behaviour for free.
+//
+//  Key APIs
+//  ────────
+//  • `Group(subviews: content) { collection in ... }` (iOS 18) — gives
+//    the parent a typed `SubviewsCollection` of its children, so it can
+//    inspect them as data, not opaque views.
+//  • `@Entry` on `ContainerValues` — iOS 18 sugar for declaring a
+//    container-value key without a `PreferenceKey`-style boilerplate.
+//  • `subview.containerValues.viewWidth` — read the value each child
+//    published via `.containerValue(\.viewWidth, ...)`.
+//  • `String.size(_:UIFont)` — pre-render text-width measurement using
+//    `NSAttributedString` attributes; lighter than rendering off-screen.
+//
+//  How to apply
+//  ────────────
+//  Use whenever you need data-driven layout decisions on heterogeneous
+//  children (filter chips, breadcrumbs, autocomplete suggestions). Same
+//  pattern works for height-, priority-, or category-based grouping —
+//  just publish a different `@Entry` value.
+//
+//  See also
+//  ────────
+//  • SelectTagView.swift — uses `TagLayout` (a `Layout` conformer)
+//    instead; compare to see when each approach wins.
+//  • TagFieldView.swift — interactive tag input on top of `TagLayout`.
+//
 import SwiftUI
 
 struct DynamicTagWidthDemoView: View {
@@ -58,6 +98,12 @@ struct ChipsView<Content: View>: View {
     }
 }
 
+/// Tip: greedy first-fit row packer.
+/// Walks subviews in declaration order; each chip's `viewWidth` is the
+/// pre-measured width (set via `.containerValue(\.viewWidth, ...)` at the
+/// call site). When the running row exceeds `containerWidth`, flush the
+/// row and start a new one. O(n), no backtracking — same algorithm CSS
+/// flexbox uses for `flex-wrap`.
 private extension SubviewsCollection {
     func chunkByWidth(_ containerWidth: CGFloat) -> [[Subview]] {
         var row: [Subview] = []
@@ -98,7 +144,9 @@ struct Chip: Identifiable {
 var mockChips: [Chip] = tagNames.map { Chip(name: $0) }
 
 private var tagNames: [String] = [
-    "Berserk", "Hunter", "One Piece", "Chainsaw Man", "Tokyo Ghoul", "Solo Leveling", "Naruto", "Monster", "Vagabond", "SpyFamily", "One Punch-Man", "Hero Academia", "Jujutsu Kaisen", "Fullmetal Alchemist", "Pandora Hearts", "Bleach", "Gantz", "Frieren",
+    "Berserk", "Hunter", "One Piece", "Chainsaw Man", "Tokyo Ghoul", "Solo Leveling",
+    "Naruto", "Monster", "Vagabond", "SpyFamily", "One Punch-Man", "Hero Academia",
+    "Jujutsu Kaisen", "Fullmetal Alchemist", "Pandora Hearts", "Bleach", "Gantz", "Frieren",
 ]
 
 /// get the size of text view based on the font type
@@ -109,7 +157,12 @@ extension String {
     }
 }
 
-/// new iOS 18 api to create env an container values without boilerplate codes
+/// Tip: `@Entry` is iOS 18's one-liner replacement for the old
+/// `EnvironmentKey` / `PreferenceKey` boilerplate.
+/// Before iOS 18 you had to define a key struct + extension on
+/// `ContainerValues` manually; `@Entry` synthesises both.
+/// Children publish via `.containerValue(\.viewWidth, value)`; parent
+/// reads via `subview.containerValues.viewWidth`.
 extension ContainerValues {
     @Entry var viewWidth: CGFloat = 0
 }

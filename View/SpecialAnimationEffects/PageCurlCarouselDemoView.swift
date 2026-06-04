@@ -3,11 +3,88 @@
 //  animation
 //
 //  Created on 12/25/25.
-// with Metal shader
-// Using Scrollview to achieve the page curl effect for the carousel with
-// 1. covert scrollView to paging scroll view (in which each element has the same size)
-// 2. apply visualEffect Modifier to each page view to achieve zStack-like layout
-// 3. use onScrollGeometryChange to calculate current progress for curl effect
+//
+//  Learning point
+//  ──────────────
+//  iBooks-style page-curl carousel: a horizontal pager where the
+//  currently-leaving page literally CURLS off to the right
+//  (revealing a back face and an underneath shadow) as the user
+//  swipes — driven by the `pageCurlEffect` Metal shader in
+//  `[[PageCurlEffect]]`.
+//
+//  The architectural trick: ScrollView-as-pager with shader-as-effect
+//  ──────────────────────────────────────────────────────────────────
+//  Three steps fuse a normal `ScrollView(.horizontal)` into a
+//  page-turning experience:
+//
+//    1. **`scrollTargetBehavior(.paging)`** — turns horizontal
+//       drags into discrete page snaps. Each "page" is a child of
+//       fixed `size = pageSize(geometry.size)`.
+//    2. **`visualEffect { content, proxy in content.offset(x: -minX) }`** —
+//       per-page modifier that COUNTERS the scroll offset, pinning
+//       every page in place visually. Without this, pages would
+//       slide normally; with it, every page sits at the same
+//       on-screen position and the SHADER does the visual work.
+//    3. **`zIndex(Double(-index))`** — keeps stacking order
+//       correct: page 0 on top, page 1 below it, etc. As page 0
+//       curls away, page 1 is revealed underneath rather than
+//       sliding sideways.
+//
+//  Without these three, the ScrollView would behave like a normal
+//  pager. With them, the user is "scrubbing" a 1D progress value
+//  the curl shader interprets as drag distance.
+//
+//  How `scrollProgress` maps to the shader
+//  ───────────────────────────────────────
+//  `scrollProgress = (contentOffsetX + leadingInset) / pageWidth` —
+//  a continuous value where each whole number = a fully-curled page.
+//  Inside `PageCurlItemView`, only the page whose `index..index+1`
+//  range contains `scrollProgress` updates its `dragOffset`:
+//
+//      let progress = newValue - range.lowerBound        // 0 → 1
+//      dragOffset = progress * (size.width + curlRadius * 2)
+//
+//  → drives the shader's `drag` parameter from 0 (not curled) to
+//  full-width-plus-curl-radius (page completely off the right).
+//
+//  Why `Group(subviews: content) { collection in ... }` (iOS 18+)
+//  ──────────────────────────────────────────────────────────────
+//  Lets the parent introspect the children declared in the trailing
+//  closure as a `SubviewsCollection`. This is what allows `enumerate
+//  + index` for the `zIndex` and per-page wiring without forcing
+//  callers to use `ForEach` themselves.
+//
+//  Why the page size needs explicit aspect-ratio scaling
+//  ─────────────────────────────────────────────────────
+//  `pageSize(_ viewSize:)` constrains the carousel to a fixed
+//  411×800 aspect ratio (mimicking iPhone Pro book pages). Without
+//  this, pages would stretch on landscape or iPad — the curl effect
+//  looks visually wrong on extreme aspect ratios.
+//
+//  Key APIs
+//  ────────
+//  • `.layerEffect(ShaderLibrary.pageCurlEffect(...), maxSampleOffset:)`
+//    — invoke the Metal shader per page.
+//  • `.visualEffect { content, proxy in ... }` — read scroll-frame
+//    geometry without GeometryReader.
+//  • `.scrollTargetBehavior(.paging)` — discrete page snaps.
+//  • `.onScrollGeometryChange(for:of:action:)` — drive shader
+//    parameters from live scroll offset.
+//  • `Group(subviews: content) { collection in ... }` — iOS 18
+//    declarative subview introspection.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a horizontal carousel needs more than a slide —
+//  reading apps, photo carousels, story books, hero feature
+//  reveals. The "ScrollView as progress source, shader as effect"
+//  pattern generalises to any scroll-driven custom transition.
+//
+//  See also
+//  ────────
+//  • PageCurlEffect.metal — the shader doing all the heavy lifting.
+//  • View/Sheet/iOS26ResizingSheet.swift — same idea (drive a
+//    custom effect from scroll) applied to a sheet's height.
 //
 
 import SwiftUI

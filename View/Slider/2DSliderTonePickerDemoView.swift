@@ -3,7 +3,63 @@
 //  animation
 //
 //  Created on 3/27/26.
-// Photos App Tone Picker - 2S slider
+//
+//  Learning point
+//  ──────────────
+//  Recreate the iOS Photos app's "Tone" picker — a 2D slider laid out
+//  as a grid of small circles where the touch point causes nearby
+//  circles to scale up + brighten in a smooth radial falloff. Idle
+//  state shows a row+column highlight cross at the snapped cell;
+//  dragging activates the proximity-based "puddle of light" feel.
+//
+//  Three reusable mechanics
+//  ────────────────────────
+//    1. **`@GestureState` + `.updating { }` for ephemeral drag state** —
+//       `dragLocation` automatically resets to `nil` when the gesture
+//       ends, distinguishing "still dragging" from "released" without
+//       a manual flag. The `.onChange(of: dragLocation)` handler turns
+//       that into start / changed / ended branches.
+//    2. **Proximity-driven scale/opacity** — for each cell, compute
+//       distance to the touch point, normalise it against
+//       `influencesRadius`, and lerp scale/opacity. Quadratic falloff
+//       (1 - clamp(d / r)) gives the soft radial puddle without a
+//       Metal shader.
+//    3. **Bidirectional position ↔ location** — `position` is exposed
+//       to the caller in normalised [0,1] × [0,1] space; the view
+//       internally tracks pixel `location`. `translateLocationIntoPosition`
+//       and `translateLocationIntoLocation` are inverses, with margin
+//       compensation (`itemSize / 2` half-cell padding) so the touch
+//       point can't leave the visible grid.
+//
+//  Why a grid of circles, not one Canvas/Metal blob?
+//  ─────────────────────────────────────────────────
+//  The discrete grid renders crisply at every scale, animates element
+//  state cheaply (one `Circle` per cell, fewer than 200 nodes), and
+//  composes natively with SwiftUI accessibility / hit testing. A
+//  `Canvas` redraw would also work but loses the per-cell diffing.
+//
+//  Why `.coordinateSpace(name: "POSITIONALPAD")`?
+//  ──────────────────────────────────────────────
+//  Without a named coordinate space, `value.location` from the gesture
+//  would be relative to whichever ancestor space SwiftUI picks. Naming
+//  the pad guarantees the X/Y we read is in the pad's own pixel space,
+//  matching `config.size`.
+//
+//  Key APIs
+//  ────────
+//  • `@GestureState` + `.updating { }` — auto-reset transient state.
+//  • `DragGesture(minimumDistance: 0, coordinateSpace: .named(...))` —
+//    fire on touch-down, in our coord space.
+//  • `.coordinateSpace(name:)` — pin the gesture's coordinate origin.
+//  • `.drawingGroup()` — flatten the cell grid into a single GPU
+//    bitmap; reduces rasterisation cost when many cells animate.
+//
+//  How to apply
+//  ────────────
+//  Use whenever you need a 2D parameter picker (colour mix, tone
+//  warmth/tint, joystick, audio pan/depth). The proximity-falloff
+//  pattern generalises to any "soft selection" UI — heat maps,
+//  influence visualisations, blob editors.
 //
 
 import SwiftUI
@@ -68,12 +124,18 @@ struct PhotosStylePositionPad: View {
                 .frame(width: itemSize, height: itemSize)
         }
         .contentShape(.rect)
+        // Tip: `@GestureState` + `.updating` is the ephemeral state pattern.
+        // `dragLocation` is automatically `nil` when the gesture is NOT
+        // active. That gives us a free "is dragging?" check via
+        // `oldValue == nil` / `newValue == nil` in the .onChange below —
+        // no manual `isDragging` flag to set/clear from inside the gesture.
         .gesture(
             DragGesture(minimumDistance: 0, coordinateSpace: .named("POSITIONALPAD"))
                 .updating($dragLocation) { value, out, _ in
                     let location = value.location
 
-                    /// Capping location to match the itemSize
+                    /// Cap to [itemSize/2, size - itemSize/2] so the touch
+                    /// point can't leave the visible cell area.
                     out = .init(
                         x: max(min(location.x, config.size - itemSize / 2), itemSize / 2),
                         y: max(min(location.y, config.size - itemSize / 2), itemSize / 2)
@@ -143,7 +205,20 @@ struct PhotosStylePositionPad: View {
             }
         }
 
-        /// Updating scale and opacity based on location with influence radius
+        // Tip: proximity-driven falloff is the core visual.
+        // For each cell:
+        //   1. distance = Euclidean distance from cell to touch point.
+        //   2. proximity = 1 - clamp(distance / influencesRadius, 0...1)
+        //      → 1 at the touch point, 0 beyond `influencesRadius`.
+        //   3. Linear lerps map proximity into scale (0.7 → 1.7) and
+        //      opacity (0.1 → 1.1, capped naturally by SwiftUI).
+        //
+        // Branching at the bottom:
+        //   • While dragging, every cell uses the proximity values.
+        //   • Idle state keeps row/column highlight: cells on the
+        //     active row OR column are full opacity; everywhere else
+        //     dims to 0.3. The exact (activeRow, activeColumn) cell
+        //     scales up to `circleZoom` (3x) — the "current value" pip.
         for rowItem in rows {
             let row = rowItem.row
             for columnItem in rowItem.columns {

@@ -1,7 +1,58 @@
 //
 //  HackerTextView.swift
 //  animation
-
+//
+//  Learning point
+//  ──────────────
+//  "Hacker / Matrix" text-reveal effect: each character cycles through
+//  random glyphs for a random duration before settling on its real
+//  value. Reads like a movie hacker terminal decrypting in real time.
+//
+//  Three implementation ideas worth understanding:
+//    1. **Per-character independent timing.** Each index gets its own
+//       `Timer` whose `delay` is `random(0...duration)`. The result:
+//       characters resolve in a non-uniform wave rather than a uniform
+//       sweep. This is what makes it feel organic instead of mechanical.
+//    2. **`animationID` as a generation counter.** When the user
+//       triggers a new animation mid-flight, we issue a fresh UUID;
+//       any stale timers compare their captured `currentID` to the
+//       current `animationID` and `invalidate()` themselves. No
+//       `Timer.invalidate` chasing, no shared cancellation token.
+//    3. **`.contentTransition(...)` per character.** Setting the
+//       transition on the whole `Text` makes each character swap blend
+//       (e.g. `.numericText()`, `.interpolate`, `.identity`) when the
+//       string changes. Combined with `monospaced` font design so the
+//       width never reflows mid-scramble.
+//
+//  Why monospaced?
+//  ───────────────
+//  Without `fontDesign(.monospaced)`, the layout would jitter as
+//  `m` swaps to `i`, etc. Fixed-width keeps every character cell the
+//  same size so only the glyph changes — an essential visual trick
+//  for any character-level animation.
+//
+//  Key APIs
+//  ────────
+//  • `Timer.scheduledTimer(withTimeInterval:repeats:_:)` — per-char
+//    cadence. Each `timer.fire()` runs the first tick immediately.
+//  • `.contentTransition(_:)` — pluggable per-char transition style.
+//  • `.fontDesign(.monospaced)` — stable cell widths during scramble.
+//  • `customOnChange` (project helper) — same shape as `.onChange` but
+//    with a single closure (legacy or sugar; check the helper file).
+//
+//  How to apply
+//  ────────────
+//  Use for splash screens, password reveals, "decrypting…" UX, terminal
+//  output. The generation-counter cancellation pattern (#2 above) is
+//  the reusable nugget — works any time you have N independent timers
+//  and need a clean way to abort a stale generation.
+//
+//  See also
+//  ────────
+//  • GlitchTextEffectView.swift — sister text-effect that's animated
+//    via KeyframeAnimator; useful comparison of timer-driven vs
+//    keyframe-driven approaches.
+//
 import SwiftUI
 
 struct HackerTextDemoView: View {
@@ -86,9 +137,16 @@ struct HackerTextView: View {
             }
     }
 
+    /// Tip: generation-counter cancellation.
+    /// `currentID` captures the animation ID at scheduling time; if the
+    /// user triggers a new animation, `animationID` is rotated to a new
+    /// UUID. Any stale timer notices `currentID != animationID` on its
+    /// next tick and self-invalidates. Avoids tracking timer references
+    /// or sharing a `Bool` cancel flag across N timers.
     private func animateText() {
         let currentID = animationID
         for index in text.indices {
+            // Per-char random delay = wave-of-decryption look.
             let delay = CGFloat.random(in: 0 ... duration)
             var timerDuration: CGFloat = 0
 
@@ -98,6 +156,8 @@ struct HackerTextView: View {
                 } else {
                     timerDuration += speed
                     if timerDuration >= delay {
+                        // Past this character's resolve time — write the
+                        // real glyph and stop scrambling this index.
                         if text.indices.contains(index) {
                             let actualCharacter = text[index]
                             replaceCharacter(at: index, character: actualCharacter)
@@ -105,11 +165,15 @@ struct HackerTextView: View {
 
                         timer.invalidate()
                     } else {
+                        // Still scrambling — paint a random glyph.
                         guard let randomCharacter = randomCharacters.randomElement() else { return }
                         replaceCharacter(at: index, character: randomCharacter)
                     }
                 }
             }
+            // `fire()` runs the first tick now instead of waiting for the
+            // first scheduled interval — avoids visible delay before the
+            // scramble begins.
             timer.fire()
         }
     }
@@ -122,7 +186,10 @@ struct HackerTextView: View {
         }
     }
 
-    /// Change character at the given index
+    /// Tip: skip whitespace cells so spaces stay spaces.
+    /// Without the trimming check, a space would also get scrambled to
+    /// a random glyph, ruining the word-boundary illusion. The original
+    /// space stays put while non-space neighbours scramble around it.
     func replaceCharacter(at index: String.Index, character: Character) {
         guard animatedText.indices.contains(index) else { return }
         let indexCharacter = String(animatedText[index])

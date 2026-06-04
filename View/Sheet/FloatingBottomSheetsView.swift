@@ -185,6 +185,13 @@ struct FloatingBottomSheetsView: View {
     FloatingBottomSheetsViewDemo()
 }
 
+/// Tip: the "floating sheet" recipe in 4 modifiers:
+///   1. `.presentationCornerRadius(0)` — turn off the system rounded chrome so
+///      our own clipShape on the inner content owns the corner radius.
+///   2. `.presentationBackground(.clear)` — no system fill behind the sheet.
+///   3. `.presentationDragIndicator(.hidden)` — kill the grabber pill.
+///   4. `.background(SheetShadowRemover())` — strip the system drop shadow
+///      via a `UIViewRepresentable` introspection pass (see below).
 extension View {
     @ViewBuilder
     func floatingBottomSheet(
@@ -202,6 +209,18 @@ extension View {
     }
 }
 
+/// Tip: UIKit introspection — fragile but powerful.
+/// SwiftUI's `.sheet` adds an internal `_UIPresentationController` that draws
+/// a drop shadow under the sheet's frame. There is no public API to disable
+/// it, so we:
+///   1. Insert this invisible `UIView` into the sheet's hierarchy (via
+///      `.background(...)`).
+///   2. Defer to the next runloop tick (`DispatchQueue.main.async`) so the
+///      view has been added to its window.
+///   3. Walk up the superview chain to the view directly under the `UIWindow`.
+///   4. Clear `shadowColor` on every direct subview.
+/// Same risk profile as any private-hierarchy reach-through — could break in
+/// future iOS versions; revisit if shadows reappear.
 private struct SheetShadowRemover: UIViewRepresentable {
     func updateUIView(_: UIViewType, context _: Context) {}
 
@@ -221,6 +240,9 @@ private struct SheetShadowRemover: UIViewRepresentable {
     }
 }
 
+/// Tip: recursive walk up to the view sitting directly under the `UIWindow`.
+/// Useful pattern for any modal-presentation introspection — sheets,
+/// fullscreen covers, popovers all sit at this level.
 private extension UIView {
     var viewBeforeWindow: UIView? {
         if let superview, superview is UIWindow {

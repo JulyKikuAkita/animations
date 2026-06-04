@@ -2,11 +2,19 @@
 //  BlurEffectSearchBarView.swift
 //  animation
 //
-//  1. make header sticky
-//  2. make header fade away when scrollView scrolled
-//  2.1: view scroll faster at the beginning b.c. header height changes dynamically ->
-// to solve this, push the view in the opposite direction w/ the amount of height reduced, 75 CGFloat
-//  3. implement expandable search bar
+//  Learning points / Demo goals:
+//  1. Make header sticky on top of a ScrollView using `safeAreaInset(edge: .top)`.
+//  2. Fade the header out as the user scrolls (drive `progress` from scroll offset).
+//  2.1 Caveat: when the header height shrinks during scroll, the content jumps faster than the finger.
+//      Fix: counter-offset the content by the same amount the header lost (here: 75pt) and
+//      add `.padding(.bottom, 75)` so the content end is preserved.
+//  3. Expandable search bar driven by `@FocusState` — corners/edges animate when focus toggles.
+//
+//  Key SwiftUI APIs to study here:
+//  • `onScrollGeometryChange` (iOS 18+) — read live scroll offset without `GeometryReader` hacks.
+//  • Custom `ScrollTargetBehavior` — snap the header to either fully-shown or fully-hidden state.
+//  • `visualEffect { content, proxy in ... }` — apply geometry-driven offsets without invalidating layout.
+//  • `ProgressiveBlurView` (UIViewRepresentable) — reuse system blur with filters removed.
 //
 
 import SwiftUI
@@ -41,14 +49,18 @@ struct BlurEffectSearchBarView: View {
         }
         .scrollTargetBehavior(CustomScrollTarget())
         .onScrollGeometryChange(for: CGFloat.self) {
+            // Tip: include `contentInsets.top` so progress is 0 at the
+            // true resting position (safe-area + inset aware), not just contentOffset.
             $0.contentOffset.y + $0.contentInsets.top
         } action: { _, newValue in
-            /// ResizableHeader height 60 + bottom padding 15
+            /// ResizableHeader height 60 + bottom padding 15 = 75 (the divisor below)
+            /// `clamp(0...1)` pattern: max(min(value, upper), lower).
             progress = max(min(newValue / 75, 1), 0)
         }
     }
 
     @ViewBuilder
+    // swiftlint:disable:next function_body_length
     func resizableHeader() -> some View {
         let progress = isFocused ? 1 : progress
         VStack(spacing: 0) {
@@ -122,8 +134,13 @@ struct BlurEffectSearchBarView: View {
         }
     }
 
+    /// Tip: `visualEffect` gives access to a `GeometryProxy` without needing a wrapping
+    /// `GeometryReader` (which would otherwise eat layout space). Use the
+    /// `.scrollView(axis:)` coordinate space to read offset relative to the scroll content.
     private func offsetY(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView(axis: .vertical)).minY
+        // When focused, lock the header to the top by cancelling overscroll;
+        // when scrolled past zero (minY < 0), pull header up to keep it pinned.
         return minY > 0 ? (isFocused ? -minY : 0) : -minY
     }
 
@@ -148,6 +165,9 @@ struct BlurEffectSearchBarView: View {
     }
 }
 
+/// Tip: a custom `ScrollTargetBehavior` is the modern way (iOS 17+) to "snap" a scroll
+/// to a discrete target after a drag/fling. Use it to avoid leaving the header in a half-collapsed state.
+/// Mid-zone (40..<75) snaps to the collapsed position (75); below 40 snaps back to the top.
 private struct CustomScrollTarget: ScrollTargetBehavior {
     func updateTarget(_ target: inout ScrollTarget, context _: TargetContext) {
         let endPoint = target.rect.minY

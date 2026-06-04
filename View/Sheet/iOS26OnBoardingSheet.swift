@@ -115,6 +115,15 @@ struct OnBoardingSheetiOS26Demo: View {
     }
 }
 
+/// Tip: `@resultBuilder` lets a trailing closure look like declarative SwiftUI:
+///
+///     cards: {
+///         OnBoardingCard(symbol: "list.bullet", title: ..., subTitle: ...)
+///         OnBoardingCard(symbol: "person.2",   title: ..., subTitle: ...)
+///     }
+///
+/// At compile time `buildBlock` collects each statement into an array. Same
+/// mechanism that powers `@ViewBuilder` and `@SceneBuilder`.
 @resultBuilder
 struct OnBoardingCardResultBuilder {
     static func buildBlock(_ components: OnBoardingCard...) -> [OnBoardingCard] {
@@ -199,11 +208,17 @@ struct AppleonBoardingView<Icon: View, Footer: View>: View {
         .interactiveDismissDisabled()
         /// Disable interaction until footer is animated
         .allowsHitTesting(animateFooter)
+        // Tip: cascade scheduling pattern.
+        // Each `delayedAnimation(delay) { ... }` sleeps, then flips a state flag
+        // inside `withAnimation`. Sequencing them with `await` produces a chain
+        // where each element appears AFTER the previous one's delay — no need
+        // for explicit `.delay()` modifiers on individual transitions.
         .task {
             guard !animateIcon else { return }
 
-            /// We need to set initial delay as 0.35 for waiting sheet animation to complete
-            /// and avoid unwated view interactions
+            // 0.35s initial delay = give the sheet's own present animation time
+            // to finish before the cascade starts. Without this, the icon
+            // appears mid-slide-up and the motion fights itself.
             await delayedAnimation(0.35) {
                 animateIcon = true
             }
@@ -214,6 +229,8 @@ struct AppleonBoardingView<Icon: View, Footer: View>: View {
 
             try? await Task.sleep(for: .seconds(0.2))
 
+            // Per-card 0.1s offset = the staircase effect (each row arrives one
+            // beat after the previous). Tune this for faster/slower cadence.
             for index in animateCards.indices {
                 let delay = Double(index) * 0.1 // you custom value
                 await delayedAnimation(delay) {
@@ -269,7 +286,11 @@ struct AppleonBoardingView<Icon: View, Footer: View>: View {
 }
 
 extension View {
-    /// use compositingGroup to group the view and apply blur to gether rather than to each node view
+    /// Tip: bundling 3 effects (blur + opacity + offset) into one helper means
+    /// you only write `.blurSlide(flag)` at each call site, AND any caller-side
+    /// `withAnimation` will animate all three properties together as one
+    /// transition. `compositingGroup()` ensures the blur applies to the
+    /// flattened subtree (no per-leaf seam artefacts).
     func blurSlide(_ show: Bool) -> some View {
         compositingGroup()
             .blur(radius: show ? 0 : 10)

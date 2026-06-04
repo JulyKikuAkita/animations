@@ -77,6 +77,9 @@ struct DynamicFloatingSheetsiOS18View: View {
     var body: some View {
         VStack(spacing: 20) {
             ZStack {
+                // Tip: a `ZStack` (not `Group`) is required so SwiftUI sees a single
+                // container whose child changes — otherwise transitions don't fire.
+                // Each branch carries `.blurReplace` so removal/insertion both blur.
                 switch currentView {
                 case .actions: view1()
                     .transition(.blurReplace)
@@ -88,6 +91,9 @@ struct DynamicFloatingSheetsiOS18View: View {
                     .transition(.blurReplace)
                 }
             }
+            // Tip: `.compositingGroup()` flattens the swapped-out subtree into a
+            // single layer before blurring — without it, individual leaves blur
+            // independently and the seams show during the transition.
             .compositingGroup()
 
             Button {
@@ -140,6 +146,9 @@ struct DynamicFloatingSheetsiOS18View: View {
 
                     Spacer(minLength: 0)
 
+                    // Tip: `.contentTransition(.symbolEffect)` makes SF Symbol
+                    // swaps animate (e.g. circle → checkmark.circle) instead of
+                    // a hard cut. Pair with a `withAnimation` block on the toggle.
                     Image(systemName: isSelected ? "checkmark.circle.fill" : "circle.fill")
                         .font(.title)
                         .contentTransition(.symbolEffect)
@@ -246,6 +255,9 @@ struct DynamicFloatingSheetsiOS18View: View {
             .padding(.bottom, 25)
 
             VStack(spacing: 6) {
+                // Tip: `.contentTransition(.numericText())` rolls digits like an
+                // odometer when the string changes — perfect for prices, counters,
+                // durations. Wrap mutations in `withAnimation` for it to fire.
                 Text(duration.isEmpty ? "0" : duration)
                     .font(.system(size: 60, weight: .black))
                     .contentTransition(.numericText())

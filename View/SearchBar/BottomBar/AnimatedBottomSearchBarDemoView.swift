@@ -3,8 +3,31 @@
 //  animation
 //
 //  Created on 11/7/25.
-// Using AnyLayout
-// mimic Perplexity Animated Bottom Bar style
+//
+//  Learning points / Demo goals:
+//  • Mimic Perplexity's animated bottom search bar: a compact pill that expands
+//    into a multi-line composer (with leading icon row) when focused, with the
+//    main "send" button sliding off to the side.
+//  • Use `AnyLayout` to swap between a horizontal pill (`HStack`/`ZStack`) and a
+//    vertical expanded composer (`VStack`/`ZStack`) inside the *same* identity
+//    so contained subviews animate position rather than fade in/out.
+//  • Demonstrate "neon" highlight: an angular gradient masked onto a stroke that
+//    rotates infinitely, only visible when the field is empty + unfocused.
+//
+//  Key APIs / patterns:
+//  • `AnyLayout` (iOS 16+) — type-erase a Layout so `if/else` can pick between
+//    `HStackLayout` and `ZStackLayout` without breaking view identity.
+//  • `@FocusState.Binding` — pass focus state across view boundaries so the
+//    parent owns the source of truth (e.g. to dismiss programmatically).
+//  • `.geometryGroup()` — coalesce child geometry changes into one animation
+//    pass; essential for smooth multi-property transitions.
+//  • `.compositingGroup()` — flatten a subtree before applying `.blur`/`.opacity`
+//    so children blur as a single image (no per-child seams).
+//  • `.visualEffect { content, proxy in ... }` — read own size to slide the main
+//    action button off-screen by `proxy.size.width + 30` when focused.
+//
+//  Notable: `iOS26OrLater` branch tunes animationDuration because the iOS 26
+//  keyboard appears faster — matching it keeps the bar in sync with the keyboard.
 
 import SwiftUI
 
@@ -100,6 +123,10 @@ struct AnimatedBottomBar<LeadingAction: View, TrailingAction: View, MainAction: 
     }
 
     var body: some View {
+        // Tip: `AnyLayout` lets us pick a layout container at runtime while
+        // preserving the identity of the children. Without `AnyLayout`, swapping
+        // between `HStack` and `VStack` based on a flag would force SwiftUI to
+        // tear down + rebuild children, breaking transitions.
         let mainLayout = isFocused ? AnyLayout(ZStackLayout(alignment: .bottomTrailing)) :
             AnyLayout(HStackLayout(alignment: .bottom, spacing: 10))
         let shape = RoundedRectangle(cornerRadius: isFocused ? 25 : 30)
@@ -166,7 +193,11 @@ struct AnimatedBottomBar<LeadingAction: View, TrailingAction: View, MainAction: 
                             .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 5)
                             .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: -5)
                     }
-                    /// when typing, expand the textfield and move main button to the right
+                    /// Tip: capture `[isFocused]` explicitly in the `visualEffect`
+                    /// closure — without the capture list, SwiftUI may not re-evaluate
+                    /// the closure when the focus flips.
+                    /// `proxy.size.width + 30` slides the button just past its own
+                    /// frame so it disappears off the trailing edge while typing.
                     .visualEffect { [isFocused] content, proxy in
                         content
                             .offset(x: isFocused ? (proxy.size.width + 30) : 0)
@@ -177,7 +208,12 @@ struct AnimatedBottomBar<LeadingAction: View, TrailingAction: View, MainAction: 
         .animation(.easeInOut(duration: animationDuration), value: isFocused)
     }
 
-    /// provide neo effect
+    /// Tip: "Neon traveling highlight" recipe:
+    ///   1. Stroke the shape with a gradient.
+    ///   2. Mask it with an `AngularGradient` whose stops are mostly clear
+    ///      except for one bright band — this leaves only a small arc visible.
+    ///   3. Animate the gradient's `angle` from 0→360 with `.repeatForever`.
+    ///   4. `.blur(radius: 2)` + slight negative padding gives the soft glow.
     private func highlightedBackgroundView() -> some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: isFocused ? 25 : 30)
@@ -188,6 +224,8 @@ struct AnimatedBottomBar<LeadingAction: View, TrailingAction: View, MainAction: 
                         style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round)
                     )
                     .mask {
+                        // 4 clear stops + 1 white stop + 4 clear stops = a single
+                        // bright sliver that rotates around the perimeter.
                         let clearColors: [Color] = Array(repeating: .clear, count: 4)
                         shape
                             .fill(AngularGradient(

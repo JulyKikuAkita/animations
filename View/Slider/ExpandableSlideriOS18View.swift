@@ -1,6 +1,72 @@
 //
 //  ExpandableSlideriOS18View.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  iOS-Music-app style expandable slider: while idle, the slider sits
+//  at a slim 20pt height; on touch-down it grows to ~45pt and reveals
+//  an overlay (icon + percentage). Releasing collapses it back.
+//
+//  Three reusable mechanics
+//  ────────────────────────
+//    1. **Mask-driven height growth** — instead of changing the
+//       slider's actual frame (which would re-run layout and bump
+//       neighbours), the slider is rendered at full expanded size and
+//       MASKED to the current visible height. Layout neighbours never
+//       move; only the mask reshapes. See the bottom `.mask { ... }`.
+//    2. **`@GestureState` for `isActive`** — auto-resets to `false`
+//       when the gesture ends. No manual reset; no race conditions.
+//    3. **Two-pass overlay tinting** — the overlay (icon + label) is
+//       drawn TWICE: once in `overlayInActiveTint` over the inactive
+//       track, once in `overlayActiveTint` masked to the active track
+//       width. As the active fill grows, the overlay automatically
+//       changes colour where the track is filled — no manual
+//       per-pixel logic, all done by mask intersection.
+//
+//  Why expand via mask, not via `frame` change
+//  ───────────────────────────────────────────
+//  Changing `frame.height` while animating triggers SwiftUI's normal
+//  layout cycle: every sibling reflows, every gesture coord may shift,
+//  and the underlying `width = (value/range)*size.width` math sees a
+//  size change mid-drag. Animating a mask leaves the inner geometry
+//  stable — the slider is "really" at expanded size the whole time;
+//  only the visible window changes.
+//
+//  Animation timing trick
+//  ──────────────────────
+//  The overlay's appear/disappear uses an *asymmetric* curve:
+//
+//      .animation(.easeInOut(duration: 0.3)
+//                  .delay(isActive ? 0.12 : 0)
+//                  .speed(isActive ? 1 : 2))
+//
+//  → On press (isActive = true): wait 0.12s for the height expansion
+//    to play out before the overlay fades in. Looks like the overlay
+//    is "revealed" by the growth.
+//  → On release (isActive = false): no delay, double speed. The
+//    overlay should feel like it's already collapsing as you let go,
+//    not lagging behind.
+//
+//  Key APIs
+//  ────────
+//  • `@GestureState` — ephemeral state that auto-resets.
+//  • `.highPriorityGesture` — wins over the parent's scroll/list
+//    gestures, important inside `List` rows.
+//  • `.mask { Rectangle().frame(width: width) }` — fill progress
+//    via masking, not a separate `Rectangle().frame(...)`. Lets the
+//    fill use the same gradient as the track.
+//  • `Image(systemName:variableValue:)` — variable-fill SF Symbols
+//    (iOS 16+); the speaker icon's fill grows with `volume / 100`.
+//
+//  How to apply
+//  ────────────
+//  Use whenever a slider needs touch-state polish: brightness, volume,
+//  EV, intensity. The mask-based expansion is the load-bearing trick;
+//  the asymmetric animation curve is the polish. Both apply to any
+//  "expand on press, contract on release" interaction beyond sliders
+//  (toolbar buttons, segmented controls, etc.).
+//
 
 import SwiftUI
 
@@ -65,6 +131,12 @@ struct CustomExpandableSlider<Overlay: View>: View {
                             .frame(width: width)
                     }
 
+                // Tip: two-pass overlay tinting.
+                // Render the overlay twice — first in the inactive
+                // colour over the empty part of the track, then in the
+                // active colour MASKED to the current fill width. As
+                // the fill grows the visible overlay colour appears to
+                // "follow the boundary" without any per-pixel logic.
                 ZStack(alignment: .leading) {
                     overlay
                         .foregroundStyle(config.overlayInActiveTint)
@@ -77,7 +149,13 @@ struct CustomExpandableSlider<Overlay: View>: View {
                         }
                 }
                 .compositingGroup() /// group the view to a single view
-                .animation(.easeInOut(duration: 0.3).delay(isActive ? 0.12 : 0).speed(isActive ? 1 : 2)) { /// adding delay to make animation and opacity smoother
+                // Tip: asymmetric on-press / on-release curve.
+                // Press → 0.12s delay (let the height grow first), 1x speed.
+                // Release → 0 delay, 2x speed (snap collapse alongside
+                // the height shrink). Same `.animation` modifier handles
+                // both directions because the durations differ via
+                // `.delay` and `.speed`.
+                .animation(.easeInOut(duration: 0.3).delay(isActive ? 0.12 : 0).speed(isActive ? 1 : 2)) {
                     $0
                         .opacity(isActive ? 1 : 0)
                 }
@@ -97,8 +175,13 @@ struct CustomExpandableSlider<Overlay: View>: View {
                     }
             )
         }
+        // Tip: render at FULL expanded height, animate the mask only.
+        // The slider's actual frame is always `20 + extraHeight`, so its
+        // internal geometry (drag math, width %) is stable. The mask
+        // shrinks/grows the visible window — surrounding layout never
+        // sees a height change, so neighbours don't shift.
         .frame(height: 20 + config.extraHeight)
-        .mask { /// instead of directly change view size during expand, use mask to guarantee a smooth effect while user interacts the slider
+        .mask {
             RoundedRectangle(cornerRadius: config.cornerRadius)
                 .frame(height: 20 + (isActive ? config.extraHeight : 0))
         }

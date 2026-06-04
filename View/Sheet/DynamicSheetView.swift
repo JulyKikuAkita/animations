@@ -110,7 +110,9 @@ struct DynamicSheetView: View {
                     }
                     .scrollTargetBehavior(.paging)
                     .scrollIndicators(.hidden)
-                    /// Disabling scroll view when keyboard is active
+                    // Tip: disabling scroll while the keyboard is up prevents
+                    // the user from accidentally swiping back to page 1 while
+                    // typing — a small UX safeguard worth copying.
                     .scrollDisabled(isKeyboardShowing)
                     .overlay(alignment: .topTrailing) {
                         Button(action: {
@@ -290,15 +292,23 @@ struct DynamicSheetView: View {
             .frame(width: size.width)
         })
         .frame(width: size.width)
-        /// Finding the view's height
+        // Tip: pre-iOS-16 height tracking pattern.
+        // `.heightChangePreference` is a custom modifier (defined in this
+        // project) that wraps a `PreferenceKey` so the parent can react to
+        // child height changes. Modern equivalent: `.onGeometryChange`.
         .heightChangePreference { height in
             sheetSecondPageHeight = height
-            /// Just in case  if the Height of the view has changed
-            ///  Currently  withAnimation not animate the sheet height in SwiftUI (xcode 15)
+            /// On Xcode 15 / iOS 16, `withAnimation` does NOT animate sheet
+            /// height changes — that's why `sheetHeight` is recomputed manually
+            /// from `sheetScrollProgress` rather than relying on implicit anim.
             let diff = sheetSecondPageHeight - sheetFirstPageHeight
             sheetHeight = sheetFirstPageHeight + (diff * sheetScrollProgress)
         }
-        /// Offset preference
+        // Tip: this drives the cross-page interpolation.
+        // As the user pages horizontally, `minX` slides from `size.width` (page 1
+        // visible) toward `0` (page 2 visible). We invert it into a 0...1
+        // progress and use it to LERP between the two pages' measured heights —
+        // giving a sheet that morphs height in lockstep with the swipe.
         .minXChangePreference { minX in
             let diff = sheetSecondPageHeight - sheetFirstPageHeight
             /// size between ( 0 to screen width )

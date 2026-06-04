@@ -1,10 +1,31 @@
 //
 //  mailSearchInboxiOS18.swift
 //  animation
+//
+//  Learning points / Demo goals:
+//  • Recreate the iOS 18 Mail "Inboxes" UI: a tab bar that sticks under the
+//    nav bar, hides when search activates, and shows a thin material divider
+//    once the user starts scrolling.
+//  • Use the *new* iOS 18 `onScrollGeometryChange` API to read both
+//    `contentOffset.y` AND `contentInsets.top` separately — the inset matters
+//    because it changes when `.searchable` shows/hides the search field.
+//
+//  Key APIs:
+//  • `.searchable(text:isPresented:placement:)` — system search bar with a
+//    binding for active state, so we can collapse the tab bar in sync.
+//  • `onScrollGeometryChange(for:of:action:)` — iOS 18+ replacement for
+//    `GeometryReader` + preference keys.
+//  • `.zIndex(1000)` — keep the sticky tab bar above content during transition.
+//
+//  Notable tricks:
+//  • `startTopInset` is captured *once* at first non-zero callback so we can
+//    distinguish initial inset from runtime changes (search activation).
+//  • The divider opacity is driven by a `progress` clamped over 15pt of scroll,
+//    giving a smooth fade-in once the user is past the title area.
 
 import SwiftUI
 
-struct mailSearchInboxiOS18DemoView: View {
+struct MailSearchInboxiOS18DemoView: View {
     /// View Properties
     @State private var searchText: String = ""
     @State private var isSearchActive: Bool = false
@@ -19,10 +40,15 @@ struct mailSearchInboxiOS18DemoView: View {
             ScrollView(.vertical) {
                 VStack(spacing: 0) {
                     InboxTabBar(activeTab: $activeTab)
+                        // Tip: collapse height to 0 (not just opacity) so following
+                        // content slides up when search activates.
                         .frame(height: isSearchActive ? 0 : nil, alignment: .top)
                         .opacity(isSearchActive ? 0 : 1)
                         .padding(.bottom, 10)
                         .background {
+                            // 110 = approx. title-area height; 15 = fade window.
+                            // The divider/material begins to appear only once the
+                            // user has scrolled past the title.
                             let progress = min(max((scrollOffset + startTopInset - 110) / 15, 0), 1)
 
                             ZStack(alignment: .bottom) {
@@ -63,6 +89,8 @@ struct mailSearchInboxiOS18DemoView: View {
                 for: CGFloat.self,
                 of: { $0.contentInsets.top
                 }, action: { _, newValue in
+                    // Tip: capture the *initial* top inset on first callback so later
+                    // calculations stay stable when `.searchable` toggles the inset.
                     if startTopInset == .zero {
                         startTopInset = newValue
                     }
@@ -88,12 +116,12 @@ struct InboxTabBar: View {
             HStack(spacing: 8) {
                 HStack(spacing: activeTab == .allMails ? -15 : 8) {
                     ForEach(InboxTabModel.allCases.filter { $0 != .allMails }, id: \.rawValue) { tab in
-                        ResizableTabButton(tab)
+                        resizableTabButton(tab)
                     }
                 }
 
                 if activeTab == .allMails {
-                    ResizableTabButton(.allMails)
+                    resizableTabButton(.allMails)
                         .transition(.offset(x: 200))
                 }
             }
@@ -102,8 +130,11 @@ struct InboxTabBar: View {
         .frame(height: 50)
     }
 
+    /// Tip: this button shows two views at the same Image position and toggles their opacity
+    /// (filled vs. outline). This avoids re-layout when the symbol variant changes,
+    /// keeping the geometry stable so the surrounding `withAnimation(.bouncy)` looks smooth.
     @ViewBuilder
-    func ResizableTabButton(_ tab: InboxTabModel) -> some View {
+    func resizableTabButton(_ tab: InboxTabModel) -> some View {
         HStack(spacing: 8) {
             Image(systemName: tab.symbolImage)
                 .opacity(activeTab != tab ? 1 : 0)
@@ -153,5 +184,5 @@ struct InboxTabBar: View {
 }
 
 #Preview {
-    mailSearchInboxiOS18DemoView()
+    MailSearchInboxiOS18DemoView()
 }

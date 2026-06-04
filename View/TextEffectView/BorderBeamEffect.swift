@@ -278,6 +278,11 @@ struct BorderBeamEffect: ViewModifier {
                     .stroke(border.tertiary, lineWidth: 0.6)
             }
 
+            // Tip: simplest possible KeyframeAnimator shape:
+            //   • One LinearKeyframe(1, duration: 2.5) → value ramps 0→1.
+            //   • `repeating: true` restarts when it hits 1.
+            //   • `value * 360` maps the 0–1 timeline onto 0–360° rotation.
+            // No Timer / @State / CADisplayLink — SwiftUI owns the cadence.
             KeyframeAnimator(initialValue: 0.0, repeating: true) { value in
                 draw(value * 360)
             } keyframes: { _ in

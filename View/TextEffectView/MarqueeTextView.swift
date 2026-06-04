@@ -67,9 +67,24 @@ struct MarqueeText: View {
                     textSize = newValue
                     isMarqueeEnabled = textSize.width > viewSize.width
                 }
+                // Tip: only enable the marquee when the text overflows.
+                // For text that fits, render it plainly (no animation cost,
+                // no flicker on resize). The `modifiers { ... }` helper at
+                // the bottom of the file is just an `@ViewBuilder` wrapper
+                // so we can branch inside the modifier chain.
                 .modifiers { content in
                     if isMarqueeEnabled {
                         content
+                            // Tip: the seamless-loop trick.
+                            //   1. Place the same text again as a TRAILING
+                            //      `.overlay` shifted right by `textWidth + gap`.
+                            //      Now we have "TextA  TextA" sitting side by side.
+                            //   2. Animate the whole thing leftward by exactly
+                            //      that same offset (`-offset * progress`,
+                            //      progress goes 0 → 1).
+                            //   3. When progress hits 1, the second copy is
+                            //      where the first started — so restarting at
+                            //      0 is invisible. No teleport seam.
                             .keyframeAnimator(initialValue: 0.0, repeating: true) { [textSize, gap] content, progress in
                                 let offset = textSize.width + gap
 
@@ -79,6 +94,10 @@ struct MarqueeText: View {
                                     }
                                     .offset(x: -offset * progress)
                             } keyframes: { _ in
+                                // Hold for `holdTime` (lets readers catch the
+                                // start of the string), then linearly scroll
+                                // for `speed` seconds. Tweak in property
+                                // accessors below.
                                 LinearKeyframe(0, duration: holdTime)
                                 LinearKeyframe(1, duration: speed)
                             }
