@@ -3,6 +3,106 @@
 //  animation
 //
 //  Created on 3/17/26.
+//
+//  Learning point
+//  ──────────────
+//  Backport of iOS 26's `ConcentricRectangle` shape to iOS 18.
+//  A concentric rectangle is a rounded rect whose CORNER RADIUS
+//  changes per-corner so that the visible inner corners stay
+//  geometrically *parallel* to the device's hardware corners —
+//  no matter where the view sits or how much it's padded.
+//
+//  Why "concentric" matters
+//  ────────────────────────
+//  Apple's iPhone hardware corners have a continuous ~50pt
+//  radius. If you draw a card with a fixed `cornerRadius: 30` and
+//  pad it close to the edge, the card's corners and the device's
+//  corners CURVE AT DIFFERENT RATES — your card looks subtly
+//  wrong (the gap between card-corner and device-corner is wider
+//  at one point than another). Concentric rectangle fixes this
+//  by tightening or relaxing each corner so the gap stays
+//  uniform. iOS 26 ships this natively as `ConcentricRectangle`;
+//  this file recreates it for iOS 18 by READING the device
+//  corner radius and computing per-corner radii from the view's
+//  global frame.
+//
+//  How the per-corner math works
+//  ─────────────────────────────
+//      let leading  = globalRect.minX
+//      let trailing = deviceSize.width - globalRect.maxX
+//      let top      = globalRect.minY
+//      let bottom   = deviceSize.height - globalRect.maxY
+//
+//      let tl = max(deviceCorner - max(top, leading),    0)
+//      let bl = max(deviceCorner - max(bottom, leading), 0)
+//      let bt = max(deviceCorner - max(bottom, trailing),0)
+//      let tt = max(deviceCorner - max(top, trailing),   0)
+//
+//  Each corner's radius equals the device corner radius MINUS
+//  the maximum distance to its two adjoining screen edges
+//  (clamped at 0). The further the view is from that corner of
+//  the device, the smaller the inner radius — so a card placed
+//  in the bottom-right gets a sharp top-left corner and a curved
+//  bottom-right corner that exactly mirrors the iPhone bezel.
+//
+//  Why `extractDeviceCornerRadius` walks the EnvironmentValues
+//  ───────────────────────────────────────────────────────────
+//  iOS exposes the device corner radius via a private
+//  `DisplayCornerRadiusKey` environment value. There's no
+//  public accessor, so the function `String(describing: env)`
+//  dumps the environment to text and `regex /…/` extracts the
+//  numeric value. Brittle — Apple could rename the key — but
+//  the only known way pre-iOS 26.
+//
+//  The `isUniform` parameter
+//  ─────────────────────────
+//  When `true`, every corner uses the LARGEST of the four
+//  computed radii. Useful when you want a "soft pill" look that
+//  doesn't change per position. When `false`, each corner gets
+//  its own radius (true concentricity).
+//
+//  Why `globalRect` is tracked via `onGeometryChange(for: CGRect.self)`
+//  ────────────────────────────────────────────────────────────────────
+//  The `Shape.path(in:)` only knows the local rect (size). To
+//  know WHERE on screen the view is, we observe the global
+//  frame via `onGeometryChange` and store it in `@State`. Each
+//  re-evaluation of `path(in:)` reads that global rect and
+//  recomputes the four corners.
+//
+//  `nonisolated` on `path(in:)` and `extractDeviceCornerRadius`
+//  ────────────────────────────────────────────────────────────
+//  `Shape.path(in:)` may be called from any actor context during
+//  layout passes; marking it `nonisolated` is required when the
+//  enclosing type stores main-actor-isolated state (we capture
+//  the env values in init). `@unchecked Sendable` opts out of
+//  Sendable checking for the captured env reference.
+//
+//  Key APIs
+//  ────────
+//  • `ConcentricRectangle()` (iOS 26+) — native shape; this file
+//    is the iOS 18 backport.
+//  • `.onGeometryChange(for: CGRect.self) { $0.frame(in: .global) }` —
+//    track view's screen position.
+//  • Custom `Shape` + `.clipShape` + `.contentShape` — clip both
+//    visual AND hit-test.
+//  • `Path.addRoundedRect(in:cornerRadii:)` — per-corner radii
+//    (iOS 16+).
+//
+//  How to apply
+//  ────────────
+//  Use this whenever a view sits close to the screen edge and
+//  needs to LOOK like part of the device chassis: floating
+//  toolbars, edge-attached cards, music player chrome, full-
+//  screen modal sheets that extend into safe areas. Once on
+//  iOS 26, switch to the native `ConcentricRectangle()`.
+//
+//  See also
+//  ────────
+//  • LiquidGlassToastView+IOS26.swift — sister iOS 26 file
+//    using the native `ConcentricRectangle` for toast capsules.
+//  • View/Sheet/iOS26StyleFloatingSheet.swift — same per-device
+//    corner-radius matching applied to sheet chrome.
+//
 
 import SwiftUI
 
@@ -99,7 +199,12 @@ struct BackportedConcentricRectangle: Shape, @unchecked Sendable {
 
     nonisolated func path(in rect: CGRect) -> Path {
         Path { path in
-
+            // Tip: the per-corner radius formula is the load-bearing
+            // bit. Each inner radius = deviceCornerRadius minus the
+            // larger of the two distances to the corresponding screen
+            // edges. Clamp at 0 so corners far from any device corner
+            // collapse to sharp 90°. `isUniform = true` flattens all
+            // four to the largest computed value (soft-pill look).
             let cornerRadius = extractDeviceCornerRadius(env) ?? 0
             let leading = globalRect.minX
             let trailing = deviceSize.width - globalRect.maxX
@@ -123,6 +228,14 @@ struct BackportedConcentricRectangle: Shape, @unchecked Sendable {
     }
 }
 
+/// Tip: brittle but functional — there is no public API to read the
+/// device's hardware corner radius pre-iOS 26.
+/// `String(describing: env)` dumps the entire `EnvironmentValues` to
+/// text; the regex extracts `Optional(53.33)` (or whatever value)
+/// from the line containing `DisplayCornerRadiusKey`. If Apple
+/// renames or restructures the key, the regex fails and we fall back
+/// to 0 (sharp corners). Replace with native iOS 26+ APIs when
+/// raising the deployment target.
 extension View {
     nonisolated func extractDeviceCornerRadius(_ env: EnvironmentValues) -> CGFloat? {
         let envText = String(describing: env)
