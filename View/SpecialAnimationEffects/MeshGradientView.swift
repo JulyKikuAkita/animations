@@ -1,6 +1,69 @@
 //
 //  MeshGradientView.swift
 //  animation
+//
+//  Learning point
+//  ──────────────
+//  Interactive playground for iOS 18's new `MeshGradient` — a 2D
+//  bilinear-interpolated gradient where each control point in a
+//  W×H grid contributes its own colour. Drag any of the 9 black
+//  handles to warp the gradient in real time.
+//
+//  Why a 3×3 mesh
+//  ──────────────
+//  `MeshGradient` interpolates colour across the surface defined
+//  by `points: [SIMD2<Float>]` (each in [0,1]×[0,1] UV space) and
+//  `colors: [Color]`. A 3×3 mesh is the smallest size that allows
+//  a CENTRE point distinct from corners — enough to create
+//  organic-looking blobs by dragging just the centre. Larger
+//  meshes (4×4, 5×5) get smoother gradients but more handles to
+//  manage.
+//
+//  Three reusable mechanics
+//  ────────────────────────
+//    1. **`@State` array of `MeshPoint` per row** — each handle
+//       owns its (x, y) UV coordinate AND a screen-space `offset`
+//       so the visible black dot tracks the touch independently
+//       of the gradient computation.
+//    2. **Named `.coordinateSpace("MESH")` for the gesture** —
+//       `value.location` from the drag is in the gradient view's
+//       own pixel space, so we can map it directly to UV via
+//       `x / size.width`. Without the name, location would be in
+//       window coords and require subtracting the view's origin.
+//    3. **Two stored offsets per handle** (`offset` + `lastOffset`) —
+//       `lastOffset` is the cumulative drag distance from prior
+//       gestures; `offset` is `lastOffset + currentGesture.translation`.
+//       Adding them on `onChanged` and copying on `onEnded` is the
+//       standard "drag persists across gestures" pattern.
+//
+//  Why `SIMD2<Float>` (not `CGPoint`)
+//  ──────────────────────────────────
+//  `MeshGradient`'s `points:` parameter is `[SIMD2<Float>]` for
+//  GPU-friendly layout. The file-local `.p(_ point:)` helper
+//  bridges from the project's `MeshPoint` struct to `SIMD2<Float>`.
+//
+//  Key APIs
+//  ────────
+//  • `MeshGradient(width:height:points:colors:)` (iOS 18+) — the
+//    primitive itself.
+//  • `.coordinateSpace(name:)` + `DragGesture(coordinateSpace: .named(...))` —
+//    pin gesture coords to the view's own space.
+//  • `SIMD2<Float>` — vectorised point type for GPU-bound APIs.
+//
+//  How to apply
+//  ────────────
+//  Use as the foundation for animated brand backgrounds, mood
+//  visualisers, music-app art, or any "organic blob gradient"
+//  surface. Combine with `.animation(...)` on the points to make
+//  the gradient flow continuously (drive points from a
+//  `TimelineView` clock).
+//
+//  See also
+//  ────────
+//  • View/Music/* — likely call sites for gradient-as-background.
+//  • MessengerGradientEffectView.swift — sister demo that uses a
+//    fixed `LinearGradient` instead of MeshGradient.
+//
 
 import SwiftUI
 

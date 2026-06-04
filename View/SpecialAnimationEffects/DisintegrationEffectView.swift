@@ -1,9 +1,80 @@
 //
 //  DisintegrationEffectView.swift
 //  animation
-// suitable for buttons, texts, images, message bubbles
-// Not for navigation stacks or scroll views
-// Lower particle counts work better (and not exceed 1600)
+//
+//  Learning point
+//  ──────────────
+//  "Thanos snap" / Marvel-style disintegration effect: a SwiftUI view
+//  appears to crumble into hundreds of tiny particles that drift up
+//  and to the left as they fade out. Apply via the file-local
+//  modifier:
+//
+//      myView.disintegrationEffect(isDeleted: $flag) {
+//          // completion: actually remove the view from the layout
+//      }
+//
+//  How the effect works (recipe)
+//  ─────────────────────────────
+//    1. **Snapshot the source view** — `.snapshot(trigger:)` (project
+//       helper using `ImageRenderer`) captures the rendered
+//       `UIImage` once `isDeleted` flips.
+//    2. **Crop into a grid of square tiles** — auto-pick `gridSize`
+//       so total tile count stays ≤ 1100 (memory + perf bound).
+//       Each tile becomes a `SnapParticle` with its original (x, y)
+//       offset and a tiny cropped image.
+//    3. **Hide the original, show the particles** — the modifier
+//       sets `content.opacity(0)` once particles are populated, then
+//       overlays the particle stack at the same position.
+//    4. **Animate every particle by random offset + opacity 0** —
+//       each particle slides to a `(-60..-10, -100..-10)` random
+//       offset over 1.5s, with a 5pt blur for cohesion. Once the
+//       animation completes, the `.completion` callback fires so the
+//       caller can remove the view from layout.
+//
+//  Why ≤ 1600 particles? Because each particle is its own SwiftUI
+//  `Image` view + offsets + opacity, and the renderer slows
+//  noticeably past that count even on modern devices. 1100 is a
+//  safe ceiling for typical button / image sizes.
+//
+//  Why NOT navigation stacks / scroll views?
+//  ─────────────────────────────────────────
+//  Snapshots capture the rendered output of *one frame*; if the
+//  source view scrolls, paginates, or contains dynamic dependent
+//  layout, the snapshot freezes that state and the disintegration
+//  looks visually wrong (clipped scroll content, missing nav bar).
+//
+//  Why `.compositingGroup() + .blur(radius: 5)` on the particle stack
+//  ──────────────────────────────────────────────────────────────────
+//  Blurring all particles together (after compositingGroup flattens
+//  them into one layer) is much cheaper than blurring each one. The
+//  5pt blur also visually "fuses" particles that overlap, hiding
+//  the grid origin and making the dust feel more organic.
+//
+//  Why `Task.detached(priority: .high)` for particle creation
+//  ─────────────────────────────────────────────────────────
+//  Cropping ~1100 sub-images is CPU work; doing it on the main
+//  actor would freeze the UI. Detach to a background priority,
+//  then `await MainActor.run` to commit the result. The 0.2s
+//  initial sleep gives the SwiftUI snapshot pipeline time to
+//  finish rendering.
+//
+//  Key APIs
+//  ────────
+//  • `.snapshot(trigger:)` (project helper) — view-as-UIImage.
+//  • `UIGraphicsImageRenderer` + `ctx.cgContext.interpolationQuality = .low`
+//    — fast cropping; particles will fade out anyway, so high
+//    quality is wasted.
+//  • `withAnimation(_, completionCriteria: .logicallyComplete) { ... } completion:` —
+//    iOS 17+; fires once the *visual* animation completes.
+//  • `Task.detached(priority: .high)` — heavy work off the main actor.
+//
+//  How to apply
+//  ────────────
+//  Use sparingly for "delete with style" moments — favourites
+//  removal, message deletion, tap-to-dismiss confirmations. The
+//  snapshot+grid+animate-each-tile recipe generalises to any
+//  particle decomposition (page tear, fragmentation explosion).
+//
 
 import SwiftUI
 
@@ -91,6 +162,10 @@ private struct DisintegrationEffectModifier: ViewModifier {
         let height = size.height
         let maxGridCount = 1100 /// up to 1600 is not recommended
 
+        // Tip: auto-tune grid size to cap total particle count.
+        // Start at 1×1 tiles and grow until rows*columns drops below
+        // maxGridCount (1100). Larger source images get coarser tiles
+        // — keeps memory bounded regardless of view size.
         var gridSize = 1
         var rows = Int(height) / gridSize
         var columns = Int(width) / gridSize

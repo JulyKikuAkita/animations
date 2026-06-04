@@ -4,8 +4,72 @@
 //
 //  Created on 7/19/25.
 //
-// iOS 26 API: .symbolEffect(.drawOn.individually)
-// resursively run loopSymbols funtion to create symbol animation when view appear
+//  Learning point
+//  ──────────────
+//  Apple-onboarding style sheet that loops through 3+ icons, each
+//  one drawing itself onto the screen stroke-by-stroke (like a
+//  pen sketching) before fading and yielding to the next. Built on
+//  iOS 26's new `.symbolEffect(.drawOn.individually)` transition.
+//
+//  How `drawOn.individually` differs from `.drawOn`
+//  ────────────────────────────────────────────────
+//    • `.drawOn` — animates the whole symbol's path as a single
+//      continuous stroke.
+//    • `.drawOn.individually` — animates each *sub-glyph* of a
+//      multi-component symbol one at a time. Useful for symbols
+//      like `chart.bar.xaxis.ascending` where each bar should
+//      appear sequentially, not all at once.
+//
+//  Why a recursive `loopSymbols()` instead of `repeatForever`?
+//  ──────────────────────────────────────────────────────────
+//  The animation is async (each symbol has its own `preDelay` /
+//  `postDelay`). `withAnimation(.repeatForever)` doesn't compose
+//  with `await Task.sleep` cleanly, so we drive the loop
+//  manually:
+//
+//      func loopSymbols() async {
+//          for index in data.indices { await loopSymbol(index) }
+//          guard !isDisappear else { return }
+//          try? await Task.sleep(for: .seconds(loopDelay))
+//          await loopSymbols()  // tail-recursive; Swift handles the stack
+//      }
+//
+//  The `isDisappear` guard breaks the recursion when the sheet
+//  dismisses, preventing a runaway loop after `onDisappear`.
+//
+//  Per-symbol pre/post delay
+//  ─────────────────────────
+//  Each `SymbolData` has independent `preDelay` (wait before draw)
+//  and `postDelay` (hold drawn before fading). Lets the rhythm of
+//  the sequence breathe — large complex icons get longer holds, a
+//  simple chevron gets a snappy beat.
+//
+//  Why `.glassProminent` button style + `.geometryGroup`?
+//  ──────────────────────────────────────────────────────
+//    • `.buttonStyle(.glassProminent)` — iOS 26's new translucent
+//      tinted button style (replaces older `.borderedProminent`
+//      with materials).
+//    • `.geometryGroup()` on the symbol container AND the title
+//      block — coalesces all child geometry changes into one
+//      animation pass. Without it, the symbol fade and the title
+//      `.contentTransition(.numericText())` swap can fight.
+//
+//  Key APIs
+//  ────────
+//  • `.symbolEffect(.drawOn.individually)` — iOS 26 transition.
+//  • `.contentTransition(.numericText())` — animates text swaps as
+//    rolling characters.
+//  • `Task.sleep(for: .seconds(...))` — modern non-blocking delay.
+//  • `.presentationDetents([.height(320)])` — fixed-height sheet.
+//  • `.interactiveDismissDisabled()` — prevents pull-to-dismiss
+//    interrupting the animation.
+//
+//  How to apply
+//  ────────────
+//  Use for first-run onboarding, feature reveals, or premium
+//  upsell sheets where each value-prop deserves its own beat. The
+//  recursive-async-loop pattern generalises to any "play a list of
+//  beats forever, with cleanup on dismiss" UI.
 //
 import SwiftUI
 
