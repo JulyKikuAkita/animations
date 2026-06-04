@@ -1,7 +1,110 @@
 //
 //  ToastView+IOS18.swift
 //  animation
-//  iOS 18
+//
+//  Learning point
+//  ──────────────
+//  iOS-Notification-Center-style stacked, swipeable toasts.
+//  Multiple toasts pile up at the bottom of the screen as a
+//  fanned card stack; tap to expand into a vertical list; swipe
+//  any individual toast left to dismiss it. Three layers of UI
+//  affordance in one composition.
+//
+//  Three reusable mechanics
+//  ────────────────────────
+//    1. **`AnyLayout` ZStack ↔ VStack swap on tap** —
+//       `let layout = isExpanded ? AnyLayout(VStackLayout(spacing: 10))
+//                                 : AnyLayout(ZStackLayout())`
+//       The same `layout { ForEach(...) }` block reformats from
+//       a stacked-deck (ZStack) into a list (VStack) when tapped.
+//       View identities (UUIDs) survive, so SwiftUI animates each
+//       card from its stacked position to its list position with
+//       the surrounding `.animation(.bouncy, value: isExpanded)`.
+//    2. **Stacked-deck via `visualEffect` per-index transforms** —
+//       In ZStack mode, each toast applies a scale + offsetY based
+//       on its INDEX from the front:
+//         scale  = 1 - min(index * 0.1, 1)
+//         offsetY = -min(index * 15, 30)  (capped at 2 cards back)
+//       Front-most card is full size at the bottom; cards behind
+//       are smaller and stacked further up. Capping at 30pt /
+//       index=2 prevents tall stacks from looking absurd.
+//    3. **Swipe-to-dismiss with velocity boost** —
+//       `let xOffset = value.translation.width + (value.velocity.width / 2)`
+//       Adding HALF the velocity to the translation means a fast
+//       fling counts as more displacement than a slow drag. So a
+//       quick flick dismisses earlier than 200pt; a slow drag
+//       has to actually reach 200pt. Feels like iOS native swipe.
+//
+//  The `isDeleting + .zIndex(1000)` trick
+//  ──────────────────────────────────────
+//      .zIndex(toast.isDeleting ? 1000 : 0)
+//
+//  When a toast is removed, we set `isDeleting = true` BEFORE
+//  the animation fires (in `Binding<[ToastContentView]>.delete`).
+//  The high zIndex ensures the OUTGOING toast renders ABOVE all
+//  others during its `.transition(.move(edge: .leading))` exit —
+//  otherwise it would slide BEHIND remaining cards in the stack
+//  and look weird.
+//
+//  Asymmetric transition: enter from below, exit to leading
+//  ────────────────────────────────────────────────────────
+//      .transition(.asymmetric(
+//          insertion: .offset(y: 100),
+//          removal: .move(edge: .leading)))
+//
+//  New toasts slide UP from below the screen; dismissed toasts
+//  slide LEFT off the side (matching the swipe direction). The
+//  asymmetry maps to user expectation: things ARRIVE from the
+//  bottom (like push notifications) and DEPART in the direction
+//  the user swiped them.
+//
+//  Why a `Binding` extension for delete
+//  ────────────────────────────────────
+//      extension Binding<[ToastContentView]> {
+//          func delete(_ id: String) {
+//              if let toast = first(where: { $0.id == id }) {
+//                  toast.wrappedValue.isDeleting = true
+//              }
+//              withAnimation(.bouncy) {
+//                  self.wrappedValue.removeAll(where: { $0.id == id })
+//              }
+//          }
+//      }
+//
+//  Encapsulates the two-step dance (set isDeleting → remove)
+//  in one call site. `Binding<[ToastContentView]>` is iOS 17+'s
+//  generic-binding-extension syntax; conforming via subscript
+//  (`first(where:)` on `Binding<Array>`) preserves bindings to
+//  individual elements.
+//
+//  Key APIs
+//  ────────
+//  • `AnyLayout(VStackLayout()) / AnyLayout(ZStackLayout())` —
+//    runtime layout switching with preserved identities.
+//  • `.visualEffect { content, _ in ... }` — per-index scale +
+//    offset without GeometryReader.
+//  • `.zIndex(_)` — promote outgoing toast above neighbours.
+//  • `Binding<[Element]>` extension — operate on a binding to
+//    an array (iOS 17+).
+//  • `.animation(.bouncy, value: isExpanded)` — single-shot
+//    spring driving the stack ↔ list reformat.
+//
+//  How to apply
+//  ────────────
+//  Use as the template for any "small notifications stack"
+//  pattern: chat reactions, achievement badges, in-app push,
+//  background-process status. The
+//  `AnyLayout`-swap-with-preserved-identity is the architectural
+//  win — each toast moves smoothly between two completely
+//  different layouts without re-creation.
+//
+//  See also
+//  ────────
+//  • LiquidGlassToastView+IOS26.swift — single-toast iOS 26
+//    variant with environment-injected show/dismiss.
+//  • InlineToastView.swift — in-flow form-validation toasts
+//    (different category entirely).
+//
 
 import SwiftUI
 
@@ -94,6 +197,13 @@ private struct ToastViewiOS18: View {
                                     let xOffset = value.translation.width < 0 ? value.translation.width : 0
                                     toast.offsetX = xOffset
                                 }.onEnded { value in
+                                    // Tip: velocity-boosted dismissal threshold.
+                                    // `translation + velocity/2` means a fast
+                                    // flick counts as more displacement than a
+                                    // slow drag — a quick swipe dismisses
+                                    // before reaching 200pt; a slow drag must
+                                    // actually reach 200pt. Feels like iOS
+                                    // native swipe-to-dismiss.
                                     let xOffset = value.translation.width + (
                                         value.velocity
                                             .width / 2)
