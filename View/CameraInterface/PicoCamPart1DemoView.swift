@@ -43,17 +43,25 @@ struct PicoCamPart1DemoView: View {
                 .padding(.top, proxy.safeAreaInsets.top)
                 .zIndex(5)
 
-                // snap effect
+                // snap effect — wrapped in a clear container that clips
+                // the card to the safe area, so the part of the card above
+                // the bar (during .flash and the early eject spring) is
+                // masked off instead of leaking into the status-bar strips.
                 if let selectedCard, showsInstantCard {
-                    PicoInstantCardView(card: selectedCard, flowState: flowState)
-                        .frame(
-                            width: PicoHardwareIslandMetrics.cardLayoutSize.width,
-                            height: PicoHardwareIslandMetrics.cardLayoutSize.height
-                        )
-                        .scaleEffect(cardScale, anchor: .top)
-                        .offset(y: PicoHardwareIslandMetrics.printFrameTop + instantCardOffset)
+                    Color.clear
+                        .overlay(alignment: .top) {
+                            PicoInstantCardView(card: selectedCard, flowState: flowState)
+                                .frame(
+                                    width: PicoHardwareIslandMetrics.cardLayoutSize.width,
+                                    height: PicoHardwareIslandMetrics.cardLayoutSize.height
+                                )
+                                .scaleEffect(cardScale, anchor: .top)
+                                .offset(y: PicoHardwareIslandMetrics.printFrameTop + instantCardOffset)
+                        }
+                        .clipped()
                         .zIndex(instantCardZIndex)
                         .transition(.opacity)
+                        .allowsHitTesting(false)
                 }
 
                 PicoIslandPrintFrame(card: selectedCard, flowState: flowState)
@@ -205,7 +213,8 @@ struct PicoCamPart1DemoView: View {
         case .flash, .retreatingCard:
             return -0.9 * cardVisualHeight - printFrameTop
         case .ejectingCard:
-            return -printFrameTop
+            // 15% of the card stays tucked behind the bar; only 80% prints out.
+            return -0.15 * cardVisualHeight - printFrameTop
         case .previewingCard:
             return 130
         default:
@@ -569,7 +578,10 @@ private struct PicoInstantCardView: View {
             Image(card.image)
                 .resizable()
                 .scaledToFill()
-                .frame(height: imageHeight)
+                .frame(
+                    width: PicoHardwareIslandMetrics.cardLayoutSize.width - 2 * cardPadding,
+                    height: imageHeight
+                )
                 .clipShape(.rect(cornerRadius: 6))
                 .padding(cardPadding)
         }
