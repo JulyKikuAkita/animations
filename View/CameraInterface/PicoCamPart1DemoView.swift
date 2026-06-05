@@ -10,8 +10,6 @@ private enum PicoFlowState {
     case generationMode
     case flash
     case ejectingCard
-    case previewingCard
-    case retreatingCard
 }
 
 struct PicoCamPart1DemoView: View {
@@ -98,7 +96,7 @@ struct PicoCamPart1DemoView: View {
                     x: proxy.size.width / 2,
                     y: -PicoHardwareIslandMetrics.dynamicIslandTopBarHeight / 2
                 )
-                .opacity(flowState == .gallery || flowState == .previewingCard ? 0 : 1)
+                .opacity(flowState == .gallery ? 0 : 1)
                 .zIndex(11)
 
                 Color.white
@@ -116,26 +114,15 @@ struct PicoCamPart1DemoView: View {
         switch flowState {
         case .gallery:
             1
-        case .generationMode, .flash, .ejectingCard, .previewingCard, .retreatingCard:
+        case .generationMode, .flash, .ejectingCard:
             0.12
         }
     }
 
     private var showsInstantCard: Bool {
-        flowState == .flash ||
-            flowState == .ejectingCard ||
-            flowState == .previewingCard ||
-            flowState == .retreatingCard
+        flowState == .flash || flowState == .ejectingCard
     }
 
-    // TODO: Explore Y-only variant. Currently emerge uses Y offset + Z
-    // (card behind bar) + mask (clip in unsafe area). The mask exists only
-    // because the card travels into the status-bar region where the bar
-    // doesn't reach. If we either (a) make the bar tall enough to cover
-    // the card's full upward travel, or (b) clip the parent ZStack to its
-    // safe-area-respecting bounds, the mask becomes redundant and the
-    // emerge is purely "card slides Y, opaque bar occludes in front".
-    //
     // ---------- Part 2: iOS Camera Controls ----------
     // Replace the static `cards` / `selectedCard` source with a live
     // AVFoundation pipeline, reusing the Part 1 print animation unchanged.
@@ -192,48 +179,34 @@ struct PicoCamPart1DemoView: View {
         case .flash, .ejectingCard:
             slotScale * PicoHardwareIslandMetrics.baseDynamicIslandWidth /
                 PicoHardwareIslandMetrics.cardLayoutSize.width
-        case .previewingCard:
-            1
-        case .retreatingCard:
-            0.5
-        default:
+        case .gallery, .generationMode:
             0.5
         }
     }
 
-    // Offset moves the card's layout top in screen Y. With the mask edge at
-    // y = 0 (top bar bottom), placing card top at -0.9 × cardVisualHeight
-    // leaves only the bottom 10% visible below the bar. .ejectingCard pushes
-    // the top down to y = 0 (fully clear of the bar). .retreatingCard goes
-    // back to the 10%-visible position before the gallery removes the card.
+    // .flash starts the card hidden behind the bar (top at -0.9 ×
+    // cardVisualHeight). .ejectingCard slides the top down so 15% stays
+    // tucked behind the bar and the remaining 85% prints out.
     private var instantCardOffset: CGFloat {
         let printFrameTop = PicoHardwareIslandMetrics.printFrameTop
         let cardVisualHeight = PicoHardwareIslandMetrics.cardLayoutSize.height * cardScale
         switch flowState {
-        case .flash, .retreatingCard:
+        case .flash:
             return -0.9 * cardVisualHeight - printFrameTop
         case .ejectingCard:
-            // 15% of the card stays tucked behind the bar; only 80% prints out.
             return -0.15 * cardVisualHeight - printFrameTop
-        case .previewingCard:
-            return 130
-        default:
+        case .gallery, .generationMode:
             return 0
         }
     }
 
     private var instantCardZIndex: Double {
         switch flowState {
-        case .flash, .ejectingCard, .retreatingCard:
+        case .flash, .ejectingCard:
             10
-        default:
+        case .gallery, .generationMode:
             0
         }
-    }
-
-    private var instantCardMaskCutoff: CGFloat {
-        let cardTopInScreen = PicoHardwareIslandMetrics.printFrameTop + instantCardOffset
-        return -cardTopInScreen
     }
 
     private var slotScale: CGFloat {
@@ -243,28 +216,27 @@ struct PicoCamPart1DemoView: View {
         )
     }
 
-    // Bar width tracks the visible photo while a card is on screen so the
-    // emerging photo doesn't peek past the bar's edges. During gallery /
-    // generation / preview there's no card behind the bar, so it falls back
-    // to the dynamic-island width × slotScale to read as one continuous bar.
-    // Bottom corners go round during eject so the bar reads as a full
-    // pill (image-15 style); square in generation mode so the bar visually
-    // continues into the open print frame below it.
+    // Bottom corners round out during eject so the bar reads as a full
+    // pill; square in gallery/generation mode so the bar visually continues
+    // into the open print frame below it.
     private var topBarBottomCornerRadius: CGFloat {
         switch flowState {
-        case .flash, .ejectingCard, .retreatingCard:
+        case .flash, .ejectingCard:
             25
-        case .gallery, .generationMode, .previewingCard:
+        case .gallery, .generationMode:
             0
         }
     }
 
+    // Bar width tracks the visible photo during eject so the emerging
+    // photo doesn't peek past the bar's edges. Otherwise it matches the
+    // dynamic-island width × slotScale to read as one continuous bar.
     private var topBarWidth: CGFloat {
         switch flowState {
-        case .flash, .ejectingCard, .retreatingCard:
+        case .flash, .ejectingCard:
             PicoHardwareIslandMetrics.cardLayoutSize.width * cardScale *
                 PicoHardwareIslandMetrics.barOvershoot
-        case .gallery, .generationMode, .previewingCard:
+        case .gallery, .generationMode:
             PicoHardwareIslandMetrics.baseDynamicIslandWidth * slotScale
         }
     }
@@ -512,37 +484,29 @@ private struct PicoIslandPrintFrame: View {
 
     private var imageOpacity: Double {
         switch flowState {
-        case .gallery:
-            0
         case .generationMode, .flash:
             0.86
         case .ejectingCard:
             0.28
-        case .previewingCard:
+        case .gallery:
             0
-        case .retreatingCard:
-            0.18
         }
     }
 
     private var imageBlur: CGFloat {
         switch flowState {
-        case .generationMode, .flash:
-            0
-        case .ejectingCard, .retreatingCard:
+        case .ejectingCard:
             2
-        case .gallery, .previewingCard:
+        case .gallery, .generationMode, .flash:
             0
         }
     }
 
     private var frameOpacity: Double {
         switch flowState {
-        case .gallery:
-            0
         case .generationMode:
             1
-        case .flash, .ejectingCard, .previewingCard, .retreatingCard:
+        case .gallery, .flash, .ejectingCard:
             0
         }
     }
@@ -592,7 +556,7 @@ private struct PicoInstantCardView: View {
                 .scaledToFill()
                 .frame(
                     width: PicoHardwareIslandMetrics.cardLayoutSize.width - 2 * cardPadding,
-                    height: imageHeight
+                    height: 126
                 )
                 .clipShape(.rect(cornerRadius: 6))
                 .padding(cardPadding)
@@ -604,49 +568,14 @@ private struct PicoInstantCardView: View {
             anchor: .top,
             perspective: 1.0
         )
-        .rotationEffect(.degrees(rotation), anchor: .top)
-        .opacity(opacity)
-    }
-
-    private var imageHeight: CGFloat {
-        switch flowState {
-        case .ejectingCard:
-            126
-        case .previewingCard:
-            128
-        case .retreatingCard:
-            118
-        default:
-            126
-        }
     }
 
     private var cardPadding: CGFloat {
         PicoHardwareIslandMetrics.cardPadding(for: flowState)
     }
 
-    private var rotation: Double {
-        switch flowState {
-        case .previewingCard:
-            4
-        case .retreatingCard:
-            -3
-        default:
-            0
-        }
-    }
-
     private var tiltX: Double {
-        switch flowState {
-        case .ejectingCard:
-            18
-        default:
-            0
-        }
-    }
-
-    private var opacity: Double {
-        flowState == .retreatingCard ? 0.72 : 1
+        flowState == .ejectingCard ? 18 : 0
     }
 }
 
@@ -679,12 +608,7 @@ private enum PicoHardwareIslandMetrics {
     static let maxSlotScale: CGFloat = 2.0
 
     static func cardPadding(for state: PicoFlowState) -> CGFloat {
-        switch state {
-        case .ejectingCard, .retreatingCard:
-            10
-        default:
-            12
-        }
+        state == .ejectingCard ? 10 : 12
     }
 }
 
