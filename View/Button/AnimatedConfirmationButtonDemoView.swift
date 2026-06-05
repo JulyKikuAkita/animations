@@ -223,12 +223,12 @@ private struct ConfirmationButtonView<Content: View>: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
-            withAnimation(animation) {
+            withAnimation(.iSpring()) {
                 properties.animate = true
             }
 
             Task {
-                withAnimation(sourceAnimation) {
+                withAnimation(.iSpring(duration: 0.15)) {
                     properties.hideSource = true
                 }
             }
@@ -267,16 +267,8 @@ private struct ConfirmationButtonView<Content: View>: View {
         return .init(.rect(cornerRadius: radius))
     }
 
-    var animation: Animation {
-        .interpolatingSpring(duration: 0.3)
-    }
-
-    var sourceAnimation: Animation {
-        .interpolatingSpring(duration: 0.15)
-    }
-
     func dismiss(_ status: Bool) {
-        withAnimation(animation, completionCriteria: .removed) {
+        withAnimation(.iSpring(), completionCriteria: .removed) {
             properties.animate = false
         } completion: {
             noAnimation {
@@ -286,7 +278,7 @@ private struct ConfirmationButtonView<Content: View>: View {
             action(status)
         }
         Task {
-            withAnimation(sourceAnimation.delay(0.08)) {
+            withAnimation(.iSpring(duration: 0.15).delay(0.08)) {
                 properties.hideSource = false
             }
         }

@@ -264,7 +264,7 @@ struct IOS26StyleOnBoarding: View {
             if currentIndex == items.count - 1 {
                 onComplet()
             }
-            withAnimation(animation) {
+            withAnimation(.iSpring(duration: 0.65)) {
                 currentIndex = min(currentIndex + 1, items.count - 1)
             }
         } label: {
@@ -281,7 +281,7 @@ struct IOS26StyleOnBoarding: View {
 
     func backButton() -> some View {
         Button {
-            withAnimation(animation) {
+            withAnimation(.iSpring(duration: 0.65)) {
                 currentIndex = max(currentIndex - 1, 0)
             }
         } label: {
@@ -306,11 +306,6 @@ struct IOS26StyleOnBoarding: View {
             .padding(.top, -radius / 2)
             .opacity(items[currentIndex].zoomScale != 1 ? 1 : 0) /// apply to scaled screenshots
             .ignoresSafeArea()
-    }
-
-    /// any preferred animation
-    var animation: Animation {
-        .interpolatingSpring(duration: 0.65, bounce: 0, initialVelocity: 0)
     }
 
     struct Item: Identifiable {

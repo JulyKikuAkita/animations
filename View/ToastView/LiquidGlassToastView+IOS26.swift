@@ -224,7 +224,7 @@ struct LiquidGlassToastRootView<Content: View>: View {
                 // Phase 1: Animate out the old toast.
                 // `.logicallyComplete(after: 0.17)` fires the completion early
                 // so the user doesn't wait for the full spring to settle.
-                withAnimation(animation.logicallyComplete(after: 0.17), completionCriteria: .logicallyComplete) {
+                withAnimation(.iSpring(duration: 0.35).logicallyComplete(after: 0.17), completionCriteria: .logicallyComplete) {
                     if activeToast != nil {
                         activeToast = nil
                     }
@@ -232,7 +232,7 @@ struct LiquidGlassToastRootView<Content: View>: View {
                     // Phase 2: Cancel old auto-dismiss timer, animate in the new toast.
                     toastDismissWorkItem?.cancel()
 
-                    withAnimation(animation) {
+                    withAnimation(.iSpring(duration: 0.35)) {
                         activeToast = toast
                     }
 
@@ -307,13 +307,11 @@ struct LiquidGlassToastRootView<Content: View>: View {
     }
 
     private func dismiss() {
-        withAnimation(animation) {
+        withAnimation(.iSpring(duration: 0.35)) {
             activeToast = nil
             toastDismissWorkItem?.cancel()
         }
     }
-
-    private let animation: Animation = .interpolatingSpring(duration: 0.35, bounce: 0, initialVelocity: 0)
 }
 
 // MARK: - Custom Environment Keys (see header point #4)

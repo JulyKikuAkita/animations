@@ -61,7 +61,7 @@ struct MetaballMorpthingAnimationDemoView: View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 4)) {
             ForEach(demoSymbols, id: \.self) { symbol in
                 Button {
-                    withAnimation(.interpolatingSpring(duration: 0.68, bounce: 0, initialVelocity: 0)) {
+                    withAnimation(.iSpring(duration: 0.68)) {
                         if !toggle {
                             nextSymbolImage = symbol
                         } else {

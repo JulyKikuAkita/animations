@@ -306,7 +306,7 @@ struct DIRQScannerView: View {
     }
 
     private func toggle(_ status: Bool) {
-        withAnimation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0)) {
+        withAnimation(.iSpring()) {
             isExpanding = status
         }
 

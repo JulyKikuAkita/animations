@@ -174,7 +174,7 @@ struct ChatBottomBar: View {
                             .padding(.trailing, 10)
                         }
                     }
-                    .animation(.interpolatingSpring(duration: 0.3), value: isRecording)
+                    .animation(.iSpring(), value: isRecording)
             }
             .padding(.horizontal, 12)
             .frame(height: 48)
@@ -217,7 +217,7 @@ struct ChatBottomBar: View {
                     isEnabled: message.isEmpty
                 )
         }
-        .animation(.interpolatingSpring(duration: 0.4), value: isHolding)
+        .animation(.iSpring(duration: 0.4), value: isHolding)
         .animation(.interactiveSpring(duration: 0.3), value: recorderOffset == 0)
         .onChange(of: isRecording) { _, newValue in
             if newValue {

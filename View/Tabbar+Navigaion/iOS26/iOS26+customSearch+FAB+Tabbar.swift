@@ -222,7 +222,7 @@ struct TabOverlayModifier<ViewContent: View>: ViewModifier {
                     }
                     .allowsHitTesting(isPresented)
                     .animation(
-                        .interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0),
+                        .iSpring(),
                         value: isPresented
                     )
                 }

@@ -280,10 +280,6 @@ private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Over
     @State private var safeArea: EdgeInsets = .init()
     @State private var dragOffset: CGSize = .zero
 
-    var animation: Animation {
-        .interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0)
-    }
-
     /// fadeout opacity for interactive gesture
     var interactiveOpacity: CGFloat {
         let opacityY = abs(dragOffset.height) / (viewSize.height * 0.3)
@@ -327,7 +323,7 @@ private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Over
                 if dragOffset.height > 50 {
                     dismiss()
                 } else {
-                    withAnimation(animation.speed(1.2)) {
+                    withAnimation(.iSpring().speed(1.2)) {
                         dragOffset = .zero
                     }
                 }
@@ -359,7 +355,7 @@ private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Over
         })
         .task {
             guard !isExpanded else { return }
-            withAnimation(animation) {
+            withAnimation(.iSpring()) {
                 isExpanded = true
             }
         }
@@ -367,7 +363,7 @@ private struct DetailPhotosView<Data: RandomAccessCollection, Detail: View, Over
 
     func dismiss() {
         Task {
-            withAnimation(animation.speed(1.2)) {
+            withAnimation(.iSpring().speed(1.2)) {
                 dragOffset = .zero
                 isExpanded = false
             }

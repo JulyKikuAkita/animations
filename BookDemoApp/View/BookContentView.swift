@@ -20,7 +20,7 @@ struct BookContentView: View {
                             imageView(item)
                                 .onTapGesture {
                                     if let index = scenic.firstIndex(where: { $0.id == item.id }) {
-                                        withAnimation(.interpolatingSpring(duration: 1)) {
+                                        withAnimation(.iSpring(duration: 1)) {
                                             config.sourceIndex = index
                                             config.expandDetailView = true
                                         }
@@ -37,7 +37,7 @@ struct BookContentView: View {
                             imageView(item)
                                 .onTapGesture {
                                     if let index = illustrations.firstIndex(where: { $0.id == item.id }) {
-                                        withAnimation(.interpolatingSpring(duration: 1)) {
+                                        withAnimation(.iSpring(duration: 1)) {
                                             config1.sourceIndex = index
                                             config1.expandDetailView = true
                                         }
