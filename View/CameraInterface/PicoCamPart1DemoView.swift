@@ -53,6 +53,7 @@ struct PicoCamPart1DemoView: View {
                         .scaleEffect(cardScale, anchor: .top)
                         .offset(y: PicoHardwareIslandMetrics.printFrameTop + instantCardOffset)
                         .zIndex(instantCardZIndex)
+                        .transition(.opacity)
                 }
 
                 PicoIslandPrintFrame(card: selectedCard, flowState: flowState)
@@ -82,7 +83,7 @@ struct PicoCamPart1DemoView: View {
                 )
                 .fill(.black)
                 .frame(
-                    width: PicoHardwareIslandMetrics.baseDynamicIslandWidth * slotScale,
+                    width: topBarWidth,
                     height: PicoHardwareIslandMetrics.dynamicIslandTopBarHeight
                 )
                 .position(
@@ -119,18 +120,6 @@ struct PicoCamPart1DemoView: View {
             flowState == .retreatingCard
     }
 
-    // TODO: The eject spring (`runCaptureAnimation` line ≈215, response 0.45)
-    // is too fast — the print-out motion barely registers visually. Bump
-    // response to ~0.7 and the matching `Task.sleep` (560ms → ~800ms) so the
-    // next phase doesn't fire mid-spring.
-    //
-    // TODO: User wants the top bar's width to match the photo's width. Today
-    // the bar = `baseDynamicIslandWidth × slotScale`, which is the *outer*
-    // card width including white border. With rotation in `.ejectingCard`,
-    // the visible photo (rotated rectangle) reads narrower than the bar.
-    // Either remove the eject rotation, or compute the bar width from the
-    // image's effective width (cardWidth − 2×padding) × cardScale.
-    //
     // TODO: Explore Y-only variant. Currently emerge uses Y offset + Z
     // (card behind bar) + mask (clip in unsafe area). The mask exists only
     // because the card travels into the status-bar region where the bar
@@ -138,6 +127,58 @@ struct PicoCamPart1DemoView: View {
     // the card's full upward travel, or (b) clip the parent ZStack to its
     // safe-area-respecting bounds, the mask becomes redundant and the
     // emerge is purely "card slides Y, opaque bar occludes in front".
+    //
+    // ---------- Part 2: iOS Camera Controls ----------
+    // Replace the static `cards` / `selectedCard` source with a live
+    // AVFoundation pipeline, reusing the Part 1 print animation unchanged.
+    // Out of scope: video recording, AI animation, MP4 export, social
+    // sharing. The animation must not care whether the image came from a
+    // local array, photo library, or camera capture.
+    //
+    // TODO: Add CameraManager (NSObject + ObservableObject) owning the
+    // AVCaptureSession. Publishes `authorizationStatus: AVAuthorizationStatus`
+    // and `capturedImage: UIImage?`. API: configureSession, startSession,
+    // stopSession, capturePhoto, switchCamera, setFlashMode(_:). Keep all
+    // AVFoundation work off SwiftUI views — never block the main actor on
+    // session config.
+    //
+    // TODO: Add CameraPreviewView as UIViewRepresentable hosting an
+    // AVCaptureVideoPreviewLayer bound to the manager's session. SwiftUI
+    // has no native camera preview, so this is the standard bridge.
+    //
+    // TODO: Introduce PicoCameraState — requestingPermission /
+    // permissionDenied / previewing / capturing / animatingResult /
+    // completed — to drive the camera screen. PicoFlowState stays scoped
+    // to the print animation; the camera state owns capture and hands the
+    // resulting UIImage off to the print flow.
+    //
+    // TODO: Permission handling. .authorized → start session;
+    // .notDetermined → request and branch on the result; .denied /
+    // .restricted → fallback view explaining that camera access is
+    // required. Set NSCameraUsageDescription in Info.plist.
+    //
+    // TODO: Camera UI chrome. Top controls: close, flash-mode toggle.
+    // Bottom controls: gallery placeholder, shutter, flip-camera. Reuse
+    // the existing yellow shutter from PicoGenerationOverlay rather than
+    // duplicating it — extend its action to call CameraManager.capturePhoto.
+    //
+    // TODO: Shutter tap behavior — scale button to 0.92, fire a medium
+    // UIImpactFeedbackGenerator, call capturePhoto(), and show a ~80ms
+    // white flash overlay. The existing `.flash` state already paints the
+    // overlay (easeOut 0.08s ≈ 80ms); align timing rather than adding a
+    // second flash layer.
+    //
+    // TODO: Capture handoff. On photo capture: disable shutter, pause the
+    // preview visually, resize the UIImage so its max dimension is ~1500px
+    // (don't animate full-resolution sensor output), feed it into the
+    // Part 1 print animation as the selected card image, then re-enable
+    // the shutter when flowState returns to .gallery.
+    //
+    // TODO: Extract the Part 1 animation into a reusable surface so the
+    // camera flow can drive it without depending on the static `cards`
+    // array — either `InstantPhotoCardView(image:animationState:)` or
+    // `PicoInstantAnimator.play(image:)`. Card-source decoupling is the
+    // whole point of Part 2's split.
     private var cardScale: CGFloat {
         switch flowState {
         case .flash, .ejectingCard:
@@ -190,6 +231,20 @@ struct PicoCamPart1DemoView: View {
         max(1, committedSlotScale + slotScaleDelta)
     }
 
+    // Bar width tracks the visible photo while a card is on screen so the
+    // emerging photo doesn't peek past the bar's edges. During gallery /
+    // generation / preview there's no card behind the bar, so it falls back
+    // to the dynamic-island width × slotScale to read as one continuous bar.
+    private var topBarWidth: CGFloat {
+        switch flowState {
+        case .flash, .ejectingCard, .retreatingCard:
+            let padding = PicoHardwareIslandMetrics.cardPadding(for: flowState)
+            return (PicoHardwareIslandMetrics.cardLayoutSize.width - 2 * padding) * cardScale
+        case .gallery, .generationMode, .previewingCard:
+            return PicoHardwareIslandMetrics.baseDynamicIslandWidth * slotScale
+        }
+    }
+
     private var slotResizeGesture: some Gesture {
         DragGesture()
             .updating($slotScaleDelta) { value, state, _ in
@@ -220,23 +275,13 @@ struct PicoCamPart1DemoView: View {
 
             try? await Task.sleep(nanoseconds: 110_000_000)
 
-            withAnimation(.spring(response: 0.45, dampingFraction: 0.82)) {
+            withAnimation(.spring(response: 1.0, dampingFraction: 0.85)) {
                 flowState = .ejectingCard
             }
 
-            try? await Task.sleep(nanoseconds: 560_000_000)
-
-            withAnimation(.easeInOut(duration: 0.2)) {
-                flowState = .previewingCard
-            }
-
-            try? await Task.sleep(nanoseconds: 680_000_000)
-
-            withAnimation(.spring(response: 0.38, dampingFraction: 0.88)) {
-                flowState = .retreatingCard
-            }
-
-            try? await Task.sleep(nanoseconds: 440_000_000)
+            // Spring settle plus a hold so the printed card reads before
+            // the gallery returns.
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
 
             cards.insert(
                 Card(
@@ -246,9 +291,9 @@ struct PicoCamPart1DemoView: View {
                 ),
                 at: 0
             )
-            self.selectedCard = nil
 
-            withAnimation(.easeInOut(duration: 0.24)) {
+            withAnimation(.easeInOut(duration: 0.32)) {
+                self.selectedCard = nil
                 flowState = .gallery
                 committedSlotScale = 1
             }
@@ -541,18 +586,11 @@ private struct PicoInstantCardView: View {
     }
 
     private var cardPadding: CGFloat {
-        switch flowState {
-        case .ejectingCard, .retreatingCard:
-            10
-        default:
-            12
-        }
+        PicoHardwareIslandMetrics.cardPadding(for: flowState)
     }
 
     private var rotation: Double {
         switch flowState {
-        case .ejectingCard:
-            -10
         case .previewingCard:
             4
         case .retreatingCard:
@@ -586,6 +624,15 @@ private enum PicoHardwareIslandMetrics {
     static let printFrameTop: CGFloat = -12
     static let dragScaleSensitivity: CGFloat = 220
     static let cardLayoutSize = CGSize(width: 190, height: 240)
+
+    static func cardPadding(for state: PicoFlowState) -> CGFloat {
+        switch state {
+        case .ejectingCard, .retreatingCard:
+            10
+        default:
+            12
+        }
+    }
 }
 
 #Preview {
