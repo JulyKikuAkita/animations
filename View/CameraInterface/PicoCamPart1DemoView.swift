@@ -85,8 +85,8 @@ struct PicoCamPart1DemoView: View {
                 // mid-screen, slot is empty).
                 UnevenRoundedRectangle(
                     topLeadingRadius: 25,
-                    bottomLeadingRadius: 0,
-                    bottomTrailingRadius: 0,
+                    bottomLeadingRadius: topBarBottomCornerRadius,
+                    bottomTrailingRadius: topBarBottomCornerRadius,
                     topTrailingRadius: 25
                 )
                 .fill(.black)
@@ -247,6 +247,18 @@ struct PicoCamPart1DemoView: View {
     // emerging photo doesn't peek past the bar's edges. During gallery /
     // generation / preview there's no card behind the bar, so it falls back
     // to the dynamic-island width × slotScale to read as one continuous bar.
+    // Bottom corners go round during eject so the bar reads as a full
+    // pill (image-15 style); square in generation mode so the bar visually
+    // continues into the open print frame below it.
+    private var topBarBottomCornerRadius: CGFloat {
+        switch flowState {
+        case .flash, .ejectingCard, .retreatingCard:
+            25
+        case .gallery, .generationMode, .previewingCard:
+            0
+        }
+    }
+
     private var topBarWidth: CGFloat {
         switch flowState {
         case .flash, .ejectingCard, .retreatingCard:
