@@ -101,7 +101,7 @@ struct PicoCamPart1DemoView: View {
                     .zIndex(20)
             }
         }
-        .background(Color.picoRed)
+        .background(Color.picoRed.ignoresSafeArea())
     }
 
     private var galleryOpacity: Double {
@@ -228,7 +228,10 @@ struct PicoCamPart1DemoView: View {
     }
 
     private var slotScale: CGFloat {
-        max(1, committedSlotScale + slotScaleDelta)
+        min(
+            PicoHardwareIslandMetrics.maxSlotScale,
+            max(1, committedSlotScale + slotScaleDelta)
+        )
     }
 
     // Bar width tracks the visible photo while a card is on screen so the
@@ -238,10 +241,10 @@ struct PicoCamPart1DemoView: View {
     private var topBarWidth: CGFloat {
         switch flowState {
         case .flash, .ejectingCard, .retreatingCard:
-            let padding = PicoHardwareIslandMetrics.cardPadding(for: flowState)
-            return (PicoHardwareIslandMetrics.cardLayoutSize.width - 2 * padding) * cardScale
+            PicoHardwareIslandMetrics.cardLayoutSize.width * cardScale *
+                PicoHardwareIslandMetrics.barOvershoot
         case .gallery, .generationMode, .previewingCard:
-            return PicoHardwareIslandMetrics.baseDynamicIslandWidth * slotScale
+            PicoHardwareIslandMetrics.baseDynamicIslandWidth * slotScale
         }
     }
 
@@ -252,7 +255,10 @@ struct PicoCamPart1DemoView: View {
             }
             .onEnded { value in
                 let delta = value.translation.height / PicoHardwareIslandMetrics.dragScaleSensitivity
-                committedSlotScale = max(1, committedSlotScale + delta)
+                committedSlotScale = min(
+                    PicoHardwareIslandMetrics.maxSlotScale,
+                    max(1, committedSlotScale + delta)
+                )
             }
     }
 
@@ -568,7 +574,13 @@ private struct PicoInstantCardView: View {
                 .padding(cardPadding)
         }
         .shadow(color: .black.opacity(0.3), radius: 20, y: 14)
-        .rotationEffect(.degrees(rotation))
+        .rotation3DEffect(
+            .degrees(tiltX),
+            axis: (x: 1, y: 0, z: 0),
+            anchor: .top,
+            perspective: 1.0
+        )
+        .rotationEffect(.degrees(rotation), anchor: .top)
         .opacity(opacity)
     }
 
@@ -600,6 +612,15 @@ private struct PicoInstantCardView: View {
         }
     }
 
+    private var tiltX: Double {
+        switch flowState {
+        case .ejectingCard:
+            18
+        default:
+            0
+        }
+    }
+
     private var opacity: Double {
         flowState == .retreatingCard ? 0.72 : 1
     }
@@ -623,7 +644,15 @@ private enum PicoHardwareIslandMetrics {
     static let printFrameHeight: CGFloat = 112
     static let printFrameTop: CGFloat = -12
     static let dragScaleSensitivity: CGFloat = 220
-    static let cardLayoutSize = CGSize(width: 190, height: 240)
+    // Height keeps the bottom white margin at ~30% of the image height
+    // (174 − 10 top padding − 126 image = 38 ≈ 30% × 126).
+    static let cardLayoutSize = CGSize(width: 190, height: 174)
+    // Bar extends past the card outer width so it reads as the printer
+    // slot, not a tight outline of the print.
+    static let barOvershoot: CGFloat = 1.25
+    // Caps the drag-resize so the bar/card can't grow past typical
+    // screen widths and clip at the edges.
+    static let maxSlotScale: CGFloat = 2.0
 
     static func cardPadding(for state: PicoFlowState) -> CGFloat {
         switch state {
