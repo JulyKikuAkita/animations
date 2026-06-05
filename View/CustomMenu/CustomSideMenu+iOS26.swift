@@ -235,6 +235,13 @@ struct CustomIOS26SideMenu<MenuContent: View, Content: View>: View {
         }
     }
 
+    // `interactiveSpring` is tuned for gesture-driven UIs: it responds
+    // instantly to velocity hand-offs and settles quickly. Prefer this over
+    // `.spring()` when finishing a drag-to-snap interaction.
+    var animation: Animation {
+        .interactiveSpring(duration: 0.2, extraBounce: 0.02)
+    }
+
     func expandMenu() {
         if !isExpanded { haptics.toggle() }
         /// Expand
@@ -261,13 +268,6 @@ struct CustomIOS26SideMenu<MenuContent: View, Content: View>: View {
         } else {
             AnyShape(RoundedRectangle(cornerRadius: 45))
         }
-    }
-
-    // `interactiveSpring` is tuned for gesture-driven UIs: it responds
-    // instantly to velocity hand-offs and settles quickly. Prefer this over
-    // `.spring()` when finishing a drag-to-snap interaction.
-    var animation: Animation {
-        .interactiveSpring(duration: 0.2, extraBounce: 0.02)
     }
 }
 

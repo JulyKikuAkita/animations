@@ -183,6 +183,10 @@
 		9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */; };
 		9656A1842FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */; };
 		9656A6182FCB84B80063550D /* ScaleButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656A6172FCB84B80063550D /* ScaleButtonStyle.swift */; };
+		9656AC3E2FD382E60063550D /* ScrollToHideHeaderInstagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656AC3D2FD382E60063550D /* ScrollToHideHeaderInstagramView.swift */; };
+		9656AC402FD384110063550D /* ScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656AC3F2FD383FF0063550D /* ScrollView+Extension.swift */; };
+		9656AC422FD38DBF0063550D /* Animation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656AC412FD38DBF0063550D /* Animation+Extension.swift */; };
+		9656AF532FD392240063550D /* Animation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9656AC412FD38DBF0063550D /* Animation+Extension.swift */; };
 		965836AB2DD2DA440062F372 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */; };
 		9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */; };
@@ -731,6 +735,9 @@
 		9654E41B2BF72CB300A4E1C9 /* ChartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGroup.swift; sourceTree = "<group>"; };
 		9656A1832FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOS26+customSearch+FAB+Tabbar.swift"; sourceTree = "<group>"; };
 		9656A6172FCB84B80063550D /* ScaleButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleButtonStyle.swift; sourceTree = "<group>"; };
+		9656AC3D2FD382E60063550D /* ScrollToHideHeaderInstagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToHideHeaderInstagramView.swift; sourceTree = "<group>"; };
+		9656AC3F2FD383FF0063550D /* ScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+Extension.swift"; sourceTree = "<group>"; };
+		9656AC412FD38DBF0063550D /* Animation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+Extension.swift"; sourceTree = "<group>"; };
 		9658369E2DD2BB250062F372 /* storeKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = storeKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		965851082C90EC2300003266 /* CustomTextFieldKeyboardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldKeyboardsView.swift; sourceTree = "<group>"; };
 		9658510A2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldWithKeyboard.swift; sourceTree = "<group>"; };
@@ -2386,16 +2393,18 @@
 				96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */,
 				96C8D5F62FA69EAB008C57D5 /* View+Geometry.swift */,
 				96C8D5F72FA69EAB008C57D5 /* View+Visibility.swift */,
-				96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */,
+				9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */,
+				9656AC412FD38DBF0063550D /* Animation+Extension.swift */,
 				969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */,
 				9663BB532DDE992200037CF1 /* Date+Extensions.swift */,
-				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
-				9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */,
 				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
+				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
 				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
+				9656AC3F2FD383FF0063550D /* ScrollView+Extension.swift */,
+				96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */,
+				965FD2DC2EF2299900989691 /* Text+Extension.swift */,
 				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
 				965E6F482ECFD64100E233ED /* UIFont+Extension.swift */,
-				965FD2DC2EF2299900989691 /* Text+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2517,6 +2526,7 @@
 			children = (
 				AB658C332F7096C000377EBC /* ResizableHeaderIOS26View.swift */,
 				9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */,
+				9656AC3D2FD382E60063550D /* ScrollToHideHeaderInstagramView.swift */,
 				960663282DD950430084B468 /* ResizableHeaderScrollView.swift */,
 				AB0B61702E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift */,
 				9606653B2DDBD74E0084B468 /* HeaderPageScrollTabiOS18View.swift */,
@@ -3471,6 +3481,7 @@
 				96921B8B2D6FC19000326523 /* BookCardView.swift in Sources */,
 				ABAA1BA22E73BCD4003535CF /* CustomList+iOS26.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
+				9656AC3E2FD382E60063550D /* ScrollToHideHeaderInstagramView.swift in Sources */,
 				9609DB192DBB2D1400A76F95 /* InlineToastView.swift in Sources */,
 				96FF50992B94427000B36142 /* PlayerAnimationView.swift in Sources */,
 				963B862A2CE9495900C3FB0D /* EffectViewModifier.swift in Sources */,
@@ -3550,6 +3561,7 @@
 				9692220A2D7AB53F00326523 /* DynamicFloatingSheetsiOS18View.swift in Sources */,
 				96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */,
 				96B884D02BDCE0DB00196125 /* HorizontalTabView.swift in Sources */,
+				9656AC422FD38DBF0063550D /* Animation+Extension.swift in Sources */,
 				96E09E7A2C6ED10C00A0BE66 /* ProgressiveBlurView.swift in Sources */,
 				96ACBEF92C33BC62004F3070 /* ExpenseCard.swift in Sources */,
 				96352D4F2C0ED814001AD2FD /* CreditCard.swift in Sources */,
@@ -3685,6 +3697,7 @@
 				967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */,
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
 				96E7CEE42BE32C5C00F24910 /* TabShape.swift in Sources */,
+				9656AC402FD384110063550D /* ScrollView+Extension.swift in Sources */,
 				96D54D262FAABCCF00FB070A /* iPodCarousel+iOS26.swift in Sources */,
 				96352CE12C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				ABE1AE732E34AE660090A2F0 /* Permission.swift in Sources */,
@@ -4014,6 +4027,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				968B64222F26B89F003BCF16 /* Book.swift in Sources */,
+				9656AF532FD392240063550D /* Animation+Extension.swift in Sources */,
 				96C5BFD22F65FD7E00CDCFB0 /* TVShowModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

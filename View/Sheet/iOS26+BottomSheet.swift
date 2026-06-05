@@ -135,7 +135,7 @@ struct BottomSheetiOS2618Demo: View {
             .clipShape(.capsule)
             .opacity(toolbarOpacity)
             .offset(y: -sheetHeight)
-            .animation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0), value: sheetHeight)
+            .animation(.iSpring(), value: sheetHeight)
         }
         return toolBarView
             .tryGlassEffect(in: .circle)
@@ -184,7 +184,7 @@ struct DummyBottomSheetView: View {
                 .padding(.horizontal, 18)
                 .frame(height: 80)
                 .padding(.top, 5)
-                .animation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0), value: isFocused)
+                .animation(.iSpring(), value: isFocused)
                 // Tip: programmatic detent control via the `selection` Binding
                 // passed to `.presentationDetents`. Tapping the search field
                 // forces `.large`, mimicking how Apple Maps expands the sheet

@@ -43,7 +43,7 @@ struct DetailItemView: View {
         .overlay(alignment: .topLeading) {
             /// close button
             Button {
-                withAnimation(.interpolatingSpring(duration: 3)) {
+                withAnimation(.iSpring(duration: 3)) {
                     config.expandDetailView = false
                 }
             } label: {

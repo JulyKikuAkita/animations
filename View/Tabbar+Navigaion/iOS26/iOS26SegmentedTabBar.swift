@@ -158,7 +158,7 @@ struct SegmentedControliOS26: View {
                         let index = Int(dragOffset / 50)
                         let cappedIndex = max(0, min(tabs.count - 1, index))
                         guard activeIndex != cappedIndex else { return }
-                        withAnimation(.interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0)) {
+                        withAnimation(.iSpring()) {
                             activeIndex = cappedIndex
                             centerPadding = tabs[cappedIndex].size.width
                         }
@@ -178,10 +178,7 @@ struct SegmentedControliOS26: View {
                 }
         )
         .onChange(of: isActive) { _, newValue in
-            withAnimation(.interpolatingSpring(duration: 0.3,
-                                               bounce: 0,
-                                               initialVelocity: 0))
-            {
+            withAnimation(.iSpring()) {
                 gestureStatus(newValue)
             }
         }
@@ -223,9 +220,7 @@ struct SegmentedControliOS26: View {
             Capsule()
                 .padding(.horizontal, isActive ? -horiztontalPadding : 0)
         }
-        .animation(.interpolatingSpring(duration: 0.3,
-                                        bounce: 0,
-                                        initialVelocity: 0), value: isActive)
+        .animation(.iSpring(), value: isActive)
     }
 
     /// selected segment style option2

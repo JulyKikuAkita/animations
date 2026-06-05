@@ -109,8 +109,8 @@ struct SearchExpandableCustomTabBar: View {
         .scrollDisabled(isSearchExpanded)
         .scrollIndicators(.hidden)
         .scrollClipDisabled()
-        .animation(animation, value: selection)
-        .animation(animation, value: isKeyboardActive)
+        .animation(.iSpring(), value: selection)
+        .animation(.iSpring(), value: isKeyboardActive)
         .onChange(of: isKeyboardActive) { _, newValue in
             onSearchActivated(newValue)
         }
@@ -151,7 +151,7 @@ struct SearchExpandableCustomTabBar: View {
             .contentShape(.capsule)
             .gesture(
                 TapGesture(count: 1).onEnded { _ in
-                    withAnimation(animation) {
+                    withAnimation(.iSpring()) {
                         isSearchExpanded = true
                     }
                 },
@@ -189,7 +189,7 @@ struct SearchExpandableCustomTabBar: View {
                     .contentShape(.capsule)
                     .onTapGesture {
                         isKeyboardActive = false
-                        withAnimation(animation) {
+                        withAnimation(.iSpring()) {
                             isSearchExpanded = false
                         }
                     }
@@ -209,8 +209,6 @@ struct SearchExpandableCustomTabBar: View {
             }
         }
     }
-
-    private let animation: Animation = .interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0)
 }
 
 @available(iOS 26.0, *)

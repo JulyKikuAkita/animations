@@ -213,7 +213,7 @@ struct MorphingButton<Label: View, Content: View, ExpandedContent: View>: View {
                         .fill(.black.opacity(animateContent ? 0.05 : 0))
                         .ignoresSafeArea()
                         .onTapGesture {
-                            withAnimation(.interpolatingSpring(duration: 0.2, bounce: 0),
+                            withAnimation(.iSpring(duration: 0.2),
                                           completionCriteria: .removed)
                             {
                                 animateContent = false
@@ -227,12 +227,12 @@ struct MorphingButton<Label: View, Content: View, ExpandedContent: View>: View {
                 }
                 .task {
                     try? await Task.sleep(for: .seconds(0.05))
-                    withAnimation(.interpolatingSpring(duration: 0.2, bounce: 0)) {
+                    withAnimation(.iSpring(duration: 0.2)) {
                         animateContent = true
                     }
                 }
                 .animation(
-                    .interpolatingSpring(duration: 0.2, bounce: 0),
+                    .iSpring(duration: 0.2),
                     value: showExpandedContent
                 )
             }
