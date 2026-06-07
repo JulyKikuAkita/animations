@@ -213,7 +213,6 @@
 		9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF362C3E3F2100508B80 /* ZoomVideoDetailView.swift */; };
 		9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EF382C3E430B00508B80 /* CustomVideoPlayer.swift */; };
 		9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */; };
-		9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */; };
 		9662EFD32C471DB300508B80 /* ThemeSwitchView+ShapeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFD22C471DB300508B80 /* ThemeSwitchView+ShapeAnimation.swift */; };
 		9662EFDB2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
 		9662EFDC2C47A8AE00508B80 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662EFDA2C47A8AE00508B80 /* Message.swift */; };
@@ -762,7 +761,6 @@
 		9662EF362C3E3F2100508B80 /* ZoomVideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomVideoDetailView.swift; sourceTree = "<group>"; };
 		9662EF382C3E430B00508B80 /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
 		9662EFC72C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPagingIndicatorsView.swift; sourceTree = "<group>"; };
-		9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageIndicatorView.swift; sourceTree = "<group>"; };
 		9662EFD22C471DB300508B80 /* ThemeSwitchView+ShapeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeSwitchView+ShapeAnimation.swift"; sourceTree = "<group>"; };
 		9662EFDA2C47A8AE00508B80 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9662EFDE2C47AAD300508B80 /* MessengerGradientEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerGradientEffectView.swift; sourceTree = "<group>"; };
@@ -1156,6 +1154,7 @@
 		9627062A2D46049100DC0161 /* Orientation */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Orientation; sourceTree = "<group>"; };
 		963B86922CEABA5F00C3FB0D /* Profiles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Profiles; sourceTree = "<group>"; };
 		9650A1BD2DE4388700D2D67C /* PokemonPlay */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (9650A1C82DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 9650A1C92DE4388700D2D67C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PokemonPlay; sourceTree = "<group>"; };
+		9656B0DC2FD621ED0063550D /* PageIndicator */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PageIndicator; sourceTree = "<group>"; };
 		9658369F2DD2BB250062F372 /* StoreKitDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (96F0A6B62E963E7C000B572E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StoreKitDemo; sourceTree = "<group>"; };
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
 		968B5E192F22071B003BCF16 /* CustomToastApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CustomToastApp; sourceTree = "<group>"; };
@@ -1634,6 +1633,7 @@
 				9609D93C2DB591DB00A76F95 /* Map */,
 				963B846F2CCC4F2700C3FB0D /* MiniPlayerView */,
 				960663262DD934AD0084B468 /* OverlayView */,
+				9656B0DC2FD621ED0063550D /* PageIndicator */,
 				9636EE9B2DC1785A00A0E5A0 /* PhaseAnimationAPI */,
 				960663222DD9306E0084B468 /* PhotosView */,
 				96E4E6032D178F350020261F /* PickerView */,
@@ -2181,7 +2181,6 @@
 				969D0D912EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift */,
 				96D04B302C09A1960062520D /* StackedScrollView.swift */,
 				AB0FFD202E2D863700E6DCBE /* PullEffectScrollView.swift */,
-				9662EFCA2C460E9F00508B80 /* PageIndicatorView.swift */,
 			);
 			path = ScrollView;
 			sourceTree = "<group>";
@@ -2681,6 +2680,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				9656B0DC2FD621ED0063550D /* PageIndicator */,
 				969B8EB82F999A640081EE29 /* Keyboard */,
 				96E36A452DB217F900A8EFBA /* Monitor */,
 				AB38B0B02EDAE0AE00767C20 /* Map */,
@@ -3570,7 +3570,6 @@
 				AB658C342F70971F00377EBC /* ResizableHeaderIOS26View.swift in Sources */,
 				9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */,
 				96C8D5EC2FA68849008C57D5 /* BorderBeamTextFieldView.swift in Sources */,
-				9662EFCB2C460E9F00508B80 /* PageIndicatorView.swift in Sources */,
 				AB22B73A2E7A88B900F2DDDE /* CustomTabbariOS26.swift in Sources */,
 				965F26FE2D86364E00300420 /* VisionProMenuBarView.swift in Sources */,
 				96F9D1712D5C61C200CD134B /* InfiniteScrollHelper.swift in Sources */,
