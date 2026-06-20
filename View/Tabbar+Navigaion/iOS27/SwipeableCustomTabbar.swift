@@ -3,7 +3,54 @@
 //  animation
 //
 //  Created on 6/15/26.
-
+//
+//  Learning point
+//  ──────────────
+//  A glass tab bar whose pills are themselves a paging scroll view:
+//  swiping the tabs drives a full-screen content pager, and each pill
+//  morphs its width / glass / blur based on how close it is to the
+//  centered (selected) slot. The content pager is scroll-DISABLED and
+//  moved only by the tab bar's reported progress — one source of truth,
+//  no feedback loop between the two scroll views.
+//
+//  Mechanics
+//  ─────────
+//    1. SwipeableTabBar is a `.scrollTargetBehavior(.paging)` H-scroll of
+//       pills. Its `onScrollGeometryChange` converts contentOffset into a
+//       normalized 0…N progress.
+//    2. That progress × (pageWidth + spacing) is pushed to the content
+//       pager via `pagerPosition.scrollTo(x:)`.
+//    3. SampleTabItem reads its own `minX` in the scroll view and
+//       interpolates width, x-offset, glass tint, and content blur/opacity
+//       so the active pill expands while neighbors shrink.
+//
+//  Key APIs
+//  ────────
+//  • `ScrollPosition` + `.scrollPosition($)` + `.scrollTo(x:)` — drive one
+//    scroll view programmatically from another's progress.
+//  • `onScrollGeometryChange` — derive progress from raw contentOffset /
+//    containerSize / contentInsets.
+//  • `GlassEffectContainer` + `.glassEffect(... in: .capsule)` — one shared
+//    Liquid Glass pass so pills + side buttons morph as a single surface.
+//  • `ForEach(subviews:)` — iterate the caller's tab views with no data
+//    model.
+//  • `containerRelativeFrame(.horizontal)` — full-width pages and pills.
+//
+//  How to apply
+//  ────────────
+//  Use when you want a compact swipeable tab control kept in sync with a
+//  paged content area, but the content area must NOT have its own
+//  gestures (the bar is the single gesture surface). The width-morphing
+//  pill effect is reusable for any "expanding segment" control.
+//
+//  Note: `@ContentBuilder` is the project's result builder; swap to
+//  `@ViewBuilder` on stock Xcode 26 (see the inline comment).
+//
+//  See also
+//  ────────
+//  • StickyScrollSectionHeader.swift — sibling iOS27 demo built on the
+//    same scroll-geometry + `visualEffect` toolkit.
+//
 import SwiftUI
 
 @available(iOS 26.0, *)

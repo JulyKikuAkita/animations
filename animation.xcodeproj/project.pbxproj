@@ -3841,7 +3841,6 @@
 				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
 				96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
-				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
 				96C8EB702FA6A0F7008C57D5 /* View+FeatureHelpers.swift in Sources */,
 				BB00000000000000000000D1 /* UIView+Extension.swift in Sources */,
 				96921AF12D6EF14900326523 /* BookCardView.swift in Sources */,
