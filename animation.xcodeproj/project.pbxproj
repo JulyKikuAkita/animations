@@ -1157,6 +1157,7 @@
 		9656B0DC2FD621ED0063550D /* PageIndicator */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PageIndicator; sourceTree = "<group>"; };
 		9658369F2DD2BB250062F372 /* StoreKitDemo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (96F0A6B62E963E7C000B572E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StoreKitDemo; sourceTree = "<group>"; };
 		967958452D2DD24B009E74CA /* Habit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Habit; sourceTree = "<group>"; };
+		968AFCE92FE0902E0010A4BF /* iOS27 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = iOS27; sourceTree = "<group>"; };
 		968B5E192F22071B003BCF16 /* CustomToastApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CustomToastApp; sourceTree = "<group>"; };
 		968B62652F24819A003BCF16 /* CalendarDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (968B62752F2481D3003BCF16 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = CalendarDemoApp; sourceTree = "<group>"; };
 		968B64092F257432003BCF16 /* BookDemoApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BookDemoApp; sourceTree = "<group>"; };
@@ -2296,6 +2297,7 @@
 		96E70B0D2B8EBF0000F23A51 /* Tabbar+Navigaion */ = {
 			isa = PBXGroup;
 			children = (
+				968AFCE92FE0902E0010A4BF /* iOS27 */,
 				AB333B842E8B0EDD00368EB8 /* iOS26 */,
 				96AC82F32C8BAC2000ABBE78 /* SideBarView.swift */,
 				96AC82F12C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift */,
@@ -2681,6 +2683,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				9656B0DC2FD621ED0063550D /* PageIndicator */,
+				968AFCE92FE0902E0010A4BF /* iOS27 */,
 				969B8EB82F999A640081EE29 /* Keyboard */,
 				96E36A452DB217F900A8EFBA /* Monitor */,
 				AB38B0B02EDAE0AE00767C20 /* Map */,
@@ -3837,7 +3840,6 @@
 				963B9CFE2D549D3500453320 /* HorizontalPanGesture.swift in Sources */,
 				96352D292C0C4A01001AD2FD /* ImageView.swift in Sources */,
 				96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */,
-				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
 				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
 				96C8EB702FA6A0F7008C57D5 /* View+FeatureHelpers.swift in Sources */,
 				BB00000000000000000000D1 /* UIView+Extension.swift in Sources */,
