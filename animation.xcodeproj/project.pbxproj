@@ -388,6 +388,7 @@
 		96C8EB6E2FA6A03C008C57D5 /* View+Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */; };
 		96C8EB6F2FA6A049008C57D5 /* View+Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */; };
 		96C8EB702FA6A0F7008C57D5 /* View+FeatureHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */; };
+		96C9386B2FEB3D610024A6AF /* GlassStyleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C9386A2FEB3D530024A6AF /* GlassStyleSlider.swift */; };
 		96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */; };
 		96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */; };
 		96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */; };
@@ -894,6 +895,7 @@
 		96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+FeatureHelpers.swift"; sourceTree = "<group>"; };
 		96C8D5F62FA69EAB008C57D5 /* View+Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Geometry.swift"; sourceTree = "<group>"; };
 		96C8D5F72FA69EAB008C57D5 /* View+Visibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Visibility.swift"; sourceTree = "<group>"; };
+		96C9386A2FEB3D530024A6AF /* GlassStyleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassStyleSlider.swift; sourceTree = "<group>"; };
 		96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionOnboardingIOS26.swift; sourceTree = "<group>"; };
 		96CD0EEE2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImageWithAmbientBackgroundEffectView.swift; sourceTree = "<group>"; };
 		96CE821B2ED6694C009AC09D /* ToolBar+NativeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBar+NativeAPI.swift"; sourceTree = "<group>"; };
@@ -1879,6 +1881,7 @@
 		963B862B2CE94F9400C3FB0D /* Slider */ = {
 			isa = PBXGroup;
 			children = (
+				96C9386A2FEB3D530024A6AF /* GlassStyleSlider.swift */,
 				96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */,
 				963B862C2CE94FAD00C3FB0D /* ExpandableSlideriOS18View.swift */,
 				963B862E2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift */,
@@ -3545,6 +3548,7 @@
 				965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				968B5F9E2F22FC84003BCF16 /* TextFieldMicroInteractionView.swift in Sources */,
+				96C9386B2FEB3D610024A6AF /* GlassStyleSlider.swift in Sources */,
 				AB0B61712E3458A0007D110A /* ResizableHeaderScrollViewiOS26.swift in Sources */,
 				AB8CBCB32E9884E000A288E4 /* FullScreenCoverDemoView.swift in Sources */,
 				9662F02F2C58BBBB00508B80 /* MorphingView.swift in Sources */,
