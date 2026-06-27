@@ -334,6 +334,8 @@
 		96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B22F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A52EAF2F7727B200493D96 /* 2DSliderTonePickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */; };
+		96A63F482FF05F5900F3EEAB /* ScreenCaptureKit27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A63F472FF05F4B00F3EEAB /* ScreenCaptureKit27.swift */; };
+		96A63F4A2FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A63F492FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift */; };
 		96A71C702F88D0DC005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */; };
 		96A71E0E2F8B1F19005BBEF2 /* TransitionAnimationIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A71E0D2F8B1F08005BBEF2 /* TransitionAnimationIOS26.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
@@ -856,6 +858,9 @@
 		96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBarIOS26.swift; sourceTree = "<group>"; };
 		96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyEventView.swift; sourceTree = "<group>"; };
 		96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2DSliderTonePickerDemoView.swift; sourceTree = "<group>"; };
+		96A63F472FF05F4B00F3EEAB /* ScreenCaptureKit27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureKit27.swift; sourceTree = "<group>"; };
+		96A63F492FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenCaptureKit+MockFor26.swift"; sourceTree = "<group>"; };
+		96A63F4B2FF07B0D00F3EEAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = storeKitDemo/Info.plist; sourceTree = "<group>"; };
 		96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchExpandable+CustomTabbar+iOS26.swift"; sourceTree = "<group>"; };
 		96A71E0D2F8B1F08005BBEF2 /* TransitionAnimationIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimationIOS26.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
@@ -1478,6 +1483,7 @@
 		961F3B822B8818240055D79B = {
 			isa = PBXGroup;
 			children = (
+				96A63F4B2FF07B0D00F3EEAB /* Info.plist */,
 				AB17E5512E6117A700C50B18 /* JSON */,
 				AB5C922A2E0131A4009CF684 /* Widgets */,
 				AB5C89912DFD4664009CF684 /* FoundationModels */,
@@ -1873,6 +1879,8 @@
 		963B85B22CD4369F00C3FB0D /* Snapshot */ = {
 			isa = PBXGroup;
 			children = (
+				96A63F472FF05F4B00F3EEAB /* ScreenCaptureKit27.swift */,
+				96A63F492FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift */,
 				963B85B32CD436B100C3FB0D /* SnapshotDemoView.swift */,
 			);
 			path = Snapshot;
@@ -3526,6 +3534,7 @@
 				9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */,
 				968D2D772B8C2B3A00007734 /* ProfileList+SheetView.swift in Sources */,
 				9656A1842FC81AF10063550D /* iOS26+customSearch+FAB+Tabbar.swift in Sources */,
+				96A63F4A2FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift in Sources */,
 				96BCDFDD2CC8C05B00A7CBFF /* UniversalOverlayView.swift in Sources */,
 				96AC82F42C8BAC2000ABBE78 /* SideBarView.swift in Sources */,
 				96921B8C2D6FC1BA00326523 /* TransparentBlurView.swift in Sources */,
@@ -3542,6 +3551,7 @@
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
+				96A63F482FF05F5900F3EEAB /* ScreenCaptureKit27.swift in Sources */,
 				96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */,
 				969B778E2F8C59110081EE29 /* Comparable+Clamped.swift in Sources */,
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
@@ -4868,6 +4878,7 @@
 				DEVELOPMENT_TEAM = Z5RJ99BFF2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = storeKitDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -4897,6 +4908,7 @@
 				DEVELOPMENT_TEAM = Z5RJ99BFF2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = storeKitDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
