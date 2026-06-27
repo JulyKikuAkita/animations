@@ -99,7 +99,7 @@ import SwiftUI
                             TabViewHelper()
                         }
                     }
-                    /// gorup switUIView -> so we can  extract the souce swiftUI view
+                    /// group swiftUIView -> so we can  extract the source swiftUI view
                     .compositingGroup()
 
                     customTabBar()
@@ -146,7 +146,7 @@ import SwiftUI
                 }
                 .padding(15)
 
-                /// tab bar connet
+                /// tab bar content
                 Text(dummyDescription)
             }
             /// ios 26 bug: didn't hide the toolbar
@@ -207,13 +207,13 @@ import SwiftUI
                 guard let swiftUIWrapperUITabView = compositeGroup.subviews.last else { return }
 
                 if let tabBarController = swiftUIWrapperUITabView.subviews.first?.next as? UITabBarController {
-                    /// Clearning backtround
+                    /// Clearing background
                     tabBarController.view.backgroundColor = .clear
                     tabBarController.viewControllers?.forEach {
                         $0.view.backgroundColor = .clear
                     }
                     tabBarController.delegate = context.coordinator
-                    /// tmp solution for the glass effect tab bar animatino when switch tab
+                    /// tmp solution for the glass effect tab bar animation when switch tab
                     tabBarController.tabBar.removeFromSuperview()
                 }
             }
@@ -223,11 +223,11 @@ import SwiftUI
 
         func updateUIView(_: UIView, context _: Context) {}
 
-        // starting with iOS18+, the tab view has default fade-in/out transtion when switching tabs,
-        // without any background, the result is weired transtioin animation
-        // to resolve it we need to replace with a custom identity transtiion animation
-        // Also we can use containerBackground view modefider to remove NavigatonStack View background
-        // (e.g., navigatonStack has its own bg color)
+        // starting with iOS18+, the tab view has default fade-in/out transition when switching tabs,
+        // without any background, the result is weird transition animation
+        // to resolve it we need to replace with a custom identity transition animation
+        // Also we can use containerBackground view modifier to remove NavigationStack View background
+        // (e.g., navigationStack has its own bg color)
         class Coordinator: NSObject, UITabBarControllerDelegate, UIViewControllerAnimatedTransitioning {
             func tabBarController(_: UITabBarController,
                                   animationControllerForTransitionFrom _: UIViewController,
