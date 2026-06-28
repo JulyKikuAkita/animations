@@ -126,6 +126,19 @@ enum AppleFindMyTab: String, CaseIterable {
     }
 }
 
+struct Device: Identifiable {
+    var id: String = UUID().uuidString
+    var symbol: String
+    var name: String
+    var description: String
+    var location: String
+
+    static let data: [Self] = [
+        .init(symbol: "iphone", name: "iPhone 100", description: "iPhone 100 Pro Max Ultra", location: "Space"),
+        .init(symbol: "macpro.gen1", name: "Mac Pro M100", description: "Nearby", location: "Space"),
+    ]
+}
+
 enum SimpleTabs: String, CaseIterable {
     case all = "All"
     case game = "Games"
