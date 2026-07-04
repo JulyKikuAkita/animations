@@ -333,6 +333,10 @@
 		96A1D4B02F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B22F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
+		96A3B4282FF989FE003A1083 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3B4272FF989FA003A1083 /* Date.swift */; };
+		96A3B4292FF989FE003A1083 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3B4272FF989FA003A1083 /* Date.swift */; };
+		96A3B42A2FF989FE003A1083 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3B4272FF989FA003A1083 /* Date.swift */; };
+		96A3B42C2FF98AD3003A1083 /* HorizontalInfiniteScrollDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3B42B2FF98AAF003A1083 /* HorizontalInfiniteScrollDateView.swift */; };
 		96A52EAF2F7727B200493D96 /* 2DSliderTonePickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */; };
 		96A63F482FF05F5900F3EEAB /* ScreenCaptureKit27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A63F472FF05F4B00F3EEAB /* ScreenCaptureKit27.swift */; };
 		96A63F4A2FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A63F492FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift */; };
@@ -857,10 +861,11 @@
 		96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paywall3DAnimation.swift; sourceTree = "<group>"; };
 		96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBarIOS26.swift; sourceTree = "<group>"; };
 		96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyEventView.swift; sourceTree = "<group>"; };
+		96A3B4272FF989FA003A1083 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		96A3B42B2FF98AAF003A1083 /* HorizontalInfiniteScrollDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalInfiniteScrollDateView.swift; sourceTree = "<group>"; };
 		96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2DSliderTonePickerDemoView.swift; sourceTree = "<group>"; };
 		96A63F472FF05F4B00F3EEAB /* ScreenCaptureKit27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureKit27.swift; sourceTree = "<group>"; };
 		96A63F492FF06C4500F3EEAB /* ScreenCaptureKit+MockFor26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenCaptureKit+MockFor26.swift"; sourceTree = "<group>"; };
-		96A63F4B2FF07B0D00F3EEAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = storeKitDemo/Info.plist; sourceTree = "<group>"; };
 		96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchExpandable+CustomTabbar+iOS26.swift"; sourceTree = "<group>"; };
 		96A71E0D2F8B1F08005BBEF2 /* TransitionAnimationIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimationIOS26.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
@@ -1483,7 +1488,6 @@
 		961F3B822B8818240055D79B = {
 			isa = PBXGroup;
 			children = (
-				96A63F4B2FF07B0D00F3EEAB /* Info.plist */,
 				AB17E5512E6117A700C50B18 /* JSON */,
 				AB5C922A2E0131A4009CF684 /* Widgets */,
 				AB5C89912DFD4664009CF684 /* FoundationModels */,
@@ -1587,6 +1591,7 @@
 				969219DB2D6D9EE300326523 /* Contact.swift */,
 				96352D4E2C0ED814001AD2FD /* CreditCard.swift */,
 				AB0EA1752DEBBAB000C62391 /* Dummies.swift */,
+				96A3B4272FF989FA003A1083 /* Date.swift */,
 				96ACBEF22C33B79E004F3070 /* Expense.swift */,
 				96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */,
 				96B884E92BDD82B000196125 /* Interpolation.swift */,
@@ -2030,6 +2035,7 @@
 		9663BB552DDE9AD100037CF1 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				96A3B42B2FF98AAF003A1083 /* HorizontalInfiniteScrollDateView.swift */,
 				9663BB562DDE9AF400037CF1 /* CalendarWithMultipleScrollView.swift */,
 			);
 			path = Calendar;
@@ -3525,6 +3531,7 @@
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
 				96FCA64E2DA8D9CA00774FB7 /* PopOutMenuView.swift in Sources */,
 				96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */,
+				96A3B42A2FF989FE003A1083 /* Date.swift in Sources */,
 				963B85B42CD436B100C3FB0D /* SnapshotDemoView.swift in Sources */,
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
 				9693DB342D9B4F9100A29727 /* DrawerButtonView.swift in Sources */,
@@ -3600,6 +3607,7 @@
 				96C8D5FB2FA69EAB008C57D5 /* View+AppStoreToolBar.swift in Sources */,
 				96C8D5FC2FA69EAB008C57D5 /* View+Compat.swift in Sources */,
 				96C8D5FD2FA69EAB008C57D5 /* View+Visibility.swift in Sources */,
+				96A3B42C2FF98AD3003A1083 /* HorizontalInfiniteScrollDateView.swift in Sources */,
 				9662EFDD2C47A8AE00508B80 /* Message.swift in Sources */,
 				96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */,
 				963DB1582BBBD91600AAF347 /* FullScreenVideoView.swift in Sources */,
@@ -3857,6 +3865,7 @@
 				9621DC5A2BEF3EBF00183CB7 /* demoApps.swift in Sources */,
 				96C8EB702FA6A0F7008C57D5 /* View+FeatureHelpers.swift in Sources */,
 				BB00000000000000000000D1 /* UIView+Extension.swift in Sources */,
+				96A3B4292FF989FE003A1083 /* Date.swift in Sources */,
 				96921AF12D6EF14900326523 /* BookCardView.swift in Sources */,
 				964629F32FA6ADF800C7AFFB /* View+Animation.swift in Sources */,
 				9621DC362BEF3D5C00183CB7 /* ExpandedBottomSheet.swift in Sources */,
@@ -3956,6 +3965,7 @@
 				968B5F982F220C13003BCF16 /* Stock.swift in Sources */,
 				9662EFDB2C47A8AE00508B80 /* Message.swift in Sources */,
 				96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */,
+				96A3B4282FF989FE003A1083 /* Date.swift in Sources */,
 				AB0EA17C2DEBBB5100C62391 /* DummyViews.swift in Sources */,
 				9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */,
 				96E4E5FA2D175FAB0020261F /* ImageLinkModel.swift in Sources */,
