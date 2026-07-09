@@ -15,6 +15,8 @@
 		9609D93B2DB4B54900A76F95 /* LocationPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609D93A2DB4B54900A76F95 /* LocationPickerManager.swift */; };
 		9609D93E2DB591F800A76F95 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609D93D2DB591F800A76F95 /* LocationPickerView.swift */; };
 		9609DB192DBB2D1400A76F95 /* InlineToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9609DB182DBB2D1400A76F95 /* InlineToastView.swift */; };
+		960F93842FFF171E004A8D7C /* LandscapePinnedSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F93832FFF1705004A8D7C /* LandscapePinnedSheet.swift */; };
+		960F93862FFF1C0A004A8D7C /* View+Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960F93852FFF1C06004A8D7C /* View+Sheet.swift */; };
 		9613D7202C7BE43E007FF2E7 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F01E2C58348100508B80 /* Page.swift */; };
 		9613D7212C7BE445007FF2E7 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0242C583FB600508B80 /* LandingView.swift */; };
 		9613D7222C7BE45E007FF2E7 /* MorphingSymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9662F0222C5838CB00508B80 /* MorphingSymbolView.swift */; };
@@ -625,6 +627,8 @@
 		9609D93A2DB4B54900A76F95 /* LocationPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerManager.swift; sourceTree = "<group>"; };
 		9609D93D2DB591F800A76F95 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
 		9609DB182DBB2D1400A76F95 /* InlineToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineToastView.swift; sourceTree = "<group>"; };
+		960F93832FFF1705004A8D7C /* LandscapePinnedSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandscapePinnedSheet.swift; sourceTree = "<group>"; };
+		960F93852FFF1C06004A8D7C /* View+Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Sheet.swift"; sourceTree = "<group>"; };
 		9613D7122C7BE42A007FF2E7 /* PlayStationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayStationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961868B72BC7A78700552748 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
@@ -2159,6 +2163,7 @@
 		969ECE492EC7FD5F0045601B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				960F93832FFF1705004A8D7C /* LandscapePinnedSheet.swift */,
 				AB38B0B72EDD0D7200767C20 /* BottomCarouselCardView.swift */,
 				AB38B0B52EDAE13C00767C20 /* CustomMapView.swift */,
 				969ECE472EC7EF590045601B /* LocationPermissionFullSheetView.swift */,
@@ -2405,6 +2410,7 @@
 		AB17E5612E61216D00C50B18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				960F93852FFF1C06004A8D7C /* View+Sheet.swift */,
 				96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */,
 				96C8D5F32FA69EAB008C57D5 /* View+AppStoreToolBar.swift */,
 				96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */,
@@ -3660,6 +3666,7 @@
 				ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
 				96D5384E2F58C33700EA2DFC /* PhotoGridViewIos26+TransitionEffect.swift in Sources */,
 				96B8F69D2E84882D00B87C56 /* PopMenuiOS26+DatePickerDemo.swift in Sources */,
+				960F93862FFF1C0A004A8D7C /* View+Sheet.swift in Sources */,
 				96CE821C2ED6694C009AC09D /* ToolBar+NativeAPI.swift in Sources */,
 				96FF509F2B944E7300B36142 /* MiniPlayerView.swift in Sources */,
 				9662EFDF2C47AAD300508B80 /* MessengerGradientEffectView.swift in Sources */,
@@ -3782,6 +3789,7 @@
 				965E573C2BC5097C00E172B3 /* DropDownView.swift in Sources */,
 				9621D9632BE5F7D100183CB7 /* Tag.swift in Sources */,
 				96C5C15C2F6A7E3900CDCFB0 /* ConcentricRectangle+BackPort+iOS18.swift in Sources */,
+				960F93842FFF171E004A8D7C /* LandscapePinnedSheet.swift in Sources */,
 				96E948F22D8B8A5000B257B4 /* AnimatedSpinnerView.swift in Sources */,
 				9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */,
 				962B047A2C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift in Sources */,
