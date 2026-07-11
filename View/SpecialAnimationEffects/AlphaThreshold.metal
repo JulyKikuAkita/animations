@@ -44,3 +44,11 @@ using namespace metal;
     half4 color = layer.sample(position);
     return color.a >= thresholdValue ? half4(color.rgb / color.a, 1.0) : half4(0.0);
 }
+
+[[stitchable]] half4 alphaV2Threshold(float2 position, SwiftUI::Layer layer) {
+    half4 color = layer.sample(position);
+    half threshold = 0.5h;
+    half edge = 0.02h;
+    half alpha = smoothstep(threshold - edge, threshold + edge, color.a);
+    return half4(color.rgb / max(color.a, 0.001h), alpha);
+}

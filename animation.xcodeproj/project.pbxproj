@@ -428,6 +428,8 @@
 		96E09E7A2C6ED10C00A0BE66 /* ProgressiveBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09E792C6ED10C00A0BE66 /* ProgressiveBlurView.swift */; };
 		96E09EC52C7401D600A0BE66 /* FloatingTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */; };
 		96E09EC72C74105300A0BE66 /* FloatingTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */; };
+		96E0A4623002F5BE009BEC6D /* List+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0A4613002F5B2009BEC6D /* List+Extension.swift */; };
+		96E0A464300302C3009BEC6D /* MorphingRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E0A463300302B6009BEC6D /* MorphingRefreshView.swift */; };
 		96E1DD732E6A5557002B9F6C /* CardCarousel+Reflection+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E1DD722E6A5557002B9F6C /* CardCarousel+Reflection+iOS26.swift */; };
 		96E4DD122CFFDE1F0020261F /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
 		96E4DD132CFFDE1F0020261F /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
@@ -941,6 +943,8 @@
 		96E09E792C6ED10C00A0BE66 /* ProgressiveBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressiveBlurView.swift; sourceTree = "<group>"; };
 		96E09EC42C7401D600A0BE66 /* FloatingTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBarView.swift; sourceTree = "<group>"; };
 		96E09EC62C74105300A0BE66 /* FloatingTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabbar.swift; sourceTree = "<group>"; };
+		96E0A4613002F5B2009BEC6D /* List+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extension.swift"; sourceTree = "<group>"; };
+		96E0A463300302B6009BEC6D /* MorphingRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphingRefreshView.swift; sourceTree = "<group>"; };
 		96E1DD722E6A5557002B9F6C /* CardCarousel+Reflection+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CardCarousel+Reflection+iOS26.swift"; sourceTree = "<group>"; };
 		96E4DD112CFFDE1F0020261F /* SportItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportItem.swift; sourceTree = "<group>"; };
 		96E4DD152CFFDF970020261F /* RotatingIconEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingIconEffectView.swift; sourceTree = "<group>"; };
@@ -1415,6 +1419,7 @@
 		960663252DD933230084B468 /* SpecialAnimationEffects */ = {
 			isa = PBXGroup;
 			children = (
+				96E0A463300302B6009BEC6D /* MorphingRefreshView.swift */,
 				96D55E852FC51A2C00FB070A /* AlphaThreshold.metal */,
 				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
 				9662F02C2C58482200508B80 /* MetaballAnimationView.swift */,
@@ -2410,6 +2415,7 @@
 		AB17E5612E61216D00C50B18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				96E0A4613002F5B2009BEC6D /* List+Extension.swift */,
 				960F93852FFF1C06004A8D7C /* View+Sheet.swift */,
 				96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */,
 				96C8D5F32FA69EAB008C57D5 /* View+AppStoreToolBar.swift */,
@@ -3565,6 +3571,7 @@
 				965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
 				96A63F482FF05F5900F3EEAB /* ScreenCaptureKit27.swift in Sources */,
+				96E0A4623002F5BE009BEC6D /* List+Extension.swift in Sources */,
 				96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */,
 				969B778E2F8C59110081EE29 /* Comparable+Clamped.swift in Sources */,
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
@@ -3741,6 +3748,7 @@
 				96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */,
 				9621D96A2BE84B8300183CB7 /* SelectTagView.swift in Sources */,
 				AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */,
+				96E0A464300302C3009BEC6D /* MorphingRefreshView.swift in Sources */,
 				96AC82F22C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift in Sources */,
 				960663292DD950430084B468 /* ResizableHeaderScrollView.swift in Sources */,
 				9662EFD32C471DB300508B80 /* ThemeSwitchView+ShapeAnimation.swift in Sources */,
