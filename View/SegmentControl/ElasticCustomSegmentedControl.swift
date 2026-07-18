@@ -3,6 +3,56 @@
 //  animation
 //
 //  Created on 7/18/26.
+//
+//  Learning point
+//  ──────────────
+//  A segmented control whose active-tab pill behaves like it's on an
+//  elastic band: dragging it stretches the capsule toward your finger
+//  (only the edge you're dragging past moves) instead of translating as a
+//  rigid block, then it snaps to the nearest tab on release.
+//
+//  Mechanics — two capsules driven by the same offset math
+//  ─────────────────────────────────────────────────────────
+//    1. Two capsule layers share one frame/offset: a background
+//       `Capsule().fill(...)` (the visible indicator) and a `.mask` inside
+//       an `.overlay` that reveals the active-tint label copy only where
+//       the capsule sits. Both apply identical stretch/offset math, or the
+//       mask and the indicator drift apart during a drag.
+//    2. Stretch direction is asymmetric padding on the capsule itself:
+//       `.padding(.trailing, offsetX > 0 ? -offsetX : 0)` and
+//       `.padding(.leading, offsetX < 0 ? offsetX : 0)`. Only the side
+//       you're dragging toward ever moves, so the capsule grows out of its
+//       anchored edge rather than sliding as a block.
+//    3. `YScale` (`abs(offsetX) / (size.width * 0.6) * 0.2`) drives
+//       `.scaleEffect(y: 1 - YScale)` on both capsules: the further you
+//       drag, the more the pill squashes vertically, reading as tension in
+//       the "band" rather than a flat horizontal stretch.
+//    4. The drag gesture runs in a named coordinate space (`"CONTROL"`)
+//       with `minimumDistance: 0` so taps and drags land in the same
+//       handler. `onChanged` clamps `translation + currentOffset` to
+//       `(0, size.width - capsuleWidth)` so the capsule can't stretch past
+//       the first/last tab. `onEnded` disambiguates by distance: under 5pt
+//       is a tap (`update(location:)` picks the tab under the finger),
+//       anything larger snaps to the nearest tab (`endTranslation`, via
+//       `.rounded()` on `(offset + currentOffset) / capsuleWidth`).
+//
+//  Key APIs
+//  ────────
+//  • `.mask(alignment:)` inside `.overlay` — swaps label tint only under
+//    the capsule instead of animating color per tab.
+//  • `DragGesture(minimumDistance: 0, coordinateSpace: .named(...))` — one
+//    gesture handles both tap-to-select and drag-to-drag.
+//  • `optionalPillGlassEffect` (`View+Compat.swift`) — iOS 26 liquid glass
+//    tint with a no-op fallback below 26, so this control degrades
+//    gracefully without an `#available` branch here.
+//
+//  How to apply
+//  ────────────
+//  Reuse "same offset math on two layers" for any drag-to-pick control
+//  where a filled indicator and a masked foreground must move in lockstep.
+//  The asymmetric leading/trailing padding is the reusable idea for an
+//  elastic (vs. rigid) drag feel — only the edge in the drag direction
+//  moves.
 
 import SwiftUI
 
@@ -43,7 +93,8 @@ struct ElasticSegmentedControl<Value: CaseIterable, Label: View>: View where Val
             let YScale = (abs(offsetX) / (size.width * 0.6)) * 0.2
 
             tabsView(config.inactiveTint, capsuleWidth: capsuleWidth, height: size.height)
-                /// active tint mask
+                /// active tint mask — geometry must mirror the indicator
+                /// capsule below, or the tint reveal drifts from the pill
                 .overlay(alignment: .leading) {
                     tabsView(config.activeTint, capsuleWidth: capsuleWidth, height: size.height)
                         .mask(alignment: .leading) {
@@ -55,7 +106,7 @@ struct ElasticSegmentedControl<Value: CaseIterable, Label: View>: View where Val
                                 .scaleEffect(y: 1 - YScale)
                         }
                 }
-                /// Indicator
+                /// Indicator — kept in lockstep with the mask above
                 .background(alignment: .leading) {
                     Capsule()
                         .fill(config.capsuleTint.gradient)
