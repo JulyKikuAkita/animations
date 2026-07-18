@@ -252,6 +252,7 @@
 		96726B1C2C2FD04E007A4E34 /* FlipClockTextEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */; };
 		96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1D2C2FD354007A4E34 /* TimePickerView.swift */; };
 		96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B202C2FD9CA007A4E34 /* Recent.swift */; };
+		9673582A300C03700079492C /* ElasticCustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96735829300C03640079492C /* ElasticCustomSegmentedControl.swift */; };
 		967958702D2DD2EF009E74CA /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
 		967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */; };
 		9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680C91E2D6AFAD2005FC80D /* RippleView.swift */; };
@@ -805,6 +806,7 @@
 		96726B1B2C2FD04E007A4E34 /* FlipClockTextEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockTextEffectView.swift; sourceTree = "<group>"; };
 		96726B1D2C2FD354007A4E34 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		96726B202C2FD9CA007A4E34 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
+		96735829300C03640079492C /* ElasticCustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticCustomSegmentedControl.swift; sourceTree = "<group>"; };
 		967958442D2DD24B009E74CA /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingiOS26View.swift; sourceTree = "<group>"; };
 		9680C91E2D6AFAD2005FC80D /* RippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleView.swift; sourceTree = "<group>"; };
@@ -2263,6 +2265,7 @@
 		96D558522FC0248100FB070A /* SegmentControl */ = {
 			isa = PBXGroup;
 			children = (
+				96735829300C03640079492C /* ElasticCustomSegmentedControl.swift */,
 				96D558502FC0246200FB070A /* GlassSegmentedControlView.swift */,
 				96D558532FC0DA2300FB070A /* LiquidLens.metal */,
 			);
@@ -3807,6 +3810,7 @@
 				962B047A2C23ED4A008E1E5D /* ExpandableNavigationSearchBarView.swift in Sources */,
 				9636EE9D2DC1787E00A0E5A0 /* PhaseAnimationView.swift in Sources */,
 				AB40B84C2C9F60A700BC7747 /* GridTransitionView.swift in Sources */,
+				9673582A300C03700079492C /* ElasticCustomSegmentedControl.swift in Sources */,
 				9642236D2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */,
 				AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */,
 				96352D532C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,

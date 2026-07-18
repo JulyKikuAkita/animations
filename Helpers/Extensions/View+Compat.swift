@@ -71,6 +71,20 @@ public extension View {
         }
     }
 
+    /// Tinted, interactive glass on iOS 26+. On older versions falls back to
+    /// a solid rounded-rectangle background matching the color scheme.
+    @ViewBuilder
+    func optionalPillGlassEffect(_ tint: Color, in shape: some Shape) -> some View {
+        if #available(iOS 26.0, *) {
+            self
+                .padding(.vertical, 6)
+                .padding(.horizontal, 3)
+                .glassEffect(.regular.tint(tint).interactive(), in: shape)
+        } else {
+            self
+        }
+    }
+
     /// Unified `onChange` across the iOS 17 signature change.
     /// iOS 17+: `(oldValue, newValue)`. Pre-17: `(newValue)`.
     /// `@ViewBuilder` reconciles the two branches' different return types.
