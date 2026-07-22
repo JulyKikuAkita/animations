@@ -49,34 +49,54 @@ struct WallpaperStackedScrollDemo: View {
 
 @available(iOS 26.0, *)
 struct WallpaperPackView: View {
-    @State private var toggle: Bool = false
     var body: some View {
-        VStack {
-            let pack = packs[1]
-            WallpaperStackView(title: pack.title, description: pack.description, trigger: toggle) {
-                ForEach(pack.imageSets, id: \.self) { wallpaper in
-                    Rectangle()
-                        .foregroundStyle(.clear)
-                        .overlay {
-                            Image(wallpaper)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        }
+        ScrollView(.vertical) {
+            LazyVStack(spacing: 30) {
+                ForEach(packs) { pack in
+                    WallpaperStackedRowView(pack: pack)
                 }
-            } buttonView: {
-                Button {
-                    toggle.toggle()
-                } label: {
-                    Text("GET")
-                }
-                .fontWeight(.medium)
-                .buttonStyle(.borderedProminent)
-                .tint(.gray.opacity(0.35))
-                .buttonSizing(.flexible)
-                .frame(maxWidth: 80)
             }
         }
-        .safeAreaPadding(15)
+        .scrollIndicators(.hidden)
+        .safeAreaPadding(.horizontal, 25)
+        .safeAreaPadding(.vertical, 30)
+    }
+}
+
+@available(iOS 26.0, *)
+struct WallpaperStackedRowView: View {
+    var pack: WallpaperPack
+    /// View Properties
+    @State private var toggle: Bool = false
+
+    var body: some View {
+        WallpaperStackView(title: pack.title, description: pack.description, trigger: toggle) {
+            ForEach(pack.imageSets, id: \.self) { wallpaper in
+                Rectangle()
+                    .foregroundStyle(.clear)
+                    .overlay {
+                        Image(wallpaper)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    }
+            }
+        } buttonView: {
+            Button {
+                toggle.toggle()
+            } label: {
+                if toggle {
+                    Image(systemName: "xmark")
+                        .frame(height: 25)
+                } else {
+                    Text("GET")
+                }
+            }
+            .fontWeight(.medium)
+            .buttonStyle(.borderedProminent)
+            .tint(.gray.opacity(0.35))
+            .buttonSizing(.flexible)
+            .frame(maxWidth: toggle ? 20 : 80)
+        }
     }
 }
 
@@ -114,65 +134,87 @@ struct WallpaperStackView<Content: View, ButtonView: View>: View {
         let layout = scaleUp ? AnyLayout(VStackLayout(alignment: .leading, spacing: 15)) : AnyLayout(ZStackLayout(alignment: .leading))
 
         layout {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text(title)
-                        .font(.title.bold())
-                        .lineLimit(1)
+            if !remove {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        Text(title)
+                            .font(.title.bold())
+                            .lineLimit(1)
 
-                    Spacer(minLength: 0)
+                        Spacer(minLength: 0)
 
-                    if scaleUp {
+                        /// this size change will cause animation stutter, switch to overlay
+//                        if scaleUp {
+//                            buttonView
+//                        }
+                    }
+                    /// button padding
+                    .padding(.trailing, scaleUp ? 50 : 0)
+                    .overlay(alignment: .trailing) {
+                        if scaleUp {
+                            buttonView
+                        }
+                    }
+
+                    /// Text effect
+                    Group {
+                        if scaleUp {
+                            Text(description)
+                                .lineLimit(2)
+                                .transition(.blurReplace)
+                        } else {
+                            Text(description)
+                                .lineLimit(3)
+                                .transition(.blurReplace)
+                        }
+                    }
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+
+                    if !scaleUp {
                         buttonView
+                            .transition(.identity)
                     }
                 }
-
-                /// Text effect
-                Group {
-                    if scaleUp {
-                        Text(description)
-                            .lineLimit(2)
-                            .transition(.blurReplace)
-                    } else {
-                        Text(description)
-                            .lineLimit(3)
-                            .transition(.blurReplace)
-                    }
-                }
-                .font(.callout)
-                .foregroundStyle(.secondary)
-
-                if !scaleUp {
-                    buttonView
-                }
+                .padding(.leading, scaleUp ? 0 : minimizeWallpaperSize.width + 60)
+                .transition(
+                    .blurReplace
+                        .combined(with: .move(edge: scaleUp ? .trailing : .leading))
+                )
             }
-            .padding(.leading, scaleUp ? 0 : minimizeWallpaperSize.width + 60)
 
-            ScrollView(.horizontal) {
-                LazyHStack(spacing: 18) {
-                    Group(subviews: content) { collection in
-                        ForEach(collection.prefix(scaleUp ? collection.count : 3)) { subview in
-                            let index = collection.firstIndex(where: { $0.id == subview.id }) ?? 0
+            if !remove {
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 18) {
+                        Group(subviews: content) { collection in
+                            ForEach(collection.prefix(scaleUp ? collection.count : 3)) { subview in
+                                let index = collection.firstIndex(where: { $0.id == subview.id }) ?? 0
 
-                            subview
-                                .frame(width: width, height: height)
-                                .visualEffect { [scaleUp, expand] content, proxy in
-                                    let minX = proxy.frame(in: .scrollView).minX
-                                    return content
-                                        .scaleEffect(
-                                            scaleUp ? 1 : 1 - (CGFloat(index) * 0.1),
-                                            anchor: .trailing
-                                        )
-                                        .offset(x: scaleUp ? 0 : CGFloat(index) * 10)
-                                        .offset(x: expand ? 0 : -minX)
-                                }
-                                .zIndex(Double(-index))
+                                subview
+                                    .frame(width: width, height: height)
+                                    .visualEffect { [scaleUp, expand] content, proxy in
+                                        let minX = proxy.frame(in: .scrollView).minX
+                                        return content
+                                            .scaleEffect(
+                                                scaleUp ? 1 : 1 - (CGFloat(index) * 0.1),
+                                                anchor: .trailing
+                                            )
+                                            .offset(x: scaleUp ? 0 : CGFloat(index) * 10)
+                                            .offset(x: expand ? minX / 2 : -minX)
+                                    }
+                                    .opacity(index > 2 ? (expand ? 1 : 0) : 1)
+                                    .zIndex(Double(-index))
+                            }
                         }
                     }
                 }
+                .frame(height: height)
+                .allowsHitTesting(expand)
+                .transition(
+                    .blurReplace
+                        .combined(with: .move(edge: scaleUp ? .leading : .trailing))
+                )
             }
-            .frame(height: height)
-            .allowsHitTesting(expand)
         }
         .scrollIndicators(.hidden)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -186,15 +228,42 @@ struct WallpaperStackView<Content: View, ButtonView: View>: View {
         .frame(minHeight: remove ? contentExpandedHeight : minimizeWallpaperSize.height)
         .onChange(of: trigger) { _, _ in
             isExpanded.toggle()
+            /// cancel existing animation task
+            animationTask?.cancel()
+            animationTask = nil
             if isExpanded {
                 withAnimation(.interpolatingSpring(duration: 0.35, bounce: 0, initialVelocity: 0)) {
+                    remove = false
                     scaleUp = true
                 }
+
+                animationTask = .init {
+                    /// non spring animation for scroll interaction
+                    withAnimation(.easeInOut(duration: 0.22)) {
+                        expand = true
+                    }
+                }
+
+                guard let animationTask else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.32, execute: animationTask)
             } else {
                 /// Close
-                withAnimation(.interpolatingSpring(duration: 0.35, bounce: 0, initialVelocity: 0)) {
-                    scaleUp = false
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    remove = true
                 }
+
+                animationTask = .init {
+                    scaleUp = false
+                    expand = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                        withAnimation(.easeInOut(duration: 0.25)) {
+                            remove = false
+                        }
+                    }
+                }
+
+                guard let animationTask else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: animationTask)
             }
         }
     }
