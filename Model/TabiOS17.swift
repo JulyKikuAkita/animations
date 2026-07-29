@@ -82,6 +82,54 @@ enum VideoTab: String, CaseIterable {
     }
 }
 
+enum InstaTab: String, CaseIterable {
+    case feed = "Feed"
+    case reels = "Reels"
+    case messages = "Messages"
+    case search = "Search"
+    case profile = "Profile"
+
+    var symbolImage: String {
+        switch self {
+        case .feed:
+            "house.fill"
+        case .reels:
+            "play.rectangle"
+        case .messages:
+            "paperplane.fill"
+        case .search:
+            "magnifyingglass"
+        case .profile:
+            "person.crop.circle"
+        }
+    }
+}
+
+// X/Twitter tab
+enum XTab: String, CaseIterable {
+    case bookmarks = "Bookmarks"
+    case videos = "Videos"
+    case articles = "Articles"
+    case likes = "Likes"
+
+    var title: String {
+        rawValue
+    }
+
+    var symbolImage: String {
+        switch self {
+        case .bookmarks:
+            "bookmark"
+        case .videos:
+            "play.square.stack"
+        case .articles:
+            "long.text.page.and.pencil"
+        case .likes:
+            "heart"
+        }
+    }
+}
+
 enum AppleMusicTab: String, CaseIterable {
     /// rawValue: system image name
     case listenNow = "play.circle.fill"

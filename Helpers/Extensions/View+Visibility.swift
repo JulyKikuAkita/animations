@@ -60,4 +60,8 @@ extension View {
             .blur(radius: status ? 0 : 10)
             .opacity(status ? 1 : 0)
     }
+
+    func hideToolbar(_ toolbar: ToolbarPlacement) -> some View {
+        toolbarVisibility(.hidden, for: toolbar)
+    }
 }
