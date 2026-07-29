@@ -4,6 +4,19 @@
 //
 //  Created on 7/29/26.
 
+// Learning notes (see XStyleTabBar below for detail):
+// - Continuous progress, not discrete index: `onScrollGeometryChange` derives a fractional
+//   `scrollProgress` from contentOffset/containerSize, so the indicator and label collapse
+//   animate smoothly mid-swipe instead of snapping at page boundaries.
+// - One-way state sync to avoid feedback loops: scrolling drives `scrollProgress` -> tab bar;
+//   tapping a tab drives `scrollPosition.scrollTo` -> scroll view. Each direction only ever
+//   writes the other's input, never both at once.
+// - `onGeometryChange` in a shared `.coordinateSpace(.named("CONTAINER"))` captures each tab's
+//   frame after layout, which `interpolate(inputRange:outputRange:)` (see Interpolation.swift)
+//   then uses to slide/resize the underline indicator between arbitrary tab widths.
+// - `tabProgress = min(abs(cappedProgress - index), 1)` is a per-tab "distance from selected"
+//   value, reused to drive the icon crossfade, label width collapse, and blur mask together.
+
 import SwiftUI
 
 struct TextExpandableTabBarDemo: View {
@@ -79,11 +92,20 @@ protocol XStyleTabItem: CaseIterable, Hashable {
 
 extension XTab: XStyleTabItem {}
 
+/// Learning note — progress-driven tab bar whose label width collapses to an icon as it moves
+/// away from the selected tab, with a sliding underline sized to each tab's full (icon + text) width.
+/// - `progress`: continuous 0...(tabCount-1) value from the paired scroll view, not a discrete index —
+///   this is what makes the collapse/underline animate smoothly mid-swipe.
+/// - `tabLocation`: per-tab frame captured in the `"CONTAINER"` coordinate space, width-adjusted to
+///   include the full (untruncated) title so the underline reflects the tab's resting size, not its
+///   currently-collapsing size.
+/// - The leading/trailing `Spacer` around each tab extends its tap target into the inter-tab gap,
+///   since the label itself shrinks but the tap area shouldn't.
 struct XStyleTabBar<Value: XStyleTabItem>: View {
     var progress: CGFloat
     var onTap: (Value) -> Void
     /// View Properties
-    @State private var tabTitleWidth: [Value: CGFloat] = [:]
+    @State private var titleWidth: [Value: CGFloat] = [:]
     @State private var tabLocation: [Value: CGRect] = [:]
     var body: some View {
         HStack(spacing: 0) {
@@ -91,6 +113,8 @@ struct XStyleTabBar<Value: XStyleTabItem>: View {
                 let index = CGFloat(tabs.firstIndex(of: tab) ?? 0)
                 let tabProgress = min(abs(cappedProgress - index), 1)
 
+                /// maintain layout as
+                /// [A content] [A-trailing Spacer] [B-leading Spacer] [B content] [B-trailing Spacer] [C-leading Spacer] [C content]
                 if tab != tabs.first {
                     Spacer(minLength: 0)
                         .frame(height: 30)
@@ -100,7 +124,7 @@ struct XStyleTabBar<Value: XStyleTabItem>: View {
                         }
                 }
 
-                if let tableWidth = tabTitleWidth[tab] {
+                if let tabTitleWidth = titleWidth[tab] {
                     HStack(spacing: 0) {
                         ZStack {
                             Image(systemName: tab.symbolImage)
@@ -113,11 +137,15 @@ struct XStyleTabBar<Value: XStyleTabItem>: View {
                         }
                         .font(.system(size: 17, weight: .medium))
                         .frame(width: 25, height: 30, alignment: .leading)
+                        // Anchor on the icon, not the icon+text HStack: the HStack's width shrinks
+                        // every frame during scroll (Text narrows with tabProgress), so its geometry
+                        // is unstable. The icon's frame is fixed, giving a stable minX for the tab's
+                        // left edge; add the cached title width to get its full resting width.
                         .onGeometryChange(for: CGRect.self) { geometry in
                             geometry.frame(in: .named("CONTAINER"))
                         } action: { newValue in
                             var newRect = newValue
-                            newRect.size.width = newValue.width + tableWidth
+                            newRect.size.width = newValue.width + tabTitleWidth
                             tabLocation[tab] = newRect
                         }
 
@@ -126,7 +154,7 @@ struct XStyleTabBar<Value: XStyleTabItem>: View {
                             .opacity(1 - tabProgress)
                             .fixedSize(horizontal: true, vertical: true)
                             .frame(
-                                width: tableWidth * (1 - tabProgress),
+                                width: tabTitleWidth * (1 - tabProgress),
                                 alignment: .trailing
                             )
                             .lineLimit(1)
@@ -156,6 +184,8 @@ struct XStyleTabBar<Value: XStyleTabItem>: View {
         .padding(.bottom, 6)
         .overlay(alignment: .bottomLeading) {
             /// Resizing indicator
+            // Wait for every tab's frame to be measured before drawing, otherwise the indicator
+            // briefly renders at a wrong size/position off the first, partially-populated frames.
             if tabLocation.count == tabs.count {
                 let extraWidth: CGFloat = 15
                 let inputRange = tabs.indices.compactMap { CGFloat($0) }
@@ -183,7 +213,7 @@ struct XStyleTabBar<Value: XStyleTabItem>: View {
                 let width = NSString(string: tab.title).size(withAttributes: [
                     .font: UIFont.systemFont(ofSize: 16, weight: .semibold),
                 ]).width
-                tabTitleWidth[tab] = width
+                titleWidth[tab] = width
             }
         }
     }
