@@ -21,6 +21,10 @@ struct PicoCamPart1DemoView: View {
 
     var body: some View {
         GeometryReader { proxy in
+            let topInset = proxy.safeAreaInsets.top + PicoHardwareIslandMetrics.printFrameTop
+            // Preserves the original 12/55 tuck-into-bar relationship at any inset.
+            let printFrameTop = -(topInset * PicoHardwareIslandMetrics.printFrameTuckRatio)
+
             ZStack(alignment: .top) {
                 VStack(spacing: 0) {
                     PicoGalleryGrid(
@@ -54,7 +58,7 @@ struct PicoCamPart1DemoView: View {
                                     height: PicoHardwareIslandMetrics.cardLayoutSize.height
                                 )
                                 .scaleEffect(cardScale, anchor: .top)
-                                .offset(y: PicoHardwareIslandMetrics.printFrameTop + instantCardOffset)
+                                .offset(y: printFrameTop + instantCardOffset(printFrameTop: printFrameTop))
                         }
                         .clipped()
                         .zIndex(instantCardZIndex)
@@ -70,8 +74,7 @@ struct PicoCamPart1DemoView: View {
                     .scaleEffect(slotScale, anchor: .top)
                     .position(
                         x: proxy.size.width / 2,
-                        y: PicoHardwareIslandMetrics.printFrameTop +
-                            (PicoHardwareIslandMetrics.printFrameHeight / 2)
+                        y: printFrameTop + (PicoHardwareIslandMetrics.printFrameHeight / 2)
                     )
                     .zIndex(12)
                     .gesture(slotResizeGesture, isEnabled: flowState == .generationMode)
@@ -90,11 +93,11 @@ struct PicoCamPart1DemoView: View {
                 .fill(.black)
                 .frame(
                     width: topBarWidth,
-                    height: PicoHardwareIslandMetrics.dynamicIslandTopBarHeight
+                    height: topInset
                 )
                 .position(
                     x: proxy.size.width / 2,
-                    y: -PicoHardwareIslandMetrics.dynamicIslandTopBarHeight / 2
+                    y: -topInset / 2
                 )
                 .opacity(flowState == .gallery ? 0 : 1)
                 .zIndex(11)
@@ -187,8 +190,7 @@ struct PicoCamPart1DemoView: View {
     // .flash starts the card hidden behind the bar (top at -0.9 ×
     // cardVisualHeight). .ejectingCard slides the top down so 15% stays
     // tucked behind the bar and the remaining 85% prints out.
-    private var instantCardOffset: CGFloat {
-        let printFrameTop = PicoHardwareIslandMetrics.printFrameTop
+    private func instantCardOffset(printFrameTop: CGFloat) -> CGFloat {
         let cardVisualHeight = PicoHardwareIslandMetrics.cardLayoutSize.height * cardScale
         switch flowState {
         case .flash:
@@ -592,10 +594,13 @@ private extension Card {
 private enum PicoHardwareIslandMetrics {
     static let baseDynamicIslandWidth: CGFloat = 128
     static let dynamicIslandHeight: CGFloat = 34
-    static let dynamicIslandTopBarHeight: CGFloat = 55
     static let frameEdgeThickness: CGFloat = 16
     static let printFrameHeight: CGFloat = 112
     static let printFrameTop: CGFloat = -12
+    // Fraction of the top bar's height (== the device's top safe-area inset)
+    // that the print frame tucks up into it, for a seamless bar→frame blend.
+    // Preserves the original fixed 12pt/55pt tuck across any device's inset.
+    static let printFrameTuckRatio: CGFloat = 12.0 / 55.0
     static let dragScaleSensitivity: CGFloat = 220
     // Height keeps the bottom white margin at ~30% of the image height
     // (174 − 10 top padding − 126 image = 38 ≈ 30% × 126).
