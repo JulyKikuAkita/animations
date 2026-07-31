@@ -460,6 +460,7 @@
 		96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */; };
 		96EBF5E12BD793B400FDD20D /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBF5E02BD793B400FDD20D /* ColorModel.swift */; };
 		96F0A6BA2E963F1D000B572E /* Dummies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0EA1752DEBBAB000C62391 /* Dummies.swift */; };
+		96F1A4C6301D36D900503502 /* SiriBubbleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F1A4C5301D36CB00503502 /* SiriBubbleTextField.swift */; };
 		96F7CF892EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F7CF882EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift */; };
 		96F9A6ED2B9FACE100FD6900 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */; };
 		96F9D16D2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */; };
@@ -972,6 +973,7 @@
 		96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerButton.swift; sourceTree = "<group>"; };
 		96EACD142BAF7E6C0056A012 /* UniversalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAlert.swift; sourceTree = "<group>"; };
 		96EBF5E02BD793B400FDD20D /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		96F1A4C5301D36CB00503502 /* SiriBubbleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriBubbleTextField.swift; sourceTree = "<group>"; };
 		96F7CF882EBE9D5D00C99DCD /* AnimatedBottomSearchBarDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBottomSearchBarDemoView.swift; sourceTree = "<group>"; };
 		96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		96F9D16C2D5C3D7E00CD134B /* InfiniteHorizontalScrollViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteHorizontalScrollViewDemo.swift; sourceTree = "<group>"; };
@@ -1857,6 +1859,7 @@
 		96301B322C2A5FAB00775407 /* TextFieldView */ = {
 			isa = PBXGroup;
 			children = (
+				96F1A4C5301D36CB00503502 /* SiriBubbleTextField.swift */,
 				96C8D5EB2FA68839008C57D5 /* BorderBeamTextFieldView.swift */,
 				968B61042F2442CD003BCF16 /* SlideToCancelText.swift */,
 				968B5F9D2F22FC78003BCF16 /* TextFieldMicroInteractionView.swift */,
@@ -3819,6 +3822,7 @@
 				AB40B84C2C9F60A700BC7747 /* GridTransitionView.swift in Sources */,
 				9642236D2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */,
 				AB40B8472C9F5F9A00BC7747 /* Note.swift in Sources */,
+				96F1A4C6301D36D900503502 /* SiriBubbleTextField.swift in Sources */,
 				96352D532C0ED913001AD2FD /* VerticalCircularCarouselView.swift in Sources */,
 				968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */,
 				9663BB542DDE992700037CF1 /* Date+Extensions.swift in Sources */,
