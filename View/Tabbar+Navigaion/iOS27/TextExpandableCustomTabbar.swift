@@ -111,6 +111,21 @@ struct XStyleTabBar<Value: XStyleTabItem>: View {
         HStack(spacing: 0) {
             ForEach(tabs, id: \.title) { tab in
                 let index = CGFloat(tabs.firstIndex(of: tab) ?? 0)
+
+                /// Per-tab collapse progress driving the icon+text expand/collapse effect.
+                ///
+                /// A continuous 0...1 "distance from selected" value, not a boolean, so the
+                /// collapse tracks smoothly mid-swipe instead of snapping at tab boundaries.
+                /// It fans out into three effects on the label below:
+                /// - Text width: `tabTitleWidth * (1 - tabProgress)` shrinks the label from its
+                ///   cached full-text width down to zero.
+                /// - Text opacity: `1 - tabProgress` fades the label in sync with the shrink.
+                /// - Blur mask: ramps with `tabProgress` so the narrowing edge reads as a
+                ///   dissolve rather than a hard clip.
+                ///
+                /// The icon stays a fixed size and only crossfades tint (gray ↔ primary) via two
+                /// overlaid images at `opacity(tabProgress)` / `opacity(1 - tabProgress)`, which
+                /// also keeps its frame stable for the underline's geometry capture.
                 let tabProgress = min(abs(cappedProgress - index), 1)
 
                 /// maintain layout as
