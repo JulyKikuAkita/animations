@@ -64,6 +64,14 @@ private struct StackedToastsView: View {
 
     var body: some View {
         /// Using scrollView with visualEffect API to create stack  (not using zStack)
+
+        /// The container starts 25pt below its resting spot and rises as toasts stack up, settling
+        /// fully once there are 3+ toasts (matching the "2 toasts peek behind the front one" cap above):
+        ///   0 or 1 toasts -> (count - 1) * 12.5 clamps to 0  -> offset stays at 25 (lowest position)
+        ///   2 toasts      -> 1 * 12.5 clamps to 12.5         -> offset 12.5 (halfway settled)
+        ///   3+ toasts     -> 2 * 12.5 = 25, clamps to 25     -> offset 0 (fully settled, stays there)
+        let settledDistance = (CGFloat(toasts.count - 1) * 12.5).clamped(to: 0 ... 25)
+
         ScrollView(.vertical) {
             VStack(spacing: 0) {
                 ForEach(toasts.reversed()) { toast in
@@ -74,8 +82,19 @@ private struct StackedToastsView: View {
                     }
                     .visualEffect { content, proxy in
                         let minY = proxy.frame(in: .scrollView).minY
+                        /// How many toast-heights this card sits below the front card:
+                        /// 0 for the front toast, 1 for the one directly behind it, 2 for the one behind that, etc.
                         let progress = minY / singleToastFrameHeight
-                        /// only push 2 toasts
+
+                        /// Only the front toast and the 2 behind it get a distinct push/scale, so the
+                        /// stack reads as "one card with a couple of edges peeking out":
+                        ///   progress 0 (front toast)  -> offset  0,   scale 0
+                        ///   progress 1 (2nd toast)    -> offset 10,   scale 0.05
+                        ///   progress 2 (3rd toast)    -> offset 20,   scale 0.1   (cap reached)
+                        ///   progress 3+ (4th+ toasts) -> same as 3rd toast - they land on an identical
+                        ///                               offset/scale, so they hide exactly behind it.
+                        /// `min(...)` is a one-sided cap (not a full clamp) because `progress` never goes
+                        /// negative here - the front toast is always at minY == 0.
                         let offset = min(progress * 10, 20)
                         let scale = min(progress * 0.05, 0.1)
 
@@ -98,7 +117,7 @@ private struct StackedToastsView: View {
         .scrollIndicators(.hidden)
         .scrollClipDisabled()
         .frame(height: toastContainerHeight)
-        .offset(y: 25 - max(min(CGFloat(toasts.count - 1) * 12.5, 25), 0))
+        .offset(y: 25 - settledDistance)
         .swipeActionsContainer()
         .background { /// add soft blur background using safe area bar
             /// soft area bar proves soft and hard blur scroll effects but this is a custom overlay view,
