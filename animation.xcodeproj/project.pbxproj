@@ -26,6 +26,7 @@
 		961868B82BC7A78700552748 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961868B72BC7A78700552748 /* FloatingButton.swift */; };
 		961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */; };
 		961BD7692CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961BD7682CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift */; };
+		961D2EBD3023168300D3B1EC /* TimelineSliderIOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D2EBC3023167A00D3B1EC /* TimelineSliderIOS27.swift */; };
 		961F3B8F2B8818240055D79B /* animationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B8E2B8818240055D79B /* animationApp.swift */; };
 		961F3B912B8818240055D79B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961F3B902B8818240055D79B /* ContentView.swift */; };
 		961F3B932B8818250055D79B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 961F3B922B8818250055D79B /* Assets.xcassets */; };
@@ -290,6 +291,7 @@
 		968D2D7B2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */; };
 		968D2E9E2B8EB56500007734 /* TabiOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9D2B8EB56500007734 /* TabiOS17.swift */; };
 		968D2EA02B8EB69800007734 /* AnimatedTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */; };
+		968E2FC230297A3B00E635A3 /*  StackedGlassToastsView+IOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E2FC130297A2D00E635A3 /*  StackedGlassToastsView+IOS27.swift */; };
 		968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */; };
 		968E55092C61BAD400EB5F52 /* GridCompositionalLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */; };
 		969219DC2D6D9EEA00326523 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969219DB2D6D9EE300326523 /* Contact.swift */; };
@@ -641,6 +643,7 @@
 		961868B72BC7A78700552748 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		961BD7492CA4C17C005ABFD6 /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		961BD7682CA4DC8C005ABFD6 /* GridTransitionView+SearchQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GridTransitionView+SearchQuery.swift"; sourceTree = "<group>"; };
+		961D2EBC3023167A00D3B1EC /* TimelineSliderIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSliderIOS27.swift; sourceTree = "<group>"; };
 		961F3B8B2B8818240055D79B /* animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		961F3B8E2B8818240055D79B /* animationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animationApp.swift; sourceTree = "<group>"; };
 		961F3B902B8818240055D79B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -843,6 +846,7 @@
 		968D2D7A2B8C65E500007734 /* WindowSharedModelHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSharedModelHeroAnimationView.swift; sourceTree = "<group>"; };
 		968D2E9D2B8EB56500007734 /* TabiOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabiOS17.swift; sourceTree = "<group>"; };
 		968D2E9F2B8EB69800007734 /* AnimatedTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabView.swift; sourceTree = "<group>"; };
+		968E2FC130297A2D00E635A3 /*  StackedGlassToastsView+IOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " StackedGlassToastsView+IOS27.swift"; sourceTree = "<group>"; };
 		968E54572C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBottomSheetsView.swift; sourceTree = "<group>"; };
 		968E55082C61BAD400EB5F52 /* GridCompositionalLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCompositionalLayoutView.swift; sourceTree = "<group>"; };
 		969219DB2D6D9EE300326523 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -1478,6 +1482,7 @@
 		9609DB172DBB2CC300A76F95 /* ToastView */ = {
 			isa = PBXGroup;
 			children = (
+				968E2FC130297A2D00E635A3 /*  StackedGlassToastsView+IOS27.swift */,
 				969B8D0E2F9427E30081EE29 /* LiquidGlassToastView+IOS26.swift */,
 				96C5C15B2F6A7E2800CDCFB0 /* ConcentricRectangle+BackPort+iOS18.swift */,
 				967049282CC4BDDA0056269C /* ToastView+IOS18.swift */,
@@ -1915,6 +1920,7 @@
 		963B862B2CE94F9400C3FB0D /* Slider */ = {
 			isa = PBXGroup;
 			children = (
+				961D2EBC3023167A00D3B1EC /* TimelineSliderIOS27.swift */,
 				96C9386A2FEB3D530024A6AF /* GlassStyleSlider.swift */,
 				96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */,
 				963B862C2CE94FAD00C3FB0D /* ExpandableSlideriOS18View.swift */,
@@ -3525,6 +3531,7 @@
 				968B628E2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */,
 				961BD74A2CA4C17C005ABFD6 /* UIImage+Color.swift in Sources */,
 				96921B8B2D6FC19000326523 /* BookCardView.swift in Sources */,
+				961D2EBD3023168300D3B1EC /* TimelineSliderIOS27.swift in Sources */,
 				ABAA1BA22E73BCD4003535CF /* CustomList+iOS26.swift in Sources */,
 				9621DC8F2BF1E9AD00183CB7 /* SwipeActionDemoView.swift in Sources */,
 				9656AC3E2FD382E60063550D /* ScrollToHideHeaderInstagramView.swift in Sources */,
@@ -3660,6 +3667,7 @@
 				AB0EA17A2DEBBB5100C62391 /* DummyViews.swift in Sources */,
 				962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */,
 				961F3BBF2B897A310055D79B /* Profile.swift in Sources */,
+				968E2FC230297A3B00E635A3 /*  StackedGlassToastsView+IOS27.swift in Sources */,
 				AB33103E2F307D2C00FC2FA5 /* DIRQScannerView.swift in Sources */,
 				963B87DA2CEC0F3B00C3FB0D /* InboxTabModel.swift in Sources */,
 				ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */,

@@ -54,3 +54,22 @@ let sportItems: [SportItem] = [
           rotation: 250,
           extraOffset: -100),
 ]
+
+/// Use in  TimelineSliderIOS27.swift
+/// Apple Sports App's Timeline Slider Interaction
+protocol GroupTabItem: CaseIterable, Hashable {
+    var symbolImage: String { get }
+}
+
+enum Sport: String, GroupTabItem {
+    case soccer = "soccerball"
+    case tennis = "tennis.racket"
+    case basketball = "basketball.fill"
+    case cricket = "cricket.ball.fill"
+    case skiing = "skis"
+    case golf = "figure.golf"
+
+    var symbolImage: String {
+        rawValue
+    }
+}

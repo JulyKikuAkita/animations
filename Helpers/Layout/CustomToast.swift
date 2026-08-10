@@ -44,8 +44,8 @@ private class PassthroughWindow: UIWindow {
 
 /// a signleton object as a state object to receive UI updates on the overlay window root controller
 @Observable
-class Toast {
-    static let shared = Toast()
+class ToastClass {
+    static let shared = ToastClass()
     fileprivate var toasts: [ToastItem] = []
 
     func present(title: String,
@@ -82,7 +82,7 @@ enum ToastTime: CGFloat {
 }
 
 private struct ToastGroup: View {
-    var model = Toast.shared
+    var model = ToastClass.shared
     let tabbarHeigh: CGFloat = 69
 
     var body: some View {
@@ -203,7 +203,7 @@ private struct ToastViewiOS17: View {
             delayTask.cancel()
         }
         withAnimation(.snappy) {
-            Toast.shared.toasts.removeAll(where: { $0.id == item.id })
+            ToastClass.shared.toasts.removeAll(where: { $0.id == item.id })
         }
     }
 
@@ -219,7 +219,7 @@ private struct ToastViewiOS17: View {
 
     /// use state change for animation
     func removeToastItem() {
-        Toast.shared.toasts.removeAll(where: { $0.id == item.id })
+        ToastClass.shared.toasts.removeAll(where: { $0.id == item.id })
     }
 }
 
@@ -227,7 +227,7 @@ struct CustomToastView: View {
     var body: some View {
         VStack {
             Button("OK!") {
-                Toast.shared.present(
+                ToastClass.shared.present(
                     title: "Thank you!",
                     symbol: "heart",
                     isUserInteractionEnabled: true
