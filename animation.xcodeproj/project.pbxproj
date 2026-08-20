@@ -341,6 +341,7 @@
 		96A1D4B02F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
 		96A1D4B22F3DA9D400377C99 /* DummyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */; };
+		96A3A18A30369D3B00DE07D3 /* Multi-ItemSection+ReorderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3A18930369D0300DE07D3 /* Multi-ItemSection+ReorderAPI.swift */; };
 		96A3B4282FF989FE003A1083 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3B4272FF989FA003A1083 /* Date.swift */; };
 		96A3B4292FF989FE003A1083 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3B4272FF989FA003A1083 /* Date.swift */; };
 		96A3B42A2FF989FE003A1083 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A3B4272FF989FA003A1083 /* Date.swift */; };
@@ -879,6 +880,7 @@
 		96A1D2E72F3463C800377C99 /* Paywall3DAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paywall3DAnimation.swift; sourceTree = "<group>"; };
 		96A1D4AD2F3DA34600377C99 /* CustomToolBarIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBarIOS26.swift; sourceTree = "<group>"; };
 		96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyEventView.swift; sourceTree = "<group>"; };
+		96A3A18930369D0300DE07D3 /* Multi-ItemSection+ReorderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Multi-ItemSection+ReorderAPI.swift"; sourceTree = "<group>"; };
 		96A3B4272FF989FA003A1083 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		96A3B42B2FF98AAF003A1083 /* HorizontalInfiniteScrollDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalInfiniteScrollDateView.swift; sourceTree = "<group>"; };
 		96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2DSliderTonePickerDemoView.swift; sourceTree = "<group>"; };
@@ -2211,6 +2213,14 @@
 			path = 3DAnimation;
 			sourceTree = "<group>";
 		};
+		96A3A18830369CEE00DE07D3 /* iOS27-API */ = {
+			isa = PBXGroup;
+			children = (
+				96A3A18930369D0300DE07D3 /* Multi-ItemSection+ReorderAPI.swift */,
+			);
+			path = "iOS27-API";
+			sourceTree = "<group>";
+		};
 		96AC80FB2C84F89300ABBE78 /* ScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2328,6 +2338,7 @@
 		96E4E6032D178F350020261F /* PickerView */ = {
 			isa = PBXGroup;
 			children = (
+				96A3A18830369CEE00DE07D3 /* iOS27-API */,
 				96E4E5FF2D178F350020261F /* DropdownPickerView.swift */,
 				96E4E6002D178F350020261F /* ExpandableWheelPickerView.swift */,
 				96E4E6012D178F350020261F /* ImagePicker.swift */,
@@ -3673,6 +3684,7 @@
 				ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */,
 				969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */,
 				96A71C702F88D0DC005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift in Sources */,
+				96A3A18A30369D3B00DE07D3 /* Multi-ItemSection+ReorderAPI.swift in Sources */,
 				96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */,
 				96E4E5FD2D1788830020261F /* AsyncImageViewer.swift in Sources */,
 				9621DC912BF1EDB100183CB7 /* ActionModel.swift in Sources */,
