@@ -3,13 +3,74 @@
 //  animation
 //
 //  Created on 8/19/26.
-//  Learning notes: iOS 27 reordering combines three responsibilities:
-//  1. reorderable(collectionID:) marks each section's ForEach as movable.
-//  2. reorderContainer scopes the interaction and applies the resulting move.
-//  3. dragContainer supplies transferable values for custom drop destinations.
 //
-//  The system reorder API needs an existing item to calculate an insertion position.
-//  This sample adds a custom drop destination so an empty section can still receive apps.
+//  Learning point
+//  ──────────────
+//  Two grid sections that exchange items by drag. iOS 27 splits reordering
+//  across three modifiers, and the demo is really about where each one's
+//  responsibility ends:
+//    1. `.reorderable(collectionID:)` marks a `ForEach` as movable and names
+//       the collection its rows belong to.
+//    2. `.reorderContainer(for:in:)` scopes the interaction and hands back a
+//       `ReorderDifference` for the app to apply.
+//    3. `.dragContainer(for:)` turns dragged IDs into transferable models,
+//       which is what a custom drop destination needs.
+//
+//  The gap worth remembering: a `ReorderDifference` destination is either
+//  `.before(itemID)` or `.end` of a collection SwiftUI already knows about, so
+//  an *empty* section offers nothing to aim at and never becomes a reorder
+//  destination. That is why the empty state carries its own `dropDestination`
+//  and its own insertion path.
+//
+//  Mechanics
+//  ─────────
+//    1. `sections` is the only source of truth. `AppSectionView` receives a
+//       value copy plus a callback, so both drop paths mutate in the parent.
+//    2. Reorder path: remove the sources from whichever section holds them,
+//       then compute the landing index *against the already-mutated array*,
+//       then insert.
+//    3. Empty-section path: the same removal, then a plain append — there is no
+//       position to compute.
+//    4. Multi-select: `.dragContainerSelection` publishes the selection so one
+//       drag carries every selected item; `.dragContainer` maps those IDs back
+//       to models.
+//    5. `.onDropSessionUpdated` drives only the dashed affordance, never data.
+//
+//  Key APIs
+//  ────────
+//  • `.reorderable(collectionID:)` — a `DynamicViewContent` modifier, so it
+//    belongs on the `ForEach` itself, not on the enclosing grid.
+//  • `.reorderContainer(for:in:)` — `in:` is the *collection ID type*, which
+//    has to match what `reorderable(collectionID:)` passes.
+//  • `ReorderDifference` — `sources: [ItemID]` plus a destination of
+//    `collectionID` and `.before(ItemID)` / `.end`. IDs only; model lookup is
+//    the app's job.
+//  • `.dragContainer(for:)` — closure receives `[Item.ID]`, returns `[Item]`.
+//  • `.dragContainerSelection(_:)` — takes an `@autoclosure`, so the array is
+//    re-read when a drag begins rather than snapshotted at view-build time.
+//  • `.onDropSessionUpdated` — `DropSession.Phase` is
+//    `.entering` / `.active` / `.exiting` / `.ended(_)` / `.dataTransferCompleted`.
+//  • `ProxyRepresentation(exporting: \.id)` — send identity, not the model.
+//  • `.contentShape(.dragPreview, .rect(cornerRadius:))` — shape the lifted
+//    preview independently of the hit-test shape.
+//
+//  Trade-offs to stay clear-eyed about
+//  ───────────────────────────────────
+//  • The two paths duplicate the "remove from the owning section" loop. They
+//    have to stay in step; only the insertion half legitimately differs.
+//  • `contains(ids:)` is an `allSatisfy`, so a selection spanning *both*
+//    sections matches neither and the drag silently carries nothing. This
+//    demo is correct for single-section selections only.
+//  • The destination is typed on `AppItem.ID`, i.e. `String`, which is what
+//    lets the proxy representation land — but it also means any dragged text
+//    lights up the affordance.
+//
+//  How to apply
+//  ────────────
+//  Reach for this when sections can be emptied and refilled: the reorder API
+//  covers every populated case, and the custom destination is the minimum
+//  needed to make "drag into nothing" work. Sections that can never be empty
+//  do not need the second path at all.
 //
 // minimal version required: xcdoe27 beta5
 // see https://developer.apple.com/documentation/swiftui/view/ondropsessionupdated%28_%3A%29
@@ -32,6 +93,8 @@ struct ReorderableItemDemo: View {
     ]
     // Editing mode controls whether taps build a multi-item drag selection.
     @State private var isMultipleSelectionEnabled: Bool = false
+    // One set spans both sections, so a selection can straddle them — which the
+    // section-owning lookups below cannot resolve. See the header trade-offs.
     @State private var multipleSelection: Set<AppItem.ID> = []
 
     var body: some View {
@@ -70,6 +133,10 @@ struct ReorderableItemDemo: View {
                       !sourceItems.isEmpty else { return }
 
                 // A destination is either before an existing item or at the collection end.
+                // Computed, not stored, and deliberately declared *after* the removal above:
+                // it reads `sections` at the point of use, so the index already accounts for
+                // the extracted items. Hoisting this over the loop would leave it stale for
+                // any move within one section.
                 var destinationIndex: Int {
                     let items = sections[landingSectionIndex].apps
                     switch destination {
@@ -83,6 +150,7 @@ struct ReorderableItemDemo: View {
                 multipleSelection.removeAll()
             }
             // Supplies dragged models for custom destinations, including empty sections.
+            // The container hands over IDs only, so the models are looked up here.
             .dragContainer(for: AppItem.self) { draggedItemIDs in
                 var draggedItems: [AppItem] = []
                 for section in sections {
@@ -92,13 +160,17 @@ struct ReorderableItemDemo: View {
                 }
                 let selectIDs = Array(multipleSelection)
                 // Starting a drag outside the active selection resets that selection.
+                // Read the containment in that direction: the payload contains every
+                // selected ID exactly when the gesture picked up the selection itself.
                 if !(isMultipleSelectionEnabled && draggedItems.contains(ids: selectIDs)) {
                     /// cleanup selected IDs
                     multipleSelection.removeAll()
                 }
                 return draggedItems
             }
-            // Passes the current selection to a multi-item drag session.
+            // Passes the current selection to a multi-item drag session. The parameter is an
+            // autoclosure, so this is a live read at drag time, not a stale copy from the
+            // last body evaluation.
             .dragContainerSelection(Array(multipleSelection))
             .padding(15)
             .background(.gray.opacity(0.1))
@@ -117,7 +189,10 @@ struct ReorderableItemDemo: View {
 
     /// Moves apps into an empty section, where reordering has no item from which
     /// to calculate a precise insertion position.
+    ///
+    /// The removal half mirrors the `reorderContainer` closure; only the insertion differs.
     private func insertNewItem(_ section: AppSection, ids: [AppItem.ID]) {
+        // Resolved before the loop below shadows `section` with its own binding.
         guard let sectionIndex = sections.firstIndex(where: { $0.id == section.id }) else { return }
         var sourceItems: [AppItem] = []
         for (index, section) in sections.enumerated() {
@@ -166,6 +241,9 @@ private struct AppSectionView: View {
                             .clipShape(.rect(cornerRadius: 28))
                             // Match the lifted drag preview to the rounded image card.
                             .contentShape(.dragPreview, .rect(cornerRadius: 28))
+                            // A raw `TapGesture` rather than a `Button`: selection must not
+                            // compete with the long-press that begins a drag, and the gesture
+                            // is disabled outright once editing ends.
                             .gesture(TapGesture().onEnded {
                                 if multipleSelection.contains(app.id) {
                                     multipleSelection.remove(app.id)
@@ -176,6 +254,8 @@ private struct AppSectionView: View {
                             .padding(8)
                     }
                     // Connect this ForEach to the matching section in the reorder container.
+                    // It modifies `DynamicViewContent`, so it has to sit on the ForEach —
+                    // moving it out to the grid would not compile against the same overload.
                     .reorderable(collectionID: section.id)
                 }
                 .padding(15)
@@ -197,12 +277,20 @@ private struct AppSectionView: View {
                             .stroke(.green, style: StrokeStyle(lineWidth: 1, dash: [10, 3]))
                             .opacity(isDropping ? 1 : 0)
                     }
+                    // The placeholder is mostly empty space, so give the whole frame a
+                    // hit-testable shape or most of the section would not accept a drop.
                     .contentShape(.rect)
+                    // Receives `AppItem.ID`, which works because `AppItem` exports its id —
+                    // see `transferRepresentation`. The drop location is unused: an empty
+                    // section has no geometry to position against.
                     .dropDestination(for: AppItem.ID.self, isEnabled: true) { ids, _ in
                         droppedItemIDs(ids)
                         multipleSelection.removeAll()
                     }
                     // Animate only the visual affordance while the session changes.
+                    // Matching `.active` alone means the border appears a beat after
+                    // `.entering`, and needs no teardown: `.exiting` and `.ended` both
+                    // fail the comparison and clear it.
                     .onDropSessionUpdated { session in
                         withAnimation(.easeInOut(duration: 0.2)) {
                             isDropping = session.phase == .active
@@ -233,17 +321,25 @@ private struct AppItem: Identifiable & Transferable {
 
     static var transferRepresentation: some TransferRepresentation {
         // Transfer only the ID; the drag container looks up the full model in `sections`.
+        // This is also what makes a destination typed on `AppItem.ID` able to receive
+        // something dragged as `AppItem`.
         ProxyRepresentation(exporting: \.id)
     }
 }
 
 private extension [AppItem] {
     /// Returns matching apps in the collection's current order.
+    ///
+    /// Order comes from the array, not from `ids`, which is what keeps a multi-item move
+    /// from scrambling the selection.
     func filtered(by ids: [String]) -> [AppItem] {
         self.filter { ids.contains($0.id) }
     }
 
     /// True only when every supplied ID belongs to this section.
+    ///
+    /// Used to find the one section that owns a payload, so a payload split across two
+    /// sections matches neither.
     func contains(ids: [String]) -> Bool {
         ids.allSatisfy { id in
             self.contains { $0.id == id }
