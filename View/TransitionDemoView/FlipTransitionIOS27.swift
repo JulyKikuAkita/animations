@@ -62,6 +62,11 @@ private struct FlipTransitionConfig {
     var sourceCornerRadius: CGFloat = 20
     var destinationCornerRadius: CGFloat = 35
     var sourceExtendedBackgroundColor: Color = .init(UIColor.systemGray6)
+    /// Drives both halves of the flip. Keeping it single-valued is load-bearing, not just tidiness:
+    /// `FlipEffectModifier` swaps faces at `progress > 0.5` on the assumption that progress and `rotation` reach
+    /// their midpoints together. Animating the two directions on different curves puts the swap somewhere other
+    /// than the edge-on frame, and the cut becomes visible.
+    var animation: Animation = .linear(duration: 1)
 }
 
 @available(iOS 27.0, *)
@@ -83,7 +88,11 @@ struct FlipTransition<Content: View, Destination: View, ContextActions: View>: V
                 .contextMenuPreview,
                 .rect(cornerRadius: config.sourceCornerRadius)
             )
+            /// The source stays in the hierarchy while the cover is up (it keeps reporting geometry), so it has to be
+            /// hidden instead of removed — otherwise it shows through underneath the flipping snapshot.
             .opacity(showDestination ? 0 : 1)
+            /// Global coordinates: the flip runs inside a fullScreenCover, a separate presentation hierarchy with no
+            /// shared coordinate space to convert from.
             .onGeometryChange(for: CGRect.self, of: {
                 $0.frame(in: .global)
             }, action: { newValue in
@@ -99,7 +108,10 @@ struct FlipTransition<Content: View, Destination: View, ContextActions: View>: V
                     }
                 }
                 contextActions
-            } preview: { /// set context menu preview position
+            } preview: {
+                /// Without an explicit frame the preview sizes to the content's ideal size, which differs from the
+                /// grid-stretched source card — the flip would then start from a box that never matched what the
+                /// user just long-pressed.
                 content
                     .frame(width: sourceRect.width, height: sourceRect.height)
             }
@@ -115,18 +127,28 @@ struct FlipTransition<Content: View, Destination: View, ContextActions: View>: V
             }
     }
 
-    /// TODO: add comment why this is better than pass the source view (content) to the destination view directly
-    /// convert source view to an image instead of directly pass to destination
-    ///  we can use the resizable source for flip effect
+    /// Rasterizes the source card and hands the bitmap to the destination rather than re-building `content` there.
+    /// The front face has to *stretch* from source size to destination size; a live copy of `content` would instead
+    /// re-run layout at every intermediate size, so text rewraps and stacks reflow and the face visibly reshuffles
+    /// instead of growing. A single `.resizable()` texture scales as one unit, and it avoids standing up a second
+    /// live copy of the source that would own its own state and animations.
     private func expandDestination() {
-        // create an image, not display source view again on transition
         let renderer = ImageRenderer(
             content: content
+                /// ImageRenderer renders outside the view tree and inherits none of its environment, so the ambient
+                /// color scheme has to be re-injected or the snapshot always comes out in light mode.
                 .environment(\.colorScheme, colorScheme)
         )
         renderer.scale = displayScale
         sourceImage = renderer.uiImage
+        /// Presenting while the context menu is still on screen collides with its dismissal transition; the short
+        /// delay lets the menu start collapsing first. `disablesAnimations` suppresses fullScreenCover's own slide-up
+        /// so the flip is the only visible motion.
+        /// TODO: this delay is a guess at the menu's teardown, making it the most fragile line here — it belongs in
+        /// the config at least, and ideally keys off an actual dismissal signal rather than wall-clock.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
+            /// TODO: replace with `withoutAnimation { }` from Helpers/Extensions/View+Animation.swift — that helper
+            /// documents itself as the preferred spelling and this is one of two hand-rolled copies in this file.
             var transaction = Transaction()
             transaction.disablesAnimations = true
             withTransaction(transaction) {
@@ -136,6 +158,8 @@ struct FlipTransition<Content: View, Destination: View, ContextActions: View>: V
     }
 }
 
+/// TODO: gate at iOS 27 like the rest of the file. Only `FlipTransition` presents this and that is 27-only, so the
+/// 26 lower bound can never be exercised — `.glassEffect` is the only member that actually needs 26.
 @available(iOS 26.0, *)
 private struct FlipDestinationView<Destination: View>: View {
     var config: FlipTransitionConfig
@@ -145,10 +169,13 @@ private struct FlipDestinationView<Destination: View>: View {
     /// View Properties
     @State private var animate: Bool = false
     @State private var rotation: CGFloat = .zero
+    /// TODO: `private`, along with `animationTransaction` / `dismissTransactions` below — the only unqualified
+    /// members in a file that marks everything else private.
     @Environment(\.dismiss) var dismiss
     var body: some View {
         GeometryReader {
             let size = $0.size
+            /// Proportional to the screen, but capped so the card stays a card on iPad instead of spanning the window.
             let maxWidth = min(size.width * 0.88, 500)
             let maxHeight = min(size.height * 0.5, 500)
 
@@ -182,14 +209,27 @@ private struct FlipDestinationView<Destination: View>: View {
                         }
                     }
                     .overlay {
-                        // use max for aspect fill // todo: comment explain why
+                        /// Aspect-fit. The source tile and the destination rarely share an aspect ratio, so one axis
+                        /// has slack: `min` keeps the whole destination inside the animating box and letterboxes that
+                        /// axis (the gap is covered by the glass background below). `max` would aspect-fill instead —
+                        /// no gap, but the overflow is cut by `clipShape`, which crops the destination's own chrome
+                        /// while the card is still near source size.
                         let scale = min(transformWidth / maxWidth, transformHeight / maxHeight)
 
                         destination(dismissTransactions)
+                            /// The destination is laid out once, at its final size, and only ever scaled from there.
+                            /// Driving this frame with `transformWidth/Height` would re-run its layout on every
+                            /// animation frame — text rewrapping and stacks reflowing mid-flip.
                             .frame(width: maxWidth, height: maxHeight)
                             .scaleEffect(scale)
+                            /// `scaleEffect` is render-only: the view keeps reporting `maxWidth × maxHeight` upward
+                            /// no matter how small it draws. This second frame collapses the reported size down to
+                            /// what is actually on screen, so the clip shape, glass background and the 3D rotation
+                            /// anchor track the visible card instead of the full-size layout box. `.top` matches the
+                            /// front face's alignment so both faces grow from the same edge.
                             .frame(width: transformWidth, height: transformHeight, alignment: .top)
-                            // flip content 180
+                            /// The back face is seen through the rotation and therefore arrives mirrored;
+                            /// pre-mirroring cancels it out so text reads correctly once the card is face-on.
                             .scaleEffect(x: -1)
                             .background {
                                 // workaround for glass background using background closure
@@ -228,9 +268,12 @@ private struct FlipDestinationView<Destination: View>: View {
         .onAppear(perform: animationTransaction)
     }
 
+    /// TODO: rename this pair — neither involves a `Transaction`, and the plural is inconsistent.
+    /// `expand()` / `collapse()` says what happens, and `collapse` is also what callers receive as their
+    /// `dismiss` closure.
     func animationTransaction() {
         guard !animate else { return }
-        withAnimation(.linear(duration: 1)) {
+        withAnimation(config.animation) {
             animate = true
             rotation = 180
         }
@@ -238,11 +281,17 @@ private struct FlipDestinationView<Destination: View>: View {
 
     func dismissTransactions() {
         guard animate else { return }
-        withAnimation(.linear(duration: 1), completionCriteria: .logicallyComplete) {
+        /// 180 → 360 rather than back to 0 so the card keeps turning the same way instead of rewinding.
+        /// `.logicallyComplete` fires the completion as the values land, so the cover tears down on the frame the
+        /// card reaches the source rect rather than after the trailing visual effects settle.
+        withAnimation(config.animation, completionCriteria: .logicallyComplete) {
             animate = false
             rotation = 360
         } completion: {
+            /// Clear the snapshot before dismissing, and dismiss without animation, so neither the stale front face
+            /// nor fullScreenCover's slide-out shows after the flip has already returned home.
             sourceImage = nil
+            // TODO: second hand-rolled copy — use `withoutAnimation { dismiss() }`.
             var transaction = Transaction()
             transaction.disablesAnimations = true
             withTransaction(transaction) {
@@ -252,8 +301,12 @@ private struct FlipDestinationView<Destination: View>: View {
     }
 }
 
+/// Both faces occupy the same space; the flip reads as one card because the opaque face is swapped at the halfway
+/// point of the rotation, where the card is edge-on and the cut cannot be seen.
 @Animatable
 private struct FlipEffectModifier: ViewModifier {
+    /// Identifies which face this is, so it is fixed for the lifetime of the modifier — `@Animatable` would otherwise
+    /// try to interpolate it. Only `progress` drives the swap.
     @AnimatableIgnored var isFlipped: Bool
     var progress: CGFloat
     func body(content: Content) -> some View {
