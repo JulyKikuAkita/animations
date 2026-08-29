@@ -19,6 +19,14 @@ struct DummyViews: View {
                 DummyTaskRow()
             }
             Section {
+                DummyLabel(
+                    title: "Distance",
+                    subTitle: "Today",
+                    highlight: "1.2KM",
+                    highlightColor: .cyan
+                )
+            }
+            Section {
                 DummyCardView()
                 DummyCardStyleView()
             }
@@ -365,6 +373,78 @@ struct DummySideBar: View {
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct DummyLabel: View {
+    var title: String
+    var subTitle: String
+    var highlight: String
+    var highlightColor: Color
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text(title)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+
+                Spacer(minLength: 0)
+
+                Image(systemName: "chevron.right.circle.full")
+                    .font(.callout)
+                    .foregroundStyle(.gray.secondary)
+            }
+
+            Text(subTitle)
+                .font(.callout)
+
+            Text(highlight)
+                .font(.title)
+                .fontWeight(.medium)
+                .foregroundStyle(highlightColor)
+
+            HStack {
+                Text("12 AM")
+                Spacer(minLength: 0)
+                Text("6 AM")
+                Spacer(minLength: 0)
+                Text("12 PM")
+                Spacer(minLength: 0)
+                Text("6 PM")
+                Spacer(minLength: 0)
+            }
+            .font(.caption2)
+            .foregroundStyle(.gray)
+            .padding(.top, 40)
+        }
+        .padding(15)
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(UIColor.systemGray6))
+        }
+    }
+}
+
+struct DummyLabelFullPage: View {
+    var title: String
+    var symbol: String
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 10) {
+                Image(systemName: symbol)
+                    .font(.title3)
+                Text(title)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+            }
+
+            ContentUnavailableView(
+                "Not enough metric available to display.",
+                systemImage: "exclamationmark.triangle"
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .padding(20)
     }
 }
 
