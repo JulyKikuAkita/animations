@@ -142,6 +142,7 @@
 		9636EEA12DC1797000A0E5A0 /* OSInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */; };
 		9636EF932DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636EF922DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift */; };
 		9636EF942DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636EF922DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift */; };
+		96380C69303B8FBC0043AD6D /* PickerParticleEffectIOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96380C68303B8FAD0043AD6D /* PickerParticleEffectIOS27.swift */; };
 		963B846E2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B846D2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlayer.swift */; };
 		963B84712CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B84702CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift */; };
 		963B84732CCC5A1D00C3FB0D /* PanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963B84722CCC5A1D00C3FB0D /* PanGesture.swift */; };
@@ -721,6 +722,7 @@
 		9636EE9C2DC1787E00A0E5A0 /* PhaseAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseAnimationView.swift; sourceTree = "<group>"; };
 		9636EE9E2DC1797000A0E5A0 /* OSInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSInfo.swift; sourceTree = "<group>"; };
 		9636EF922DC9CD2600A0E5A0 /* FloatingTabBarViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTabBarViewV2.swift; sourceTree = "<group>"; };
+		96380C68303B8FAD0043AD6D /* PickerParticleEffectIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerParticleEffectIOS27.swift; sourceTree = "<group>"; };
 		963B846D2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniversalOverlayView+AppleMusicMiniPlayer.swift"; sourceTree = "<group>"; };
 		963B84702CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMusicPlayerView.swift; sourceTree = "<group>"; };
 		963B84722CCC5A1D00C3FB0D /* PanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanGesture.swift; sourceTree = "<group>"; };
@@ -2416,6 +2418,7 @@
 		96F9A6EB2B9FACC900FD6900 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				96380C68303B8FAD0043AD6D /* PickerParticleEffectIOS27.swift */,
 				96F9A6EC2B9FACE100FD6900 /* CustomButton.swift */,
 				96E948F32D8B8C0D00B257B4 /* SpinnerButton.swift */,
 				9693DB332D9B4F9100A29727 /* DrawerButtonView.swift */,
@@ -3762,6 +3765,7 @@
 				ABB8F0082FAFFE7E00FB4A84 /* CustomSideMenu+iOS26.swift in Sources */,
 				96F9D1742D5C6AB200CD134B /* TitleTextRenderer.swift in Sources */,
 				96E4E4C02D122E220020261F /* LoopingStackCardsDemoView.swift in Sources */,
+				96380C69303B8FBC0043AD6D /* PickerParticleEffectIOS27.swift in Sources */,
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
 				AB95E8972F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift in Sources */,
 				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
