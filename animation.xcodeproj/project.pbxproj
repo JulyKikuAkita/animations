@@ -108,6 +108,10 @@
 		9621DE282BF5678C00183CB7 /* MintCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621DE272BF5678C00183CB7 /* MintCardView.swift */; };
 		96258DD930432CBC0091438B /* FlipTransitionIOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96258DD830432C8B0091438B /* FlipTransitionIOS27.swift */; };
 		9625910F30474EA80091438B /* TypeWriterTextEffectIOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9625910E30474E9C0091438B /* TypeWriterTextEffectIOS27.swift */; };
+		96259445304C8CF50091438B /* CircularSliderIOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259444304C8CE80091438B /* CircularSliderIOS27.swift */; };
+		96259447304CA02F0091438B /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259446304CA0270091438B /* ClockView.swift */; };
+		96259448304CA02F0091438B /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259446304CA0270091438B /* ClockView.swift */; };
+		96259449304CA02F0091438B /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259446304CA0270091438B /* ClockView.swift */; };
 		9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */; };
 		962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04722C214C03008E1E5D /* PixellateTextView.swift */; };
 		962B04762C215176008E1E5D /* Pixellate.metal in Sources */ = {isa = PBXBuildFile; fileRef = 962B04752C215176008E1E5D /* Pixellate.metal */; };
@@ -701,6 +705,8 @@
 		962240B52D379C1B0013FFA9 /* DocumentScannerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocumentScannerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96258DD830432C8B0091438B /* FlipTransitionIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipTransitionIOS27.swift; sourceTree = "<group>"; };
 		9625910E30474E9C0091438B /* TypeWriterTextEffectIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWriterTextEffectIOS27.swift; sourceTree = "<group>"; };
+		96259444304C8CE80091438B /* CircularSliderIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSliderIOS27.swift; sourceTree = "<group>"; };
+		96259446304CA0270091438B /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		962706292D46049100DC0161 /* Orientation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orientation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToHideHeaderView.swift; sourceTree = "<group>"; };
 		962B04722C214C03008E1E5D /* PixellateTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixellateTextView.swift; sourceTree = "<group>"; };
@@ -1930,6 +1936,7 @@
 		963B862B2CE94F9400C3FB0D /* Slider */ = {
 			isa = PBXGroup;
 			children = (
+				96259444304C8CE80091438B /* CircularSliderIOS27.swift */,
 				961D2EBC3023167A00D3B1EC /* TimelineSliderIOS27.swift */,
 				96C9386A2FEB3D530024A6AF /* GlassStyleSlider.swift */,
 				96A52EAE2F77278100493D96 /* 2DSliderTonePickerDemoView.swift */,
@@ -2033,6 +2040,7 @@
 		9662EFC92C460E8600508B80 /* HelpView */ = {
 			isa = PBXGroup;
 			children = (
+				96259446304CA0270091438B /* ClockView.swift */,
 				968B5F992F22F69D003BCF16 /* DummyChartViews.swift */,
 				AB0EA1792DEBBB5100C62391 /* DummyViews.swift */,
 				96A1D4AF2F3DA9D400377C99 /* DummyEventView.swift */,
@@ -3605,6 +3613,7 @@
 				9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */,
 				96921B8D2D6FC33500326523 /* SearchView.swift in Sources */,
 				96E4E5F92D175FAB0020261F /* ImageLinkModel.swift in Sources */,
+				96259445304C8CF50091438B /* CircularSliderIOS27.swift in Sources */,
 				96D580B12EFDE0030011B986 /* PageCurlCarouselDemoView.swift in Sources */,
 				9682B4FB2CA7C852003D917F /* InfiniteCarouselView.swift in Sources */,
 				961F3BC22B897D7D0055D79B /* ProfileListView.swift in Sources */,
@@ -3614,6 +3623,7 @@
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
 				965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
+				96259447304CA02F0091438B /* ClockView.swift in Sources */,
 				96A63F482FF05F5900F3EEAB /* ScreenCaptureKit27.swift in Sources */,
 				96E0A4623002F5BE009BEC6D /* List+Extension.swift in Sources */,
 				96CC19712F50038300D4EB2D /* PermissionOnboardingIOS26.swift in Sources */,
@@ -3921,6 +3931,7 @@
 				9662EFF72C4B97CF00508B80 /* CustomPagingIndicatorView.swift in Sources */,
 				9621DC3F2BEF3D7A00183CB7 /* PlayerItem.swift in Sources */,
 				9621DC402BEF3D7A00183CB7 /* Interpolation.swift in Sources */,
+				96259448304CA02F0091438B /* ClockView.swift in Sources */,
 				9621DC412BEF3D7A00183CB7 /* Reel.swift in Sources */,
 				9621DC8D2BF0121E00183CB7 /* HeroLayer.swift in Sources */,
 				96352CE22C09A416001AD2FD /* AnchorKey.swift in Sources */,
@@ -4039,6 +4050,7 @@
 				96352CE32C09A416001AD2FD /* AnchorKey.swift in Sources */,
 				96A3B4282FF989FE003A1083 /* Date.swift in Sources */,
 				AB0EA17C2DEBBB5100C62391 /* DummyViews.swift in Sources */,
+				96259449304CA02F0091438B /* ClockView.swift in Sources */,
 				9654E41C2BF72CB300A4E1C9 /* ChartGroup.swift in Sources */,
 				96E4E5FA2D175FAB0020261F /* ImageLinkModel.swift in Sources */,
 				968B628C2F256E35003BCF16 /* ScreenshotPreventingMaskView.swift in Sources */,
