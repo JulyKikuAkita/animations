@@ -134,7 +134,7 @@ enum AppleMusicTab: String, CaseIterable {
     /// rawValue: system image name
     case listenNow = "play.circle.fill"
     case browse = "square.grid.2x2.fill"
-    case radis = "dot.radiowaves.left.and.right"
+    case radio = "dot.radiowaves.left.and.right"
     case music = "play.square.stack"
     case search = "magnifyingglass"
 
@@ -144,12 +144,20 @@ enum AppleMusicTab: String, CaseIterable {
             "Listen Now"
         case .browse:
             "Browse"
-        case .radis:
-            "Radis"
+        case .radio:
+            "Radio"
         case .music:
             "Music"
         case .search:
             "Search"
+        }
+    }
+
+    @ContentBuilder
+    var tabLabel: some View {
+        Group {
+            Text(title)
+            Image(systemName: rawValue)
         }
     }
 }

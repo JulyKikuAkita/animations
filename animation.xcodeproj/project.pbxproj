@@ -112,6 +112,10 @@
 		96259447304CA02F0091438B /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259446304CA0270091438B /* ClockView.swift */; };
 		96259448304CA02F0091438B /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259446304CA0270091438B /* ClockView.swift */; };
 		96259449304CA02F0091438B /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259446304CA0270091438B /* ClockView.swift */; };
+		96259AB43051FE470091438B /* BottomBarTransitionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259AB23051FE3F0091438B /* BottomBarTransitionDemo.swift */; };
+		96259AB73052004C0091438B /* ExtendedPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259AB6305200450091438B /* ExtendedPlayer.swift */; };
+		96259AB9305201EA0091438B /* PlayerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259AB8305201E00091438B /* PlayerContainer.swift */; };
+		96259ABB305202370091438B /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96259ABA305202340091438B /* MiniPlayer.swift */; };
 		9627DF132C25521300ABA6ED /* ScrollToHideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */; };
 		962B04732C214C03008E1E5D /* PixellateTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B04722C214C03008E1E5D /* PixellateTextView.swift */; };
 		962B04762C215176008E1E5D /* Pixellate.metal in Sources */ = {isa = PBXBuildFile; fileRef = 962B04752C215176008E1E5D /* Pixellate.metal */; };
@@ -707,6 +711,10 @@
 		9625910E30474E9C0091438B /* TypeWriterTextEffectIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWriterTextEffectIOS27.swift; sourceTree = "<group>"; };
 		96259444304C8CE80091438B /* CircularSliderIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSliderIOS27.swift; sourceTree = "<group>"; };
 		96259446304CA0270091438B /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
+		96259AB23051FE3F0091438B /* BottomBarTransitionDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarTransitionDemo.swift; sourceTree = "<group>"; };
+		96259AB6305200450091438B /* ExtendedPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedPlayer.swift; sourceTree = "<group>"; };
+		96259AB8305201E00091438B /* PlayerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerContainer.swift; sourceTree = "<group>"; };
+		96259ABA305202340091438B /* MiniPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayer.swift; sourceTree = "<group>"; };
 		962706292D46049100DC0161 /* Orientation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orientation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9627DF122C25521300ABA6ED /* ScrollToHideHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToHideHeaderView.swift; sourceTree = "<group>"; };
 		962B04722C214C03008E1E5D /* PixellateTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixellateTextView.swift; sourceTree = "<group>"; };
@@ -1877,6 +1885,17 @@
 			path = TabViews;
 			sourceTree = "<group>";
 		};
+		96259AB53052001E0091438B /* iOS27 */ = {
+			isa = PBXGroup;
+			children = (
+				96259ABA305202340091438B /* MiniPlayer.swift */,
+				96259AB8305201E00091438B /* PlayerContainer.swift */,
+				96259AB6305200450091438B /* ExtendedPlayer.swift */,
+				96259AB23051FE3F0091438B /* BottomBarTransitionDemo.swift */,
+			);
+			path = iOS27;
+			sourceTree = "<group>";
+		};
 		96301B322C2A5FAB00775407 /* TextFieldView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2121,6 +2140,7 @@
 		96845DA32BD3346500B7D8B2 /* AppleMusic */ = {
 			isa = PBXGroup;
 			children = (
+				96259AB53052001E0091438B /* iOS27 */,
 				96845DA42BD3347F00B7D8B2 /* AppleMusicHomeView.swift */,
 				96845DA62BD337D200B7D8B2 /* MusicInfoView.swift */,
 				96845DA82BD33CAC00B7D8B2 /* ExpandedBottomSheet.swift */,
@@ -3630,6 +3650,7 @@
 				969B778E2F8C59110081EE29 /* Comparable+Clamped.swift in Sources */,
 				96FF509B2B94465700B36142 /* PlayerItem.swift in Sources */,
 				965FD2DB2EF2289F00989691 /* TruncatedTextEffect.swift in Sources */,
+				96259AB43051FE470091438B /* BottomBarTransitionDemo.swift in Sources */,
 				9621DC442BEF3D8F00183CB7 /* PinchZoom.swift in Sources */,
 				968B5F9E2F22FC84003BCF16 /* TextFieldMicroInteractionView.swift in Sources */,
 				96C9386B2FEB3D610024A6AF /* GlassStyleSlider.swift in Sources */,
@@ -3693,6 +3714,7 @@
 				969219DD2D6D9EEA00326523 /* Contact.swift in Sources */,
 				AB0FFD212E2D863700E6DCBE /* PullEffectScrollView.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
+				96259ABB305202370091438B /* MiniPlayer.swift in Sources */,
 				96D558542FC0DA2300FB070A /* LiquidLens.metal in Sources */,
 				96A1D4AE2F3DA35C00377C99 /* CustomToolBarIOS26.swift in Sources */,
 				96E4DD162CFFDF970020261F /* RotatingIconEffectView.swift in Sources */,
@@ -3706,6 +3728,7 @@
 				ABC5C9992E36D393009D7EDC /* GlassMorphEffectiOS26.swift in Sources */,
 				969ECF862EC90E1B0045601B /* LocationManagerHelper.swift in Sources */,
 				96A71C702F88D0DC005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift in Sources */,
+				96259AB73052004C0091438B /* ExtendedPlayer.swift in Sources */,
 				96A3A18A30369D3B00DE07D3 /* Multi-ItemSection+ReorderAPI.swift in Sources */,
 				96E948F42D8B8C0D00B257B4 /* SpinnerButton.swift in Sources */,
 				96E4E5FD2D1788830020261F /* AsyncImageViewer.swift in Sources */,
@@ -3811,6 +3834,7 @@
 				AB38B0B62EDAE13D00767C20 /* CustomMapView.swift in Sources */,
 				96E0A464300302C3009BEC6D /* MorphingRefreshView.swift in Sources */,
 				96AC82F22C8BAC0E00ABBE78 /* AdaptiveLayoutView.swift in Sources */,
+				96259AB9305201EA0091438B /* PlayerContainer.swift in Sources */,
 				960663292DD950430084B468 /* ResizableHeaderScrollView.swift in Sources */,
 				9662EFD32C471DB300508B80 /* ThemeSwitchView+ShapeAnimation.swift in Sources */,
 				9662EFC82C45F51F00508B80 /* AnimatedPagingIndicatorsView.swift in Sources */,
