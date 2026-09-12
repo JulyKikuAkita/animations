@@ -17,7 +17,7 @@ struct AppleMusicHomeView: View {
 
     var body: some View {
         TabView {
-            ListenView()
+            listenView()
                 .tabItem {
                     Image(systemName: AppleMusicTab.listenNow.rawValue)
                     Text("Listen Now")
@@ -28,15 +28,15 @@ struct AppleMusicHomeView: View {
                 /// Hiding tab bar when sheet is expanded
                 .toolbar(expandSheet ? .hidden : .visible, for: .tabBar)
 
-            SampleTab(AppleMusicTab.browse.title, AppleMusicTab.browse.rawValue)
-            SampleTab(AppleMusicTab.radis.title, AppleMusicTab.radis.rawValue)
-            SampleTab(AppleMusicTab.music.title, AppleMusicTab.music.rawValue)
-            SampleTab(AppleMusicTab.search.title, AppleMusicTab.search.rawValue)
+            sampleTab(AppleMusicTab.browse.title, AppleMusicTab.browse.rawValue)
+            sampleTab(AppleMusicTab.radio.title, AppleMusicTab.radio.rawValue)
+            sampleTab(AppleMusicTab.music.title, AppleMusicTab.music.rawValue)
+            sampleTab(AppleMusicTab.search.title, AppleMusicTab.search.rawValue)
         }
         /// Changing tab indicator color
         .tint(.red)
         .safeAreaInset(edge: .bottom) {
-            CustomBottomSheet()
+            customBottomSheet()
         }
         .overlay {
             if expandSheet {
@@ -49,7 +49,7 @@ struct AppleMusicHomeView: View {
 
     /// Custom listen now  view
     @ViewBuilder
-    func ListenView() -> some View {
+    func listenView() -> some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 ForEach(playItems.reversed()) { item in
@@ -68,7 +68,7 @@ struct AppleMusicHomeView: View {
 
     /// Custom bottom sheet
     @ViewBuilder
-    func CustomBottomSheet() -> some View {
+    func customBottomSheet() -> some View {
         /// Animating sheet background (to look like it's expanding from the bottom)
         ZStack {
             if expandSheet {
@@ -96,7 +96,7 @@ struct AppleMusicHomeView: View {
     }
 
     @ViewBuilder
-    func SampleTab(_ title: String, _ icon: String) -> some View {
+    func sampleTab(_ title: String, _ icon: String) -> some View {
         /// iOS bug of tab bar animation, it can be avoided by wrapping the view inside scrollview
         ScrollView(.vertical, showsIndicators: false, content: {
             Text(title)

@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+// PanGesture allows control under multiple simultaneous gestures (useful in scrollView)
 struct PanGesture: UIGestureRecognizerRepresentable {
     /// ExpandableMusicPlayerView.swift
     var onChange: ((PanGestureValue) -> Void)?
