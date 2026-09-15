@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-@available(iOS 27.0, *)
+@available(iOS 26.0, *)
 struct ExtendedPlayer: View {
     var size: CGSize
     var safeArea: EdgeInsets
@@ -63,7 +63,6 @@ struct ExtendedPlayer: View {
         }
     }
 
-    @available(iOS 27.0, *)
     private func dummyControls() -> some View {
         VStack(spacing: 12) {
             HStack(spacing: 15) {
