@@ -50,3 +50,21 @@ public extension MKCoordinateRegion {
         )
     }
 }
+
+protocol VerticalItem: CaseIterable, Hashable {
+    var symbol: String { get }
+}
+
+enum MapMode: String, VerticalItem {
+    case explore = "Explore"
+    case driving = "Driving"
+    case satellite = "Satellite"
+
+    var symbol: String {
+        switch self {
+        case .explore: "map.fill"
+        case .driving: "car.fill"
+        case .satellite: "globe.americas.fill"
+        }
+    }
+}
