@@ -14,7 +14,7 @@ struct PlayerContainerConfig {
     var animation: Animation = .interpolatingSpring(duration: 0.3, bounce: 0, initialVelocity: 0)
 }
 
-@available(iOS 27.0, *)
+@available(iOS 26.0, *)
 struct PlayerContainer: View {
     @Binding var config: PlayerContainerConfig
     @Namespace private var namespace
@@ -86,20 +86,33 @@ struct PlayerContainer: View {
                 )
                 .ignoresSafeArea()
             }
-        } else {
+        } else if #available(iOS 27, *) {
             MiniPlayer(namespace: namespace)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .contentShape(.rect)
                 .onTapGesture {
                     toggleExpandedPlayer(status: true)
                 }
-                /// Extracting mini player rect
                 .onGeometryChange(for: CGRect.self) {
                     $0.frame(in: .global)
                 } action: { newValue in
                     guard !config.attachExpandedPlayer else { return }
                     config.minimizedPlayerRect = newValue
                 }
+        } else {
+            /// On iOS 26 `onGeometryChange` reports the wrong frame for a view hosted in
+            /// `tabViewBottomAccessory`, so the rect is read straight from a proxy at tap time instead.
+            /// Reading it on tap rather than continuously is also why this branch needs no
+            /// `attachExpandedPlayer` guard: the expanded player is not attached yet at that point.
+            GeometryReader { proxy in
+                MiniPlayer(namespace: namespace)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .contentShape(.rect)
+                    .onTapGesture {
+                        config.minimizedPlayerRect = proxy.frame(in: .global)
+                        toggleExpandedPlayer(status: true)
+                    }
+            }
         }
     }
 

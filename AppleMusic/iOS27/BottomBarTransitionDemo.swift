@@ -6,7 +6,8 @@
 
 import SwiftUI
 
-@available(iOS 27.0, *)
+/// 26.1 rather than 26.0: `tabViewBottomAccessory(isEnabled:)` is the only member here that needs it.
+@available(iOS 26.1, *)
 struct BottomBarTransitionIOS27Demo: View {
     @State private var config: PlayerContainerConfig = .init()
     var body: some View {
@@ -53,7 +54,7 @@ struct BottomBarTransitionIOS27Demo: View {
     }
 }
 
-@available(iOS 27.0, *)
+@available(iOS 26.1, *)
 #Preview {
     BottomBarTransitionIOS27Demo()
 }
