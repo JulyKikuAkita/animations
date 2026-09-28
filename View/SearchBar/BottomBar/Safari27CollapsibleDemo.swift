@@ -3,7 +3,7 @@
 //  animation
 //
 //  Created on 9/27/26.
-  
+
 import SwiftUI
 
 @available(iOS 26.0, *)
@@ -11,40 +11,51 @@ struct Safari27CollapsibleDemo: View {
     @State private var safeArea: EdgeInsets = .init()
     @State private var text: String = ""
     @State private var isMinimized: Bool = false
+    @FocusState private var isFocused: Bool
+    /// Interactive scroll to minimize/maximize bottom bar properties
+    @State private var progress: CGFloat = 0
+    @GestureState private var isDragging: Bool = false
     var body: some View {
         ScrollView(.vertical) {
             Rectangle()
                 .foregroundStyle(.clear)
                 .frame(height: 2000)
-                .overlay(alignment: .top) {
-                    Button("Toggle") {
-                        isMinimized.toggle()
-                    }
-                }
         }
-        /// auto-dismiss keyboard when scroll
+        // auto-dismiss keyboard when scroll
         .scrollDismissesKeyboard(.interactively)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .contentShape(.rect)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .updating($isDragging) { _, out, _ in
+                    out = true
+                }.onEnded { value in
+                    onGestureEnd(value: value)
+                }
+        )
+        .onScrollGeometryChange(for: CGFloat.self) {
+            $0.contentOffset.y + $0.contentInsets.top
+        } action: { oldValue, newValue in
+            guard isDragging else { return }
+            handleScroll(oldValue: oldValue, newValue: newValue)
+        }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            CollapsibleBottomBar27Style(safeArea: safeArea, text: $text, isMinimized: $isMinimized) {
-                SFBAction(symbol: "chevron.left") {
-                    
-                }
-                
-                SFBAction(symbol: "chevron.right") {
-                    
-                }
-                
-                SFBAction(symbol: "square.and.arrow.up") {
-                    
-                }
-                
-                SFBAction(symbol: "bookmark") {
-                    
-                }
-                
-                SFBAction(symbol: "square.on.square") {
-                    
-                }
+            CollapsibleBottomBar27Style(
+                safeArea: safeArea,
+                text: $text,
+                isMinimized: $isMinimized,
+                progress: $progress,
+                isFocused: $isFocused
+            ) {
+                SFBAction(symbol: "chevron.left") {}
+
+                SFBAction(symbol: "chevron.right") {}
+
+                SFBAction(symbol: "square.and.arrow.up") {}
+
+                SFBAction(symbol: "bookmark") {}
+
+                SFBAction(symbol: "square.on.square") {}
             }
         }
         .ignoresSafeArea(.all, edges: .bottom)
@@ -53,6 +64,39 @@ struct Safari27CollapsibleDemo: View {
         } action: { newValue in
             safeArea = newValue
         }
+    }
+
+    private func handleScroll(oldValue: CGFloat, newValue: CGFloat) {
+        guard !isFocused else { return }
+        let delta = (newValue - oldValue) / transitionDistance
+        let progress = max(0, progress + (isMinimized ? -delta : delta))
+        if progress >= 1 {
+            withAnimation(.iSpring()) {
+                isMinimized.toggle()
+                self.progress = 0
+            }
+        } else {
+            self.progress = progress
+        }
+    }
+
+    private func onGestureEnd(value: DragGesture.Value) {
+        guard !isFocused else { return }
+        let velocity = -value.velocity.height * 0.1
+        let velocityProgress = velocity / transitionDistance
+
+        let progress = progress + (isMinimized ? -velocityProgress : velocityProgress)
+        withAnimation(.iSpring()) {
+            if progress >= 0.5 { // customizable
+                isMinimized.toggle()
+            }
+            self.progress = 0
+        }
+    }
+
+    /// customizable
+    private var transitionDistance: CGFloat {
+        120
     }
 }
 
@@ -75,10 +119,10 @@ struct CollapsibleBottomBar27Style: View {
     @Binding var text: String
     @Binding var isMinimized: Bool
     @Binding var progress: CGFloat
+    @FocusState.Binding var isFocused: Bool
     @SFBActionBuilder var actions: [SFBAction]
     /// View Properties
     let padding: CGFloat = 18
-    @FocusState private var isFocused: Bool
     @Environment(\.colorScheme) private var colorScheme
     var body: some View {
         VStack(spacing: isMinimized ? 0 : 10) {
@@ -128,7 +172,7 @@ struct CollapsibleBottomBar27Style: View {
         .glassEffect(
             .regular.interactive(isMinimized),
             in: ConcentricRectangle(corners: .concentric(minimum: .fixed(30)),
-                                             isUniform: true)
+                                    isUniform: true)
         )
         .animation(.iSpring().speed(1.5)) {
             $0.opacity(isFocused ? 0 : 1)
@@ -140,18 +184,19 @@ struct CollapsibleBottomBar27Style: View {
                 .allowsHitTesting(!isMinimized)
         }
         .padding([.horizontal, .bottom], padding)
+        .scaleEffect(1 + (isMinimized ? 0.1 : -0.1) * progress, anchor: .bottom)
         .frame(minWidth: isMinimized ? 180 : nil)
         .animation(.iSpring(), value: isMinimized)
     }
-    
+
     private func searchBar() -> some View {
         ZStack(alignment: .leading) {
             Image(systemName: "magnifyingglass")
                 .font(.callout)
                 .opacity(isFocused ? 0 : 1)
-            
+
             TextField("Search here", text: $text)
-                .padding(.leading, isFocused ? 0 :30)
+                .padding(.leading, isFocused ? 0 : 30)
         }
         .padding(.horizontal, 15)
         .frame(height: isMinimized ? 35 : 45)
@@ -180,11 +225,11 @@ struct CollapsibleBottomBar27Style: View {
             }
         }
         .focused($isFocused)
-        /// adjust with keyboard
+        // adjust with keyboard
         .offset(y: isFocused ? -safeArea.bottom : 0)
         .animation(.iSpring(), value: isFocused)
     }
-    
+
     private func actionView(_ item: SFBAction) -> some View {
         Button(action: item.action) {
             Image(systemName: item.symbol)
@@ -194,7 +239,6 @@ struct CollapsibleBottomBar27Style: View {
                 .contentShape(.rect)
         }
         .frame(maxWidth: .infinity)
-        
     }
 }
 
