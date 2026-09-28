@@ -3,6 +3,65 @@
 //  animation
 //
 //  Created on 9/27/26.
+//
+//  Learning points / Demo goals:
+//  • Mimic Safari's (iOS 26+) bottom bar: a full bar with search field + action
+//    row that collapses into a compact pill on scroll, re-expands on tap, and
+//    hands the search field off to the keyboard when focused.
+//  • Interactive, *gesture-driven* collapse — not a phase snap. `progress`
+//    accumulates scroll deltas / `transitionDistance` and only drives the
+//    scaleEffect; the state flip happens when progress crosses a threshold.
+//  • Three independent state machines layered on one container:
+//    scroll progress (continuous) → isMinimized (discrete) → isFocused
+//    (relocates the field). Each owns a disjoint set of modifiers.
+//
+//  Key APIs / patterns:
+//  • `@FocusState.Binding` — the *parent* owns focus even though only the child
+//    has the TextField, because `handleScroll`/`onGestureEnd` must `guard
+//    !isFocused` (never collapse while the user is typing). A plain
+//    `@Binding<Bool>` will not compile against `.focused(_:)`.
+//  • `@GestureState private var isDragging` — auto-resets to false on gesture
+//    end, so `onScrollGeometryChange` can ignore momentum/decelerating scroll
+//    and only integrate progress during an active finger-down drag.
+//  • `.overlay(alignment: isFocused ? .bottom : .top)` — the search field is an
+//    overlay on the glass container, not a child of it. Flipping alignment is
+//    what lets the field visually *detach* and dock above the keyboard while
+//    the bar itself fades out underneath.
+//  • `.animation(_:body:)` (iOS 17+) — scopes an animation to one property
+//    (`$0.opacity(isFocused ? 0 : 1)`) so the bar's fade is independent of the
+//    `.animation(_:value: isMinimized)` collapse driving everything else.
+//  • `.geometryGroup()` — the VStack changes spacing, padding, and two frames at
+//    once; without this each resolves independently and the collapse tears.
+//  • `.compositingGroup()` before `.blur`/`.opacity` on the action row — blurs
+//    the row as one flattened image instead of five seams.
+//  • `frame(width:/height: isMinimized ? 0 : nil)` + `.opacity` rather than
+//    `if !isMinimized` — keeps view identity so the row animates to zero
+//    instead of popping out of the hierarchy.
+//  • `ConcentricRectangle(corners: .concentric(minimum: .fixed(30)))` (iOS 26) —
+//    corner radius derived from the enclosing container's curvature, floored at
+//    30pt. `.clipShape(.rect(cornerRadius: 30))` is the approximation used for
+//    the *clip*, since concentric shapes aren't available there.
+//  • `.glassEffect(.regular.interactive(isMinimized))` — interactivity is gated
+//    on state so the glass only responds to touch while it's acting as a pill.
+//  • `.environment(\.colorScheme, .dark)` + `.tint(.white)` on the field —
+//    forces light-on-dark chrome regardless of system appearance.
+//
+//  Notable:
+//  • `isMinimized ? -delta : delta` inverts the gesture's meaning by state: the
+//    same upward drag collapses an expanded bar and expands a collapsed one.
+//  • `onGestureEnd` projects `velocity * 0.1` into progress space, so a fast
+//    flick commits the toggle at 0.5 that a slow drag would not.
+//  • `safeArea` is measured in the parent (`onGeometryChange`) and passed down
+//    because the parent sets `.ignoresSafeArea(.all, edges: .bottom)` — the
+//    child can no longer read a meaningful bottom inset itself, and needs it to
+//    offset the field by `-safeArea.bottom`.
+//  • The transparent `Rectangle` tap target uses `.transition(.identity)` so the
+//    hit-test layer appears instantly rather than fading in with the collapse.
+//
+//  Gotcha: `SFBAction.id` is a fresh `UUID()` per init, and the result builder
+//  re-runs on every parent `body` pass — so `ForEach` sees new identities each
+//  render. Harmless for static symbol buttons, but any per-action transition or
+//  matched-geometry work would need a stable id first.
 
 import SwiftUI
 
