@@ -5,6 +5,34 @@
 //  Created on 10/2/26.
 // Apple Maps Interactive Sheet Header Scroll animation
 
+// Learning notes:
+// - One driver value: `sheetProgress` is the sheet's live height normalized to 0...1 between the
+//   min detent (80) and the largest detent. Every effect (header size, title scale, padding,
+//   shadow, background opacity) derives from it, so they all track the drag gesture in lockstep.
+// - Explicit height detents: the largest detent is measured from the presenting view via
+//   onGeometryChange, and the center detent is the midpoint. Fixed heights keep the progress math
+//   deterministic, unlike `.medium`/`.large` whose heights vary by device.
+// - Maps-style persistence: `.presentationBackgroundInteraction(.enabled(upThrough:))` keeps the
+//   view behind the sheet interactive up to the center detent, and `.interactiveDismissDisabled()`
+//   stops a swipe-down from dismissing it, so the sheet only collapses to the min detent.
+// - Phased sub-progress: one 0...1 value is split into ranges so effects happen in stages.
+//   `centerProgress` covers min -> center, `shadowProgress` covers center -> largest, and the
+//   background fades from 0.49 to 0.69, so the sheet stays glass until it passes the center detent.
+// - Header lives inside the scroll content (`.safeAreaInset(edge: .top)`), so it scrolls away with
+//   the content. `max(..., 1)` on its size avoids a zero-size frame at progress 0.
+// - Minimized bar trigger: `contentOffset.y + contentInsets.top` gives an offset that is 0 at rest.
+//   Once it exceeds the current header height + spacing, the header has scrolled off and the glass
+//   bar overlay is shown. It is a Bool so the swap springs instead of tracking the finger.
+// - Scoped animation (`.animation(_:body:)`): only the opacity inside the closure animates. Frame
+//   and scale changes driven by `sheetProgress` stay un-animated so they follow the gesture exactly.
+// - `scaleEffect` does not change layout size, so the title stack uses negative spacing at small
+//   progress to pull the caption up under the visually shrunk title. `.geometryGroup()` makes the
+//   stack resolve its geometry as one unit so children don't animate their positions independently.
+// - `.compositingGroup()` before `.shadow` renders the image first and shadows the result; a large
+//   radius with negative y offset reads as a tinted glow behind the header rather than a drop shadow.
+// - Overlays sit outside the ScrollView, so the minimized bar and dismiss button stay pinned to the
+//   sheet's top edge regardless of scroll position.
+
 import SwiftUI
 
 @available(iOS 26.0, *)
@@ -65,7 +93,6 @@ private struct CustomSheetView<Content: View>: View {
         .onGeometryChange(for: CGSize.self, of: {
             $0.size
         }, action: { newValue in
-            let startDetent: CGFloat = 80
             let progress = (newValue.height - 80) / (config.largestDetentHeight - 80)
             let cappedProgress = min(1, max(0, progress))
             sheetProgress = cappedProgress
