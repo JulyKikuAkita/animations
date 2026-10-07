@@ -192,6 +192,9 @@
 		9642236E2CF698D600A69F8D /* InteractiveNavigationGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */; };
 		964223702CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
 		964223712CF69FCF00A69F8D /* ViewExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */; };
+		96432E1F30706873004A10C5 /* HeaderScrollAppleMapsIOS27Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96432E1E30706859004A10C5 /* HeaderScrollAppleMapsIOS27Demo.swift */; };
+		96432FEF30743144004A10C5 /* DuoBookFlipDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96432FEE30743136004A10C5 /* DuoBookFlipDemo.swift */; };
+		96432FF130745DA2004A10C5 /* DuoEdgeBlur.metal in Sources */ = {isa = PBXBuildFile; fileRef = 96432FF030745D90004A10C5 /* DuoEdgeBlur.metal */; };
 		964525772F2AE3F100E32278 /* SortableIOS26GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964525762F2AE3E400E32278 /* SortableIOS26GridView.swift */; };
 		9645273A2F31B89600E32278 /* CameraProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964527392F31B88E00E32278 /* CameraProperties.swift */; };
 		964629F22FA6ADDB00C7AFFB /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7562DAC49A100774FB7 /* SkeletonView.swift */; };
@@ -770,6 +773,9 @@
 		964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisintegrationEffectView.swift; sourceTree = "<group>"; };
 		9642236C2CF698D600A69F8D /* InteractiveNavigationGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteractiveNavigationGestureView.swift; path = "View/Tabbar+Navigaion/InteractiveNavigationGestureView.swift"; sourceTree = SOURCE_ROOT; };
 		9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtractor.swift; sourceTree = "<group>"; };
+		96432E1E30706859004A10C5 /* HeaderScrollAppleMapsIOS27Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderScrollAppleMapsIOS27Demo.swift; sourceTree = "<group>"; };
+		96432FEE30743136004A10C5 /* DuoBookFlipDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuoBookFlipDemo.swift; sourceTree = "<group>"; };
+		96432FF030745D90004A10C5 /* DuoEdgeBlur.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DuoEdgeBlur.metal; sourceTree = "<group>"; };
 		964525762F2AE3E400E32278 /* SortableIOS26GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableIOS26GridView.swift; sourceTree = "<group>"; };
 		964527392F31B88E00E32278 /* CameraProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraProperties.swift; sourceTree = "<group>"; };
 		96513E9F2D3DC6590004C7C8 /* Message1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message1.apns; sourceTree = "<group>"; };
@@ -1462,6 +1468,8 @@
 		960663252DD933230084B468 /* SpecialAnimationEffects */ = {
 			isa = PBXGroup;
 			children = (
+				96432FF030745D90004A10C5 /* DuoEdgeBlur.metal */,
+				96432FEE30743136004A10C5 /* DuoBookFlipDemo.swift */,
 				96E0A463300302B6009BEC6D /* MorphingRefreshView.swift */,
 				96D55E852FC51A2C00FB070A /* AlphaThreshold.metal */,
 				964222E52CF3F13C00A69F8D /* DisintegrationEffectView.swift */,
@@ -2345,6 +2353,7 @@
 		96DF8A882C39D7F90063A931 /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
+				96432E1E30706859004A10C5 /* HeaderScrollAppleMapsIOS27Demo.swift */,
 				963FF24F2F5F984600FAB0CF /* iOS26ResizingSheet.swift */,
 				96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */,
 				ABA982292E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift */,
@@ -3582,6 +3591,7 @@
 				96A1D4B02F3DA9D400377C99 /* DummyEventView.swift in Sources */,
 				963B9CFB2D5492B200453320 /* SwipeActionModel.swift in Sources */,
 				96E4DEAD2D06619D0020261F /* PickerStylesGesturesView.swift in Sources */,
+				96432E1F30706873004A10C5 /* HeaderScrollAppleMapsIOS27Demo.swift in Sources */,
 				96D580B32EFDF8F60011B986 /* PageCurlEffect.metal in Sources */,
 				96C5C2FB2F6D29E400CDCFB0 /* SwipeToDismiss+ScrollView.swift in Sources */,
 				9697F77B2EB03F9A005C5C77 /* UIView+Extension.swift in Sources */,
@@ -3820,6 +3830,7 @@
 				9682B8A52CBDC00D003D917F /* AnimatedTabBariOS18.swift in Sources */,
 				AB95E8972F42AD53001E9769 /* CustomMorphingTabBarIOS26.swift in Sources */,
 				96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */,
+				96432FEF30743144004A10C5 /* DuoBookFlipDemo.swift in Sources */,
 				AB8747BF2D8F4DA200507C55 /* WaveformsScrubberView.swift in Sources */,
 				964525772F2AE3F100E32278 /* SortableIOS26GridView.swift in Sources */,
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
@@ -3882,6 +3893,7 @@
 				968D2D792B8C34CB00007734 /* WindowSharedModel.swift in Sources */,
 				96C0C2DD2B906BA500F56FF5 /* ParallelXCardView.swift in Sources */,
 				AB0FFC382E2C44E800E6DCBE /* DrawBasedSymbolsEffects-iOS26.swift in Sources */,
+				96432FF130745DA2004A10C5 /* DuoEdgeBlur.metal in Sources */,
 				AB0E9DA02DE2655600C62391 /* MorphCustomMenuDemoView.swift in Sources */,
 				963B84712CCC4F5200C3FB0D /* ExpandableMusicPlayerView.swift in Sources */,
 				96D54D282FAAC6A100FB070A /* iPodCarouselReflection.metal in Sources */,
