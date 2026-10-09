@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9600DE512BA17D1800205DE9 /* CustomToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9600DE502BA17D1800205DE9 /* CustomToast.swift */; };
+		9601AA803078591E00841B2D /* NotificationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9601AA7F3078591500841B2D /* NotificationPermission.swift */; };
 		9603C9F92B8AB73400F91C21 /* BasicProfileAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9F82B8AB73400F91C21 /* BasicProfileAnimationView.swift */; };
 		9603C9FB2B8AB79200F91C21 /* ListExpandSheetHeroAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603C9FA2B8AB79200F91C21 /* ListExpandSheetHeroAnimationView.swift */; };
 		960663292DD950430084B468 /* ResizableHeaderScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960663282DD950430084B468 /* ResizableHeaderScrollView.swift */; };
@@ -645,6 +646,7 @@
 
 /* Begin PBXFileReference section */
 		9600DE502BA17D1800205DE9 /* CustomToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToast.swift; sourceTree = "<group>"; };
+		9601AA7F3078591500841B2D /* NotificationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermission.swift; sourceTree = "<group>"; };
 		9603C9F82B8AB73400F91C21 /* BasicProfileAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicProfileAnimationView.swift; sourceTree = "<group>"; };
 		9603C9FA2B8AB79200F91C21 /* ListExpandSheetHeroAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExpandSheetHeroAnimationView.swift; sourceTree = "<group>"; };
 		9604D1B52DE3A62E0087AB24 /* PokemonPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1696,7 +1698,6 @@
 				96A1D2E62F3463BF00377C99 /* 3DAnimation */,
 				9697F7602EB039D2005C5C77 /* Alert */,
 				AB8CBDDE2E9B028100A288E4 /* AppUpdateView */,
-				ABB222982E6CDE66008CFE21 /* Notifications */,
 				96F9A6EB2B9FACC900FD6900 /* Button */,
 				AB658C312F70961800377EBC /* CameraInterface */,
 				965E573A2BC5086000E172B3 /* Carousel */,
@@ -1708,6 +1709,7 @@
 				960663232DD930B50084B468 /* LandingPages */,
 				9609D93C2DB591DB00A76F95 /* Map */,
 				963B846F2CCC4F2700C3FB0D /* MiniPlayerView */,
+				ABB222982E6CDE66008CFE21 /* Notifications */,
 				960663262DD934AD0084B468 /* OverlayView */,
 				9656B0DC2FD621ED0063550D /* PageIndicator */,
 				9636EE9B2DC1785A00A0E5A0 /* PhaseAnimationAPI */,
@@ -2690,6 +2692,7 @@
 		ABB222982E6CDE66008CFE21 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				9601AA7F3078591500841B2D /* NotificationPermission.swift */,
 				ABB222962E6CDE40008CFE21 /* CustomNotificationsView.swift */,
 			);
 			path = Notifications;
@@ -3722,6 +3725,7 @@
 				96976C762D50245800643821 /* OTPVerificationTextFieldView.swift in Sources */,
 				AB8CBDDD2E9AFE0800A288E4 /* VersionCheckManager.swift in Sources */,
 				96D556C92FBA753F00FB070A /* CustomMorphingTab+BottomBar+IOS26.swift in Sources */,
+				9601AA803078591E00841B2D /* NotificationPermission.swift in Sources */,
 				96C5BFD42F65FEE900CDCFB0 /* AppleTVCarousel+iOS26.swift in Sources */,
 				9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */,
 				ABE1AE772E34B08B0090A2F0 /* PermissionSheetDemo.swift in Sources */,

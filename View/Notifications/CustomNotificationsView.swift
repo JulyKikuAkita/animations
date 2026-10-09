@@ -106,7 +106,7 @@ struct NotificationOnboardingDemoView: View {
         let config = NotificationOnboardingConfig(
             title: "Stay Connected with Push Notifications",
             content: "Click to see Lorem Ipsum text of the printing and typesetting industry",
-            notifacationTitle: "Made In Abyss",
+            notificationTitle: "Made In Abyss",
             notificationContent: dummyDescription,
             primaryButtonTitle: "Continue",
             secondaryButtonTitle: "Ask Me Later"
@@ -120,7 +120,6 @@ struct NotificationOnboardingDemoView: View {
                 .background(.primary)
                 .clipShape(.rect(cornerRadius: 12))
         } onPermissionChange: { _ in
-
         } onPrimaryButtonTapped: {} onSecondaryButtonTapped: {} onFinish: {}
     }
 }
@@ -128,7 +127,7 @@ struct NotificationOnboardingDemoView: View {
 struct NotificationOnboardingConfig {
     var title: String
     var content: String
-    var notifacationTitle: String
+    var notificationTitle: String
     var notificationContent: String
     var primaryButtonTitle: String
     var secondaryButtonTitle: String
@@ -146,7 +145,7 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
     @Environment(\.openURL) private var openURL // ios 26 works on sims; others need real device
     @State private var animatedNotification: Bool = false
     @State private var loopContinue: Bool = true
-    @State private var askPermisisons: Bool = false
+    @State private var askPermissions: Bool = false
     @State private var showArrow: Bool = false
     @State private var authorization: UNAuthorizationStatus = .notDetermined
     var body: some View {
@@ -155,12 +154,12 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
                 Rectangle()
                     .fill(backgroundColor)
                     .ignoresSafeArea()
-                    .blurOpacity(askPermisisons)
+                    .blurOpacity(askPermissions)
 
                 Image(systemName: "arrow.up")
                     .font(.system(size: 80, weight: .bold))
                     .foregroundStyle(foregroundColor)
-                    /// ios26 has larger button padding so apply different offset
+                    // ios26 has larger button padding so apply different offset
                     .offset(x: isiOS26OrLater ? 75 : 70, y: 150)
                     .blurOpacity(showArrow)
             }
@@ -189,7 +188,7 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
                         if authorization == .authorized {
                             onPrimaryButtonTapped()
                         } else if authorization == .denied {
-                            /// route to settings page
+                            // route to settings page
                             if let settingsURL = URL(
                                 string: UIApplication.openNotificationSettingsURLString
                             ) {
@@ -223,7 +222,7 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
                 .padding(.horizontal, 15)
                 .padding(.bottom, 20)
             }
-            .blurOpacity(!askPermisisons)
+            .blurOpacity(!askPermissions)
         }
         .onDisappear {
             loopContinue = false
@@ -253,7 +252,7 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
     private func iPhonePreview() -> some View {
         GeometryReader { proxy in
             let size = proxy.size
-            /// scaling view size for smaller phone screen
+            // scaling view size for smaller phone screen
             let scale = min(size.height / 340, 1)
             let width: CGFloat = 320
 
@@ -272,7 +271,7 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
                     .init(color: .white, location: 0),
                     .init(color: .clear, location: 0.9),
                 ], startPoint: .top, endPoint: .bottom)
-                    .padding(-1) /// show border
+                    .padding(-1) // show border
             }
             .scaleEffect(scale, anchor: .top)
         }
@@ -284,7 +283,7 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text(config.notifacationTitle)
+                    Text(config.notificationTitle)
                         .font(.callout)
                         .fontWeight(.medium)
                         .lineLimit(1)
@@ -334,7 +333,7 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
     private func askNotificationPermission() {
         Task { @MainActor in
             withAnimation(.smooth(duration: 0.3, extraBounce: 0)) {
-                askPermisisons = true
+                askPermissions = true
             }
             try? await Task.sleep(for: .seconds(0.3))
 
@@ -352,10 +351,10 @@ struct NotificationOnboardingView<NotificationLogo: View>: View {
             let authorization = await UNUserNotificationCenter.current().notificationSettings().authorizationStatus
             onPermissionChange(status)
 
-            /// remove arrow view + dark background
+            // remove arrow view + dark background
             withAnimation(.smooth(duration: 0.3, extraBounce: 0)) {
                 showArrow = false
-                askPermisisons = false
+                askPermissions = false
                 self.authorization = authorization
             }
         }
