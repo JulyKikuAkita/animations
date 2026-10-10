@@ -369,6 +369,9 @@
 		96A71C702F88D0DC005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */; };
 		96A71E0E2F8B1F19005BBEF2 /* TransitionAnimationIOS26.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A71E0D2F8B1F08005BBEF2 /* TransitionAnimationIOS26.swift */; };
 		96A77F583069D86500930F06 /* Safari27CollapsibleDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A77F573069D85400930F06 /* Safari27CollapsibleDemo.swift */; };
+		96A9D00D307A0BD2001C1CC3 /* CustomContextMenu+iOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D00C307A0BCB001C1CC3 /* CustomContextMenu+iOS27.swift */; };
+		96A9D00F307A0FB7001C1CC3 /* LongPressGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D00E307A0FAC001C1CC3 /* LongPressGesture.swift */; };
+		96A9D010307A0FB7001C1CC3 /* LongPressGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D00E307A0FAC001C1CC3 /* LongPressGesture.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -384,8 +387,8 @@
 		96ACBEFA2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
 		96ACBEFB2C33BC62004F3070 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */; };
 		96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */; };
-		96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
-		96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* CustomGesture.swift */; };
+		96ACBF032C350BFA004F3070 /* DraggablePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* DraggablePanGesture.swift */; };
+		96ACBF042C350BFA004F3070 /* DraggablePanGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF022C350BFA004F3070 /* DraggablePanGesture.swift */; };
 		96ACBF082C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
 		96ACBF092C3675FA004F3070 /* TabView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF072C3675FA004F3070 /* TabView+Extension.swift */; };
 		96ACBF0B2C36791D004F3070 /* TabbarOverSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */; };
@@ -922,6 +925,8 @@
 		96A71C6F2F88D0C7005BBEF2 /* SearchExpandable+CustomTabbar+iOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchExpandable+CustomTabbar+iOS26.swift"; sourceTree = "<group>"; };
 		96A71E0D2F8B1F08005BBEF2 /* TransitionAnimationIOS26.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimationIOS26.swift; sourceTree = "<group>"; };
 		96A77F573069D85400930F06 /* Safari27CollapsibleDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Safari27CollapsibleDemo.swift; sourceTree = "<group>"; };
+		96A9D00C307A0BCB001C1CC3 /* CustomContextMenu+iOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomContextMenu+iOS27.swift"; sourceTree = "<group>"; };
+		96A9D00E307A0FAC001C1CC3 /* LongPressGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressGesture.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -931,7 +936,7 @@
 		96ACBEF62C33B961004F3070 /* ExpenseHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHomeView.swift; sourceTree = "<group>"; };
 		96ACBEF82C33BC62004F3070 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
 		96ACBEFE2C35014C004F3070 /* DraggableTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTabbarView.swift; sourceTree = "<group>"; };
-		96ACBF022C350BFA004F3070 /* CustomGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGesture.swift; sourceTree = "<group>"; };
+		96ACBF022C350BFA004F3070 /* DraggablePanGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggablePanGesture.swift; sourceTree = "<group>"; };
 		96ACBF072C3675FA004F3070 /* TabView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TabView+Extension.swift"; sourceTree = "<group>"; };
 		96ACBF0A2C36791D004F3070 /* TabbarOverSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarOverSheetView.swift; sourceTree = "<group>"; };
 		96AE18F92C01BEB40015155A /* HackerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerTextView.swift; sourceTree = "<group>"; };
@@ -1764,14 +1769,15 @@
 		9621DB142BEDDD6100183CB7 /* Gesture */ = {
 			isa = PBXGroup;
 			children = (
+				96ACBF022C350BFA004F3070 /* DraggablePanGesture.swift */,
+				963B9CFC2D549D3500453320 /* HorizontalPanGesture.swift */,
+				96A9D00E307A0FAC001C1CC3 /* LongPressGesture.swift */,
+				963B84722CCC5A1D00C3FB0D /* PanGesture.swift */,
+				9621DB152BEDDD7400183CB7 /* PinchZoom.swift */,
 				969B77902F8C63A00081EE29 /* SimultaneousPanGesture.swift */,
+				AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */,
 				969B77912F8C63A00081EE29 /* ToggleablePanGesture.swift */,
 				969B77922F8C63A00081EE29 /* VerticalPanGesture.swift */,
-				9621DB152BEDDD7400183CB7 /* PinchZoom.swift */,
-				96ACBF022C350BFA004F3070 /* CustomGesture.swift */,
-				963B84722CCC5A1D00C3FB0D /* PanGesture.swift */,
-				963B9CFC2D549D3500453320 /* HorizontalPanGesture.swift */,
-				AB8CBCB52E98DE8F00A288E4 /* SimplePanGesture.swift */,
 			);
 			path = Gesture;
 			sourceTree = "<group>";
@@ -2043,6 +2049,7 @@
 		965F26FC2D86361B00300420 /* CustomMenu */ = {
 			isa = PBXGroup;
 			children = (
+				96A9D00C307A0BCB001C1CC3 /* CustomContextMenu+iOS27.swift */,
 				ABB8F0072FAFFE6F00FB4A84 /* CustomSideMenu+iOS26.swift */,
 				965F26FD2D86364E00300420 /* VisionProMenuBarView.swift */,
 				96FCA64D2DA8D9CA00774FB7 /* PopOutMenuView.swift */,
@@ -3641,6 +3648,7 @@
 				963B85B42CD436B100C3FB0D /* SnapshotDemoView.swift in Sources */,
 				9662EF2D2C3E01FF00508B80 /* ZoomTransitionView.swift in Sources */,
 				9693DB342D9B4F9100A29727 /* DrawerButtonView.swift in Sources */,
+				96A9D00D307A0BD2001C1CC3 /* CustomContextMenu+iOS27.swift in Sources */,
 				9682B7292CB5DD9E003D917F /* CameraControlView.swift in Sources */,
 				AB658C372F70A00100377EBC /* PicoCamPart1DemoView.swift in Sources */,
 				9636EEA02DC1797000A0E5A0 /* OSInfo.swift in Sources */,
@@ -3663,6 +3671,7 @@
 				96D55B782FC50F1A00FB070A /* MetaballAnimation_iOS26.swift in Sources */,
 				AB5C922D2E0131E3009CF684 /* OrderView.swift in Sources */,
 				96E70B0F2B8EBF3100F23A51 /* AppDelegate.swift in Sources */,
+				96A9D00F307A0FB7001C1CC3 /* LongPressGesture.swift in Sources */,
 				965EA1C02EFA5270008E02BD /* AnimatedScrollableSliderIOS26DemoView.swift in Sources */,
 				9662EF292C3E012800508B80 /* Video.swift in Sources */,
 				96259447304CA02F0091438B /* ClockView.swift in Sources */,
@@ -3840,7 +3849,7 @@
 				961F51DB2BC3B43B00F0D953 /* LimitedTextFieldIView.swift in Sources */,
 				969D0D922EB489BD00ACA4B5 /* ScrollView+BottomSheetInteractionDemoView.swift in Sources */,
 				96A52EAF2F7727B200493D96 /* 2DSliderTonePickerDemoView.swift in Sources */,
-				96ACBF032C350BFA004F3070 /* CustomGesture.swift in Sources */,
+				96ACBF032C350BFA004F3070 /* DraggablePanGesture.swift in Sources */,
 				965E03A22BCD059F00E8A400 /* ParticleEffectsView.swift in Sources */,
 				967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */,
 				96D496612BBFADD10011D5AA /* CircularCarouselSliderView.swift in Sources */,
@@ -3967,7 +3976,7 @@
 				9662EFDC2C47A8AE00508B80 /* Message.swift in Sources */,
 				9662F0202C58348100508B80 /* Page.swift in Sources */,
 				96352D232C0BD4C2001AD2FD /* GridImageView.swift in Sources */,
-				96ACBF042C350BFA004F3070 /* CustomGesture.swift in Sources */,
+				96ACBF042C350BFA004F3070 /* DraggablePanGesture.swift in Sources */,
 				9621DC3C2BEF3D7A00183CB7 /* PlayerConfig.swift in Sources */,
 				96921D172D74423100326523 /* UIImage+Color.swift in Sources */,
 				96A1D4B12F3DA9D400377C99 /* DummyEventView.swift in Sources */,
@@ -4026,6 +4035,7 @@
 				9621DC3A2BEF3D7600183CB7 /* Card.swift in Sources */,
 				9662EFED2C4B4D8400508B80 /* PhotoAppIOS18View.swift in Sources */,
 				9621DC342BEF3D5600183CB7 /* AppleMusicHomeView.swift in Sources */,
+				96A9D010307A0FB7001C1CC3 /* LongPressGesture.swift in Sources */,
 				96C8EB6F2FA6A049008C57D5 /* View+Compat.swift in Sources */,
 				9621DC802BEF461000183CB7 /* PhotoItem.swift in Sources */,
 				96E4DD122CFFDE1F0020261F /* SportItem.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CustomGesture.swift
+//  DraggablePanGesture.swift
 //  animation
 
 import SwiftUI
@@ -10,8 +10,7 @@ struct DraggablePanGesture: UIGestureRecognizerRepresentable {
     var trigger: (Bool) -> Void
     var onChanged: (CGSize, CGPoint) -> Void
     func makeUIGestureRecognizer(context _: Context) -> UIPanGestureRecognizer {
-        let gesture = UIPanGestureRecognizer()
-        return gesture
+        UIPanGestureRecognizer()
     }
 
     func updateUIGestureRecognizer(
