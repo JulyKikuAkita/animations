@@ -109,7 +109,7 @@ struct ThemeSwitchDemoView: View {
         .preferredColorScheme(userTheme.colorScheme)
         .sheet(isPresented: $changeTheme, content: {
             ThemeSwitchView(scheme: scheme)
-                .presentationDetents([.height(410)]) /// maxHeight is 410
+                .presentationDetents([.height(410)]) // maxHeight is 410
                 .presentationBackground(.clear)
         })
     }
@@ -167,7 +167,7 @@ struct ThemeSwitchView: View {
                 .multilineTextAlignment(.center)
 //                .foregroundStyle(userTheme.color(scheme))
 
-            /// Segment picker
+            // Segment picker
             HStack(spacing: 0) {
                 ForEach(Theme.allCases, id: \.rawValue) { theme in
                     Text(theme.rawValue)
@@ -198,7 +198,7 @@ struct ThemeSwitchView: View {
             .padding(.top, 20)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .frame(height: 410) /// maxHeight
+        .frame(height: 410) // maxHeight
         .background(userTheme.backgroundColor(scheme))
         .clipShape(.rect(cornerRadius: 30))
         .padding(.horizontal, 15)
@@ -215,43 +215,4 @@ struct ThemeSwitchView: View {
 
 #Preview {
     ThemeSwitchDemoView()
-}
-
-enum Theme: String, CaseIterable {
-    case systemDefault = "Default"
-    case light = "Light"
-    case dark = "Dark"
-
-    func color(_ scheme: ColorScheme) -> Color {
-        switch self {
-        case .systemDefault:
-            scheme == .dark ? .purple : .orange
-        case .light:
-            .orange
-        case .dark:
-            .purple
-        }
-    }
-
-    func backgroundColor(_ scheme: ColorScheme) -> Color {
-        switch self {
-        case .systemDefault:
-            scheme == .dark ? .gray.opacity(0.7) : .gray.opacity(0.1)
-        case .light:
-            .white
-        case .dark:
-            .brown
-        }
-    }
-
-    var colorScheme: ColorScheme? {
-        switch self {
-        case .systemDefault:
-            nil
-        case .light:
-            .light
-        case .dark:
-            .dark
-        }
-    }
 }
