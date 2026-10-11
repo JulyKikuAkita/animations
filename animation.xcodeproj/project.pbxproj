@@ -372,6 +372,8 @@
 		96A9D00D307A0BD2001C1CC3 /* CustomContextMenu+iOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D00C307A0BCB001C1CC3 /* CustomContextMenu+iOS27.swift */; };
 		96A9D00F307A0FB7001C1CC3 /* LongPressGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D00E307A0FAC001C1CC3 /* LongPressGesture.swift */; };
 		96A9D010307A0FB7001C1CC3 /* LongPressGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D00E307A0FAC001C1CC3 /* LongPressGesture.swift */; };
+		96A9D1AE307C28C3001C1CC3 /* ThemeSwitcherIOS27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D1AD307C28B1001C1CC3 /* ThemeSwitcherIOS27.swift */; };
+		96A9D1B0307C292D001C1CC3 /* ThemeDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A9D1AF307C2928001C1CC3 /* ThemeDM.swift */; };
 		96AC7F6D2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */; };
 		96AC80FD2C84F91D00ABBE78 /* CustomDragDropScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */; };
 		96AC80FF2C84FFF900ABBE78 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC80FE2C84FFF900ABBE78 /* Control.swift */; };
@@ -927,6 +929,8 @@
 		96A77F573069D85400930F06 /* Safari27CollapsibleDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Safari27CollapsibleDemo.swift; sourceTree = "<group>"; };
 		96A9D00C307A0BCB001C1CC3 /* CustomContextMenu+iOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomContextMenu+iOS27.swift"; sourceTree = "<group>"; };
 		96A9D00E307A0FAC001C1CC3 /* LongPressGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressGesture.swift; sourceTree = "<group>"; };
+		96A9D1AD307C28B1001C1CC3 /* ThemeSwitcherIOS27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSwitcherIOS27.swift; sourceTree = "<group>"; };
+		96A9D1AF307C2928001C1CC3 /* ThemeDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDM.swift; sourceTree = "<group>"; };
 		96AC7F6C2C802F5300ABBE78 /* SwiftDataEncryptionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataEncryptionDemoView.swift; sourceTree = "<group>"; };
 		96AC80FC2C84F91D00ABBE78 /* CustomDragDropScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDragDropScrollView.swift; sourceTree = "<group>"; };
 		96AC80FE2C84FFF900ABBE78 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -1421,6 +1425,8 @@
 		960663202DD92EC80084B468 /* ThemeSwitcher */ = {
 			isa = PBXGroup;
 			children = (
+				96A9D1AF307C2928001C1CC3 /* ThemeDM.swift */,
+				96A9D1AD307C28B1001C1CC3 /* ThemeSwitcherIOS27.swift */,
 				96601FF02C78085A002C91FB /* ThemeSwitcherView.swift */,
 				9662EFD22C471DB300508B80 /* ThemeSwitchView+ShapeAnimation.swift */,
 			);
@@ -2511,26 +2517,26 @@
 		AB17E5612E61216D00C50B18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9656AC412FD38DBF0063550D /* Animation+Extension.swift */,
+				969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */,
+				9663BB532DDE992200037CF1 /* Date+Extensions.swift */,
 				96E0A4613002F5B2009BEC6D /* List+Extension.swift */,
-				960F93852FFF1C06004A8D7C /* View+Sheet.swift */,
+				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
+				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
+				9656AC3F2FD383FF0063550D /* ScrollView+Extension.swift */,
+				96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */,
+				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
+				965E6F482ECFD64100E233ED /* UIFont+Extension.swift */,
+				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
+				965FD2DC2EF2299900989691 /* Text+Extension.swift */,
 				96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */,
 				96C8D5F32FA69EAB008C57D5 /* View+AppStoreToolBar.swift */,
 				96C8D5F42FA69EAB008C57D5 /* View+Compat.swift */,
 				96C8D5F52FA69EAB008C57D5 /* View+FeatureHelpers.swift */,
 				96C8D5F62FA69EAB008C57D5 /* View+Geometry.swift */,
+				960F93852FFF1C06004A8D7C /* View+Sheet.swift */,
 				96C8D5F72FA69EAB008C57D5 /* View+Visibility.swift */,
 				9642236F2CF69FCF00A69F8D /* ViewExtractor.swift */,
-				9656AC412FD38DBF0063550D /* Animation+Extension.swift */,
-				969B778D2F8C59110081EE29 /* Comparable+Clamped.swift */,
-				9663BB532DDE992200037CF1 /* Date+Extensions.swift */,
-				96C0C2DA2B9063CF00F56FF5 /* OffsetReader.swift */,
-				96E4E3592D0D72950020261F /* Platform+View+Extension.swift */,
-				963B85762CD35BBA00C3FB0D /* Snapshot.swift */,
-				9656AC3F2FD383FF0063550D /* ScrollView+Extension.swift */,
-				96C8D5ED2FA69011008C57D5 /* Shape+Extensions.swift */,
-				965FD2DC2EF2299900989691 /* Text+Extension.swift */,
-				9697F77A2EB03F9A005C5C77 /* UIView+Extension.swift */,
-				965E6F482ECFD64100E233ED /* UIFont+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3640,6 +3646,7 @@
 				9662EF372C3E3F2100508B80 /* ZoomVideoDetailView.swift in Sources */,
 				96D5521F2FB5170B00FB070A /* LoopingKeyframeAnimation+iOS26.swift in Sources */,
 				96E4DD142CFFDE1F0020261F /* SportItem.swift in Sources */,
+				96A9D1AE307C28C3001C1CC3 /* ThemeSwitcherIOS27.swift in Sources */,
 				9693DA482D9520B300A29727 /* StaggeredAnimationView.swift in Sources */,
 				96AE18FA2C01BEB40015155A /* HackerTextView.swift in Sources */,
 				96FCA64E2DA8D9CA00774FB7 /* PopOutMenuView.swift in Sources */,
@@ -3737,6 +3744,7 @@
 				9601AA803078591E00841B2D /* NotificationPermission.swift in Sources */,
 				96C5BFD42F65FEE900CDCFB0 /* AppleTVCarousel+iOS26.swift in Sources */,
 				9680C9222D6AFF68005FC80D /* RippleTransitionDemoView.swift in Sources */,
+				96A9D1B0307C292D001C1CC3 /* ThemeDM.swift in Sources */,
 				ABE1AE772E34B08B0090A2F0 /* PermissionSheetDemo.swift in Sources */,
 				965851092C90EC2300003266 /* CustomTextFieldKeyboardsView.swift in Sources */,
 				96D495812BBD0E140011D5AA /* ReelView.swift in Sources */,
@@ -4474,7 +4482,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -4541,7 +4549,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
