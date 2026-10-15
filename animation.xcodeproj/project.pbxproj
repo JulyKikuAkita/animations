@@ -200,6 +200,7 @@
 		9645273A2F31B89600E32278 /* CameraProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964527392F31B88E00E32278 /* CameraProperties.swift */; };
 		964629F22FA6ADDB00C7AFFB /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7562DAC49A100774FB7 /* SkeletonView.swift */; };
 		964629F32FA6ADF800C7AFFB /* View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */; };
+		964A245A30808B7A00D8EC5E /* OnBoarding27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A245930808B7200D8EC5E /* OnBoarding27.swift */; };
 		9650AE092DE5133F00D2D67C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9650AE082DE5133F00D2D67C /* SDWebImageSwiftUI */; };
 		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
 		96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */; };
@@ -785,6 +786,7 @@
 		96432FF030745D90004A10C5 /* DuoEdgeBlur.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DuoEdgeBlur.metal; sourceTree = "<group>"; };
 		964525762F2AE3E400E32278 /* SortableIOS26GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableIOS26GridView.swift; sourceTree = "<group>"; };
 		964527392F31B88E00E32278 /* CameraProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraProperties.swift; sourceTree = "<group>"; };
+		964A245930808B7200D8EC5E /* OnBoarding27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoarding27.swift; sourceTree = "<group>"; };
 		96513E9F2D3DC6590004C7C8 /* Message1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message1.apns; sourceTree = "<group>"; };
 		96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSDemoView.swift; sourceTree = "<group>"; };
 		96513EA22D3DCA9E0004C7C8 /* deeplinkMSG1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG1.apns; sourceTree = "<group>"; };
@@ -1457,6 +1459,7 @@
 		960663232DD930B50084B468 /* LandingPages */ = {
 			isa = PBXGroup;
 			children = (
+				964A245930808B7200D8EC5E /* OnBoarding27.swift */,
 				96D5521E2FB516FC00FB070A /* LoopingKeyframeAnimation+iOS26.swift */,
 				96CC19702F50037800D4EB2D /* PermissionOnboardingIOS26.swift */,
 				967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */,
@@ -3668,6 +3671,7 @@
 				96921B8C2D6FC1BA00326523 /* TransparentBlurView.swift in Sources */,
 				9682B6CE2CB1D070003D917F /* Grid+PanGestureView.swift in Sources */,
 				9658510B2C90ED3E00003266 /* CustomTextFieldWithKeyboard.swift in Sources */,
+				964A245A30808B7A00D8EC5E /* OnBoarding27.swift in Sources */,
 				96921B8D2D6FC33500326523 /* SearchView.swift in Sources */,
 				96E4E5F92D175FAB0020261F /* ImageLinkModel.swift in Sources */,
 				96259445304C8CF50091438B /* CircularSliderIOS27.swift in Sources */,
