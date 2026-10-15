@@ -3,23 +3,61 @@
 //  animation
 //
 //  Created on 10/14/26.
+//
+//  Learning points — `LaunchScreenOnly`: why a reverse mask AND a plain overlay
+//  ───────────────────────────────────────────────────────────────────────
+//  Goal: a tinted splash with the logo in the middle; the logo then grows
+//  until it "opens up" and reveals the app underneath (Twitter-style).
+//
+//  1. Reverse (inverse) mask = cut a logo-shaped hole.
+//     A normal `.mask { logo }` keeps the tint only INSIDE the logo — the
+//     opposite of what we want. SwiftUI has no built-in inverted mask, so we
+//     build one: an opaque `Rectangle()` with the logo overlaid using
+//     `.blendMode(.destinationOut)`. destinationOut erases wherever the logo's
+//     alpha is opaque, so the mask is solid everywhere except a logo-shaped hole.
+//     The mask is rendered in its own offscreen layer, so the blend only
+//     erases the mask — not the tint or the app behind it.
+//
+//  2. The hole only reveals something because the cover is transparent.
+//     `.presentationBackground(.clear)` on the fullScreenCover lets the hole
+//     show the real app content instead of the cover's default background.
+//
+//  3. Why the plain overlay logo is still needed.
+//     A mask can only remove pixels; it can't draw the logo's artwork. Before
+//     the reveal we want to SEE the logo, not a hole showing the app through
+//     it. So two copies of the same logo crossfade during `scaleUp`:
+//       • overlay (isMask: false): opacity 1 → 0  — the visible logo
+//       • mask    (isMask: true):  opacity 0 → 1  — the hole
+//     At opacity 0 the destinationOut copy erases nothing, so the splash starts
+//     as a solid tint + logo. Both copies go through `logoView`, so they share
+//     the exact same scale transforms and stay pixel-aligned while animating.
+//
+//  4. Scale target.
+//     Only the logo's opaque pixels punch through, and its silhouette isn't a
+//     rectangle. Scaling it to `max(...)` of 4× the screen size makes the
+//     silhouette large enough to fully cover the screen, so the hole swallows
+//     the whole splash before `dismiss()` removes the cover.
 
 import AuthenticationServices
 import SwiftUI
 
 private struct OnBoarding27: View {
+    @AppStorage("isOnBoardingCompleted") private var isOnBoardingComplete: Bool = false
     var body: some View {
         VStack {
             Text("test")
         }
         .padding()
-        .splashScreen(config: .init(), showOnBoarding: true) {
+        .splashScreen(config: .init(), showOnBoarding: !isOnBoardingComplete) {
             OnBoardingView()
         }
     }
 }
 
 private struct OnBoardingView: View {
+    @AppStorage("isOnBoardingCompleted") private var isOnBoardingComplete: Bool = false
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         VStack(spacing: 20) {
             Text("Discover your favorite\nApple products")
@@ -28,6 +66,8 @@ private struct OnBoardingView: View {
 
             SignInWithAppleButton { _ in
             } onCompletion: { _ in
+                dismiss()
+                isOnBoardingComplete = true
             }
             .signInWithAppleButtonStyle(.black)
             .frame(height: 50)
@@ -170,7 +210,74 @@ private struct LaunchScreenWithObBoarding<Content: View>: View {
 
 private struct LaunchScreenOnly: View {
     var config: LaunchConfig
-    var body: some View {}
+    /// View Properties
+    @State private var scaleUp: Bool = false
+    @State private var scaleDown: Bool = false
+    @Environment(\.dismiss) private var dismiss
+    var body: some View {
+        Rectangle()
+            .fill(.clear)
+            .overlay {
+                GeometryReader {
+                    let scaleFactor: CGFloat = 4
+                    let size = $0.size.applying(.init(scaleX: scaleFactor, y: scaleFactor))
+
+                    Rectangle()
+                        .fill(config.tint)
+                        .mask {
+                            // inverse mask
+                            Rectangle()
+                                .overlay {
+                                    logoView(true, size: size)
+                                }
+                        }
+                        .overlay {
+                            logoView(false, size: size)
+                        }
+                }
+            }
+            .ignoresSafeArea()
+            .task {
+                guard !scaleDown else { return }
+
+                // bounce down
+                try? await Task.sleep(for: .seconds(config.initialDelay))
+                withAnimation(.smooth(duration: 0.3, extraBounce: 0)) {
+                    scaleDown = true
+                }
+
+                // scale up & mask up
+                try? await Task.sleep(for: .seconds(0.1))
+                withAnimation(.interpolatingSpring(duration: 0.6, bounce: 0, initialVelocity: 0)) {
+                    scaleUp = true
+                }
+
+                // Dismiss splash screen
+                try? await Task.sleep(for: .seconds(0.6))
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                withTransaction(transaction) {
+                    dismiss()
+                }
+            }
+    }
+
+    private func logoView(_ isMask: Bool, size: CGSize) -> some View {
+        config.logo
+            .blendMode(isMask ? .destinationOut : .normal)
+            .scaleEffect(scaleDown ? 0.8 : 1)
+            .visualEffect { [scaleUp] content, proxy in
+                let imageSize = proxy.size
+                let scale = max(
+                    size.width / imageSize.width,
+                    size.height / imageSize.height
+                )
+
+                return content
+                    .scaleEffect(scaleUp ? scale : 1)
+                    .opacity(isMask ? (scaleUp ? 1 : 0) : (scaleUp ? 0 : 1))
+            }
+    }
 }
 
 #Preview {
