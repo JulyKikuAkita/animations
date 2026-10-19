@@ -9,62 +9,69 @@ import SwiftUI
 
 @available(iOS 26.0, *)
 struct ScrollToMinimizeTabBarDemo: View {
-    @State private var activeTab: InstaTab = .reels
+    @State private var activeTab: InstaTab = .feed
     @State private var progress: CGFloat = 0
-
+    @State private var isVisible: Bool = false
     var body: some View {
-        TabView(selection: $activeTab) {
-            Tab(value: .feed) {
-                ScrollView(.vertical) {
-                    Rectangle()
-                        .foregroundStyle(.orange.opacity(0.1))
-                        .frame(height: 2000)
+        InstaSwipeToCameraView(isEnabled: true, isVisible: $isVisible) { visibilityProgress in
+            CameraView(progress: visibilityProgress, isVisible: $isVisible)
+        } content: { visibilityProgress in
+            TabView(selection: $activeTab) {
+                Tab(value: .feed) {
+                    FeedView(
+                        visibilityProgress: visibilityProgress,
+                        isVisible: $isVisible,
+                        progress: $progress
+                    )
                 }
-                .adoptForIGTabBar($progress)
-                .hideToolbar(.tabBar)
-            }
 
-            Tab(value: .reels) {
-                ScrollView(.vertical) {
-                    Text("Tab Bar does't Resize")
-                        .frame(maxWidth: .infinity)
-                }
-                .hideToolbar(.tabBar)
-            }
-            Tab(value: .messages) {
-                ScrollView(.vertical) {
-                    Text("Tab Bar does't Stay minimized")
-                        .frame(maxWidth: .infinity)
-                }
-                .adoptForIGTabBar($progress)
-                .hideToolbar(.tabBar)
-            }
-            Tab(value: .search) {
-                Text("Search")
+                Tab(value: .reels) {
+                    ScrollView(.vertical) {
+                        Text("Tab Bar does't Resize")
+                            .frame(maxWidth: .infinity)
+                    }
                     .hideToolbar(.tabBar)
-            }
-            Tab(value: .profile) {
-                Text("Profile")
+                }
+                Tab(value: .messages) {
+                    ScrollView(.vertical) {
+                        Text("Tab Bar does't Stay minimized")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .adoptForIGTabBar($progress)
                     .hideToolbar(.tabBar)
+                }
+                Tab(value: .search) {
+                    Text("Search")
+                        .hideToolbar(.tabBar)
+                }
+                Tab(value: .profile) {
+                    ScrollView(.vertical) {
+                        Rectangle()
+                            .foregroundStyle(.orange.opacity(0.1))
+                            .frame(height: 2000)
+                    }
+                    .adoptForIGTabBar($progress)
+                    .hideToolbar(.tabBar)
+                }
             }
-        }
-        .overlay(alignment: .bottom) {
-            IGStyleTabBar(selection: $activeTab) { tab in
-                let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20))
-                // "questionmark.circle" is a built-in SF Symbol, guaranteed non-nil fallback
-                let fallback = UIImage(systemName: "questionmark.circle")!
-                return UIImage(systemName: tab.symbolImage)?.withConfiguration(config) ?? fallback
-            } onInteraction: {
-                if progress != 0 {
-                    withAnimation(.iSpring()) {
-                        progress = 0
+            .overlay(alignment: .bottom) {
+                IGStyleTabBar(selection: $activeTab) { tab in
+                    let config = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20))
+                    // "questionmark.circle" is a built-in SF Symbol, guaranteed non-nil fallback
+                    let fallback = UIImage(systemName: "questionmark.circle")!
+                    return UIImage(systemName: tab.symbolImage)?.withConfiguration(config) ?? fallback
+                } onInteraction: {
+                    if progress != 0 {
+                        withAnimation(.iSpring()) {
+                            progress = 0
+                        }
                     }
                 }
+                .padding(4)
+                .glassEffect(.regular.interactive(), in: .capsule)
+                .scaleEffect(1 - (progress * 0.15), anchor: .bottom)
+                .padding(.horizontal, 20)
             }
-            .padding(4)
-            .glassEffect(.regular.interactive(), in: .capsule)
-            .scaleEffect(1 - (progress * 0.15), anchor: .bottom)
-            .padding(.horizontal, 20)
         }
     }
 }
@@ -82,7 +89,7 @@ struct ScrollToMinimizeTabBarDemo: View {
 /// UIKit types involved: `UIViewRepresentable` (SwiftUI↔UIKit bridge protocol), `UISegmentedControl`,
 /// `UIImage`/`UIColor`, `NSObject` (Coordinator's superclass — required for `@objc`/`#selector` target-action),
 /// and `UITouch`/`UIEvent` (touchesBegan params on `CustomSegmentControl` below).
-struct IGStyleTabBar<Value: CaseIterable>: UIViewRepresentable where Value: Hashable {
+struct IGStyleTabBar<Value: CaseIterable & Hashable>: UIViewRepresentable {
     @Binding var selection: Value
     var symbolImage: (Value) -> UIImage
     var onInteraction: () -> Void
@@ -99,7 +106,7 @@ struct IGStyleTabBar<Value: CaseIterable>: UIViewRepresentable where Value: Hash
         )
         control.onTouchBegin = onInteraction
 
-        /// Removing background
+        // Removing background
         DispatchQueue.main.async {
             for subview in control.subviews {
                 if subview is UIImageView, subview != control.subviews.last {
@@ -124,7 +131,7 @@ struct IGStyleTabBar<Value: CaseIterable>: UIViewRepresentable where Value: Hash
         Coordinator(parent: self)
     }
 
-    // NSObject subclass required: UIKit target-action (#selector/addTarget) needs an Objective-C-visible object
+    /// NSObject subclass required: UIKit target-action (#selector/addTarget) needs an Objective-C-visible object
     class Coordinator: NSObject {
         var parent: IGStyleTabBar
         init(parent: IGStyleTabBar) {
@@ -137,8 +144,8 @@ struct IGStyleTabBar<Value: CaseIterable>: UIViewRepresentable where Value: Hash
     }
 }
 
-// UIKit subclass: SwiftUI has no pre-tap touch hook, so override touchesBegan to catch the tap
-// before selectedSegmentIndex changes and valueChanged fires.
+/// UIKit subclass: SwiftUI has no pre-tap touch hook, so override touchesBegan to catch the tap
+/// before selectedSegmentIndex changes and valueChanged fires.
 class CustomSegmentControl: UISegmentedControl {
     var onTouchBegin: (() -> Void)?
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -167,7 +174,7 @@ private struct IGTabBarViewModeManager: ViewModifier {
     func body(content: Content) -> some View {
         content
             .hideToolbar(.tabBar)
-            /// adjust tab bar height
+            // adjust tab bar height
             .safeAreaPadding(.bottom, 50)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .contentShape(.rect)
@@ -180,7 +187,7 @@ private struct IGTabBarViewModeManager: ViewModifier {
                     }.onEnded { value in
                         guard scrollPhase != .idle else { return }
 
-                        /// decrease velocity by increase 5 to different number
+                        // decrease velocity by increase 5 to different number
                         // negative height velocity = flung upward; flip sign so a bigger fling projects further
                         let velocity = -value.velocity.height / 5
                         // where the scroll would land if the fling continued past finger-lift
@@ -195,7 +202,7 @@ private struct IGTabBarViewModeManager: ViewModifier {
                             ) : 0
                         }
                         isScrolledUp = nil
-                        /// or any desired shiftOffset value
+                        // or any desired shiftOffset value
                         shiftOffset = scrollOffset - (progress * distance)
                     }
             )
@@ -234,5 +241,129 @@ private struct IGTabBarViewModeManager: ViewModifier {
 
     private var distance: CGFloat {
         100
+    }
+}
+
+private struct FeedView: View {
+    var visibilityProgress: CGFloat
+    @Binding var isVisible: Bool
+    @Binding var progress: CGFloat
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        ScrollView(.vertical) {
+            LazyVStack(spacing: 12) {
+                mockHeader()
+                    .padding(.horizontal, 5)
+
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 10) {
+                        ForEach(1 ... 15, id: \.self) { _ in
+                            Circle()
+                                .fill(.fill.tertiary)
+                                .padding(5)
+                                .frame(width: 80, height: 80)
+                                .background {
+                                    Circle()
+                                        .stroke(.fill, lineWidth: 2)
+                                }
+                        }
+                    }
+                }
+                .scrollIndicators(.hidden)
+                .padding(.bottom, 5)
+                .padding(.top, 10)
+
+                ForEach(1 ... 10, id: \.self) { _ in
+                    VStack(alignment: .leading, spacing: 8) {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.fill.tertiary)
+                            .aspectRatio(1.3, contentMode: .fit)
+                    }
+                }
+                .padding(.top, 10)
+                .safeAreaPadding([.horizontal, .bottom], 15)
+            }
+        }
+        .adoptForIGTabBar($progress)
+    }
+
+    func mockHeader() -> some View {
+        HStack {
+            Button {
+                isVisible = true
+            } label: {
+                let progress = min(visibilityProgress * 2, 1)
+                let isExpanded = progress == 1
+                ZStack {
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(.primary)
+                        .opacity(isExpanded ? 1 : 0)
+
+                    RoundedRectangle(cornerRadius: 6)
+                        .trim(from: 0, to: progress)
+                        .stroke(lineWidth: 2)
+                        .rotation(.init(degrees: -90))
+
+                    let tint = colorScheme == .dark ? Color.black : Color.white
+                    Image(systemName: "plus")
+                        .foregroundStyle(isExpanded ? tint : Color.primary)
+                        .animation(.snappy) {
+                            $0.scaleEffect(progress != 0 ? 0.8 : 1)
+                        }
+                }
+                .frame(width: 28, height: 28)
+                .animation(.snappy, value: isExpanded)
+                .keyframeAnimator(initialValue: 1.0, trigger: isExpanded) { content, scale in
+                    content
+                        .scaleEffect(scale)
+                } keyframes: { _ in
+                    MoveKeyframe(1.0)
+                    CubicKeyframe(0.8, duration: 0.15)
+                    CubicKeyframe(1, duration: 0.15)
+                }
+            }
+
+            Spacer(minLength: 0)
+
+            Button {} label: { Image(systemName: "suit.heart") }
+        }
+        .overlay {
+            Text("Instra Mock")
+                .fontWeight(.medium)
+        }
+        .font(.title3)
+        .foregroundStyle(.primary)
+    }
+}
+
+private struct CameraView: View {
+    var progress: CGFloat
+    @Binding var isVisible: Bool
+    var body: some View {
+        VStack {
+            Button {
+                isVisible = false
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.title3)
+                    .foregroundStyle(.primary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Image(systemName: "iphone.badge.play")
+                .font(.system(size: 60))
+                .foregroundStyle(.red, .primary)
+                .frame(maxHeight: .infinity)
+        }
+        .padding(15)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .compositingGroup()
+        .opacity(0.5 + min(progress * 2, 0.5))
+        .background {
+            Rectangle()
+                .fill(.black)
+                .ignoresSafeArea()
+        }
+        .environment(\.colorScheme, .dark)
     }
 }
