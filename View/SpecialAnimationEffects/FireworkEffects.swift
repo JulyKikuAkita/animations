@@ -3,6 +3,40 @@
 //  animation
 //
 //  Created on 10/27/26.
+
+// Learning notes — drawing with Canvas / GraphicsContext / Path (see `Fireworks`):
+// 1. Canvas is immediate-mode drawing: one view whose closure
+//    `{ (ctx: inout GraphicsContext, size: CGSize) in ... }` paints pixels directly.
+//    Hundreds of sparks become draw calls, not hundreds of SwiftUI views, so there is
+//    no per-element layout, diffing, or hit-testing cost. Coordinates are points with
+//    the origin at the top-left; `size` is the canvas size to lay things out against.
+// 2. Canvas does not animate on its own. Wrapping it in `TimelineView(.animation)`
+//    re-runs the closure every display frame and supplies `timeline.date`; the drawing
+//    is a pure function of that time (no @State).
+// 3. Path is only geometry — it draws nothing until handed to the context.
+//    Build it with the closure form (`Path { $0.move(to:); $0.addLine(to:) }`) for the
+//    rocket trail, or a convenience init (`Path(ellipseIn:)`) for spark dots (`circle`).
+// 4. GraphicsContext draws a path with `fill(_:with:)` or `stroke(_:with:lineWidth:)`.
+//    `with:` takes a `GraphicsContext.Shading`: `.color(...)` for sparks,
+//    `.linearGradient(_:startPoint:endPoint:)` for the trail, and
+//    `.radialGradient(_:center:startRadius:endRadius:)` for the center flash.
+//    Unlike the LinearGradient view, these points are absolute canvas coordinates,
+//    so the trail gradient can run exactly from `tail` to `head`.
+// 5. GraphicsContext is a value type holding drawing state (blendMode, opacity,
+//    transform, filters) that targets the same underlying canvas. A copy inherits the
+//    current state and still draws to that canvas, so `var local = ctx;
+//    local.translateBy(...)` scopes a state change to one group of draws.
+//    `inout` (as in the helpers here) is only required when a callee must mutate
+//    state the caller keeps using; the draw calls themselves don't need it.
+// 6. Draws are painted in call order (later on top). Setting
+//    `ctx.blendMode = .plusLighter` once makes overlapping sparks add their light
+//    instead of covering each other — the glow on a black background.
+//    `ctx.addFilter(.blur(radius:))` is the next step for a softer glow.
+// 7. Effect math, briefly: `random(_:)` is a stateless `fract(sin(x) * 43758.5453)` hash
+//    seeded per cycle, so each firework gets new colors/locations every loop without
+//    storage; the burst uses ease-out-quart radius `1 - (1 - p)^4`, `p^2` gravity drop,
+//    `1 - p` fade, and a per-spark `sin` twinkle.
+
 import SwiftUI
 
 struct FireworkDemo: View {
