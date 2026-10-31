@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+@available(iOS 26.0, *)
 @main
 struct AnimationApp: App { // with colorTransformer context
     init() {
@@ -19,7 +20,7 @@ struct AnimationApp: App { // with colorTransformer context
 }
 
 /// only for  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
-// @main
+/// @main
 struct AnimationTabbar: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
 
@@ -36,14 +37,14 @@ struct AnimationTabbar: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
         let config = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
-        config.delegateClass = SceneDelegate.self /// crash if not set
+        config.delegateClass = SceneDelegate.self // crash if not set
         return config
     }
 }
 
-/// only for  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
+// only for  SwiftUI: Placing Tab Bar Over Sheet’s | Apple Map’s Bottom Sheet | iOS 17 | Xcode 15
 
-// @main
+/// @main
 struct SchemeChangeApp: App {
     var body: some Scene {
         WindowGroup {

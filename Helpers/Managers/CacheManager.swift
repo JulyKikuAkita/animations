@@ -11,6 +11,7 @@
 import SwiftData
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct CacheManagerTestApp: App {
     var body: some Scene {
         WindowGroup {
@@ -25,8 +26,7 @@ final class CacheManager {
     /// Separate Context for Cache Operations
     let context: ModelContext? = {
         guard let container = try? ModelContainer(for: Cache.self) else { return nil }
-        let context = ModelContext(container)
-        return context
+        return ModelContext(container)
     }()
 
     /// demo purpose, usually 20-30 or based on scenarios
@@ -60,7 +60,7 @@ final class CacheManager {
         let count = try context.fetchCount(countDescriptor)
 
         if count >= cacheLimit {
-            /// always start removing with the oldest item
+            // always start removing with the oldest item
             var fetchDescriptor = FetchDescriptor<Cache>(sortBy: [.init(\.creation, order: .forward)])
             fetchDescriptor.fetchLimit = 1
 
@@ -73,9 +73,9 @@ final class CacheManager {
     /// CRUD operation
     func insert(id: String, data: Data, expirationDays: Int) throws {
         guard let context else { return }
-        /// updating existing cache
+        // updating existing cache
         if let cache = try get(id: id) {
-            context.delete(cache) /// or update cache
+            context.delete(cache) // or update cache
         }
 
         try verifyLimits()
@@ -90,7 +90,7 @@ final class CacheManager {
         guard let context else { return nil }
         let predicate = #Predicate<Cache> { $0.cacheID == id }
         var descriptor = FetchDescriptor(predicate: predicate)
-        /// for demo, only one
+        // for demo, only one
         descriptor.fetchLimit = 1
 
         if let cache = try context.fetch(descriptor).first {
@@ -109,7 +109,7 @@ final class CacheManager {
 
     func removeAll() throws {
         guard let context else { return }
-        /// Empty Descriptor returns all objects
+        // Empty Descriptor returns all objects
         let descriptor = FetchDescriptor<Cache>()
         try context.enumerate(descriptor) {
             context.delete($0)

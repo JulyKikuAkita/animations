@@ -4,18 +4,9 @@
 
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        AppIconPickerDemo()
     }
-}
-
-#Preview {
-    ContentView()
 }
