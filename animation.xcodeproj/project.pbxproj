@@ -201,6 +201,9 @@
 		964629F22FA6ADDB00C7AFFB /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FCA7562DAC49A100774FB7 /* SkeletonView.swift */; };
 		964629F32FA6ADF800C7AFFB /* View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8D5F22FA69EAB008C57D5 /* View+Animation.swift */; };
 		964A245A30808B7A00D8EC5E /* OnBoarding27.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A245930808B7200D8EC5E /* OnBoarding27.swift */; };
+		964A297C308BE46A00D8EC5E /* CompactImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A297B308BE46300D8EC5E /* CompactImagePicker.swift */; };
+		964A2CD0309134FB00D8EC5E /* FireworkEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A2CCF309134F000D8EC5E /* FireworkEffects.swift */; };
+		964A303C3096662600D8EC5E /* AppIconPickerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964A303B3096662100D8EC5E /* AppIconPickerDemo.swift */; };
 		9650AE092DE5133F00D2D67C /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9650AE082DE5133F00D2D67C /* SDWebImageSwiftUI */; };
 		96513EA12D3DC7120004C7C8 /* APNSDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */; };
 		96529D592EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96529D582EB6C20000467510 /* AnimatedConfirmationButtonDemoView.swift */; };
@@ -787,6 +790,9 @@
 		964525762F2AE3E400E32278 /* SortableIOS26GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableIOS26GridView.swift; sourceTree = "<group>"; };
 		964527392F31B88E00E32278 /* CameraProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraProperties.swift; sourceTree = "<group>"; };
 		964A245930808B7200D8EC5E /* OnBoarding27.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoarding27.swift; sourceTree = "<group>"; };
+		964A297B308BE46300D8EC5E /* CompactImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactImagePicker.swift; sourceTree = "<group>"; };
+		964A2CCF309134F000D8EC5E /* FireworkEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworkEffects.swift; sourceTree = "<group>"; };
+		964A303B3096662100D8EC5E /* AppIconPickerDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconPickerDemo.swift; sourceTree = "<group>"; };
 		96513E9F2D3DC6590004C7C8 /* Message1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = Message1.apns; sourceTree = "<group>"; };
 		96513EA02D3DC7120004C7C8 /* APNSDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNSDemoView.swift; sourceTree = "<group>"; };
 		96513EA22D3DCA9E0004C7C8 /* deeplinkMSG1.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = deeplinkMSG1.apns; sourceTree = "<group>"; };
@@ -1484,6 +1490,7 @@
 		960663252DD933230084B468 /* SpecialAnimationEffects */ = {
 			isa = PBXGroup;
 			children = (
+				964A2CCF309134F000D8EC5E /* FireworkEffects.swift */,
 				96432FF030745D90004A10C5 /* DuoEdgeBlur.metal */,
 				96432FEE30743136004A10C5 /* DuoBookFlipDemo.swift */,
 				96E0A463300302B6009BEC6D /* MorphingRefreshView.swift */,
@@ -2286,6 +2293,7 @@
 		96A3A18830369CEE00DE07D3 /* iOS27-API */ = {
 			isa = PBXGroup;
 			children = (
+				964A297B308BE46300D8EC5E /* CompactImagePicker.swift */,
 				96A3A18930369D0300DE07D3 /* Multi-ItemSection+ReorderAPI.swift */,
 			);
 			path = "iOS27-API";
@@ -2691,6 +2699,7 @@
 		AB8CBDDE2E9B028100A288E4 /* AppUpdateView */ = {
 			isa = PBXGroup;
 			children = (
+				964A303B3096662100D8EC5E /* AppIconPickerDemo.swift */,
 				AB8CBDDF2E9B02BE00A288E4 /* AppUpdateDemoView.swift */,
 				ABC31CF42EA4A6DC0068C41D /* AppRatingDemoView.swift */,
 			);
@@ -3758,6 +3767,7 @@
 				96C0C2D72B905DDE00F56FF5 /* Card.swift in Sources */,
 				969219DD2D6D9EEA00326523 /* Contact.swift in Sources */,
 				AB0FFD212E2D863700E6DCBE /* PullEffectScrollView.swift in Sources */,
+				964A297C308BE46A00D8EC5E /* CompactImagePicker.swift in Sources */,
 				96ACBEF72C33B961004F3070 /* ExpenseHomeView.swift in Sources */,
 				96259ABB305202370091438B /* MiniPlayer.swift in Sources */,
 				96D558542FC0DA2300FB070A /* LiquidLens.metal in Sources */,
@@ -3794,6 +3804,7 @@
 				963B846E2CCC4B7E00C3FB0D /* UniversalOverlayView+AppleMusicMiniPlayer.swift in Sources */,
 				AB5C97A12E076DF5009CF684 /* LiquidGlassSearchableTabbar.swift in Sources */,
 				9662EF392C3E431600508B80 /* CustomVideoPlayer.swift in Sources */,
+				964A2CD0309134FB00D8EC5E /* FireworkEffects.swift in Sources */,
 				96CD0EEF2D2C5F1500896B3E /* CarouselImageWithAmbientBackgroundEffectView.swift in Sources */,
 				96B89EA92EF4BFF9006F532F /* ExpandableMenuiOS26DemoView.swift in Sources */,
 				ABA102232E1E2583007ECA07 /* OnBoardingCard.swift in Sources */,
@@ -3895,6 +3906,7 @@
 				ABA9822A2E65716F00F5A150 /* DynamicHeightSheetViewiOS26.swift in Sources */,
 				968E54582C5C5F2800EB5F52 /* FloatingBottomSheetsView.swift in Sources */,
 				ABC31CF52EA4A6DC0068C41D /* AppRatingDemoView.swift in Sources */,
+				964A303C3096662600D8EC5E /* AppIconPickerDemo.swift in Sources */,
 				96D265162E106E8F00B1D1EF /* iOS26+BottomSheet.swift in Sources */,
 				96D26A6D2E24503E00B1D1EF /* SearchableTabbariOS26Style.swift in Sources */,
 				968B61052F2442D8003BCF16 /* SlideToCancelText.swift in Sources */,
@@ -4614,6 +4626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"animation/Preview Content\"";
@@ -4646,6 +4659,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"animation/Preview Content\"";
@@ -4676,8 +4690,8 @@
 		9621DC312BEF3CF900183CB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4708,8 +4722,8 @@
 		9621DC322BEF3CF900183CB7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"demoApps/Preview Content\"";
