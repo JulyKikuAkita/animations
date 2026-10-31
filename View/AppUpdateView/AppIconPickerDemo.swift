@@ -3,6 +3,25 @@
 //  animation
 //
 //  Created on 10/31/26.
+//
+//  Learning points / Demo goals:
+//  • Switch the app icon at runtime with `UIApplication.shared.setAlternateIconName`.
+//    Passing `nil` restores the primary icon.
+//  • Alternate icons must be declared in Info.plist under `CFBundleIcons` →
+//    `CFBundleAlternateIcons`. `Bundle.iconList` reads that dictionary so the
+//    picker stays in sync with the asset catalog without hard-coding names.
+//  • Build a paging carousel with `scrollTargetBehavior(.viewAligned)` and
+//    `scrollPosition(id:)`, which lets the active item be read and set by id.
+//  • `visualEffect` applies per-item scale, blur, offset, and rotation from each
+//    item's position in the scroll view, so the effect is computed during layout
+//    without extra state.
+//  • `onScrollGeometryChange` reports the raw scroll offset, which drives the
+//    cross-fading title row.
+//  • `safeAreaBar` pins the explanation and action button to the bottom edge
+//    while the scrolling content extends behind them.
+//  • `presentationDetents` with `presentationCompactAdaptation(.sheet)` keeps
+//    the picker a fixed-height sheet on iPhone instead of a full-screen cover.
+
 import SwiftUI
 
 @available(iOS 26.0, *)
