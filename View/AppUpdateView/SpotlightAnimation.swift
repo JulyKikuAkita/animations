@@ -3,6 +3,27 @@
 //  animation
 //
 //  Created on 11/4/26.
+//
+//  Learning points / Demo goals:
+//  • `onGeometryChange(for: CGRect.self)` reports each target's frame in global
+//    coordinates. The spotlight can then cut out any view without a shared
+//    anchor or preference key.
+//  • Highlights are keyed by `order` in a dictionary, so tour order is set
+//    explicitly and does not depend on view hierarchy or layout order.
+//  • `onDisappear` clears a highlight's entry. Without it, a view removed from
+//    the hierarchy would leave a stale cutout behind.
+//  • The dimming layer is a `Rectangle` masked with a `.destinationOut` blend
+//    of the target shape. The masked-out area is the transparent hole.
+//  • The tour card is a `popover(item:)` anchored to a clear rectangle placed
+//    over the target. Its arrow edge flips to `.bottom` when the target sits in
+//    the lower half of the screen.
+//  • `interactiveDismissDisabled()` keeps the tour from being swiped away, so it
+//    ends only through Skip or Finish.
+//  • The `.task` waits 0.25s before animating to the first highlight, so the
+//    spotlight animates in after the full-screen cover has appeared.
+//  • `presentationBackground(.clear)` lets the app show through the dimmed
+//    overlay.
+
 import SwiftUI
 
 @available(iOS 27.0, *)
@@ -153,6 +174,7 @@ private struct HighlightView: View {
                     let origin = frame.origin
                     let inset = currentHighlight.inset
 
+                    // The inset grows the cutout on every side, so shift it by half to keep it centered on the target
                     currentHighlight.maskShape
                         .frame(width: frame.width + inset, height: frame.height + inset)
                         .offset(x: origin.x - inset / 2, y: origin.y - inset / 2)
@@ -162,7 +184,7 @@ private struct HighlightView: View {
                 let frame = currentHighlight?.frame ?? .zero
                 let origin = frame.origin
                 let inset = currentHighlight?.inset ?? 0
-                // using either top or bottom edge
+                // Open the card toward the larger free area so it stays on screen
                 let edge: Edge = origin.y > (containerSize.height / 2) ? .bottom : .top
 
                 Rectangle()
@@ -186,6 +208,7 @@ private struct HighlightView: View {
             }
             .task {
                 try? await Task.sleep(for: .seconds(0.25))
+                // Without an order-0 highlight there is no first step, so the tour closes instead of showing an empty card
                 if let highlight = group[0] {
                     withAnimation(.iSpring()) {
                         currentHighlight = highlight
@@ -227,6 +250,7 @@ private struct HighlightView: View {
 
                 Spacer(minLength: 0)
 
+                // Assumes `order` values are contiguous from 0, so the last step has the highest index
                 let isLast = highlight.id == group.count - 1
                 Button {
                     if isLast {
