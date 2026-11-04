@@ -3,7 +3,6 @@
 //  animation
 //
 //  Created on 11/4/26.
-
 import SwiftUI
 
 @available(iOS 27.0, *)
@@ -13,6 +12,21 @@ struct SpotlightAnimationDemo: View {
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
+                VStack {
+                    TextField("Search", text: .constant(""))
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 12)
+                        .glassEffect(.regular.interactive(), in: .capsule)
+                        .highlight(
+                            order: 1,
+                            title: "Search here",
+                            description: dummyDescription,
+                            maskShape: .capsule,
+                            // use inset to enlarge the icon size
+                            inset: 10,
+                            group: $group
+                        )
+                }
                 Button("Show View") {
                     showHighlightView.toggle()
                 }
@@ -21,10 +35,27 @@ struct SpotlightAnimationDemo: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {} label: {
-                        Image(systemName: "plus")
+                        Image(systemName: "bell")
                     }
                     .highlight(
                         order: 0,
+                        title: "Stay Updated",
+                        description: dummyDescription,
+                        maskShape: .circle,
+                        // use inset to enlarge the icon size
+                        inset: 0,
+                        group: $group
+                    )
+                }
+
+                ToolbarSpacer(.flexible, placement: .bottomBar)
+
+                ToolbarItem(placement: .bottomBar) {
+                    Button {} label: {
+                        Image(systemName: "plus")
+                    }
+                    .highlight(
+                        order: 2,
                         title: "New Item",
                         description: dummyDescription,
                         maskShape: .circle,
@@ -112,6 +143,7 @@ private struct HighlightView: View {
     @Binding var group: [Int: Highlight]
     /// View Properties
     @State private var currentHighlight: Highlight?
+    @State private var containerSize: CGSize = .zero
     var body: some View {
         Rectangle()
             .fill(.black.opacity(0.7))
@@ -126,13 +158,31 @@ private struct HighlightView: View {
                         .offset(x: origin.x - inset / 2, y: origin.y - inset / 2)
                 }
             }
-            .popover(
-                item: $currentHighlight
-            ) { highlight in
-                popoverView(highlight: highlight)
-                    .frame(width: 330)
-                    .presentationCompactAdaptation(.popover)
-                    .interactiveDismissDisabled()
+            .overlay(alignment: .topLeading) {
+                let frame = currentHighlight?.frame ?? .zero
+                let origin = frame.origin
+                let inset = currentHighlight?.inset ?? 0
+                // using either top or bottom edge
+                let edge: Edge = origin.y > (containerSize.height / 2) ? .bottom : .top
+
+                Rectangle()
+                    .foregroundStyle(.clear)
+                    .frame(width: frame.width + inset, height: frame.height + inset)
+                    .popover(
+                        item: $currentHighlight,
+                        arrowEdge: edge
+                    ) { highlight in
+                        popoverView(highlight: highlight)
+                            .frame(width: 330)
+                            .presentationCompactAdaptation(.popover)
+                            .interactiveDismissDisabled()
+                    }
+                    .offset(x: origin.x - inset / 2, y: origin.y - inset / 2)
+            }
+            .onGeometryChange(for: CGSize.self) {
+                $0.size
+            } action: { newValue in
+                containerSize = newValue
             }
             .task {
                 try? await Task.sleep(for: .seconds(0.25))
@@ -168,11 +218,45 @@ private struct HighlightView: View {
             }
             .padding(.bottom, 4)
 
-            HStack {}
+            HStack {
+                Button("Skip") {
+                    // close the popup as well
+                    isPresented = false
+                }
+                .tint(.secondary)
+
+                Spacer(minLength: 0)
+
+                let isLast = highlight.id == group.count - 1
+                Button {
+                    if isLast {
+                        isPresented = false
+                    } else {
+                        withAnimation(.iSpring()) {
+                            let nextIndex = min(highlight.id + 1, group.count - 1)
+                            currentHighlight = group[nextIndex]
+                        }
+                    }
+
+                } label: {
+                    Text(isLast ? "Finish" : "Next")
+                        .fontWeight(.semibold)
+                        .padding(.horizontal, 25)
+                        .padding(.vertical, 4)
+                }
+                .buttonStyle(.glassProminent)
+                .buttonBorderShape(.capsule)
+            }
         }
+        .padding(20)
     }
 
     private var initialDelay: Double {
         0.25
     }
+}
+
+@available(iOS 27.0, *)
+#Preview {
+    SpotlightAnimationDemo()
 }
