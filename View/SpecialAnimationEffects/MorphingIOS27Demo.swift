@@ -3,6 +3,30 @@
 //  animation
 //
 //  Created on 11/10/26.
+//
+//  Learning points / Demo goals:
+//  • Paging carousel: `containerRelativeFrame(.horizontal)` makes each page one
+//    viewport wide and `scrollTargetBehavior(.paging)` snaps to it.
+//  • The artwork does not scroll with the pages. Each page reserves a clear
+//    `Rectangle` whose size is read with `onGeometryChange`; the real images live
+//    in a separate stack in `.background`, driven by the scroll offset from
+//    `onScrollGeometryChange` (`contentOffset.x + contentInsets.leading`).
+//  • Inside that stack every image is counter-offset by its own `minX`, so all
+//    images sit in the same spot and cross-fade by distance from the center.
+//  • Gooey morph = blur + alpha threshold. `compositingGroup()` flattens the
+//    cross-fading images into one layer, `.blur` smears their alpha, and the
+//    `alphaThreshold` layer effect (AlphaThreshold.metal) cuts it back into a
+//    single shape, so two half-faded images fuse into one blob.
+//  • The blur follows a triangle over each page turn (0 → peak at 50% → 0), so
+//    images are sharp at rest and only melt mid-swipe. Peak radius scales with
+//    the container height so the effect holds across sizes.
+//  • `maxSampleOffset` tells SwiftUI how far the shader may sample beyond each
+//    pixel; `drawingGroup()` rasterizes the result off-screen with Metal.
+//  • Parallax titles: `visualEffect` + `proxy.bounds(of: .scrollView)` shifts
+//    the title against the scroll at 0.6× speed without extra state.
+//  • Page indicator: each capsule's width and opacity are derived from
+//    `|progress - index|`, so the active dot stretches continuously while dragging.
+//  • iOS 26 glass button: `.buttonStyle(.glassProminent)`, `.buttonSizing(.flexible)`.
 
 import SwiftUI
 
@@ -14,7 +38,6 @@ extension TVShow: MorphingItem {}
 
 @available(iOS 26.0, *)
 struct MorphingIOS27Demo: View {
-    @State private var showSheet: Bool = false
     var body: some View {
         NavigationStack {
             VStack {
@@ -115,7 +138,7 @@ struct MorphingIOS27ScrollView<Preview: View, Title: View, Description: View, It
                     .frame(width: morphingContainer.width, height: morphingContainer.height)
                     .compositingGroup()
                     .visualEffect { [morphingContainer] content, proxy in
-                        let minX = proxy.frame(in: .named("BACKGROUP")).minX
+                        let minX = proxy.frame(in: .named("BACKGROUND")).minX
                         let opacity = abs(minX / morphingContainer.width)
 
                         return content
@@ -146,7 +169,7 @@ struct MorphingIOS27ScrollView<Preview: View, Title: View, Description: View, It
     private func bottomBar() -> some View {
         VStack(spacing: 15) {
             HStack(spacing: 4) {
-                let progress = offsetX / morphingContainer.width
+                let progress = morphingContainer.width > 0 ? offsetX / morphingContainer.width : 0
                 ForEach(items.indices, id: \.self) { index in
                     let indexProgress = max(min(abs(progress - CGFloat(index)), 1), 0)
                     let width = 20 - (15 * indexProgress)
