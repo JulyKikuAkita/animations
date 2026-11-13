@@ -280,6 +280,7 @@
 		96726B1F2C2FD370007A4E34 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B1D2C2FD354007A4E34 /* TimePickerView.swift */; };
 		96726B212C2FD9CA007A4E34 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96726B202C2FD9CA007A4E34 /* Recent.swift */; };
 		9673582A300C03700079492C /* ElasticCustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96735829300C03640079492C /* ElasticCustomSegmentedControl.swift */; };
+		967938E630A7AA0800D5A247 /* iOS27ResizeHSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967938E530A7AA0000D5A247 /* iOS27ResizeHSheet.swift */; };
 		967958702D2DD2EF009E74CA /* SportItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E4DD112CFFDE1F0020261F /* SportItem.swift */; };
 		967A2D0A2F47B4A000C06A54 /* OnBoardingiOS26View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */; };
 		9680C91F2D6AFAD2005FC80D /* RippleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9680C91E2D6AFAD2005FC80D /* RippleView.swift */; };
@@ -866,6 +867,7 @@
 		96726B1D2C2FD354007A4E34 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		96726B202C2FD9CA007A4E34 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		96735829300C03640079492C /* ElasticCustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticCustomSegmentedControl.swift; sourceTree = "<group>"; };
+		967938E530A7AA0000D5A247 /* iOS27ResizeHSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS27ResizeHSheet.swift; sourceTree = "<group>"; };
 		967958442D2DD24B009E74CA /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		967A2D092F47B49000C06A54 /* OnBoardingiOS26View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingiOS26View.swift; sourceTree = "<group>"; };
 		9680C91E2D6AFAD2005FC80D /* RippleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleView.swift; sourceTree = "<group>"; };
@@ -2384,6 +2386,7 @@
 		96DF8A882C39D7F90063A931 /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
+				967938E530A7AA0000D5A247 /* iOS27ResizeHSheet.swift */,
 				96432E1E30706859004A10C5 /* HeaderScrollAppleMapsIOS27Demo.swift */,
 				963FF24F2F5F984600FAB0CF /* iOS26ResizingSheet.swift */,
 				96DF8A892C39D81E0063A931 /* DynamicSheetView.swift */,
@@ -3825,6 +3828,7 @@
 				96362C972EAD72A40025F238 /* PhotoPickeriMessageStyleDemoView.swift in Sources */,
 				963FF2502F5F984C00FAB0CF /* iOS26ResizingSheet.swift in Sources */,
 				963B85772CD35BBA00C3FB0D /* Snapshot.swift in Sources */,
+				967938E630A7AA0800D5A247 /* iOS27ResizeHSheet.swift in Sources */,
 				96ACBEFF2C35014C004F3070 /* DraggableTabbarView.swift in Sources */,
 				96E09EC72C74105300A0BE66 /* FloatingTabbar.swift in Sources */,
 				963B862F2CE971E100C3FB0D /* SliderWorkaroundScrollView.swift in Sources */,
